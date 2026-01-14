@@ -1,0 +1,5 @@
+Application Specific Interface Icons
+
+Copyright (c) 2026 Jerome Shidel
+The Clear BSD License
+All rights reserved.

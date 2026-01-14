@@ -1,0 +1,64 @@
+object fMain: TfMain
+  Left = 1312
+  Height = 322
+  Top = 215
+  Width = 432
+  Caption = 'Codepage Witch'
+  ClientHeight = 322
+  ClientWidth = 432
+  Position = poScreenCenter
+  LCLVersion = '4.0.0.4'
+  OnCreate = FormCreate
+  object ctrlBar: TControlBar
+    Left = 0
+    Height = 66
+    Top = 0
+    Width = 432
+    Align = alTop
+    AutoSize = True
+    BevelInner = bvNone
+    BevelOuter = bvNone
+    BorderWidth = 4
+    RowSize = 20
+    TabOrder = 0
+    object ToolBar1: TToolBar
+      Left = 13
+      Height = 48
+      Top = 8
+      Width = 410
+      Align = alNone
+      ButtonHeight = 48
+      ButtonWidth = 48
+      Caption = 'ToolBar1'
+      EdgeBorders = []
+      TabOrder = 0
+    end
+  end
+  object statBar: TStatusBar
+    Left = 0
+    Height = 18
+    Top = 304
+    Width = 432
+    Panels = <>
+  end
+  object btnUpdater: TButton
+    Left = 112
+    Height = 25
+    Top = 271
+    Width = 75
+    Anchors = [akLeft, akBottom]
+    Caption = 'Update...'
+    TabOrder = 2
+    OnClick = btnUpdaterClick
+  end
+  object btnLogWindow: TButton
+    Left = 34
+    Height = 25
+    Top = 271
+    Width = 75
+    Anchors = [akLeft, akBottom]
+    Caption = 'Log...'
+    TabOrder = 3
+    OnClick = btnLogWindowClick
+  end
+end

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CONFIG Language="en_US">
+  <Application>
+    <ModalButtons>
+      <Ok Value="Ok"/>
+      <Cancel Value="Cancel"/>
+      <Yes Value="Yes"/>
+      <No Value="No"/>
+      <Close Value="Close"/>
+      <Abort Value="Abort"/>
+      <Retry Value="Retry"/>
+      <Ignore Value="Ignore"/>
+      <All Value="All"/>
+      <NoToAll Value="No to all"/>
+      <YesToAll Value="Yes to all"/>
+    </ModalButtons>
+    <Error>
+      <File>
+        <Read>
+          <Caption Value="File read error"/>
+          <Message Value="Error #%1:s (%2:s) occured while reading from file &quot;%0:s&quot;."/>
+        </Read>
+        <Write>
+          <Caption Value="File write error"/>
+          <Message Value="Error #%1:s (%2:s) occured while writing to file &quot;%0:s&quot;."/>
+        </Write>
+      </File>
+      <Codes>
+        <ecUnknown Value="Unknown error."/>
+        <ec0 Value="No error"/>
+        <ec2 Value="File not found"/>
+        <ec3 Value="Path not found"/>
+        <ec4 Value="Too many files open"/>
+        <ec5 Value="Access denied"/>
+        <ec6 Value="Invalid file handle"/>
+        <ec12 Value="Invalid access mode"/>
+        <ec17 Value="Cannot rename across devices"/>
+        <ec100 Value="Disk read error"/>
+        <ec101 Value="Disk write error"/>
+        <ec102 Value="File not assigned"/>
+        <ec103 Value="File not open"/>
+        <ec104 Value="File not open for input"/>
+        <ec105 Value="File not open for output"/>
+        <ec106 Value="Invalid numerical format"/>
+        <ec150 Value="Disk is write protected"/>
+      </Codes>
+    </Error>
+    <FormatSettings>
+      <CurrencyFormat Value="0"/>
+      <NegCurrFormat Value="1"/>
+      <DecimalSeparator Value="."/>
+      <CurrencyDecimals Value="2"/>
+      <DateSeparator Value="-"/>
+      <TimeSeparator Value=":"/>
+      <ListSeparator Value=","/>
+      <CurrencyString Value="$"/>
+      <ShortDateFormat Value="d/m/y"/>
+      <LongDateFormat Value="dd&quot; &quot;mmmm&quot; &quot;yyyy"/>
+      <TimeAMString Value="AM"/>
+      <TimePMString Value="PM"/>
+      <ShortTimeFormat Value="hh:nn"/>
+      <LongTimeFormat Value="hh:nn:ss"/>
+      <ShortMonthNames>
+        <Index_1 Value="Jan"/>
+        <Index_2 Value="Feb"/>
+        <Index_3 Value="Mar"/>
+        <Index_4 Value="Apr"/>
+        <Index_5 Value="May"/>
+        <Index_6 Value="Jun"/>
+        <Index_7 Value="Jul"/>
+        <Index_8 Value="Aug"/>
+        <Index_9 Value="Sep"/>
+        <Index_10 Value="Oct"/>
+        <Index_11 Value="Nov"/>
+        <Index_12 Value="Dec"/>
+      </ShortMonthNames>
+      <LongMonthNames>
+        <Index_1 Value="January"/>
+        <Index_2 Value="February"/>
+        <Index_3 Value="March"/>
+        <Index_4 Value="April"/>
+        <Index_5 Value="May"/>
+        <Index_6 Value="June"/>
+        <Index_7 Value="July"/>
+        <Index_8 Value="August"/>
+        <Index_9 Value="September"/>
+        <Index_10 Value="October"/>
+        <Index_11 Value="November"/>
+        <Index_12 Value="December"/>
+      </LongMonthNames>
+      <ShortDayNames>
+        <Index_1 Value="Sun"/>
+        <Index_2 Value="Mon"/>
+        <Index_3 Value="Tue"/>
+        <Index_4 Value="Wed"/>
+        <Index_5 Value="Thu"/>
+        <Index_6 Value="Fri"/>
+        <Index_7 Value="Sat"/>
+      </ShortDayNames>
+      <LongDayNames>
+        <Index_1 Value="Sunday"/>
+        <Index_2 Value="Monday"/>
+        <Index_3 Value="Tuesday"/>
+        <Index_4 Value="Wednesday"/>
+        <Index_5 Value="Thursday"/>
+        <Index_6 Value="Friday"/>
+        <Index_7 Value="Saturday"/>
+      </LongDayNames>
+      <TwoDigitYearCenturyWindow Value="50"/>
+    </FormatSettings>
+  </Application>
+  <Controls>
+    <fMain>
+      <Caption Value="Codepage Witch"/>
+      <ctrlBar>
+        <ToolBar1>
+          <Caption Value="ToolBar1"/>
+        </ToolBar1>
+      </ctrlBar>
+      <btnUpdater>
+        <Caption Value="Update..."/>
+      </btnUpdater>
+      <btnLogWindow>
+        <Caption Value="Log..."/>
+      </btnLogWindow>
+    </fMain>
+  </Controls>
+</CONFIG>
