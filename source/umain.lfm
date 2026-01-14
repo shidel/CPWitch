@@ -1,11 +1,12 @@
 object fMain: TfMain
-  Left = 1312
+  Left = 1361
   Height = 322
-  Top = 215
+  Top = 741
   Width = 432
   Caption = 'Codepage Witch'
   ClientHeight = 322
   ClientWidth = 432
+  Menu = mmMain
   Position = poScreenCenter
   LCLVersion = '4.0.0.4'
   OnCreate = FormCreate
@@ -21,7 +22,7 @@ object fMain: TfMain
     BorderWidth = 4
     RowSize = 20
     TabOrder = 0
-    object ToolBar1: TToolBar
+    object tbMain: TToolBar
       Left = 13
       Height = 48
       Top = 8
@@ -29,7 +30,7 @@ object fMain: TfMain
       Align = alNone
       ButtonHeight = 48
       ButtonWidth = 48
-      Caption = 'ToolBar1'
+      Caption = 'tbMain'
       EdgeBorders = []
       TabOrder = 0
     end
@@ -41,24 +42,39 @@ object fMain: TfMain
     Width = 432
     Panels = <>
   end
-  object btnUpdater: TButton
-    Left = 112
-    Height = 25
-    Top = 271
-    Width = 75
-    Anchors = [akLeft, akBottom]
-    Caption = 'Update...'
-    TabOrder = 2
-    OnClick = btnUpdaterClick
+  object alMain: TActionList
+    Left = 379
+    Top = 156
+    object actFileOpen: TAction
+      Category = 'File'
+      Caption = 'File Open...'
+      Hint = 'Open a text file.'
+    end
+    object actFileExport: TAction
+      Category = 'File'
+      Caption = 'File Export...'
+      Hint = 'Export a text file encoded in codepage format.'
+    end
+    object actPreferences: TAction
+      Category = 'Application'
+      Caption = 'Preferences...'
+      Hint = 'View or modify Codepage Witch preferences.'
+    end
+    object actOnlineUpdate: TAction
+      Category = 'Application'
+      Caption = 'Update Check...'
+      Hint = 'Check for updates to Codepage Witch.'
+      OnExecute = actOnlineUpdateExecute
+    end
+    object actDebugLog: TAction
+      Category = 'Application'
+      Caption = 'Debug Log...'
+      Hint = 'View the debugging log.'
+      OnExecute = actDebugLogExecute
+    end
   end
-  object btnLogWindow: TButton
-    Left = 34
-    Height = 25
-    Top = 271
-    Width = 75
-    Anchors = [akLeft, akBottom]
-    Caption = 'Log...'
-    TabOrder = 3
-    OnClick = btnLogWindowClick
+  object mmMain: TMainMenu
+    Left = 380
+    Top = 104
   end
 end

@@ -112,17 +112,118 @@
   <Controls>
     <fMain>
       <Caption Value="Codepage Witch"/>
-      <ctrlBar>
-        <ToolBar1>
-          <Caption Value="ToolBar1"/>
-        </ToolBar1>
-      </ctrlBar>
-      <btnUpdater>
-        <Caption Value="Update..."/>
-      </btnUpdater>
-      <btnLogWindow>
-        <Caption Value="Log..."/>
-      </btnLogWindow>
+      <alMain>
+        <actFileOpen>
+          <Caption Value="File Open..."/>
+          <Hint Value="Open a text file."/>
+        </actFileOpen>
+        <actFileExport>
+          <Caption Value="File Export..."/>
+          <Hint Value="Export a text file encoded in codepage format."/>
+        </actFileExport>
+        <actPreferences>
+          <Caption Value="Preferences..."/>
+          <Hint Value="View or modify Codepage Witch preferences."/>
+        </actPreferences>
+        <actOnlineUpdate>
+          <Caption Value="Update Check..."/>
+          <Hint Value="Check for updates to Codepage Witch."/>
+        </actOnlineUpdate>
+        <actDebugLog>
+          <Caption Value="Debug Log..."/>
+          <Hint Value="View the debugging log."/>
+        </actDebugLog>
+      </alMain>
     </fMain>
+    <fUpdateCheckDialog>
+      <Caption Value="Update Check"/>
+      <btnCancel>
+        <Caption Value="Cancel"/>
+      </btnCancel>
+      <btnRetry>
+        <Caption Value="Retry"/>
+      </btnRetry>
+      <Check Value="Checking for available updates for &quot;%s&quot;, version %s."/>
+      <Error Value="Unable to determine if there are any updates for &quot;%s&quot; at this time. Please try again later."/>
+      <None Value="There are no available updates for &quot;%s&quot; at this time. Please try again later."/>
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnRetry>
+            <Caption Value="Retry"/>
+          </btnRetry>
+          <btnCancel>
+            <Caption Value="Cancel"/>
+          </btnCancel>
+        </fButtonPanel>
+      </fLowerPanel>
+    </fUpdateCheckDialog>
+    <fUpdateFoundDialog>
+      <Caption Value="Update Available"/>
+      <btnCancel>
+        <Caption Value="Cancel"/>
+      </btnCancel>
+      <btnDownload>
+        <Caption Value="Download"/>
+      </btnDownload>
+      <btnSkip>
+        <Caption Value="Skip"/>
+      </btnSkip>
+      <cbSkipVersion>
+        <Caption Value="Skip this version"/>
+      </cbSkipVersion>
+      <Note Value="There are no release notes for version %1:s of &quot;%0:s&quot;"/>
+    </fUpdateFoundDialog>
+    <fUpdateDownloadDialog>
+      <Caption Value="Update Download"/>
+      <btnCancel>
+        <Caption Value="Cancel"/>
+      </btnCancel>
+      <btnRetry>
+        <Caption Value="Retry"/>
+      </btnRetry>
+      <Fetch Value="Downloading update for &quot;%s&quot;."/>
+      <Error Value="Error downloading &quot;%s&quot; update. Please try again later."/>
+    </fUpdateDownloadDialog>
+    <fUpdateSaveDialog>
+      <Caption Value="Update Downloaded"/>
+      <btnCancel>
+        <Caption Value="Cancel"/>
+      </btnCancel>
+      <btnSaveAs>
+        <Caption Value="Save as..."/>
+      </btnSaveAs>
+      <Downloaded Value="Downloaded &quot;%s&quot; version %s."/>
+    </fUpdateSaveDialog>
+    <fLoggerViewForm>
+      <LineCount>
+        <Singular Value="%.0n log entry"/>
+        <Plural Value="%.0n log entries"/>
+      </LineCount>
+      <Caption Value="Debug log"/>
+      <pControls>
+        <pButtons>
+          <Clear>
+            <Caption Value="Clear"/>
+          </Clear>
+          <SaveAs>
+            <Caption Value="Save As..."/>
+          </SaveAs>
+        </pButtons>
+        <pVerbose>
+          <cbVerbosity>
+            <Items>
+              <Index_0 Value="Critical"/>
+              <Index_1 Value="Minimal"/>
+              <Index_2 Value="Normal"/>
+              <Index_3 Value="Verbose"/>
+              <Index_4 Value="Excessive"/>
+            </Items>
+          </cbVerbosity>
+          <lbVerbosity>
+            <Caption Value="Verbosity:"/>
+          </lbVerbosity>
+        </pVerbose>
+      </pControls>
+    </fLoggerViewForm>
   </Controls>
 </CONFIG>

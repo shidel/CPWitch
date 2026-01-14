@@ -15,7 +15,7 @@ interface
 uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  ExtCtrls, ComCtrls,
+  ExtCtrls, ComCtrls, ActnList, Menus,
   Version, PasExt, Icons, MultiApp, LogView, Updater
   { other forms }
   ;
@@ -25,16 +25,20 @@ type
   { TfMain }
 
   TfMain = class(TMultiAppForm)
-    btnLogWindow: TButton;
-    btnUpdater: TButton;
-    ctrlBar: TControlBar;
-    statBar: TStatusBar;
-    ToolBar1: TToolBar;
-    procedure btnLogWindowClick(Sender: TObject);
-    procedure btnUpdaterClick(Sender: TObject);
+      actFileOpen: TAction;
+      actFileExport: TAction;
+      actDebugLog: TAction;
+      actOnlineUpdate: TAction;
+      actPreferences: TAction;
+      alMain: TActionList;
+      ctrlBar: TControlBar;
+      mmMain: TMainMenu;
+      statBar: TStatusBar;
+      tbMain: TToolBar;
+    procedure actDebugLogExecute(Sender: TObject);
+    procedure actOnlineUpdateExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     private
-      TBS : Array of TToolButton;
     protected
       procedure FormSettingsLoad(Sender: TObject);
       procedure FormSettingsSave(Sender: TObject);
@@ -51,35 +55,36 @@ implementation
 
 { TfMain }
 
-procedure TfMain.btnLogWindowClick(Sender: TObject);
+procedure TfMain.actDebugLogExecute(Sender: TObject);
 begin
   LogShow;
 end;
 
-procedure TfMain.btnUpdaterClick(Sender: TObject);
+procedure TfMain.actOnlineUpdateExecute(Sender: TObject);
 begin
   UpdateCheck(True);
 end;
 
 procedure TfMain.FormCreate(Sender: TObject);
-var
-  I : integer;
 begin
-  TBS:=[];
-  SetLength(TBS, 10);
-  for I := Low(TBS) to High(TBS) do begin
-      TBS[I]:=TToolButton.Create(Self);
-      TBS[I].Parent:=ToolBar1;
-      TBS[I].ImageIndex:=I;
-  end;
   OnSettingsLoad:=@FormSettingsLoad;
   OnSettingsSave:=@FormSettingsSave;
-  ToolBar1.Images:=ilButtonEnabled;
-  ToolBar1.DisabledImages:=ilButtonDisabled;
-  ToolBar1.HotImages:=ilButtonHover;
-  ToolBar1.Width:=ToolBar1.Images.Width * (Length(TBS) + 1);
-end;
+  tbMain.Images:=ilButtonEnabled;
+  tbMain.DisabledImages:=ilButtonDisabled;
+  tbMain.HotImages:=ilButtonHover;
+  // tbMain.Width:=tbMain.Images.Width * (Length(TBS) + 1);
 
+  // Assign Images
+  actFileOpen.ImageIndex:=idxButtonFileOpen;
+  actFileExport.ImageIndex:=idxButtonFileExport;
+  actPreferences.ImageIndex:=-1;
+
+  CreateToolButton(tbMain, actFileOpen);
+  CreateToolButton(tbMain, actFileExport);
+  CreateToolButton(tbMain, actPreferences);
+  CreateToolButton(tbMain, actOnlineUpdate);
+  CreateToolButton(tbMain, actDebugLog);
+end;
 
 procedure TfMain.FormSettingsLoad(Sender: TObject);
 begin
