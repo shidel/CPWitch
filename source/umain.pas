@@ -32,7 +32,18 @@ type
       actPreferences: TAction;
       alMain: TActionList;
       ctrlBar: TControlBar;
+      Label1: TLabel;
+      lbFileList: TLabel;
+      ListView1: TListView;
+      lvFileList: TListView;
       mmMain: TMainMenu;
+      pViewers: TPanel;
+      pCodepageListLabel: TPanel;
+      pCodepageList: TPanel;
+      pFileListLabel: TPanel;
+      pFileList: TPanel;
+      spFilesCPs: TSplitter;
+      spCPsViewers: TSplitter;
       statBar: TStatusBar;
       tbMain: TToolBar;
     procedure actDebugLogExecute(Sender: TObject);
@@ -42,12 +53,14 @@ type
     protected
       procedure FormSettingsLoad(Sender: TObject);
       procedure FormSettingsSave(Sender: TObject);
+      procedure SetButtonIcons;
     public
     published
   end;
 
 var
   fMain: TfMain;
+
 
 implementation
 
@@ -69,16 +82,8 @@ procedure TfMain.FormCreate(Sender: TObject);
 begin
   OnSettingsLoad:=@FormSettingsLoad;
   OnSettingsSave:=@FormSettingsSave;
-  {
-  // Black and White Buttons
-  tbMain.Images:=ilButtonEnabled;
-  tbMain.DisabledImages:=ilButtonDisabled;
-  tbMain.HotImages:=ilButtonHover;
-  }
-  // Color Buttons
-  tbMain.Images:=ilButtonColorEnabled;
-  tbMain.DisabledImages:=ilButtonColorDisabled;
-  tbMain.HotImages:=ilButtonColorHover;
+
+  SetButtonIcons;
 
   // Assign Images to Actions
   actFileOpen.ImageIndex:=idxButtonFileOpen;
@@ -106,6 +111,14 @@ procedure TfMain.FormSettingsSave(Sender: TObject);
 begin
   SetConfig('Nothing', '1234');
 end;
+
+procedure TfMain.SetButtonIcons;
+begin
+  tbMain.Images:=IconTheme.ButtonEnabled;
+  tbMain.DisabledImages:=IconTheme.ButtonDisabled;
+  tbMain.HotImages:=IconTheme.ButtonHover;
+end;
+
 
 
 end.
