@@ -1,11 +1,11 @@
 object fMain: TfMain
   Left = 1361
-  Height = 322
+  Height = 320
   Top = 741
-  Width = 432
+  Width = 480
   Caption = 'Codepage Witch'
-  ClientHeight = 322
-  ClientWidth = 432
+  ClientHeight = 320
+  ClientWidth = 480
   Menu = mmMain
   Position = poScreenCenter
   LCLVersion = '4.0.0.4'
@@ -14,7 +14,7 @@ object fMain: TfMain
     Left = 0
     Height = 66
     Top = 0
-    Width = 432
+    Width = 480
     Align = alTop
     AutoSize = True
     BevelInner = bvNone
@@ -38,19 +38,19 @@ object fMain: TfMain
   object statBar: TStatusBar
     Left = 0
     Height = 18
-    Top = 304
-    Width = 432
+    Top = 302
+    Width = 480
     Panels = <>
   end
   object pFileList: TPanel
     Left = 4
-    Height = 236
+    Height = 234
     Top = 66
     Width = 132
     Align = alLeft
     BorderSpacing.Left = 4
     BorderSpacing.Bottom = 2
-    ClientHeight = 236
+    ClientHeight = 234
     ClientWidth = 132
     TabOrder = 2
     object pFileListLabel: TPanel
@@ -72,11 +72,12 @@ object fMain: TfMain
         Align = alClient
         BorderSpacing.Around = 6
         Caption = 'Text Files'
+        FocusControl = pFileList
       end
     end
     object lvFileList: TListView
       Left = 1
-      Height = 206
+      Height = 204
       Top = 29
       Width = 130
       Align = alClient
@@ -90,46 +91,47 @@ object fMain: TfMain
   end
   object spFilesCPs: TSplitter
     Left = 136
-    Height = 238
+    Height = 236
     Top = 66
     Width = 5
   end
   object pCodepageList: TPanel
     Left = 141
-    Height = 236
+    Height = 234
     Top = 66
-    Width = 119
+    Width = 100
     Align = alLeft
     BorderSpacing.Bottom = 2
-    ClientHeight = 236
-    ClientWidth = 119
+    ClientHeight = 234
+    ClientWidth = 100
     TabOrder = 4
     object pCodepageListLabel: TPanel
       Left = 1
       Height = 28
       Top = 1
-      Width = 117
+      Width = 98
       Align = alTop
       AutoSize = True
       BevelOuter = bvNone
       ClientHeight = 28
-      ClientWidth = 117
+      ClientWidth = 98
       TabOrder = 0
-      object Label1: TLabel
+      object lbCodepageLabel: TLabel
         Left = 6
         Height = 16
         Top = 6
-        Width = 105
+        Width = 86
         Align = alClient
         BorderSpacing.Around = 6
         Caption = 'Codepages'
+        FocusControl = pCodepageList
       end
     end
-    object ListView1: TListView
+    object lvCodepageList: TListView
       Left = 1
-      Height = 206
+      Height = 204
       Top = 29
-      Width = 117
+      Width = 98
       Align = alClient
       Columns = <>
       ScrollBars = ssAutoBoth
@@ -139,16 +141,16 @@ object fMain: TfMain
     end
   end
   object spCPsViewers: TSplitter
-    Left = 260
-    Height = 238
+    Left = 241
+    Height = 236
     Top = 66
     Width = 5
   end
   object pViewers: TPanel
-    Left = 265
-    Height = 236
+    Left = 246
+    Height = 234
     Top = 66
-    Width = 163
+    Width = 230
     Align = alClient
     BorderSpacing.Right = 4
     BorderSpacing.Bottom = 2

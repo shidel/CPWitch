@@ -30,5 +30,3 @@ Same as above, only for negative currencies:
     10 = $ 1-
 
 
-
-

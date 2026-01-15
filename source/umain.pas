@@ -32,9 +32,9 @@ type
       actPreferences: TAction;
       alMain: TActionList;
       ctrlBar: TControlBar;
-      Label1: TLabel;
+      lbCodepageLabel: TLabel;
       lbFileList: TLabel;
-      ListView1: TListView;
+      lvCodepageList: TListView;
       lvFileList: TListView;
       mmMain: TMainMenu;
       pViewers: TPanel;
@@ -95,12 +95,13 @@ begin
   // Add Main ToolBar Buttons
   CreateToolButton(tbMain, actFileOpen);
   CreateToolButton(tbMain, actFileExport);
+  CreateToolButton(tbMain, tbsDivider);
   CreateToolButton(tbMain, actPreferences);
   CreateToolButton(tbMain, actOnlineUpdate);
   CreateToolButton(tbMain, actDebugLog);
 
   // Set Toolbar width
-  tbMain.Width:=(tbMain.Images.Width + 4) * 5 + tbMain.Indent * 2;
+  tbMain.Width:=(tbMain.Images.Width + 4) * 10 + tbMain.Indent * 2;
 end;
 
 procedure TfMain.FormSettingsLoad(Sender: TObject);
