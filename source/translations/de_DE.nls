@@ -224,6 +224,31 @@
         <Caption Value="Diese Version überspringen"/>
       </cbSkipVersion>
       <Note Value="Es gibt keine Versionshinweise für Version %1:s von &quot;%0:s&quot;"/>
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnSkip>
+            <Caption Value="Überspringen"/>
+          </btnSkip>
+          <btnDownload>
+            <Caption Value="Herunterladen"/>
+          </btnDownload>
+          <btnCancel>
+            <Caption Value="Abbrechen"/>
+          </btnCancel>
+        </fButtonPanel>
+        <fAuxPanel>
+          <cbSkipVersion>
+            <Caption Value="Skip this version"/>
+          </cbSkipVersion>
+        </fAuxPanel>
+      </fLowerPanel>
+      <fMiddlePanel>
+        <fBodyPanel>
+          <fHTML>
+            <Caption Value="fHTML"/>
+          </fHTML>
+        </fBodyPanel>
+      </fMiddlePanel>
     </fUpdateFoundDialog>
     <fUpdateDownloadDialog>
       <Caption Value="Update-Download"/>
@@ -235,6 +260,16 @@
       </btnRetry>
       <Fetch Value="Update für &quot;%s&quot; wird heruntergeladen."/>
       <Error Value="Fehler beim Herunterladen des Updates für &quot;%s&quot;. Bitte versuchen Sie es später erneut."/>
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnRetry>
+            <Caption Value="Retry"/>
+          </btnRetry>
+          <btnCancel>
+            <Caption Value="Abbrechen"/>
+          </btnCancel>
+        </fButtonPanel>
+      </fLowerPanel>
     </fUpdateDownloadDialog>
     <fUpdateSaveDialog>
       <Caption Value="Update heruntergeladen"/>
@@ -245,6 +280,19 @@
         <Caption Value="Speichern unter..."/>
       </btnSaveAs>
       <Downloaded Value="&quot;%s&quot; Version %s heruntergeladen."/>
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnSaveAs>
+            <Caption Value="Save As..."/>
+          </btnSaveAs>
+          <btnCancel>
+            <Caption Value="Abbrechen"/>
+          </btnCancel>
+        </fButtonPanel>
+      </fLowerPanel>
     </fUpdateSaveDialog>
+    <TComponent>
+      <Caption Value="&quot;CodepageWitch&quot; Version 0.0.0.0 heruntergeladen."/>
+    </TComponent>
   </Controls>
 </CONFIG>
