@@ -69,21 +69,33 @@ procedure TfMain.FormCreate(Sender: TObject);
 begin
   OnSettingsLoad:=@FormSettingsLoad;
   OnSettingsSave:=@FormSettingsSave;
+  {
+  // Black and White Buttons
   tbMain.Images:=ilButtonEnabled;
   tbMain.DisabledImages:=ilButtonDisabled;
   tbMain.HotImages:=ilButtonHover;
-  // tbMain.Width:=tbMain.Images.Width * (Length(TBS) + 1);
+  }
+  // Color Buttons
+  tbMain.Images:=ilButtonColorEnabled;
+  tbMain.DisabledImages:=ilButtonColorDisabled;
+  tbMain.HotImages:=ilButtonColorHover;
 
-  // Assign Images
+  // Assign Images to Actions
   actFileOpen.ImageIndex:=idxButtonFileOpen;
   actFileExport.ImageIndex:=idxButtonFileExport;
-  actPreferences.ImageIndex:=-1;
+  actPreferences.ImageIndex:=idxButtonPreferences;
+  actOnlineUpdate.ImageIndex:=idxButtonUpdateCheck;
+  actDebugLog.ImageIndex:=idxButtonDebugLog;
 
+  // Add Main ToolBar Buttons
   CreateToolButton(tbMain, actFileOpen);
   CreateToolButton(tbMain, actFileExport);
   CreateToolButton(tbMain, actPreferences);
   CreateToolButton(tbMain, actOnlineUpdate);
   CreateToolButton(tbMain, actDebugLog);
+
+  // Set Toolbar width
+  tbMain.Width:=(tbMain.Images.Width + 4) * 5 + tbMain.Indent * 2;
 end;
 
 procedure TfMain.FormSettingsLoad(Sender: TObject);

@@ -20,8 +20,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="38"/>
-        <CursorPos X="21" Y="65"/>
+        <TopLine Value="55"/>
+        <CursorPos X="41" Y="93"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -29,11 +29,10 @@
       <Unit>
         <Filename Value="icons.pp"/>
         <UnitName Value="Icons"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="88"/>
         <CursorPos X="22" Y="101"/>
         <UsageCount Value="39"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/pasext.pp"/>
