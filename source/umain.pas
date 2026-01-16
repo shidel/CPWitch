@@ -9,6 +9,7 @@ unit uMain;
 {$mode objfpc}{$H+}
 
 {$I patches.pp}  // Various compiler directives to "fix" things.
+{$I version.def} // Include directives for project option build flags.
 
 interface
 
@@ -16,9 +17,9 @@ uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ExtCtrls, ComCtrls, ActnList, Menus,
-  Version, PasExt, Icons, MultiApp, LogView, Updater
+  Version, PasExt, Icons, MultiApp, LogView, Updater,
   { other forms }
-  ;
+  uPreferences;
 
 type
 
@@ -48,6 +49,7 @@ type
       tbMain: TToolBar;
     procedure actDebugLogExecute(Sender: TObject);
     procedure actOnlineUpdateExecute(Sender: TObject);
+    procedure actPreferencesExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     private
     protected
@@ -78,6 +80,13 @@ begin
   UpdateCheck(True);
 end;
 
+procedure TfMain.actPreferencesExecute(Sender: TObject);
+begin
+  if not Assigned(fPreferences) then
+      Application.CreateForm(TfPreferences, fPreferences);
+  fPreferences.Show;
+end;
+
 procedure TfMain.FormCreate(Sender: TObject);
 begin
   OnSettingsLoad:=@FormSettingsLoad;
@@ -106,6 +115,7 @@ end;
 
 procedure TfMain.FormSettingsLoad(Sender: TObject);
 begin
+  SetButtonIcons;
 end;
 
 procedure TfMain.FormSettingsSave(Sender: TObject);

@@ -156,37 +156,6 @@
         </pCodepageListLabel>
       </pCodepageList>
     </fMain>
-    <fLoggerViewForm>
-      <LineCount>
-        <Singular Value="%.0n log entry"/>
-        <Plural Value="%.0n log entries"/>
-      </LineCount>
-      <Caption Value="Debug log"/>
-      <pControls>
-        <pButtons>
-          <Clear>
-            <Caption Value="Clear"/>
-          </Clear>
-          <SaveAs>
-            <Caption Value="Save As..."/>
-          </SaveAs>
-        </pButtons>
-        <pVerbose>
-          <cbVerbosity>
-            <Items>
-              <Index_0 Value="Critical"/>
-              <Index_1 Value="Minimal"/>
-              <Index_2 Value="Normal"/>
-              <Index_3 Value="Verbose"/>
-              <Index_4 Value="Excessive"/>
-            </Items>
-          </cbVerbosity>
-          <lbVerbosity>
-            <Caption Value="Verbosity:"/>
-          </lbVerbosity>
-        </pVerbose>
-      </pControls>
-    </fLoggerViewForm>
     <fUpdateCheckDialog>
       <Caption Value="Update Check"/>
       <btnCancel>
@@ -291,6 +260,37 @@
         </fButtonPanel>
       </fLowerPanel>
     </fUpdateSaveDialog>
+    <fLoggerViewForm>
+      <LineCount>
+        <Singular Value="%.0n log entry"/>
+        <Plural Value="%.0n log entries"/>
+      </LineCount>
+      <Caption Value="Debug log"/>
+      <pControls>
+        <pButtons>
+          <Clear>
+            <Caption Value="Clear"/>
+          </Clear>
+          <SaveAs>
+            <Caption Value="Save As..."/>
+          </SaveAs>
+        </pButtons>
+        <pVerbose>
+          <cbVerbosity>
+            <Items>
+              <Index_0 Value="Critical"/>
+              <Index_1 Value="Minimal"/>
+              <Index_2 Value="Normal"/>
+              <Index_3 Value="Verbose"/>
+              <Index_4 Value="Excessive"/>
+            </Items>
+          </cbVerbosity>
+          <lbVerbosity>
+            <Caption Value="Verbosity:"/>
+          </lbVerbosity>
+        </pVerbose>
+      </pControls>
+    </fLoggerViewForm>
     <TComponent>
       <Caption Value="&quot;CodepageWitch&quot; Version 0.0.0.0 heruntergeladen."/>
     </TComponent>

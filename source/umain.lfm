@@ -8,6 +8,7 @@ object fMain: TfMain
   ClientWidth = 480
   Menu = mmMain
   Position = poScreenCenter
+  ShowHint = True
   LCLVersion = '4.0.0.4'
   OnCreate = FormCreate
   object ctrlBar: TControlBar
@@ -173,6 +174,7 @@ object fMain: TfMain
       Category = 'Application'
       Caption = 'Preferences...'
       Hint = 'View or modify Codepage Witch preferences.'
+      OnExecute = actPreferencesExecute
     end
     object actOnlineUpdate: TAction
       Category = 'Application'

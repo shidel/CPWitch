@@ -14,7 +14,7 @@ uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
   Interfaces, Forms, // this includes the LCL widgetset
   Version, PasExt, MultiApp, Icons,
-  uMain;
+  uMain, uPreferences;
 
 {$R *.res}
 
