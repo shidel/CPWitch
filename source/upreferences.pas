@@ -56,11 +56,15 @@ type
     tsGeneral: TTabSheet;
     tsAbout: TTabSheet;
     tvSections: TTreeView;
+    procedure btnCancelClick(Sender: TObject);
+    procedure btnOkayClick(Sender: TObject);
     procedure btnUpdateCheckClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormResize(Sender: TObject);
+    procedure FormShow(Sender: TObject);
     procedure tvSectionsChange(Sender: TObject; Node: TTreeNode);
   private
+  protected
     lblApp, lblVer, lblCopy, lblSysLang : TLabel;
     cbPrefLang : TComboBox;
     fDefaultLanguage : String;
@@ -70,6 +74,8 @@ type
     procedure CreateLanguageSelectBox;
   public
     procedure ApplyUserLanguage; override;
+    procedure ReadConfiguration; virtual;
+    procedure WriteConfiguration; virtual;
 
   end;
 
@@ -127,6 +133,17 @@ begin
   UpdateCheck(True);
 end;
 
+procedure TfPreferences.btnCancelClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TfPreferences.btnOkayClick(Sender: TObject);
+begin
+  WriteConfiguration;
+  Close;
+end;
+
 procedure TfPreferences.FormResize(Sender: TObject);
 begin
   { TODO 0 -cBug Force position to prevent controls from swapping places when
@@ -136,6 +153,11 @@ begin
     to tle left, Aligning the panel with the TComboBox as alClient has seemed
     to fix the issue. However, leaving the forced position in place anyway. }
   ControlOnRight(pPrefOpts, lbPreferred);
+end;
+
+procedure TfPreferences.FormShow(Sender: TObject);
+begin
+  ReadConfiguration;
 end;
 
 procedure TfPreferences.tvSectionsChange(Sender: TObject; Node: TTreeNode);
@@ -232,6 +254,23 @@ procedure TfPreferences.ApplyUserLanguage;
 begin
   inherited ApplyUserLanguage;
   UpdateNode(tvSections.Items.GetFirstNode);
+end;
+
+procedure TfPreferences.ReadConfiguration;
+begin
+  cbAutoCheck.Checked:=GetAutoUpdate;
+end;
+
+procedure TfPreferences.WriteConfiguration;
+begin
+  SetAutoUpdate(cbAutoCheck.Checked);
+  try
+    if Assigned(UserConfig) then
+      UserConfig.Flush;
+  except
+    on E : Exception do
+      LogMessage(vbCritical, 'error writing config file: ' + E.Message);
+  end;
 end;
 
 initialization

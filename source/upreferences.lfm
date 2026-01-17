@@ -14,6 +14,7 @@ object fPreferences: TfPreferences
   LCLVersion = '4.0.0.4'
   OnCreate = FormCreate
   OnResize = FormResize
+  OnShow = FormShow
   object pUpperPanel: TPanel
     Left = 16
     Height = 4
@@ -330,6 +331,7 @@ object fPreferences: TfPreferences
         BorderSpacing.Around = 4
         Caption = 'Cancel'
         TabOrder = 0
+        OnClick = btnCancelClick
       end
       object btnOkay: TButton
         Left = 4
@@ -341,6 +343,7 @@ object fPreferences: TfPreferences
         BorderSpacing.Around = 4
         Caption = 'Accept'
         TabOrder = 1
+        OnClick = btnOkayClick
       end
     end
   end
