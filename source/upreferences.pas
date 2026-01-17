@@ -259,11 +259,19 @@ end;
 procedure TfPreferences.ReadConfiguration;
 begin
   cbAutoCheck.Checked:=GetAutoUpdate;
+  cbColorButtons.Checked:=DefaultIconThemeInColor;
+  if Assigned(IconTheme) then
+    cbColorButtons.Checked := IconTheme.InColor;
 end;
 
 procedure TfPreferences.WriteConfiguration;
 begin
   SetAutoUpdate(cbAutoCheck.Checked);
+  if Assigned(UserConfig) then begin
+    if Assigned(IconTheme) and (DefaultIconThemeInColor<>cbColorButtons.Checked) then
+      UserConfig.SetValue('Application/Theme/ColorIcons', cbColorButtons.Checked);
+  end;
+  if Assigned(IconTheme) then IconTheme.InColor:=cbColorButtons.Checked;
   try
     if Assigned(UserConfig) then
       UserConfig.Flush;
