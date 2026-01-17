@@ -164,7 +164,7 @@
                 <System Value="System Language:  %s"/>
                 <pUsrLang>
                   <lbPreferred>
-                    <Default Value="(nein)"/>
+                    <Default Value="(Standardeinstellung)"/>
                     <Caption Value="Preferred Language:"/>
                   </lbPreferred>
                 </pUsrLang>
