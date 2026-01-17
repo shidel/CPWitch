@@ -18,8 +18,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <IsVisibleTab Value="True"/>
-        <CursorPos X="13" Y="20"/>
+        <TopLine Value="33"/>
+        <CursorPos Y="81"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -45,7 +45,7 @@
         <Filename Value="mpla/multiapp.pp"/>
         <UnitName Value="MultiApp"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="40"/>
+        <TopLine Value="49"/>
         <CursorPos Y="770"/>
         <FoldState Value=" T7lVIt012 PFjZN TCoAI3 T3pM04A pibjK03655 pkGla0C721 pm3jf286 pj1l20I[e4YjX077]9ajG]n[w5B048[R5F067131E]=8oJ03214 P]O30o"/>
         <UsageCount Value="103"/>
@@ -94,20 +94,17 @@
         <ComponentName Value="fPreferences"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uPreferences"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="56"/>
-        <CursorPos X="77" Y="131"/>
-        <FoldState Value=" T3k506011 PIL0g"/>
+        <TopLine Value="119"/>
+        <CursorPos X="21" Y="127"/>
+        <FoldState Value=" T3kB06011 PIL0+"/>
         <UsageCount Value="72"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="mpla/multiapp.pp"/>
-        <Caret Line="65" Column="22" TopLine="28"/>
-      </Position>
       <Position>
         <Filename Value="mpla/multiapp.pp"/>
         <Caret Line="408" TopLine="346"/>
@@ -223,6 +220,10 @@
       <Position>
         <Filename Value="upreferences.pas"/>
         <Caret Line="183" Column="5" TopLine="119"/>
+      </Position>
+      <Position>
+        <Filename Value="upreferences.pas"/>
+        <Caret Line="20" Column="44"/>
       </Position>
     </JumpHistory>
     <RunParams>

@@ -17,7 +17,7 @@ uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ExtCtrls, ComCtrls, ActnList, Menus,
-  Version, PasExt, Icons, MultiApp;
+  Version, PasExt, Icons, MultiApp, Updater;
 
 type
 
@@ -56,6 +56,7 @@ type
     tsGeneral: TTabSheet;
     tsAbout: TTabSheet;
     tvSections: TTreeView;
+    procedure btnUpdateCheckClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure tvSectionsChange(Sender: TObject; Node: TTreeNode);
@@ -121,6 +122,11 @@ begin
   pcTabs.ActivePage:=tsAbout;
 end;
 
+procedure TfPreferences.btnUpdateCheckClick(Sender: TObject);
+begin
+  UpdateCheck(True);
+end;
+
 procedure TfPreferences.FormResize(Sender: TObject);
 begin
   { TODO 0 -cBug Force position to prevent controls from swapping places when
@@ -183,15 +189,17 @@ begin
 
   cbPrefLang:=TComboBox.Create(Self);
   cbPrefLang.Parent:=pPrefOpts;
-  //cbPrefLang.Left:=1;
-  cbPrefLang.Align:=alLeft;
+  // cbPrefLang.Left:=1;
+  // cbPrefLang.Width:=75;
+  cbPrefLang.Align:=alClient;
   cbPrefLang.AutoSize:=True;
+  cbPrefLang.Constraints.MaxWidth:=200;
   cbPrefLang.BorderSpacing.Top:=1;
   cbPrefLang.BorderSpacing.Left:=8;
   cbPrefLang.BorderSpacing.Bottom:=7;
   cbPrefLang.BorderSpacing.Right:=8;
   cbPrefLang.Items.Add(fDefaultLanguage);
-  cbPrefLang.Text:=fDefaultLanguage;
+  // cbPrefLang.Text:=fDefaultLanguage;
   cbPrefLang.ReadOnly:=True;
   // Add Other Available Languages
   { TODO 0 -cDevel Improve Language NLS scan to not be case specific }

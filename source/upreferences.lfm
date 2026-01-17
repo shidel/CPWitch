@@ -195,6 +195,7 @@ object fPreferences: TfPreferences
                 AutoSize = True
                 Caption = 'Check now...'
                 TabOrder = 0
+                OnClick = btnUpdateCheckClick
               end
             end
           end

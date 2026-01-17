@@ -6,6 +6,8 @@ object fMain: TfMain
   Caption = 'Codepage Witch'
   ClientHeight = 320
   ClientWidth = 480
+  Constraints.MinHeight = 320
+  Constraints.MinWidth = 480
   Menu = mmMain
   Position = poScreenCenter
   ShowHint = True

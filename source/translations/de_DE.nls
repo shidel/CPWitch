@@ -225,6 +225,16 @@
       <Check Value="Checking for available updates for &quot;%s&quot;, version %s."/>
       <Error Value="Unable to determine if there are any updates for &quot;%s&quot; at this time. Please try again later."/>
       <None Value="There are no available updates for &quot;%s&quot; at this time. Please try again later."/>
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnRetry>
+            <Caption Value="Retry"/>
+          </btnRetry>
+          <btnCancel>
+            <Caption Value="Cancel"/>
+          </btnCancel>
+        </fButtonPanel>
+      </fLowerPanel>
     </fUpdateCheckDialog>
     <fUpdateFoundDialog>
       <Caption Value="Update Available"/>
