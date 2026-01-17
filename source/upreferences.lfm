@@ -8,6 +8,7 @@ object fPreferences: TfPreferences
   ClientHeight = 320
   ClientWidth = 480
   Position = poMainFormCenter
+  ShowHint = True
   LCLVersion = '4.0.0.4'
   OnCreate = FormCreate
   object pUpperPanel: TPanel
@@ -52,7 +53,12 @@ object fPreferences: TfPreferences
         Top = 33
         Width = 168
         Align = alClient
+        ReadOnly = True
+        RowSelect = True
+        ScrollBars = ssAutoVertical
         TabOrder = 0
+        Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoRowSelect, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+        OnChange = tvSectionsChange
       end
       object pSectionLabel: TPanel
         Left = 1
@@ -76,7 +82,7 @@ object fPreferences: TfPreferences
         end
       end
     end
-    object Splitter1: TSplitter
+    object sSectionsPage: TSplitter
       Left = 170
       Height = 252
       Top = 0
@@ -97,9 +103,9 @@ object fPreferences: TfPreferences
         Height = 252
         Top = 0
         Width = 281
-        ActivePage = tsAbout
+        ActivePage = tsGeneral
         Align = alClient
-        TabIndex = 0
+        TabIndex = 1
         TabOrder = 0
         object tsAbout: TTabSheet
           Caption = 'About'
@@ -135,6 +141,78 @@ object fPreferences: TfPreferences
             AutoSize = True
             BevelOuter = bvNone
             TabOrder = 1
+          end
+        end
+        object tsGeneral: TTabSheet
+          Caption = 'General'
+          ClientHeight = 216
+          ClientWidth = 275
+          object gbOnlineUpdates: TGroupBox
+            Left = 0
+            Height = 85
+            Top = 0
+            Width = 275
+            Align = alTop
+            AutoSize = True
+            Caption = 'Online Updates'
+            ClientHeight = 66
+            ClientWidth = 265
+            TabOrder = 0
+            object cbAutoCheck: TCheckBox
+              Left = 8
+              Height = 18
+              Top = 8
+              Width = 249
+              Align = alTop
+              BorderSpacing.Around = 8
+              Caption = 'Automatically check for updates'
+              TabOrder = 0
+            end
+            object pUpdateButton: TPanel
+              Left = 8
+              Height = 20
+              Top = 38
+              Width = 249
+              Align = alTop
+              AutoSize = True
+              BorderSpacing.Top = 4
+              BorderSpacing.Around = 8
+              BevelOuter = bvNone
+              ClientHeight = 20
+              ClientWidth = 249
+              TabOrder = 1
+              object btnUpdateCheck: TButton
+                Left = 0
+                Height = 20
+                Top = 0
+                Width = 100
+                Align = alLeft
+                AutoSize = True
+                Caption = 'Check now...'
+                TabOrder = 0
+              end
+            end
+          end
+          object gbUserLanguage: TGroupBox
+            Left = 0
+            Height = 105
+            Top = 101
+            Width = 275
+            Align = alTop
+            BorderSpacing.Top = 16
+            Caption = 'User Language'
+            ClientHeight = 86
+            ClientWidth = 265
+            TabOrder = 1
+            object pSysLang: TPanel
+              Left = 0
+              Height = 50
+              Top = 0
+              Width = 265
+              Align = alTop
+              BevelOuter = bvNone
+              TabOrder = 0
+            end
           end
         end
       end

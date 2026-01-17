@@ -134,13 +134,6 @@
           <Hint Value="View the debugging log."/>
         </actDebugLog>
       </alMain>
-      <ctrlBar>
-        <tbMain>
-          <btnDivider>
-            <Caption Value="btnDivider"/>
-          </btnDivider>
-        </tbMain>
-      </ctrlBar>
       <pFileList>
         <pFileListLabel>
           <lbFileList>
@@ -155,7 +148,46 @@
           </lbCodepageLabel>
         </pCodepageListLabel>
       </pCodepageList>
+      <ctrlBar>
+        <tbMain>
+          <btnDivider>
+            <Caption Value="btnDivider"/>
+          </btnDivider>
+        </tbMain>
+      </ctrlBar>
     </fMain>
+    <fPreferences>
+      <pMiddlePanel>
+        <pPagePanel>
+          <pcTabs>
+            <tsAbout>
+              <Copyright Value="Copyright %s"/>
+              <Version Value="Version %0:s (build %1:s)"/>
+              <Application Value="The &quot;%s&quot;"/>
+              <Caption Value="About"/>
+            </tsAbout>
+          </pcTabs>
+        </pPagePanel>
+        <pSectionPanel>
+          <pSectionLabel>
+            <lbSections>
+              <Caption Value="Sections"/>
+            </lbSections>
+          </pSectionLabel>
+        </pSectionPanel>
+      </pMiddlePanel>
+      <Caption Value="Codepage Witch Preferences"/>
+      <pLowerPanel>
+        <pButtons>
+          <btnCancel>
+            <Caption Value="Cancel"/>
+          </btnCancel>
+          <btnOkay>
+            <Caption Value="Accept"/>
+          </btnOkay>
+        </pButtons>
+      </pLowerPanel>
+    </fPreferences>
     <fUpdateCheckDialog>
       <Caption Value="Update Check"/>
       <btnCancel>
