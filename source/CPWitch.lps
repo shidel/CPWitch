@@ -18,8 +18,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <TopLine Value="72"/>
-        <CursorPos Y="94"/>
+        <TopLine Value="8"/>
+        <CursorPos X="50" Y="20"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -27,10 +27,10 @@
       <Unit>
         <Filename Value="icons.pp"/>
         <UnitName Value="Icons"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="431"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="288"/>
         <CursorPos X="26" Y="323"/>
-        <UsageCount Value="36"/>
+        <UsageCount Value="37"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -45,9 +45,9 @@
       <Unit>
         <Filename Value="mpla/multiapp.pp"/>
         <UnitName Value="MultiApp"/>
-        <EditorIndex Value="3"/>
-        <TopLine Value="749"/>
-        <CursorPos X="79" Y="1058"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="1830"/>
+        <CursorPos Y="1845"/>
         <FoldState Value=" T7lVIt012 PFjZN TCoAI3 T3pM04A pibjK036552621 pofoY286 pj1l20I014142B pkFnX0I7]mZjS08[I4clR07B]IYjO03814 PjBjZ0-"/>
         <UsageCount Value="103"/>
         <Loaded Value="True"/>
@@ -69,11 +69,13 @@
       <Unit>
         <Filename Value="mpla/updater.pp"/>
         <UnitName Value="Updater"/>
-        <EditorIndex Value="-1"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
         <TopLine Value="382"/>
-        <CursorPos X="65" Y="597"/>
-        <FoldState Value=" T3pH0I7 pifjW03A pj5jY098]IajM0F6]9XjL0I9]R2k109[a4dkT063 PKQ0E"/>
+        <CursorPos X="60" Y="484"/>
+        <FoldState Value=" T3pH0I7 pifjW03028]BYjY09[94ajM0F6]9XjL0I41]ejJl106[947jT063 PKQ0Y"/>
         <UsageCount Value="23"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="/Applications/Lazarus/lcl/comctrls.pp"/>
@@ -96,25 +98,16 @@
         <ComponentName Value="fPreferences"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uPreferences"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="131"/>
-        <CursorPos X="17" Y="273"/>
-        <FoldState Value=" T3j40c9 pj3kI0J_"/>
-        <UsageCount Value="85"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="222"/>
+        <CursorPos X="3" Y="267"/>
+        <FoldState Value=" T3j40c811 PiXkI0b"/>
+        <UsageCount Value="86"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="114" Column="28" TopLine="105"/>
-      </Position>
-      <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="55" TopLine="19"/>
-      </Position>
       <Position>
         <Filename Value="upreferences.pas"/>
         <Caret Line="108" Column="52" TopLine="104"/>
@@ -226,6 +219,14 @@
       <Position>
         <Filename Value="mpla/multiapp.pp"/>
         <Caret Line="149" Column="45" TopLine="140"/>
+      </Position>
+      <Position>
+        <Filename Value="upreferences.pas"/>
+        <Caret Line="272" Column="5" TopLine="204"/>
+      </Position>
+      <Position>
+        <Filename Value="upreferences.pas"/>
+        <Caret Line="289" Column="17" TopLine="231"/>
       </Position>
     </JumpHistory>
     <RunParams>

@@ -257,21 +257,41 @@ begin
 end;
 
 procedure TfPreferences.ReadConfiguration;
+var
+  I : integer;
+  L : String;
 begin
   cbAutoCheck.Checked:=GetAutoUpdate;
   cbColorButtons.Checked:=DefaultIconThemeInColor;
   cbHints.Checked:=UserConfig.GetValue('Application/Show_Hints/Enabled', ShowHint);
+
   if Assigned(IconTheme) then
-    cbColorButtons.Checked := IconTheme.InColor;
+    cbColorButtons.Checked := IconTheme.InColor
+  else
+    cbColorButtons.Checked:=DefaultIconThemeInColor;
+
+  cbPrefLang.Text:=fDefaultLanguage;
+  L:=Trim(RawByteString(UserConfig.GetValue('Application/Language/Value', '')));
+  for I := 0 to cbPrefLang.Items.Count - 1 do
+    if Lowercase(L) = Lowercase(Trim(cbPrefLang.Items[I])) then begin
+      cbPrefLang.Text:=Trim(cbPrefLang.Items[I]);
+      Break;
+    end;
 end;
 
 procedure TfPreferences.WriteConfiguration;
+var
+  L : String;
 begin
   SetAutoUpdate(cbAutoCheck.Checked);
   if Assigned(UserConfig) then begin
     UserConfig.SetValue('Application/Theme/ColorIcons', cbColorButtons.Checked);
     UserConfig.SetValue('Application/Show_Hints/Enabled', cbHints.Checked);
+    L := cbPrefLang.Text;
+    if L = fDefaultLanguage then L:='Default';
+    UserConfig.SetValue('Application/Language/Value', UnicodeString(Trim(L)));
   end;
+
   if Assigned(IconTheme) then IconTheme.InColor:=cbColorButtons.Checked;
   try
     if Assigned(UserConfig) then
