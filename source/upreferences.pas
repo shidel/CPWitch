@@ -30,10 +30,16 @@ type
     btnOkay: TButton;
     btnUpdateCheck: TButton;
     cbAutoCheck: TCheckBox;
+    cbColorButtons: TCheckBox;
+    cbHints: TCheckBox;
     gbOnlineUpdates: TGroupBox;
     gbUserLanguage: TGroupBox;
+    gbMiscellaneous: TGroupBox;
     imgAppImage: TImage;
+    lbPreferred: TLabel;
     lbSections: TLabel;
+    pPrefOpts: TPanel;
+    pUsrLang: TPanel;
     pSysLang: TPanel;
     pUpdateButton: TPanel;
     pVersionInfo: TPanel;
@@ -51,12 +57,16 @@ type
     tsAbout: TTabSheet;
     tvSections: TTreeView;
     procedure FormCreate(Sender: TObject);
+    procedure FormResize(Sender: TObject);
     procedure tvSectionsChange(Sender: TObject; Node: TTreeNode);
   private
     lblApp, lblVer, lblCopy, lblSysLang : TLabel;
+    cbPrefLang : TComboBox;
+    fDefaultLanguage : String;
     function CreateLabel(AParent : TWinControl; ACaption : String;
       AAlignment : TAlignment=taCenter; ASpacing : integer=4) : TLabel;
     procedure CreateSectionTree;
+    procedure CreateLanguageSelectBox;
   public
     procedure ApplyUserLanguage; override;
 
@@ -95,11 +105,31 @@ begin
   // User System Language
   Key:=ComponentNamePath(gbUserLanguage, Self, True);
   lblSysLang := CreateLabel(pSysLang,GetFormat(Key + 'System',
-    [UserLanguage], 'System Language: %s'), taLeftJustify, 8
-  );
+    [UserLanguage], 'System Language:  %s'), taLeftJustify);
+  lblSysLang.BorderSpacing.Left:=4;
+
+  // String for Default preferred language
+  Key:=ComponentNamePath(lbPreferred, Self, True);
+  fDefaultLanguage := GetTranslation(Key + 'Default', '(default)');
+
+  CreateLanguageSelectBox;
+  pSysLang.AutoSize:=True;
+  lbPreferred.FocusControl:=cbPrefLang;
+  ControlOnRight(pPrefOpts, lbPreferred);
 
   CreateSectionTree;
   pcTabs.ActivePage:=tsAbout;
+end;
+
+procedure TfPreferences.FormResize(Sender: TObject);
+begin
+  { TODO 0 -cBug Force position to prevent controls from swapping places when
+    the form is resized vertically. However, they do still flicker back and
+    forth on occasion when being resized. This was improved a lot by placing
+    the TComboBox inside it's own TPanel. Instead of aligning both controls
+    to tle left, Aligning the panel with the TComboBox as alClient has seemed
+    to fix the issue. However, leaving the forced position in place anyway. }
+  ControlOnRight(pPrefOpts, lbPreferred);
 end;
 
 procedure TfPreferences.tvSectionsChange(Sender: TObject; Node: TTreeNode);
@@ -141,6 +171,38 @@ begin
   end;
   L:=tvSections.Items.GetFirstNode;
   if Assigned(L) then L.Selected:=True;
+end;
+
+procedure TfPreferences.CreateLanguageSelectBox;
+var
+  Pref, L : String;
+  Langs : TArrayOfRawByteString;
+  I : Integer;
+begin
+  Pref:=Trim(RawByteString(UserConfig.GetValue('Application/Language/Value', '')));
+
+  cbPrefLang:=TComboBox.Create(Self);
+  cbPrefLang.Parent:=pPrefOpts;
+  //cbPrefLang.Left:=1;
+  cbPrefLang.Align:=alLeft;
+  cbPrefLang.AutoSize:=True;
+  cbPrefLang.BorderSpacing.Top:=1;
+  cbPrefLang.BorderSpacing.Left:=8;
+  cbPrefLang.BorderSpacing.Bottom:=7;
+  cbPrefLang.BorderSpacing.Right:=8;
+  cbPrefLang.Items.Add(fDefaultLanguage);
+  cbPrefLang.Text:=fDefaultLanguage;
+  cbPrefLang.ReadOnly:=True;
+  // Add Other Available Languages
+  { TODO 0 -cDevel Improve Language NLS scan to not be case specific }
+  cbPrefLang.Items.Add('en_US'); // Built-in
+  DirScan(AppDataPath + PathDelimiter + '*.nls', Langs, [dsFiles]);
+  for I := 0 to Length(Langs) - 1 do begin
+    L :=Trim(ExcludeTrailing(Langs[I], '.NLS', false));
+    if cbPrefLang.Items.IndexOf(L) <> -1 then Continue;
+    cbPrefLang.Items.Add(L);
+  end;
+
 end;
 
 procedure TfPreferences.ApplyUserLanguage;

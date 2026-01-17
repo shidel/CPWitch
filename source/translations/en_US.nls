@@ -166,6 +166,39 @@
               <Application Value="The &quot;%s&quot;"/>
               <Caption Value="About"/>
             </tsAbout>
+            <tsGeneral>
+              <gbUserLanguage>
+                <System Value="System Language: %s"/>
+                <pUsrLang>
+                  <lbPreferred>
+                    <Default Value="(default)"/>
+                    <Caption Value="Preferred Language:"/>
+                  </lbPreferred>
+                </pUsrLang>
+                <Caption Value="User Language"/>
+              </gbUserLanguage>
+              <Caption Value="General"/>
+              <gbOnlineUpdates>
+                <Caption Value="Online Updates"/>
+                <cbAutoCheck>
+                  <Caption Value="Automatically check for updates"/>
+                </cbAutoCheck>
+                <pUpdateButton>
+                  <btnUpdateCheck>
+                    <Caption Value="Check now..."/>
+                  </btnUpdateCheck>
+                </pUpdateButton>
+              </gbOnlineUpdates>
+              <gbMiscellaneous>
+                <Caption Value="Miscellaneous"/>
+                <cbColorButtons>
+                  <Caption Value="Use color toolbar buttons"/>
+                </cbColorButtons>
+                <cbHints>
+                  <Caption Value="Show hints when mouse hovers"/>
+                </cbHints>
+              </gbMiscellaneous>
+            </tsGeneral>
           </pcTabs>
         </pPagePanel>
         <pSectionPanel>

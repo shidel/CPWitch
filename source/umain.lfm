@@ -1,7 +1,7 @@
 object fMain: TfMain
-  Left = 1361
+  Left = 1381
   Height = 320
-  Top = 741
+  Top = 649
   Width = 480
   Caption = 'Codepage Witch'
   ClientHeight = 320

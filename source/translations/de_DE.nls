@@ -1,143 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CONFIG Language="de_DE">
+<CONFIG Language="en_US">
   <Application>
     <ModalButtons>
-      <Ok Value="OK"/>
-      <Cancel Value="Abbrechen"/>
-      <Yes Value="Ja"/>
-      <No Value="Nein"/>
-      <Close Value="Schließen"/>
-      <Abort Value="Abbrechen"/>
-      <Retry Value="Wiederholen"/>
-      <Ignore Value="Ignorieren"/>
-      <All Value="Alle"/>
-      <NoToAll Value="Nein zu allen"/>
-      <YesToAll Value="Ja zu allen"/>
+      <Ok Value="Ok"/>
+      <Cancel Value="Cancel"/>
+      <Yes Value="Yes"/>
+      <No Value="No"/>
+      <Close Value="Close"/>
+      <Abort Value="Abort"/>
+      <Retry Value="Retry"/>
+      <Ignore Value="Ignore"/>
+      <All Value="All"/>
+      <NoToAll Value="No to all"/>
+      <YesToAll Value="Yes to all"/>
     </ModalButtons>
     <Error>
       <File>
         <Read>
-          <Caption Value="Dateilesefehler"/>
-          <Message Value="Fehler #%1:s (%2:s) trat beim Lesen der Datei &quot;%0:s&quot; auf."/>
+          <Caption Value="File read error"/>
+          <Message Value="Error #%1:s (%2:s) occured while reading from file &quot;%0:s&quot;."/>
         </Read>
         <Write>
-          <Caption Value="Dateischreibfehler"/>
-          <Message Value="Fehler #%1:s (%2:s) trat beim Schreiben in die Datei &quot;%0:s&quot; auf."/>
+          <Caption Value="File write error"/>
+          <Message Value="Error #%1:s (%2:s) occured while writing to file &quot;%0:s&quot;."/>
         </Write>
       </File>
       <Codes>
-        <ecUnknown Value="Unbekannter Fehler."/>
-        <ec0 Value="Kein Fehler"/>
-        <ec2 Value="Datei nicht gefunden"/>
-        <ec3 Value="Pfad nicht gefunden"/>
-        <ec4 Value="Zu viele Dateien geöffnet"/>
-        <ec5 Value="Zugriff verweigert"/>
-        <ec6 Value="Ungültiges Dateihandle"/>
-        <ec12 Value="Ungültiger Zugriffsmodus"/>
-        <ec17 Value="Geräteübergreifendes Umbenennen nicht möglich"/>
-        <ec100 Value="Disk-Lesefehler"/>
-        <ec101 Value="Disk-Schreibfehler"/>
-        <ec102 Value="Datei nicht zugewiesen"/>
-        <ec103 Value="Datei nicht geöffnet"/>
-        <ec104 Value="Datei nicht zum Lesen geöffnet"/>
-        <ec105 Value="Datei nicht zum Schreiben geöffnet"/>
-        <ec106 Value="Ungültiges numerisches Format"/>
-        <ec150 Value="Datenträger ist schreibgeschützt"/>
+        <ecUnknown Value="Unknown error."/>
+        <ec0 Value="No error"/>
+        <ec2 Value="File not found"/>
+        <ec3 Value="Path not found"/>
+        <ec4 Value="Too many files open"/>
+        <ec5 Value="Access denied"/>
+        <ec6 Value="Invalid file handle"/>
+        <ec12 Value="Invalid access mode"/>
+        <ec17 Value="Cannot rename across devices"/>
+        <ec100 Value="Disk read error"/>
+        <ec101 Value="Disk write error"/>
+        <ec102 Value="File not assigned"/>
+        <ec103 Value="File not open"/>
+        <ec104 Value="File not open for input"/>
+        <ec105 Value="File not open for output"/>
+        <ec106 Value="Invalid numerical format"/>
+        <ec150 Value="Disk is write protected"/>
       </Codes>
     </Error>
     <FormatSettings>
       <CurrencyFormat Value="0"/>
       <NegCurrFormat Value="1"/>
-      <DecimalSeparator Value=","/>
+      <DecimalSeparator Value="."/>
       <CurrencyDecimals Value="2"/>
-      <DateSeparator Value="."/>
+      <DateSeparator Value="-"/>
       <TimeSeparator Value=":"/>
-      <ListSeparator Value=";"/>
-      <CurrencyString Value="€"/>
-      <ShortDateFormat Value="dd.mm.yyyy"/>
-      <LongDateFormat Value="dd. mmmm yyyy"/>
-      <TimeAMString Value=""/>
-      <TimePMString Value=""/>
-      <ShortTimeFormat Value="HH:mm"/>
-      <LongTimeFormat Value="HH:mm:ss"/>
+      <ListSeparator Value=","/>
+      <CurrencyString Value="$"/>
+      <ShortDateFormat Value="d/m/y"/>
+      <LongDateFormat Value="dd&quot; &quot;mmmm&quot; &quot;yyyy"/>
+      <TimeAMString Value="AM"/>
+      <TimePMString Value="PM"/>
+      <ShortTimeFormat Value="hh:nn"/>
+      <LongTimeFormat Value="hh:nn:ss"/>
       <ShortMonthNames>
         <Index_1 Value="Jan"/>
         <Index_2 Value="Feb"/>
-        <Index_3 Value="Mär"/>
+        <Index_3 Value="Mar"/>
         <Index_4 Value="Apr"/>
-        <Index_5 Value="Mai"/>
+        <Index_5 Value="May"/>
         <Index_6 Value="Jun"/>
         <Index_7 Value="Jul"/>
         <Index_8 Value="Aug"/>
         <Index_9 Value="Sep"/>
-        <Index_10 Value="Okt"/>
+        <Index_10 Value="Oct"/>
         <Index_11 Value="Nov"/>
-        <Index_12 Value="Dez"/>
+        <Index_12 Value="Dec"/>
       </ShortMonthNames>
       <LongMonthNames>
-        <Index_1 Value="Januar"/>
-        <Index_2 Value="Februar"/>
-        <Index_3 Value="März"/>
+        <Index_1 Value="January"/>
+        <Index_2 Value="February"/>
+        <Index_3 Value="March"/>
         <Index_4 Value="April"/>
-        <Index_5 Value="Mai"/>
-        <Index_6 Value="Juni"/>
-        <Index_7 Value="Juli"/>
+        <Index_5 Value="May"/>
+        <Index_6 Value="June"/>
+        <Index_7 Value="July"/>
         <Index_8 Value="August"/>
         <Index_9 Value="September"/>
-        <Index_10 Value="Oktober"/>
+        <Index_10 Value="October"/>
         <Index_11 Value="November"/>
-        <Index_12 Value="Dezember"/>
+        <Index_12 Value="December"/>
       </LongMonthNames>
       <ShortDayNames>
-        <Index_1 Value="So"/>
-        <Index_2 Value="Mo"/>
-        <Index_3 Value="Di"/>
-        <Index_4 Value="Mi"/>
-        <Index_5 Value="Do"/>
-        <Index_6 Value="Fr"/>
-        <Index_7 Value="Sa"/>
+        <Index_1 Value="Sun"/>
+        <Index_2 Value="Mon"/>
+        <Index_3 Value="Tue"/>
+        <Index_4 Value="Wed"/>
+        <Index_5 Value="Thu"/>
+        <Index_6 Value="Fri"/>
+        <Index_7 Value="Sat"/>
       </ShortDayNames>
       <LongDayNames>
-        <Index_1 Value="Sonntag"/>
-        <Index_2 Value="Montag"/>
-        <Index_3 Value="Dienstag"/>
-        <Index_4 Value="Mittwoch"/>
-        <Index_5 Value="Donnerstag"/>
-        <Index_6 Value="Freitag"/>
-        <Index_7 Value="Samstag"/>
+        <Index_1 Value="Sunday"/>
+        <Index_2 Value="Monday"/>
+        <Index_3 Value="Tuesday"/>
+        <Index_4 Value="Wednesday"/>
+        <Index_5 Value="Thursday"/>
+        <Index_6 Value="Friday"/>
+        <Index_7 Value="Saturday"/>
       </LongDayNames>
       <TwoDigitYearCenturyWindow Value="50"/>
     </FormatSettings>
   </Application>
   <Controls>
     <fMain>
-      <Caption Value="Codepage Witch"/>
+      <Caption Value="Codepage-Hexe"/>
       <alMain>
         <actFileOpen>
-          <Caption Value="Datei öffnen..."/>
-          <Hint Value="Eine Textdatei öffnen."/>
+          <Caption Value="File Open..."/>
+          <Hint Value="Open a text file."/>
         </actFileOpen>
         <actFileExport>
-          <Caption Value="Datei exportieren..."/>
-          <Hint Value="Eine Textdatei im Codepage-Format exportieren."/>
+          <Caption Value="File Export..."/>
+          <Hint Value="Export a text file encoded in codepage format."/>
         </actFileExport>
         <actPreferences>
-          <Caption Value="Einstellungen..."/>
-          <Hint Value="Codepage Witch Einstellungen anzeigen oder ändern."/>
+          <Caption Value="Preferences..."/>
+          <Hint Value="View or modify Codepage Witch preferences."/>
         </actPreferences>
         <actOnlineUpdate>
-          <Caption Value="Update-Prüfung..."/>
-          <Hint Value="Nach Updates für Codepage Witch suchen."/>
+          <Caption Value="Update Check..."/>
+          <Hint Value="Check for updates to Codepage Witch."/>
         </actOnlineUpdate>
         <actDebugLog>
-          <Caption Value="Debug-Protokoll..."/>
-          <Hint Value="Das Debugging-Protokoll anzeigen."/>
+          <Caption Value="Debug Log..."/>
+          <Hint Value="View the debugging log."/>
         </actDebugLog>
       </alMain>
       <pFileList>
         <pFileListLabel>
           <lbFileList>
-            <Caption Value="Textdateien"/>
+            <Caption Value="Text Files"/>
           </lbFileList>
         </pFileListLabel>
       </pFileList>
@@ -148,24 +148,50 @@
           </lbCodepageLabel>
         </pCodepageListLabel>
       </pCodepageList>
-      <ctrlBar>
-        <tbMain>
-          <btnDivider>
-            <Caption Value="btnDivider"/>
-          </btnDivider>
-        </tbMain>
-      </ctrlBar>
     </fMain>
     <fPreferences>
       <pMiddlePanel>
         <pPagePanel>
           <pcTabs>
             <tsAbout>
-              <Copyright Value="Copyright %s"/>
+              <Copyright Value="Urheberrecht %s"/>
               <Version Value="Version %0:s (build %1:s)"/>
-              <Application Value="The &quot;%s&quot;"/>
+              <Application Value="Der „%s“"/>
               <Caption Value="About"/>
             </tsAbout>
+            <tsGeneral>
+              <gbUserLanguage>
+                <System Value="System Language:  %s"/>
+                <pUsrLang>
+                  <lbPreferred>
+                    <Default Value="(nein)"/>
+                    <Caption Value="Preferred Language:"/>
+                  </lbPreferred>
+                </pUsrLang>
+                <Caption Value="User Language"/>
+              </gbUserLanguage>
+              <Caption Value="General"/>
+              <gbOnlineUpdates>
+                <Caption Value="Online Updates"/>
+                <cbAutoCheck>
+                  <Caption Value="Automatically check for updates"/>
+                </cbAutoCheck>
+                <pUpdateButton>
+                  <btnUpdateCheck>
+                    <Caption Value="Check now..."/>
+                  </btnUpdateCheck>
+                </pUpdateButton>
+              </gbOnlineUpdates>
+              <gbMiscellaneous>
+                <Caption Value="Miscellaneous"/>
+                <cbColorButtons>
+                  <Caption Value="Use color toolbar buttons"/>
+                </cbColorButtons>
+                <cbHints>
+                  <Caption Value="Show hints when mouse hovers"/>
+                </cbHints>
+              </gbMiscellaneous>
+            </tsGeneral>
           </pcTabs>
         </pPagePanel>
         <pSectionPanel>
@@ -189,52 +215,42 @@
       </pLowerPanel>
     </fPreferences>
     <fUpdateCheckDialog>
-      <Caption Value="Update-Prüfung"/>
+      <Caption Value="Update Check"/>
       <btnCancel>
-        <Caption Value="Abbrechen"/>
+        <Caption Value="Cancel"/>
       </btnCancel>
       <btnRetry>
-        <Caption Value="Wiederholen"/>
+        <Caption Value="Retry"/>
       </btnRetry>
-      <Check Value="Suche nach verfügbaren Updates für &quot;%s&quot;, Version %s."/>
-      <Error Value="Es konnte derzeit nicht festgestellt werden, ob Updates für &quot;%s&quot; verfügbar sind. Bitte versuchen Sie es später erneut."/>
-      <None Value="Es sind derzeit keine Updates für &quot;%s&quot; verfügbar. Bitte versuchen Sie es später erneut."/>
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnRetry>
-            <Caption Value="Wiederholen"/>
-          </btnRetry>
-          <btnCancel>
-            <Caption Value="Abbrechen"/>
-          </btnCancel>
-        </fButtonPanel>
-      </fLowerPanel>
+      <Check Value="Checking for available updates for &quot;%s&quot;, version %s."/>
+      <Error Value="Unable to determine if there are any updates for &quot;%s&quot; at this time. Please try again later."/>
+      <None Value="There are no available updates for &quot;%s&quot; at this time. Please try again later."/>
     </fUpdateCheckDialog>
     <fUpdateFoundDialog>
-      <Caption Value="Update verfügbar"/>
+      <Caption Value="Update Available"/>
       <btnCancel>
-        <Caption Value="Abbrechen"/>
+        <Caption Value="Cancel"/>
       </btnCancel>
       <btnDownload>
-        <Caption Value="Herunterladen"/>
+        <Caption Value="Download"/>
       </btnDownload>
       <btnSkip>
-        <Caption Value="Überspringen"/>
+        <Caption Value="Skip"/>
       </btnSkip>
       <cbSkipVersion>
-        <Caption Value="Diese Version überspringen"/>
+        <Caption Value="Skip this version"/>
       </cbSkipVersion>
-      <Note Value="Es gibt keine Versionshinweise für Version %1:s von &quot;%0:s&quot;"/>
+      <Note Value="There are no release notes for version %1:s of &quot;%0:s&quot;"/>
       <fLowerPanel>
         <fButtonPanel>
           <btnSkip>
-            <Caption Value="Überspringen"/>
+            <Caption Value="Skip"/>
           </btnSkip>
           <btnDownload>
-            <Caption Value="Herunterladen"/>
+            <Caption Value="Download"/>
           </btnDownload>
           <btnCancel>
-            <Caption Value="Abbrechen"/>
+            <Caption Value="Cancel"/>
           </btnCancel>
         </fButtonPanel>
         <fAuxPanel>
@@ -243,88 +259,27 @@
           </cbSkipVersion>
         </fAuxPanel>
       </fLowerPanel>
-      <fMiddlePanel>
-        <fBodyPanel>
-          <fHTML>
-            <Caption Value="fHTML"/>
-          </fHTML>
-        </fBodyPanel>
-      </fMiddlePanel>
     </fUpdateFoundDialog>
     <fUpdateDownloadDialog>
-      <Caption Value="Update-Download"/>
+      <Caption Value="Update Download"/>
       <btnCancel>
-        <Caption Value="Abbrechen"/>
+        <Caption Value="Cancel"/>
       </btnCancel>
       <btnRetry>
-        <Caption Value="Wiederholen"/>
+        <Caption Value="Retry"/>
       </btnRetry>
-      <Fetch Value="Update für &quot;%s&quot; wird heruntergeladen."/>
-      <Error Value="Fehler beim Herunterladen des Updates für &quot;%s&quot;. Bitte versuchen Sie es später erneut."/>
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnRetry>
-            <Caption Value="Retry"/>
-          </btnRetry>
-          <btnCancel>
-            <Caption Value="Abbrechen"/>
-          </btnCancel>
-        </fButtonPanel>
-      </fLowerPanel>
+      <Fetch Value="Downloading update for &quot;%s&quot;."/>
+      <Error Value="Error downloading &quot;%s&quot; update. Please try again later."/>
     </fUpdateDownloadDialog>
     <fUpdateSaveDialog>
-      <Caption Value="Update heruntergeladen"/>
+      <Caption Value="Update Downloaded"/>
       <btnCancel>
-        <Caption Value="Abbrechen"/>
+        <Caption Value="Cancel"/>
       </btnCancel>
       <btnSaveAs>
-        <Caption Value="Speichern unter..."/>
+        <Caption Value="Save as..."/>
       </btnSaveAs>
-      <Downloaded Value="&quot;%s&quot; Version %s heruntergeladen."/>
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnSaveAs>
-            <Caption Value="Save As..."/>
-          </btnSaveAs>
-          <btnCancel>
-            <Caption Value="Abbrechen"/>
-          </btnCancel>
-        </fButtonPanel>
-      </fLowerPanel>
+      <Downloaded Value="Downloaded &quot;%s&quot; version %s."/>
     </fUpdateSaveDialog>
-    <fLoggerViewForm>
-      <LineCount>
-        <Singular Value="%.0n Protokolleintrag"/>
-        <Plural Value="%.0n Protokolleinträge"/>
-      </LineCount>
-      <Caption Value="Debug-Protokoll"/>
-      <pControls>
-        <pButtons>
-          <Clear>
-            <Caption Value="Löschen"/>
-          </Clear>
-          <SaveAs>
-            <Caption Value="Speichern unter..."/>
-          </SaveAs>
-        </pButtons>
-        <pVerbose>
-          <cbVerbosity>
-            <Items>
-              <Index_0 Value="Kritisch"/>
-              <Index_1 Value="Minimal"/>
-              <Index_2 Value="Normal"/>
-              <Index_3 Value="Ausführlich"/>
-              <Index_4 Value="Exzessiv"/>
-            </Items>
-          </cbVerbosity>
-          <lbVerbosity>
-            <Caption Value="Ausführlichkeit:"/>
-          </lbVerbosity>
-        </pVerbose>
-      </pControls>
-    </fLoggerViewForm>
-    <TComponent>
-      <Caption Value="&quot;CodepageWitch&quot; Version 0.0.0.0 heruntergeladen."/>
-    </TComponent>
   </Controls>
 </CONFIG>
