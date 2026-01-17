@@ -18,6 +18,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
+        <IsVisibleTab Value="True"/>
         <CursorPos X="13" Y="20"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
@@ -93,12 +94,11 @@
         <ComponentName Value="fPreferences"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uPreferences"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="56"/>
         <CursorPos X="77" Y="131"/>
         <FoldState Value=" T3k506011 PIL0g"/>
-        <UsageCount Value="71"/>
+        <UsageCount Value="72"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
