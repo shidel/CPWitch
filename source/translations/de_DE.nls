@@ -150,6 +150,82 @@
       </pCodepageList>
     </fMain>
     <fPreferences>
+      <fPreferencePages>
+        <tsAbout>
+          <Caption Value="About"/>
+          <lbCopyright>
+            <Caption Value="Copyright %s"/>
+          </lbCopyright>
+          <lbVersion>
+            <Caption Value="Version %0:s (build %1:s)"/>
+          </lbVersion>
+          <lbApplication>
+            <Caption Value="The &quot;%s&quot;"/>
+          </lbApplication>
+        </tsAbout>
+        <tsGeneral>
+          <gbUserLanguage>
+            <cbLanguageChoice>
+              <Default Value="(default)"/>
+            </cbLanguageChoice>
+            <Caption Value="User Language"/>
+            <pLanguagePreferred>
+              <lbLanguagePreferred>
+                <Caption Value="Preferred Language:"/>
+              </lbLanguagePreferred>
+            </pLanguagePreferred>
+            <lbLanguageSystem>
+              <Caption Value="System Language:  %s"/>
+            </lbLanguageSystem>
+          </gbUserLanguage>
+          <Caption Value="General"/>
+          <gbMiscellaneous>
+            <Caption Value="Miscellaneous"/>
+            <cbShowHints>
+              <Caption Value="Show hints when mouse hovers."/>
+            </cbShowHints>
+            <cbColorButtons>
+              <Caption Value="Use color toolbar buttons."/>
+            </cbColorButtons>
+          </gbMiscellaneous>
+          <gbOnlineUpdate>
+            <Caption Value="Online Update"/>
+            <cbAutoCheck>
+              <Caption Value="Automatically check for updates"/>
+            </cbAutoCheck>
+            <pUpdateButton>
+              <btnUpdateCheck>
+                <Caption Value="Check now..."/>
+                <Hint Value="Check the online server for the latest update."/>
+              </btnUpdateCheck>
+            </pUpdateButton>
+          </gbOnlineUpdate>
+        </tsGeneral>
+      </fPreferencePages>
+      <Caption Value="Codepage Witch Preferences"/>
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnAccept>
+            <Caption Value="Accept"/>
+            <Hint Value="Accept and apply any changes."/>
+          </btnAccept>
+          <btnCancel>
+            <Caption Value="Cancel"/>
+            <Hint Value="Ignore all changes."/>
+          </btnCancel>
+        </fButtonPanel>
+      </fLowerPanel>
+      <fMiddlePanel>
+        <fBodyPanel>
+          <pSectionsPanel>
+            <pSectionLabel>
+              <lbSections>
+                <Caption Value="Options"/>
+              </lbSections>
+            </pSectionLabel>
+          </pSectionsPanel>
+        </fBodyPanel>
+      </fMiddlePanel>
       <PageControl1>
         <tsAbout>
           <Caption Value="About"/>
@@ -207,28 +283,6 @@
           <Caption Value="TestPage"/>
         </TestPage>
       </PageControl1>
-      <Caption Value="Codepage Witch Preferences"/>
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnAccept>
-            <Caption Value="Accept"/>
-          </btnAccept>
-          <btnCancel>
-            <Caption Value="Cancel"/>
-          </btnCancel>
-        </fButtonPanel>
-      </fLowerPanel>
-      <fMiddlePanel>
-        <fBodyPanel>
-          <pSectionsPanel>
-            <pSectionLabel>
-              <lbSections>
-                <Caption Value="Options"/>
-              </lbSections>
-            </pSectionLabel>
-          </pSectionsPanel>
-        </fBodyPanel>
-      </fMiddlePanel>
     </fPreferences>
     <fUpdateCheckDialog>
       <Caption Value="Update Check"/>
