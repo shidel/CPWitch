@@ -17,9 +17,9 @@ uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ExtCtrls, ComCtrls, ActnList, Menus,
-  Version, PasExt, Icons, MultiApp, LogView, Updater,
+  Version, PasExt, Icons, MultiApp, LogView, Updater
   { other forms }
-  uPreferences;
+  ;
 
 type
 
@@ -83,9 +83,9 @@ end;
 
 procedure TfMain.actPreferencesExecute(Sender: TObject);
 begin
-  if not Assigned(fPreferences) then
+{  if not Assigned(fPreferences) then
       Application.CreateForm(TfPreferences, fPreferences);
-  fPreferences.Show;
+  fPreferences.Show; }
 end;
 
 procedure TfMain.FormCreate(Sender: TObject);

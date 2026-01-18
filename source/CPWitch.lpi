@@ -62,11 +62,11 @@
         <UnitName Value="uMain"/>
       </Unit>
       <Unit>
-        <Filename Value="upreferences.pas"/>
+        <Filename Value="uprefs.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fPreferences"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="uPreferences"/>
+        <UnitName Value="uPrefs"/>
       </Unit>
     </Units>
   </ProjectOptions>

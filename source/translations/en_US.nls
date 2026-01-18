@@ -150,69 +150,85 @@
       </pCodepageList>
     </fMain>
     <fPreferences>
-      <pMiddlePanel>
-        <pPagePanel>
-          <pcTabs>
-            <tsGeneral>
-              <gbUserLanguage>
-                <pUsrLang>
-                  <lbPreferred>
-                    <Default Value="(default)"/>
-                    <Caption Value="Preferred Language:"/>
-                  </lbPreferred>
-                </pUsrLang>
-                <Caption Value="User Language"/>
-                <System Value="System Language:  %s"/>
-              </gbUserLanguage>
-              <Caption Value="General"/>
-              <gbOnlineUpdates>
-                <Caption Value="Online Updates"/>
-                <cbAutoCheck>
-                  <Caption Value="Automatically check for updates"/>
-                </cbAutoCheck>
-                <pUpdateButton>
-                  <btnUpdateCheck>
-                    <Caption Value="Check now..."/>
-                  </btnUpdateCheck>
-                </pUpdateButton>
-              </gbOnlineUpdates>
-              <gbMiscellaneous>
-                <Caption Value="Miscellaneous"/>
-                <cbColorButtons>
-                  <Caption Value="Use color toolbar buttons"/>
-                </cbColorButtons>
-                <cbHints>
-                  <Caption Value="Show hints when mouse hovers"/>
-                </cbHints>
-              </gbMiscellaneous>
-            </tsGeneral>
-            <tsAbout>
-              <Caption Value="About"/>
-              <Copyright Value="Copyright %s"/>
-              <Version Value="Version %0:s (build %1:s)"/>
-              <Application Value="The &quot;%s&quot;"/>
-            </tsAbout>
-          </pcTabs>
-        </pPagePanel>
-        <pSectionPanel>
-          <pSectionLabel>
-            <lbSections>
-              <Caption Value="Options"/>
-            </lbSections>
-          </pSectionLabel>
-        </pSectionPanel>
-      </pMiddlePanel>
+      <PageControl1>
+        <tsAbout>
+          <Caption Value="About"/>
+          <lbCopyright>
+            <Caption Value="Copyright %s"/>
+          </lbCopyright>
+          <lbVersion>
+            <Caption Value="Version %0:s (build %1:s)"/>
+          </lbVersion>
+          <lbApplication>
+            <Caption Value="The &quot;%s&quot;"/>
+          </lbApplication>
+          <Copyright Value="Copyright %s"/>
+          <Version Value="Version %0:s (build %1:s)"/>
+          <Application Value="The &quot;%s&quot;"/>
+        </tsAbout>
+        <tsGeneral>
+          <gbUserLanguage>
+            <cbLanguageChoice>
+              <Default Value="(default)"/>
+            </cbLanguageChoice>
+            <Caption Value="User Language"/>
+            <pLanguagePreferred>
+              <lbLanguagePreferred>
+                <Caption Value="Preferred Language:"/>
+              </lbLanguagePreferred>
+            </pLanguagePreferred>
+            <lbLanguageSystem>
+              <Caption Value="System Language:  %s"/>
+            </lbLanguageSystem>
+          </gbUserLanguage>
+          <Caption Value="General"/>
+          <gbMiscellaneous>
+            <Caption Value="Miscellaneous"/>
+            <cbShowHints>
+              <Caption Value="Show hints when mouse hovers."/>
+            </cbShowHints>
+            <cbColorButtons>
+              <Caption Value="Use color toolbar buttons."/>
+            </cbColorButtons>
+          </gbMiscellaneous>
+          <gbOnlineUpdate>
+            <Caption Value="Online Update"/>
+            <pUpdateButton>
+              <btnUpdateCheck>
+                <Caption Value="Check now..."/>
+              </btnUpdateCheck>
+            </pUpdateButton>
+            <cbAutoCheck>
+              <Caption Value="Automatically check for updates"/>
+            </cbAutoCheck>
+          </gbOnlineUpdate>
+        </tsGeneral>
+        <TestPage>
+          <Caption Value="TestPage"/>
+        </TestPage>
+      </PageControl1>
       <Caption Value="Codepage Witch Preferences"/>
-      <pLowerPanel>
-        <pButtons>
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnAccept>
+            <Caption Value="Accept"/>
+          </btnAccept>
           <btnCancel>
             <Caption Value="Cancel"/>
           </btnCancel>
-          <btnOkay>
-            <Caption Value="Accept"/>
-          </btnOkay>
-        </pButtons>
-      </pLowerPanel>
+        </fButtonPanel>
+      </fLowerPanel>
+      <fMiddlePanel>
+        <fBodyPanel>
+          <pSectionsPanel>
+            <pSectionLabel>
+              <lbSections>
+                <Caption Value="Options"/>
+              </lbSections>
+            </pSectionLabel>
+          </pSectionsPanel>
+        </fBodyPanel>
+      </fMiddlePanel>
     </fPreferences>
     <fUpdateCheckDialog>
       <Caption Value="Update Check"/>
@@ -225,16 +241,6 @@
       <Check Value="Checking for available updates for &quot;%s&quot;, version %s."/>
       <Error Value="Unable to determine if there are any updates for &quot;%s&quot; at this time. Please try again later."/>
       <None Value="There are no available updates for &quot;%s&quot; at this time. Please try again later."/>
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnRetry>
-            <Caption Value="Retry"/>
-          </btnRetry>
-          <btnCancel>
-            <Caption Value="Cancel"/>
-          </btnCancel>
-        </fButtonPanel>
-      </fLowerPanel>
     </fUpdateCheckDialog>
     <fUpdateFoundDialog>
       <Caption Value="Update Available"/>
@@ -251,24 +257,6 @@
         <Caption Value="Skip this version"/>
       </cbSkipVersion>
       <Note Value="There are no release notes for version %1:s of &quot;%0:s&quot;"/>
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnSkip>
-            <Caption Value="Skip"/>
-          </btnSkip>
-          <btnDownload>
-            <Caption Value="Download"/>
-          </btnDownload>
-          <btnCancel>
-            <Caption Value="Cancel"/>
-          </btnCancel>
-        </fButtonPanel>
-        <fAuxPanel>
-          <cbSkipVersion>
-            <Caption Value="Skip this version"/>
-          </cbSkipVersion>
-        </fAuxPanel>
-      </fLowerPanel>
     </fUpdateFoundDialog>
     <fUpdateDownloadDialog>
       <Caption Value="Update Download"/>
@@ -291,36 +279,5 @@
       </btnSaveAs>
       <Downloaded Value="Downloaded &quot;%s&quot; version %s."/>
     </fUpdateSaveDialog>
-    <fLoggerViewForm>
-      <LineCount>
-        <Singular Value="%.0n log entry"/>
-        <Plural Value="%.0n log entries"/>
-      </LineCount>
-      <Caption Value="Debug log"/>
-      <pControls>
-        <pButtons>
-          <Clear>
-            <Caption Value="Clear"/>
-          </Clear>
-          <SaveAs>
-            <Caption Value="Save As..."/>
-          </SaveAs>
-        </pButtons>
-        <pVerbose>
-          <cbVerbosity>
-            <Items>
-              <Index_0 Value="Critical"/>
-              <Index_1 Value="Minimal"/>
-              <Index_2 Value="Normal"/>
-              <Index_3 Value="Verbose"/>
-              <Index_4 Value="Excessive"/>
-            </Items>
-          </cbVerbosity>
-          <lbVerbosity>
-            <Caption Value="Verbosity:"/>
-          </lbVerbosity>
-        </pVerbose>
-      </pControls>
-    </fLoggerViewForm>
   </Controls>
 </CONFIG>

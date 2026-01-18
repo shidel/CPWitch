@@ -7,9 +7,11 @@
       <Unit>
         <Filename Value="CPWitch.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="33"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <CursorPos X="8" Y="17"/>
         <UsageCount Value="201"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="umain.pas"/>
@@ -18,7 +20,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <CursorPos X="40" Y="20"/>
+        <TopLine Value="62"/>
+        <CursorPos X="23" Y="88"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -29,7 +32,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="288"/>
         <CursorPos X="38" Y="303"/>
-        <UsageCount Value="36"/>
+        <UsageCount Value="34"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/pasext.pp"/>
@@ -38,15 +41,15 @@
         <TopLine Value="168"/>
         <CursorPos X="18" Y="182"/>
         <FoldState Value=" T3-b095 PfiE0u"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="5"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/multiapp.pp"/>
         <UnitName Value="MultiApp"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="10"/>
-        <CursorPos X="58" Y="734"/>
-        <FoldState Value=" T7laIt021 PBjZN TCoFI3 T3pR04A pibjK03655 pkGla0C7]hpm3jf286 pj1l20I[e4ejd078[95M]n[w5B04[I4YjF068]:Pl607B[I5O03816 Pk1kE0:"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="133"/>
+        <CursorPos X="27" Y="190"/>
+        <FoldState Value=" T7nCPZ011 PBiGN TCoFI3 T3pR04A pibjK03655 pkGla0C631 plEjf2862A]Mdo70oC pj0kX0I13[B48lH032]9Tjc0732E]BBkZ0O016 PiSj30t"/>
         <UsageCount Value="103"/>
         <Loaded Value="True"/>
       </Unit>
@@ -54,7 +57,7 @@
         <Filename Value="mpla/patches.pp"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="51" Y="31"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/logview.pp"/>
@@ -63,160 +66,159 @@
         <TopLine Value="271"/>
         <CursorPos X="57" Y="296"/>
         <FoldState Value=" T3iM0A41717 Pk2oF0x"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="8"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/updater.pp"/>
         <UnitName Value="Updater"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="159"/>
-        <CursorPos X="11" Y="177"/>
-        <FoldState Value=" T3pI0I7 pifjW03A pj5jY098]IajM0F6]9XjL0I417]TJl106[947jT063 PKQ0G"/>
-        <UsageCount Value="21"/>
-      </Unit>
-      <Unit>
-        <Filename Value="/Applications/Lazarus/lcl/comctrls.pp"/>
-        <UnitName Value="ComCtrls"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="2041"/>
-        <CursorPos Y="2074"/>
-        <UsageCount Value="0"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="782"/>
+        <CursorPos Y="638"/>
+        <FoldState Value=" T7meKE4 PiKiYH T3pI0I7 pifjW03A pj5jY09129]Kgl50371]VkNld067]V7jT063 PKQ0("/>
+        <UsageCount Value="32"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="upreferences.pas"/>
+        <ComponentName Value="fPreferences"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uPreferences"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="36"/>
+        <CursorPos X="33" Y="36"/>
+        <FoldState Value=" T3j60Q82111 PjClc0-"/>
+        <UsageCount Value="107"/>
+      </Unit>
+      <Unit>
+        <Filename Value="uprefs.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fPreferences"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="uPreferences"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
-        <CursorPos X="23" Y="33"/>
-        <FoldState Value=" T3jA0Q82111 PjClc0p"/>
-        <UsageCount Value="108"/>
+        <UnitName Value="uPrefs"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="72" Y="18"/>
+        <UsageCount Value="43"/>
+      </Unit>
+      <Unit>
+        <Filename Value="mpla/preferences.pp"/>
+        <UnitName Value="Preferences"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="2"/>
+        <CursorPos Y="93"/>
+        <FoldState Value=" T3j6054 pjBjQ04111 pkYiL2A3121212 PlEn80i"/>
+        <UsageCount Value="21"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="29">
+    <JumpHistory HistoryIndex="26">
       <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="152" Column="3" TopLine="130"/>
-      </Position>
-      <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="105" Column="36" TopLine="73"/>
-      </Position>
-      <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="110" Column="39" TopLine="71"/>
-      </Position>
-      <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="164" Column="34" TopLine="95"/>
-      </Position>
-      <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="107" Column="58" TopLine="97"/>
-      </Position>
-      <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="167" Column="37" TopLine="102"/>
-      </Position>
-      <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="166" Column="37" TopLine="101"/>
-      </Position>
-      <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="176" Column="73" TopLine="124"/>
+        <Filename Value="mpla/preferences.pp"/>
+        <Caret Line="256" Column="11" TopLine="231"/>
       </Position>
       <Position>
         <Filename Value="mpla/multiapp.pp"/>
-        <Caret Line="156" Column="35" TopLine="133"/>
-      </Position>
-      <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="110" Column="70" TopLine="84"/>
-      </Position>
-      <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="111" Column="70" TopLine="85"/>
-      </Position>
-      <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="112" Column="70" TopLine="86"/>
-      </Position>
-      <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="116" Column="41" TopLine="102"/>
-      </Position>
-      <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="117" TopLine="111"/>
-      </Position>
-      <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="127" Column="31" TopLine="102"/>
-      </Position>
-      <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="183" Column="5" TopLine="119"/>
-      </Position>
-      <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="20" Column="44"/>
-      </Position>
-      <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="72" Column="24" TopLine="50"/>
-      </Position>
-      <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="75" Column="43" TopLine="61"/>
-      </Position>
-      <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="170" Column="62" TopLine="69"/>
-      </Position>
-      <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="153" Column="21" TopLine="75"/>
-      </Position>
-      <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="136" TopLine="78"/>
+        <Caret Line="190" Column="77" TopLine="165"/>
       </Position>
       <Position>
         <Filename Value="mpla/multiapp.pp"/>
-        <Caret Line="149" Column="45" TopLine="140"/>
-      </Position>
-      <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="272" Column="5" TopLine="204"/>
-      </Position>
-      <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="289" Column="17" TopLine="231"/>
+        <Caret Line="1319" Column="92" TopLine="1283"/>
       </Position>
       <Position>
         <Filename Value="mpla/multiapp.pp"/>
-        <Caret Line="194" Column="41" TopLine="161"/>
+        <Caret Line="15" Column="62"/>
       </Position>
       <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="263" Column="49" TopLine="153"/>
+        <Filename Value="mpla/multiapp.pp"/>
+        <Caret Line="190" Column="27" TopLine="148"/>
       </Position>
       <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="271" TopLine="173"/>
+        <Filename Value="mpla/multiapp.pp"/>
+        <Caret Line="1317" Column="37" TopLine="1056"/>
       </Position>
       <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="255" TopLine="118"/>
+        <Filename Value="mpla/multiapp.pp"/>
+        <Caret Line="1330" Column="33" TopLine="1121"/>
       </Position>
       <Position>
-        <Filename Value="upreferences.pas"/>
-        <Caret Line="202" Column="8" TopLine="179"/>
+        <Filename Value="mpla/multiapp.pp"/>
+        <Caret Line="1358" Column="44" TopLine="1303"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/preferences.pp"/>
+        <Caret Line="265" TopLine="187"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/preferences.pp"/>
+        <Caret Line="255" Column="26" TopLine="197"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/preferences.pp"/>
+        <Caret Line="300" Column="32" TopLine="253"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/preferences.pp"/>
+        <Caret Line="295" Column="38" TopLine="34"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/preferences.pp"/>
+        <Caret Line="65" Column="11" TopLine="37"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/preferences.pp"/>
+        <Caret Line="295" Column="3" TopLine="259"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/preferences.pp"/>
+        <Caret Line="55" Column="7" TopLine="41"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/preferences.pp"/>
+        <Caret Line="232" Column="5" TopLine="208"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/preferences.pp"/>
+        <Caret Line="428" Column="2" TopLine="375"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/preferences.pp"/>
+        <Caret Line="333" Column="45" TopLine="306"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/preferences.pp"/>
+        <Caret Line="336" TopLine="300"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/preferences.pp"/>
+        <Caret Line="455" Column="46" TopLine="413"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/preferences.pp"/>
+        <Caret Line="420" Column="21" TopLine="89"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/preferences.pp"/>
+        <Caret Line="489" Column="5" TopLine="407"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/preferences.pp"/>
+        <Caret Line="513" Column="26" TopLine="435"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/preferences.pp"/>
+        <Caret Line="79" Column="40" TopLine="52"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/preferences.pp"/>
+        <Caret Line="435" Column="27" TopLine="184"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="20" Column="53"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="88" Column="23" TopLine="62"/>
       </Position>
     </JumpHistory>
     <RunParams>
