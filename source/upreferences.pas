@@ -24,7 +24,13 @@ type
   { TfPreferences }
 
   { TODO 5 -cDevel Figure out the best way to migrate Prefenences Dialog to the
-    MPLA as a generic reusable dialog. }
+    MPLA as a generic reusable dialog. Best/easiest way is probably to have a
+    TMultiAppPrefsDialog class, which can be aded as a simple form with a
+    PrefsPanel. At runtime, creates all the stuff here and Re-Parents the
+    Prefs Panel into the Proper Panel. Note, that means the about and general
+    tabs will need created programmatically at runtime. }
+  { TODO -7 cDevel Like the Updater, remove Modal NLS button strings from
+    Preferences Form }
   TfPreferences = class(TMultiAppForm)
     btnCancel: TButton;
     btnOkay: TButton;
