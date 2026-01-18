@@ -18,8 +18,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <TopLine Value="87"/>
-        <CursorPos Y="71"/>
+        <CursorPos X="40" Y="20"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -27,11 +26,10 @@
       <Unit>
         <Filename Value="icons.pp"/>
         <UnitName Value="Icons"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="288"/>
-        <CursorPos X="26" Y="323"/>
-        <UsageCount Value="38"/>
-        <Loaded Value="True"/>
+        <CursorPos X="38" Y="303"/>
+        <UsageCount Value="36"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/pasext.pp"/>
@@ -40,16 +38,15 @@
         <TopLine Value="168"/>
         <CursorPos X="18" Y="182"/>
         <FoldState Value=" T3-b095 PfiE0u"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="8"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/multiapp.pp"/>
         <UnitName Value="MultiApp"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="3"/>
-        <TopLine Value="754"/>
-        <CursorPos X="69" Y="1849"/>
-        <FoldState Value=" T7laIt012 PFjZN TCoFI3 T3pR04A pibjK036552621 pofoY286 pj1l20I01413211B plCnc0I7]oZjS08]IkclR07B]IYjO03816 Pk1kE07"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="10"/>
+        <CursorPos X="58" Y="734"/>
+        <FoldState Value=" T7laIt021 PBjZN TCoFI3 T3pR04A pibjK03655 pkGla0C7]hpm3jf286 pj1l20I[e4ejd078[95M]n[w5B04[I4YjF068]:Pl607B[I5O03816 Pk1kE0:"/>
         <UsageCount Value="103"/>
         <Loaded Value="True"/>
       </Unit>
@@ -57,24 +54,25 @@
         <Filename Value="mpla/patches.pp"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="51" Y="31"/>
-        <UsageCount Value="14"/>
+        <UsageCount Value="12"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/logview.pp"/>
         <UnitName Value="LogView"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="18" Y="227"/>
+        <TopLine Value="271"/>
+        <CursorPos X="57" Y="296"/>
         <FoldState Value=" T3iM0A41717 Pk2oF0x"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/updater.pp"/>
         <UnitName Value="Updater"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="382"/>
-        <CursorPos X="43" Y="495"/>
-        <FoldState Value=" T3pH0I7 pifjW03A pj5jY098]IajM0F6]9XjL0I417]TJl106[947jT063 PKQ0D"/>
-        <UsageCount Value="23"/>
+        <TopLine Value="159"/>
+        <CursorPos X="11" Y="177"/>
+        <FoldState Value=" T3pI0I7 pifjW03A pj5jY098]IajM0F6]9XjL0I417]TJl106[947jT063 PKQ0G"/>
+        <UsageCount Value="21"/>
       </Unit>
       <Unit>
         <Filename Value="/Applications/Lazarus/lcl/comctrls.pp"/>
@@ -82,14 +80,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="2041"/>
         <CursorPos Y="2074"/>
-        <UsageCount Value="2"/>
-      </Unit>
-      <Unit>
-        <Filename Value="/Applications/Lazarus/lcl/include/tabcontrol.inc"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="207"/>
-        <CursorPos Y="232"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit>
       <Unit>
         <Filename Value="upreferences.pas"/>
@@ -97,11 +88,11 @@
         <ComponentName Value="fPreferences"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uPreferences"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="225"/>
-        <CursorPos X="42" Y="273"/>
-        <FoldState Value=" T3j40Q82111 PjClc0\"/>
-        <UsageCount Value="88"/>
+        <CursorPos X="23" Y="33"/>
+        <FoldState Value=" T3jA0Q82111 PjClc0p"/>
+        <UsageCount Value="108"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
