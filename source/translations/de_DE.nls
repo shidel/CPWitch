@@ -153,15 +153,8 @@
       <pMiddlePanel>
         <pPagePanel>
           <pcTabs>
-            <tsAbout>
-              <Copyright Value="Urheberrecht %s"/>
-              <Version Value="Version %0:s (build %1:s)"/>
-              <Application Value="Der „%s“"/>
-              <Caption Value="About"/>
-            </tsAbout>
             <tsGeneral>
               <gbUserLanguage>
-                <System Value="System Language:  %s"/>
                 <pUsrLang>
                   <lbPreferred>
                     <Default Value="(Standardeinstellung)"/>
@@ -169,6 +162,7 @@
                   </lbPreferred>
                 </pUsrLang>
                 <Caption Value="User Language"/>
+                <System Value="System Language:  %s"/>
               </gbUserLanguage>
               <Caption Value="General"/>
               <gbOnlineUpdates>
@@ -192,12 +186,18 @@
                 </cbHints>
               </gbMiscellaneous>
             </tsGeneral>
+            <tsAbout>
+              <Caption Value="Über uns"/>
+              <Copyright Value="Urheberrecht %s"/>
+              <Version Value="Version %0:s (build %1:s)"/>
+              <Application Value="Der „%s“"/>
+            </tsAbout>
           </pcTabs>
         </pPagePanel>
         <pSectionPanel>
           <pSectionLabel>
             <lbSections>
-              <Caption Value="Sections"/>
+              <Caption Value="Options"/>
             </lbSections>
           </pSectionLabel>
         </pSectionPanel>
@@ -291,5 +291,36 @@
       </btnSaveAs>
       <Downloaded Value="Downloaded &quot;%s&quot; version %s."/>
     </fUpdateSaveDialog>
+    <fLoggerViewForm>
+      <LineCount>
+        <Singular Value="%.0n log entry"/>
+        <Plural Value="%.0n log entries"/>
+      </LineCount>
+      <Caption Value="Debug log"/>
+      <pControls>
+        <pButtons>
+          <Clear>
+            <Caption Value="Clear"/>
+          </Clear>
+          <SaveAs>
+            <Caption Value="Save As..."/>
+          </SaveAs>
+        </pButtons>
+        <pVerbose>
+          <cbVerbosity>
+            <Items>
+              <Index_0 Value="Critical"/>
+              <Index_1 Value="Minimal"/>
+              <Index_2 Value="Normal"/>
+              <Index_3 Value="Verbose"/>
+              <Index_4 Value="Excessive"/>
+            </Items>
+          </cbVerbosity>
+          <lbVerbosity>
+            <Caption Value="Verbosity:"/>
+          </lbVerbosity>
+        </pVerbose>
+      </pControls>
+    </fLoggerViewForm>
   </Controls>
 </CONFIG>

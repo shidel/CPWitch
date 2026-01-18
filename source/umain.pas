@@ -68,6 +68,7 @@ implementation
 
 {$R *.lfm}
 
+
 { TfMain }
 
 procedure TfMain.actDebugLogExecute(Sender: TObject);

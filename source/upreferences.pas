@@ -68,8 +68,8 @@ type
     lblApp, lblVer, lblCopy, lblSysLang : TLabel;
     cbPrefLang : TComboBox;
     fDefaultLanguage : String;
-    function CreateLabel(AParent : TWinControl; ACaption : String;
-      AAlignment : TAlignment=taCenter; ASpacing : integer=4) : TLabel;
+    function CreateLabel(AParent : TWinControl; AAlignment
+      : TAlignment=taCenter) : TLabel;
     procedure CreateSectionTree;
     procedure CreateLanguageSelectBox;
   public
@@ -89,8 +89,6 @@ implementation
 { TfPreferences }
 
 procedure TfPreferences.FormCreate(Sender: TObject);
-var
-  Key : String;
 begin
   pcTabs.ShowTabs:=False;
   try
@@ -100,24 +98,14 @@ begin
   end;
 
 // Labels added to About page in reverse order and aligned with top of panel
-  Key:=ComponentNamePath(tsAbout, Self, True);
-  lblCopy := CreateLabel(pVersionInfo,GetFormat(Key + 'Copyright',
-    [APP_LEGALCOPYRIGHT], 'Copyright %s'));
-  lblVer := CreateLabel(pVersionInfo,GetFormat(Key + 'Version',
-    [APP_VERSION, APP_BUILD], 'Version %0:s (build %1:s)')
-  );
-  lblApp := CreateLabel(pVersionInfo,GetFormat(Key + 'Application',
-    [APP_PRODUCTNAME], 'The "%s"')
-  );
+  lblCopy := CreateLabel(pVersionInfo);
+  lblVer := CreateLabel(pVersionInfo);
+  lblApp := CreateLabel(pVersionInfo);
   // User System Language
-  Key:=ComponentNamePath(gbUserLanguage, Self, True);
-  lblSysLang := CreateLabel(pSysLang,GetFormat(Key + 'System',
-    [UserLanguage], 'System Language:  %s'), taLeftJustify);
+  lblSysLang := CreateLabel(pSysLang, taLeftJustify);
   lblSysLang.BorderSpacing.Left:=4;
-
   // String for Default preferred language
-  Key:=ComponentNamePath(lbPreferred, Self, True);
-  fDefaultLanguage := GetTranslation(Key + 'Default', '(default)');
+  fDefaultLanguage := 'n/a';
 
   CreateLanguageSelectBox;
   pSysLang.AutoSize:=True;
@@ -139,9 +127,17 @@ begin
 end;
 
 procedure TfPreferences.btnOkayClick(Sender: TObject);
+var
+  I : Integer;
 begin
   WriteConfiguration;
   Close;
+  InitializeTranslations;
+  for I := 0 to Application.ComponentCount - 1 do
+    if Application.Components[I] is TMultiAppForm then begin
+      TMultiAppForm(Application.Components[I]).ApplyNewSettings;
+      TMultiAppForm(Application.Components[I]).ApplyUserLanguage;
+    end;
 end;
 
 procedure TfPreferences.FormResize(Sender: TObject);
@@ -168,8 +164,8 @@ begin
     pcTabs.ActivePage:=tsAbout;
 end;
 
-function TfPreferences.CreateLabel(AParent:TWinControl; ACaption: String;
-    AAlignment : TAlignment=taCenter; ASpacing : integer=4): TLabel;
+function TfPreferences.CreateLabel(AParent:TWinControl; AAlignment
+  : TAlignment=taCenter): TLabel;
 begin
   Result := TLabel.Create(Self);
   Result.Parent:=AParent;
@@ -177,8 +173,8 @@ begin
   Result.Alignment:=AAlignment;
   Result.AutoSize:=True;
   Result.WordWrap:=True;
-  Result.BorderSpacing.Around:=ASpacing;
-  Result.Caption:=ACaption;
+  Result.BorderSpacing.Around:=4;
+  Result.Caption:='';
 end;
 
 procedure TfPreferences.CreateSectionTree;
@@ -203,11 +199,13 @@ end;
 
 procedure TfPreferences.CreateLanguageSelectBox;
 var
-  Pref, L : String;
+  Key, L : String;
   Langs : TArrayOfRawByteString;
   I : Integer;
 begin
-  Pref:=Trim(RawByteString(UserConfig.GetValue('Application/Language/Value', '')));
+
+  Key:=ComponentNamePath(lbPreferred, Self, True);
+  fDefaultLanguage := GetTranslation(Key + 'Default', '(default)');
 
   cbPrefLang:=TComboBox.Create(Self);
   cbPrefLang.Parent:=pPrefOpts;
@@ -251,8 +249,29 @@ procedure TfPreferences.ApplyUserLanguage;
     end;
   end;
 
+var
+  Key : String;
+
 begin
   inherited ApplyUserLanguage;
+
+  Key:=ComponentNamePath(tsAbout, Self, True);
+  lblCopy.Caption:=GetFormat(Key + 'Copyright',
+    [APP_LEGALCOPYRIGHT], 'Copyright %s');
+  lblVer.Caption:=GetFormat(Key + 'Version',
+    [APP_VERSION, APP_BUILD], 'Version %0:s (build %1:s)');
+  lblApp.Caption:=GetFormat(Key + 'Application',
+    [APP_PRODUCTNAME], 'The "%s"');
+
+  Key:=ComponentNamePath(gbUserLanguage, Self, True);
+  lblSysLang.Caption:=GetFormat(Key + 'System',
+    [UserLanguage], 'System Language:  %s');
+
+  Key:=ComponentNamePath(lbPreferred, Self, True);
+  fDefaultLanguage := GetTranslation(Key + 'Default', '(default)');
+  if cbPrefLang.Items.Count > 0 then
+    cbPrefLang.Items[0]:=fDefaultLanguage;
+
   UpdateNode(tvSections.Items.GetFirstNode);
 end;
 

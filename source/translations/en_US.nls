@@ -148,27 +148,13 @@
           </lbCodepageLabel>
         </pCodepageListLabel>
       </pCodepageList>
-      <ctrlBar>
-        <tbMain>
-          <btnDivider>
-            <Caption Value="btnDivider"/>
-          </btnDivider>
-        </tbMain>
-      </ctrlBar>
     </fMain>
     <fPreferences>
       <pMiddlePanel>
         <pPagePanel>
           <pcTabs>
-            <tsAbout>
-              <Copyright Value="Copyright %s"/>
-              <Version Value="Version %0:s (build %1:s)"/>
-              <Application Value="The &quot;%s&quot;"/>
-              <Caption Value="About"/>
-            </tsAbout>
             <tsGeneral>
               <gbUserLanguage>
-                <System Value="System Language: %s"/>
                 <pUsrLang>
                   <lbPreferred>
                     <Default Value="(default)"/>
@@ -176,6 +162,7 @@
                   </lbPreferred>
                 </pUsrLang>
                 <Caption Value="User Language"/>
+                <System Value="System Language:  %s"/>
               </gbUserLanguage>
               <Caption Value="General"/>
               <gbOnlineUpdates>
@@ -199,12 +186,18 @@
                 </cbHints>
               </gbMiscellaneous>
             </tsGeneral>
+            <tsAbout>
+              <Caption Value="About"/>
+              <Copyright Value="Copyright %s"/>
+              <Version Value="Version %0:s (build %1:s)"/>
+              <Application Value="The &quot;%s&quot;"/>
+            </tsAbout>
           </pcTabs>
         </pPagePanel>
         <pSectionPanel>
           <pSectionLabel>
             <lbSections>
-              <Caption Value="Sections"/>
+              <Caption Value="Options"/>
             </lbSections>
           </pSectionLabel>
         </pSectionPanel>
@@ -276,13 +269,6 @@
           </cbSkipVersion>
         </fAuxPanel>
       </fLowerPanel>
-      <fMiddlePanel>
-        <fBodyPanel>
-          <fHTML>
-            <Caption Value="fHTML"/>
-          </fHTML>
-        </fBodyPanel>
-      </fMiddlePanel>
     </fUpdateFoundDialog>
     <fUpdateDownloadDialog>
       <Caption Value="Update Download"/>
@@ -294,16 +280,6 @@
       </btnRetry>
       <Fetch Value="Downloading update for &quot;%s&quot;."/>
       <Error Value="Error downloading &quot;%s&quot; update. Please try again later."/>
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnRetry>
-            <Caption Value="Retry"/>
-          </btnRetry>
-          <btnCancel>
-            <Caption Value="Cancel"/>
-          </btnCancel>
-        </fButtonPanel>
-      </fLowerPanel>
     </fUpdateDownloadDialog>
     <fUpdateSaveDialog>
       <Caption Value="Update Downloaded"/>
@@ -314,16 +290,6 @@
         <Caption Value="Save as..."/>
       </btnSaveAs>
       <Downloaded Value="Downloaded &quot;%s&quot; version %s."/>
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnSaveAs>
-            <Caption Value="Save As..."/>
-          </btnSaveAs>
-          <btnCancel>
-            <Caption Value="Cancel"/>
-          </btnCancel>
-        </fButtonPanel>
-      </fLowerPanel>
     </fUpdateSaveDialog>
     <fLoggerViewForm>
       <LineCount>
@@ -356,8 +322,5 @@
         </pVerbose>
       </pControls>
     </fLoggerViewForm>
-    <TComponent>
-      <Caption Value="&quot;CodepageWitch&quot; Version 0.0.0.0 heruntergeladen."/>
-    </TComponent>
   </Controls>
 </CONFIG>
