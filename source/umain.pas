@@ -17,9 +17,8 @@ uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ExtCtrls, ComCtrls, ActnList, Menus,
-  Version, PasExt, Icons, MultiApp, LogView, Updater, Preferences
+  Version, PasExt, Icons, MultiApp, LogView, Updater, Preferences;
   { other forms }
-  ;
 
 type
 
@@ -33,11 +32,16 @@ type
       actPreferences: TAction;
       alMain: TActionList;
       ctrlBar: TControlBar;
+      lbUnicodeViewLabel: TLabel;
       lbCodepageLabel: TLabel;
       lbFileList: TLabel;
       lvCodepageList: TListView;
       lvFileList: TListView;
       mmMain: TMainMenu;
+      pViewCodepageLabel: TPanel;
+      pViewUnicodeLabel: TPanel;
+      pCodepage: TPanel;
+      pViewUnicode: TPanel;
       pViewers: TPanel;
       pCodepageListLabel: TPanel;
       pCodepageList: TPanel;
@@ -45,6 +49,7 @@ type
       pFileList: TPanel;
       spFilesCPs: TSplitter;
       spCPsViewers: TSplitter;
+      Splitter1: TSplitter;
       statBar: TStatusBar;
       tbMain: TToolBar;
     procedure actDebugLogExecute(Sender: TObject);
@@ -52,22 +57,23 @@ type
     procedure actPreferencesExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     private
+      lbViewCodePageLabel : TLabel;
     protected
       procedure FormSettingsLoad(Sender: TObject);
       procedure FormSettingsSave(Sender: TObject);
       procedure SetButtonIcons;
+      procedure SetCodepageViewLabel;
     public
+      procedure ApplyUserLanguage; override;
     published
   end;
 
 var
   fMain: TfMain;
 
-
 implementation
 
 {$R *.lfm}
-
 
 { TfMain }
 
@@ -84,9 +90,6 @@ end;
 procedure TfMain.actPreferencesExecute(Sender: TObject);
 begin
   PreferencesShow;
-{  if not Assigned(fPreferences) then
-      Application.CreateForm(TfPreferences, fPreferences);
-  fPreferences.Show; }
 end;
 
 procedure TfMain.FormCreate(Sender: TObject);
@@ -113,6 +116,13 @@ begin
 
   // Set Toolbar width
   tbMain.Width:=(tbMain.Images.Width + 4) * 10 + tbMain.Indent * 2;
+
+  // Create at runtime without name to not save Caption iduring NLS generation.
+  lbViewCodepageLabel :=TLabel.Create(Self);
+  lbViewCodepageLabel.Parent:=pViewCodepageLabel;
+  lbViewCodepageLabel.Align:=alTop;
+  lbViewCodepageLabel.AutoSize:=True;
+  lbViewCodepageLabel.BorderSpacing.Around:=8;
 end;
 
 procedure TfMain.FormSettingsLoad(Sender: TObject);
@@ -130,6 +140,20 @@ begin
   tbMain.Images:=IconTheme.ButtonEnabled;
   tbMain.DisabledImages:=IconTheme.ButtonDisabled;
   tbMain.HotImages:=IconTheme.ButtonHover;
+end;
+
+procedure TfMain.SetCodepageViewLabel;
+begin
+
+  lbViewCodepageLabel.Caption:=GetFormat(ComponentNamePath(pViewCodepageLabel,
+    Self, True) + 'lbViewCodepageLabel/Value' , ['437'],
+    'Viewed as Codepage %s');
+end;
+
+procedure TfMain.ApplyUserLanguage;
+begin
+  inherited ApplyUserLanguage;
+  SetCodepageViewlabel;
 end;
 
 
