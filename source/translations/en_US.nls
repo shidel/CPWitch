@@ -141,6 +141,21 @@
         </pCodepage>
       </pViewers>
     </fMain>
+    <fLoggerViewForm Caption="Debug log">
+      <LineCount Plural="%.0n log entries" Singular="%.0n log entry"/>
+      <pControls>
+        <pButtons>
+          <btnClear Caption="Clear"/>
+          <btnSaveAs Caption="Save As..."/>
+        </pButtons>
+        <pVerbose>
+          <cbVerbosity>
+            <Items Index_0="Critical" Index_1="Minimal" Index_2="Normal" Index_3="Verbose" Index_4="Excessive"/>
+          </cbVerbosity>
+          <lbVerbosity Caption="Verbosity:"/>
+        </pVerbose>
+      </pControls>
+    </fLoggerViewForm>
     <fPreferences Caption="Codepage Witch Preferences">
       <fPreferencePages>
         <tsAbout Hint="About the &quot;%s&quot;" Caption="About">

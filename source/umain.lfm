@@ -85,6 +85,7 @@ object fMain: TfMain
       Width = 130
       Align = alClient
       Columns = <>
+      ReadOnly = True
       RowSelect = True
       ScrollBars = ssAutoBoth
       ShowColumnHeaders = False
@@ -170,6 +171,7 @@ object fMain: TfMain
       BorderSpacing.Bottom = 2
       ClientHeight = 100
       ClientWidth = 230
+      Constraints.MinHeight = 100
       TabOrder = 0
       object pViewUnicodeLabel: TPanel
         Left = 1
@@ -192,6 +194,18 @@ object fMain: TfMain
           Caption = 'Viewed as Unicode'
         end
       end
+      object mUnicodeText: TMemo
+        Left = 1
+        Height = 66
+        Top = 33
+        Width = 228
+        Align = alClient
+        Lines.Strings = (
+          'mUnicodeText'
+        )
+        ScrollBars = ssAutoBoth
+        TabOrder = 1
+      end
     end
     object pCodepage: TPanel
       Left = 0
@@ -201,6 +215,7 @@ object fMain: TfMain
       Align = alClient
       ClientHeight = 127
       ClientWidth = 230
+      Constraints.MinHeight = 100
       TabOrder = 1
       object pViewCodepageLabel: TPanel
         Left = 1
@@ -212,8 +227,26 @@ object fMain: TfMain
         BevelOuter = bvNone
         TabOrder = 0
       end
+      object sbCodepage: TScrollBox
+        Left = 1
+        Height = 125
+        Top = 1
+        Width = 228
+        HorzScrollBar.Page = 90
+        VertScrollBar.Page = 90
+        Align = alClient
+        ClientHeight = 123
+        ClientWidth = 226
+        TabOrder = 1
+        object imgCodepage: TImage
+          Left = 0
+          Height = 90
+          Top = 0
+          Width = 90
+        end
+      end
     end
-    object Splitter1: TSplitter
+    object spUnicodeCP: TSplitter
       Cursor = crVSplit
       Left = 0
       Height = 5
@@ -230,6 +263,7 @@ object fMain: TfMain
       Category = 'File'
       Caption = 'File Open...'
       Hint = 'Open a text file.'
+      OnExecute = actFileOpenExecute
     end
     object actFileExport: TAction
       Category = 'File'
@@ -258,5 +292,10 @@ object fMain: TfMain
   object mmMain: TMainMenu
     Left = 380
     Top = 104
+  end
+  object dlgOpenFile: TOpenDialog
+    Options = [ofAllowMultiSelect, ofFileMustExist, ofEnableSizing, ofDontAddToRecent, ofViewDetail]
+    Left = 380
+    Top = 219
   end
 end

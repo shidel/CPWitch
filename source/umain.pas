@@ -17,8 +17,7 @@ uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ExtCtrls, ComCtrls, ActnList, Menus,
-  Version, PasExt, Icons, MultiApp, LogView, Updater, Preferences;
-  { other forms }
+  Version, PasExt, Icons, MultiApp, LogView, Updater, Preferences, Witch;
 
 type
 
@@ -32,12 +31,15 @@ type
       actPreferences: TAction;
       alMain: TActionList;
       ctrlBar: TControlBar;
+      imgCodepage: TImage;
       lbUnicodeViewLabel: TLabel;
       lbCodepageLabel: TLabel;
       lbFileList: TLabel;
       lvCodepageList: TListView;
       lvFileList: TListView;
+      mUnicodeText: TMemo;
       mmMain: TMainMenu;
+      dlgOpenFile: TOpenDialog;
       pViewCodepageLabel: TPanel;
       pViewUnicodeLabel: TPanel;
       pCodepage: TPanel;
@@ -47,17 +49,20 @@ type
       pCodepageList: TPanel;
       pFileListLabel: TPanel;
       pFileList: TPanel;
+      sbCodepage: TScrollBox;
       spFilesCPs: TSplitter;
       spCPsViewers: TSplitter;
-      Splitter1: TSplitter;
+      spUnicodeCP: TSplitter;
       statBar: TStatusBar;
       tbMain: TToolBar;
     procedure actDebugLogExecute(Sender: TObject);
+    procedure actFileOpenExecute(Sender: TObject);
     procedure actOnlineUpdateExecute(Sender: TObject);
     procedure actPreferencesExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     private
       lbViewCodePageLabel : TLabel;
+      fWitch : TWitch;
     protected
       procedure FormSettingsLoad(Sender: TObject);
       procedure FormSettingsSave(Sender: TObject);
@@ -65,6 +70,7 @@ type
       procedure SetCodepageViewLabel;
     public
       procedure ApplyUserLanguage; override;
+      procedure OpenFile(FileName : String; Select : boolean = False);
     published
   end;
 
@@ -82,6 +88,17 @@ begin
   LogShow;
 end;
 
+procedure TfMain.actFileOpenExecute(Sender: TObject);
+var
+  I : integer;
+begin
+  dlgOpenFile.InitialDir:=UserWorkPath;
+  if dlgOpenFile.Execute then begin
+     for I := 0 to dlgOpenFile.Files.Count - 1 do
+       OpenFile(dlgOpenFile.Files[I], I = dlgOpenFile.Files.Count - 1);
+  end;
+end;
+
 procedure TfMain.actOnlineUpdateExecute(Sender: TObject);
 begin
   UpdateCheck(True);
@@ -94,6 +111,7 @@ end;
 
 procedure TfMain.FormCreate(Sender: TObject);
 begin
+  fWitch := TWitch.Create;
   OnSettingsLoad:=@FormSettingsLoad;
   OnSettingsSave:=@FormSettingsSave;
 
@@ -123,6 +141,9 @@ begin
   lbViewCodepageLabel.Align:=alTop;
   lbViewCodepageLabel.AutoSize:=True;
   lbViewCodepageLabel.BorderSpacing.Around:=8;
+
+  mUnicodeText.Clear;
+  imgCodepage.Height:=1;
 end;
 
 procedure TfMain.FormSettingsLoad(Sender: TObject);
@@ -154,6 +175,16 @@ procedure TfMain.ApplyUserLanguage;
 begin
   inherited ApplyUserLanguage;
   SetCodepageViewlabel;
+end;
+
+procedure TfMain.OpenFile(FileName: String; Select: boolean);
+var
+  I : integer;
+begin
+  I:=fWitch.Find(FileName);
+  if I = -1 then
+    I := fWitch.Add(FileName);
+  // L:=lvFileList.Items.Add;
 end;
 
 
