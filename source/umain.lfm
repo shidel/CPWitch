@@ -84,11 +84,15 @@ object fMain: TfMain
       Top = 29
       Width = 130
       Align = alClient
-      Columns = <>
+      Columns = <      
+        item
+          AutoSize = True
+        end>
       ReadOnly = True
       RowSelect = True
       ScrollBars = ssAutoBoth
       ShowColumnHeaders = False
+      SmallImagesWidth = 24
       TabOrder = 1
       ViewStyle = vsReport
     end

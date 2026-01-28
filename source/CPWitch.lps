@@ -18,9 +18,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <TopLine Value="122"/>
-        <CursorPos X="31" Y="186"/>
-        <FoldState Value=" T3ig03315 Paj200"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="111"/>
+        <CursorPos X="45" Y="187"/>
+        <FoldState Value=" T3ig030131112 PiBj40b"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -33,7 +34,7 @@
         <UnitName Value="uPrefs"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="72" Y="18"/>
-        <UsageCount Value="112"/>
+        <UsageCount Value="124"/>
       </Unit>
       <Unit>
         <Filename Value="icons.pp"/>
@@ -41,16 +42,17 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="288"/>
         <CursorPos X="38" Y="303"/>
-        <UsageCount Value="27"/>
+        <UsageCount Value="26"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/pasext.pp"/>
         <UnitName Value="PasExt"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="2729"/>
-        <CursorPos X="63" Y="2704"/>
-        <FoldState Value=" T3+F0S4 PCi206"/>
-        <UsageCount Value="6"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="988"/>
+        <CursorPos X="47" Y="1019"/>
+        <FoldState Value=" T3+I0S4 PCi20r"/>
+        <UsageCount Value="16"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/multiapp.pp"/>
@@ -66,7 +68,7 @@
         <Filename Value="mpla/patches.pp"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="51" Y="31"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/logview.pp"/>
@@ -74,7 +76,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="48"/>
         <CursorPos X="35" Y="78"/>
-        <UsageCount Value="19"/>
+        <UsageCount Value="18"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/updater.pp"/>
@@ -83,7 +85,7 @@
         <TopLine Value="230"/>
         <CursorPos Y="373"/>
         <FoldState Value=" T7meKE4 PiKiYH T3pc076 piYjC03A pj5jY098]IajM0F[R4XjL0I9]R2k109[a4dkT063 PKQ0!"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="24"/>
       </Unit>
       <Unit>
         <Filename Value="upreferences.pas"/>
@@ -95,83 +97,29 @@
         <TopLine Value="36"/>
         <CursorPos X="33" Y="36"/>
         <FoldState Value=" T3j60Q82111 PjClc0-"/>
-        <UsageCount Value="101"/>
+        <UsageCount Value="100"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/preferences.pp"/>
         <UnitName Value="Preferences"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="594"/>
         <CursorPos X="5" Y="625"/>
         <FoldState Value=" T3n90L11131126]8 PpRr90d"/>
         <UsageCount Value="56"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="witch.pas"/>
         <UnitName Value="Witch"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="105"/>
-        <CursorPos X="19" Y="171"/>
-        <FoldState Value=" T3j70401714 Pj0k30c"/>
-        <UsageCount Value="28"/>
+        <TopLine Value="82"/>
+        <CursorPos X="52" Y="118"/>
+        <FoldState Value=" T3j7030113B pjBl1082 PFG05"/>
+        <UsageCount Value="34"/>
         <Loaded Value="True"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="witch.pas"/>
-        <Caret Line="31" Column="17"/>
-      </Position>
-      <Position>
-        <Filename Value="witch.pas"/>
-        <Caret Line="43" Column="20"/>
-      </Position>
-      <Position>
-        <Filename Value="witch.pas"/>
-        <Caret Line="35" Column="61"/>
-      </Position>
-      <Position>
-        <Filename Value="witch.pas"/>
-        <Caret Line="31" Column="18" TopLine="2"/>
-      </Position>
-      <Position>
-        <Filename Value="witch.pas"/>
-        <Caret Line="52" Column="44" TopLine="29"/>
-      </Position>
-      <Position>
-        <Filename Value="witch.pas"/>
-        <Caret Line="86" Column="13" TopLine="46"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="73" Column="26" TopLine="49"/>
-      </Position>
-      <Position>
-        <Filename Value="witch.pas"/>
-        <Caret Line="34" Column="65" TopLine="16"/>
-      </Position>
-      <Position>
-        <Filename Value="witch.pas"/>
-        <Caret Line="55" Column="48" TopLine="15"/>
-      </Position>
-      <Position>
-        <Filename Value="witch.pas"/>
-        <Caret Line="56" Column="38" TopLine="21"/>
-      </Position>
-      <Position>
-        <Filename Value="witch.pas"/>
-        <Caret Line="24" Column="18" TopLine="16"/>
-      </Position>
-      <Position>
-        <Filename Value="witch.pas"/>
-        <Caret Line="38" Column="56" TopLine="18"/>
-      </Position>
-      <Position>
-        <Filename Value="witch.pas"/>
-        <Caret Line="116" Column="27" TopLine="84"/>
-      </Position>
       <Position>
         <Filename Value="witch.pas"/>
         <Caret Line="63" Column="51" TopLine="32"/>
@@ -239,6 +187,58 @@
       <Position>
         <Filename Value="witch.pas"/>
         <Caret Line="181" Column="50" TopLine="99"/>
+      </Position>
+      <Position>
+        <Filename Value="witch.pas"/>
+        <Caret Line="47" Column="55"/>
+      </Position>
+      <Position>
+        <Filename Value="witch.pas"/>
+        <Caret Line="41" Column="25" TopLine="30"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/pasext.pp"/>
+        <Caret Line="2704" Column="63" TopLine="47"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/pasext.pp"/>
+        <Caret Line="2878" Column="15" TopLine="2837"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/pasext.pp"/>
+        <Caret Line="254" Column="18" TopLine="214"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/pasext.pp"/>
+        <Caret Line="1222" Column="36" TopLine="1205"/>
+      </Position>
+      <Position>
+        <Filename Value="witch.pas"/>
+        <Caret Line="43" Column="20" TopLine="25"/>
+      </Position>
+      <Position>
+        <Filename Value="witch.pas"/>
+        <Caret Line="24" Column="50" TopLine="6"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/pasext.pp"/>
+        <Caret Line="254" Column="27" TopLine="959"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="159" Column="37" TopLine="114"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="198" Column="56" TopLine="138"/>
+      </Position>
+      <Position>
+        <Filename Value="witch.pas"/>
+        <Caret Line="51" Column="55" TopLine="23"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="187" Column="36" TopLine="111"/>
       </Position>
     </JumpHistory>
     <RunParams>

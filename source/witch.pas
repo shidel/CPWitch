@@ -21,26 +21,36 @@ uses
 
 type
 
+  TWitchEncoding = (weNone, weCodePage, weUnicode);
+
   TWitch = class;
 
   { TWitchItem }
 
   TWitchItem = class
   private
+    FEncoding: TWitchEncoding;
     FFileName: String;
+    FData : TArrayOfByte;
     FOwner: TWitch;
     FIndex: Integer;
+    function GetDisplayName: String;
     function GetIndex: integer;
     procedure SetFileName(AValue: String);
     procedure SetOwner(AValue: TWitch);
   protected
     procedure SetIndex(AIndex : Integer);
+    procedure ClearData;
+    procedure AnalyzeData;
+    procedure LoadFile(AFileName : String);
   public
     constructor Create(AOwner: TWitch);
     destructor Destroy; override;
     property Owner : TWitch read FOwner write SetOwner;
     property FileName : String read FFileName write SetFileName;
+    property DisplayName : String read GetDisplayName;
     property Index : integer read GetIndex;
+    property Encoding : TWitchEncoding read FEncoding;
   published
   end;
 
@@ -78,7 +88,7 @@ implementation
 procedure TWitchItem.SetFileName(AValue: String);
 begin
   if FFileName=AValue then Exit;
-  FFileName:=AValue;
+  LoadFile(AValue);
 end;
 
 function TWitchItem.GetIndex: integer;
@@ -86,9 +96,54 @@ begin
   Result:=FIndex;
 end;
 
+function TWitchItem.GetDisplayName: String;
+begin
+  Result:=ExtractFileName(FFileName);
+end;
+
 procedure TWitchItem.SetIndex(AIndex: Integer);
 begin
   FIndex:=AIndex;
+end;
+
+procedure TWitchItem.ClearData;
+begin
+  FFileName:='';
+  FEncoding:=weNone;
+  SetLength(FData, 0);
+end;
+
+procedure TWitchItem.AnalyzeData;
+var
+  I : integer;
+begin
+  // First check if any characters > 127 exist
+  for I := Low(FData) to High(FData) do
+    if FData[I] > 127 then begin
+      FEncoding:=weCodepage;
+      Break;
+    end;
+  // Now if there are, see if it is Codepage or Unicode
+  if FEncoding <> weNone then begin
+    if IsUnicode(PasExt.ToString(FData)) then
+      FEncoding:=weUnicode;
+  end;
+end;
+
+procedure TWitchItem.LoadFile(AFileName : String);
+var
+  E : integer;
+begin
+  ClearData;
+  if AFileName = '' then Exit;
+  E:=FileLoad(AFileName, FData);
+  if E <> 0 then begin
+    ClearData;
+    FileErrorDialog(AFileName, E, false);
+    raise Exception.Create('file read error');
+  end;
+  FFileName:=AFileName;
+  AnalyzeData;
 end;
 
 procedure TWitchItem.SetOwner(AValue: TWitch);
@@ -102,6 +157,8 @@ begin
   inherited Create;
   FOwner:=AOwner;
   FIndex:=-1;
+  FData:=[];
+  ClearData;
 end;
 
 destructor TWitchItem.Destroy;

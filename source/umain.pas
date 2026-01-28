@@ -66,7 +66,7 @@ type
     protected
       procedure FormSettingsLoad(Sender: TObject);
       procedure FormSettingsSave(Sender: TObject);
-      procedure SetButtonIcons;
+      procedure SetApplicationIcons;
       procedure SetCodepageViewLabel;
     public
       procedure ApplyUserLanguage; override;
@@ -115,7 +115,7 @@ begin
   OnSettingsLoad:=@FormSettingsLoad;
   OnSettingsSave:=@FormSettingsSave;
 
-  SetButtonIcons;
+  SetApplicationIcons;
 
   // Assign Images to Actions
   actFileOpen.ImageIndex:=idxButtonFileOpen;
@@ -148,7 +148,7 @@ end;
 
 procedure TfMain.FormSettingsLoad(Sender: TObject);
 begin
-  SetButtonIcons;
+  SetApplicationIcons;
 end;
 
 procedure TfMain.FormSettingsSave(Sender: TObject);
@@ -156,11 +156,13 @@ begin
   SetConfig('Nothing', '1234');
 end;
 
-procedure TfMain.SetButtonIcons;
+procedure TfMain.SetApplicationIcons;
 begin
   tbMain.Images:=IconTheme.ButtonEnabled;
   tbMain.DisabledImages:=IconTheme.ButtonDisabled;
   tbMain.HotImages:=IconTheme.ButtonHover;
+  lvFileList.SmallImages:=ilFileTypeColor;
+  // lvFileList.LargeImages:=ilFileTypeColor;
 end;
 
 procedure TfMain.SetCodepageViewLabel;
@@ -180,11 +182,23 @@ end;
 procedure TfMain.OpenFile(FileName: String; Select: boolean);
 var
   I : integer;
+  L : TListItem;
 begin
+  UserWorkPath:=IncludeTrailingPathDelimiter(ExtractFilePath(FileName));
   I:=fWitch.Find(FileName);
   if I = -1 then
     I := fWitch.Add(FileName);
-  // L:=lvFileList.Items.Add;
+  if I = -1 then
+    Exit;
+
+  L:=lvFileList.Items.Add;
+  L.Caption:=fWitch.Items[I].DisplayName;
+  L.Data:=Pointer(fWitch.Items[I]);
+  case fWitch.Items[I].Encoding of
+    weNone : L.ImageIndex:=idxFileTypeFilePlainGray;
+    weCodePage : L.ImageIndex:=idxFileTypeFilePlainBlue;
+    weUnicode : L.ImageIndex:=idxFileTypeFilePlainGreen;
+  end;
 end;
 
 
