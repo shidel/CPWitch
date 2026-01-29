@@ -66,6 +66,7 @@ type
     protected
       procedure FormSettingsLoad(Sender: TObject);
       procedure FormSettingsSave(Sender: TObject);
+      procedure WitchOnAnalyzed(Sender : TObject);
       procedure SetApplicationIcons;
       procedure SetCodepageViewLabel;
     public
@@ -95,7 +96,7 @@ begin
   dlgOpenFile.InitialDir:=UserWorkPath;
   if dlgOpenFile.Execute then begin
      for I := 0 to dlgOpenFile.Files.Count - 1 do
-       OpenFile(dlgOpenFile.Files[I], I = dlgOpenFile.Files.Count - 1);
+       OpenFile(dlgOpenFile.Files[I], I=0); // I = dlgOpenFile.Files.Count - 1);
   end;
 end;
 
@@ -112,6 +113,7 @@ end;
 procedure TfMain.FormCreate(Sender: TObject);
 begin
   fWitch := TWitch.Create;
+  fWitch.OnAnalyzed:=@WitchOnAnalyzed;
   OnSettingsLoad:=@FormSettingsLoad;
   OnSettingsSave:=@FormSettingsSave;
 
@@ -156,13 +158,27 @@ begin
   SetConfig('Nothing', '1234');
 end;
 
+procedure TfMain.WitchOnAnalyzed(Sender: TObject);
+var
+  W : TWitchItem;
+begin
+  if not (Sender is TWitchItem) then Exit;
+
+  W:=Sender as TWitchItem;
+  case W.Encoding of
+    weNone : W.ListItem.ImageIndex:=idxFileTypeFilePlainGray;
+    weCodePage : W.ListItem.ImageIndex:=idxFileTypeFilePlainBlue;
+    weUnicode : W.ListItem.ImageIndex:=idxFileTypeFilePlainGreen;
+  end;
+end;
+
 procedure TfMain.SetApplicationIcons;
 begin
   tbMain.Images:=IconTheme.ButtonEnabled;
   tbMain.DisabledImages:=IconTheme.ButtonDisabled;
   tbMain.HotImages:=IconTheme.ButtonHover;
   lvFileList.SmallImages:=ilFileTypeColor;
-  // lvFileList.LargeImages:=ilFileTypeColor;
+  lvCodePageList.SmallImages:=ilPercentageColor;
 end;
 
 procedure TfMain.SetCodepageViewLabel;
@@ -182,23 +198,20 @@ end;
 procedure TfMain.OpenFile(FileName: String; Select: boolean);
 var
   I : integer;
-  L : TListItem;
 begin
   UserWorkPath:=IncludeTrailingPathDelimiter(ExtractFilePath(FileName));
-  I:=fWitch.Find(FileName);
-  if I = -1 then
-    I := fWitch.Add(FileName);
-  if I = -1 then
-    Exit;
 
-  L:=lvFileList.Items.Add;
-  L.Caption:=fWitch.Items[I].DisplayName;
-  L.Data:=Pointer(fWitch.Items[I]);
-  case fWitch.Items[I].Encoding of
-    weNone : L.ImageIndex:=idxFileTypeFilePlainGray;
-    weCodePage : L.ImageIndex:=idxFileTypeFilePlainBlue;
-    weUnicode : L.ImageIndex:=idxFileTypeFilePlainGreen;
+  I:=fWitch.Find(FileName);
+  if I <> -1 then begin
+    fWitch.Select(I);
+    Exit;
   end;
+
+  I := fWitch.Add(FileName, lvFileList.Items.Add);
+  if I = -1 then Exit;
+  if Select then
+    fWitch.Select(I);
+
 end;
 
 

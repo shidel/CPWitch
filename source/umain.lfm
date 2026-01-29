@@ -141,7 +141,10 @@ object fMain: TfMain
       Top = 29
       Width = 98
       Align = alClient
-      Columns = <>
+      Columns = <      
+        item
+          AutoSize = True
+        end>
       ScrollBars = ssAutoBoth
       ShowColumnHeaders = False
       TabOrder = 1

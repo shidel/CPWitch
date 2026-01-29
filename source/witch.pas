@@ -15,7 +15,7 @@ interface
 
 uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
-  Classes, SysUtils,
+  Classes, SysUtils, ComCtrls,
   Version, PasExt, Icons, MultiApp;
   { other forms }
 
@@ -29,15 +29,16 @@ type
 
   TWitchItem = class
   private
+    FAnalyzed: boolean;
     FEncoding: TWitchEncoding;
     FFileName: String;
     FData : TArrayOfByte;
+    FListItem: TListItem;
     FOwner: TWitch;
     FIndex: Integer;
     function GetDisplayName: String;
     function GetIndex: integer;
     procedure SetFileName(AValue: String);
-    procedure SetOwner(AValue: TWitch);
   protected
     procedure SetIndex(AIndex : Integer);
     procedure ClearData;
@@ -46,10 +47,12 @@ type
   public
     constructor Create(AOwner: TWitch);
     destructor Destroy; override;
-    property Owner : TWitch read FOwner write SetOwner;
+    property Owner : TWitch read FOwner;
+    property ListItem : TListItem read FListItem;
     property FileName : String read FFileName write SetFileName;
     property DisplayName : String read GetDisplayName;
     property Index : integer read GetIndex;
+    property Analyzed : boolean read FAnalyzed;
     property Encoding : TWitchEncoding read FEncoding;
   published
   end;
@@ -63,8 +66,10 @@ type
   TWitch = class
   private
     FItems: TWitchItems;
+    FOnAnalyzed: TNotifyEvent;
     function GetCount: integer;
     procedure SetItems(AValue: TWitchItems);
+    procedure SetOnAnalyzed(AValue: TNotifyEvent);
   protected
     procedure ValidIndex(Index : integer);
     procedure Remove(Index:integer);
@@ -73,12 +78,15 @@ type
     destructor Destroy; override;
     property Items : TWitchItems read FItems write SetItems;
     property Count : integer read GetCount;
+    function IndexOf(Item : TWitchItem) : integer;
     function Find(FileName : String; CaseSensitive : boolean = true) : integer;
-    function Add(FileName : String) : integer;
+    function Add(FileName : String; ListItem : TListItem = nil) : integer; overload;
     procedure Delete(Index : Integer); overload;
     procedure Delete(Item : TWitchItem); overload;
-    function IndexOf(Item : TWitchItem) : integer;
+    procedure Select(Index : Integer); overload;
+    procedure Select(Item : TWitchItem); overload;
   published
+    property OnAnalyzed : TNotifyEvent read FOnAnalyzed write SetOnAnalyzed;
   end;
 
 implementation
@@ -110,6 +118,7 @@ procedure TWitchItem.ClearData;
 begin
   FFileName:='';
   FEncoding:=weNone;
+  FAnalyzed:=False;
   SetLength(FData, 0);
 end;
 
@@ -117,17 +126,24 @@ procedure TWitchItem.AnalyzeData;
 var
   I : integer;
 begin
-  // First check if any characters > 127 exist
-  for I := Low(FData) to High(FData) do
-    if FData[I] > 127 then begin
-      FEncoding:=weCodepage;
-      Break;
+  if not FAnalyzed then begin
+    // First check if any characters > 127 exist
+    for I := Low(FData) to High(FData) do
+      if FData[I] > 127 then begin
+        FEncoding:=weCodepage;
+        Break;
+      end;
+    // Now if there are, see if it is Codepage or Unicode
+    if FEncoding <> weNone then begin
+      if IsUnicode(PasExt.ToString(FData)) then
+        FEncoding:=weUnicode;
     end;
-  // Now if there are, see if it is Codepage or Unicode
-  if FEncoding <> weNone then begin
-    if IsUnicode(PasExt.ToString(FData)) then
-      FEncoding:=weUnicode;
+    FAnalyzed:=True;
   end;
+
+  if Assigned(FListItem) and Assigned(FOwner) and Assigned(FOwner.FOnAnalyzed) then
+    FOwner.FOnAnalyzed(Self);
+
 end;
 
 procedure TWitchItem.LoadFile(AFileName : String);
@@ -143,19 +159,13 @@ begin
     raise Exception.Create('file read error');
   end;
   FFileName:=AFileName;
-  AnalyzeData;
-end;
-
-procedure TWitchItem.SetOwner(AValue: TWitch);
-begin
-  if FOwner=AValue then Exit;
-  FOwner:=AValue;
 end;
 
 constructor TWitchItem.Create(AOwner: TWitch);
 begin
   inherited Create;
   FOwner:=AOwner;
+  FListItem:=nil;
   FIndex:=-1;
   FData:=[];
   ClearData;
@@ -163,6 +173,7 @@ end;
 
 destructor TWitchItem.Destroy;
 begin
+  FListItem:=nil;
   if Assigned(FOwner) then
     FOwner.Remove(FOwner.IndexOf(Self));
   inherited Destroy;
@@ -181,6 +192,17 @@ begin
   FItems:=AValue;
 end;
 
+procedure TWitch.SetOnAnalyzed(AValue: TNotifyEvent);
+var
+  I : integer;
+begin
+  if FOnAnalyzed=AValue then Exit;
+  FOnAnalyzed:=AValue;
+  if Assigned(FOnAnalyzed) then
+    for I := Low(FItems) to High(FItems) do
+      FItems[I].AnalyzeData;
+end;
+
 procedure TWitch.ValidIndex(Index: integer);
 begin
   if (Index < Low(FItems)) or (Index > High(FItems)) then begin
@@ -194,7 +216,7 @@ var
   I : integer;
 begin
   ValidIndex(Index);
-  FItems[Index].Owner:=nil;
+  FItems[Index].FOwner:=nil;
   FItems[Index].SetIndex(-1);
   for I := Index to High(FItems) - 1 do  begin
     FItems[I]:=FItems[I+1];
@@ -207,6 +229,7 @@ constructor TWitch.Create;
 begin
   inherited Create;
   FItems:=[];
+  FOnAnalyzed:=nil;
 end;
 
 destructor TWitch.Destroy;
@@ -214,7 +237,8 @@ var
   I : Integer;
 begin
   for I := Low(FItems) to High(FItems) do begin
-    FItems[I].Owner:=nil;
+    FItems[I].FOwner:=nil;
+    FItems[I].FListItem:=nil;
     FreeAndNil(FItems[I]);
   end;
   inherited Destroy;
@@ -242,7 +266,7 @@ begin
   end;
 end;
 
-function TWitch.Add(FileName: String): integer;
+function TWitch.Add(FileName: String; ListItem : TListItem): integer;
 var
   W : TWitchItem;
 begin
@@ -250,7 +274,7 @@ begin
   try
     W.FileName := FileName;
   except
-    W.Owner:=nil;
+    W.FOwner:=nil;
     FreeAndNil(W);
   end;
   if not Assigned(W) then begin
@@ -258,10 +282,22 @@ begin
     LogMessage(vbCritical, 'unable to create TWitchItem for ' + FileName);
     raise Exception.Create('unable to create TWitchItem for ' + FileName);
   end;
+
+  // Add Entry to Witch List
   SetLength(FItems, Length(FItems) + 1);
   Result:=High(FItems);
   FItems[Result] := W;
   W.SetIndex(Result);
+
+  // Set ListView Item data
+  ListItem.ImageIndex:=idxFileTypeFilePlainGray;
+  ListItem.Caption:=W.DisplayName;
+  ListItem.Data:=Pointer(W);
+  W.FListItem:=ListItem;
+
+  if Assigned(FOnAnalyzed) then
+    W.AnalyzeData;
+
 end;
 
 procedure TWitch.Delete(Index: Integer);
@@ -278,6 +314,18 @@ procedure TWitch.Delete(Item: TWitchItem);
 begin
   if not Assigned(Item) then Exit;
   Delete(IndexOf(Item));
+end;
+
+procedure TWitch.Select(Index: Integer);
+begin
+  ValidIndex(Index);
+  if Assigned(FItems[Index].ListItem) then
+    FItems[Index].ListItem.Selected:=True;
+end;
+
+procedure TWitch.Select(Item: TWitchItem);
+begin
+  Select(IndexOf(Item));
 end;
 
 function TWitch.IndexOf(Item: TWitchItem): integer;
