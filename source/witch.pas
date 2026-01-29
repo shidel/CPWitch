@@ -30,6 +30,7 @@ type
   TWitchItem = class
   private
     FAnalyzed: boolean;
+    FAnalyzing: boolean;
     FEncoding: TWitchEncoding;
     FFileName: String;
     FData : TArrayOfByte;
@@ -42,7 +43,8 @@ type
   protected
     procedure SetIndex(AIndex : Integer);
     procedure ClearData;
-    procedure AnalyzeData;
+    procedure AnalyzeStart;
+    procedure AnalyzeDone(Sender : TObject);
     procedure LoadFile(AFileName : String);
   public
     constructor Create(AOwner: TWitch);
@@ -73,6 +75,7 @@ type
   protected
     procedure ValidIndex(Index : integer);
     procedure Remove(Index:integer);
+    procedure ThreadComplete(Sender : TObject);
   public
     constructor Create;
     destructor Destroy; override;
@@ -90,6 +93,92 @@ type
   end;
 
 implementation
+
+{$DEFINE Slow_Analyze}
+
+type
+
+  { TWitchAnalyzeThread }
+
+  TWitchAnalyzeThread=class(TThread)
+  private
+    FEncoding: TWitchEncoding;
+    FText: RawByteString;
+    FWitch: TWitch;
+    FWitchItem: TWitchItem;
+    procedure SetText(AValue: RawByteString);
+    procedure SetWitch(AValue: TWitch);
+    procedure SetWitchItem(AValue: TWitchItem);
+  protected
+    procedure Execute; override;
+    procedure Completed;
+  public
+    constructor Create(CreateSuspended:Boolean);
+    property Witch : TWitch read FWitch write SetWitch;
+    property WitchItem : TWitchItem read FWitchItem write SetWitchItem;
+    property Text : RawByteString read FText write SetText;
+    property Encoding : TWitchEncoding read FEncoding;
+  end;
+
+{ TWitchAnalyzeThread }
+
+procedure TWitchAnalyzeThread.SetWitchItem(AValue: TWitchItem);
+begin
+  if FWitchItem=AValue then Exit;
+  FWitchItem:=AValue;
+end;
+
+procedure TWitchAnalyzeThread.SetText(AValue: RawByteString);
+begin
+  if FText=AValue then Exit;
+  FText:=AValue;
+end;
+
+procedure TWitchAnalyzeThread.SetWitch(AValue: TWitch);
+begin
+  if FWitch=AValue then Exit;
+  FWitch:=AValue;
+end;
+
+procedure TWitchAnalyzeThread.Execute;
+var
+  I : integer;
+begin
+  If Not (Assigned(FWitch) and Assigned(FWitchItem)) then Exit;
+  FEncoding:=weNone;
+  // Test for characters above ASCII 127
+  for I := 1 to Length(FText) do
+    if Byte(FText[I]) > 127 then begin
+      FEncoding:=weCodepage;
+      Break;
+  {$IFDEF Slow_Analyze}
+    end else Sleep(3);
+  {$ELSE}
+    end;
+  {$ENDIF}
+  // Now if there are, see if it is Codepage or Unicode
+  if FEncoding <> weNone then begin
+    if IsUnicode(FText) then
+      FEncoding:=weUnicode;
+  end;
+
+  Synchronize(@Completed);
+end;
+
+procedure TWitchAnalyzeThread.Completed;
+begin
+  FWitch.ThreadComplete(Self);
+end;
+
+constructor TWitchAnalyzeThread.Create(CreateSuspended: Boolean);
+begin
+  inherited Create(CreateSuspended);
+  FreeOnTerminate:=True;
+  FText:='';
+  FWitch:=nil;
+  FWitchItem:=nil;
+end;
+
 
 { TWitchItem }
 
@@ -119,31 +208,39 @@ begin
   FFileName:='';
   FEncoding:=weNone;
   FAnalyzed:=False;
+  FAnalyzing:=False;
   SetLength(FData, 0);
 end;
 
-procedure TWitchItem.AnalyzeData;
+procedure TWitchItem.AnalyzeStart;
 var
-  I : integer;
+  T : TWitchAnalyzeThread;
 begin
-  if not FAnalyzed then begin
-    // First check if any characters > 127 exist
-    for I := Low(FData) to High(FData) do
-      if FData[I] > 127 then begin
-        FEncoding:=weCodepage;
-        Break;
-      end;
-    // Now if there are, see if it is Codepage or Unicode
-    if FEncoding <> weNone then begin
-      if IsUnicode(PasExt.ToString(FData)) then
-        FEncoding:=weUnicode;
-    end;
-    FAnalyzed:=True;
+  if not (Assigned(FOwner) and Assigned(FOwner.FOnAnalyzed)) then Exit;
+  if FAnalyzed then begin
+    if Assigned(FListItem) then
+      FOwner.FOnAnalyzed(Self);
+  end else
+  if not FAnalyzing then begin
+    FAnalyzing:=True;
+    T := TWitchAnalyzeThread.Create(True);
+    T.Witch:=FOwner;
+    T.WitchItem:=Self;
+    T.Text:=PasExt.ToString(FData);
+    T.Start;
   end;
 
+end;
+
+procedure TWitchItem.AnalyzeDone(Sender: TObject);
+begin
+  FAnalyzing:=False;
+  FAnalyzed:=True;
+  if Sender is TWitchAnalyzeThread then begin
+    FEncoding:=TWitchAnalyzeThread(Sender).Encoding;
+  end;
   if Assigned(FListItem) and Assigned(FOwner) and Assigned(FOwner.FOnAnalyzed) then
     FOwner.FOnAnalyzed(Self);
-
 end;
 
 procedure TWitchItem.LoadFile(AFileName : String);
@@ -200,7 +297,7 @@ begin
   FOnAnalyzed:=AValue;
   if Assigned(FOnAnalyzed) then
     for I := Low(FItems) to High(FItems) do
-      FItems[I].AnalyzeData;
+      FItems[I].AnalyzeStart;
 end;
 
 procedure TWitch.ValidIndex(Index: integer);
@@ -223,6 +320,17 @@ begin
     FItems[I].SetIndex(I);
   end;
   SetLength(FItems, Length(FItems) - 1);
+end;
+
+procedure TWitch.ThreadComplete(Sender: TObject);
+var
+  I : Integer;
+begin
+  if not (Sender is TWitchAnalyzeThread) then Exit;
+  I := IndexOf(TWitchAnalyzeThread(Sender).WitchItem);
+  // Item no longer exists.
+  if I = -1 then Exit;
+  FItems[I].AnalyzeDone(Sender);
 end;
 
 constructor TWitch.Create;
@@ -296,7 +404,7 @@ begin
   W.FListItem:=ListItem;
 
   if Assigned(FOnAnalyzed) then
-    W.AnalyzeData;
+    W.AnalyzeStart;
 
 end;
 
