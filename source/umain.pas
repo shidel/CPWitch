@@ -60,15 +60,18 @@ type
     procedure actOnlineUpdateExecute(Sender: TObject);
     procedure actPreferencesExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure lvFileListClick(Sender: TObject);
     private
       lbViewCodePageLabel : TLabel;
       fWitch : TWitch;
+      procedure PopulateCodePageList(Item : TWitchItem);
     protected
       procedure FormSettingsLoad(Sender: TObject);
       procedure FormSettingsSave(Sender: TObject);
       procedure WitchOnAnalyzed(Sender : TObject);
       procedure SetApplicationIcons;
       procedure SetCodepageViewLabel;
+      procedure SetCodepageList;
     public
       procedure ApplyUserLanguage; override;
       procedure OpenFile(FileName : String; Select : boolean = False);
@@ -148,6 +151,28 @@ begin
   imgCodepage.Height:=1;
 end;
 
+procedure TfMain.lvFileListClick(Sender: TObject);
+begin
+  SetCodePageList;
+end;
+
+procedure TfMain.PopulateCodePageList(Item: TWitchItem);
+var
+  L : TListItem;
+  K : String;
+begin
+  if not Assigned(Item) then Exit;
+  K:=ComponentNamePath(lvCodePageList, Self, True);
+  if Item.Analyzed then begin
+    L:=lvCodePageList.Items.Add;
+    L.Caption:=GetTranslation(K+'Analyzed/Caption', 'Analyzed');
+  end else begin
+    L:=lvCodePageList.Items.Add;
+    L.Caption:=GetTranslation(K+'Analyzing/Caption', 'Processing');
+    L.ImageIndex:=0;
+  end;
+end;
+
 procedure TfMain.FormSettingsLoad(Sender: TObject);
 begin
   SetApplicationIcons;
@@ -170,6 +195,9 @@ begin
     weCodePage : W.ListItem.ImageIndex:=idxFileTypeFilePlainBlue;
     weUnicode : W.ListItem.ImageIndex:=idxFileTypeFilePlainGreen;
   end;
+
+  if W.ListItem = lvFileList.Selected then
+    SetCodePageList;
 end;
 
 procedure TfMain.SetApplicationIcons;
@@ -187,6 +215,16 @@ begin
   lbViewCodepageLabel.Caption:=GetFormat(ComponentNamePath(pViewCodepageLabel,
     Self, True) + 'lbViewCodepageLabel/Value' , ['437'],
     'Viewed as Codepage %s');
+end;
+
+procedure TfMain.SetCodepageList;
+begin
+  lvCodePageList.BeginUpdate;
+  lvCodePageList.Clear;
+  if Assigned(lvFileList.Selected) then begin
+    PopulateCodePageList(TWitchItem(lvFileList.Selected.Data));
+  end;
+  lvCodePageList.EndUpdate;
 end;
 
 procedure TfMain.ApplyUserLanguage;
@@ -209,8 +247,10 @@ begin
 
   I := fWitch.Add(FileName, lvFileList.Items.Add);
   if I = -1 then Exit;
-  if Select then
+  if Select then begin
     fWitch.Select(I);
+    SetCodePageList;
+  end;
 
 end;
 

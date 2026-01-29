@@ -95,6 +95,7 @@ object fMain: TfMain
       SmallImagesWidth = 24
       TabOrder = 1
       ViewStyle = vsReport
+      OnClick = lvFileListClick
     end
   end
   object spFilesCPs: TSplitter
@@ -144,9 +145,13 @@ object fMain: TfMain
       Columns = <      
         item
           AutoSize = True
+          Width = 64
         end>
+      ReadOnly = True
+      RowSelect = True
       ScrollBars = ssAutoBoth
       ShowColumnHeaders = False
+      SmallImagesWidth = 20
       TabOrder = 1
       ViewStyle = vsReport
     end

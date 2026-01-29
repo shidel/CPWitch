@@ -127,6 +127,10 @@
         <pCodepageListLabel>
           <lbCodepageLabel Caption="Codepages"/>
         </pCodepageListLabel>
+        <lvCodepageList>
+          <Analyzing Caption="Analyzing"/>
+          <Analyzed Caption="Analyzed"/>
+        </lvCodepageList>
       </pCodepageList>
       <pViewers>
         <pViewUnicode>
@@ -141,6 +145,57 @@
         </pCodepage>
       </pViewers>
     </fMain>
+    <fUpdateCheckDialog Caption="Update Check">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancel"/>
+          <btnRetry Caption="Retry"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Check Text="Checking for available updates for &quot;%s&quot;, version %s."/>
+        <Error Text="Unable to determine if there are any updates for &quot;%s&quot; at this time. Please try again later."/>
+        <None Text="There are no available updates for &quot;%s&quot; at this time. Please try again later."/>
+      </Message>
+    </fUpdateCheckDialog>
+    <fUpdateFoundDialog Caption="Update Available">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancel"/>
+          <btnDownload Caption="Download"/>
+          <btnSkip Caption="Skip"/>
+        </fButtonPanel>
+        <fAuxPanel>
+          <cbSkipVersion Caption="Skip this version"/>
+        </fAuxPanel>
+      </fLowerPanel>
+      <Message>
+        <Note Text="There are no release notes provided for version %1:s of &quot;%0:s&quot;"/>
+      </Message>
+    </fUpdateFoundDialog>
+    <fUpdateDownloadDialog Caption="Update Download">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancel"/>
+          <btnRetry Caption="Retry"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Fetch Text="Downloading update for &quot;%s&quot;."/>
+        <Error Text="Error downloading &quot;%s&quot; update. Please try again later."/>
+      </Message>
+    </fUpdateDownloadDialog>
+    <fUpdateSaveDialog Caption="Update Downloaded">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancel"/>
+          <btnSaveAs Caption="Save as..."/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Downloaded Text="Downloaded &quot;%s&quot; version %s."/>
+      </Message>
+    </fUpdateSaveDialog>
     <fLoggerViewForm Caption="Debug log">
       <LineCount Plural="%.0n log entries" Singular="%.0n log entry"/>
       <pControls>
@@ -199,56 +254,5 @@
         </fBodyPanel>
       </fMiddlePanel>
     </fPreferences>
-    <fUpdateCheckDialog Caption="Update Check">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancel"/>
-          <btnRetry Caption="Retry"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Check Text="Checking for available updates for &quot;%s&quot;, version %s."/>
-        <Error Text="Unable to determine if there are any updates for &quot;%s&quot; at this time. Please try again later."/>
-        <None Text="There are no available updates for &quot;%s&quot; at this time. Please try again later."/>
-      </Message>
-    </fUpdateCheckDialog>
-    <fUpdateFoundDialog Caption="Update Available">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancel"/>
-          <btnDownload Caption="Download"/>
-          <btnSkip Caption="Skip"/>
-        </fButtonPanel>
-        <fAuxPanel>
-          <cbSkipVersion Caption="Skip this version"/>
-        </fAuxPanel>
-      </fLowerPanel>
-      <Message>
-        <Note Text="There are no release notes provided for version %1:s of &quot;%0:s&quot;"/>
-      </Message>
-    </fUpdateFoundDialog>
-    <fUpdateDownloadDialog Caption="Update Download">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancel"/>
-          <btnRetry Caption="Retry"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Fetch Text="Downloading update for &quot;%s&quot;."/>
-        <Error Text="Error downloading &quot;%s&quot; update. Please try again later."/>
-      </Message>
-    </fUpdateDownloadDialog>
-    <fUpdateSaveDialog Caption="Update Downloaded">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancel"/>
-          <btnSaveAs Caption="Save as..."/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Downloaded Text="Downloaded &quot;%s&quot; version %s."/>
-      </Message>
-    </fUpdateSaveDialog>
   </Controls>
 </CONFIG>

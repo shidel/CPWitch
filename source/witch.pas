@@ -398,7 +398,7 @@ begin
   W.SetIndex(Result);
 
   // Set ListView Item data
-  ListItem.ImageIndex:=idxFileTypeFilePlainGray;
+  ListItem.ImageIndex:=idxFileTypeFilePlainOrange;
   ListItem.Caption:=W.DisplayName;
   ListItem.Data:=Pointer(W);
   W.FListItem:=ListItem;

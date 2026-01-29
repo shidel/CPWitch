@@ -127,6 +127,10 @@
         <pCodepageListLabel>
           <lbCodepageLabel Caption="Codepages"/>
         </pCodepageListLabel>
+        <lvCodepageList>
+          <Analyzing Caption="Analyzing"/>
+          <Analyzed Caption="Analyzed"/>
+        </lvCodepageList>
       </pCodepageList>
       <pViewers>
         <pViewUnicode>
@@ -141,6 +145,57 @@
         </pCodepage>
       </pViewers>
     </fMain>
+    <fUpdateCheckDialog Caption="Update-Prüfung">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Abbrechen"/>
+          <btnRetry Caption="Wiederholen"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Check Text="Suche nach verfügbaren Updates für &quot;%s&quot;, Version %s."/>
+        <Error Text="Es konnte derzeit nicht festgestellt werden, ob Updates für &quot;%s&quot; verfügbar sind. Bitte versuchen Sie es später erneut."/>
+        <None Text="Es sind derzeit keine Updates für &quot;%s&quot; verfügbar. Bitte versuchen Sie es später erneut."/>
+      </Message>
+    </fUpdateCheckDialog>
+    <fUpdateFoundDialog Caption="Update verfügbar">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Abbrechen"/>
+          <btnDownload Caption="Herunterladen"/>
+          <btnSkip Caption="Überspringen"/>
+        </fButtonPanel>
+        <fAuxPanel>
+          <cbSkipVersion Caption="Diese Version überspringen"/>
+        </fAuxPanel>
+      </fLowerPanel>
+      <Message>
+        <Note Text="Es wurden keine Versionshinweise für Version %1:s von &quot;%0:s&quot; bereitgestellt."/>
+      </Message>
+    </fUpdateFoundDialog>
+    <fUpdateDownloadDialog Caption="Update-Download">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Abbrechen"/>
+          <btnRetry Caption="Wiederholen"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Fetch Text="Update für &quot;%s&quot; wird heruntergeladen."/>
+        <Error Text="Fehler beim Herunterladen des Updates für &quot;%s&quot;. Bitte versuchen Sie es später erneut."/>
+      </Message>
+    </fUpdateDownloadDialog>
+    <fUpdateSaveDialog Caption="Update heruntergeladen">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Abbrechen"/>
+          <btnSaveAs Caption="Speichern unter..."/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Downloaded Text="&quot;%s&quot; Version %s heruntergeladen."/>
+      </Message>
+    </fUpdateSaveDialog>
     <fLoggerViewForm Caption="Debug log">
       <LineCount Plural="%.0n log entries" Singular="%.0n log entry"/>
       <pControls>
@@ -199,56 +254,5 @@
         </fBodyPanel>
       </fMiddlePanel>
     </fPreferences>
-    <fUpdateCheckDialog Caption="Update-Prüfung">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Abbrechen"/>
-          <btnRetry Caption="Wiederholen"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Check Text="Suche nach verfügbaren Updates für &quot;%s&quot;, Version %s."/>
-        <Error Text="Es konnte derzeit nicht festgestellt werden, ob Updates für &quot;%s&quot; verfügbar sind. Bitte versuchen Sie es später erneut."/>
-        <None Text="Es sind derzeit keine Updates für &quot;%s&quot; verfügbar. Bitte versuchen Sie es später erneut."/>
-      </Message>
-    </fUpdateCheckDialog>
-    <fUpdateFoundDialog Caption="Update verfügbar">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Abbrechen"/>
-          <btnDownload Caption="Herunterladen"/>
-          <btnSkip Caption="Überspringen"/>
-        </fButtonPanel>
-        <fAuxPanel>
-          <cbSkipVersion Caption="Diese Version überspringen"/>
-        </fAuxPanel>
-      </fLowerPanel>
-      <Message>
-        <Note Text="Es wurden keine Versionshinweise für Version %1:s von &quot;%0:s&quot; bereitgestellt."/>
-      </Message>
-    </fUpdateFoundDialog>
-    <fUpdateDownloadDialog Caption="Update-Download">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Abbrechen"/>
-          <btnRetry Caption="Wiederholen"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Fetch Text="Update für &quot;%s&quot; wird heruntergeladen."/>
-        <Error Text="Fehler beim Herunterladen des Updates für &quot;%s&quot;. Bitte versuchen Sie es später erneut."/>
-      </Message>
-    </fUpdateDownloadDialog>
-    <fUpdateSaveDialog Caption="Update heruntergeladen">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Abbrechen"/>
-          <btnSaveAs Caption="Speichern unter..."/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Downloaded Text="&quot;%s&quot; Version %s heruntergeladen."/>
-      </Message>
-    </fUpdateSaveDialog>
   </Controls>
 </CONFIG>
