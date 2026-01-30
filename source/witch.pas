@@ -16,7 +16,7 @@ interface
 uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
   Classes, SysUtils, ComCtrls,
-  Version, PasExt, Icons, MultiApp;
+  Version, PasExt, Icons, MultiApp, Codepages;
   { other forms }
 
 type
