@@ -145,6 +145,11 @@
           </pViewCodepageLabel>
         </pCodepage>
       </pViewers>
+      <statBar>
+        <Processing Caption="Processing"/>
+        <Codepage Caption="Codepage"/>
+        <NoEncoding Caption="ASCII"/>
+      </statBar>
     </fMain>
     <fUpdateCheckDialog Caption="Update Check">
       <fLowerPanel>

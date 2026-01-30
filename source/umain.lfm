@@ -43,7 +43,22 @@ object fMain: TfMain
     Height = 18
     Top = 302
     Width = 480
-    Panels = <>
+    Panels = <    
+      item
+        Alignment = taCenter
+        Width = 100
+      end    
+      item
+        Alignment = taCenter
+        Width = 100
+      end    
+      item
+        Width = 50
+      end    
+      item
+        Width = 50
+      end>
+    SimplePanel = False
   end
   object pFileList: TPanel
     Left = 4
@@ -55,6 +70,7 @@ object fMain: TfMain
     BorderSpacing.Bottom = 2
     ClientHeight = 234
     ClientWidth = 132
+    Constraints.MinWidth = 120
     TabOrder = 2
     object pFileListLabel: TPanel
       Left = 1
@@ -114,6 +130,7 @@ object fMain: TfMain
     BorderSpacing.Bottom = 2
     ClientHeight = 234
     ClientWidth = 100
+    Constraints.MinWidth = 90
     TabOrder = 4
     object pCodepageListLabel: TPanel
       Left = 1
@@ -309,6 +326,27 @@ object fMain: TfMain
       OnExecute = actFileCloseExecute
       OnUpdate = actFileCloseUpdate
     end
+    object actListAll: TAction
+      Category = 'ViewMode'
+      Caption = 'All codepages'
+      Hint = 'List all known codepages.'
+    end
+    object actListPotential: TAction
+      Category = 'ViewMode'
+      Caption = 'Possible codepages'
+      Hint = 'List possible partial codepages.'
+    end
+    object actListGood: TAction
+      Category = 'ViewMode'
+      Caption = 'Compatible codepages'
+      Hint = 'List only compatible codepages.'
+    end
+    object actCodepageFilter: TAction
+      Category = 'ViewMode'
+      Caption = 'Codepage Filter'
+      Hint = 'Filter the codepages list.'
+      OnExecute = actCodepageFilterExecute
+    end
   end
   object mmMain: TMainMenu
     Left = 380
@@ -325,5 +363,18 @@ object fMain: TfMain
     OnTimer = tAnimateTimer
     Left = 432
     Top = 219
+  end
+  object pmListMode: TPopupMenu
+    Left = 431
+    Top = 156
+    object miListGood: TMenuItem
+      Action = actListGood
+    end
+    object miListPotential: TMenuItem
+      Action = actListPotential
+    end
+    object miListAll: TMenuItem
+      Action = actListAll
+    end
   end
 end

@@ -28,6 +28,10 @@ type
       actFileExport: TAction;
       actDebugLog: TAction;
       actFileClose: TAction;
+      actCodepageFilter: TAction;
+      actListGood: TAction;
+      actListPotential: TAction;
+      actListAll: TAction;
       actOnlineUpdate: TAction;
       actPreferences: TAction;
       alMain: TActionList;
@@ -38,9 +42,13 @@ type
       lbFileList: TLabel;
       lvCodepageList: TListView;
       lvFileList: TListView;
+      miListGood: TMenuItem;
+      miListPotential: TMenuItem;
+      miListAll: TMenuItem;
       mUnicodeText: TMemo;
       mmMain: TMainMenu;
       dlgOpenFile: TOpenDialog;
+      pmListMode: TPopupMenu;
       pViewCodepageLabel: TPanel;
       pViewUnicodeLabel: TPanel;
       pCodepage: TPanel;
@@ -57,6 +65,7 @@ type
       statBar: TStatusBar;
       tbMain: TToolBar;
       tAnimate: TTimer;
+    procedure actCodepageFilterExecute(Sender: TObject);
     procedure actDebugLogExecute(Sender: TObject);
     procedure actFileCloseExecute(Sender: TObject);
     procedure actFileCloseUpdate(Sender: TObject);
@@ -69,6 +78,7 @@ type
     procedure tAnimateTimer(Sender: TObject);
     private
       lbViewCodePageLabel : TLabel;
+      btnCodepageFilter : TToolButton;
       fWitch : TWitch;
       procedure PopulateCodePageList(Item : TWitchItem);
     protected
@@ -78,6 +88,7 @@ type
       procedure SetApplicationIcons;
       procedure SetCodepageViewLabel;
       procedure UpdateMetaData;
+      procedure UpdateStatusBar;
     public
       procedure ApplyUserLanguage; override;
       procedure OpenFile(FileName : String; Select : boolean = False);
@@ -96,6 +107,12 @@ implementation
 procedure TfMain.actDebugLogExecute(Sender: TObject);
 begin
   LogShow;
+end;
+
+procedure TfMain.actCodepageFilterExecute(Sender: TObject);
+begin
+  if Assigned(btnCodepageFilter.DropdownMenu) then
+    btnCodepageFilter.CheckMenuDropdown;
 end;
 
 procedure TfMain.actFileCloseExecute(Sender: TObject);
@@ -166,12 +183,26 @@ begin
   actPreferences.ImageIndex:=idxButtonPreferences;
   actOnlineUpdate.ImageIndex:=idxButtonUpdateCheck;
   actDebugLog.ImageIndex:=idxButtonDebugLog;
+  actListGood.ImageIndex:=idxButtonListViewFinished;
+  actListPotential.ImageIndex:=idxButtonListViewPartial;
+  actListAll.ImageIndex:=idxButtonListViewEmpty;
+  actCodePageFilter.ImageIndex:=idxButtonListView;
 
   // Add Main ToolBar Buttons
   CreateToolButton(tbMain, actFileOpen);
   CreateToolButton(tbMain, actFileExport);
   CreateToolButton(tbMain, actFileClose);
-  CreateToolButton(tbMain, tbsDivider);
+  CreateToolButton(tbMain, tbsDivider, 'btnDivider1');
+  btnCodepageFilter:=CreateToolButton(tbMain, actCodepageFilter);
+  btnCodepageFilter.Style:=tbsButtonDrop;
+  btnCodepageFilter.DropdownMenu:=pmListMode;
+
+  //btnCodepageFilter:=CreateToolButton(tbMain, tbsButtonDrop, 'btnCodepageFilter');
+  //btnCodepageFilter.Style:=tbsDropDown;
+  //btnCodepageFilter.DropdownMenu:=pmListMode;
+  //btnCodePageFilter.ImageIndex:=idxButtonListView;
+
+  CreateToolButton(tbMain, tbsDivider, 'btnDivider2');
   CreateToolButton(tbMain, actPreferences);
   CreateToolButton(tbMain, actOnlineUpdate);
   CreateToolButton(tbMain, actDebugLog);
@@ -217,18 +248,19 @@ var
   K : String;
 begin
   if not Assigned(Item) then Exit;
-  K:=ComponentNamePath(lvCodePageList, Self, True);
   if Item.Analyzed then begin
     lvCodePageList.Enabled:=True;
     lvCodePageList.SmallImages:=ilPercentageColor;
     L:=lvCodePageList.Items.Add;
+    K:=ComponentNamePath(lvCodePageList, Self, True);
     L.Caption:=GetTranslation(K+'Analyzed/Caption', 'Analyzed');
     tAnimate.Enabled:=False;
   end else begin
     lvCodePageList.Enabled:=False;
     lvCodePageList.SmallImages:=ilWorkingColor;
     L:=lvCodePageList.Items.Add;
-    L.Caption:=GetTranslation(K+'Analyzing/Caption', 'Processing');
+    K:=ComponentNamePath(lvCodePageList, Self, True);
+    L.Caption:=GetTranslation(K+'Analyzing/Caption', 'Analyzing');
     L.ImageIndex:=0;
     tAnimate.Enabled:=True;
   end;
@@ -266,6 +298,8 @@ begin
   tbMain.Images:=IconTheme.ButtonEnabled;
   tbMain.DisabledImages:=IconTheme.ButtonDisabled;
   tbMain.HotImages:=IconTheme.ButtonHover;
+  pmListMode.Images:=IconTheme.ButtonEnabled;
+
   lvFileList.SmallImages:=ilFileTypeColor;
   lvCodePageList.SmallImages:=ilPercentageColor;
 end;
@@ -286,6 +320,33 @@ begin
     PopulateCodePageList(TWitchItem(lvFileList.Selected.Data));
   end;
   lvCodePageList.EndUpdate;
+  UpdateStatusBar;
+end;
+
+procedure TfMain.UpdateStatusBar;
+var
+  W : TWitchItem;
+  K : String;
+begin
+  if Not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data))then begin
+    statBar.Panels[0].Text:='';
+    statBar.Panels[1].Text:='';
+    statBar.Panels[2].Text:='';
+    statBar.Panels[3].Text:='';
+    Exit;
+  end;
+  W:=TWitchItem(lvFileList.Selected.Data);
+  statBar.Panels[3].Text:=SPACE2+W.FileName;
+  K:=ComponentNamePath(statBar, Self, True);
+  if W.Analyzed then begin
+    case W.Encoding of
+      weNone : statBar.Panels[0].Text:=GetTranslation(K+'NoEncoding/Caption', 'ASCII');
+      weCodePage : statBar.Panels[0].Text:=GetTranslation(K+'Codepage/Caption', 'Codepage');
+      weUnicode : statBar.Panels[0].Text:=GetTranslation(K+'Unicode/Caption', 'Unicode');
+    end;
+  end else begin
+    statBar.Panels[0].Text:=GetTranslation(K+'Processing/Caption', 'Processing');
+  end;
 end;
 
 procedure TfMain.ApplyUserLanguage;
