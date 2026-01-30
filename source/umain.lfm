@@ -87,6 +87,7 @@ object fMain: TfMain
       Columns = <      
         item
           AutoSize = True
+          Width = 96
         end>
       ReadOnly = True
       RowSelect = True
@@ -281,6 +282,7 @@ object fMain: TfMain
       Category = 'File'
       Caption = 'File Export...'
       Hint = 'Export a text file encoded in codepage format.'
+      OnUpdate = actFileExportUpdate
     end
     object actPreferences: TAction
       Category = 'Application'
@@ -300,6 +302,13 @@ object fMain: TfMain
       Hint = 'View the debugging log.'
       OnExecute = actDebugLogExecute
     end
+    object actFileClose: TAction
+      Category = 'File'
+      Caption = 'File Close'
+      Hint = 'Close the current text file.'
+      OnExecute = actFileCloseExecute
+      OnUpdate = actFileCloseUpdate
+    end
   end
   object mmMain: TMainMenu
     Left = 380
@@ -308,6 +317,13 @@ object fMain: TfMain
   object dlgOpenFile: TOpenDialog
     Options = [ofAllowMultiSelect, ofFileMustExist, ofEnableSizing, ofDontAddToRecent, ofViewDetail]
     Left = 380
+    Top = 219
+  end
+  object tAnimate: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = tAnimateTimer
+    Left = 432
     Top = 219
   end
 end

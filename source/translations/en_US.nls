@@ -117,6 +117,7 @@
         <actPreferences Hint="View or modify Codepage Witch preferences." Caption="Preferences..."/>
         <actOnlineUpdate Hint="Check for updates to Codepage Witch." Caption="Update Check..."/>
         <actDebugLog Hint="View the debugging log." Caption="Debug Log..."/>
+        <actFileClose Hint="Close the current text file." Caption="File Close"/>
       </alMain>
       <pFileList>
         <pFileListLabel>

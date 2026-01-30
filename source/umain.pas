@@ -27,6 +27,7 @@ type
       actFileOpen: TAction;
       actFileExport: TAction;
       actDebugLog: TAction;
+      actFileClose: TAction;
       actOnlineUpdate: TAction;
       actPreferences: TAction;
       alMain: TActionList;
@@ -55,12 +56,17 @@ type
       spUnicodeCP: TSplitter;
       statBar: TStatusBar;
       tbMain: TToolBar;
+      tAnimate: TTimer;
     procedure actDebugLogExecute(Sender: TObject);
+    procedure actFileCloseExecute(Sender: TObject);
+    procedure actFileCloseUpdate(Sender: TObject);
+    procedure actFileExportUpdate(Sender: TObject);
     procedure actFileOpenExecute(Sender: TObject);
     procedure actOnlineUpdateExecute(Sender: TObject);
     procedure actPreferencesExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure lvFileListClick(Sender: TObject);
+    procedure tAnimateTimer(Sender: TObject);
     private
       lbViewCodePageLabel : TLabel;
       fWitch : TWitch;
@@ -71,7 +77,7 @@ type
       procedure WitchOnAnalyzed(Sender : TObject);
       procedure SetApplicationIcons;
       procedure SetCodepageViewLabel;
-      procedure SetCodepageList;
+      procedure UpdateMetaData;
     public
       procedure ApplyUserLanguage; override;
       procedure OpenFile(FileName : String; Select : boolean = False);
@@ -90,6 +96,37 @@ implementation
 procedure TfMain.actDebugLogExecute(Sender: TObject);
 begin
   LogShow;
+end;
+
+procedure TfMain.actFileCloseExecute(Sender: TObject);
+var
+  N : Integer;
+begin
+  if not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)
+  and TWitchItem(lvFileList.Selected.Data).Analyzed) then Exit;
+  N:=lvFileList.Selected.Index;
+  if N>=lvFileList.Items.Count - 1 then
+    N:=lvFileList.Items.Count - 2;
+  fWitch.Delete(TWitchItem(lvFileList.Selected.Data));
+  lvFileList.Selected.Delete;
+  if N >= 0 then
+    lvFileList.Items[N].Selected:=True;
+  UpdateMetaData;
+end;
+
+procedure TfMain.actFileCloseUpdate(Sender: TObject);
+begin
+ // actFileClose.Enabled:=Assigned(lvFileList.Selected);
+  actFileClose.Enabled:=
+  Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data) and
+  TWitchItem(lvFileList.Selected.Data).Analyzed;
+end;
+
+procedure TfMain.actFileExportUpdate(Sender: TObject);
+begin
+  actFileExport.Enabled:=Assigned(lvCodePageList.Selected) and
+  Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data) and
+  TWitchItem(lvFileList.Selected.Data).Analyzed;
 end;
 
 procedure TfMain.actFileOpenExecute(Sender: TObject);
@@ -125,6 +162,7 @@ begin
   // Assign Images to Actions
   actFileOpen.ImageIndex:=idxButtonFileOpen;
   actFileExport.ImageIndex:=idxButtonFileExport;
+  actFileClose.ImageIndex:=idxButtonFileClose;
   actPreferences.ImageIndex:=idxButtonPreferences;
   actOnlineUpdate.ImageIndex:=idxButtonUpdateCheck;
   actDebugLog.ImageIndex:=idxButtonDebugLog;
@@ -132,6 +170,7 @@ begin
   // Add Main ToolBar Buttons
   CreateToolButton(tbMain, actFileOpen);
   CreateToolButton(tbMain, actFileExport);
+  CreateToolButton(tbMain, actFileClose);
   CreateToolButton(tbMain, tbsDivider);
   CreateToolButton(tbMain, actPreferences);
   CreateToolButton(tbMain, actOnlineUpdate);
@@ -153,7 +192,23 @@ end;
 
 procedure TfMain.lvFileListClick(Sender: TObject);
 begin
-  SetCodePageList;
+  UpdateMetaData;
+end;
+
+procedure TfMain.tAnimateTimer(Sender: TObject);
+var
+  I : integer;
+begin
+  if lvCodePageList.Items.Count <> 1 then Exit;
+  if not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)
+  and (TWitchItem(lvFileList.Selected.Data).Analyzed=False)) then begin
+     UpdateMetaData;
+     Exit;
+  end;
+  I:=lvCodePageList.Items[0].ImageIndex+1;
+  if I >= lvCodePageList.SmallImages.Count then
+    I := 0;
+  lvCodePageList.Items[0].ImageIndex:=I;
 end;
 
 procedure TfMain.PopulateCodePageList(Item: TWitchItem);
@@ -164,12 +219,18 @@ begin
   if not Assigned(Item) then Exit;
   K:=ComponentNamePath(lvCodePageList, Self, True);
   if Item.Analyzed then begin
+    lvCodePageList.Enabled:=True;
+    lvCodePageList.SmallImages:=ilPercentageColor;
     L:=lvCodePageList.Items.Add;
     L.Caption:=GetTranslation(K+'Analyzed/Caption', 'Analyzed');
+    tAnimate.Enabled:=False;
   end else begin
+    lvCodePageList.Enabled:=False;
+    lvCodePageList.SmallImages:=ilWorkingColor;
     L:=lvCodePageList.Items.Add;
     L.Caption:=GetTranslation(K+'Analyzing/Caption', 'Processing');
     L.ImageIndex:=0;
+    tAnimate.Enabled:=True;
   end;
 end;
 
@@ -197,7 +258,7 @@ begin
   end;
 
   if W.ListItem = lvFileList.Selected then
-    SetCodePageList;
+    UpdateMetaData;
 end;
 
 procedure TfMain.SetApplicationIcons;
@@ -217,7 +278,7 @@ begin
     'Viewed as Codepage %s');
 end;
 
-procedure TfMain.SetCodepageList;
+procedure TfMain.UpdateMetaData;
 begin
   lvCodePageList.BeginUpdate;
   lvCodePageList.Clear;
@@ -249,7 +310,7 @@ begin
   if I = -1 then Exit;
   if Select then begin
     fWitch.Select(I);
-    SetCodePageList;
+    UpdateMetaData;
   end;
 
 end;
