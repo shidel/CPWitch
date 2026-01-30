@@ -118,6 +118,10 @@
         <actOnlineUpdate Hint="Nach Updates für Codepage Witch suchen." Caption="Update-Prüfung..."/>
         <actDebugLog Hint="Das Debugging-Protokoll anzeigen." Caption="Debug-Protokoll..."/>
         <actFileClose Hint="Close the current text file." Caption="File Close"/>
+        <actListAll Hint="List all known codepages." Caption="All known"/>
+        <actListPartial Hint="List possible and partial compatible codepages." Caption="Any possible"/>
+        <actListCompatible Hint="List only fully compatible codepages." Caption="Only compatible"/>
+        <actCodepageFilter Hint="Filter the codepages list." Caption="Codepage Filter"/>
       </alMain>
       <pFileList>
         <pFileListLabel>

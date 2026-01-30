@@ -328,18 +328,21 @@ object fMain: TfMain
     end
     object actListAll: TAction
       Category = 'ViewMode'
-      Caption = 'All codepages'
+      Caption = 'All known'
       Hint = 'List all known codepages.'
+      OnExecute = actListAllExecute
     end
-    object actListPotential: TAction
+    object actListPartial: TAction
       Category = 'ViewMode'
-      Caption = 'Possible codepages'
-      Hint = 'List possible partial codepages.'
+      Caption = 'Any possible'
+      Hint = 'List partially compatible codepages.'
+      OnExecute = actListPartialExecute
     end
-    object actListGood: TAction
+    object actListCompatible: TAction
       Category = 'ViewMode'
-      Caption = 'Compatible codepages'
-      Hint = 'List only compatible codepages.'
+      Caption = 'Only compatible'
+      Hint = 'List only fully compatible codepages.'
+      OnExecute = actListCompatibleExecute
     end
     object actCodepageFilter: TAction
       Category = 'ViewMode'
@@ -368,10 +371,10 @@ object fMain: TfMain
     Left = 431
     Top = 156
     object miListGood: TMenuItem
-      Action = actListGood
+      Action = actListCompatible
     end
     object miListPotential: TMenuItem
-      Action = actListPotential
+      Action = actListPartial
     end
     object miListAll: TMenuItem
       Action = actListAll

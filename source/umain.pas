@@ -21,6 +21,8 @@ uses
 
 type
 
+  TCodepageFilter = (cpfAll, cpfPartial, cpfComplete);
+
   { TfMain }
 
   TfMain = class(TMultiAppForm)
@@ -29,8 +31,8 @@ type
       actDebugLog: TAction;
       actFileClose: TAction;
       actCodepageFilter: TAction;
-      actListGood: TAction;
-      actListPotential: TAction;
+      actListCompatible: TAction;
+      actListPartial: TAction;
       actListAll: TAction;
       actOnlineUpdate: TAction;
       actPreferences: TAction;
@@ -71,16 +73,21 @@ type
     procedure actFileCloseUpdate(Sender: TObject);
     procedure actFileExportUpdate(Sender: TObject);
     procedure actFileOpenExecute(Sender: TObject);
+    procedure actListAllExecute(Sender: TObject);
+    procedure actListCompatibleExecute(Sender: TObject);
+    procedure actListPartialExecute(Sender: TObject);
     procedure actOnlineUpdateExecute(Sender: TObject);
     procedure actPreferencesExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure lvFileListClick(Sender: TObject);
     procedure tAnimateTimer(Sender: TObject);
     private
+      FCodepageFilter: TCodepageFilter;
       lbViewCodePageLabel : TLabel;
       btnCodepageFilter : TToolButton;
       fWitch : TWitch;
       procedure PopulateCodePageList(Item : TWitchItem);
+      procedure SetCodepageFilter(AValue: TCodepageFilter);
     protected
       procedure FormSettingsLoad(Sender: TObject);
       procedure FormSettingsSave(Sender: TObject);
@@ -89,10 +96,13 @@ type
       procedure SetCodepageViewLabel;
       procedure UpdateMetaData;
       procedure UpdateStatusBar;
+      procedure UpdateFilterCheck;
     public
       procedure ApplyUserLanguage; override;
       procedure OpenFile(FileName : String; Select : boolean = False);
     published
+      property CodepageFilter : TCodepageFilter read FCodepageFilter write SetCodepageFilter;
+
   end;
 
 var
@@ -157,6 +167,27 @@ begin
   end;
 end;
 
+procedure TfMain.actListAllExecute(Sender: TObject);
+begin
+  CodepageFilter:=cpfAll;
+  UpdateFilterCheck;
+  UpdateMetaData;
+end;
+
+procedure TfMain.actListCompatibleExecute(Sender: TObject);
+begin
+  CodepageFilter:=cpfComplete;
+  UpdateFilterCheck;
+  UpdateMetaData;
+end;
+
+procedure TfMain.actListPartialExecute(Sender: TObject);
+begin
+  CodepageFilter:=cpfPartial;
+  UpdateFilterCheck;
+  UpdateMetaData;
+end;
+
 procedure TfMain.actOnlineUpdateExecute(Sender: TObject);
 begin
   UpdateCheck(True);
@@ -183,8 +214,8 @@ begin
   actPreferences.ImageIndex:=idxButtonPreferences;
   actOnlineUpdate.ImageIndex:=idxButtonUpdateCheck;
   actDebugLog.ImageIndex:=idxButtonDebugLog;
-  actListGood.ImageIndex:=idxButtonListViewFinished;
-  actListPotential.ImageIndex:=idxButtonListViewPartial;
+  actListCompatible.ImageIndex:=idxButtonListViewFinished;
+  actListPartial.ImageIndex:=idxButtonListViewPartial;
   actListAll.ImageIndex:=idxButtonListViewEmpty;
   actCodePageFilter.ImageIndex:=idxButtonListView;
 
@@ -196,12 +227,6 @@ begin
   btnCodepageFilter:=CreateToolButton(tbMain, actCodepageFilter);
   btnCodepageFilter.Style:=tbsButtonDrop;
   btnCodepageFilter.DropdownMenu:=pmListMode;
-
-  //btnCodepageFilter:=CreateToolButton(tbMain, tbsButtonDrop, 'btnCodepageFilter');
-  //btnCodepageFilter.Style:=tbsDropDown;
-  //btnCodepageFilter.DropdownMenu:=pmListMode;
-  //btnCodePageFilter.ImageIndex:=idxButtonListView;
-
   CreateToolButton(tbMain, tbsDivider, 'btnDivider2');
   CreateToolButton(tbMain, actPreferences);
   CreateToolButton(tbMain, actOnlineUpdate);
@@ -266,28 +291,63 @@ begin
   end;
 end;
 
-procedure TfMain.FormSettingsLoad(Sender: TObject);
+procedure TfMain.SetCodepageFilter(AValue: TCodepageFilter);
 begin
+  if FCodepageFilter=AValue then Exit;
+  FCodepageFilter:=AValue;
+end;
+
+procedure TfMain.FormSettingsLoad(Sender: TObject);
+var
+  S : String;
+begin
+  S:=Trim(Lowercase(GetConfig('Codepage_Filter', '')));
+  case S of
+    'complete' : FCodepageFilter:=cpfComplete;
+    'partial' : FCodepageFilter:=cpfPartial;
+  else
+    FCodepageFilter:=cpfAll;
+  end;
+  UpdateFilterCheck;
   SetApplicationIcons;
 end;
 
 procedure TfMain.FormSettingsSave(Sender: TObject);
+var
+  S: String;
 begin
-  SetConfig('Nothing', '1234');
+  case FCodepageFilter of
+    cpfComplete : S := 'Complete';
+    cpfPartial : S := 'Partial';
+    cpfAll : S := 'All';
+  end;
+  SetConfig('Codepage_Filter', S);
 end;
 
 procedure TfMain.WitchOnAnalyzed(Sender: TObject);
 var
   W : TWitchItem;
+  M : String;
 begin
   if not (Sender is TWitchItem) then Exit;
-
   W:=Sender as TWitchItem;
+  M:='Analyzed ';
   case W.Encoding of
-    weNone : W.ListItem.ImageIndex:=idxFileTypeFilePlainGray;
-    weCodePage : W.ListItem.ImageIndex:=idxFileTypeFilePlainBlue;
-    weUnicode : W.ListItem.ImageIndex:=idxFileTypeFilePlainGreen;
+    weNone : begin
+      Cat(M, 'ASCII');
+      W.ListItem.ImageIndex:=idxFileTypeFilePlainGray;
+    end;
+    weCodePage : begin
+      Cat(M, 'Codepage');
+      W.ListItem.ImageIndex:=idxFileTypeFilePlainBlue;
+    end;
+    weUnicode : begin
+      Cat(M, 'Unicode');
+      W.ListItem.ImageIndex:=idxFileTypeFilePlainGreen;
+    end;
   end;
+  Cat(M, ' file "'+W.DisplayName+'"');
+  LogMessage(vbVerbose, M);
 
   if W.ListItem = lvFileList.Selected then
     UpdateMetaData;
@@ -349,6 +409,13 @@ begin
   end;
 end;
 
+procedure TfMain.UpdateFilterCheck;
+begin
+  actListCompatible.Checked:=FCodepageFilter=cpfComplete;
+  actListPartial.Checked:=FCodepageFilter=cpfPartial;
+  actListAll.Checked:=FCodepageFilter=cpfAll;
+end;
+
 procedure TfMain.ApplyUserLanguage;
 begin
   inherited ApplyUserLanguage;
@@ -363,19 +430,23 @@ begin
 
   I:=fWitch.Find(FileName);
   if I <> -1 then begin
+    LogMessage(vbVerbose, 'Open file "' + FileName + '" already open.');
     fWitch.Select(I);
     Exit;
   end;
 
   I := fWitch.Add(FileName, lvFileList.Items.Add);
-  if I = -1 then Exit;
+  if I = -1 then begin
+    LogMessage(vbVerbose, 'Open file "' + FileName + '" Failed!');
+    Exit;
+  end;
+  LogMessage(vbVerbose, 'Opened file "' + FileName + '"');
   if Select then begin
     fWitch.Select(I);
     UpdateMetaData;
   end;
 
 end;
-
 
 
 end.
