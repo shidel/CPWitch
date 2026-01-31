@@ -112,6 +112,8 @@ object fMain: TfMain
       ScrollBars = ssAutoBoth
       ShowColumnHeaders = False
       SmallImagesWidth = 24
+      SortColumn = 0
+      SortType = stText
       TabOrder = 1
       ViewStyle = vsReport
       OnClick = lvFileListClick

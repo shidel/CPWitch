@@ -100,7 +100,7 @@ type
       procedure UpdateFilterCheck;
     public
       procedure ApplyUserLanguage; override;
-      procedure OpenFile(FileName : String; Select : boolean = False);
+      procedure OpenFile(FileName : String; Select : boolean = False); overload;
     published
       property CodepageFilter : TCodepageFilter read FCodepageFilter write SetCodepageFilter;
 
@@ -163,8 +163,8 @@ var
 begin
   dlgOpenFile.InitialDir:=UserWorkPath;
   if dlgOpenFile.Execute then begin
-     for I := 0 to dlgOpenFile.Files.Count - 1 do
-       OpenFile(dlgOpenFile.Files[I], I=0); // I = dlgOpenFile.Files.Count - 1);
+    for I := dlgOpenFile.Files.Count - 1 downto 0 do
+      OpenFile(dlgOpenFile.Files[I], I=0);
   end;
 end;
 
@@ -252,7 +252,7 @@ procedure TfMain.FormDropFiles(Sender: TObject; const FileNames: array of string
 var
   I : Integer;
 begin
-  for I := 0 to High(FileNames) do
+  for I := High(FileNames) downto 0 do
     OpenFile(FileNames[I], I=0);
 end;
 
@@ -435,7 +435,18 @@ end;
 procedure TfMain.OpenFile(FileName: String; Select: boolean);
 var
   I : integer;
+  F : TStringList;
 begin
+  if DirectoryExists(FileName) then begin
+    F := TStringList.Create;
+    DirScan(IncludeTrailingPathDelimiter(FileName) + WildCard, F,
+      [dsFiles, dsRecursive]);
+    for I := F.Count - 1 downto 0 do
+      OpenFile(IncludeTrailingPathDelimiter(FileName) + F[I], I=0);
+    FreeAndNil(F);
+    Exit;
+  end;
+
   UserWorkPath:=IncludeTrailingPathDelimiter(ExtractFilePath(FileName));
 
   I:=fWitch.Find(FileName);
@@ -445,14 +456,19 @@ begin
     Exit;
   end;
 
-  I := fWitch.Add(FileName, lvFileList.Items.Add);
-  if I = -1 then begin
+  try
+    I := fWitch.Add(FileName, lvFileList.Items.Add);
+  except
     LogMessage(vbVerbose, 'Open file "' + FileName + '" Failed!');
     Exit;
   end;
+
   LogMessage(vbVerbose, 'Opened file "' + FileName + '"');
   if Select then begin
+    lvFileList.Sort;
     fWitch.Select(I);
+    fWitch.Items[I].ListItem.MakeVisible(False);
+    lvFileList.SetFocus;
     UpdateMetaData;
   end;
 

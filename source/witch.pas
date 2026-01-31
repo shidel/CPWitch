@@ -15,7 +15,7 @@ interface
 
 uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
-  Classes, SysUtils, ComCtrls,
+  Classes, SysUtils, Controls, ComCtrls,
   Version, PasExt, Icons, MultiApp, Codepages;
   { other forms }
 
@@ -249,12 +249,14 @@ var
 begin
   ClearData;
   if AFileName = '' then Exit;
-  E:=FileLoad(AFileName, FData);
-  if E <> 0 then begin
-    ClearData;
-    FileErrorDialog(AFileName, E, false);
-    raise Exception.Create('file read error');
-  end;
+  repeat
+    E:=FileLoad(AFileName, FData);
+    if E <> 0 then begin
+      ClearData;
+      if FileErrorDialog(AFileName, E, false) <> mrRetry then
+        raise Exception.Create('file read error');
+    end;
+  until E=0;
   FFileName:=AFileName;
 end;
 
