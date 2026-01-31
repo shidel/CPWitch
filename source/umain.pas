@@ -79,6 +79,7 @@ type
     procedure actOnlineUpdateExecute(Sender: TObject);
     procedure actPreferencesExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
     procedure lvFileListClick(Sender: TObject);
     procedure tAnimateTimer(Sender: TObject);
     private
@@ -244,6 +245,15 @@ begin
 
   mUnicodeText.Clear;
   imgCodepage.Height:=1;
+end;
+
+procedure TfMain.FormDropFiles(Sender: TObject; const FileNames: array of string
+  );
+var
+  I : Integer;
+begin
+  for I := 0 to High(FileNames) do
+    OpenFile(FileNames[I], I=0);
 end;
 
 procedure TfMain.lvFileListClick(Sender: TObject);
