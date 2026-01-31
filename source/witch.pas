@@ -246,11 +246,20 @@ end;
 procedure TWitchItem.LoadFile(AFileName : String);
 var
   E : integer;
+  S, N: UTF8String;
+  V: TArrayOfInt32;
+  B, C : Boolean;
 begin
   ClearData;
   if AFileName = '' then Exit;
   repeat
     E:=FileLoad(AFileName, FData);
+    S:=UTF8String(PasExt.ToString(FData));
+    B:=UTF8ToValues(S, V);
+    LogMessage(vbVerbose, 'UTF8 to Values: ' + BoolStr(B));
+    C:=ValuesToUTF8(V, N);
+    LogMessage(vbVerbose, 'Values to UTF8: ' + BoolStr(C) + ',' + BoolStr(S=N));
+
     if E <> 0 then begin
       ClearData;
       if FileErrorDialog(AFileName, E, false) <> mrRetry then
