@@ -4,6 +4,12 @@
    All rights reserved.
 }
 
+{ TODO 0 -cDevel Remove need for an external codepages.ini file. }
+
+{ This unit requires an external data file called codepages.ini to be stored
+  in the "AppDataPath" set by the PasExt Unit. Eventually, that data will likely
+  be embedded into this unit to remove the requirement of the external file. }
+
 unit CodePages;
 
 {$mode ObjFPC}{$H+}
