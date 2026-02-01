@@ -83,12 +83,22 @@ type
     property Converted : RawByteString read FConverted;
   end;
 
+
+  { Converts a UTF-8 String into an array of its character values. Returns True
+    if there were no encoding errors in the string. If there were encoding
+    errors, it will return False and still try to convert the the String giving
+    those characters a value of -1. }
   function UTF8ToValues(const UTF : UTF8String; out Values : TArrayOfInt32) : boolean;
-  function ValuesToUTF8(const Values : TArrayOfInt32; out UTF : UTF8String) : boolean;
+
+  { Converts an array of character values into an UTF-8 String. If there were
+    no values outside of range 0 - 0x10ffff, it will return True. Otherwise,
+    it will return False while assigning such characters teh BadChar value. }
+  function ValuesToUTF8(const Values : TArrayOfInt32; out UTF : UTF8String;
+    BadChar : Int32 = 0 ) : boolean;
 
 implementation
 
-{ UTF8 Codepoint }
+{ UTF8 Codepoint and Character Value conversion }
 
 const
   CodePointMasks : array[1..4] of record A, O : byte end = (
@@ -175,13 +185,16 @@ begin
   SetLength(Values, IV);
 end;
 
-function ValuesToUTF8(const Values: TArrayOfInt32; out UTF: UTF8String): boolean;
+function ValuesToUTF8(const Values: TArrayOfInt32; out UTF: UTF8String;
+  BadChar : Int32 = 0 ): boolean;
 var
   IU, IV, CP, CL : integer;
   CV : Int32;
   A, O : Byte;
   S : RawByteString;
 begin
+  if (BadChar < 0) or (BadChar > $10ffff) then
+    BadChar:=0;
   Result:=True;
   IU:=0;
   S:='';
@@ -191,7 +204,7 @@ begin
     if (CV < 0) or (CV > $10ffff) then begin
       // Previous Error. Or, Too big.
       Result:=False;
-      CV:=0;
+      CV:=BadChar;
     end;
     if CV > $ffff then
       CL := 4
@@ -223,6 +236,7 @@ begin
   SetLength(S, IU);
   UTF:=UTF8String(S);
 end;
+
 { DOS Codepage }
 
 const
