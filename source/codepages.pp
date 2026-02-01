@@ -83,7 +83,6 @@ type
     property Converted : RawByteString read FConverted;
   end;
 
-
   { Converts a UTF-8 String into an array of its character values. Returns True
     if there were no encoding errors in the string. If there were encoding
     errors, it will return False and still try to convert the the String giving
@@ -108,6 +107,7 @@ const
     (A:$0f; O:$f0)
   );
 
+{ TODO 5 -cDevel Restrict U+D800–U+DFFF from UTF-8, they are reserved for UTF-16 }
 function UTF8ToValues(const UTF: UTF8String; out Values: TArrayOfInt32): boolean;
 var
   IU, IV, CP, L, CL, CM : integer;
@@ -240,28 +240,30 @@ end;
 { DOS Codepage }
 
 const
-  cpeExcluded = -1; // Character specifically excluded from Codepage map.
-  cpeInherited = -2; // Characer inherited from Codepage 437. If Codepage 437,
+// cpeExcluded = -1; // Character specifically excluded from Codepage map.
+   cpeInherited = -2; // Characer inherited from Codepage 437. If Codepage 437,
                      // then is same as ASCII value.
-  cpeUnknown = -3; // Character Unicode to Codepage mapping not know at present
-  cpeError = -4; // Mostly for functions that need to know to ignore the result.
+// cpeUnknown = -3; // Character Unicode to Codepage mapping not know at present
+   cpeError = -4; // Mostly for functions that need to know to ignore the result.
 
 type
   TCodePageMap = record
     CodePage : integer;
-    Map : TArrayOfInt64;
+    Map : TArrayOfInt32;
   end;
   TCodePageMaps = array of TCodePageMap;
   TUnmappableChar = record
-    Value : Int64;
-    Data : TArrayOfInt64;
+    Value : Int32;
+    Data : TArrayOfInt32;
   end;
-  TUnmappableChars = array of TUnmappableChar;
+  TUnmappable = array of TUnmappableChar;
 
 var
-  EnMap : Integer;
-  Maps : TCodePageMaps;
-  UnMap : TUnmappableChars;
+  EnMap : Integer;         // Default English Codepage to Unicode Map
+  Maps : TCodePageMaps;    // All codepage Maps
+  UnMap : TUnmappable;     // Codepage character which do not exist in Unicode
+  Mapper : TBinaryTree;    // Binary Tree for Unicode to Codepage Lookup
+
 
 function FindMap(CodePage : Integer) : Integer;
 var
@@ -292,7 +294,7 @@ end;
 procedure ProcessNoMap(L : TStringList);
 var
   C, I, E : Integer;
-  V : Int64;
+  V : Int32;
   TS : RawByteString;
 begin
   C := 0;
@@ -323,7 +325,7 @@ var
   INI : TInifile;
   S, L : TStringList;
   I, J, E, C, T, K, D, CC : integer;
-  V : Int64;
+  V : Int32;
   TS, CN : RawByteString;
 begin
   Maps:=[];
@@ -393,10 +395,117 @@ begin
   if Assigned(INI) then FreeAndNil(INI);
 end;
 
+function SubTree(S : String) : TBinaryTree;
+var
+  SL : TStringList;
+  B : TBinaryTree;
+
+  procedure AddNode(L, H : integer);
+  var
+    M : Integer;
+    S, T : String;
+    V, E : Integer;
+  begin
+    if H < L then Exit;
+    M := L + (H - L) div 2;
+
+    S:=SL[M];
+    T:=PopDelim(S, COMMA);
+
+    Val(S, V, E);
+    IgnoreParameter(E);
+
+    B.Add(T, V);
+
+    if L = H then Exit;
+    if L < M then AddNode(L, M-1);
+    if M < H then AddNode(M + 1, H);
+  end;
+
+begin
+  SL :=TStringList.Create;
+  Explode(S, SL, SEMICOLON);
+  SL.Sort;
+  B:=TBinaryTree.Create;
+  AddNode(0, SL.Count - 1);
+  SL.Free;
+  Result:=B;
+end;
+
+procedure CreateMapper;
+var
+  SL : TStringList;
+  I, J : integer;
+  V, N : Int32;
+  T, S : String;
+
+  procedure AddNode(L, H : Integer);
+  var
+    M : Integer;
+    X : TBinaryTreeNode;
+  begin
+    if H < L then Exit;
+    M := L + (H - L) div 2;
+    S := SL[M];
+    T:=PopDelim(S, EQUAL);
+    Val(T, N, J);
+    X:=Mapper.Add(N);
+    X.Item:=SubTree(S);
+    if L = H then Exit;
+    if L < M then AddNode(L, M-1);
+    if M < H then AddNode(M + 1, H);
+  end;
+
+begin
+  SL := TStringList.Create;
+  // Add all chars from all codepage maps as separate entries in TStringList
+  for I := 0 to High(Maps) do
+    for J := $80 to High(Maps[I].Map) do begin
+      V:=Maps[I].Map[J];
+      if V < 0 then begin
+        // Potentially, this should only be done for cpeInherited and other
+        // values skipped.
+        V:=Maps[EnMap].Map[J];
+        if V < 0 then V:=J;
+      end;
+      SL.Add(IntToStr(V) + // Unicode Value 0 - 1,114,111
+        EQUAL + IntToStr(Maps[I].CodePage) + COMMA + // Codepage Number
+        IntToStr(J) ); // ASCI Value
+    end;
+  SL.Sort;
+  // Combine Unicode character data
+  I := 0;
+  V := -1;
+  While I < SL.Count do begin
+    S := SL[I];
+    T:=PopDelim(S, EQUAL);
+    Val(T, N, J);
+    if N = V then begin
+      SL[I-1]:=SL[I-1] + SEMICOLON + S;
+      SL.Delete(I);
+    end else begin
+      V:=N;
+      Inc(I);
+    end;
+  end;
+  Mapper := TBinaryTree.Create;
+  AddNode(0, SL.Count - 1);
+  SL.Free;
+end;
+
 procedure Initialize;
 begin
+  Mapper:=nil;
   LoadMappingData;
-  EnMap:=FindMap(437); // en_US
+  EnMap:=FindMap(437); // Default CP437 (en_US) index in Maps array.
+  if EnMap <> -1 then begin
+    CreateMapper;
+  end;
+end;
+
+procedure Finalize;
+begin
+  if Assigned(Mapper) then FreeAndNil(Mapper);
 end;
 
 function CodePageList: TArrayOfInteger;
@@ -501,6 +610,10 @@ end;
 initialization
 
   Initialize;
+
+finalization
+
+  Finalize;
 
 end.
 
