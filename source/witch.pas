@@ -143,6 +143,7 @@ end;
 procedure TWitchAnalyzeThread.Execute;
 var
   I : integer;
+  V : TArrayOfInt32;
 begin
   If Not (Assigned(FWitch) and Assigned(FWitchItem)) then Exit;
   FEncoding:=weNone;
@@ -158,8 +159,10 @@ begin
   {$ENDIF}
   // Now if there are, see if it is Codepage or Unicode
   if FEncoding <> weNone then begin
-    if IsUnicode(FText) then
-      FEncoding:=weUnicode;
+    if UTF8ToValues(FText, V) then begin
+      if Length(V) <> Length(FText) then
+        FEncoding:=weUnicode;
+    end;
   end;
 
   Synchronize(@Completed);
@@ -246,20 +249,11 @@ end;
 procedure TWitchItem.LoadFile(AFileName : String);
 var
   E : integer;
-  S, N: UTF8String;
-  V: TArrayOfInt32;
-  B, C : Boolean;
 begin
   ClearData;
   if AFileName = '' then Exit;
   repeat
     E:=FileLoad(AFileName, FData);
-    S:=UTF8String(PasExt.ToString(FData));
-    B:=UTF8ToValues(S, V);
-    LogMessage(vbVerbose, 'UTF8 to Values: ' + BoolStr(B));
-    C:=ValuesToUTF8(V, N);
-    LogMessage(vbVerbose, 'Values to UTF8: ' + BoolStr(C) + ',' + BoolStr(S=N));
-
     if E <> 0 then begin
       ClearData;
       if FileErrorDialog(AFileName, E, false) <> mrRetry then

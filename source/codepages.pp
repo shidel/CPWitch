@@ -83,161 +83,7 @@ type
     property Converted : RawByteString read FConverted;
   end;
 
-  { Converts a UTF-8 String into an array of its character values. Returns True
-    if there were no encoding errors in the string. If there were encoding
-    errors, it will return False and still try to convert the the String giving
-    those characters a value of -1. }
-  function UTF8ToValues(const UTF : UTF8String; out Values : TArrayOfInt32) : boolean;
-
-  { Converts an array of character values into an UTF-8 String. If there were
-    no values outside of range 0 - 0x10ffff, it will return True. Otherwise,
-    it will return False while assigning such characters teh BadChar value. }
-  function ValuesToUTF8(const Values : TArrayOfInt32; out UTF : UTF8String;
-    BadChar : Int32 = 0 ) : boolean;
-
 implementation
-
-{ UTF8 Codepoint and Character Value conversion }
-
-const
-  CodePointMasks : array[1..4] of record A, O : byte end = (
-    (A:$7f; O:$80),
-    (A:$1f; O:$c0),
-    (A:$0f; O:$e0),
-    (A:$0f; O:$f0)
-  );
-
-{ TODO 5 -cDevel Restrict U+D800–U+DFFF from UTF-8, they are reserved for UTF-16 }
-function UTF8ToValues(const UTF: UTF8String; out Values: TArrayOfInt32): boolean;
-var
-  IU, IV, CP, L, CL, CM : integer;
-  CV, CT : Int32;
-  S : RawByteString;
-begin
-  Result:=True;
-  IU:=1;
-  IV:=0;
-  Values:=[];
-  S:=RawByteString(UTF);
-  L := Length(S);
-  SetLength(Values, L);
-  while IU <= L do begin
-    CV:=Byte(S[IU]);
-    if (CV and $80) = 0 then begin // High bit not set, standard ASCII
-      {
-      if CV = $7f then begin
-        // It is likely followed by value x2302 (226 140 130).
-        // Browsers either ignore it or display a Box. Then, the x2302 "house"
-        // symbol sometimes follows. Technically it is a "Delete" Control
-        // Character.
-        CV:=$7f;
-      end;
-      }
-      Values[IV]:=CV;
-      Inc(IU);
-      Inc(IV);
-      Continue;
-    end;
-    // Number of set bits + 0 equals number of total bytes.
-    if (CV and $f0) = $f0 then       // 1111????, technically 0xf8 and 11110???
-      CL := 4
-    else if (CV and $f0) = $e0 then  // 1110????
-      CL := 3
-    else if (CV and $e0) = $c0 then  // 110?????
-      CL := 2
-    else begin                       // 10??????
-      // I dont think this is legal/possible for the first character.
-      // So, treat it as an encoding error. Otherwise, mask would be $3f.
-      // Values[IV]:=CV and $3f;
-      Values[IV]:=-1;
-      Inc(IU);
-      Inc(IV);
-      Result:=False;
-      Continue;
-    end;
-    CV:=0;
-    CP:=0;
-    CM:=CodePointMasks[CL].A;
-    if CL + IU > L then begin
-      // String is not long enough.
-      CL:=1;
-      CV:=-1;
-      Result:=False;
-    end else
-      while CP < CL do begin
-        CT:=Byte(S[IU+CP]);
-        if (CP > 0) and (CT and $c0 <> $80) then begin
-          // After the first byte, all bytes are masked with 10??????
-          // So if the mask is missing, then encoding error.
-          CV:=-1;
-          CL:=1;
-          Result:=False;
-          Break;
-        end;
-        CV:=(CV shl 6) + (CT and CM);
-        CM := $3f;
-        Inc(CP);
-      end;
-    Values[IV]:=CV;
-    Inc(IV);
-    Inc(IU, CL);
-  end;
-  SetLength(Values, IV);
-end;
-
-function ValuesToUTF8(const Values: TArrayOfInt32; out UTF: UTF8String;
-  BadChar : Int32 = 0 ): boolean;
-var
-  IU, IV, CP, CL : integer;
-  CV : Int32;
-  A, O : Byte;
-  S : RawByteString;
-begin
-  if (BadChar < 0) or (BadChar > $10ffff) then
-    BadChar:=0;
-  Result:=True;
-  IU:=0;
-  S:='';
-  SetLength(S, Length(Values) * 4);
-  for IV := 0 to High(Values) do begin
-    CV:=Values[IV];
-    if (CV < 0) or (CV > $10ffff) then begin
-      // Previous Error. Or, Too big.
-      Result:=False;
-      CV:=BadChar;
-    end;
-    if CV > $ffff then
-      CL := 4
-    else
-    if CV > $07ff then
-      CL := 3
-    else
-    if CV > $007f then
-      CL := 2
-    else begin
-      S[IU+1]:=Char(CV);
-      Inc(IU);
-      Continue;
-    end;
-    CP := CL;
-    A := $3f;
-    O := $80;
-    while CP > 0 do begin
-      if CP = 1 then begin
-        A := CodePointMasks[CL].A;
-        O := CodePointMasks[CL].O;
-      end;
-      S[IU+CP] := Char((CV and A) or O);
-      CV := CV shr 6;
-      Dec(CP);
-    end;
-    Inc(IU, CL);
-  end;
-  SetLength(S, IU);
-  UTF:=UTF8String(S);
-end;
-
-{ DOS Codepage }
 
 const
 // cpeExcluded = -1; // Character specifically excluded from Codepage map.
@@ -263,7 +109,6 @@ var
   Maps : TCodePageMaps;    // All codepage Maps
   UnMap : TUnmappable;     // Codepage character which do not exist in Unicode
   Mapper : TBinaryTree;    // Binary Tree for Unicode to Codepage Lookup
-
 
 function FindMap(CodePage : Integer) : Integer;
 var
@@ -517,7 +362,6 @@ begin
   for I := 0 to High(Result) do
     Result[I]:=Maps[I].CodePage;
 end;
-
 
 { TCodepageConverter }
 
