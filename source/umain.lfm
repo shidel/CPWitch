@@ -293,17 +293,17 @@ object fMain: TfMain
   object alMain: TActionList
     Left = 379
     Top = 156
-    object actFileOpen: TAction
+    object actOpen: TAction
       Category = 'File'
       Caption = 'File Open...'
       Hint = 'Open a text file.'
-      OnExecute = actFileOpenExecute
+      OnExecute = actOpenExecute
     end
-    object actFileExport: TAction
+    object actExportCodepage: TAction
       Category = 'File'
-      Caption = 'File Export...'
+      Caption = 'Export Codepage...'
       Hint = 'Export a text file encoded in codepage format.'
-      OnUpdate = actFileExportUpdate
+      OnUpdate = actExportCodepageUpdate
     end
     object actPreferences: TAction
       Category = 'Application'
@@ -322,13 +322,6 @@ object fMain: TfMain
       Caption = 'Debug Log...'
       Hint = 'View the debugging log.'
       OnExecute = actDebugLogExecute
-    end
-    object actFileClose: TAction
-      Category = 'File'
-      Caption = 'File Close'
-      Hint = 'Close the current text file.'
-      OnExecute = actFileCloseExecute
-      OnUpdate = actFileCloseUpdate
     end
     object actListAll: TAction
       Category = 'ViewMode'
@@ -353,6 +346,19 @@ object fMain: TfMain
       Caption = 'Codepage Filter'
       Hint = 'Filter the codepages list.'
       OnExecute = actCodepageFilterExecute
+    end
+    object actExportUnicode: TAction
+      Category = 'File'
+      Caption = 'Export UTF-8...'
+      Hint = 'Export a text file encoded in UTF-8 format.'
+      OnUpdate = actExportUnicodeUpdate
+    end
+    object actClose: TAction
+      Category = 'File'
+      Caption = 'Close File'
+      Hint = 'Close the current text file.'
+      OnExecute = actCloseExecute
+      OnUpdate = actCloseUpdate
     end
   end
   object mmMain: TMainMenu

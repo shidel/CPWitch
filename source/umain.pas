@@ -26,10 +26,11 @@ type
   { TfMain }
 
   TfMain = class(TMultiAppForm)
-      actFileOpen: TAction;
-      actFileExport: TAction;
+      actExportUnicode: TAction;
+      actOpen: TAction;
+      actExportCodepage: TAction;
       actDebugLog: TAction;
-      actFileClose: TAction;
+      actClose: TAction;
       actCodepageFilter: TAction;
       actListCompatible: TAction;
       actListPartial: TAction;
@@ -69,10 +70,11 @@ type
       tAnimate: TTimer;
     procedure actCodepageFilterExecute(Sender: TObject);
     procedure actDebugLogExecute(Sender: TObject);
-    procedure actFileCloseExecute(Sender: TObject);
-    procedure actFileCloseUpdate(Sender: TObject);
-    procedure actFileExportUpdate(Sender: TObject);
-    procedure actFileOpenExecute(Sender: TObject);
+    procedure actCloseExecute(Sender: TObject);
+    procedure actCloseUpdate(Sender: TObject);
+    procedure actExportCodepageUpdate(Sender: TObject);
+    procedure actExportUnicodeUpdate(Sender: TObject);
+    procedure actOpenExecute(Sender: TObject);
     procedure actListAllExecute(Sender: TObject);
     procedure actListCompatibleExecute(Sender: TObject);
     procedure actListPartialExecute(Sender: TObject);
@@ -85,6 +87,7 @@ type
     private
       FCodepageFilter: TCodepageFilter;
       lbViewCodePageLabel : TLabel;
+      btnExportFile : TToolButton;
       btnCodepageFilter : TToolButton;
       fWitch : TWitch;
       procedure PopulateCodePageList(Item : TWitchItem);
@@ -97,6 +100,7 @@ type
       procedure SetCodepageViewLabel;
       procedure UpdateMetaData;
       procedure UpdateStatusBar;
+      procedure UpdateButtons;
       procedure UpdateFilterCheck;
     public
       procedure ApplyUserLanguage; override;
@@ -126,7 +130,7 @@ begin
     btnCodepageFilter.CheckMenuDropdown;
 end;
 
-procedure TfMain.actFileCloseExecute(Sender: TObject);
+procedure TfMain.actCloseExecute(Sender: TObject);
 var
   N : Integer;
 begin
@@ -142,22 +146,29 @@ begin
   UpdateMetaData;
 end;
 
-procedure TfMain.actFileCloseUpdate(Sender: TObject);
+procedure TfMain.actCloseUpdate(Sender: TObject);
 begin
- // actFileClose.Enabled:=Assigned(lvFileList.Selected);
-  actFileClose.Enabled:=
+ // actClose.Enabled:=Assigned(lvFileList.Selected);
+  actClose.Enabled:=
   Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data) and
   TWitchItem(lvFileList.Selected.Data).Analyzed;
 end;
 
-procedure TfMain.actFileExportUpdate(Sender: TObject);
+procedure TfMain.actExportCodepageUpdate(Sender: TObject);
 begin
-  actFileExport.Enabled:=Assigned(lvCodePageList.Selected) and
+  actExportCodepage.Enabled:=Assigned(lvCodePageList.Selected) and
   Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data) and
   TWitchItem(lvFileList.Selected.Data).Analyzed;
 end;
 
-procedure TfMain.actFileOpenExecute(Sender: TObject);
+procedure TfMain.actExportUnicodeUpdate(Sender: TObject);
+begin
+  actExportUnicode.Enabled:=Assigned(lvCodePageList.Selected) and
+  Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data) and
+  TWitchItem(lvFileList.Selected.Data).Analyzed;
+end;
+
+procedure TfMain.actOpenExecute(Sender: TObject);
 var
   I : integer;
 begin
@@ -209,9 +220,10 @@ begin
   SetApplicationIcons;
 
   // Assign Images to Actions
-  actFileOpen.ImageIndex:=idxButtonFileOpen;
-  actFileExport.ImageIndex:=idxButtonFileExport;
-  actFileClose.ImageIndex:=idxButtonFileClose;
+  actOpen.ImageIndex:=idxButtonFileOpen;
+  actExportUnicode.ImageIndex:=idxButtonFileExportGreen;
+  actExportCodepage.ImageIndex:=idxButtonFileExport;
+  actClose.ImageIndex:=idxButtonFileClose;
   actPreferences.ImageIndex:=idxButtonPreferences;
   actOnlineUpdate.ImageIndex:=idxButtonUpdateCheck;
   actDebugLog.ImageIndex:=idxButtonDebugLog;
@@ -221,9 +233,9 @@ begin
   actCodePageFilter.ImageIndex:=idxButtonListView;
 
   // Add Main ToolBar Buttons
-  CreateToolButton(tbMain, actFileOpen);
-  CreateToolButton(tbMain, actFileExport);
-  CreateToolButton(tbMain, actFileClose);
+  CreateToolButton(tbMain, actOpen);
+  btnExportFile:=CreateToolButton(tbMain, actExportCodepage);
+  CreateToolButton(tbMain, actClose);
   CreateToolButton(tbMain, tbsDivider, 'btnDivider1');
   btnCodepageFilter:=CreateToolButton(tbMain, actCodepageFilter);
   btnCodepageFilter.Style:=tbsButtonDrop;
@@ -396,6 +408,7 @@ begin
     PopulateCodePageList(TWitchItem(lvFileList.Selected.Data));
   end;
   lvCodePageList.EndUpdate;
+  UpdateButtons;
   UpdateStatusBar;
 end;
 
@@ -423,6 +436,23 @@ begin
   end else begin
     statBar.Panels[0].Text:=GetTranslation(K+'Processing/Caption', 'Processing');
   end;
+end;
+
+procedure TfMain.UpdateButtons;
+begin
+  if Assigned(lvFileList.Selected) then begin
+    case TWitchItem(lvFileList.Selected.Data).Encoding of
+      weNone, weCodepage : begin
+        actClose.ImageIndex:=idxButtonFileClose;
+        btnExportFile.Action:=actExportUnicode;
+      end;
+      weUnicode: begin
+        actClose.ImageIndex:=idxButtonFileCloseGreen;
+        btnExportFile.Action:=actExportCodepage;
+      end;
+    end;
+  end;
+
 end;
 
 procedure TfMain.UpdateFilterCheck;
