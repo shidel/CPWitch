@@ -157,7 +157,7 @@ begin
   {$ELSE}
     end;
   {$ENDIF}
-  // Now if there are, see if it is Codepage or Unicode
+  // Now if there are, see if it is Codepage or UTF-8.
   if FEncoding <> weNone then begin
     if UTF8ToValues(FText, V) then begin
       if Length(V) <> Length(FText) then

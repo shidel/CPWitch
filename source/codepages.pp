@@ -27,10 +27,14 @@ uses
 
 type
   TCodePageResult = record
-    Bytes : integer;
-    Unicode : integer;
-    Converted : integer;
+    Codepage : integer;       // Specific Codepage.
+    Characters : integer;     // total number of characters
+    ASCII : integer;          // ASCII < 0x80
+    Unicode : integer;        // Unicode character count
+    Converted : integer;      // Number of characters supported in conversion
+    Compatible : integer;     // percentage of compatibility
   end;
+  TCodePageResults = array of TCodePageResult;
 
   { TCodepageConverter }
 
@@ -89,6 +93,19 @@ type
     property Converted : RawByteString read FConverted;
   end;
 
+  { TUTF8Anaylize }
+
+  TUTF8Anaylize = class
+  private
+    FValues : TArrayOfInt32;
+    FResults: TCodePageResults;
+  protected
+    procedure Analyze; overload;
+  public
+    constructor Create(const Data : TArrayOfByte); virtual;
+    property Results : TCodePageResults read FResults;
+  end;
+
 implementation
 
 const
@@ -114,7 +131,7 @@ var
   EnMap : Integer;         // Default English Codepage to Unicode Map
   Maps : TCodePageMaps;    // All codepage Maps
   UnMap : TUnmappable;     // Codepage character which do not exist in Unicode
-  Mapper : TBinaryTree;    // Binary Tree for Unicode to Codepage Lookup
+  AnalyzeMap : TBinaryTree;    // Binary Tree for Unicode to Codepage Lookup
 
 function FindMap(CodePage : Integer) : Integer;
 var
@@ -283,8 +300,9 @@ begin
   Result:=B;
 end;
 
-procedure CreateMapper;
+function CreateMapper(Inclusive : boolean = true) : TBinaryTree;
 var
+  R : TBinaryTree;
   SL : TStringList;
   I, J : integer;
   V, N : Int32;
@@ -300,7 +318,7 @@ var
     S := SL[M];
     T:=PopDelim(S, EQUAL);
     Val(T, N, J);
-    X:=Mapper.Add(N);
+    X:=R.Add(N);
     X.Item:=SubTree(S);
     if L = H then Exit;
     if L < M then AddNode(L, M-1);
@@ -314,6 +332,7 @@ begin
     for J := $80 to High(Maps[I].Map) do begin
       V:=Maps[I].Map[J];
       if V < 0 then begin
+        if not Inclusive then Continue;
         // Potentially, this should only be done for cpeInherited and other
         // values skipped.
         V:=Maps[EnMap].Map[J];
@@ -339,24 +358,25 @@ begin
       Inc(I);
     end;
   end;
-  Mapper := TBinaryTree.Create;
+  R := TBinaryTree.Create;
   AddNode(0, SL.Count - 1);
   SL.Free;
+  Result:=R;
 end;
 
 procedure Initialize;
 begin
-  Mapper:=nil;
+  AnalyzeMap:=nil;
   LoadMappingData;
   EnMap:=FindMap(437); // Default CP437 (en_US) index in Maps array.
   if EnMap <> -1 then begin
-    CreateMapper;
+    AnalyzeMap:=CreateMapper;
   end;
 end;
 
 procedure Finalize;
 begin
-  if Assigned(Mapper) then FreeAndNil(Mapper);
+  if Assigned(AnalyzeMap) then FreeAndNil(AnalyzeMap);
 end;
 
 function CodePageList: TArrayOfInteger;
@@ -400,9 +420,12 @@ end;
 procedure TCodepageConverter.Clear;
 begin
   FCodePage:=-1;
-  FResults.Bytes:=0;
+  FResults.Codepage:=FCodePage;
+  FResults.Characters:=0;
+  FResults.ASCII:=0;
   FResults.Converted:=0;
   FResults.Unicode:=0;
+  FResults.Compatible:=0;
 end;
 
 { TCodepageToUTF8 }
@@ -455,6 +478,56 @@ end;
 function TUTF8ToCodePage.Convert : boolean;
 begin
   Result:=False;
+end;
+
+{ TUTF8Anaylize }
+
+procedure TUTF8Anaylize.Analyze;
+var
+  R : TBinaryTree;
+  N, X : TBinaryTreeNode;
+  I : integer;
+  AC, UC, EC : integer;
+begin
+  R := TBinaryTree.Create;
+  AC:=0;
+  UC:=0;
+  EC:=0;
+  for I := 0 to High(FValues) do begin
+    if FValues[I] < $80 then
+      Inc(AC)
+    else begin
+      Inc(UC);
+      N := AnalyzeMap.Find(IntToStr(FValues[I]));
+      if not (Assigned(N) and Assigned(N.Item)) then
+        Inc(EC)
+      else begin
+        N:=TBinaryTree(N.Item).First;
+        if Not Assigned(N) then
+          Inc(EC)
+        else
+          while Assigned(N) do begin
+            X:=R.Find(N.UniqueID);
+            if Assigned(X) then
+              X.Value:=X.Value+1
+            else
+              R.Add(N.UniqueID,1);
+            N:=N.Next;
+          end;
+      end;
+    end;
+  end;
+  R.Free;
+end;
+
+constructor TUTF8Anaylize.Create(const Data: TArrayOfByte);
+begin
+  inherited Create;
+  UTF8ToValues(Data, FValues);
+  FResults:=[];
+  SetLength(FResults, Length(Maps));
+  if Assigned(AnalyzeMap) then
+    Analyze;
 end;
 
 initialization

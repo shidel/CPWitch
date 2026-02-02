@@ -284,12 +284,18 @@ var
 begin
   if not Assigned(Item) then Exit;
   if Item.Analyzed then begin
+    tAnimate.Enabled:=False;
     lvCodePageList.Enabled:=True;
     lvCodePageList.SmallImages:=ilPercentageColor;
     L:=lvCodePageList.Items.Add;
     K:=ComponentNamePath(lvCodePageList, Self, True);
-    L.Caption:=GetTranslation(K+'Analyzed/Caption', 'Analyzed');
-    tAnimate.Enabled:=False;
+    if Item.Encoding = weNone then begin;
+      L.Caption:=GetTranslation(K+'Any_Codepage/Caption', 'Any Codepage');
+      L.ImageIndex:=High(iconPercentageNames);
+    end else begin
+      L.Caption:=GetTranslation(K+'Analyzed/Caption', 'Analyzed');
+      L.ImageIndex:=0;
+    end;
   end else begin
     lvCodePageList.Enabled:=False;
     lvCodePageList.SmallImages:=ilWorkingColor;
