@@ -94,13 +94,15 @@ type
 
 implementation
 
+uses TaskMngr;
+
 {$DEFINE Slow_Analyze}
 
 type
 
   { TWitchAnalyzeThread }
 
-  TWitchAnalyzeThread=class(TThread)
+  TWitchAnalyzeThread=class(TThreadTask)
   private
     FEncoding: TWitchEncoding;
     FText: RawByteString;
@@ -146,6 +148,7 @@ var
   V : TArrayOfInt32;
 begin
   If Not (Assigned(FWitch) and Assigned(FWitchItem)) then Exit;
+
   FEncoding:=weNone;
   // Test for characters above ASCII 127
   for I := 1 to Length(FText) do
@@ -230,7 +233,7 @@ begin
     T.Witch:=FOwner;
     T.WitchItem:=Self;
     T.Text:=PasExt.ToString(FData);
-    T.Start;
+    QueueTask(T);
   end;
 
 end;
