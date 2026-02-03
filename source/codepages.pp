@@ -511,11 +511,8 @@ procedure TUTF8Analyze.Analyze;
 var
   R : TBinaryTree;
   N, X : TBinaryTreeNode;
-  I, J : integer;
+  I : integer;
   AC, UC, EC : integer;
-  T, S : String;
-  V, E : Integer;
-  SL : TStringList;
 begin
   R := TBinaryTree.Create;
   AC:=0;
@@ -558,46 +555,39 @@ begin
       end;
     end;
   end;
-  // Stick results in a TStringList for sorting by codepage
-  SL:=TStringList.Create;
-  N:=R.First;
-  while Assigned(N) do begin
-    SL.Add(ZeroPad(N.UniqueID, 10) + EQUAL + ZeroPad(N.Value, 12));
-    N:=N.Next;
-  end;
-  SL.Sort;
-  SetLength(FResults, SL.Count);
 
-  // Move to results array
+// Populate Result Array
+  SetLength(FResults, Length(Maps));
   for I := 0 to High(FResults) do begin
-    S := SL[I];
-    T := PopDelim(S, EQUAL);
-    Val(T, V, E);
-    IgnoreParameter(E);
-    FResults[I].Codepage:=V;
-    Val(S, V, E);
-    IgnoreParameter(E);
-    FResults[I].Converted:=V;
-    // General Stuff
+    FResults[I].Codepage:=Maps[I].CodePage;
     FResults[I].Characters := Length(FValues);
     FResults[I].ASCII := AC;
     FResults[I].Unicode := UC;
-    if (UC = 0) or  (FResults[I].Converted = UC) then
-      FResults[I].Compatible:=100
-    else begin
-      FResults[I].Compatible := (FResults[I].Converted) * 100 div UC;
-      // Cap unperfect match at 99%
-      if FResults[I].Compatible > 99 then
-        FResults[I].Compatible:=99;
+    X:=R.Find(IntToStr(Maps[I].CodePage));
+    if Assigned(X) then begin
+      FResults[I].Converted:=X.Value;
+      if (UC = 0) or  (FResults[I].Converted = UC) then
+        FResults[I].Compatible:=100
+      else begin
+        FResults[I].Compatible := (FResults[I].Converted) * 100 div UC;
+        // Cap unperfect match at 99%
+        if FResults[I].Compatible > 99 then
+          FResults[I].Compatible:=99
+        else
+        // Minimum umperfect match of 1%
+        if FResults[I].Compatible < 1 then
+          FResults[I].Compatible:=1;
+      end;
+    end else begin
+      FResults[I].Converted := 0;
+      FResults[I].Compatible := 0;
     end;
-
     {$IFDEF DEBUGGING}
     with FResults[I] do
       WriteLn(ZeroPad(I, 2), ': CP', Codepage, ', Converted ', Converted,
         ', Compatible ', Compatible, '%');
     {$ENDIF}
   end;
-  SL.Free;
   R.Free;
 end;
 

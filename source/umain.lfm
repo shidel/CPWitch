@@ -55,6 +55,7 @@ object fMain: TfMain
         Width = 100
       end    
       item
+        Alignment = taCenter
         Width = 50
       end    
       item
@@ -116,7 +117,7 @@ object fMain: TfMain
       SortType = stText
       TabOrder = 1
       ViewStyle = vsReport
-      OnClick = lvFileListClick
+      OnChange = lvFileListChange
     end
   end
   object spFilesCPs: TSplitter
@@ -176,6 +177,7 @@ object fMain: TfMain
       SmallImagesWidth = 20
       TabOrder = 1
       ViewStyle = vsReport
+      OnChange = lvCodepageListChange
     end
   end
   object spCPsViewers: TSplitter

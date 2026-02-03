@@ -184,6 +184,7 @@ end;
 
 procedure TWitchAnalyzeThread.Completed;
 begin
+  FWitchItem.FResults:=Results;
   FWitch.ThreadComplete(Self);
 end;
 

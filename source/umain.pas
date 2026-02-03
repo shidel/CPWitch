@@ -82,7 +82,10 @@ type
     procedure actPreferencesExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
-    procedure lvFileListClick(Sender: TObject);
+    procedure lvCodepageListChange(Sender: TObject; Item: TListItem;
+      Change: TItemChange);
+    procedure lvFileListChange(Sender: TObject; Item: TListItem;
+      Change: TItemChange);
     procedure tAnimateTimer(Sender: TObject);
     private
       FCodepageFilter: TCodepageFilter;
@@ -99,6 +102,7 @@ type
       procedure SetApplicationIcons;
       procedure SetCodepageViewLabel;
       procedure UpdateMetaData;
+      procedure UpdateCodepageList;
       procedure UpdateStatusBar;
       procedure UpdateButtons;
       procedure UpdateFilterCheck;
@@ -182,22 +186,16 @@ end;
 procedure TfMain.actListAllExecute(Sender: TObject);
 begin
   CodepageFilter:=cpfAll;
-  UpdateFilterCheck;
-  UpdateMetaData;
 end;
 
 procedure TfMain.actListCompatibleExecute(Sender: TObject);
 begin
   CodepageFilter:=cpfComplete;
-  UpdateFilterCheck;
-  UpdateMetaData;
 end;
 
 procedure TfMain.actListPartialExecute(Sender: TObject);
 begin
   CodepageFilter:=cpfPartial;
-  UpdateFilterCheck;
-  UpdateMetaData;
 end;
 
 procedure TfMain.actOnlineUpdateExecute(Sender: TObject);
@@ -268,8 +266,21 @@ begin
     OpenFile(FileNames[I], I=0);
 end;
 
-procedure TfMain.lvFileListClick(Sender: TObject);
+procedure TfMain.lvCodepageListChange(Sender: TObject; Item: TListItem;
+  Change: TItemChange);
 begin
+  IgnoreParameter(Sender);
+  IgnoreParameter(Item);
+  IgnoreParameter(Change);
+  UpdateStatusBar;
+end;
+
+procedure TfMain.lvFileListChange(Sender: TObject; Item: TListItem;
+  Change: TItemChange);
+begin
+  IgnoreParameter(Sender);
+  IgnoreParameter(Item);
+  IgnoreParameter(Change);
   UpdateMetaData;
 end;
 
@@ -293,22 +304,53 @@ procedure TfMain.PopulateCodePageList(Item: TWitchItem);
 var
   L : TListItem;
   K : String;
+  I, P : integer;
 begin
   if not Assigned(Item) then Exit;
   if Item.Analyzed then begin
+    // Processing complete
     tAnimate.Enabled:=False;
     lvCodePageList.Enabled:=True;
     lvCodePageList.SmallImages:=ilPercentageColor;
-    L:=lvCodePageList.Items.Add;
     K:=ComponentNamePath(lvCodePageList, Self, True);
-    if Item.Encoding = weNone then begin;
-      L.Caption:=GetTranslation(K+'Any_Codepage/Caption', 'Any Codepage');
-      L.ImageIndex:=High(iconPercentageNames);
-    end else begin
-      L.Caption:=GetTranslation(K+'Analyzed/Caption', 'Analyzed');
-      L.ImageIndex:=0;
+    case Item.Encoding of
+      weNone : begin
+        // Only Liwer 7-Bit ASCII characters, compatible with any codepage
+        L:=lvCodePageList.Items.Add;
+        L.Caption:=GetTranslation(K+'Any_Codepage/Caption', 'Any Codepage');
+        L.ImageIndex:=High(iconPercentageNames);
+      end;
+      weUnicode : begin
+        // UTF-8/Unicode encoded file
+        for I := 0 to High(Item.Results) do begin
+          P := High(iconPercentageNames) * Item.Results[I].Compatible div 100;
+          if (P = 0) and (Item.Results[I].Compatible <> 0) then
+            P := 1
+          else if (P = High(iconPercentageNames)) and (Item.Results[I].Compatible <> 100) then
+            P := High(iconPercentageNames) - 1;
+
+          if (Item.Results[I].Compatible<>100) and (CodePageFilter=cpfComplete) then
+            Continue
+          else
+          if (Item.Results[I].Compatible = 0) and (CodePageFilter=cpfPartial) then
+            Continue;
+          { permit incompatible codepages }
+
+          L:=lvCodePageList.Items.Add;
+          L.Caption:=IntToStr(Item.Results[I].Codepage);
+          // L.Caption:=GetTranslation(K+'Analyzed/Caption', 'Analyzed');
+          L.ImageIndex:=P;
+          end;
+      end;
+      weCodepage : begin
+        // File is not UTF-8 so must be Codepage encoded
+        L:=lvCodePageList.Items.Add;
+        L.ImageIndex:=5;
+        L.Caption:='Multiple';
+      end;
     end;
   end else begin
+    // Still srocessing text file in background thread
     lvCodePageList.Enabled:=False;
     lvCodePageList.SmallImages:=ilWorkingColor;
     L:=lvCodePageList.Items.Add;
@@ -323,6 +365,8 @@ procedure TfMain.SetCodepageFilter(AValue: TCodepageFilter);
 begin
   if FCodepageFilter=AValue then Exit;
   FCodepageFilter:=AValue;
+  UpdateFilterCheck;
+  UpdateMetaData;
 end;
 
 procedure TfMain.FormSettingsLoad(Sender: TObject);
@@ -394,7 +438,6 @@ end;
 
 procedure TfMain.SetCodepageViewLabel;
 begin
-
   lbViewCodepageLabel.Caption:=GetFormat(ComponentNamePath(pViewCodepageLabel,
     Self, True) + 'lbViewCodepageLabel/Value' , ['437'],
     'Viewed as Codepage %s');
@@ -402,20 +445,26 @@ end;
 
 procedure TfMain.UpdateMetaData;
 begin
+  UpdateCodePagelist;
+  UpdateButtons;
+  UpdateStatusBar;
+end;
+
+procedure TfMain.UpdateCodepageList;
+begin
   lvCodePageList.BeginUpdate;
   lvCodePageList.Clear;
   if Assigned(lvFileList.Selected) then begin
     PopulateCodePageList(TWitchItem(lvFileList.Selected.Data));
   end;
   lvCodePageList.EndUpdate;
-  UpdateButtons;
-  UpdateStatusBar;
 end;
 
 procedure TfMain.UpdateStatusBar;
 var
   W : TWitchItem;
-  K : String;
+  K, P : String;
+  I, V, E : integer;
 begin
   if Not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data))then begin
     statBar.Panels[0].Text:='';
@@ -424,6 +473,7 @@ begin
     statBar.Panels[3].Text:='';
     Exit;
   end;
+  P:='';
   W:=TWitchItem(lvFileList.Selected.Data);
   statBar.Panels[3].Text:=SPACE2+W.FileName;
   K:=ComponentNamePath(statBar, Self, True);
@@ -433,9 +483,21 @@ begin
       weCodePage : statBar.Panels[0].Text:=GetTranslation(K+'Codepage/Caption', 'Codepage');
       weUnicode : statBar.Panels[0].Text:=GetTranslation(K+'Unicode/Caption', 'Unicode');
     end;
+    if Assigned(lvCodePageList.Selected) then begin
+      Val(lvCodePageList.Selected.Caption, V, E);
+      if E = 0 then begin
+        for I := 0 to High(W.Results) do
+          if W.Results[I].Codepage = V then begin
+            P:=IntToStr(W.Results[I].Compatible);
+            Break;
+          end;
+      end;
+    end;
   end else begin
     statBar.Panels[0].Text:=GetTranslation(K+'Processing/Caption', 'Processing');
   end;
+  if P <> '' then P:=P+'%';
+  statBar.Panels[2].Text:=P;
 end;
 
 procedure TfMain.UpdateButtons;
