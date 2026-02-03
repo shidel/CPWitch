@@ -37,6 +37,7 @@ type
     FListItem: TListItem;
     FOwner: TWitch;
     FIndex: Integer;
+    FResults: TCodePageResults;
     function GetDisplayName: String;
     function GetIndex: integer;
     procedure SetFileName(AValue: String);
@@ -56,6 +57,7 @@ type
     property Index : integer read GetIndex;
     property Analyzed : boolean read FAnalyzed;
     property Encoding : TWitchEncoding read FEncoding;
+    property Results : TCodePageResults read FResults;
   published
   end;
 
@@ -105,6 +107,7 @@ type
   TWitchAnalyzeThread=class(TThreadTask)
   private
     FEncoding: TWitchEncoding;
+    FResults: TCodePageResults;
     FText: RawByteString;
     FWitch: TWitch;
     FWitchItem: TWitchItem;
@@ -114,12 +117,15 @@ type
   protected
     procedure Execute; override;
     procedure Completed;
+    procedure AnalyzeUTF8;
+    procedure AnalyzeCP;
   public
     constructor Create(CreateSuspended:Boolean);
     property Witch : TWitch read FWitch write SetWitch;
     property WitchItem : TWitchItem read FWitchItem write SetWitchItem;
     property Text : RawByteString read FText write SetText;
     property Encoding : TWitchEncoding read FEncoding;
+    property Results : TCodePageResults read FResults;
   end;
 
 { TWitchAnalyzeThread }
@@ -168,12 +174,31 @@ begin
     end;
   end;
 
+  case FEncoding of
+    weCodePage:AnalyzeCP;
+    weUnicode:AnalyzeUTF8;
+  end;
+
   Synchronize(@Completed);
 end;
 
 procedure TWitchAnalyzeThread.Completed;
 begin
   FWitch.ThreadComplete(Self);
+end;
+
+procedure TWitchAnalyzeThread.AnalyzeUTF8;
+var
+  A : TUTF8Analyze;
+begin
+  A:=TUTF8Analyze.Create(ToBytes(FText));
+  FResults:=A.Results;
+  A.Free;
+end;
+
+procedure TWitchAnalyzeThread.AnalyzeCP;
+begin
+
 end;
 
 constructor TWitchAnalyzeThread.Create(CreateSuspended: Boolean);
@@ -183,6 +208,7 @@ begin
   FText:='';
   FWitch:=nil;
   FWitchItem:=nil;
+  FResults:=[];
 end;
 
 
@@ -215,6 +241,7 @@ begin
   FEncoding:=weNone;
   FAnalyzed:=False;
   FAnalyzing:=False;
+  SetLength(FResults, 0);
   SetLength(FData, 0);
 end;
 
@@ -272,6 +299,7 @@ begin
   FOwner:=AOwner;
   FListItem:=nil;
   FIndex:=-1;
+  FResults:=[];
   FData:=[];
   ClearData;
 end;

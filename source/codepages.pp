@@ -95,7 +95,7 @@ type
 
   { TUTF8Anaylize }
 
-  TUTF8Anaylize = class
+  TUTF8Analyze = class
   private
     FValues : TArrayOfInt32;
     FResults: TCodePageResults;
@@ -107,6 +107,8 @@ type
   end;
 
 implementation
+
+{ DEFINE DEBUGGING}
 
 const
 // cpeExcluded = -1; // Character specifically excluded from Codepage map.
@@ -317,13 +319,17 @@ var
     M := L + (H - L) div 2;
     S := SL[M];
     T:=PopDelim(S, EQUAL);
-    Val(T, N, J);
-    X:=R.Add(N);
+    X:=R.Add(T);
     X.Item:=SubTree(S);
     if L = H then Exit;
     if L < M then AddNode(L, M-1);
     if M < H then AddNode(M + 1, H);
   end;
+
+{$IFDEF DEBUGGING}
+var
+  TN : TBinaryTreeNode;
+{$ENDIF}
 
 begin
   SL := TStringList.Create;
@@ -358,10 +364,29 @@ begin
       Inc(I);
     end;
   end;
+ {$IFDEF DEBUGGING}
+  WriteLn(StringOf('-', 80));
+  for I := 0 to SL.Count -1 do
+    WriteLn(ZeroPad(I, 3) , ' - ', SL[I]);
+  WriteLn(StringOf('-', 80));
+  {$ENDIF}
+  // Create BinaryTree from TStringist
   R := TBinaryTree.Create;
   AddNode(0, SL.Count - 1);
   SL.Free;
   Result:=R;
+  {$IFDEF DEBUGGING}
+  TN:=R.First;
+  V:=0;
+  I:=0;
+  while Assigned(TN) do begin
+    if Assigned(TN.Item) then
+      WriteLn(ZeroPad(I, 3), ': ', TN.UniqueID, ' - ',TBinaryTree(TN.Item).Count)
+    else
+      WriteLn(ZeroPad(I, 3), ': ', TN.UniqueID, ' - nil');
+    TN:=TN.Next;
+  end;
+  {$ENDIF}
 end;
 
 procedure Initialize;
@@ -480,14 +505,17 @@ begin
   Result:=False;
 end;
 
-{ TUTF8Anaylize }
+{ TUTF8Analyze }
 
-procedure TUTF8Anaylize.Analyze;
+procedure TUTF8Analyze.Analyze;
 var
   R : TBinaryTree;
   N, X : TBinaryTreeNode;
-  I : integer;
+  I, J : integer;
   AC, UC, EC : integer;
+  T, S : String;
+  V, E : Integer;
+  SL : TStringList;
 begin
   R := TBinaryTree.Create;
   AC:=0;
@@ -499,28 +527,81 @@ begin
     else begin
       Inc(UC);
       N := AnalyzeMap.Find(IntToStr(FValues[I]));
-      if not (Assigned(N) and Assigned(N.Item)) then
+      if not (Assigned(N) and Assigned(N.Item)) then begin
+        {$IFDEF DEBUGGING}
+        WriteLn(I, ' error1 ', HexStr(FValues[I],8), ' ', BoolStr(Assigned(N)));
+        {$ENDIF}
         Inc(EC)
+      end
       else begin
         N:=TBinaryTree(N.Item).First;
-        if Not Assigned(N) then
+        if Not Assigned(N) then begin
+          {$IFDEF DEBUGGING}
+          WriteLn(I, ' error2 ', BoolStr(Assigned(N)));
+          {$ENDIF}
           Inc(EC)
+        end
         else
           while Assigned(N) do begin
             X:=R.Find(N.UniqueID);
             if Assigned(X) then
               X.Value:=X.Value+1
-            else
+            else begin
+              {$IFDEF DEBUGGING}
+              WriteLn(I, ' Add ', N.UniqueID);
+              {$ENDIF}
               R.Add(N.UniqueID,1);
+            end;
             N:=N.Next;
+
           end;
       end;
     end;
   end;
+  // Stick results in a TStringList for sorting by codepage
+  SL:=TStringList.Create;
+  N:=R.First;
+  while Assigned(N) do begin
+    SL.Add(ZeroPad(N.UniqueID, 10) + EQUAL + ZeroPad(N.Value, 12));
+    N:=N.Next;
+  end;
+  SL.Sort;
+  SetLength(FResults, SL.Count);
+
+  // Move to results array
+  for I := 0 to High(FResults) do begin
+    S := SL[I];
+    T := PopDelim(S, EQUAL);
+    Val(T, V, E);
+    IgnoreParameter(E);
+    FResults[I].Codepage:=V;
+    Val(S, V, E);
+    IgnoreParameter(E);
+    FResults[I].Converted:=V;
+    // General Stuff
+    FResults[I].Characters := Length(FValues);
+    FResults[I].ASCII := AC;
+    FResults[I].Unicode := UC;
+    if (UC = 0) or  (FResults[I].Converted = UC) then
+      FResults[I].Compatible:=100
+    else begin
+      FResults[I].Compatible := (FResults[I].Converted) * 100 div UC;
+      // Cap unperfect match at 99%
+      if FResults[I].Compatible > 99 then
+        FResults[I].Compatible:=99;
+    end;
+
+    {$IFDEF DEBUGGING}
+    with FResults[I] do
+      WriteLn(ZeroPad(I, 2), ': CP', Codepage, ', Converted ', Converted,
+        ', Compatible ', Compatible, '%');
+    {$ENDIF}
+  end;
+  SL.Free;
   R.Free;
 end;
 
-constructor TUTF8Anaylize.Create(const Data: TArrayOfByte);
+constructor TUTF8Analyze.Create(const Data: TArrayOfByte);
 begin
   inherited Create;
   UTF8ToValues(Data, FValues);
