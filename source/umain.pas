@@ -17,7 +17,8 @@ uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ExtCtrls, ComCtrls, ActnList, Menus,
-  Version, PasExt, Icons, MultiApp, LogView, Updater, Preferences, Witch;
+  Version, PasExt, Icons, MultiApp, LogView, Updater, Preferences,
+  Witch;
 
 type
 
@@ -345,8 +346,8 @@ begin
       weCodepage : begin
         // File is not UTF-8 so must be Codepage encoded
         L:=lvCodePageList.Items.Add;
-        L.ImageIndex:=5;
-        L.Caption:='Multiple';
+        L.ImageIndex:=0;
+        L.Caption:=GetTranslation(K+'Not_implemented/Caption', 'Not implemented');
       end;
     end;
   end else begin
@@ -373,7 +374,7 @@ procedure TfMain.FormSettingsLoad(Sender: TObject);
 var
   S : String;
 begin
-  S:=Trim(Lowercase(GetConfig('Codepage_Filter', '')));
+  S:=Trim(Lowercase(GetConfig('Codepage_Filter', 'partial')));
   case S of
     'complete' : FCodepageFilter:=cpfComplete;
     'partial' : FCodepageFilter:=cpfPartial;
@@ -461,43 +462,54 @@ begin
 end;
 
 procedure TfMain.UpdateStatusBar;
+const
+  spiEncoding = 0;               // displayed when file is selected
+  spiCompatiblity = 1;           // displayed when codepage is selected
+  // spiLanguage = 2;            // not yet implemented
+  // spiPrefered = 3;            // not yet implemented
+  spiFileName = 2;               // displayed when file is selected
 var
   W : TWitchItem;
-  K, P : String;
+  K : String;
   I, V, E : integer;
+  Compat : String;
 begin
   if Not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data))then begin
-    statBar.Panels[0].Text:='';
-    statBar.Panels[1].Text:='';
-    statBar.Panels[2].Text:='';
-    statBar.Panels[3].Text:='';
+    statBar.Panels[spiEncoding].Text:='';
+    statBar.Panels[spiCompatiblity].Text:='';
+    // statBar.Panels[spiLanguage].Text:='';
+    // statBar.Panels[spiPrefered].Text:='';
+    statBar.Panels[spiFileName].Text:='';
     Exit;
   end;
-  P:='';
+  Compat:='';
   W:=TWitchItem(lvFileList.Selected.Data);
-  statBar.Panels[3].Text:=SPACE2+W.FileName;
+  statBar.Panels[spiFileName].Text:=SPACE2+W.FileName;
   K:=ComponentNamePath(statBar, Self, True);
   if W.Analyzed then begin
     case W.Encoding of
-      weNone : statBar.Panels[0].Text:=GetTranslation(K+'NoEncoding/Caption', 'ASCII');
-      weCodePage : statBar.Panels[0].Text:=GetTranslation(K+'Codepage/Caption', 'Codepage');
-      weUnicode : statBar.Panels[0].Text:=GetTranslation(K+'Unicode/Caption', 'Unicode');
+      weNone : statBar.Panels[spiEncoding].Text:=
+        GetTranslation(K+'NoEncoding/Caption', 'ASCII');
+      weCodePage : statBar.Panels[spiEncoding].Text:=
+        GetTranslation(K+'Codepage/Caption', 'Codepage');
+      weUnicode : statBar.Panels[spiEncoding].Text:=
+        GetTranslation(K+'Unicode/Caption', 'Unicode');
     end;
     if Assigned(lvCodePageList.Selected) then begin
       Val(lvCodePageList.Selected.Caption, V, E);
       if E = 0 then begin
         for I := 0 to High(W.Results) do
           if W.Results[I].Codepage = V then begin
-            P:=IntToStr(W.Results[I].Compatible);
+            Compat:=IntToStr(W.Results[I].Compatible);
             Break;
           end;
       end;
     end;
   end else begin
-    statBar.Panels[0].Text:=GetTranslation(K+'Processing/Caption', 'Processing');
+    statBar.Panels[spiEncoding].Text:=GetTranslation(K+'Processing/Caption', 'Processing');
   end;
-  if P <> '' then P:=P+'%';
-  statBar.Panels[2].Text:=P;
+  if Compat <> '' then Compat:=Compat+'%';
+  statBar.Panels[spiCompatiblity].Text:=Compat;
 end;
 
 procedure TfMain.UpdateButtons;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CONFIG Name="English" Language="en_US">
+<CONFIG Language="en_US">
   <Application>
     <ModalButtons>
       <Ok Value="Ok"/>
@@ -112,16 +112,17 @@
   <Controls>
     <fMain Caption="Codepage Witch">
       <alMain>
-        <actFileOpen Hint="Open a text file." Caption="File Open..."/>
-        <actFileExport Hint="Export a text file encoded in codepage format." Caption="File Export..."/>
+        <actOpen Hint="Open a text file." Caption="File Open..."/>
+        <actExportCodepage Hint="Export a text file encoded in codepage format." Caption="Export Codepage..."/>
         <actPreferences Hint="View or modify Codepage Witch preferences." Caption="Preferences..."/>
         <actOnlineUpdate Hint="Check for updates to Codepage Witch." Caption="Update Check..."/>
         <actDebugLog Hint="View the debugging log." Caption="Debug Log..."/>
-        <actFileClose Hint="Close the current text file." Caption="File Close"/>
         <actListAll Hint="List all known codepages." Caption="All known"/>
         <actListPartial Hint="List partially compatible codepages." Caption="Any possible"/>
         <actListCompatible Hint="List only fully compatible codepages." Caption="Only compatible"/>
         <actCodepageFilter Hint="Filter the codepages list." Caption="Codepage Filter"/>
+        <actExportUnicode Hint="Export a text file encoded in UTF-8 format." Caption="Export UTF-8..."/>
+        <actClose Hint="Close the current text file." Caption="Close File"/>
       </alMain>
       <pFileList>
         <pFileListLabel>
@@ -134,7 +135,8 @@
         </pCodepageListLabel>
         <lvCodepageList>
           <Analyzing Caption="Analyzing"/>
-          <Analyzed Caption="Analyzed"/>
+          <Not_implemented Caption="Not implemented"/>
+          <Any_Codepage Caption="Any Codepage"/>
         </lvCodepageList>
       </pCodepageList>
       <pViewers>
@@ -206,21 +208,6 @@
         <Downloaded Text="Downloaded &quot;%s&quot; version %s."/>
       </Message>
     </fUpdateSaveDialog>
-    <fLoggerViewForm Caption="Debug log">
-      <LineCount Plural="%.0n log entries" Singular="%.0n log entry"/>
-      <pControls>
-        <pButtons>
-          <btnClear Caption="Clear"/>
-          <btnSaveAs Caption="Save As..."/>
-        </pButtons>
-        <pVerbose>
-          <cbVerbosity>
-            <Items Index_0="Critical" Index_1="Minimal" Index_2="Normal" Index_3="Verbose" Index_4="Excessive"/>
-          </cbVerbosity>
-          <lbVerbosity Caption="Verbosity:"/>
-        </pVerbose>
-      </pControls>
-    </fLoggerViewForm>
     <fPreferences Caption="Codepage Witch Preferences">
       <fPreferencePages>
         <tsAbout Hint="About the &quot;%s&quot;" Caption="About">

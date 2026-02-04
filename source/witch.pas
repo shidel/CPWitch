@@ -31,12 +31,14 @@ type
   private
     FAnalyzed: boolean;
     FAnalyzing: boolean;
+    FDetected: String;
     FEncoding: TWitchEncoding;
     FFileName: String;
     FData : TArrayOfByte;
     FListItem: TListItem;
     FOwner: TWitch;
     FIndex: Integer;
+    FPreferred: integer;
     FResults: TCodePageResults;
     function GetDisplayName: String;
     function GetIndex: integer;
@@ -58,6 +60,8 @@ type
     property Analyzed : boolean read FAnalyzed;
     property Encoding : TWitchEncoding read FEncoding;
     property Results : TCodePageResults read FResults;
+    property Detected : String read FDetected; // Detected Language
+    property Preferred : integer read FPreferred; // Preferred Codepage
   published
   end;
 
@@ -242,6 +246,8 @@ begin
   FEncoding:=weNone;
   FAnalyzed:=False;
   FAnalyzing:=False;
+  FDetected:='';
+  FPreferred:=-1;
   SetLength(FResults, 0);
   SetLength(FData, 0);
 end;

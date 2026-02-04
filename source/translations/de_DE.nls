@@ -112,16 +112,20 @@
   <Controls>
     <fMain Caption="Codepage Witch">
       <alMain>
-        <actFileOpen Hint="Eine Textdatei öffnen." Caption="Datei öffnen..."/>
-        <actFileExport Hint="Eine Textdatei im Codepage-Format exportieren." Caption="Datei exportieren..."/>
+        <actOpen Hint="Open a text file." Caption="File Open..."/>
+        <actExportCodepage Hint="Export a text file encoded in codepage format." Caption="Export Codepage..."/>
         <actPreferences Hint="Codepage Witch Einstellungen anzeigen oder ändern." Caption="Einstellungen..."/>
         <actOnlineUpdate Hint="Nach Updates für Codepage Witch suchen." Caption="Update-Prüfung..."/>
         <actDebugLog Hint="Das Debugging-Protokoll anzeigen." Caption="Debug-Protokoll..."/>
-        <actFileClose Hint="Close the current text file." Caption="File Close"/>
         <actListAll Hint="List all known codepages." Caption="All known"/>
         <actListPartial Hint="List possible and partial compatible codepages." Caption="Any possible"/>
         <actListCompatible Hint="List only fully compatible codepages." Caption="Only compatible"/>
         <actCodepageFilter Hint="Filter the codepages list." Caption="Codepage Filter"/>
+        <actExportUnicode Hint="Export a text file encoded in UTF-8 format." Caption="Export UTF-8..."/>
+        <actClose Hint="Close the current text file." Caption="Close File"/>
+        <actFileOpen Hint="Eine Textdatei öffnen." Caption="Datei öffnen..."/>
+        <actFileExport Hint="Eine Textdatei im Codepage-Format exportieren." Caption="Datei exportieren..."/>
+        <actFileClose Hint="Close the current text file." Caption="File Close"/>
       </alMain>
       <pFileList>
         <pFileListLabel>
@@ -134,6 +138,8 @@
         </pCodepageListLabel>
         <lvCodepageList>
           <Analyzing Caption="Analyzing"/>
+          <Not_implemented Caption="Not implemented"/>
+          <Any_Codepage Caption="Any Codepage"/>
           <Analyzed Caption="Analyzed"/>
         </lvCodepageList>
       </pCodepageList>
@@ -206,21 +212,6 @@
         <Downloaded Text="&quot;%s&quot; Version %s heruntergeladen."/>
       </Message>
     </fUpdateSaveDialog>
-    <fLoggerViewForm Caption="Debug log">
-      <LineCount Plural="%.0n log entries" Singular="%.0n log entry"/>
-      <pControls>
-        <pButtons>
-          <btnClear Caption="Clear"/>
-          <btnSaveAs Caption="Save As..."/>
-        </pButtons>
-        <pVerbose>
-          <cbVerbosity>
-            <Items Index_0="Critical" Index_1="Minimal" Index_2="Normal" Index_3="Verbose" Index_4="Excessive"/>
-          </cbVerbosity>
-          <lbVerbosity Caption="Verbosity:"/>
-        </pVerbose>
-      </pControls>
-    </fLoggerViewForm>
     <fPreferences Caption="Codepage Witch Einstellungen">
       <fPreferencePages>
         <tsAbout Hint="Über &quot;%s&quot;" Caption="Über">
@@ -264,5 +255,20 @@
         </fBodyPanel>
       </fMiddlePanel>
     </fPreferences>
+    <fLoggerViewForm Caption="Debug log">
+      <LineCount Plural="%.0n log entries" Singular="%.0n log entry"/>
+      <pControls>
+        <pButtons>
+          <btnClear Caption="Clear"/>
+          <btnSaveAs Caption="Save As..."/>
+        </pButtons>
+        <pVerbose>
+          <cbVerbosity>
+            <Items Index_0="Critical" Index_1="Minimal" Index_2="Normal" Index_3="Verbose" Index_4="Excessive"/>
+          </cbVerbosity>
+          <lbVerbosity Caption="Verbosity:"/>
+        </pVerbose>
+      </pControls>
+    </fLoggerViewForm>
   </Controls>
 </CONFIG>
