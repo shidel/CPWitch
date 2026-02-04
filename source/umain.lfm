@@ -277,18 +277,10 @@ object fMain: TfMain
         Height = 125
         Top = 1
         Width = 228
-        HorzScrollBar.Page = 90
-        VertScrollBar.Page = 90
+        HorzScrollBar.Page = 1
+        VertScrollBar.Page = 1
         Align = alClient
-        ClientHeight = 123
-        ClientWidth = 226
         TabOrder = 1
-        object imgCodepage: TImage
-          Left = 0
-          Height = 90
-          Top = 0
-          Width = 90
-        end
       end
     end
     object spUnicodeCP: TSplitter

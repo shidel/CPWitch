@@ -18,7 +18,7 @@ uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ExtCtrls, ComCtrls, ActnList, Menus, IpHtml,
   Version, PasExt, Icons, MultiApp, LogView, Updater, Preferences,
-  Witch;
+  DosCRT, Witch;
 
 type
 
@@ -40,7 +40,6 @@ type
       actPreferences: TAction;
       alMain: TActionList;
       ctrlBar: TControlBar;
-      imgCodepage: TImage;
       hpUnicodeText: TIpHtmlPanel;
       lbUnicodeViewLabel: TLabel;
       lbCodepageLabel: TLabel;
@@ -89,11 +88,12 @@ type
       Change: TItemChange);
     procedure tAnimateTimer(Sender: TObject);
     private
-      FCodepageFilter: TCodepageFilter;
+      fCodepageFilter: TCodepageFilter;
       lbViewCodePageLabel : TLabel;
       btnExportFile : TToolButton;
       btnCodepageFilter : TToolButton;
       fWitch : TWitch;
+      fCodepageText : TDosCrt;
       procedure PopulateCodePageList(Item : TWitchItem);
       procedure SetCodepageFilter(AValue: TCodepageFilter);
       procedure SetUnicodeView( S : String );
@@ -216,6 +216,11 @@ procedure TfMain.FormCreate(Sender: TObject);
 begin
   fWitch := TWitch.Create;
   fWitch.OnAnalyzed:=@WitchOnAnalyzed;
+
+  fCodePageText := TDosCrt.Create(Self);
+  // fCodePageText.Name:='fCodePageText';
+  fCodePageText.Parent:=sbCodePage;
+
   OnSettingsLoad:=@FormSettingsLoad;
   OnSettingsSave:=@FormSettingsSave;
 
@@ -258,7 +263,6 @@ begin
   lbViewCodepageLabel.BorderSpacing.Around:=8;
 
   SetUnicodeView('');
-  imgCodepage.Height:=1;
 end;
 
 procedure TfMain.FormDropFiles(Sender: TObject; const FileNames: array of string
@@ -385,9 +389,10 @@ begin
   C:=ColorToRGB(clWindow);
   hpUnicodeText.SetHtmlFromStr('<html><body style="background-color:' +
     IntToHex(Red(C), 2) + IntToHex(Green(C), 2) + IntToHex(Blue(C), 2) + '; '+
-    'margin:0; font-size:110%;">' +
-    '<pre>' + { StringReplace(S, CR, '<br>',[rfReplaceAll]) } S + '</pre>' +
-    '</body></html>');
+    'margin:0; font-weight:light; font-size:100%;">' +
+    '<pre>' + S + '</pre>' +
+    { StringReplace(S, CR, '<br>',[rfReplaceAll]) + }
+    '<br></body></html>');
 end;
 
 procedure TfMain.FormSettingsLoad(Sender: TObject);
