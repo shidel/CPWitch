@@ -38,8 +38,9 @@
         <Filename Value="mpla/pasext.pp"/>
         <UnitName Value="PasExt"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="72" Y="2146"/>
-        <FoldState Value=" TK0071 TL904122M1U1322111vD1G pjUuS]E34226686639231A491 Pj1sK4 T4P02 p0;60]*3+V04E]t2kI064]9Pjf0D7 pigjb0!43]TkCnP04G]KZjU07B]9YjM075]9bjD0M4[:4jY0M6]If]99716]uBlC0LD[u5f07A[c5V0DA]RDjG297 piekV0b[968044[{B550!9[j4l90E3]9CiY0x6]96ja038[{%5M0C4 PjNj30 T1+W03H pk3mC02[)4ak10A1413L]t5pL0352I]BLmL0I5]94kF0I6[g5207817]-1m205H]KdkO[}:7kA]^[I4jg068]u1]u25[94jb024 piXjM0LA pj5kX0[}j5fk5029[}a5c093 Pj0iW0 T6;Z01A]zMu301t]Xb?V01P PiCyZ]XM@441172 p5&apos;W010F p0zG21 T0:9HJAB petZO4S]xXyHb3G piap6L4B[I4mJOLE pjGn9X3F]90mDR7C[{u5Zf1H PiVlXVV"/>
+        <TopLine Value="2740"/>
+        <CursorPos Y="2910"/>
+        <FoldState Value=" TK0071 TL904122M1U1322111vD1G pjUuS]E34226686639231A491 Pj1sK4 T4P02 p0;60]*3+V04E]t2kI064]9Pjf0D7 pigjb0!43]TkCnP04G]KZjU07B]9YjM075]9bjD0M4[:4jY0M6]If]99716]uBlC0LD[u5f07A[c5V0DA]RDjG297 piekV0b[968044[{B550!9[j4l90E3]9CiY0x6]96ja038[{%5M0C4 PjNj30 T1+W03H pk3mC02[)4ak10A1413L]t5pL0352I]BLmL0I5]94kF0I6[g5207817]-1m205H]KdkO[}:7kA]^[I4jg0682]nkdnS023[}.5R029 pj3k9097[I4k5]I[}T5c093 Pj0iW0 T6;Z01A5 pMu301t]Xb?V0121M PiAyZ]ZM@441172 p5&apos;W010F p0zG21 T0:9HJAB petZO4S]zXyHb3G piap6L4B[I4mJOL41]BjEo4NDF]KZlUPB[95kWW3C PiEkOV/"/>
         <UsageCount Value="58"/>
       </Unit>
       <Unit>
@@ -127,8 +128,9 @@
         <Filename Value="doscrt.pp"/>
         <UnitName Value="DosCRT"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="39" Y="77"/>
-        <UsageCount Value="13"/>
+        <TopLine Value="53"/>
+        <CursorPos X="37" Y="77"/>
+        <UsageCount Value="14"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -136,9 +138,10 @@
         <UnitName Value="DosFont"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="108"/>
-        <CursorPos Y="133"/>
-        <UsageCount Value="13"/>
+        <TopLine Value="400"/>
+        <CursorPos X="7" Y="438"/>
+        <FoldState Value=" T3iK0~7h"/>
+        <UsageCount Value="14"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -147,7 +150,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="249"/>
         <CursorPos X="3" Y="274"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="/Applications/Lazarus/lcl/controls.pp"/>
@@ -155,34 +158,10 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="2421"/>
         <CursorPos X="55" Y="2447"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="101" Column="25" TopLine="89"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="390" Column="20" TopLine="277"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="379" TopLine="307"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="387" Column="59" TopLine="307"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="388" Column="79" TopLine="282"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="390" Column="6" TopLine="258"/>
-      </Position>
       <Position>
         <Filename Value="umain.pas"/>
         <Caret Line="389" Column="55" TopLine="258"/>
@@ -278,6 +257,30 @@
       <Position>
         <Filename Value="dosfont.pp"/>
         <Caret Line="29" Column="77" TopLine="8"/>
+      </Position>
+      <Position>
+        <Filename Value="dosfont.pp"/>
+        <Caret Line="67" TopLine="54"/>
+      </Position>
+      <Position>
+        <Filename Value="dosfont.pp"/>
+        <Caret Line="169" TopLine="122"/>
+      </Position>
+      <Position>
+        <Filename Value="dosfont.pp"/>
+        <Caret Line="417" Column="15" TopLine="375"/>
+      </Position>
+      <Position>
+        <Filename Value="dosfont.pp"/>
+        <Caret Line="411" Column="24" TopLine="384"/>
+      </Position>
+      <Position>
+        <Filename Value="dosfont.pp"/>
+        <Caret Line="45" Column="14" TopLine="20"/>
+      </Position>
+      <Position>
+        <Filename Value="dosfont.pp"/>
+        <Caret Line="438" Column="15" TopLine="388"/>
       </Position>
     </JumpHistory>
     <RunParams>

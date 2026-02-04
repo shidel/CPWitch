@@ -30,7 +30,7 @@ type
     procedure SetResolution(AValue: TPoint);
     procedure SetScale(AValue: TPoint);
   protected
-    procedure AdjustSize; virtual;
+    procedure DoSizeChange; virtual;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -57,24 +57,24 @@ procedure TCustomDosCRT.SetResolution(AValue: TPoint);
 begin
   if FResolution=AValue then Exit;
   FResolution:=AValue;
-  AdjustSize;
+  DoSizeChange;
 end;
 
 procedure TCustomDosCRT.SetFont(AValue: TCustomDosFont);
 begin
   if FFont=AValue then Exit;
   FFont:=AValue;
-  AdjustSize;
+  DoSizeChange;
 end;
 
 procedure TCustomDosCRT.SetScale(AValue: TPoint);
 begin
   if FScale=AValue then Exit;
   FScale:=AValue;
-  AdjustSize;
+  DoSizeChange;
 end;
 
-procedure TCustomDosCRT.AdjustSize;
+procedure TCustomDosCRT.DoSizeChange;
 begin
   if Assigned(FFont) then begin
     Width:=FResolution.X * FFont.Width * FScale.X;
