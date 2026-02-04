@@ -226,17 +226,30 @@ object fMain: TfMain
           Caption = 'Viewed as Unicode'
         end
       end
-      object mUnicodeText: TMemo
+      object hpUnicodeText: TIpHtmlPanel
         Left = 1
         Height = 66
         Top = 33
         Width = 228
         Align = alClient
-        Lines.Strings = (
-          'mUnicodeText'
-        )
-        ScrollBars = ssAutoBoth
+        BgColor = clSkyBlue
+        BorderWidth = 1
+        BorderStyle = bsSingle
+        FixedTypeface = 'Courier'
+        DefaultTypeFace = 'default'
+        DefaultFontSize = 12
+        FlagErrors = False
+        PrintSettings.MarginLeft = 0.5
+        PrintSettings.MarginTop = 0.5
+        PrintSettings.MarginRight = 0.5
+        PrintSettings.MarginBottom = 0.5
+        PrintSettings.Preview.Left = 640
+        PrintSettings.Preview.Top = 360
+        PrintSettings.Preview.Width = 1920
+        PrintSettings.Preview.Height = 1080
         TabOrder = 1
+        TextColor = clWindowText
+        UsePaintBuffer = False
       end
     end
     object pCodepage: TPanel

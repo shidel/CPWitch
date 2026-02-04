@@ -16,7 +16,7 @@ interface
 uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  ExtCtrls, ComCtrls, ActnList, Menus,
+  ExtCtrls, ComCtrls, ActnList, Menus, IpHtml,
   Version, PasExt, Icons, MultiApp, LogView, Updater, Preferences,
   Witch;
 
@@ -41,6 +41,7 @@ type
       alMain: TActionList;
       ctrlBar: TControlBar;
       imgCodepage: TImage;
+      hpUnicodeText: TIpHtmlPanel;
       lbUnicodeViewLabel: TLabel;
       lbCodepageLabel: TLabel;
       lbFileList: TLabel;
@@ -49,7 +50,6 @@ type
       miListGood: TMenuItem;
       miListPotential: TMenuItem;
       miListAll: TMenuItem;
-      mUnicodeText: TMemo;
       mmMain: TMainMenu;
       dlgOpenFile: TOpenDialog;
       pmListMode: TPopupMenu;
@@ -96,6 +96,7 @@ type
       fWitch : TWitch;
       procedure PopulateCodePageList(Item : TWitchItem);
       procedure SetCodepageFilter(AValue: TCodepageFilter);
+      procedure SetUnicodeView( S : String );
     protected
       procedure FormSettingsLoad(Sender: TObject);
       procedure FormSettingsSave(Sender: TObject);
@@ -105,6 +106,8 @@ type
       procedure UpdateMetaData;
       procedure UpdateCodepageList;
       procedure UpdateStatusBar;
+      procedure UpdateUnicodeView;
+      procedure UpdateCodepageView;
       procedure UpdateButtons;
       procedure UpdateFilterCheck;
     public
@@ -254,7 +257,7 @@ begin
   lbViewCodepageLabel.AutoSize:=True;
   lbViewCodepageLabel.BorderSpacing.Around:=8;
 
-  mUnicodeText.Clear;
+  SetUnicodeView('');
   imgCodepage.Height:=1;
 end;
 
@@ -370,6 +373,22 @@ begin
   UpdateMetaData;
 end;
 
+procedure TfMain.SetUnicodeView(S: String);
+var
+  C : TColor;
+begin
+  // This does not scroll a TMemo to the top on macOS
+  // mUnicodeText.VertScrollBar.Position:=0;
+  // This does work on macOS
+  //mUnicodeText.SelStart := 0;
+  //mUnicodeText.SelLength := 0;
+  C:=ColorToRGB(clWindow);
+  hpUnicodeText.SetHtmlFromStr('<html><body style="background-color:' +
+    IntToHex(Red(C), 2) + IntToHex(Green(C), 2) + IntToHex(Blue(C), 2) + '; '+
+    'margin:0;"><pre>' + { StringReplace(S, CR, '<br>',[rfReplaceAll]) } S +
+    '</pre></body></html>');
+end;
+
 procedure TfMain.FormSettingsLoad(Sender: TObject);
 var
   S : String;
@@ -449,6 +468,8 @@ begin
   UpdateCodePagelist;
   UpdateButtons;
   UpdateStatusBar;
+  UpdateUnicodeView;
+  UpdateCodepageView;
 end;
 
 procedure TfMain.UpdateCodepageList;
@@ -474,7 +495,7 @@ var
   I, V, E : integer;
   Compat : String;
 begin
-  if Not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data))then begin
+  if not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data))then begin
     statBar.Panels[spiEncoding].Text:='';
     statBar.Panels[spiCompatiblity].Text:='';
     // statBar.Panels[spiLanguage].Text:='';
@@ -510,6 +531,52 @@ begin
   end;
   if Compat <> '' then Compat:=Compat+'%';
   statBar.Panels[spiCompatiblity].Text:=Compat;
+end;
+
+procedure TfMain.UpdateUnicodeView;
+var
+  W : TWitchItem;
+  H : String;
+begin
+  if (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then begin
+    W:=TWitchItem(lvFileList.Selected.Data);
+    if W.Analyzed then begin
+      case W.Encoding of
+        weNone, weUnicode : begin
+          H:=EscapeHTML(PasExt.ToString(W.FileData));
+        end;
+        weCodePage : begin
+          H:= '';
+        end;
+      end;
+
+    end;
+  end;
+  SetUnicodeView(H);
+end;
+
+procedure TfMain.UpdateCodepageView;
+var
+  W : TWitchItem;
+begin
+  if Not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then begin
+    // Clear
+    Exit;
+  end;
+  W:=TWitchItem(lvFileList.Selected.Data);
+  if not W.Analyzed then begin
+    // Clear
+    Exit;
+  end else begin
+    case W.Encoding of
+      weNone : begin
+      end;
+      weCodePage : begin
+      end;
+      weUnicode : begin
+      end;
+    end;
+  end;
 end;
 
 procedure TfMain.UpdateButtons;

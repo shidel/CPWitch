@@ -55,6 +55,7 @@ type
     property Owner : TWitch read FOwner;
     property ListItem : TListItem read FListItem;
     property FileName : String read FFileName write SetFileName;
+    property FileData: TArrayOfByte read FData;
     property DisplayName : String read GetDisplayName;
     property Index : integer read GetIndex;
     property Analyzed : boolean read FAnalyzed;
@@ -215,7 +216,6 @@ begin
   FWitchItem:=nil;
   FResults:=[];
 end;
-
 
 { TWitchItem }
 
