@@ -385,8 +385,9 @@ begin
   C:=ColorToRGB(clWindow);
   hpUnicodeText.SetHtmlFromStr('<html><body style="background-color:' +
     IntToHex(Red(C), 2) + IntToHex(Green(C), 2) + IntToHex(Blue(C), 2) + '; '+
-    'margin:0;"><pre>' + { StringReplace(S, CR, '<br>',[rfReplaceAll]) } S +
-    '</pre></body></html>');
+    'margin:0; font-size:110%;">' +
+    '<pre>' + { StringReplace(S, CR, '<br>',[rfReplaceAll]) } S + '</pre>' +
+    '</body></html>');
 end;
 
 procedure TfMain.FormSettingsLoad(Sender: TObject);

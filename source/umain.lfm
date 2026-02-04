@@ -232,7 +232,7 @@ object fMain: TfMain
         Top = 33
         Width = 228
         Align = alClient
-        BgColor = clSkyBlue
+        BgColor = clWindow
         BorderWidth = 1
         BorderStyle = bsSingle
         FixedTypeface = 'Courier'
