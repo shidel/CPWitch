@@ -29,7 +29,7 @@ type
 
   TCustomDosCRT = class ( TGraphicControl )
   private
-    FFont: TCustomDosFont;
+    FFont, FNoFont: TCustomDosFont;
     FScale: TPoint;
     FResolution: TPoint;
     FScreen : array of TDosCRTScreenItem;
@@ -41,6 +41,7 @@ type
     FBottomRight : TPoint;
     FForeground : TColor;
     FBackground : TColor;
+    function CurrentFont : TCustomDosFont;
     procedure ValidateCoordinates(var P : TPoint); overload;
     procedure ValidateCoordinates(var X, Y : LongInt); overload;
     procedure DoSizeChange; virtual;
@@ -110,6 +111,14 @@ begin
   DoSizeChange;
 end;
 
+function TCustomDosCRT.CurrentFont: TCustomDosFont;
+begin
+  if Assigned(FFont) and (FFont.Width > 0) then
+    Result:=FFont
+  else
+    Result:=FNoFont;
+end;
+
 procedure TCustomDosCRT.ValidateCoordinates(var P: TPoint);
 begin
   ValidateCoordinates(P.X, P.Y);
@@ -127,58 +136,73 @@ procedure TCustomDosCRT.DoSizeChange;
 begin
   if Assigned(FFont) then begin
     Width:=FResolution.X * FFont.Width * FScale.X;
-    Height:=FResolution.X * FFont.Height * FScale.Y;
+    Height:=FResolution.Y * FFont.Height * FScale.Y;
   end else begin
-    Width:=FResolution.X * 8 * FScale.X;
-    Height:=FResolution.X * 8 * FScale.Y;
+    Width:=FResolution.X * FNoFont.Width * FScale.X;
+    Height:=FResolution.Y * FNoFont.Height * FScale.Y;
   end;
   SetScreenBuffer;
-  Invalidate;
+  // Invalidate;
 end;
 
 procedure TCustomDosCRT.Paint;
 var
+  F : TCustomDosFont;
   X, Y, I : LongInt;
   CLX, CLY, CXX,
   SLX, SLY, SHX, SHY : LongInt;
 begin
   inherited Paint;
-  if not Assigned(FFont) then begin
-    Canvas.Brush.Color:=FBackground;
-    Canvas.FillRect(0,0,Width,Height);
-    Exit;
-  end;
+  F:=CurrentFont;
   // Calculate what Screen characters need drawn.
-  SLX := Canvas.ClipRect.TopLeft.X div (FFont.Width * FScale.X);
-  SLY := Canvas.ClipRect.TopLeft.Y div (FFont.Height * FScale.Y);
-  SHX := Canvas.ClipRect.BottomRight.X div (FFont.Width * FScale.X) + 1;
-  SHY := Canvas.ClipRect.BottomRight.Y div (FFont.Height * FScale.Y) + 1;
+  SLX := Canvas.ClipRect.TopLeft.X div (F.Width * FScale.X);
+  SLY := Canvas.ClipRect.TopLeft.Y div (F.Height * FScale.Y);
+  SHX := Canvas.ClipRect.BottomRight.X div (F.Width * FScale.X) + 1;
+  SHY := Canvas.ClipRect.BottomRight.Y div (F.Height * FScale.Y) + 1;
   ValidateCoordinates(SLX, SLY);
   ValidateCoordinates(SHX, SHY);
-  CXX := SLX * (FFont.Width * FScale.X);
-  CLY := SLY * (FFont.Height * FScale.Y);
+  CXX := SLX * (F.Width * FScale.X);
+  CLY := SLY * (F.Height * FScale.Y);
   for Y := SLY to SHY do begin
     CLX:=CXX;
-    I := FResolution.Y * Y;
+    I := FResolution.Y * Y + SLX;
     for X := SLX to SHX do begin
-      // PaintCharAttr(CLX, CLY, FScreen[I]);
+      PaintCharAttr(CLX, CLY, FScreen[I]);
       Inc(I);
-      Inc(CLX);
+      Inc(CLX, (F.Width * FScale.X));
     end;
-    Inc(CLY);
+    Inc(CLY, (F.Height * FScale.Y));
   end;
-
 end;
 
 procedure TCustomDosCRT.PaintCharAttr(X, Y: LongInt; C: TDosCRTScreenItem);
+var
+  F : TCustomDosFont;
+  D : TArrayOfBoolean;
+  I, PX, PY, XX, YY : LongInt;
 begin
+  F:=CurrentFont;
+  D:=F.Pixels[C.Character];
+  Canvas.Brush.Color:=C.BackGround;
+  Canvas.FillRect(X, Y, X + F.Width * FScale.X, Y + F.Height * FScale.Y);
+  Canvas.Brush.Color:=C.ForeGround;
+  I:=0;
+  for PY := 0 to F.Height - 1 do begin
+    YY := Y + PY * FScale.Y;
+    for PX := 0 to F.Width - 1 do begin
+      XX := X + PX * FScale.X;
+      if D[I] then
+        Canvas.FillRect(XX, YY, XX + FScale.X, YY + FScale.Y);
+      Inc(I);
+    end;
+  end;
 end;
 
 procedure TCustomDosCRT.SetScreenBuffer;
 var
   I, J : Integer;
 begin
-  J := 0;
+  J := 32;
   SetLength(FScreen, FResolution.X * FResolution.Y);
   for I := 0 to High(FScreen) do begin
       FScreen[I].Background:=FBackGround;
@@ -186,20 +210,22 @@ begin
       // FScreen[I].Character:=Byte(SPACE);
       FScreen[I].Character:=J;
       Inc(J);
-      if J > 255 then J := 0;
+      if J > 127 then J := 32;
   end;
 end;
 
 constructor TCustomDosCRT.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
+  ControlStyle := ControlStyle + [csOpaque];
   FFont:=nil;
+  FNoFont:=TBitmapDosFont.Create;
   FScreen:=[];
   FForeground:=clGray;
   FBackGround:=clBlack;
   FTopLeft:=Point(0,0);
   FBottomRight:=Point(79,24);
-  FScale:=Point(1,1);
+  FScale:=Point(3,3);
   FResolution.X:=FBottomRight.X + 1;
   FResolution.Y:=FBottomRight.Y + 1;
   DoSizeChange;
@@ -207,6 +233,7 @@ end;
 
 destructor TCustomDosCRT.Destroy;
 begin
+  FreeAndNil(FNoFont);
   inherited Destroy;
 end;
 

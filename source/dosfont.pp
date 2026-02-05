@@ -25,6 +25,7 @@ type
   private
     FHeight: integer;
     FWidth: integer;
+    function GetPixels(Index : integer): TArrayOfBoolean;
   protected
     function GetCharacter(Index : integer): TArrayOfByte; virtual; abstract;
   public
@@ -33,6 +34,7 @@ type
     property Width : integer read FWidth;
     property Height : integer read FHeight;
     property Character[Index : integer] : TArrayOfByte read GetCharacter;
+    property Pixels[Index : integer] : TArrayOfBoolean read GetPixels;
   published
   end;
 
@@ -392,6 +394,38 @@ const
 
 { TCustomDosFont }
 
+function TCustomDosFont.GetPixels(Index: integer): TArrayOfBoolean;
+var
+  D : TArrayOfByte;
+  I, P : Integer;
+  Y, X : integer;
+  B : integer;
+  S: String;
+begin
+  Result:=[];
+  D:=GetCharacter(Index);
+  if Length(D) = 0 then Exit;
+  SetLength(Result, FWidth * FHeight);
+  for I := 0 to High(Result) do
+    Result[I] := False;
+  I := 0;
+  P := 0;
+  for Y := 0 to FHeight - 1 do begin
+    B:=0;
+    for X := 0 to FWidth - 1 do begin
+      Result[P]:= (D[I] and (1 shl (7 - B))) <> 0;
+      Inc(P);
+      Inc(B);
+      if B > 7 then begin
+        B:=0;
+        Inc(I);
+      end;
+    end;
+    if B <> 0 then
+      Inc(I);
+  end;
+end;
+
 constructor TCustomDosFont.Create;
 begin
   inherited Create;
@@ -418,12 +452,13 @@ begin
   SetLength(Result, FHeight);
   P := Index * FHeight;
   for I := 0 to High(Result) do
-    Result[I]:=FData[P+I];
+    Result[I]:= FData[P+I];
 end;
 
 constructor TBitmapDosFont.Create;
 begin
   inherited Create;
+  FData:=[];
   Reset;
 end;
 
