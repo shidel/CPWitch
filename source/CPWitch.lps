@@ -18,9 +18,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="141"/>
-        <CursorPos X="9" Y="223"/>
+        <TopLine Value="194"/>
+        <CursorPos X="44" Y="228"/>
         <FoldState Value=" T3k003B1113 pkGmT066 pibjE073]9Yj60M4 PiLiB0q"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
@@ -129,10 +128,11 @@
       <Unit>
         <Filename Value="doscrt.pp"/>
         <UnitName Value="DosCRT"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="331"/>
-        <CursorPos Y="423"/>
-        <FoldState Value=" T3jN059 pjfkQ0S11A PjHkT00"/>
+        <TopLine Value="278"/>
+        <CursorPos X="20" Y="456"/>
+        <FoldState Value=" T3kO0531217 pkQlT0S267 Piakd0r"/>
         <UsageCount Value="35"/>
         <Loaded Value="True"/>
       </Unit>
@@ -170,26 +170,6 @@
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="doscrt.pp"/>
-        <Caret Line="170" Column="38" TopLine="133"/>
-      </Position>
-      <Position>
-        <Filename Value="doscrt.pp"/>
-        <Caret Line="162" Column="7" TopLine="133"/>
-      </Position>
-      <Position>
-        <Filename Value="doscrt.pp"/>
-        <Caret Line="21" Column="67"/>
-      </Position>
-      <Position>
-        <Filename Value="doscrt.pp"/>
-        <Caret Line="165" Column="46" TopLine="133"/>
-      </Position>
-      <Position>
-        <Filename Value="doscrt.pp"/>
-        <Caret Line="177" Column="10" TopLine="166"/>
-      </Position>
       <Position>
         <Filename Value="dosfont.pp"/>
         <Caret Line="30" Column="24" TopLine="332"/>
@@ -289,6 +269,26 @@
       <Position>
         <Filename Value="doscrt.pp"/>
         <Caret Line="419" Column="34" TopLine="354"/>
+      </Position>
+      <Position>
+        <Filename Value="doscrt.pp"/>
+        <Caret Line="51" Column="19" TopLine="37"/>
+      </Position>
+      <Position>
+        <Filename Value="doscrt.pp"/>
+        <Caret Line="78" Column="78" TopLine="53"/>
+      </Position>
+      <Position>
+        <Filename Value="doscrt.pp"/>
+        <Caret Line="68" Column="47" TopLine="68"/>
+      </Position>
+      <Position>
+        <Filename Value="doscrt.pp"/>
+        <Caret Line="71" Column="26" TopLine="43"/>
+      </Position>
+      <Position>
+        <Filename Value="doscrt.pp"/>
+        <Caret Line="88" Column="69" TopLine="68"/>
       </Position>
     </JumpHistory>
     <RunParams>

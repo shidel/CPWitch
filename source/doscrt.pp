@@ -36,14 +36,22 @@ type
 
   TCustomDosCRT = class ( TGraphicControl )
   private
+    FControlCodes: boolean;
     FFont, FNoFont: TCustomDosFont;
     FScale: TPoint;
     FResolution: TPoint;
     FScreen : TDosCRTScreen;
+    FScrolling: boolean;
     FUpdate : integer;
+    FWrapping: boolean;
+    procedure SetControlCodes(AValue: boolean);
     procedure SetFont(AValue: TCustomDosFont);
     procedure SetResolution(AValue: TPoint);
     procedure SetScale(AValue: TPoint);
+    procedure SetScrolling(AValue: boolean);
+    procedure SetWindMin(AValue : TPoint);
+    procedure SetWindMax(AValue : TPoint);
+    procedure SetWrapping(AValue: boolean);
   protected
     FPosition : TPoint;
     FTopLeft : TPoint;
@@ -61,6 +69,11 @@ type
     procedure PaintCharAttr(X, Y : LongInt; C : TDosCRTScreenItem);
     {$ENDIF}
     procedure SetScreenBuffer;
+    procedure ScrollUp(AFromPosition : boolean = false);
+    procedure ScrollDown(AFromPosition : boolean = false);
+    procedure ScrollLeft(AFromPosition : boolean = false);
+    procedure ScrollRight(AFromPosition : boolean = false);
+    procedure SendCRT(const S : String);
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -70,7 +83,9 @@ type
     property Scale : TPoint read FScale write SetScale;
     property Font : TCustomDosFont read FFont write SetFont;
     property Screen : TDosCRTScreen read FScreen write FScreen;
-
+    property ControlCodes : boolean read FControlCodes write SetControlCodes;
+    property Wrapping : boolean read FWrapping write SetWrapping;
+    property Scrolling : boolean read FScrolling write SetScrolling;
   published
   end;
 
@@ -78,28 +93,57 @@ type
 
   TDosCRT = class ( TCustomDosCRT )
   private
-    function GetWindMax: TPoint;
-    function GetWindMin: TPoint;
-    procedure SetWindMax(AValue: TPoint);
-    procedure SetWindWin(AValue: TPoint);
   protected
   public
 //    constructor Create(AOwner: TComponent); override;
 //    destructor Destroy; override;
     { CRT Style Stuff }
     // property TextAttr : byte;
-    property WindMin : TPoint read GetWindMin write SetWindWin;
-    property WindMax : TPoint read GetWindMax write SetWindMax;
+    // property WindMin : TPoint read GetWindMin write SetWindWin;
+    // property WindMax : TPoint read GetWindMax write SetWindMax;
     // procedure Window(X1, Y1, X2, Y2 : byte);
     // procedure GotoXY(X, Y : byte);
     //function WhereX: byte;
     //function WhereY: byte;
     procedure ClrScr;
     procedure ClrEol;
-    procedure InsLine;
-    procedure DelLine;
     procedure TextColor(AValue : TColor);
     procedure TextBackground(AValue : TColor);
+  published
+  end;
+
+  TLittleDosCRT = class ( TCustomDosCRT )
+  private
+  protected
+  public
+  //  property CheckBreak : boolean;
+  //  property CheckEOF : boolean;
+  //  property DirectVideo : boolean;
+  //  property CheckSnow : boolean;
+  //  property LastMode : word;
+  //  property TextAttr : byte;
+  //  property WindMin : word;
+  //  property WindMax : word;
+  //  procedure AssignCrt(var F : text);
+  //  function KeyPressed : boolean;
+  //  function ReadKey : char;
+  //  procedure TextMode(Mode : word);
+  //  procedure Window(X1, Y1, X2, Y2 : byte);
+  //  procedure GotoXY(X, Y : byte);
+  //  function WhereX: byte;
+  //  function WhereY: byte;
+  //  procedure ClrScr;
+  //  procedure ClrEol;
+  //  procedure InsLine;
+  //  procedure DelLine;
+  //  procedure TextColor(Color : byte);
+  //  procedure TextBackground(Color : byte);
+  //  procedure LowVideo;
+  //  procedure HighVideo;
+  //  procedure NormVideo;
+  //  procedure Delay(MS : word);
+  //  procedure Sound(Hz : word);
+  // procedure NoSound;
   published
   end;
 
@@ -121,11 +165,57 @@ begin
   DoSizeChange;
 end;
 
+procedure TCustomDosCRT.SetControlCodes(AValue: boolean);
+begin
+  if FControlCodes=AValue then Exit;
+  FControlCodes:=AValue;
+end;
+
 procedure TCustomDosCRT.SetScale(AValue: TPoint);
 begin
   if FScale=AValue then Exit;
   FScale:=AValue;
   DoSizeChange;
+end;
+
+procedure TCustomDosCRT.SetScrolling(AValue: boolean);
+begin
+  if FScrolling=AValue then Exit;
+  FScrolling:=AValue;
+end;
+
+procedure TCustomDosCRT.SetWindMin(AValue: TPoint);
+var
+  B : TPoint;
+begin
+  ValidateCoordinates(AValue);
+  B := FBottomRight;
+  if AValue.X > B.X then Exchange(AValue.X, B.X);
+  if AValue.Y > B.Y then Exchange(AValue.Y, B.Y);
+  if (B.X = FBottomRight.X) and (B.Y = FBottomRight.Y) and
+    (AValue.X = FTopLeft.X) and (AValue.Y = FTopLeft.Y) then Exit;
+  FTopLeft:=AValue;
+  FBottomRight:=B;
+end;
+
+procedure TCustomDosCRT.SetWindMax(AValue: TPoint);
+var
+  A : TPoint;
+begin
+  ValidateCoordinates(AValue);
+  A := FTopLeft;
+  if AValue.X < A.X then Exchange(AValue.X, A.X);
+  if AValue.Y < A.Y then Exchange(AValue.Y, A.Y);
+  if (A.X = FTopLeft.X) and (A.Y = FTopLeft.Y) and (AValue.X = FBottomRight.X)
+    and (AValue.Y = FBottomRight.Y) then Exit;
+  FTopLeft:=A;
+  FBottomRight:=AValue;
+end;
+
+procedure TCustomDosCRT.SetWrapping(AValue: boolean);
+begin
+  if FWrapping=AValue then Exit;
+  FWrapping:=AValue;
 end;
 
 function TCustomDosCRT.CurrentFont: TCustomDosFont;
@@ -331,11 +421,39 @@ begin
   end;
 end;
 
+procedure TCustomDosCRT.ScrollUp(AFromPosition: boolean);
+begin
+
+end;
+
+procedure TCustomDosCRT.ScrollDown(AFromPosition: boolean);
+begin
+
+end;
+
+procedure TCustomDosCRT.ScrollLeft(AFromPosition: boolean);
+begin
+
+end;
+
+procedure TCustomDosCRT.ScrollRight(AFromPosition: boolean);
+begin
+
+end;
+
+procedure TCustomDosCRT.SendCRT(const S: String);
+begin
+
+end;
+
 constructor TCustomDosCRT.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   ControlStyle := ControlStyle + [csOpaque];
   FUpdate:=0;
+  FControlCodes:=True;
+  FWrapping:=True;
+  FScrolling:=True;
   FFont:=nil;
   FNoFont:=TBitmapDosFont.Create;
   FScreen:=[];
@@ -364,44 +482,6 @@ begin
 end;
 
 { TDosCRT }
-
-function TDosCRT.GetWindMax: TPoint;
-begin
-  Result:=FBottomRight;
-end;
-
-function TDosCRT.GetWindMin: TPoint;
-begin
-  Result:=FTopLeft;
-end;
-
-procedure TDosCRT.SetWindMax(AValue: TPoint);
-var
-  A : TPoint;
-begin
-  ValidateCoordinates(AValue);
-  A := FTopLeft;
-  if AValue.X < A.X then Exchange(AValue.X, A.X);
-  if AValue.Y < A.Y then Exchange(AValue.Y, A.Y);
-  if (A.X = FTopLeft.X) and (A.Y = FTopLeft.Y) and (AValue.X = FBottomRight.X)
-    and (AValue.Y = FBottomRight.Y) then Exit;
-  FTopLeft:=A;
-  FBottomRight:=AValue;
-end;
-
-procedure TDosCRT.SetWindWin(AValue: TPoint);
-var
-  B : TPoint;
-begin
-  ValidateCoordinates(AValue);
-  B := FBottomRight;
-  if AValue.X > B.X then Exchange(AValue.X, B.X);
-  if AValue.Y > B.Y then Exchange(AValue.Y, B.Y);
-  if (B.X = FBottomRight.X) and (B.Y = FBottomRight.Y) and
-    (AValue.X = FTopLeft.X) and (AValue.Y = FTopLeft.Y) then Exit;
-  FTopLeft:=AValue;
-  FBottomRight:=B;
-end;
 
 procedure TDosCRT.ClrScr;
 var
@@ -433,16 +513,6 @@ begin
       FScreen[P].Character:=Byte(SPACE);
     end;
   EndUpdate;
-end;
-
-procedure TDosCRT.InsLine;
-begin
-
-end;
-
-procedure TDosCRT.DelLine;
-begin
-
 end;
 
 procedure TDosCRT.TextColor(AValue: TColor);
