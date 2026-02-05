@@ -50,9 +50,9 @@ type
   published
   end;
 
-  { TUFFDosFont }
+  { TUnicodeDosFont }
 
-  TUFFDosFont = class ( TCustomDosFont )
+  TUnicodeDosFont = class ( TCustomDosFont )
   private
   protected
   public
