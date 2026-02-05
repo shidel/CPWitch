@@ -13,8 +13,14 @@ unit DosCRT;
 
 interface
 
+{$DEFINE ALTDRAW}
+
+
 uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
+  {$IFDEF ALTDRAW}
+  IntfGraphics, FPCanvas, LCLType, LCLIntf, GraphType, FPImage,
+  {$ENDIF}
   Classes, SysUtils, Controls, Graphics, PasExt, CodePages, DosFont;
 
 type
@@ -24,6 +30,7 @@ type
     Foreground : TColor;
     BackGround : TColor;
   end;
+  TDosCRTScreen = array of TDosCRTScreenItem;
 
   { TCustomDosCRT }
 
@@ -32,11 +39,13 @@ type
     FFont, FNoFont: TCustomDosFont;
     FScale: TPoint;
     FResolution: TPoint;
-    FScreen : array of TDosCRTScreenItem;
+    FScreen : TDosCRTScreen;
+    FUpdate : integer;
     procedure SetFont(AValue: TCustomDosFont);
     procedure SetResolution(AValue: TPoint);
     procedure SetScale(AValue: TPoint);
   protected
+    FPosition : TPoint;
     FTopLeft : TPoint;
     FBottomRight : TPoint;
     FForeground : TColor;
@@ -46,14 +55,22 @@ type
     procedure ValidateCoordinates(var X, Y : LongInt); overload;
     procedure DoSizeChange; virtual;
     procedure Paint; override;
+    {$IFDEF ALTDRAW}
+    procedure Render(IntfImg: TLazIntfImage);
+    {$ELSE}
     procedure PaintCharAttr(X, Y : LongInt; C : TDosCRTScreenItem);
+    {$ENDIF}
     procedure SetScreenBuffer;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
+    procedure BeginUpdate; virtual;
+    procedure EndUpdate; virtual;
     property Resolution : TPoint read FResolution write SetResolution;
     property Scale : TPoint read FScale write SetScale;
     property Font : TCustomDosFont read FFont write SetFont;
+    property Screen : TDosCRTScreen read FScreen write FScreen;
+
   published
   end;
 
@@ -81,8 +98,8 @@ type
     procedure ClrEol;
     procedure InsLine;
     procedure DelLine;
-    //procedure TextColor(Color : byte);
-    //procedure TextBackground(Color : byte);
+    procedure TextColor(AValue : TColor);
+    procedure TextBackground(AValue : TColor);
   published
   end;
 
@@ -142,8 +159,108 @@ begin
     Height:=FResolution.Y * FNoFont.Height * FScale.Y;
   end;
   SetScreenBuffer;
-  // Invalidate;
+  Invalidate;
 end;
+
+{$IFDEF ALTDRAW}
+procedure TCustomDosCRT.Paint;
+var
+  I: TLazIntfImage;
+  B : TBitmap;
+begin
+  B := TBitmap.Create;
+  try
+    B.SetSize(Width, Height);
+    I := TLazIntfImage.Create(0, 0);
+    try
+      I.LoadFromBitmap(B.Handle, B.MaskHandle);
+      Render(I);
+      B.LoadFromIntfImage(I);
+      Canvas.Draw(0, 0, B);
+    finally
+      I.Free;
+    end;
+  finally
+    B.Free;
+  end;
+end;
+
+function ColorToFP(C: TColor): TFPColor;
+var
+  RGB: LongInt;
+  R, G, B: Word;
+begin
+  RGB := ColorToRGB(C);
+  R := RGB and $FF;
+  G := (RGB shr 8) and $FF;
+  B := (RGB shr 16) and $FF;
+  Result.Red   := (R shl 8) or R;  // Bit math version of R * 257
+  Result.Green := (G shl 8) or G;
+  Result.Blue  := (B shl 8) or B;
+  Result.Alpha := $FFFF;           // Fully opaque
+end;
+
+procedure TCustomDosCRT.Render(IntfImg: TLazIntfImage);
+var
+  F : TCustomDosFont;
+  X, Y, XX, YY, SX, SY: Integer;
+  SLX, SLY, SHX, SHY : LongInt;
+  BitMask: TArrayOfByte;
+  FG, BG, DrawColor: TFPColor;
+  ScreenItem: TDosCRTScreenItem;
+  CW, CH: Integer;
+  BaseX, BaseY, PixelY, PixelX: Integer;
+  B, I: Integer;
+begin
+  F:=CurrentFont;
+  CW := F.Width * FScale.X;
+  CH := F.Height * FScale.Y;
+
+  // Calculate what Screen characters need drawn.
+  SLX := Canvas.ClipRect.TopLeft.X div (F.Width * FScale.X);
+  SLY := Canvas.ClipRect.TopLeft.Y div (F.Height * FScale.Y);
+  SHX := Canvas.ClipRect.BottomRight.X div (F.Width * FScale.X) + 1;
+  SHY := Canvas.ClipRect.BottomRight.Y div (F.Height * FScale.Y) + 1;
+  ValidateCoordinates(SLX, SLY);
+  ValidateCoordinates(SHX, SHY);
+  for Y := SLY to SHY do begin
+    BaseY := Y * CH;
+    for X := SLX to SHX do begin
+      BaseX := X * CW;
+
+      ScreenItem := FScreen[FResolution.Y * Y + X];
+      BitMask := F.BitMask[ScreenItem.Character];
+      if Length(BitMask) = 0 then Continue;
+
+      FG := ColorToFP(ScreenItem.Foreground);
+      BG := ColorToFP(ScreenItem.Background);
+
+      I := 0;
+      for YY := 0 to F.Height - 1 do begin
+        B := 0;
+        PixelY := BaseY + (YY * FScale.Y);
+        for XX := 0 to F.Width - 1 do begin
+          if (BitMask[I] and (1 shl (7 - B))) <> 0 then
+            DrawColor := FG
+          else
+            DrawColor := BG;
+          PixelX := BaseX + (XX * FScale.X);
+          for SY := 0 to FScale.Y - 1 do
+            for SX := 0 to FScale.X - 1 do
+              IntfImg.Colors[PixelX + SX, PixelY + SY] := DrawColor;
+          Inc(B);
+          if B > 7 then begin
+            B := 0;
+            Inc(I);
+          end;
+        end;
+        if B <> 0 then Inc(I);
+      end;
+    end;
+  end;
+end;
+
+{$ELSE}
 
 procedure TCustomDosCRT.Paint;
 var
@@ -197,20 +314,20 @@ begin
     end;
   end;
 end;
+{$ENDIF}
 
 procedure TCustomDosCRT.SetScreenBuffer;
 var
-  I, J : Integer;
+  I : Integer;
 begin
-  J := 32;
+  FPosition:=Point(0,0);
+  FTopLeft:=Point(0,0);
+  FBottomRight:=Point(FResolution.X -1, FResolution.Y-1);
   SetLength(FScreen, FResolution.X * FResolution.Y);
   for I := 0 to High(FScreen) do begin
       FScreen[I].Background:=FBackGround;
       FScreen[I].Foreground:=FForeGround;
-      // FScreen[I].Character:=Byte(SPACE);
-      FScreen[I].Character:=J;
-      Inc(J);
-      if J > 127 then J := 32;
+      FScreen[I].Character:=Byte(SPACE);
   end;
 end;
 
@@ -218,16 +335,14 @@ constructor TCustomDosCRT.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   ControlStyle := ControlStyle + [csOpaque];
+  FUpdate:=0;
   FFont:=nil;
   FNoFont:=TBitmapDosFont.Create;
   FScreen:=[];
   FForeground:=clGray;
   FBackGround:=clBlack;
-  FTopLeft:=Point(0,0);
-  FBottomRight:=Point(79,24);
-  FScale:=Point(3,3);
-  FResolution.X:=FBottomRight.X + 1;
-  FResolution.Y:=FBottomRight.Y + 1;
+  FScale:=Point(1,1);
+  FResolution:=Point(80,25);
   DoSizeChange;
 end;
 
@@ -235,6 +350,17 @@ destructor TCustomDosCRT.Destroy;
 begin
   FreeAndNil(FNoFont);
   inherited Destroy;
+end;
+
+procedure TCustomDosCRT.BeginUpdate;
+begin
+  Inc(FUpdate);
+end;
+
+procedure TCustomDosCRT.EndUpdate;
+begin
+  Dec(FUpdate);
+  if FUpdate <= 0 then Invalidate;
 end;
 
 { TDosCRT }
@@ -278,13 +404,35 @@ begin
 end;
 
 procedure TDosCRT.ClrScr;
+var
+  X, Y, P : Integer;
 begin
-
+  BeginUpdate;
+  FPosition:=Point(0,0);
+  for Y := FTopLeft.Y to FBottomRight.Y do
+    for X := FTopLeft.X to FBottomRight.X do
+      begin
+        P:=Y * FResolution.X + X;
+        FScreen[P].Background:=FBackGround;
+        FScreen[P].Foreground:=FForeGround;
+        FScreen[P].Character:=Byte(SPACE);
+      end;
+  EndUpdate;
 end;
 
 procedure TDosCRT.ClrEol;
+var
+  X, P : Integer;
 begin
-
+  BeginUpdate;
+  for X := FTopLeft.X to FBottomRight.X do
+    begin
+      P:=FPosition.Y * FResolution.X + X;
+      FScreen[P].Background:=FBackGround;
+      FScreen[P].Foreground:=FForeGround;
+      FScreen[P].Character:=Byte(SPACE);
+    end;
+  EndUpdate;
 end;
 
 procedure TDosCRT.InsLine;
@@ -295,6 +443,16 @@ end;
 procedure TDosCRT.DelLine;
 begin
 
+end;
+
+procedure TDosCRT.TextColor(AValue: TColor);
+begin
+  FForeground:=AValue;
+end;
+
+procedure TDosCRT.TextBackground(AValue: TColor);
+begin
+  FBackground:=AValue;
 end;
 
 initialization

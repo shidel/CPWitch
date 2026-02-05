@@ -27,13 +27,13 @@ type
     FWidth: integer;
     function GetPixels(Index : integer): TArrayOfBoolean;
   protected
-    function GetCharacter(Index : integer): TArrayOfByte; virtual; abstract;
+    function GetBitMask(Index : integer): TArrayOfByte; virtual; abstract;
   public
     constructor Create; virtual;
     function LoadFromFile(FileName : String) : integer; virtual; abstract;
     property Width : integer read FWidth;
     property Height : integer read FHeight;
-    property Character[Index : integer] : TArrayOfByte read GetCharacter;
+    property BitMask[Index : integer] : TArrayOfByte read GetBitMask;
     property Pixels[Index : integer] : TArrayOfBoolean read GetPixels;
   published
   end;
@@ -45,7 +45,7 @@ type
      FData : TArrayOfByte;
   protected
     procedure Reset;
-    function GetCharacter(Index : integer): TArrayOfByte; override;
+    function GetBitMask(Index : integer): TArrayOfByte; override;
   public
     constructor Create; override;
     function LoadFromFile(FileName : String) : integer; override;
@@ -400,10 +400,9 @@ var
   I, P : Integer;
   Y, X : integer;
   B : integer;
-  S: String;
 begin
   Result:=[];
-  D:=GetCharacter(Index);
+  D:=GetBitMask(Index);
   if Length(D) = 0 then Exit;
   SetLength(Result, FWidth * FHeight);
   for I := 0 to High(Result) do
@@ -442,7 +441,7 @@ begin
   FHeight:=Length(FData) div 256;
 end;
 
-function TBitmapDosFont.GetCharacter(Index: integer): TArrayOfByte;
+function TBitmapDosFont.GetBitMask(Index: integer): TArrayOfByte;
 var
   I, P : Integer;
 begin

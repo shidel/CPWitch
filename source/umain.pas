@@ -220,6 +220,8 @@ begin
   fCodePageText := TDosCrt.Create(Self);
   // fCodePageText.Name:='fCodePageText';
   fCodePageText.Parent:=sbCodePage;
+  fCodePageText.TextBackground(clWindow);
+  fCodePageText.ClrScr;
 
   OnSettingsLoad:=@FormSettingsLoad;
   OnSettingsSave:=@FormSettingsSave;

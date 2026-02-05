@@ -280,6 +280,9 @@ object fMain: TfMain
         HorzScrollBar.Page = 1
         VertScrollBar.Page = 1
         Align = alClient
+        Color = clWindow
+        ParentBackground = False
+        ParentColor = False
         TabOrder = 1
       end
     end
