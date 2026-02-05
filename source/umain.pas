@@ -89,6 +89,10 @@ type
     procedure tAnimateTimer(Sender: TObject);
     private
       fCodepageFilter: TCodepageFilter;
+      FErrorBackground: TColor;
+      FErrorForeground: TColor;
+      FGoodBackground: TColor;
+      FGoodForeground: TColor;
       lbViewCodePageLabel : TLabel;
       btnExportFile : TToolButton;
       btnCodepageFilter : TToolButton;
@@ -96,6 +100,10 @@ type
       fCodepageText : TDosCrt;
       procedure PopulateCodePageList(Item : TWitchItem);
       procedure SetCodepageFilter(AValue: TCodepageFilter);
+      procedure SetErrorBackground(AValue: TColor);
+      procedure SetErrorForeground(AValue: TColor);
+      procedure SetGoodBackground(AValue: TColor);
+      procedure SetGoodForeground(AValue: TColor);
       procedure SetUnicodeView( S : String );
     protected
       procedure FormSettingsLoad(Sender: TObject);
@@ -114,8 +122,11 @@ type
       procedure ApplyUserLanguage; override;
       procedure OpenFile(FileName : String; Select : boolean = False); overload;
     published
-      property CodepageFilter : TCodepageFilter read FCodepageFilter write SetCodepageFilter;
-
+     property GoodForeground : TColor read FGoodForeground write SetGoodForeground;
+     property GoodBackground : TColor read FGoodBackground write SetGoodBackground;
+     property ErrorForeground : TColor read FErrorForeground write SetErrorForeground;
+     property ErrorBackground : TColor read FErrorBackground write SetErrorBackground;
+     property CodepageFilter : TCodepageFilter read FCodepageFilter write SetCodepageFilter;
   end;
 
 var
@@ -214,19 +225,27 @@ end;
 
 procedure TfMain.FormCreate(Sender: TObject);
 begin
+  FGoodForeground := clWindowText;
+  FGoodBackground := clWindow;
+  FErrorForeground := clRed;
+  FErrorBackground := clBlack;
   fWitch := TWitch.Create;
   fWitch.OnAnalyzed:=@WitchOnAnalyzed;
 
   fCodePageText := TDosCrt.Create(Self);
   // fCodePageText.Name:='fCodePageText';
   fCodePageText.Parent:=sbCodePage;
-  fCodePageText.TextBackground(clWindow);
-  fCodePageText.ClrScr;
+  fCodePageText.TextBackground(GoodBackground);
+  fCodePageText.TextColor(GoodForeground);
+  fCodePageText.ControlCodes:=False;
+  fCodePageText.Wrapping:=False;
 
   OnSettingsLoad:=@FormSettingsLoad;
   OnSettingsSave:=@FormSettingsSave;
 
   SetApplicationIcons;
+
+  fCodePageText.ClrScr;
 
   // Assign Images to Actions
   actOpen.ImageIndex:=idxButtonFileOpen;
@@ -379,18 +398,47 @@ begin
   UpdateMetaData;
 end;
 
+procedure TfMain.SetErrorBackground(AValue: TColor);
+begin
+  if FErrorBackground=AValue then Exit;
+  FErrorBackground:=AValue;
+end;
+
+procedure TfMain.SetErrorForeground(AValue: TColor);
+begin
+  if FErrorForeground=AValue then Exit;
+  FErrorForeground:=AValue;
+end;
+
+procedure TfMain.SetGoodBackground(AValue: TColor);
+begin
+  if FGoodBackground=AValue then Exit;
+  FGoodBackground:=AValue;
+end;
+
+procedure TfMain.SetGoodForeground(AValue: TColor);
+begin
+  if FGoodForeground=AValue then Exit;
+  FGoodForeground:=AValue;
+end;
+
 procedure TfMain.SetUnicodeView(S: String);
 var
   C : TColor;
+  B, F : String;
 begin
   // This does not scroll a TMemo to the top on macOS
   // mUnicodeText.VertScrollBar.Position:=0;
   // This does work on macOS
   //mUnicodeText.SelStart := 0;
   //mUnicodeText.SelLength := 0;
-  C:=ColorToRGB(clWindow);
-  hpUnicodeText.SetHtmlFromStr('<html><body style="background-color:' +
-    IntToHex(Red(C), 2) + IntToHex(Green(C), 2) + IntToHex(Blue(C), 2) + '; '+
+  C:=ColorToRGB(GoodForeground);
+  F:=IntToHex(Red(C), 2) + IntToHex(Green(C), 2) + IntToHex(Blue(C), 2);
+  C:=ColorToRGB(GoodBackground);
+  B:=IntToHex(Red(C), 2) + IntToHex(Green(C), 2) + IntToHex(Blue(C), 2);
+  hpUnicodeText.SetHtmlFromStr('<html><body style="' +
+    'color:' + F + '; '+
+    'background-color:' + B + '; '+
     'margin:0; font-weight:light; font-size:100%;">' +
     '<pre>' + S + '</pre>' +
     { StringReplace(S, CR, '<br>',[rfReplaceAll]) + }
@@ -410,6 +458,8 @@ begin
   end;
   UpdateFilterCheck;
   SetApplicationIcons;
+  { TODO 5 -cDevel Add load color settings for Good/Bad mappings }
+  sbCodepage.Color:=FGoodBackground;
 end;
 
 procedure TfMain.FormSettingsSave(Sender: TObject);
@@ -422,6 +472,7 @@ begin
     cpfAll : S := 'All';
   end;
   SetConfig('Codepage_Filter', S);
+  { TODO 5 -cDevel Add save color settings for Good/Bad mappings }
 end;
 
 procedure TfMain.WitchOnAnalyzed(Sender: TObject);
@@ -566,24 +617,47 @@ end;
 procedure TfMain.UpdateCodepageView;
 var
   W : TWitchItem;
+  SL : TStringList;
+  Y, TW, TH : Integer;
 begin
+  fCodepageText.TextBackground(GoodBackground);
+  fCodepageText.TextColor(GoodForeground);
   if Not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then begin
-    // Clear
+    fCodePageText.Resolution:=Point(1,1);
+    fCodePageText.ClrScr;
     Exit;
   end;
   W:=TWitchItem(lvFileList.Selected.Data);
   if not W.Analyzed then begin
-    // Clear
+    fCodePageText.Resolution:=Point(1,1);
+    fCodePageText.ClrScr;
     Exit;
   end else begin
+    fCodePageText.BeginUpdate;
+    SL := TStringList.Create;
     case W.Encoding of
       weNone : begin
+        SL.AddText(PasExt.ToString(W.FileData));
+        TW:=Longest(SL);
+        if TW < 1 then TW:=1;
+        TH:=SL.Count;
+        if TH < 1 then TH:=1;
+        Inc(TW);
+        Inc(TH);
+        fCodePageText.Resolution:=Point(TW,TH);
+        fCodePageText.ClrScr;
+        for Y := 0 to SL.Count - 1 do begin
+          fCodePageText.GotoXY(1, Y + 1);
+          fCodePageText.WriteCRT(SL[Y]);
+        end;
       end;
       weCodePage : begin
       end;
       weUnicode : begin
       end;
     end;
+    SL.Free;
+    fCodePageText.EndUpdate;
   end;
 end;
 
