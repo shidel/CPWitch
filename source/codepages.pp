@@ -10,7 +10,7 @@
   in the "AppDataPath" set by the PasExt Unit. Eventually, that data will likely
   be embedded into this unit to remove the requirement of the external file. }
 
-unit CodePages;
+unit Codepages;
 
 {$mode ObjFPC}{$H+}
 
@@ -23,10 +23,12 @@ uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
   Classes, SysUtils, PasExt, IniFiles, BinTree;
 
-  function CodePageList : TArrayOfInteger;
-
 type
-  TCodePageResult = record
+  TCodepageMap = record
+    Codepage : integer;
+    Map : TArrayOfInt32;
+  end;
+  TCodepageResult = record
     Codepage : integer;       // Specific Codepage.
     Characters : integer;     // total number of characters
     ASCII : integer;          // ASCII < 0x80
@@ -34,7 +36,12 @@ type
     Converted : integer;      // Number of characters supported in conversion
     Compatible : integer;     // percentage of compatibility
   end;
-  TCodePageResults = array of TCodePageResult;
+  TCodepageResults = array of TCodepageResult;
+
+  function CodepageList : TArrayOfInteger;
+  function CodepageMap(Codepage : integer) : TCodepageMap;
+
+type
 
   { TCodepageConverter }
 
@@ -43,10 +50,13 @@ type
     FCodepage: integer;
     FControlCodes: boolean;
     FExpanded: boolean;
-    FResults: TCodePageResult;
+    FInvalid: Int32;
+    FResults: TCodepageResult;
     procedure SetCodepage(AValue: integer);
     procedure SetControlCodes(AValue: boolean);
     procedure SetExpanded(AValue: boolean);
+  protected
+    procedure SetInvalid(AValue: Int32); virtual; abstract;
   public
     constructor Create; virtual;
     { Clear all data. Does not reset Expanded or ControlCodes! }
@@ -59,17 +69,23 @@ type
     property Expanded : boolean read FExpanded write SetExpanded;
     { Convert ASCII Control Codes }
     property ControlCodes : boolean read FControlCodes write SetControlCodes;
+    { Invalid or Un-mappable characters get assigned this Value. For conversion
+      to Codepage, it should be the ASCII value 0-255. For conversion to Unicode,
+      it should be the Value of a Unicode Character. }
+    property Invalid : Int32 read FInvalid write SetInvalid;
     { Conversion success results }
-    property Results : TCodePageResult read FResults;
+    property Results : TCodepageResult read FResults;
   end;
 
   { TCodepageToUTF8 }
 
-  TCodepageToUTF8 = class(TCodePageConverter)
+  TCodepageToUTF8 = class(TCodepageConverter)
   private
     FConverted: UnicodeString;
     FSource: RawByteString;
     procedure SetSource(AValue: RawByteString);
+  protected
+    procedure SetInvalid(AValue: Int32); override;
   public
     constructor Create; override;
     procedure Clear; override;
@@ -78,13 +94,15 @@ type
     property Converted : UnicodeString read FConverted;
   end;
 
-  { TUTF8ToCodePage }
+  { TUTF8ToCodepage }
 
-  TUTF8ToCodePage = class(TCodePageConverter)
+  TUTF8ToCodepage = class(TCodepageConverter)
   private
     FConverted: RawByteString;
     FSource: UnicodeString;
     procedure SetSource(AValue: UnicodeString);
+  protected
+    procedure SetInvalid(AValue: Int32); override;
   public
     constructor Create; override;
     procedure Clear; override;
@@ -98,12 +116,12 @@ type
   TUTF8Analyze = class
   private
     FValues : TArrayOfInt32;
-    FResults: TCodePageResults;
+    FResults: TCodepageResults;
   protected
     procedure Analyze; overload;
   public
     constructor Create(const Data : TArrayOfByte); virtual;
-    property Results : TCodePageResults read FResults;
+    property Results : TCodepageResults read FResults;
   end;
 
 implementation
@@ -118,11 +136,7 @@ const
    cpeError = -4; // Mostly for functions that need to know to ignore the result.
 
 type
-  TCodePageMap = record
-    CodePage : integer;
-    Map : TArrayOfInt32;
-  end;
-  TCodePageMaps = array of TCodePageMap;
+  TCodepageMaps = array of TCodepageMap;
   TUnmappableChar = record
     Value : Int32;
     Data : TArrayOfInt32;
@@ -131,31 +145,31 @@ type
 
 var
   EnMap : Integer;         // Default English Codepage to Unicode Map
-  Maps : TCodePageMaps;    // All codepage Maps
+  Maps : TCodepageMaps;    // All Codepage Maps
   UnMap : TUnmappable;     // Codepage character which do not exist in Unicode
   AnalyzeMap : TBinaryTree;    // Binary Tree for Unicode to Codepage Lookup
 
-function FindMap(CodePage : Integer) : Integer;
+function FindMap(Codepage : Integer) : Integer;
 var
   I : Integer;
 begin
   Result:=-1;
    for I := Low(Maps) to High(Maps) do
-    if Maps[I].CodePage = CodePage then begin
+    if Maps[I].Codepage = Codepage then begin
       Result:=I;
       Break;
     end;
 end;
 
-function CodePageMap(CodePage: Integer): TCodePageMap;
+function CodepageMap(Codepage: Integer): TCodepageMap;
 var
   I : Integer;
 begin
-  Result.CodePage:=-1;
+  Result.Codepage:=-1;
   Result.Map:=[];
   for I := Low(Maps) to High(Maps) do
-    if Maps[I].CodePage = CodePage then begin
-      Result.CodePage:=CodePage;
+    if Maps[I].Codepage = Codepage then begin
+      Result.Codepage:=Codepage;
       Result.Map:=Copy(Maps[I].Map,0,Length(Maps[I].Map));
       Break;
     end;
@@ -205,8 +219,8 @@ begin
   L:=nil;
   D:=0;
   try
-    LogMessage(vbExcessive, 'Codepage data: ' + AppDataPath+'codepages.ini');
-    INI:=TIniFile.Create(AppDataPath+'codepages.ini');
+    LogMessage(vbExcessive, 'Codepage data: ' + AppDataPath+'Codepages.ini');
+    INI:=TIniFile.Create(AppDataPath+'Codepages.ini');
     S:=TStringList.Create;
     L:=TStringList.Create;
     INI.ReadSections(S);
@@ -222,7 +236,7 @@ begin
       if E <> 0 then Continue;
       SetLength(Maps, Length(Maps) + 1);
       C:=High(Maps);
-      Maps[C].CodePage:=T;
+      Maps[C].Codepage:=T;
       if T = 437 then D:=C;
       Maps[C].Map:=[];
       SetLength(Maps[C].Map,256);
@@ -250,14 +264,14 @@ begin
       for J := 0 to 255 do
         if Maps[D].Map[J] = Maps[I].Map[J] then begin
           if J > 127 then
-            LogMessage(vbExcessive, 'Codepage ' + IntToStr(Maps[I].CodePage) +
+            LogMessage(vbExcessive, 'Codepage ' + IntToStr(Maps[I].Codepage) +
              ', Map entry + 0x' + HexStr(J, 2) + ' should be removed.');
           Maps[I].Map[J]:=cpeInherited;
         end;
     end;
     LogMessage(vbExcessive, IntToStr(Length(Maps)) + ' Codepage maps.');
   except
-    LogMessage(vbCritical, 'Exception raised loading codepage mapping data.');
+    LogMessage(vbCritical, 'Exception raised loading Codepage mapping data.');
     Maps:=[];
   end;
   if Assigned(L) then FreeAndNil(L);
@@ -330,12 +344,14 @@ var
 var
   TN : TBinaryTreeNode;
 {$ENDIF}
-
+var
+  FC : integer;
 begin
+  if Inclusive then FC:=0 else FC:=$80;
   SL := TStringList.Create;
-  // Add all chars from all codepage maps as separate entries in TStringList
+  // Add all chars from all Codepage maps as separate entries in TStringList
   for I := 0 to High(Maps) do
-    for J := $80 to High(Maps[I].Map) do begin
+    for J := FC to High(Maps[I].Map) do begin
       V:=Maps[I].Map[J];
       if V < 0 then begin
         if not Inclusive then Continue;
@@ -345,7 +361,7 @@ begin
         if V < 0 then V:=J;
       end;
       SL.Add(IntToStr(V) + // Unicode Value 0 - 1,114,111
-        EQUAL + IntToStr(Maps[I].CodePage) + COMMA + // Codepage Number
+        EQUAL + IntToStr(Maps[I].Codepage) + COMMA + // Codepage Number
         IntToStr(J) ); // ASCI Value
     end;
   SL.Sort;
@@ -404,14 +420,14 @@ begin
   if Assigned(AnalyzeMap) then FreeAndNil(AnalyzeMap);
 end;
 
-function CodePageList: TArrayOfInteger;
+function CodepageList: TArrayOfInteger;
 var
   I : Integer;
 begin
   Result:=[];
   SetLength(Result, Length(Maps));
   for I := 0 to High(Result) do
-    Result[I]:=Maps[I].CodePage;
+    Result[I]:=Maps[I].Codepage;
 end;
 
 { TCodepageConverter }
@@ -439,13 +455,14 @@ begin
   inherited Create;
   FExpanded:=False;
   FControlCodes:=False;
+  FInvalid:=0;
   Clear;
 end;
 
 procedure TCodepageConverter.Clear;
 begin
-  FCodePage:=-1;
-  FResults.Codepage:=FCodePage;
+  FCodepage:=-1;
+  FResults.Codepage:=FCodepage;
   FResults.Characters:=0;
   FResults.ASCII:=0;
   FResults.Converted:=0;
@@ -459,6 +476,12 @@ procedure TCodepageToUTF8.SetSource(AValue: RawByteString);
 begin
   if FSource=AValue then Exit;
   FSource:=AValue;
+end;
+
+procedure TCodepageToUTF8.SetInvalid(AValue: Int32);
+begin
+  if AValue = FInvalid then Exit;
+  FInvalid:=AValue;
 end;
 
 constructor TCodepageToUTF8.Create;
@@ -476,31 +499,48 @@ begin
 end;
 
 function TCodepageToUTF8.Convert : boolean;
+var
+  M, I, C : Integer;
 begin
   Result:=False;
+  FConverted := '';
+  M:=FindMap(FCodepage);
+  if M < 0 then Exit;
+  if EnMap < 0 then Exit;
+  for I := 1 to Length(FSource) do begin
+     C:=Byte(FSource[I]);
+  end;
 end;
 
-{ TUTF8ToCodePage }
+{ TUTF8ToCodepage }
 
-procedure TUTF8ToCodePage.SetSource(AValue: UnicodeString);
+procedure TUTF8ToCodepage.SetSource(AValue: UnicodeString);
 begin
   if FSource=AValue then Exit;
   FSource:=AValue;
 end;
 
-constructor TUTF8ToCodePage.Create;
+procedure TUTF8ToCodepage.SetInvalid(AValue: Int32);
+begin
+  if (AValue < 0) or (AValue > 255) then
+    AValue:=0;
+  if AValue = FInvalid then Exit;
+  FInvalid:=AValue;
+end;
+
+constructor TUTF8ToCodepage.Create;
 begin
   inherited Create;
 end;
 
-procedure TUTF8ToCodePage.Clear;
+procedure TUTF8ToCodepage.Clear;
 begin
   inherited Clear;
   FSource:='';
   FConverted:='';
 end;
 
-function TUTF8ToCodePage.Convert : boolean;
+function TUTF8ToCodepage.Convert : boolean;
 begin
   Result:=False;
 end;
@@ -559,11 +599,11 @@ begin
 // Populate Result Array
   SetLength(FResults, Length(Maps));
   for I := 0 to High(FResults) do begin
-    FResults[I].Codepage:=Maps[I].CodePage;
+    FResults[I].Codepage:=Maps[I].Codepage;
     FResults[I].Characters := Length(FValues);
     FResults[I].ASCII := AC;
     FResults[I].Unicode := UC;
-    X:=R.Find(IntToStr(Maps[I].CodePage));
+    X:=R.Find(IntToStr(Maps[I].Codepage));
     if Assigned(X) then begin
       FResults[I].Converted:=X.Value;
       if (UC = 0) or  (FResults[I].Converted = UC) then

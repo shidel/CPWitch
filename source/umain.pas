@@ -91,10 +91,6 @@ type
     private
       FActiveCodepage: integer;
       fCodepageFilter: TCodepageFilter;
-      FErrorBackground: TColor;
-      FErrorForeground: TColor;
-      FGoodBackground: TColor;
-      FGoodForeground: TColor;
       lbViewCodepageLabel : TLabel;
       btnExportFile : TToolButton;
       btnCodepageFilter : TToolButton;
@@ -103,10 +99,6 @@ type
       fUFF : TUnicodeDosFont;
       procedure PopulateCodepageList(Item : TWitchItem);
       procedure SetCodepageFilter(AValue: TCodepageFilter);
-      procedure SetErrorBackground(AValue: TColor);
-      procedure SetErrorForeground(AValue: TColor);
-      procedure SetGoodBackground(AValue: TColor);
-      procedure SetGoodForeground(AValue: TColor);
       procedure SetUnicodeView( S : String );
     protected
       procedure FormSettingsLoad(Sender: TObject);
@@ -126,10 +118,6 @@ type
       procedure OpenFile(FileName : String; Select : boolean = False); overload;
       property ActiveCodepage : integer read FActiveCodepage;
     published
-     property GoodForeground : TColor read FGoodForeground write SetGoodForeground;
-     property GoodBackground : TColor read FGoodBackground write SetGoodBackground;
-     property ErrorForeground : TColor read FErrorForeground write SetErrorForeground;
-     property ErrorBackground : TColor read FErrorBackground write SetErrorBackground;
      property CodepageFilter : TCodepageFilter read FCodepageFilter write SetCodepageFilter;
   end;
 
@@ -230,10 +218,6 @@ end;
 procedure TfMain.FormCreate(Sender: TObject);
 begin
   FActiveCodepage := 437;
-  FGoodForeground := clWindowText;
-  FGoodBackground := clWindow;
-  FErrorForeground := clRed;
-  FErrorBackground := clBlack;
   fWitch := TWitch.Create;
   fWitch.OnAnalyzed:=@WitchOnAnalyzed;
 
@@ -241,8 +225,10 @@ begin
   // fCodepageText.Name:='fCodepageText';
   fCodepageText.Parent:=sbCodepage;
   fCodepageText.Color:=clBlue;
-  fCodepageText.TextBackground(GoodBackground);
-  fCodepageText.TextColor(GoodForeground);
+  fCodepageText.Foreground := clWindowText;
+  fCodepageText.Background := clWindow;
+  fCodepageText.ErrorForeground := clRed;
+  fCodepageText.ErrorBackground := clBlack;
   fCodepageText.ControlCodes:=False;
   fCodepageText.Wrapping:=False;
   { TODO 0 -cDevel Convert to BorderSpacing when supported by TCustomDosCRT }
@@ -326,10 +312,10 @@ begin
   IgnoreParameter(Change);
   FActiveCodepage:= 437;
   if Assigned(lvCodepageList.Selected) then begin
-    LogMessage(vbVerbose, '?' + CutDelim(lvCodepageList.Selected.Caption,SPACE,1,1));
     Val(CutDelim(lvCodepageList.Selected.Caption,SPACE,1,1),FActiveCodepage, E);
     if E <> 0 then FActiveCodepage:=437;
   end;
+  LogMessage(vbVerbose, 'Selected Codepage ' + IntToStr(FActiveCodepage));
   UpdateStatusBar;
   UpdateCodepageViewlabel;
   UpdateCodePageView;
@@ -403,7 +389,8 @@ begin
           end;
       end;
       weCodepage : begin
-        // File is not UTF-8 so must be Codepage encoded
+       // File is not UTF-8 so must be Codepage encoded
+        { TODO 9 -cDevel Implement Codepage List for Codepage encoded files. }
         L:=lvCodepageList.Items.Add;
         L.ImageIndex:=0;
         L.Caption:=GetTranslation(K+'Not_implemented/Caption', 'Not implemented');
@@ -429,34 +416,10 @@ begin
   UpdateMetaData;
 end;
 
-procedure TfMain.SetErrorBackground(AValue: TColor);
-begin
-  if FErrorBackground=AValue then Exit;
-  FErrorBackground:=AValue;
-end;
-
-procedure TfMain.SetErrorForeground(AValue: TColor);
-begin
-  if FErrorForeground=AValue then Exit;
-  FErrorForeground:=AValue;
-end;
-
-procedure TfMain.SetGoodBackground(AValue: TColor);
-begin
-  if FGoodBackground=AValue then Exit;
-  FGoodBackground:=AValue;
-end;
-
-procedure TfMain.SetGoodForeground(AValue: TColor);
-begin
-  if FGoodForeground=AValue then Exit;
-  FGoodForeground:=AValue;
-end;
-
 procedure TfMain.SetUnicodeView(S: String);
 var
   C : TColor;
-  B, F : String;
+  B, F, EB, EF : String;
 begin
   // This does not scroll a TMemo to the top on macOS
   // mUnicodeText.VertScrollBar.Position:=0;
@@ -465,10 +428,14 @@ begin
   // mUnicodeText.SelStart := 0;
   // mUnicodeText.SelLength := 0;
 
-  C:=ColorToRGB(GoodForeground);
+  C:=ColorToRGB(fCodepageText.Foreground);
   F:=IntToHex(Red(C), 2) + IntToHex(Green(C), 2) + IntToHex(Blue(C), 2);
-  C:=ColorToRGB(GoodBackground);
+  C:=ColorToRGB(fCodepageText.Background);
   B:=IntToHex(Red(C), 2) + IntToHex(Green(C), 2) + IntToHex(Blue(C), 2);
+  C:=ColorToRGB(fCodepageText.ErrorForeground);
+  EF:=IntToHex(Red(C), 2) + IntToHex(Green(C), 2) + IntToHex(Blue(C), 2);
+  C:=ColorToRGB(fCodepageText.ErrorBackground);
+  EB:=IntToHex(Red(C), 2) + IntToHex(Green(C), 2) + IntToHex(Blue(C), 2);
   { TODO 0 -cBug TIpHtmlPanel does not honor whites-space pre, pre-wrap or nowrap and wraps text anyway. }
   { TODO 0 -cBug TIpHtmlPanel displays HTML entities "as-is" inside PRE tags. }
   // Note: TIpHtmlPanel incorrectly displays Named HTML entities inside of
@@ -480,7 +447,8 @@ begin
   S:=StringReplace(S, CR, LF,[rfReplaceAll]);
   S:=StringReplace(S, LF, '<br>',[rfReplaceAll]);
   S:=StringReplace(S, SPACE, '&nbsp;', [rfReplaceAll]);
-
+  { TODO 6 -cDevel Add support to view unmapped characters as errors in UnicodeView }
+  IgnoreParameter([EF, EB]);
   S:='<html><body style="' +
     'color:' + F + '; background-color:' + B + '; '+
     'margin:0; font-weight:light; font-size:90%;">' + CR +
@@ -504,7 +472,7 @@ begin
   UpdateFilterCheck;
   SetApplicationIcons;
   { TODO 5 -cDevel Add load color settings for Good/Bad mappings }
-  sbCodepage.Color:=FGoodBackground;
+  sbCodepage.Color:=fCodepageText.Background;
 end;
 
 procedure TfMain.FormSettingsSave(Sender: TObject);
@@ -651,7 +619,9 @@ begin
           H:=EscapeHTML(PasExt.ToString(W.FileData));
         end;
         weCodepage : begin
-          H:= '';
+{ TODO 9 -cDevel Implement Unicode View for Codepage encoded files. }
+          H:= GetTranslation(ComponentNamePath(lvCodepageList, Self, True)
+          +'Not_implemented/Caption', 'Not implemented');
         end;
       end;
 
@@ -666,10 +636,9 @@ var
   SL : TStringList;
   Y, TW, TH : Integer;
   CP : integer;
+  S : String;
 begin
   CP := FActiveCodepage;
-  fCodepageText.TextBackground(GoodBackground);
-  fCodepageText.TextColor(GoodForeground);
   if Not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then begin
     fCodepageText.Resolution:=Point(1,1);
     fCodepageText.ClrScr;
@@ -692,6 +661,7 @@ begin
     Inc(TH);
     case W.Encoding of
       weNone : begin
+        fCodepageText.Codepage:=-1;
         fCodepageText.Resolution:=Point(TW,TH);
         fCodepageText.ClrScr;
         for Y := 0 to SL.Count - 1 do begin
@@ -700,11 +670,18 @@ begin
         end;
       end;
       weCodepage : begin
-        fCodepageText.Resolution:=Point(1,1);
+{ TODO 9 -cDevel Implement Codepage View for Codepage encoded files. }
+        S:=GetTranslation(ComponentNamePath(lvCodepageList, Self, True)
+         +'Not_implemented/Caption', 'Not implemented');
+        fCodepageText.Codepage:=-1;
+        fCodepageText.Resolution:=Point(Length(S),1);
         fCodepageText.ClrScr;
+        fCodepageText.WriteCRT(S);
+        fCodepageText.WriteError(S);
       end;
       weUnicode : begin
-        fCodepageText.Resolution:=Point(1,1);
+        fCodepageText.Codepage:=-1;
+        fCodepageText.Resolution:=Point(TW,TH);
         fCodepageText.ClrScr;
       end;
     end;

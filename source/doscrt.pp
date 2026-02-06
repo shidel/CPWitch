@@ -39,20 +39,22 @@ type
     FCodepage: integer;
     FControlCodes: boolean;
     FFont, FNoFont: TCustomDosFont;
-    FInvalidBackground: TColor;
-    FInvalidChar: Int32;
-    FInvalidTextColor: TColor;
+    FErrorBackground: TColor;
+    FErrorChar: Int32;
+    FErrorForeground: TColor;
     FScale: TPoint;
     FResolution: TPoint;
     FScreen : TDosCRTScreen;
     FUpdate : integer;
     FWrapping: boolean;
+    procedure SetBackground(AValue: TColor);
     procedure SetCodepage(AValue: integer);
     procedure SetControlCodes(AValue: boolean);
     procedure SetFont(AValue: TCustomDosFont);
-    procedure SetInvalidBackground(AValue: TColor);
-    procedure SetInvalidChar(AValue: Int32);
-    procedure SetInvalidTextColor(AValue: TColor);
+    procedure SetForeground(AValue: TColor);
+    procedure SetErrorBackground(AValue: TColor);
+    procedure SetErrorChar(AValue: Int32);
+    procedure SetErrorForeground(AValue: TColor);
     procedure SetResolution(AValue: TPoint);
     procedure SetScale(AValue: TPoint);
     procedure SetWindMin(AValue : TPoint);
@@ -79,6 +81,9 @@ type
     procedure ScrollDown(AFromPosition : boolean = false);
     procedure ScrollLeft(AFromPosition : boolean = false);
     procedure ScrollRight(AFromPosition : boolean = false);
+    function ControlCode(const CtrlCode : Char) : boolean;
+    function PosOfChar : Longint;
+    procedure NextChar;
     procedure NextLine;
   public
     constructor Create(AOwner: TComponent); override;
@@ -91,11 +96,14 @@ type
     property Screen : TDosCRTScreen read FScreen write FScreen;
     property ControlCodes : boolean read FControlCodes write SetControlCodes;
     property Codepage : integer read FCodepage write SetCodepage;
-    property InvalidChar : Int32 read FInvalidChar write SetInvalidChar;
-    property InvalidTextColor : TColor read FInvalidTextColor write SetInvalidTextColor;
-    property InvalidBackground : TColor read FInvalidBackground write SetInvalidBackground;
+    property Foreground : TColor read FForeground write SetForeground;
+    property Background : TColor read FBackground write SetBackground;
+    property ErrorChar : Int32 read FErrorChar write SetErrorChar;
+    property ErrorForeground : TColor read FErrorForeground write SetErrorForeground;
+    property ErrorBackground : TColor read FErrorBackground write SetErrorBackground;
     property Wrapping : boolean read FWrapping write SetWrapping;
     procedure WriteCRT(const S : RawByteString); overload;
+    procedure WriteError(const S : RawByteString); overload;
   published
   end;
 
@@ -176,22 +184,28 @@ begin
   DoSizeChange;
 end;
 
-procedure TCustomDosCRT.SetInvalidBackground(AValue: TColor);
+procedure TCustomDosCRT.SetForeground(AValue: TColor);
 begin
-  if FInvalidBackground=AValue then Exit;
-  FInvalidBackground:=AValue;
+  if FForeground=AValue then Exit;
+  FForeground:=AValue;
 end;
 
-procedure TCustomDosCRT.SetInvalidChar(AValue: Int32);
+procedure TCustomDosCRT.SetErrorBackground(AValue: TColor);
 begin
-  if FInvalidChar=AValue then Exit;
-  FInvalidChar:=AValue;
+  if FErrorBackground=AValue then Exit;
+  FErrorBackground:=AValue;
 end;
 
-procedure TCustomDosCRT.SetInvalidTextColor(AValue: TColor);
+procedure TCustomDosCRT.SetErrorChar(AValue: Int32);
 begin
-  if FInvalidTextColor=AValue then Exit;
-  FInvalidTextColor:=AValue;
+  if FErrorChar=AValue then Exit;
+  FErrorChar:=AValue;
+end;
+
+procedure TCustomDosCRT.SetErrorForeground(AValue: TColor);
+begin
+  if FErrorForeground=AValue then Exit;
+  FErrorForeground:=AValue;
 end;
 
 procedure TCustomDosCRT.SetControlCodes(AValue: boolean);
@@ -204,6 +218,12 @@ procedure TCustomDosCRT.SetCodepage(AValue: integer);
 begin
   if FCodepage=AValue then Exit;
   FCodepage:=AValue;
+end;
+
+procedure TCustomDosCRT.SetBackground(AValue: TColor);
+begin
+  if FBackground=AValue then Exit;
+  FBackground:=AValue;
 end;
 
 procedure TCustomDosCRT.SetScale(AValue: TPoint);
@@ -541,6 +561,41 @@ begin
   EndUpdate;
 end;
 
+function TCustomDosCRT.ControlCode(const CtrlCode: Char): boolean;
+var
+  I : Integer;
+begin
+  Result:=FControlCodes and (CtrlCode < #32) or (CtrlCode=#127);
+  if Result then begin
+      case CtrlCode of
+        CR  : FPosition.X := 0;
+        LF  : NextLine;
+        TAB : begin
+          I := (8 - (FPosition.X + 1) mod 8);
+          WriteCRT(StringOf(SPACE, I));
+        end;
+        { TODO 7 -cDevel Add support for BACKSPACE character in DosCRT }
+        BACKSPACE  : begin end;
+        { TODO 7 -cDevel Add support for DELETE character in DosCRT }
+        DELETECHAR : begin end;
+      end;
+    end;
+end;
+
+function TCustomDosCRT.PosOfChar: Longint;
+begin
+  Result:=(FTopLeft.Y + FPosition.Y) * FResolution.X + (FTopLeft.X + FPosition.X);
+end;
+
+procedure TCustomDosCRT.NextChar;
+begin
+  Inc(FPosition.X);
+  if (FTopLeft.X + FPosition.X) > FBottomRight.X then begin
+    FPosition.X:=0;
+    NextLine;
+  end;
+end;
+
 procedure TCustomDosCRT.NextLine;
 begin
   Inc(FPosition.Y);
@@ -568,10 +623,10 @@ begin
   FBackGround:=clBlack;
   FScale:=Point(1,1);
   FResolution:=Point(80,25);
-  FInvalidChar:=$3f; { or $bf }
+  FErrorChar:=$3f; { or $bf }
   FCodepage:=-1;
-  FInvalidTextColor:=clRed;
-  FInvalidBackground:=clBlack;
+  FErrorForeGround:=clRed;
+  FErrorBackground:=clBlack;
   DoSizeChange;
 end;
 
@@ -593,39 +648,35 @@ begin
 end;
 
 procedure TCustomDosCRT.WriteCRT(const S: RawByteString);
+{ TODO 8 -cDevel WriteCRT text as if it is Codepage Encoded }
+{ TODO 8 -cDevel WriteCRT text as if it is Unicode Encoded }
 var
   I : Integer;
   P : LongInt;
 begin
   BeginUpdate;
   for I := 1 to Length(S) do begin
-  if FControlCodes and (S[I] < #32) or (S[I]=#127) then begin
-      { propcess or ignore character control codes }
-      case S[I] of
-        CR  : FPosition.X := 0;
-        LF  : NextLine;
-        TAB : begin
-          P := (8 - (FPosition.X + 1) mod 8);
-          WriteCRT(StringOf(SPACE, P));
-        end;
-        { TODO 7 -cDevel Add support for BACKSPACE character in DosCRT }
-        BACKSPACE  : begin end;
-        { TODO 7 -cDevel Add support for DELETE character in DosCRT }
-        DELETECHAR : begin end;
-      end;
-      Continue;
-    end;
-    P := (FTopLeft.Y + FPosition.Y) * FResolution.X + (FTopLeft.X + FPosition.X);
+    if ControlCode(S[I]) then Continue;
+    P := PosOfChar;
     FScreen[P].Character:=Byte(S[I]);
     FScreen[P].Foreground := FForeground;
     FScreen[P].BackGround := FBackground;
-    Inc(FPosition.X);
-    if (FTopLeft.X + FPosition.X) > FBottomRight.X then begin
-      FPosition.X:=0;
-      NextLine;
-    end;
+    NextChar;
   end;
   EndUpdate;
+end;
+
+procedure TCustomDosCRT.WriteError(const S: RawByteString);
+var
+  HoldForeground, HoldBackground : TColor;
+begin
+  HoldForeground:=FForeground;
+  HoldBackground:=FBackground;
+  FForeground:=FErrorForeground;
+  FBackGround:=FErrorBackground;
+  WriteCRT(S);
+  Foreground:=HoldForeground;
+  Background:=HoldBackground;
 end;
 
 { TDosCRT }
