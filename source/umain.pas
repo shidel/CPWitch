@@ -18,7 +18,7 @@ uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ExtCtrls, ComCtrls, ActnList, Menus, IpHtml,
   Version, PasExt, Icons, MultiApp, LogView, Updater, Preferences,
-  DosCRT, Witch;
+  DosCRT, DosFont, Witch;
 
 type
 
@@ -81,6 +81,7 @@ type
     procedure actOnlineUpdateExecute(Sender: TObject);
     procedure actPreferencesExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
     procedure lvCodepageListChange(Sender: TObject; Item: TListItem;
       Change: TItemChange);
@@ -98,6 +99,7 @@ type
       btnCodepageFilter : TToolButton;
       fWitch : TWitch;
       fCodepageText : TDosCrt;
+      fUFF : TUnicodeDosFont;
       procedure PopulateCodePageList(Item : TWitchItem);
       procedure SetCodepageFilter(AValue: TCodepageFilter);
       procedure SetErrorBackground(AValue: TColor);
@@ -235,10 +237,20 @@ begin
   fCodePageText := TDosCrt.Create(Self);
   // fCodePageText.Name:='fCodePageText';
   fCodePageText.Parent:=sbCodePage;
+  fCodePageText.Color:=clBlue;
   fCodePageText.TextBackground(GoodBackground);
   fCodePageText.TextColor(GoodForeground);
   fCodePageText.ControlCodes:=False;
   fCodePageText.Wrapping:=False;
+  { TODO 0 -cDevel Convert to BorderSpacing when supported by TCustomDosCRT }
+  fCodePageText.Left:=8;
+  fCodePageText.Top:=8;
+
+  fUFF:=TUnicodeDosFont.Create;
+  if fUFF.LoadFromFile(AppDataPath + '0816norm.uff') = 0 then
+    fCodePageText.Font:=fUFF
+  else
+    FreeAndNil(fUFF);
 
   OnSettingsLoad:=@FormSettingsLoad;
   OnSettingsSave:=@FormSettingsSave;
@@ -284,6 +296,12 @@ begin
   lbViewCodepageLabel.BorderSpacing.Around:=8;
 
   SetUnicodeView('');
+end;
+
+procedure TfMain.FormDestroy(Sender: TObject);
+begin
+  if Assigned(fUFF) then
+    FreeAndNil(fUff);
 end;
 
 procedure TfMain.FormDropFiles(Sender: TObject; const FileNames: array of string
@@ -652,8 +670,12 @@ begin
         end;
       end;
       weCodePage : begin
+        fCodePageText.Resolution:=Point(1,1);
+        fCodePageText.ClrScr;
       end;
       weUnicode : begin
+        fCodePageText.Resolution:=Point(1,1);
+        fCodePageText.ClrScr;
       end;
     end;
     SL.Free;

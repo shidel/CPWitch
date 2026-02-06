@@ -13,12 +13,12 @@ unit DosCRT;
 
 interface
 
-{$DEFINE ALTDRAW}
+{ DEFINE OLDDRAW}
 
 
 uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
-  {$IFDEF ALTDRAW}
+  {$IFNDEF OLDDRAW}
   IntfGraphics, FPCanvas, LCLType, LCLIntf, GraphType, FPImage,
   {$ENDIF}
   Classes, SysUtils, Controls, Graphics, PasExt, CodePages, DosFont;
@@ -36,15 +36,23 @@ type
 
   TCustomDosCRT = class ( TGraphicControl )
   private
+    FCodepage: integer;
     FControlCodes: boolean;
     FFont, FNoFont: TCustomDosFont;
+    FInvalidBackground: TColor;
+    FInvalidChar: Int32;
+    FInvalidTextColor: TColor;
     FScale: TPoint;
     FResolution: TPoint;
     FScreen : TDosCRTScreen;
     FUpdate : integer;
     FWrapping: boolean;
+    procedure SetCodepage(AValue: integer);
     procedure SetControlCodes(AValue: boolean);
     procedure SetFont(AValue: TCustomDosFont);
+    procedure SetInvalidBackground(AValue: TColor);
+    procedure SetInvalidChar(AValue: Int32);
+    procedure SetInvalidTextColor(AValue: TColor);
     procedure SetResolution(AValue: TPoint);
     procedure SetScale(AValue: TPoint);
     procedure SetWindMin(AValue : TPoint);
@@ -61,7 +69,7 @@ type
     procedure ValidateCoordinates(var X, Y : LongInt); overload;
     procedure DoSizeChange; virtual;
     procedure Paint; override;
-    {$IFDEF ALTDRAW}
+    {$IFNDEF OLDDRAW}
     procedure Render(IntfImg: TLazIntfImage);
     {$ELSE}
     procedure PaintCharAttr(X, Y : LongInt; C : TDosCRTScreenItem);
@@ -82,6 +90,10 @@ type
     property Font : TCustomDosFont read FFont write SetFont;
     property Screen : TDosCRTScreen read FScreen write FScreen;
     property ControlCodes : boolean read FControlCodes write SetControlCodes;
+    property Codepage : integer read FCodepage write SetCodepage;
+    property InvalidChar : Int32 read FInvalidChar write SetInvalidChar;
+    property InvalidTextColor : TColor read FInvalidTextColor write SetInvalidTextColor;
+    property InvalidBackground : TColor read FInvalidBackground write SetInvalidBackground;
     property Wrapping : boolean read FWrapping write SetWrapping;
     procedure WriteCRT(const S : RawByteString); overload;
   published
@@ -164,10 +176,34 @@ begin
   DoSizeChange;
 end;
 
+procedure TCustomDosCRT.SetInvalidBackground(AValue: TColor);
+begin
+  if FInvalidBackground=AValue then Exit;
+  FInvalidBackground:=AValue;
+end;
+
+procedure TCustomDosCRT.SetInvalidChar(AValue: Int32);
+begin
+  if FInvalidChar=AValue then Exit;
+  FInvalidChar:=AValue;
+end;
+
+procedure TCustomDosCRT.SetInvalidTextColor(AValue: TColor);
+begin
+  if FInvalidTextColor=AValue then Exit;
+  FInvalidTextColor:=AValue;
+end;
+
 procedure TCustomDosCRT.SetControlCodes(AValue: boolean);
 begin
   if FControlCodes=AValue then Exit;
   FControlCodes:=AValue;
+end;
+
+procedure TCustomDosCRT.SetCodepage(AValue: integer);
+begin
+  if FCodepage=AValue then Exit;
+  FCodepage:=AValue;
 end;
 
 procedure TCustomDosCRT.SetScale(AValue: TPoint);
@@ -233,19 +269,21 @@ begin
 end;
 
 procedure TCustomDosCRT.DoSizeChange;
+var
+   W, H : Integer;
 begin
-  if Assigned(FFont) then begin
-    Width:=FResolution.X * FFont.Width * FScale.X;
-    Height:=FResolution.Y * FFont.Height * FScale.Y;
-  end else begin
-    Width:=FResolution.X * FNoFont.Width * FScale.X;
-    Height:=FResolution.Y * FNoFont.Height * FScale.Y;
-  end;
+  W:=FResolution.X * CurrentFont.Width * FScale.X;
+  H:=FResolution.Y * CurrentFont.Height * FScale.Y;
+  { TODO 1 -cDevel Add support for BorderSpacing to TCustomDosCRT }
+  // Inc(W,BorderSpacing.Inner * 2);
+  // Inc(H,BorderSpacing.Inner * 2);
+  Width:=W;
+  Height:=H;
   SetScreenBuffer;
   Invalidate;
 end;
 
-{$IFDEF ALTDRAW}
+{$IFNDEF OLDDRAW}
 procedure TCustomDosCRT.Paint;
 var
   I: TLazIntfImage;
@@ -530,6 +568,10 @@ begin
   FBackGround:=clBlack;
   FScale:=Point(1,1);
   FResolution:=Point(80,25);
+  FInvalidChar:=$3f; { or $bf }
+  FCodePage:=-1;
+  FInvalidTextColor:=clRed;
+  FInvalidBackground:=clBlack;
   DoSizeChange;
 end;
 

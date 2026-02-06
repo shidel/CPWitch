@@ -15,7 +15,7 @@ interface
 
 uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
-  Classes, SysUtils, PasExt, CodePages;
+  Classes, SysUtils, PasExt, BinTree, CodePages;
 
 type
 
@@ -27,6 +27,7 @@ type
     FWidth: integer;
     function GetPixels(Index : integer): TArrayOfBoolean;
   protected
+    FData : TArrayOfByte;
     function GetBitMask(Index : integer): TArrayOfByte; virtual; abstract;
   public
     constructor Create; virtual;
@@ -40,9 +41,10 @@ type
 
   { TBitmapDosFont }
 
+  { TODO 1 -cDevel Add Modification and Saving of a Dos Bitmap Font file. }
+
   TBitmapDosFont = class ( TCustomDosFont )
   private
-     FData : TArrayOfByte;
   protected
     procedure Reset;
     function GetBitMask(Index : integer): TArrayOfByte; override;
@@ -54,10 +56,56 @@ type
 
   { TUnicodeDosFont }
 
+  { TODO 1 -cDevel Port Modification and Saving of a (UFF) DOS Unicode Font
+    file from the Danger Engine Resource Editor. }
+
   TUnicodeDosFont = class ( TCustomDosFont )
   private
+    FChars : TBinaryTree;
+    FBaseLine: integer;
+    FBoldness: Int8;
+    FComment: String;
+    FDisplacement: integer;
+    FFontName: String;
+    FInvalidChar: Int32;
+    FItalics: Int8;
+    FProportional: Boolean;
+    FStrikeOut: integer;
+    FTitle: String;
+    FUnderLine: integer;
+    FVersion: word;
+    function GetCount: integer;
+    function GetPadded(Index : integer): boolean;
+    procedure Reset;
+    procedure SetInvalidChar(AValue: Int32);
   protected
+    procedure ReadData(var Position : integer; out V; C : Word);
+    function ReadASCIIz(var Position : integer) : RawByteString;
+    function ReadBytes(var Position : integer; C : word) : TArrayOfByte;
+    function ProcessHeader : integer;
+    function DecodeChars(var Position: integer; Current, Last: Int32; Expected: word): boolean;
+    function DecodeChar(CData, CMask: TArrayOfByte): TArrayOfByte;
+    procedure AddCharacter(Index : Int64; CData : TArrayOfByte; AValue: boolean);
+    function GetBitMask(Index : integer): TArrayOfByte; override;
   public
+    constructor Create; override;
+    destructor Destroy; override;
+    function LoadFromFile(FileName : String) : integer; override;
+    property InvalidChar : Int32 read FInvalidChar write SetInvalidChar;
+    property Count : integer read GetCount;
+    property Version : word read FVersion;
+    property Proportional : Boolean read FProportional;
+    property Boldness : Int8 read FBoldness;
+    property Italics : Int8 read FItalics;
+    property FontName : String read FFontName;
+    property Title : String read FTitle;
+    property Comment : String read FComment;
+    property BaseLine : integer read FBaseLine;
+    property UnderLine : integer read FUnderLine;
+    property StrikeOut : integer read FStrikeOut;
+    property Displacement : integer read FDisplacement;
+    property Padded[Index : integer] : boolean read GetPadded;
+
   published
   end;
 
@@ -392,6 +440,13 @@ const
   uffCharacter        = $01; // Character data defined.
   uffTerminate        = $00; // End of font data stream.
 
+function UFFToInt32(Index: TUFFCharacterIndex): Int32;
+begin
+  Result:=Index[2];
+  Result :=Result shl 8 + Index[1];
+  Result :=Result shl 8 + Index[0];
+end;
+
 { TCustomDosFont }
 
 function TCustomDosFont.GetPixels(Index: integer): TArrayOfBoolean;
@@ -430,6 +485,7 @@ begin
   inherited Create;
   FWidth:=0;
   FHeight:=0;
+  FData:=[];
 end;
 
 { TBitmapDosFont }
@@ -467,13 +523,362 @@ begin
   FHeight:=0;
   Result:=FileLoad(FileName, FData);
   if Result = 0 then begin
+    LogMessage(vbVerbose, 'Loaded DOS bitmap font: ' + FileName);
     FHeight:=Length(FData) div 256;
     if FHeight * 256 <> Length(FData) then begin
       Reset;
       Result:=5;
     end else
       FWidth:=8;
+  end else
+    LogMessage(vbCritical, 'Error #' + IntToStr(Result) + ' loading DOS bitmap font: ' + FileName);
+
+end;
+
+{ TUnicodeDosFont }
+
+procedure TUnicodeDosFont.Reset;
+begin
+  FInvalidChar:=-1;
+  FWidth:=0;
+  FHeight:=0;
+  SetLength(FData, 0);
+end;
+
+function TUnicodeDosFont.GetPadded(Index : integer): boolean;
+var
+  N : TBinaryTreeNode;
+begin
+  N:=FChars.Find(Index);
+  if Assigned(N) then
+    Result:=N.Flags and uffPadded <> 0
+  else
+    Result:=False;
+end;
+
+function TUnicodeDosFont.GetCount: integer;
+begin
+  if Assigned(FChars) then
+    Result:=FChars.Count
+  else
+    Result:=0;
+end;
+
+function TUnicodeDosFont.GetBitMask(Index: integer): TArrayOfByte;
+var
+  N : TBinaryTreeNode;
+begin
+  Result := [];
+  N:=FChars.Find(Index);
+  if Assigned(N) then
+    Result:=N.Data
+  else if FInvalidChar > 0 then begin
+    N:=FChars.Find(FInvalidChar);
+    if Assigned(N) then
+      Result:=N.Data
   end;
+end;
+
+procedure TUnicodeDosFont.SetInvalidChar(AValue: Int32);
+begin
+  if FInvalidChar=AValue then Exit;
+  FInvalidChar:=AValue;
+end;
+
+function TUnicodeDosFont.ProcessHeader: integer;
+var
+  I : integer;
+  H : TUFFHeader;
+  P : integer;
+begin
+  PseudoInit(H);
+  Result:=5;
+  // FCount:=0;
+  P:=0;
+  for I := 0 to 5 do
+    if UFFFileID[I] <> Char(FData[I]) then begin
+      LogMessage(vbVerbose, 'not a Unicode font file');
+      Exit;
+    end;
+  if Length(FData) < Sizeof(TUFFHeader) + 3 then begin
+    LogMessage(vbVerbose, 'font file is trucated');
+    Exit;
+  end;
+  ReadData(P, H, SizeOf(H));
+  if Length(FData) <  H.HeaderSize + 1 then begin
+    LogMessage(vbVerbose, 'invalid header size');
+    Exit;
+  end;
+  { Parse Header }
+  FWidth:=H.Width;
+  FHeight:=H.Height;
+  FBaseLine:=H.BaseLine;
+  FUnderLine:=H.UnderLine;
+  FStrikeOut:=H.StrikeOut;
+  FDisplacement:=H.Displacement;
+  FVersion:=H.Version;
+  if H.Style and $c0fe <> 0 then
+    LogMessage(vbVerbose, TAB + 'ignore unrecognized style bits: ' + BinStr(H.Style and $c0fe, 16) );
+  FProportional:=H.Style and 1 <> 0;
+  FBoldness := (H.Style shr 8) and 3;
+  if H.Style and $0400 <> 0 then FBoldness:=-FBoldness;
+  FItalics := (H.Style shr 11) and 3;
+  if H.Style and $0200 <> 0 then FItalics:=-FItalics;
+  FFontName:=ReadASCIIz(P);
+  FTitle:=ReadASCIIz(P);
+  FComment:=ReadASCIIz(P);
+  { Process Data }
+  if P <> H.HeaderSize then begin
+    LogMessage(vbVerbose, 'extra data in header (contains ' + IntToStr(P) +
+      ' bytes, expected ' + IntToStr(H.HeaderSize) + ' bytes)' );
+    P := H.HeaderSize;
+  end;
+  if not DecodeChars(P, UFFToInt32(H.First), UFFToInt32(H.Last), H.Count) then begin
+    LogMessage(vbMinimal, TAB+'decoding error');
+    Exit;
+  end;
+  if P <> Length(FData) then begin
+    LogMessage(vbVerbose, TAB+'extraneous data after character stream');
+  end;
+  { Summary }
+  Result:=0;
+end;
+
+function TUnicodeDosFont.DecodeChars(var Position: integer; Current,
+  Last: Int32; Expected: word): boolean;
+var
+  Flags : byte;
+  Entry, W : word;
+  U : TUFFCharacterIndex;
+  CCombine : Int32;
+  CSpacing, CMaskSize : word;
+  CMask, CMAll, CData, CChar : TArrayOfByte;
+  CPad : Boolean;
+  CBytes, I : integer;
+begin
+  Result:=False;
+  Entry:=0;
+  CMaskSize:=BitSize(FHeight);
+  CMAll:=[];
+  SetLength(CMAll, CMaskSize);
+  for I := 0 to CMaskSize - 1 do
+    CMAll[I]:=255;
+  while true do try
+    if Position > Length(FData) then raise Exception.Create('not terminated');
+    ReadData(Position, Flags, Sizeof(Flags));
+    { LogMessage(vbExcessive, TAB + 'Action Flags: ' + BinStr(Flags,8)); }
+
+    if Flags = uffTerminate then Break; { terminated }
+
+    if Flags and uffSkipCount <> 0 then begin { Skip Count }
+      W := (Flags and $7f);
+      W:=W shl 8;
+      ReadData(Position, W, Sizeof(Byte));
+      Current:=Current + W + 1;
+      LogMessage(vbExcessive, TAB + 'skip ' + IntToStr(W+1) + ' character' +
+       WhenTrue(W+1 <>1, 's'));
+      Continue;
+    end;
+
+    if Flags and (uffUserDefined) <> 0 then begin { unknown data }
+      ReadData(Position, W, SizeOf(W));
+      LogMessage(vbExcessive, TAB + IntToStr(W) + ' byte' + WhenTrue(W <> 1, 's') +
+      ' of unknown data');
+      Position := Position + W;
+      Continue;
+    end;
+
+    if Flags and uffCombining <> 0 then begin { Combine with character }
+      ReadData(Position, U, Sizeof(U));
+      CCombine:=UFFToInt32(U);
+    end else
+      CCombine:=-1;
+
+    if Flags and uffDuplicate <> 0 then begin { Duplicate of existing }
+      ReadData(Position, U, Sizeof(U));
+      CMask:=[];
+      CChar:=GetBitMask(UFFToInt32(U));
+      CPad:=GetPadded(UFFToInt32(U));
+      CSpacing:=0;
+      LogMessage(vbExcessive, TAB+'Entry #' + IntToStr(Entry) + ' (U+' +
+        HexStr(Current, 6) + ') duplicate of U+' + HexStr(UFFToInt32(U),6));
+    end else begin
+      if (Flags and uffCharacter = 0) then
+        LogMessage(vbNormal, 'Probable corruption of UFF data.');
+      CPad:=Flags and uffPadded <> 0;
+      if Flags and uffSpacing <> 0 then  { Spacing Data }
+        ReadData(Position, CSpacing, Sizeof(CSpacing))
+      else
+        CSpacing := 0;
+      if Flags and uffMasking <> 0 then begin { Masking Data }
+        CMask:=ReadBytes(Position, CMaskSize);
+        CBytes:=BitSize(FWidth) * BitCount(CMask, FHeight);
+      end else begin
+        CBytes:=BitSize(FWidth) * FHeight;
+        CMask:=Copy(CMAll, 0, CMaskSize);
+      end;
+      if CBytes <> 0 then
+        CData:=ReadBytes(Position, CBytes);
+      CChar := DecodeChar(CData, CMask);
+    end;
+
+    { TODO 0 -cDevel UFF Combine Character Support }
+    if CCombine <> -1 then begin
+      LogMessage(vbMinimal, 'UFF combining characters not yet implemented.');
+    end;
+
+    LogMessage(vbExcessive, TAB+'Entry #' + IntToStr(Entry) + ' (U+' +
+      HexStr(Current, 6) + ') ' + IntToStr(CBytes) + ' byte' +
+      WhenTrue(CBytes <> 1, 's'));
+    if CSpacing <> 0 then
+      LogMessage(vbExcessive, TAB2+'Spacing: ' + HexStr(CSpacing, 4));
+    if Length(CMask) <> 0 then begin
+      LogMessage(vbExcessive, TAB2+'Masking: ', CMask, FHeight);
+      LogMessage(vbExcessive, TAB2+'Data: ', CData);
+    end;
+    LogMessage(vbExcessive, TAB2+'Character: ', CChar);
+    AddCharacter(Current, CChar, CPad);
+
+    { TODO 0 -cDevel UFF Character Spacing Support }
+
+    Inc(Entry);
+    Inc(Current);
+
+  except
+    on E : Exception do begin
+      LogMessage(vbCritical, 'UFF, exception: ' + E.Message);
+      LogMessage(vbCritical, 'UFF, corrupt unicode font file');
+      exit;
+    end;
+  end;
+  Dec(Current);
+  if Last <> Current then
+    LogMessage(vbMinimal, 'UFF, last expected character was U+' + HexStr(Last,6) +
+    ', but was ' + HexStr(Current ,6));
+  if Expected <> Count then
+    LogMessage(vbMinimal, 'UFF, expected ' + IntToStr(Expected) + ' character' +
+    WhenTrue(Expected <> 1, 's') + ', but ' + IntToStr(Count) + SPACE +
+    WhenTrue(Count <> 1, 'were', 'was') + SPACE + 'defined');
+  Result:=True;
+end;
+
+function TUnicodeDosFont.DecodeChar(CData, CMask: TArrayOfByte): TArrayOfByte;
+var
+  M : DWord;
+  I, R, J, W : integer;
+begin
+  CData := BitUnpack(CData, FWidth);
+  M := 0;
+  for I := Length(CMask) - 1 downto 0 do
+    M := (M shl 8) + CMask[I];
+  // LogMessage(vbExcessive, TAB2 + 'Mask Value: ' + BinStr(M, FHeight));
+  Result:=[];
+  W:=BitSize(FWidth);
+  SetLength(Result, W * FHeight);
+  R:=0;
+  for I := 0 to FHeight - 1 do
+    if (M shr I) and 1 = 0 then begin
+      for J := 0 to W - 1 do
+        Result[I * W + J] := 0;
+    end else begin
+      for J := 0 to W - 1 do begin
+        Result[I * W + J] := CData[R];
+        Inc(R);
+      end;
+    end;
+end;
+
+procedure TUnicodeDosFont.AddCharacter(Index: Int64; CData: TArrayOfByte;
+  AValue: boolean);
+var
+  N : TBinaryTreeNode;
+begin
+  N:=FChars.Find(Index);
+  if Assigned(N) then begin
+    LogMessage(vbCritical, 'Identical UniqueID ' + IntToStr(Index) + ' already present in tree.');
+    Exit;
+  end;
+  try
+    N:=FChars.Add(Index, CData);
+    N.Value:=WhenTrue(AValue, uffPadded);
+  except
+    LogMessage(vbCritical, 'Failed to add UniqueID ' + IntToStr(Index) + ' to tree.');
+  end;
+end;
+
+procedure TUnicodeDosFont.ReadData(var Position: integer; out V; C: Word);
+type
+  Bytes=array[0..65535] of byte;
+var
+  I : integer;
+begin
+  try
+    for I := 0 to C - 1 do begin
+      Bytes(V)[I]:=FData[Position];
+      Inc(Position);
+    end;
+  finally
+  end;
+end;
+
+function TUnicodeDosFont.ReadASCIIz(var Position: integer): RawByteString;
+var
+  B : Byte;
+begin
+  try
+    Result:='';
+    While Position < Length(FData) do begin
+      ReadData(Position, B, Sizeof(B));
+      if B = 0 then Break;
+      Result:=Result+Char(B);
+    end;
+  except
+    Result:='';
+  end;
+end;
+
+function TUnicodeDosFont.ReadBytes(var Position: integer; C: word
+  ): TArrayOfByte;
+var
+  I : integer;
+  B : Byte;
+begin
+  Result:=[];
+  SetLength(Result, C);
+  for I := 0 to C - 1 do begin
+    ReadData(Position, B, Sizeof(B));
+    Result[I]:=B;
+  end;
+end;
+
+constructor TUnicodeDosFont.Create;
+begin
+  inherited Create;
+  FChars := TBinaryTree.Create;
+  FData:=[];
+  Reset;
+end;
+
+destructor TUnicodeDosFont.Destroy;
+begin
+  if Assigned(FChars) then FreeAndNil(FChars);
+  inherited Destroy;
+end;
+
+function TUnicodeDosFont.LoadFromFile(FileName: String): integer;
+begin
+  Reset;
+  Result:=FileLoad(FileName, FData);
+  if Result = 0 then
+    Result:=ProcessHeader;
+  SetLength(FData, 0);
+  if Result = 0 then begin
+    LogMessage(vbVerbose, 'Loaded DOS Unicode font: ' + FileName);
+  end else begin
+    Reset;
+    LogMessage(vbCritical, 'Error #' + IntToStr(Result) + ' loading DOS Unicode font: ' + FileName);
+  end;
+  FChars.Balance;
 end;
 
 initialization

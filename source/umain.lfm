@@ -14,6 +14,7 @@ object fMain: TfMain
   ShowHint = True
   LCLVersion = '4.0.0.4'
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnDropFiles = FormDropFiles
   object ctrlBar: TControlBar
     Left = 0
