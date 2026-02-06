@@ -448,19 +448,34 @@ begin
   // This does not scroll a TMemo to the top on macOS
   // mUnicodeText.VertScrollBar.Position:=0;
   // This does work on macOS
-  //mUnicodeText.SelStart := 0;
-  //mUnicodeText.SelLength := 0;
+  //
+  // mUnicodeText.SelStart := 0;
+  // mUnicodeText.SelLength := 0;
+
   C:=ColorToRGB(GoodForeground);
   F:=IntToHex(Red(C), 2) + IntToHex(Green(C), 2) + IntToHex(Blue(C), 2);
   C:=ColorToRGB(GoodBackground);
   B:=IntToHex(Red(C), 2) + IntToHex(Green(C), 2) + IntToHex(Blue(C), 2);
-  hpUnicodeText.SetHtmlFromStr('<html><body style="' +
+  { TODO 0 -cBug TIpHtmlPanel does not honor whites-space pre, pre-wrap or nowrap and wraps text anyway. }
+  { TODO 0 -cBug TIpHtmlPanel displays HTML entities "as-is" inside PRE tags. }
+  // Note: TIpHtmlPanel incorrectly displays Named HTML entities inside of
+  // PRE tags and displays them as-is. For example, "&gt;" should be displayed
+  // as ">". But, it is displayed as "&gt;". Also, pre, pre-wrap and nowrap
+  // will still break lines at the edge of a window. Therefore, SPACE needs
+  // converted to &nbsp and CR/LF need converted to a <br> tag.
+  S:=StringReplace(S, CRLF, '<br>',[rfReplaceAll]);
+  S:=StringReplace(S, CR, '<br>',[rfReplaceAll]);
+  S:=StringReplace(S, LF, '<br>',[rfReplaceAll]);
+  S:=StringReplace(S, SPACE, '&nbsp;', [rfReplaceAll]);
+
+  S:='<html><body style="' +
     'color:' + F + '; '+
     'background-color:' + B + '; '+
-    'margin:0; font-weight:light; font-size:100%;">' +
-    '<pre>' + S + '</pre>' +
-    { StringReplace(S, CR, '<br>',[rfReplaceAll]) + }
-    '<br></body></html>');
+    'margin:0; font-weight:light; font-size:90%;">' + CR +
+    '<div style="font-family: monospace; ">'+ S + '</div>' +
+    '<br></body></html>';
+  hpUnicodeText.SetHtmlFromStr(S);
+  // FileSave(AppBasePath + '/test.html',PasExt.ToBytes(S));
 end;
 
 procedure TfMain.FormSettingsLoad(Sender: TObject);

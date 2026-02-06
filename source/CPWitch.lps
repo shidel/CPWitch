@@ -18,9 +18,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <TopLine Value="208"/>
-        <CursorPos X="32" Y="249"/>
-        <FoldState Value=" T3kD03B16 pkRnA068 pj4jS09514 PkOlJ0T"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="445"/>
+        <CursorPos X="105" Y="459"/>
+        <FoldState Value=" T3kD03B16 pkRnA06417 pjCkb0n114 PifkP0C"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -39,9 +40,10 @@
         <Filename Value="mpla/pasext.pp"/>
         <UnitName Value="PasExt"/>
         <EditorIndex Value="5"/>
-        <CursorPos X="38" Y="30"/>
-        <FoldState Value=" TK0071 TL904022M1W1322111zD1G pjTv4]E34226686639231A491 Pj1sK4 T4N02 p0;R0]*3;704E]t2kI064]9Pjf0D7 pigjb0!43]TkCnP04D[K5V0FC]9bjZ079]9ZjJ0M4[:4jY0M[99B16]ucmH0LD[c5f07A[T4]:DA]RDjG297 piekV0b[968044]9Yj50!9[j4l90E3]9CiY0x6]96ja038[{u5M0C4 PjNj30 T1;803H pk3mC02[)4ak10A1413L]t5pL033422I]DLo30I5]94kF0I6[i5207817];1m205H]KdkO07B]9YkA027[I4jg0682]nkdnS023]KfjR029 pj3k9097[I4k5]I[}V5c093 Pj0iW0 T6:B01A5 pMu30124r]Zb%D]B1M PiAyZ]bM@N41172 p5{E010F p0zG21 T0:SHJAB petZO428T pj2-Nb3G piZqUL39 pj1kHJ931B]B5o1NDF[T4lUPB[95kWW3C PiEkOVb"/>
-        <UsageCount Value="70"/>
+        <TopLine Value="182"/>
+        <CursorPos X="15" Y="211"/>
+        <FoldState Value=" TK0071 TL904022M1W13241zD1G pjRv421134226686639231A491 Pj1sK4 T4N02 p0;R0]@3;704E]t2kI064]9Pjf0D7 pigjb0!43]TkCnP04D[K5V0FC]9bjZ079]9ZjJ0M4[:4jY0M[99B16]ucmH0LD[c5f07A[T4]:DA]RDjG297 piekV0b[968044]9Yj50!9[j4l90E3]9CiY0x6]96ja038[{u5M0C4 PjNj30 T1;803H pk3mC02[)4ak10A1413L]t5pL033422I]DLo30I5]94kF0I6[i5207817];1m205H]KdkO07B]9YkA027[I4jg0682]nkdnS023]KfjR029 pj3k9097[I4k5]I[}V5c093 Pj0iW0 T6:B01A5 pMu30124r]Zb%D]B1M PiAyZ]bM@N41172 p5{E010F p0zG21 T0:SHJAB petZO428T pj2-Nb3G piZqUL39 pj1kHJ931B]B5o1NDF[T4lUPB[95kWW3C PiEkOVN"/>
+        <UsageCount Value="71"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -87,7 +89,7 @@
         <Filename Value="witch.pas"/>
         <UnitName Value="Witch"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="75"/>
+        <TopLine Value="178"/>
         <CursorPos X="44" Y="90"/>
         <FoldState Value=" T3k80425A pj2lE03516]BXkO031 PB50m"/>
         <UsageCount Value="104"/>
@@ -109,15 +111,8 @@
         <TopLine Value="247"/>
         <CursorPos Y="165"/>
         <FoldState Value=" T3jK079 piZjN051153317 pm2o5031M"/>
-        <UsageCount Value="18"/>
+        <UsageCount Value="19"/>
         <Loaded Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="mpla/taskmngr.pp"/>
-        <UnitName Value="TaskMngr"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="49" Y="19"/>
-        <UsageCount Value="0"/>
       </Unit>
       <Unit>
         <Filename Value="version.pp"/>
@@ -134,18 +129,17 @@
         <TopLine Value="204"/>
         <CursorPos X="33" Y="276"/>
         <FoldState Value=" T7jHCK1 PXMI T3l6043141213 pkHla0S4 piXjT0J218 pjTl7031p"/>
-        <UsageCount Value="54"/>
+        <UsageCount Value="55"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="dosfont.pp"/>
         <UnitName Value="DosFont"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <TopLine Value="538"/>
-        <CursorPos X="18" Y="881"/>
+        <CursorPos X="38" Y="865"/>
         <FoldState Value=" T7i2J9 T3jR0~77 piYqd065 pj3jL0{Z5]JalZ06y"/>
-        <UsageCount Value="54"/>
+        <UsageCount Value="55"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -172,14 +166,6 @@
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="dosfont.pp"/>
-        <Caret Line="580" Column="53" TopLine="555"/>
-      </Position>
-      <Position>
-        <Filename Value="dosfont.pp"/>
-        <Caret Line="588" Column="22" TopLine="553"/>
-      </Position>
       <Position>
         <Filename Value="dosfont.pp"/>
         <Caret Line="75" Column="64" TopLine="42"/>
@@ -291,6 +277,14 @@
       <Position>
         <Filename Value="dosfont.pp"/>
         <Caret Line="802" Column="31" TopLine="581"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="471" Column="28" TopLine="324"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="472" Column="6" TopLine="446"/>
       </Position>
     </JumpHistory>
     <RunParams>
