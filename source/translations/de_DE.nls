@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CONFIG Name="Deutsch" Language="de_DE">
+  <Translation>
+    <Revision_0 Date="2026-02-06" Contributor="Jerome Shidel"/>
+  </Translation>
   <Application>
     <ModalButtons>
       <Ok Value="OK"/>
@@ -159,8 +162,52 @@
         <Processing Caption="Processing"/>
         <Codepage Caption="Codepage"/>
         <NoEncoding Caption="ASCII"/>
+        <Unicode Caption="Unicode"/>
       </statBar>
     </fMain>
+    <fPreferences Caption="Codepage Witch Einstellungen">
+      <fPreferencePages>
+        <tsAbout Hint="Über &quot;%s&quot;" Caption="Über">
+          <lbCopyright Caption="Copyright %s"/>
+          <lbVersion Caption="Version %0:s (Build %1:s)"/>
+          <lbApplication Caption="Die &quot;%s&quot;"/>
+        </tsAbout>
+        <tsGeneral Hint="Allgemeine Anwendungseinstellungen." Caption="Allgemein">
+          <gbUserLanguage Caption="Benutzersprache">
+            <cxLanguageChoice Default="(Standard)"/>
+            <pLanguagePreferred>
+              <lbLanguagePreferred Caption="Bevorzugte Sprache:"/>
+            </pLanguagePreferred>
+            <lbLanguageSystem Caption="Systemsprache:  %s"/>
+          </gbUserLanguage>
+          <gbMiscellaneous Caption="Verschiedenes">
+            <cbShowHints Caption="Hinweise beim Überfahren mit der Maus anzeigen."/>
+            <cbColorButtons Caption="Farbige Symbolleisten-Schaltflächen verwenden."/>
+          </gbMiscellaneous>
+          <gbOnlineUpdate Caption="Online-Update">
+            <cbAutoCheck Caption="Automatisch nach Updates suchen"/>
+            <pUpdateButton>
+              <btnUpdateCheck Hint="Den Online-Server nach dem neuesten Update abfragen." Caption="Jetzt prüfen..."/>
+            </pUpdateButton>
+          </gbOnlineUpdate>
+        </tsGeneral>
+      </fPreferencePages>
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnAccept Hint="Alle Änderungen akzeptieren und anwenden." Caption="Übernehmen"/>
+          <btnCancel Hint="Alle Änderungen ignorieren." Caption="Abbrechen"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <fMiddlePanel>
+        <fBodyPanel>
+          <pSectionsPanel>
+            <pSectionLabel>
+              <lbSections Caption="Optionen"/>
+            </pSectionLabel>
+          </pSectionsPanel>
+        </fBodyPanel>
+      </fMiddlePanel>
+    </fPreferences>
     <fUpdateCheckDialog Caption="Update-Prüfung">
       <fLowerPanel>
         <fButtonPanel>
@@ -212,49 +259,6 @@
         <Downloaded Text="&quot;%s&quot; Version %s heruntergeladen."/>
       </Message>
     </fUpdateSaveDialog>
-    <fPreferences Caption="Codepage Witch Einstellungen">
-      <fPreferencePages>
-        <tsAbout Hint="Über &quot;%s&quot;" Caption="Über">
-          <lbCopyright Caption="Copyright %s"/>
-          <lbVersion Caption="Version %0:s (Build %1:s)"/>
-          <lbApplication Caption="Die &quot;%s&quot;"/>
-        </tsAbout>
-        <tsGeneral Hint="Allgemeine Anwendungseinstellungen." Caption="Allgemein">
-          <gbUserLanguage Caption="Benutzersprache">
-            <cxLanguageChoice Default="(Standard)"/>
-            <pLanguagePreferred>
-              <lbLanguagePreferred Caption="Bevorzugte Sprache:"/>
-            </pLanguagePreferred>
-            <lbLanguageSystem Caption="Systemsprache:  %s"/>
-          </gbUserLanguage>
-          <gbMiscellaneous Caption="Verschiedenes">
-            <cbShowHints Caption="Hinweise beim Überfahren mit der Maus anzeigen."/>
-            <cbColorButtons Caption="Farbige Symbolleisten-Schaltflächen verwenden."/>
-          </gbMiscellaneous>
-          <gbOnlineUpdate Caption="Online-Update">
-            <cbAutoCheck Caption="Automatisch nach Updates suchen"/>
-            <pUpdateButton>
-              <btnUpdateCheck Hint="Den Online-Server nach dem neuesten Update abfragen." Caption="Jetzt prüfen..."/>
-            </pUpdateButton>
-          </gbOnlineUpdate>
-        </tsGeneral>
-      </fPreferencePages>
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnAccept Hint="Alle Änderungen akzeptieren und anwenden." Caption="Übernehmen"/>
-          <btnCancel Hint="Alle Änderungen ignorieren." Caption="Abbrechen"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <fMiddlePanel>
-        <fBodyPanel>
-          <pSectionsPanel>
-            <pSectionLabel>
-              <lbSections Caption="Optionen"/>
-            </pSectionLabel>
-          </pSectionsPanel>
-        </fBodyPanel>
-      </fMiddlePanel>
-    </fPreferences>
     <fLoggerViewForm Caption="Debug log">
       <LineCount Plural="%.0n log entries" Singular="%.0n log entry"/>
       <pControls>

@@ -89,18 +89,19 @@ type
       Change: TItemChange);
     procedure tAnimateTimer(Sender: TObject);
     private
+      FActiveCodepage: integer;
       fCodepageFilter: TCodepageFilter;
       FErrorBackground: TColor;
       FErrorForeground: TColor;
       FGoodBackground: TColor;
       FGoodForeground: TColor;
-      lbViewCodePageLabel : TLabel;
+      lbViewCodepageLabel : TLabel;
       btnExportFile : TToolButton;
       btnCodepageFilter : TToolButton;
       fWitch : TWitch;
       fCodepageText : TDosCrt;
       fUFF : TUnicodeDosFont;
-      procedure PopulateCodePageList(Item : TWitchItem);
+      procedure PopulateCodepageList(Item : TWitchItem);
       procedure SetCodepageFilter(AValue: TCodepageFilter);
       procedure SetErrorBackground(AValue: TColor);
       procedure SetErrorForeground(AValue: TColor);
@@ -112,7 +113,7 @@ type
       procedure FormSettingsSave(Sender: TObject);
       procedure WitchOnAnalyzed(Sender : TObject);
       procedure SetApplicationIcons;
-      procedure SetCodepageViewLabel;
+      procedure UpdateCodepageViewLabel;
       procedure UpdateMetaData;
       procedure UpdateCodepageList;
       procedure UpdateStatusBar;
@@ -123,6 +124,7 @@ type
     public
       procedure ApplyUserLanguage; override;
       procedure OpenFile(FileName : String; Select : boolean = False); overload;
+      property ActiveCodepage : integer read FActiveCodepage;
     published
      property GoodForeground : TColor read FGoodForeground write SetGoodForeground;
      property GoodBackground : TColor read FGoodBackground write SetGoodBackground;
@@ -177,14 +179,14 @@ end;
 
 procedure TfMain.actExportCodepageUpdate(Sender: TObject);
 begin
-  actExportCodepage.Enabled:=Assigned(lvCodePageList.Selected) and
+  actExportCodepage.Enabled:=Assigned(lvCodepageList.Selected) and
   Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data) and
   TWitchItem(lvFileList.Selected.Data).Analyzed;
 end;
 
 procedure TfMain.actExportUnicodeUpdate(Sender: TObject);
 begin
-  actExportUnicode.Enabled:=Assigned(lvCodePageList.Selected) and
+  actExportUnicode.Enabled:=Assigned(lvCodepageList.Selected) and
   Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data) and
   TWitchItem(lvFileList.Selected.Data).Analyzed;
 end;
@@ -227,6 +229,7 @@ end;
 
 procedure TfMain.FormCreate(Sender: TObject);
 begin
+  FActiveCodepage := 437;
   FGoodForeground := clWindowText;
   FGoodBackground := clWindow;
   FErrorForeground := clRed;
@@ -234,21 +237,21 @@ begin
   fWitch := TWitch.Create;
   fWitch.OnAnalyzed:=@WitchOnAnalyzed;
 
-  fCodePageText := TDosCrt.Create(Self);
-  // fCodePageText.Name:='fCodePageText';
-  fCodePageText.Parent:=sbCodePage;
-  fCodePageText.Color:=clBlue;
-  fCodePageText.TextBackground(GoodBackground);
-  fCodePageText.TextColor(GoodForeground);
-  fCodePageText.ControlCodes:=False;
-  fCodePageText.Wrapping:=False;
+  fCodepageText := TDosCrt.Create(Self);
+  // fCodepageText.Name:='fCodepageText';
+  fCodepageText.Parent:=sbCodepage;
+  fCodepageText.Color:=clBlue;
+  fCodepageText.TextBackground(GoodBackground);
+  fCodepageText.TextColor(GoodForeground);
+  fCodepageText.ControlCodes:=False;
+  fCodepageText.Wrapping:=False;
   { TODO 0 -cDevel Convert to BorderSpacing when supported by TCustomDosCRT }
-  fCodePageText.Left:=8;
-  fCodePageText.Top:=8;
+  fCodepageText.Left:=8;
+  fCodepageText.Top:=8;
 
   fUFF:=TUnicodeDosFont.Create;
   if fUFF.LoadFromFile(AppDataPath + '0816norm.uff') = 0 then
-    fCodePageText.Font:=fUFF
+    fCodepageText.Font:=fUFF
   else
     FreeAndNil(fUFF);
 
@@ -257,7 +260,7 @@ begin
 
   SetApplicationIcons;
 
-  fCodePageText.ClrScr;
+  fCodepageText.ClrScr;
 
   // Assign Images to Actions
   actOpen.ImageIndex:=idxButtonFileOpen;
@@ -270,7 +273,7 @@ begin
   actListCompatible.ImageIndex:=idxButtonListViewFinished;
   actListPartial.ImageIndex:=idxButtonListViewPartial;
   actListAll.ImageIndex:=idxButtonListViewEmpty;
-  actCodePageFilter.ImageIndex:=idxButtonListView;
+  actCodepageFilter.ImageIndex:=idxButtonListView;
 
   // Add Main ToolBar Buttons
   CreateToolButton(tbMain, actOpen);
@@ -315,11 +318,21 @@ end;
 
 procedure TfMain.lvCodepageListChange(Sender: TObject; Item: TListItem;
   Change: TItemChange);
+var
+  E : integer;
 begin
   IgnoreParameter(Sender);
   IgnoreParameter(Item);
   IgnoreParameter(Change);
+  FActiveCodepage:= 437;
+  if Assigned(lvCodepageList.Selected) then begin
+    LogMessage(vbVerbose, '?' + CutDelim(lvCodepageList.Selected.Caption,SPACE,1,1));
+    Val(CutDelim(lvCodepageList.Selected.Caption,SPACE,1,1),FActiveCodepage, E);
+    if E <> 0 then FActiveCodepage:=437;
+  end;
   UpdateStatusBar;
+  UpdateCodepageViewlabel;
+  UpdateCodePageView;
 end;
 
 procedure TfMain.lvFileListChange(Sender: TObject; Item: TListItem;
@@ -335,19 +348,19 @@ procedure TfMain.tAnimateTimer(Sender: TObject);
 var
   I : integer;
 begin
-  if lvCodePageList.Items.Count <> 1 then Exit;
+  if lvCodepageList.Items.Count <> 1 then Exit;
   if not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)
   and (TWitchItem(lvFileList.Selected.Data).Analyzed=False)) then begin
      UpdateMetaData;
      Exit;
   end;
-  I:=lvCodePageList.Items[0].ImageIndex+1;
-  if I >= lvCodePageList.SmallImages.Count then
+  I:=lvCodepageList.Items[0].ImageIndex+1;
+  if I >= lvCodepageList.SmallImages.Count then
     I := 0;
-  lvCodePageList.Items[0].ImageIndex:=I;
+  lvCodepageList.Items[0].ImageIndex:=I;
 end;
 
-procedure TfMain.PopulateCodePageList(Item: TWitchItem);
+procedure TfMain.PopulateCodepageList(Item: TWitchItem);
 var
   L : TListItem;
   K : String;
@@ -357,13 +370,13 @@ begin
   if Item.Analyzed then begin
     // Processing complete
     tAnimate.Enabled:=False;
-    lvCodePageList.Enabled:=True;
-    lvCodePageList.SmallImages:=ilPercentageColor;
-    K:=ComponentNamePath(lvCodePageList, Self, True);
+    lvCodepageList.Enabled:=True;
+    lvCodepageList.SmallImages:=ilPercentageColor;
+    K:=ComponentNamePath(lvCodepageList, Self, True);
     case Item.Encoding of
       weNone : begin
-        // Only Liwer 7-Bit ASCII characters, compatible with any codepage
-        L:=lvCodePageList.Items.Add;
+        // Only Liwer 7-Bit ASCII characters, compatible with any Codepage
+        L:=lvCodepageList.Items.Add;
         L.Caption:=GetTranslation(K+'Any_Codepage/Caption', 'Any Codepage');
         L.ImageIndex:=High(iconPercentageNames);
       end;
@@ -376,14 +389,14 @@ begin
           else if (P = High(iconPercentageNames)) and (Item.Results[I].Compatible <> 100) then
             P := High(iconPercentageNames) - 1;
 
-          if (Item.Results[I].Compatible<>100) and (CodePageFilter=cpfComplete) then
+          if (Item.Results[I].Compatible<>100) and (CodepageFilter=cpfComplete) then
             Continue
           else
-          if (Item.Results[I].Compatible = 0) and (CodePageFilter=cpfPartial) then
+          if (Item.Results[I].Compatible = 0) and (CodepageFilter=cpfPartial) then
             Continue;
-          { permit incompatible codepages }
+          { permit incompatible Codepages }
 
-          L:=lvCodePageList.Items.Add;
+          L:=lvCodepageList.Items.Add;
           L.Caption:=IntToStr(Item.Results[I].Codepage);
           // L.Caption:=GetTranslation(K+'Analyzed/Caption', 'Analyzed');
           L.ImageIndex:=P;
@@ -391,17 +404,17 @@ begin
       end;
       weCodepage : begin
         // File is not UTF-8 so must be Codepage encoded
-        L:=lvCodePageList.Items.Add;
+        L:=lvCodepageList.Items.Add;
         L.ImageIndex:=0;
         L.Caption:=GetTranslation(K+'Not_implemented/Caption', 'Not implemented');
       end;
     end;
   end else begin
     // Still srocessing text file in background thread
-    lvCodePageList.Enabled:=False;
-    lvCodePageList.SmallImages:=ilWorkingColor;
-    L:=lvCodePageList.Items.Add;
-    K:=ComponentNamePath(lvCodePageList, Self, True);
+    lvCodepageList.Enabled:=False;
+    lvCodepageList.SmallImages:=ilWorkingColor;
+    L:=lvCodepageList.Items.Add;
+    K:=ComponentNamePath(lvCodepageList, Self, True);
     L.Caption:=GetTranslation(K+'Analyzing/Caption', 'Analyzing');
     L.ImageIndex:=0;
     tAnimate.Enabled:=True;
@@ -463,14 +476,13 @@ begin
   // as ">". But, it is displayed as "&gt;". Also, pre, pre-wrap and nowrap
   // will still break lines at the edge of a window. Therefore, SPACE needs
   // converted to &nbsp and CR/LF need converted to a <br> tag.
-  S:=StringReplace(S, CRLF, '<br>',[rfReplaceAll]);
-  S:=StringReplace(S, CR, '<br>',[rfReplaceAll]);
+  S:=StringReplace(S, CRLF, LF,[rfReplaceAll]);
+  S:=StringReplace(S, CR, LF,[rfReplaceAll]);
   S:=StringReplace(S, LF, '<br>',[rfReplaceAll]);
   S:=StringReplace(S, SPACE, '&nbsp;', [rfReplaceAll]);
 
   S:='<html><body style="' +
-    'color:' + F + '; '+
-    'background-color:' + B + '; '+
+    'color:' + F + '; background-color:' + B + '; '+
     'margin:0; font-weight:light; font-size:90%;">' + CR +
     '<div style="font-family: monospace; ">'+ S + '</div>' +
     '<br></body></html>';
@@ -521,7 +533,7 @@ begin
       Cat(M, 'ASCII');
       W.ListItem.ImageIndex:=idxFileTypeFilePlainGray;
     end;
-    weCodePage : begin
+    weCodepage : begin
       Cat(M, 'Codepage');
       W.ListItem.ImageIndex:=idxFileTypeFilePlainBlue;
     end;
@@ -545,39 +557,40 @@ begin
   pmListMode.Images:=IconTheme.ButtonEnabled;
 
   lvFileList.SmallImages:=ilFileTypeColor;
-  lvCodePageList.SmallImages:=ilPercentageColor;
+  lvCodepageList.SmallImages:=ilPercentageColor;
 end;
 
-procedure TfMain.SetCodepageViewLabel;
+procedure TfMain.UpdateCodepageViewLabel;
 begin
   lbViewCodepageLabel.Caption:=GetFormat(ComponentNamePath(pViewCodepageLabel,
-    Self, True) + 'lbViewCodepageLabel/Value' , ['437'],
+    Self, True) + 'lbViewCodepageLabel/Value' , [IntToStr(ActiveCodepage)],
     'Viewed as Codepage %s');
 end;
 
 procedure TfMain.UpdateMetaData;
 begin
-  UpdateCodePagelist;
+  UpdateCodepagelist;
   UpdateButtons;
   UpdateStatusBar;
   UpdateUnicodeView;
   UpdateCodepageView;
+  UpdateCodepageViewLabel;
 end;
 
 procedure TfMain.UpdateCodepageList;
 begin
-  lvCodePageList.BeginUpdate;
-  lvCodePageList.Clear;
+  lvCodepageList.BeginUpdate;
+  lvCodepageList.Clear;
   if Assigned(lvFileList.Selected) then begin
-    PopulateCodePageList(TWitchItem(lvFileList.Selected.Data));
+    PopulateCodepageList(TWitchItem(lvFileList.Selected.Data));
   end;
-  lvCodePageList.EndUpdate;
+  lvCodepageList.EndUpdate;
 end;
 
 procedure TfMain.UpdateStatusBar;
 const
   spiEncoding = 0;               // displayed when file is selected
-  spiCompatiblity = 1;           // displayed when codepage is selected
+  spiCompatiblity = 1;           // displayed when Codepage is selected
   // spiLanguage = 2;            // not yet implemented
   // spiPrefered = 3;            // not yet implemented
   spiFileName = 2;               // displayed when file is selected
@@ -603,13 +616,13 @@ begin
     case W.Encoding of
       weNone : statBar.Panels[spiEncoding].Text:=
         GetTranslation(K+'NoEncoding/Caption', 'ASCII');
-      weCodePage : statBar.Panels[spiEncoding].Text:=
+      weCodepage : statBar.Panels[spiEncoding].Text:=
         GetTranslation(K+'Codepage/Caption', 'Codepage');
       weUnicode : statBar.Panels[spiEncoding].Text:=
         GetTranslation(K+'Unicode/Caption', 'Unicode');
     end;
-    if Assigned(lvCodePageList.Selected) then begin
-      Val(lvCodePageList.Selected.Caption, V, E);
+    if Assigned(lvCodepageList.Selected) then begin
+      Val(lvCodepageList.Selected.Caption, V, E);
       if E = 0 then begin
         for I := 0 to High(W.Results) do
           if W.Results[I].Codepage = V then begin
@@ -637,7 +650,7 @@ begin
         weNone, weUnicode : begin
           H:=EscapeHTML(PasExt.ToString(W.FileData));
         end;
-        weCodePage : begin
+        weCodepage : begin
           H:= '';
         end;
       end;
@@ -652,49 +665,51 @@ var
   W : TWitchItem;
   SL : TStringList;
   Y, TW, TH : Integer;
+  CP : integer;
 begin
+  CP := FActiveCodepage;
   fCodepageText.TextBackground(GoodBackground);
   fCodepageText.TextColor(GoodForeground);
   if Not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then begin
-    fCodePageText.Resolution:=Point(1,1);
-    fCodePageText.ClrScr;
+    fCodepageText.Resolution:=Point(1,1);
+    fCodepageText.ClrScr;
     Exit;
   end;
   W:=TWitchItem(lvFileList.Selected.Data);
   if not W.Analyzed then begin
-    fCodePageText.Resolution:=Point(1,1);
-    fCodePageText.ClrScr;
+    fCodepageText.Resolution:=Point(1,1);
+    fCodepageText.ClrScr;
     Exit;
   end else begin
-    fCodePageText.BeginUpdate;
+    fCodepageText.BeginUpdate;
     SL := TStringList.Create;
+    SL.AddText(PasExt.ToString(W.FileData));
+    TW:=Longest(SL);
+    if TW < 1 then TW:=1;
+    TH:=SL.Count;
+    if TH < 1 then TH:=1;
+    Inc(TW);
+    Inc(TH);
     case W.Encoding of
       weNone : begin
-        SL.AddText(PasExt.ToString(W.FileData));
-        TW:=Longest(SL);
-        if TW < 1 then TW:=1;
-        TH:=SL.Count;
-        if TH < 1 then TH:=1;
-        Inc(TW);
-        Inc(TH);
-        fCodePageText.Resolution:=Point(TW,TH);
-        fCodePageText.ClrScr;
+        fCodepageText.Resolution:=Point(TW,TH);
+        fCodepageText.ClrScr;
         for Y := 0 to SL.Count - 1 do begin
-          fCodePageText.GotoXY(1, Y + 1);
-          fCodePageText.WriteCRT(SL[Y]);
+          fCodepageText.GotoXY(1, Y + 1);
+          fCodepageText.WriteCRT(SL[Y]);
         end;
       end;
-      weCodePage : begin
-        fCodePageText.Resolution:=Point(1,1);
-        fCodePageText.ClrScr;
+      weCodepage : begin
+        fCodepageText.Resolution:=Point(1,1);
+        fCodepageText.ClrScr;
       end;
       weUnicode : begin
-        fCodePageText.Resolution:=Point(1,1);
-        fCodePageText.ClrScr;
+        fCodepageText.Resolution:=Point(1,1);
+        fCodepageText.ClrScr;
       end;
     end;
     SL.Free;
-    fCodePageText.EndUpdate;
+    fCodepageText.EndUpdate;
   end;
 end;
 
@@ -725,7 +740,8 @@ end;
 procedure TfMain.ApplyUserLanguage;
 begin
   inherited ApplyUserLanguage;
-  SetCodepageViewlabel;
+  UpdateStatusBar;
+  UpdateCodepageViewlabel;
 end;
 
 procedure TfMain.OpenFile(FileName: String; Select: boolean);

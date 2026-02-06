@@ -15,7 +15,7 @@ interface
 
 uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
-  Classes, SysUtils, PasExt, BinTree, CodePages;
+  Classes, SysUtils, PasExt, BinTree, Codepages;
 
 type
 
@@ -105,7 +105,6 @@ type
     property StrikeOut : integer read FStrikeOut;
     property Displacement : integer read FDisplacement;
     property Padded[Index : integer] : boolean read GetPadded;
-
   published
   end;
 

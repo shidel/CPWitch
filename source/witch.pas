@@ -21,7 +21,7 @@ uses
 
 type
 
-  TWitchEncoding = (weNone, weCodePage, weUnicode);
+  TWitchEncoding = (weNone, weCodepage, weUnicode);
 
   TWitch = class;
 
@@ -39,7 +39,7 @@ type
     FOwner: TWitch;
     FIndex: Integer;
     FPreferred: integer;
-    FResults: TCodePageResults;
+    FResults: TCodepageResults;
     function GetDisplayName: String;
     function GetIndex: integer;
     procedure SetFileName(AValue: String);
@@ -60,7 +60,7 @@ type
     property Index : integer read GetIndex;
     property Analyzed : boolean read FAnalyzed;
     property Encoding : TWitchEncoding read FEncoding;
-    property Results : TCodePageResults read FResults;
+    property Results : TCodepageResults read FResults;
     property Detected : String read FDetected; // Detected Language
     property Preferred : integer read FPreferred; // Preferred Codepage
   published
@@ -112,7 +112,7 @@ type
   TWitchAnalyzeThread=class(TThreadTask)
   private
     FEncoding: TWitchEncoding;
-    FResults: TCodePageResults;
+    FResults: TCodepageResults;
     FText: RawByteString;
     FWitch: TWitch;
     FWitchItem: TWitchItem;
@@ -130,7 +130,7 @@ type
     property WitchItem : TWitchItem read FWitchItem write SetWitchItem;
     property Text : RawByteString read FText write SetText;
     property Encoding : TWitchEncoding read FEncoding;
-    property Results : TCodePageResults read FResults;
+    property Results : TCodepageResults read FResults;
   end;
 
 { TWitchAnalyzeThread }
@@ -180,7 +180,7 @@ begin
   end;
 
   case FEncoding of
-    weCodePage:AnalyzeCP;
+    weCodepage:AnalyzeCP;
     weUnicode:AnalyzeUTF8;
   end;
 

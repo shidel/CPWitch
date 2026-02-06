@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CONFIG Language="en_US">
+  <Translation>
+    <Revision_0 Date="2026-02-06" Contributor="Jerome Shidel"/>
+  </Translation>
   <Application>
     <ModalButtons>
       <Ok Value="Ok"/>
@@ -155,8 +158,52 @@
         <Processing Caption="Processing"/>
         <Codepage Caption="Codepage"/>
         <NoEncoding Caption="ASCII"/>
+        <Unicode Caption="Unicode"/>
       </statBar>
     </fMain>
+    <fPreferences Caption="Codepage Witch Preferences">
+      <fPreferencePages>
+        <tsAbout Hint="About the &quot;%s&quot;" Caption="About">
+          <lbCopyright Caption="Copyright %s"/>
+          <lbVersion Caption="Version %0:s (build %1:s)"/>
+          <lbApplication Caption="The &quot;%s&quot;"/>
+        </tsAbout>
+        <tsGeneral Hint="General application settings." Caption="General">
+          <gbUserLanguage Caption="User Language">
+            <cxLanguageChoice Default="(default)"/>
+            <pLanguagePreferred>
+              <lbLanguagePreferred Caption="Preferred Language:"/>
+            </pLanguagePreferred>
+            <lbLanguageSystem Caption="System Language:  %s"/>
+          </gbUserLanguage>
+          <gbMiscellaneous Caption="Miscellaneous">
+            <cbShowHints Caption="Show hints when mouse hovers."/>
+            <cbColorButtons Caption="Use color toolbar buttons."/>
+          </gbMiscellaneous>
+          <gbOnlineUpdate Caption="Online Update">
+            <cbAutoCheck Caption="Automatically check for updates"/>
+            <pUpdateButton>
+              <btnUpdateCheck Hint="Check the online server for the latest update." Caption="Check now..."/>
+            </pUpdateButton>
+          </gbOnlineUpdate>
+        </tsGeneral>
+      </fPreferencePages>
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnAccept Hint="Accept and apply any changes." Caption="Accept"/>
+          <btnCancel Hint="Ignore all changes." Caption="Cancel"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <fMiddlePanel>
+        <fBodyPanel>
+          <pSectionsPanel>
+            <pSectionLabel>
+              <lbSections Caption="Options"/>
+            </pSectionLabel>
+          </pSectionsPanel>
+        </fBodyPanel>
+      </fMiddlePanel>
+    </fPreferences>
     <fUpdateCheckDialog Caption="Update Check">
       <fLowerPanel>
         <fButtonPanel>
@@ -208,48 +255,5 @@
         <Downloaded Text="Downloaded &quot;%s&quot; version %s."/>
       </Message>
     </fUpdateSaveDialog>
-    <fPreferences Caption="Codepage Witch Preferences">
-      <fPreferencePages>
-        <tsAbout Hint="About the &quot;%s&quot;" Caption="About">
-          <lbCopyright Caption="Copyright %s"/>
-          <lbVersion Caption="Version %0:s (build %1:s)"/>
-          <lbApplication Caption="The &quot;%s&quot;"/>
-        </tsAbout>
-        <tsGeneral Hint="General application settings." Caption="General">
-          <gbUserLanguage Caption="User Language">
-            <cxLanguageChoice Default="(default)"/>
-            <pLanguagePreferred>
-              <lbLanguagePreferred Caption="Preferred Language:"/>
-            </pLanguagePreferred>
-            <lbLanguageSystem Caption="System Language:  %s"/>
-          </gbUserLanguage>
-          <gbMiscellaneous Caption="Miscellaneous">
-            <cbShowHints Caption="Show hints when mouse hovers."/>
-            <cbColorButtons Caption="Use color toolbar buttons."/>
-          </gbMiscellaneous>
-          <gbOnlineUpdate Caption="Online Update">
-            <cbAutoCheck Caption="Automatically check for updates"/>
-            <pUpdateButton>
-              <btnUpdateCheck Hint="Check the online server for the latest update." Caption="Check now..."/>
-            </pUpdateButton>
-          </gbOnlineUpdate>
-        </tsGeneral>
-      </fPreferencePages>
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnAccept Hint="Accept and apply any changes." Caption="Accept"/>
-          <btnCancel Hint="Ignore all changes." Caption="Cancel"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <fMiddlePanel>
-        <fBodyPanel>
-          <pSectionsPanel>
-            <pSectionLabel>
-              <lbSections Caption="Options"/>
-            </pSectionLabel>
-          </pSectionsPanel>
-        </fBodyPanel>
-      </fMiddlePanel>
-    </fPreferences>
   </Controls>
 </CONFIG>

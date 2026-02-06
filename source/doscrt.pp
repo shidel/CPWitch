@@ -21,7 +21,7 @@ uses
   {$IFNDEF OLDDRAW}
   IntfGraphics, FPCanvas, LCLType, LCLIntf, GraphType, FPImage,
   {$ENDIF}
-  Classes, SysUtils, Controls, Graphics, PasExt, CodePages, DosFont;
+  Classes, SysUtils, Controls, Graphics, PasExt, Codepages, DosFont;
 
 type
 
@@ -569,7 +569,7 @@ begin
   FScale:=Point(1,1);
   FResolution:=Point(80,25);
   FInvalidChar:=$3f; { or $bf }
-  FCodePage:=-1;
+  FCodepage:=-1;
   FInvalidTextColor:=clRed;
   FInvalidBackground:=clBlack;
   DoSizeChange;
