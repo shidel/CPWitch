@@ -61,11 +61,15 @@ type
     constructor Create; virtual;
     { Clear all data. Does not reset Expanded or ControlCodes! }
     procedure Clear; virtual;
-    { Perform the conversion }
+    { Perform the conversion. Note that the conversion from Codepage to Unicode
+      always returns TRUE unless the required codepage maps are not loaded. }
     function Convert : boolean; virtual; abstract;
     { DOS Codepage number }
     property Codepage : integer read FCodepage write SetCodepage;
-    { Expand non-existing unicode characters to multi-character sequence }
+    { Expand non-existing unicode characters to multi-character unicode
+      sequence. If this is False, than those characters are mapped into
+      Basic Multilingual Plane (BMP) (U+E000 through U+F8FF) starting at
+      U+F000 accoring to the mapping data. }
     property Expanded : boolean read FExpanded write SetExpanded;
     { Convert ASCII Control Codes }
     property ControlCodes : boolean read FControlCodes write SetControlCodes;
@@ -73,7 +77,8 @@ type
       to Codepage, it should be the ASCII value 0-255. For conversion to Unicode,
       it should be the Value of a Unicode Character. }
     property Invalid : Int32 read FInvalid write SetInvalid;
-    { Conversion success results }
+    { Conversion success results. Note that the conversion from Codepage to Unicode
+      is always 100% compatible unless the required codepage maps are not loaded. }
     property Results : TCodepageResult read FResults;
   end;
 
@@ -500,16 +505,61 @@ end;
 
 function TCodepageToUTF8.Convert : boolean;
 var
-  M, I, C : Integer;
+  M, I, P, C : Integer;
+  V : Int32;
+  U : TArrayOfInt32;
+  UTF: UTF8String;
 begin
+  FResults.Codepage := -1;
+  FResults.Characters := 0;
+  FResults.ASCII := 0;
+  FResults.Unicode := 0;
+  FResults.Converted := 0;
+  FResults.Compatible := 0;
   Result:=False;
   FConverted := '';
   M:=FindMap(FCodepage);
   if M < 0 then Exit;
   if EnMap < 0 then Exit;
+  FResults.Codepage:=M;
+  FResults.Characters := Length(FSource);
+  FResults.Compatible := 100;
+  P := 0;
+  U:=[];
+  // Since not all Codepage characters exist directly in unicode, it can
+  // actually be longer than the original RawByteString. Sometimes, it can
+  // take several Unicode Combining Characters to represent the Codepage
+  // version.
+  SetLength(U, Length(FSource) * 4);
+  { TODO 9 -cDevel Add support for Result Statistics }
   for I := 1 to Length(FSource) do begin
      C:=Byte(FSource[I]);
+     if C < $80 then begin
+       Inc(FResults.ASCII);
+       // Chars below 128 are all the same 7-bit ASCII
+       V:=C;
+       if (FControlCodes and ((C<32) or (C=127))) then begin
+         Inc(FResults.Converted);
+         // If we want to Remap Control Codes for displaying an ASCII representation
+         // of the control character.
+         V:=Maps[EnMap].Map[C];
+       end;
+     end else begin
+       Inc(FResults.Unicode);
+       Inc(FResults.Converted);
+       V:=Maps[M].Map[C];
+     end;
+     if V < 0 then begin
+       V:=Maps[EnMap].Map[C];
+     end;
+     { TODO 9 -cDevel Add support to include Combining characters }
+     U[P]:=C;
+     Inc(P);
   end;
+  SetLength(U,P);
+  ValuesToUTF8(U, UTF, FInvalid);
+  FConverted:=UnicodeString(UTF);
+  Result:=True;
 end;
 
 { TUTF8ToCodepage }

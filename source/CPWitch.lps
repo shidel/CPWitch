@@ -39,10 +39,10 @@
         <Filename Value="mpla/pasext.pp"/>
         <UnitName Value="PasExt"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="529"/>
-        <CursorPos X="20" Y="564"/>
+        <TopLine Value="252"/>
+        <CursorPos X="24" Y="279"/>
         <FoldState Value=" TK0071 TL904022M1W13241zD1G pjRv421134226686639231A491 Pj1sK4 T4N02 p0;R0]@3;704E]t2kI064]9Pjf0D7 pigjb0!43]TkCnP04D[K5V0FC]9bjZ079]9ZjJ0M4[:4jY0M[99B16]ucmH0LD[c5f07A[T4]:DA]RDjG297 piekV0b[968044]9Yj50!9[j4l90E3]9CiY0x6]96ja038[{u5M0C4 PjNj30 T1;803H pk3mC02[)4ak10A1413L]t5pL033422I]DLo30I5]94kF0I6[i5207817];1m205H]KdkO07B]9YkA027[I4jg0682]nkdnS023]KfjR029 pj3k9097[I4k5]I[}V5c093 Pj0iW0 T6:B01A5 pMu30124r]Zb%D]B1M PiAyZ]bM@N41172 p5{E010F p0zG21 T0:SHJAB petZO428T pj2-Nb3G piZqUL39 pj1kHJ931B]B5o1NDF[T4lUPB[95kWW3C PiEkOVN"/>
-        <UsageCount Value="80"/>
+        <UsageCount Value="81"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -99,10 +99,10 @@
         <UnitName Value="Codepages"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="163"/>
-        <CursorPos X="40" Y="350"/>
-        <FoldState Value=" T3kM0A3 pjQk10Z03B2421 Pj0p80v"/>
-        <UsageCount Value="90"/>
+        <TopLine Value="519"/>
+        <CursorPos X="28" Y="548"/>
+        <FoldState Value=" T3kR0A3 pjQk10Z0111C1421 Pl6qA0{"/>
+        <UsageCount Value="91"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -112,7 +112,7 @@
         <TopLine Value="247"/>
         <CursorPos Y="165"/>
         <FoldState Value=" T3jK079 piZjN051153317 pm2o5031M"/>
-        <UsageCount Value="28"/>
+        <UsageCount Value="29"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -121,7 +121,7 @@
         <EditorIndex Value="2"/>
         <CursorPos X="53" Y="24"/>
         <FoldState Value=" T7jPCK1 PXMI T3lK0411A13 pkRlg0S4 piXjT0J6]9ZjP04226 PiAjI0+"/>
-        <UsageCount Value="63"/>
+        <UsageCount Value="64"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -148,26 +148,8 @@
         <CursorPos X="55" Y="2447"/>
         <UsageCount Value="0"/>
       </Unit>
-      <Unit>
-        <Filename Value="/Applications/Lazarus/fpc/3.2.2/sources/rtl/objpas/classes/classesh.inc"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="4" Y="27"/>
-        <UsageCount Value="0"/>
-      </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="419" TopLine="349"/>
-      </Position>
-      <Position>
-        <Filename Value="doscrt.pp"/>
-        <Caret Line="96" TopLine="53"/>
-      </Position>
-      <Position>
-        <Filename Value="doscrt.pp"/>
-        <Caret Line="95" Column="46" TopLine="72"/>
-      </Position>
       <Position>
         <Filename Value="doscrt.pp"/>
         <Caret Line="196" Column="21" TopLine="168"/>
@@ -275,6 +257,18 @@
       <Position>
         <Filename Value="codepages.pp"/>
         <Caret Line="105" Column="15" TopLine="80"/>
+      </Position>
+      <Position>
+        <Filename Value="codepages.pp"/>
+        <Caret Line="521" Column="39" TopLine="434"/>
+      </Position>
+      <Position>
+        <Filename Value="codepages.pp"/>
+        <Caret Line="531" Column="41" TopLine="508"/>
+      </Position>
+      <Position>
+        <Filename Value="codepages.pp"/>
+        <Caret Line="513" Column="27" TopLine="486"/>
       </Position>
     </JumpHistory>
     <RunParams>
