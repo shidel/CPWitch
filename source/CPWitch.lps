@@ -91,9 +91,9 @@
         <UnitName Value="Codepages"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="668"/>
-        <CursorPos X="16" Y="693"/>
-        <FoldState Value=" T7i4Ne3 PfifH T3kc0A3 pjQk10Z0111E plcnP04321 POlZ0V"/>
+        <TopLine Value="640"/>
+        <CursorPos X="20" Y="667"/>
+        <FoldState Value=" T7i4Ne3 PfifH T3kc0A3 pjQk10Z0111D1421 PlEs805"/>
         <UsageCount Value="98"/>
         <Loaded Value="True"/>
       </Unit>
@@ -113,7 +113,7 @@
         <TopLine Value="8"/>
         <CursorPos X="43" Y="31"/>
         <FoldState Value=" T7jPCK1 PXMI T3lK0411A13 pkRlg0S4 piXjT0J6]9ZjP04226 PiAjI0+"/>
-        <UsageCount Value="71"/>
+        <UsageCount Value="72"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -134,10 +134,6 @@
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="codepages.pp"/>
-        <Caret Line="12" Column="10" TopLine="10"/>
-      </Position>
       <Position>
         <Filename Value="codepages.pp"/>
         <Caret Line="43" TopLine="97"/>
@@ -253,6 +249,10 @@
       <Position>
         <Filename Value="codepages.pp"/>
         <Caret Line="677" Column="32" TopLine="647"/>
+      </Position>
+      <Position>
+        <Filename Value="codepages.pp"/>
+        <Caret Line="671" TopLine="632"/>
       </Position>
     </JumpHistory>
     <RunParams>

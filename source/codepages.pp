@@ -608,7 +608,6 @@ end;
 
 function TUTF8ToCodepage.Convert : boolean;
 var
-  CPB : TArrayOfByte;
   N : TBinaryTreeNode;
   I : integer;
   V : Int32;
@@ -620,7 +619,6 @@ begin
   FChars:=[];
   FValues:=[];
   FConverted:='';
-  CPB:=[];
   if FindMap(FCodepage) < 0 then Exit;
   CP := IntToStr(FCodepage);
   FResults.Codepage:=FCodepage;
@@ -631,7 +629,7 @@ begin
   FResults.Characters:=Length(FSource);
   // Create the ASCII Values array;
   SetLength(FValues, Length(FChars));
-  SetLength(CPB, Length(FChars));
+  SetLength(FConverted, Length(FChars));
   EC:=0;
   for I := Low(FChars) to High(FChars) do begin
 
@@ -666,15 +664,8 @@ begin
       Inc(EC);
       V:=FInvalid;
     end;
-    CPB[I]:=V;
+    FConverted[1 + I]:=Char(V);
   end;
-
-  // Convert to RawByteString
-  SetLength(FConverted, Length(CPB));
-  // FPC complains about using "Move" as "not inlined"
-  // So, just do it manually. Not going to be as fast. But, whatever.
-  for I := 0 to Length(CPB) - 1 do
-    FConverted[1 + I]:=Char(CPB[I]);
 
   // Update Compatible Percentage
   if EC = 0 then begin
