@@ -61,6 +61,7 @@ type
       pCodepageList: TPanel;
       pFileListLabel: TPanel;
       pFileList: TPanel;
+      dlgFileSave: TSaveDialog;
       sbCodepage: TScrollBox;
       spFilesCPs: TSplitter;
       spCPsViewers: TSplitter;
@@ -72,6 +73,7 @@ type
     procedure actDebugLogExecute(Sender: TObject);
     procedure actCloseExecute(Sender: TObject);
     procedure actCloseUpdate(Sender: TObject);
+    procedure actExportCodepageExecute(Sender: TObject);
     procedure actExportCodepageUpdate(Sender: TObject);
     procedure actExportUnicodeUpdate(Sender: TObject);
     procedure actOpenExecute(Sender: TObject);
@@ -163,6 +165,33 @@ begin
   actClose.Enabled:=
   Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data) and
   TWitchItem(lvFileList.Selected.Data).Analyzed;
+end;
+
+procedure TfMain.actExportCodepageExecute(Sender: TObject);
+var
+  W : TWitchItem;
+  TCP : TUTF8ToCodepage;
+  R : integer;
+  N : String;
+begin
+  if Not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then
+    Exit;
+  W:=TWitchItem(lvFileList.Selected.Data);
+  TCP:=W.AsCodePage(FActiveCodepage);
+  if not Assigned(TCP) then Exit;
+  dlgFileSave.InitialDir:=UserWorkPath;
+  N := ExcludeTrailing(W.DisplayName, '.UTF-8', false);
+  dlgFileSave.FileName:=FileIterative(UserWorkPath + N);
+  repeat
+    if dlgFileSave.Execute then begin
+      R:=FileSave(dlgFileSave.FileName, PasExt.ToBytes(TCP.Converted));
+      if R <> 0 then
+        if FileErrorDialog(dlgFileSave.FileName, R, True) <> mrRetry then
+          R:=0;
+    end else R:=0;
+  until R=0;
+
+  FreeAndNil(TCP);
 end;
 
 procedure TfMain.actExportCodepageUpdate(Sender: TObject);
@@ -548,12 +577,42 @@ begin
 end;
 
 procedure TfMain.UpdateCodepageList;
+var
+  I : integer;
+  T : String;
+  HCP, CP, E : integer;
+  Item : TListItem;
 begin
   lvCodepageList.BeginUpdate;
   lvCodepageList.Clear;
   if Assigned(lvFileList.Selected) then begin
     PopulateCodepageList(TWitchItem(lvFileList.Selected.Data));
   end;
+  HCP:=FActiveCodepage;
+  // Reselect Active Codepage if Possible;
+  Item:=nil;
+  for I := 0 to lvCodePageList.Items.Count -1 do begin
+    T:=CutDelim(lvCodepageList.Items[I].Caption, SPACE, 1,1);
+    Val(T, CP, E);
+    if (E=0) and (CP=FActiveCodepage) then begin
+      Item:=lvCodepageList.Items[I];
+      Break;
+    end;
+  end;
+  // If Active Codepage is not in list and If first item is not a Codepage
+  // Number then select it instead.
+  if (Not Assigned(Item)) and (lvCodePageList.Items.Count > 0) then begin
+    T:=CutDelim(lvCodepageList.Items[0].Caption, SPACE, 1,1);
+    Val(T, CP, E);
+    if (E=1) then begin
+      Item:=lvCodepageList.Items[0];
+    end;
+  end;
+  if Assigned(Item) then begin
+    Item.Selected:=True;
+    Item.MakeVisible(False);
+  end;
+  fActiveCodepage:=HCP;
   lvCodepageList.EndUpdate;
 end;
 
@@ -681,8 +740,9 @@ begin
         fCodepageText.WriteError(S);
       end;
       weUnicode : begin
-        fCodepageText.Codepage:=FActiveCodepage;
+        fCodepageText.Codepage:=-1;
         fCodepageText.Resolution:=Point(TW,TH);
+        // fCodepageText.Scale:=Point(2,2);
         fCodepageText.ClrScr;
         TCP:=W.AsCodePage(FActiveCodepage);
         Y := 1;
@@ -692,9 +752,11 @@ begin
             fCodepageText.GotoXY(1, Y);
           end else
           if TCP.Values[I] < 0 then
-              fCodepageText.WriteError(#$3f)
+              // if $bf not defined in the Unicode Font, DosCRT will have its
+              // own charcter error and use $3f.
+              fCodepageText.WriteError($bf)
             else
-              fCodepageText.WriteCRT(Char(TCP.Values[I]));
+              fCodepageText.WriteCRT(TCP.Values[I]);
         end;
         FreeAndNil(TCP);
       end;

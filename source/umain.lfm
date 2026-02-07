@@ -310,6 +310,7 @@ object fMain: TfMain
       Category = 'File'
       Caption = 'Export Codepage...'
       Hint = 'Export a text file encoded in codepage format.'
+      OnExecute = actExportCodepageExecute
       OnUpdate = actExportCodepageUpdate
     end
     object actPreferences: TAction
@@ -396,5 +397,9 @@ object fMain: TfMain
     object miListAll: TMenuItem
       Action = actListAll
     end
+  end
+  object dlgFileSave: TSaveDialog
+    Left = 328
+    Top = 219
   end
 end
