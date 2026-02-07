@@ -63,6 +63,8 @@ type
     property Results : TCodepageResults read FResults;
     property Detected : String read FDetected; // Detected Language
     property Preferred : integer read FPreferred; // Preferred Codepage
+    function AsCodePage(Codepage : integer; Convert : boolean = true) : TUTF8ToCodepage;
+    function AsUnicode(Codepage : integer; Convert : boolean = true) : TCodepageToUTF8;
   published
   end;
 
@@ -204,7 +206,7 @@ end;
 
 procedure TWitchAnalyzeThread.AnalyzeCP;
 begin
-
+  { TODO 9 -cDevel Witch analyze Codepage. Requires Language Dictionaries. }
 end;
 
 constructor TWitchAnalyzeThread.Create(CreateSuspended: Boolean);
@@ -317,6 +319,30 @@ begin
   if Assigned(FOwner) then
     FOwner.Remove(FOwner.IndexOf(Self));
   inherited Destroy;
+end;
+
+function TWitchItem.AsCodePage(Codepage: integer; Convert : boolean): TUTF8ToCodepage;
+begin
+  Result := TUTF8ToCodepage.Create;
+  Result.Codepage:=Codepage;
+  Result.ControlCodes:=False;
+  Result.Expanded:=True;
+  Result.Invalid:=$3f; { Question Mark }
+  Result.Source:=UnicodeString(NormalizeLineEndings(PasExt.ToString(FData)));
+  if Convert then
+    Result.Convert;
+end;
+
+function TWitchItem.AsUnicode(Codepage: integer; Convert : boolean): TCodepageToUTF8;
+begin
+  Result := TCodepageToUTF8.Create;
+  Result.Codepage:=Codepage;
+  Result.ControlCodes:=False;
+  Result.Expanded:=True;
+  Result.Invalid:=$3f; { Question Mark }
+  Result.Source:=NormalizeLineEndings(PasExt.ToString(FData));
+  if Convert then
+    Result.Convert;
 end;
 
 { TWitch }

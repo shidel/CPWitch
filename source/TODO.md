@@ -1,11 +1,16 @@
 # Major feature To-Do list
 
-* Performance improvements to DOS Preview Window
+* Remove intentional delays used to slow application for multi-thread testing.
+* Single Pane Text Preview mode with autoswitch between Codepage and Unicode.
+* Performance improvements to DOS Preview Pane
 * Support characters not in Unicode (like in CP777, CP778)
-* CodePage To UTF-8 Analysis
 * Language Detection
 * Preferred Codepage Recommendation
+* CodePage To UTF-8 Analysis
 * Additional Codepages
 * User settings for DOS Preview Scaling
 * User Settings for Un-mappable character color
+* Automatic file extensions on export.
+* Ignore attempts to add non-text files.
+* Some other fine tuning stuff and general improvements.
 

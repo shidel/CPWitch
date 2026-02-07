@@ -18,7 +18,7 @@ uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ExtCtrls, ComCtrls, ActnList, Menus, IpHtml,
   Version, PasExt, Icons, MultiApp, LogView, Updater, Preferences,
-  DosCRT, DosFont, Witch;
+  DosCRT, DosFont, Codepages, Witch;
 
 type
 
@@ -442,15 +442,13 @@ begin
   { TODO 0 -cLazarus_Bug TIpHtmlPanel does not honor whites-space pre, pre-wrap or nowrap and wraps text anyway. }
   { TODO 0 -cLazarus_Bug TIpHtmlPanel displays HTML entities "as-is" inside PRE tags. }
 
-  S:=StringReplace(S, CRLF, LF,[rfReplaceAll]);
-  S:=StringReplace(S, CR, LF,[rfReplaceAll]);
-  S:=StringReplace(S, LF, '<br>',[rfReplaceAll]);
+  S:=NormalizeLineEndings(S, '<br>'+LF);
   S:=StringReplace(S, SPACE, '&nbsp;', [rfReplaceAll]);
-  // TIpHtmlPanel incorrectly displays Named HTML Entities inside of
-  // PRE tags and displays them as-is. For example, "&gt;" should be displayed
-  // as ">". But, it is displayed as "&gt;". Also, pre, pre-wrap and nowrap
-  // will still break lines at the edge of a window. Therefore, SPACE needs
-  // converted to &nbsp and CR/LF need converted to a <br> tag.
+  // TIpHtmlPanel incorrectly displays Named HTML Entities inside of PRE tags
+  // displaying them as-is. For example, "&gt;" should be displayed as ">".
+  // But, it is displayed as "&gt;". Also, pre, pre-wrap and nowrap will still
+  // break lines at the edge of a window. Therefore, SPACE needs converted to
+  // &nbsp and CR/LF need converted to a <br> tag.
   { TODO 6 -cDevel Add support to view unmapped characters as errors in UnicodeView }
   IgnoreParameter([EF, EB]);
   S:='<html><body style="' +
@@ -638,11 +636,10 @@ procedure TfMain.UpdateCodepageView;
 var
   W : TWitchItem;
   SL : TStringList;
-  Y, TW, TH : Integer;
-  CP : integer;
+  I, Y, TW, TH : Integer;
   S : String;
+  TCP : TUTF8ToCodepage;
 begin
-  CP := FActiveCodepage;
   if Not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then begin
     fCodepageText.Resolution:=Point(1,1);
     fCodepageText.ClrScr;
@@ -684,9 +681,22 @@ begin
         fCodepageText.WriteError(S);
       end;
       weUnicode : begin
-        fCodepageText.Codepage:=-1;
+        fCodepageText.Codepage:=FActiveCodepage;
         fCodepageText.Resolution:=Point(TW,TH);
         fCodepageText.ClrScr;
+        TCP:=W.AsCodePage(FActiveCodepage);
+        Y := 1;
+        for I := Low(TCP.Values) to High(TCP.Values) do begin
+          if TCP.Chars[I] = Byte(LF) then begin
+            Inc(Y);
+            fCodepageText.GotoXY(1, Y);
+          end else
+          if TCP.Values[I] < 0 then
+              fCodepageText.WriteError(#$3f)
+            else
+              fCodepageText.WriteCRT(Char(TCP.Values[I]));
+        end;
+        FreeAndNil(TCP);
       end;
     end;
     SL.Free;
