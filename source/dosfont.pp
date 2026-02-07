@@ -372,6 +372,8 @@ begin
     ];
 end;
 
+{ TODO 1 -Devel Included an embedded version og the basic DOS unicode font file. }
+
 (* Unicode Font File for DOS, File Format Specification, Version 1.0 (draft) *)
 
 const

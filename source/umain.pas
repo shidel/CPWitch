@@ -421,6 +421,9 @@ var
   C : TColor;
   B, F, EB, EF : String;
 begin
+  { TODO 0 -cLazarus_Bug On macOS, setting the VertScrollBar.Position does
+    not scroll a TMemo }
+
   // This does not scroll a TMemo to the top on macOS
   // mUnicodeText.VertScrollBar.Position:=0;
   // This does work on macOS
@@ -436,17 +439,18 @@ begin
   EF:=IntToHex(Red(C), 2) + IntToHex(Green(C), 2) + IntToHex(Blue(C), 2);
   C:=ColorToRGB(fCodepageText.ErrorBackground);
   EB:=IntToHex(Red(C), 2) + IntToHex(Green(C), 2) + IntToHex(Blue(C), 2);
-  { TODO 0 -cBug TIpHtmlPanel does not honor whites-space pre, pre-wrap or nowrap and wraps text anyway. }
-  { TODO 0 -cBug TIpHtmlPanel displays HTML entities "as-is" inside PRE tags. }
-  // Note: TIpHtmlPanel incorrectly displays Named HTML entities inside of
-  // PRE tags and displays them as-is. For example, "&gt;" should be displayed
-  // as ">". But, it is displayed as "&gt;". Also, pre, pre-wrap and nowrap
-  // will still break lines at the edge of a window. Therefore, SPACE needs
-  // converted to &nbsp and CR/LF need converted to a <br> tag.
+  { TODO 0 -cLazarus_Bug TIpHtmlPanel does not honor whites-space pre, pre-wrap or nowrap and wraps text anyway. }
+  { TODO 0 -cLazarus_Bug TIpHtmlPanel displays HTML entities "as-is" inside PRE tags. }
+
   S:=StringReplace(S, CRLF, LF,[rfReplaceAll]);
   S:=StringReplace(S, CR, LF,[rfReplaceAll]);
   S:=StringReplace(S, LF, '<br>',[rfReplaceAll]);
   S:=StringReplace(S, SPACE, '&nbsp;', [rfReplaceAll]);
+  // TIpHtmlPanel incorrectly displays Named HTML Entities inside of
+  // PRE tags and displays them as-is. For example, "&gt;" should be displayed
+  // as ">". But, it is displayed as "&gt;". Also, pre, pre-wrap and nowrap
+  // will still break lines at the edge of a window. Therefore, SPACE needs
+  // converted to &nbsp and CR/LF need converted to a <br> tag.
   { TODO 6 -cDevel Add support to view unmapped characters as errors in UnicodeView }
   IgnoreParameter([EF, EB]);
   S:='<html><body style="' +

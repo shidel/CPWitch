@@ -4,7 +4,7 @@
    All rights reserved.
 }
 
-{ TODO 0 -cDevel Remove need for an external codepages.ini file. }
+{ TODO 1 -cDevel Remove need for an external codepages.ini file. }
 
 { This unit requires an external data file called codepages.ini to be stored
   in the "AppDataPath" set by the PasExt Unit. Eventually, that data will likely
@@ -57,12 +57,15 @@ type
     procedure SetExpanded(AValue: boolean);
   protected
     procedure SetInvalid(AValue: Int32); virtual; abstract;
+    procedure ResultClear;
   public
     constructor Create; virtual;
     { Clear all data. Does not reset Expanded or ControlCodes! }
     procedure Clear; virtual;
     { Perform the conversion. Note that the conversion from Codepage to Unicode
-      always returns TRUE unless the required codepage maps are not loaded. }
+      always returns TRUE unless the required codepage maps are not loaded.
+      When converting to Codepage from Unicode, it will return TRUE only if
+      all characters could be mapped to the requested Codepage. }
     function Convert : boolean; virtual; abstract;
     { DOS Codepage number }
     property Codepage : integer read FCodepage write SetCodepage;
@@ -71,11 +74,13 @@ type
       Basic Multilingual Plane (BMP) (U+E000 through U+F8FF) starting at
       U+F000 accoring to the mapping data. }
     property Expanded : boolean read FExpanded write SetExpanded;
-    { Convert ASCII Control Codes }
+    { Convert ASCII Control Codes. Has no effect on Unicode to Codepage connversion. }
     property ControlCodes : boolean read FControlCodes write SetControlCodes;
     { Invalid or Un-mappable characters get assigned this Value. For conversion
       to Codepage, it should be the ASCII value 0-255. For conversion to Unicode,
-      it should be the Value of a Unicode Character. }
+      it should be the Value of a Unicode Character. Howevever except for some
+      extreme edge cases, it is not used when converting to Unicode. Those edge
+      cases are things like out of range character values. }
     property Invalid : Int32 read FInvalid write SetInvalid;
     { Conversion success results. Note that the conversion from Codepage to Unicode
       is always 100% compatible unless the required codepage maps are not loaded. }
@@ -105,6 +110,8 @@ type
   private
     FConverted: RawByteString;
     FSource: UnicodeString;
+    FChars: TArrayOfInt32;
+    FValues: TArrayOfInt32;
     procedure SetSource(AValue: UnicodeString);
   protected
     procedure SetInvalid(AValue: Int32); override;
@@ -114,6 +121,10 @@ type
     function Convert : boolean; override;
     property Source : UnicodeString read FSource write SetSource;
     property Converted : RawByteString read FConverted;
+    { Pre-conversion value of individual Unicode Characters }
+    property Chars : TArrayOfInt32 read FChars;
+    { Post-conversion value of individual Unicode Characters. }
+    property Values : TArrayOfInt32 read FValues;
   end;
 
   { TUTF8Anaylize }
@@ -321,7 +332,7 @@ begin
   Result:=B;
 end;
 
-function CreateMapper(Inclusive : boolean = true) : TBinaryTree;
+function CreateMapper(Inclusive : boolean = true; Inheritance : boolean = true) : TBinaryTree;
 var
   R : TBinaryTree;
   SL : TStringList;
@@ -359,7 +370,7 @@ begin
     for J := FC to High(Maps[I].Map) do begin
       V:=Maps[I].Map[J];
       if V < 0 then begin
-        if not Inclusive then Continue;
+        if not Inheritance then Continue;
         // Potentially, this should only be done for cpeInherited and other
         // values skipped.
         V:=Maps[EnMap].Map[J];
@@ -455,6 +466,16 @@ begin
   FExpanded:=AValue;
 end;
 
+procedure TCodepageConverter.ResultClear;
+begin
+  FResults.Codepage := -1;
+  FResults.Characters := 0;
+  FResults.ASCII := 0;
+  FResults.Unicode := 0;
+  FResults.Converted := 0;
+  FResults.Compatible := 0;
+end;
+
 constructor TCodepageConverter.Create;
 begin
   inherited Create;
@@ -492,8 +513,6 @@ end;
 constructor TCodepageToUTF8.Create;
 begin
   inherited Create;
-  FSource:='';
-  FConverted:='';
 end;
 
 procedure TCodepageToUTF8.Clear;
@@ -504,34 +523,29 @@ begin
 end;
 
 function TCodepageToUTF8.Convert : boolean;
+{ TODO 8 -cUntested TCodepageToUTF8.Convert is completely untested. }
 var
   M, I, P, C : Integer;
   V : Int32;
   U : TArrayOfInt32;
   UTF: UTF8String;
 begin
-  FResults.Codepage := -1;
-  FResults.Characters := 0;
-  FResults.ASCII := 0;
-  FResults.Unicode := 0;
-  FResults.Converted := 0;
-  FResults.Compatible := 0;
   Result:=False;
+  ResultClear;
   FConverted := '';
   M:=FindMap(FCodepage);
   if M < 0 then Exit;
   if EnMap < 0 then Exit;
-  FResults.Codepage:=M;
-  FResults.Characters := Length(FSource);
-  FResults.Compatible := 100;
-  P := 0;
+  FResults.Codepage:=FCodepage;
+  FResults.Characters:=Length(FSource);
+  FResults.Compatible:=100;
+  P:=0;
   U:=[];
   // Since not all Codepage characters exist directly in unicode, it can
   // actually be longer than the original RawByteString. Sometimes, it can
   // take several Unicode Combining Characters to represent the Codepage
   // version.
   SetLength(U, Length(FSource) * 4);
-  { TODO 9 -cDevel Add support for Result Statistics }
   for I := 1 to Length(FSource) do begin
      C:=Byte(FSource[I]);
      if C < $80 then begin
@@ -552,11 +566,11 @@ begin
      if V < 0 then begin
        V:=Maps[EnMap].Map[C];
      end;
-     { TODO 9 -cDevel Add support to include Combining characters }
      U[P]:=C;
      Inc(P);
   end;
   SetLength(U,P);
+  { TODO 8 -cDevel Expand NoMap Character Values to Unicode Sequences }
   ValuesToUTF8(U, UTF, FInvalid);
   FConverted:=UnicodeString(UTF);
   Result:=True;
@@ -586,13 +600,100 @@ end;
 procedure TUTF8ToCodepage.Clear;
 begin
   inherited Clear;
+  FChars:=[];
+  FValues:=[];
   FSource:='';
   FConverted:='';
 end;
 
 function TUTF8ToCodepage.Convert : boolean;
+var
+  CPB : TArrayOfByte;
+  N : TBinaryTreeNode;
+  I : integer;
+  V : Int32;
+  EC : Integer;
+  CP : String;
 begin
   Result:=False;
+  ResultClear;
+  FChars:=[];
+  FValues:=[];
+  FConverted:='';
+  CPB:=[];
+  if FindMap(FCodepage) < 0 then Exit;
+  CP := IntToStr(FCodepage);
+  FResults.Codepage:=FCodepage;
+  // Since UTF8toValues was likely used to determine the string is UTF8 encoded,
+  // we will assume conversion here is successful and continue regardless.
+  { if not } UTF8toValues(UTF8String(FSource), FChars) { then exit } ;
+  { TODO 8 -cDevel Convert Multi-Character Unicode Combinations to NoMap Values }
+  FResults.Characters:=Length(FSource);
+  // Create the ASCII Values array;
+  SetLength(FValues, Length(FChars));
+  SetLength(CPB, Length(FChars));
+  EC:=0;
+  for I := Low(FChars) to High(FChars) do begin
+
+    V:=FChars[I];
+    if V < $80 then begin
+      // ASCII or ERROR
+      if V >= 0 then
+        Inc(FResults.ASCII);
+    end else begin
+      // Unicode
+      Inc(FResults.Unicode);
+      N := AnalyzeMap.Find(IntToStr(V));
+      if not (Assigned(N) and Assigned(N.Item)) then begin
+        // Unicode not in map
+        V:=-1;
+      end else begin
+        N:=TBinaryTree(N.Item).Find(CP);
+        if not (Assigned(N) and Assigned(N.Item)) then begin
+          // Unicode not present in codepage
+          V:=-1;
+        end else begin
+          Inc(FResults.Converted);
+          V:=N.Value;
+        end;
+      end;
+    end;
+
+    if V > 255 then
+      V:=-1;
+    FValues[I]:=V;
+    if V < 0 then begin
+      Inc(EC);
+      V:=FInvalid;
+    end;
+    CPB[I]:=V;
+  end;
+
+  // Convert to RawByteString
+  SetLength(FConverted, Length(CPB));
+  // FPC complains about using "Move" as "not inlined"
+  // So, just do it manually. Not going to be as fast. But, whatever.
+  for I := 0 to Length(CPB) - 1 do
+    FConverted[1 + I]:=Char(CPB[I]);
+
+  // Update Compatible Percentage
+  if EC = 0 then begin
+    FResults.Compatible:=100;
+  end else
+  if FResults.Unicode = 0 then begin
+    FResults.Compatible:=0;
+  end else begin
+    FResults.Compatible := (FResults.Converted) * 100 div FResults.Unicode;
+    // Cap unperfect match at 99%
+    if FResults.Compatible > 99 then
+      FResults.Compatible:=99
+    else
+    // Minimum umperfect match of 1%
+    if FResults.Compatible < 1 then
+      FResults.Compatible:=1;
+  end;
+
+  Result:=EC=0;
 end;
 
 { TUTF8Analyze }
@@ -613,6 +714,7 @@ begin
       Inc(AC)
     else begin
       Inc(UC);
+      // Check Unicode Exists
       N := AnalyzeMap.Find(IntToStr(FValues[I]));
       if not (Assigned(N) and Assigned(N.Item)) then begin
         {$IFDEF DEBUGGING}
@@ -621,6 +723,7 @@ begin
         Inc(EC)
       end
       else begin
+        // Check if there is mapping data... Should be!
         N:=TBinaryTree(N.Item).First;
         if Not Assigned(N) then begin
           {$IFDEF DEBUGGING}
@@ -629,6 +732,8 @@ begin
           Inc(EC)
         end
         else
+          // For each codepage the character exists, increment our Codepage
+          // character count tree.
           while Assigned(N) do begin
             X:=R.Find(N.UniqueID);
             if Assigned(X) then
@@ -640,7 +745,6 @@ begin
               R.Add(N.UniqueID,1);
             end;
             N:=N.Next;
-
           end;
       end;
     end;
