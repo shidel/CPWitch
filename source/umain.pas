@@ -245,6 +245,17 @@ begin
 end;
 
 procedure TfMain.FormCreate(Sender: TObject);
+
+{$IFDEF WINDOWS}
+  procedure Flatten(C : TWinControl);
+  begin
+    if C is TPanel then begin
+      TPanel(C).BevelOuter:=bvNone;
+      TPanel(C).BorderStyle:=bsSingle;
+    end;
+  end;
+{$ENDIF}
+
 begin
   FActiveCodepage := 437;
   fWitch := TWitch.Create;
@@ -304,7 +315,22 @@ begin
   CreateToolButton(tbMain, actDebugLog);
 
   // Set Toolbar width
+  { TODO 3 -cUI Adjust for DPI and Windows }
+  {$IFDEF WINDOWS}
+  tbMain.Width:=(tbMain.Images.Width + 4) * 12 + tbMain.Indent * 2;
+  Flatten(pFileList);
+  Flatten(pCodepageList);
+  Flatten(pViewUnicode);
+  Flatten(pCodepage);
+  lvFileList.HideSelection:=False;
+  lvCodepageList.HideSelection:=False;
+  sbCodePage.HorzScrollBar.Increment:=16;
+  sbCodePage.HorzScrollBar.Tracking:=True;
+  sbCodePage.VertScrollBar.Increment:=32;
+  sbCodePage.VertScrollBar.Tracking:=True;
+  {$ELSE}
   tbMain.Width:=(tbMain.Images.Width + 4) * 10 + tbMain.Indent * 2;
+  {$ENDIF}
 
   // Create at runtime without name to not save Caption iduring NLS generation.
   lbViewCodepageLabel :=TLabel.Create(Self);
@@ -486,7 +512,7 @@ begin
     '<div style="font-family: monospace; ">'+ S + '</div>' +
     '<br></body></html>';
   hpUnicodeText.SetHtmlFromStr(S);
-  // FileSave(AppBasePath + '/test.html',PasExt.ToBytes(S));
+  FileSave(AppBasePath + '/test.html',PasExt.ToBytes(S));
 end;
 
 procedure TfMain.FormSettingsLoad(Sender: TObject);
@@ -742,7 +768,6 @@ begin
       weUnicode : begin
         fCodepageText.Codepage:=-1;
         fCodepageText.Resolution:=Point(TW,TH);
-        // fCodepageText.Scale:=Point(2,2);
         fCodepageText.ClrScr;
         TCP:=W.AsCodePage(FActiveCodepage);
         Y := 1;

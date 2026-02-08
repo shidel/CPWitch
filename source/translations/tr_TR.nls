@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CONFIG Name="Türkçe" Language="tr_TR">
+  <Translation>
+    <Revision_0 Date="2026-02-08" Contributor="Google Gemini"/>
+  </Translation>
+  <Application>
+    <ModalButtons>
+      <Ok Value="Tamam"/>
+      <Cancel Value="İptal"/>
+      <Yes Value="Evet"/>
+      <No Value="Hayır"/>
+      <Close Value="Kapat"/>
+      <Abort Value="Durdur"/>
+      <Retry Value="Yeniden Dene"/>
+      <Ignore Value="Yoksay"/>
+      <All Value="Tümü"/>
+      <NoToAll Value="Tümüne Hayır"/>
+      <YesToAll Value="Tümüne Evet"/>
+    </ModalButtons>
+    <Error>
+      <File>
+        <Read>
+          <Caption Value="Dosya okuma hatası"/>
+          <Message Value="&quot;%0:s&quot; dosyası okunurken #%1:s (%2:s) hatası oluştu."/>
+        </Read>
+        <Write>
+          <Caption Value="Dosya yazma hatası"/>
+          <Message Value="&quot;%0:s&quot; dosyasına yazılırken #%1:s (%2:s) hatası oluştu."/>
+        </Write>
+      </File>
+      <Codes>
+        <ecUnknown Value="Bilinmeyen hata."/>
+        <ec0 Value="Hata yok"/>
+        <ec2 Value="Dosya bulunamadı"/>
+        <ec3 Value="Yol bulunamadı"/>
+        <ec4 Value="Çok fazla dosya açık"/>
+        <ec5 Value="Erişim engellendi"/>
+        <ec6 Value="Geçersiz dosya tanıtıcısı"/>
+        <ec12 Value="Geçersiz erişim modu"/>
+        <ec17 Value="Cihazlar arası yeniden adlandırma yapılamaz"/>
+        <ec100 Value="Disk okuma hatası"/>
+        <ec101 Value="Disk yazma hatası"/>
+        <ec102 Value="Dosya atanmadı"/>
+        <ec103 Value="Dosya açık değil"/>
+        <ec104 Value="Dosya giriş için açık değil"/>
+        <ec105 Value="Dosya çıkış için açık değil"/>
+        <ec106 Value="Geçersiz sayısal format"/>
+        <ec150 Value="Disk yazma korumalı"/>
+      </Codes>
+    </Error>
+    <FormatSettings>
+      <CurrencyFormat Value="0"/>
+      <NegCurrFormat Value="1"/>
+      <DecimalSeparator Value=","/>
+      <CurrencyDecimals Value="2"/>
+      <DateSeparator Value="."/>
+      <TimeSeparator Value=":"/>
+      <ListSeparator Value=";"/>
+      <CurrencyString Value="₺"/>
+      <ShortDateFormat Value="d.m.yyyy"/>
+      <LongDateFormat Value="d mmmm yyyy dddd"/>
+      <TimeAMString Value="ÖÖ"/>
+      <TimePMString Value="ÖS"/>
+      <ShortTimeFormat Value="HH:mm"/>
+      <LongTimeFormat Value="HH:mm:ss"/>
+      <ShortMonthNames>
+        <Index_1 Value="Oca"/>
+        <Index_2 Value="Şub"/>
+        <Index_3 Value="Mar"/>
+        <Index_4 Value="Nis"/>
+        <Index_5 Value="May"/>
+        <Index_6 Value="Haz"/>
+        <Index_7 Value="Tem"/>
+        <Index_8 Value="Ağu"/>
+        <Index_9 Value="Eyl"/>
+        <Index_10 Value="Eki"/>
+        <Index_11 Value="Kas"/>
+        <Index_12 Value="Ara"/>
+      </ShortMonthNames>
+      <LongMonthNames>
+        <Index_1 Value="Ocak"/>
+        <Index_2 Value="Şubat"/>
+        <Index_3 Value="Mart"/>
+        <Index_4 Value="Nisan"/>
+        <Index_5 Value="Mayıs"/>
+        <Index_6 Value="Haziran"/>
+        <Index_7 Value="Temmuz"/>
+        <Index_8 Value="Ağustos"/>
+        <Index_9 Value="Eylül"/>
+        <Index_10 Value="Ekim"/>
+        <Index_11 Value="Kasım"/>
+        <Index_12 Value="Aralık"/>
+      </LongMonthNames>
+      <ShortDayNames>
+        <Index_1 Value="Paz"/>
+        <Index_2 Value="Pzt"/>
+        <Index_3 Value="Sal"/>
+        <Index_4 Value="Çar"/>
+        <Index_5 Value="Per"/>
+        <Index_6 Value="Cum"/>
+        <Index_7 Value="Cmt"/>
+      </ShortDayNames>
+      <LongDayNames>
+        <Index_1 Value="Pazar"/>
+        <Index_2 Value="Pazartesi"/>
+        <Index_3 Value="Salı"/>
+        <Index_4 Value="Çarşamba"/>
+        <Index_5 Value="Perşembe"/>
+        <Index_6 Value="Cuma"/>
+        <Index_7 Value="Cumartesi"/>
+      </LongDayNames>
+      <TwoDigitYearCenturyWindow Value="50"/>
+    </FormatSettings>
+  </Application>
+  <Controls>
+    <fMain Caption="Codepage Witch">
+      <alMain>
+        <actOpen Hint="Bir metin dosyası aç." Caption="Dosya Aç..."/>
+        <actExportCodepage Hint="Bir metin dosyasını kod sayfası formatında dışa aktar." Caption="Kod Sayfası Dışa Aktar..."/>
+        <actPreferences Hint="Codepage Witch tercihlerini görüntüle veya değiştir." Caption="Tercihler..."/>
+        <actOnlineUpdate Hint="Codepage Witch güncellemelerini kontrol et." Caption="Güncelleme Kontrolü..."/>
+        <actDebugLog Hint="Hata ayıklama günlüğünü görüntüle." Caption="Hata Ayıklama Günlüğü..."/>
+        <actListAll Hint="Bilinen tüm kod sayfalarını listele." Caption="Tümü bilinen"/>
+        <actListPartial Hint="Kısmen uyumlu kod sayfalarını listele." Caption="Herhangi bir olası"/>
+        <actListCompatible Hint="Sadece tam uyumlu kod sayfalarını listele." Caption="Sadece uyumlu"/>
+        <actCodepageFilter Hint="Kod sayfaları listesini filtrele." Caption="Kod Sayfası Filtresi"/>
+        <actExportUnicode Hint="Bir metin dosyasını UTF-8 formatında dışa aktar." Caption="UTF-8 Dışa Aktar..."/>
+        <actClose Hint="Mevcut metin dosyasını kapat." Caption="Dosyayı Kapat"/>
+      </alMain>
+      <pFileList>
+        <pFileListLabel>
+          <lbFileList Caption="Metin Dosyaları"/>
+        </pFileListLabel>
+      </pFileList>
+      <pCodepageList>
+        <pCodepageListLabel>
+          <lbCodepageLabel Caption="Kod Sayfaları"/>
+        </pCodepageListLabel>
+        <lvCodepageList>
+          <Analyzing Caption="Analiz ediliyor"/>
+          <Not_implemented Caption="Uygulanmadı"/>
+          <Any_Codepage Caption="Herhangi Bir Kod Sayfası"/>
+        </lvCodepageList>
+      </pCodepageList>
+      <pViewers>
+        <pViewUnicode>
+          <pViewUnicodeLabel>
+            <lbUnicodeViewLabel Caption="Unicode olarak görüntülendi"/>
+          </pViewUnicodeLabel>
+        </pViewUnicode>
+        <pCodepage>
+          <pViewCodepageLabel>
+            <lbViewCodepageLabel Value="Kod Sayfası %s olarak görüntülendi"/>
+          </pViewCodepageLabel>
+        </pCodepage>
+      </pViewers>
+      <statBar>
+        <Processing Caption="İşleniyor"/>
+        <Codepage Caption="Kod Sayfası"/>
+        <Unicode Caption="Unicode"/>
+        <NoEncoding Caption="ASCII"/>
+      </statBar>
+    </fMain>
+    <fPreferences Caption="Codepage Witch Tercihleri">
+      <fPreferencePages>
+        <tsAbout Hint="&quot;%s&quot; Hakkında" Caption="Hakkında">
+          <lbCopyright Caption="Telif Hakkı %s"/>
+          <lbVersion Caption="Sürüm %0:s (derleme %1:s)"/>
+          <lbApplication Caption="&quot;%s&quot;"/>
+        </tsAbout>
+        <tsGeneral Hint="Genel uygulama ayarları." Caption="Genel">
+          <gbUserLanguage Caption="Kullanıcı Dili">
+            <cxLanguageChoice Default="(varsayılan)"/>
+            <pLanguagePreferred>
+              <lbLanguagePreferred Caption="Tercih Edilen Dil:"/>
+            </pLanguagePreferred>
+            <lbLanguageSystem Caption="Sistem Dili:  %s"/>
+          </gbUserLanguage>
+          <gbMiscellaneous Caption="Çeşitli">
+            <cbShowHints Caption="Fare üzerine geldiğinde ipuçlarını göster."/>
+            <cbColorButtons Caption="Renkli araç çubuğu düğmelerini kullan."/>
+          </gbMiscellaneous>
+          <gbOnlineUpdate Caption="Çevrimiçi Güncelleme">
+            <cbAutoCheck Caption="Güncellemeleri otomatik olarak kontrol et"/>
+            <pUpdateButton>
+              <btnUpdateCheck Hint="En son güncelleme için çevrimiçi sunucuyu kontrol et." Caption="Şimdi kontrol et..."/>
+            </pUpdateButton>
+          </gbOnlineUpdate>
+        </tsGeneral>
+      </fPreferencePages>
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnAccept Hint="Tüm değişiklikleri kabul et ve uygula." Caption="Kabul Et"/>
+          <btnCancel Hint="Tüm değişiklikleri yoksay." Caption="İptal"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <fMiddlePanel>
+        <fBodyPanel>
+          <pSectionsPanel>
+            <pSectionLabel>
+              <lbSections Caption="Seçenekler"/>
+            </pSectionLabel>
+          </pSectionsPanel>
+        </fBodyPanel>
+      </fMiddlePanel>
+    </fPreferences>
+    <fUpdateCheckDialog Caption="Güncelleme Kontrolü">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="İptal"/>
+          <btnRetry Caption="Yeniden Dene"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Check Text="&quot;%s&quot; için mevcut güncellemeler kontrol ediliyor, sürüm %s."/>
+        <Error Text="Şu anda &quot;%s&quot; için herhangi bir güncelleme olup olmadığı belirlenemiyor. Lütfen daha sonra tekrar deneyiniz."/>
+        <None Text="Şu anda &quot;%s&quot; için mevcut bir güncelleme yok. Lütfen daha sonra tekrar deneyiniz."/>
+      </Message>
+    </fUpdateCheckDialog>
+    <fUpdateFoundDialog Caption="Güncelleme Mevcut">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="İptal"/>
+          <btnDownload Caption="İndir"/>
+          <btnSkip Caption="Atla"/>
+        </fButtonPanel>
+        <fAuxPanel>
+          <cbSkipVersion Caption="Bu sürümü atla"/>
+        </fAuxPanel>
+      </fLowerPanel>
+      <Message>
+        <Note Text="&quot;%0:s&quot; uygulamasının %1:s sürümü için sürüm notu sağlanmadı."/>
+      </Message>
+    </fUpdateFoundDialog>
+    <fUpdateDownloadDialog Caption="Güncelleme İndiriliyor">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="İptal"/>
+          <btnRetry Caption="Yeniden Dene"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Fetch Text="&quot;%s&quot; güncellemesi indiriliyor."/>
+        <Error Text="&quot;%s&quot; güncellemesi indirilirken hata oluştu. Lütfen daha sonra tekrar deneyiniz."/>
+      </Message>
+    </fUpdateDownloadDialog>
+    <fUpdateSaveDialog Caption="Güncelleme İndirildi">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="İptal"/>
+          <btnSaveAs Caption="Farklı kaydet..."/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Downloaded Text="&quot;%s&quot; sürüm %s indirildi."/>
+      </Message>
+    </fUpdateSaveDialog>
+  </Controls>
+</CONFIG>

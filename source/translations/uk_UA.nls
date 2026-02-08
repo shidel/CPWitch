@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CONFIG Name="Українська" Language="uk_UA">
+  <Translation>
+    <Revision_0 Date="2026-02-08" Contributor="Google Gemini"/>
+  </Translation>
+  <Application>
+    <ModalButtons>
+      <Ok Value="ОК"/>
+      <Cancel Value="Скасувати"/>
+      <Yes Value="Так"/>
+      <No Value="Ні"/>
+      <Close Value="Закрити"/>
+      <Abort Value="Перервати"/>
+      <Retry Value="Повторити"/>
+      <Ignore Value="Ігнорувати"/>
+      <All Value="Усі"/>
+      <NoToAll Value="Ні для всіх"/>
+      <YesToAll Value="Так для всіх"/>
+    </ModalButtons>
+    <Error>
+      <File>
+        <Read>
+          <Caption Value="Помилка читання файлу"/>
+          <Message Value="Помилка #%1:s (%2:s) виникла під час читання з файлу &quot;%0:s&quot;."/>
+        </Read>
+        <Write>
+          <Caption Value="Помилка запису файлу"/>
+          <Message Value="Помилка #%1:s (%2:s) виникла під час запису до файлу &quot;%0:s&quot;."/>
+        </Write>
+      </File>
+      <Codes>
+        <ecUnknown Value="Невідома помилка."/>
+        <ec0 Value="Помилок немає"/>
+        <ec2 Value="Файл не знайдено"/>
+        <ec3 Value="Шлях не знайдено"/>
+        <ec4 Value="Відкрито занадто багато файлів"/>
+        <ec5 Value="Доступ заборонено"/>
+        <ec6 Value="Недійсний дескриптор файлу"/>
+        <ec12 Value="Недійсний режим доступу"/>
+        <ec17 Value="Неможливо перейменувати між різними пристроями"/>
+        <ec100 Value="Помилка читання диска"/>
+        <ec101 Value="Помилка запису диска"/>
+        <ec102 Value="Файл не призначено"/>
+        <ec103 Value="Файл не відкрито"/>
+        <ec104 Value="Файл не відкрито для читання"/>
+        <ec105 Value="Файл не відкрито для запису"/>
+        <ec106 Value="Недійсний числовий формат"/>
+        <ec150 Value="Диск захищено від запису"/>
+      </Codes>
+    </Error>
+    <FormatSettings>
+      <CurrencyFormat Value="0"/>
+      <NegCurrFormat Value="1"/>
+      <DecimalSeparator Value=","/>
+      <CurrencyDecimals Value="2"/>
+      <DateSeparator Value="."/>
+      <TimeSeparator Value=":"/>
+      <ListSeparator Value=";"/>
+      <CurrencyString Value="₴"/>
+      <ShortDateFormat Value="dd.mm.yyyy"/>
+      <LongDateFormat Value="d mmmm yyyy &quot;р.&quot;"/>
+      <TimeAMString Value=""/>
+      <TimePMString Value=""/>
+      <ShortTimeFormat Value="HH:mm"/>
+      <LongTimeFormat Value="HH:mm:ss"/>
+      <ShortMonthNames>
+        <Index_1 Value="січ"/>
+        <Index_2 Value="лют"/>
+        <Index_3 Value="бер"/>
+        <Index_4 Value="квіт"/>
+        <Index_5 Value="трав"/>
+        <Index_6 Value="черв"/>
+        <Index_7 Value="лип"/>
+        <Index_8 Value="серп"/>
+        <Index_9 Value="вер"/>
+        <Index_10 Value="жовт"/>
+        <Index_11 Value="лист"/>
+        <Index_12 Value="груд"/>
+      </ShortMonthNames>
+      <LongMonthNames>
+        <Index_1 Value="січень"/>
+        <Index_2 Value="лютий"/>
+        <Index_3 Value="березень"/>
+        <Index_4 Value="квітень"/>
+        <Index_5 Value="травень"/>
+        <Index_6 Value="червень"/>
+        <Index_7 Value="липень"/>
+        <Index_8 Value="серпень"/>
+        <Index_9 Value="вересень"/>
+        <Index_10 Value="жовтень"/>
+        <Index_11 Value="листопад"/>
+        <Index_12 Value="грудень"/>
+      </LongMonthNames>
+      <ShortDayNames>
+        <Index_1 Value="Нд"/>
+        <Index_2 Value="Пн"/>
+        <Index_3 Value="Вт"/>
+        <Index_4 Value="Ср"/>
+        <Index_5 Value="Чт"/>
+        <Index_6 Value="Пт"/>
+        <Index_7 Value="Сб"/>
+      </ShortDayNames>
+      <LongDayNames>
+        <Index_1 Value="неділя"/>
+        <Index_2 Value="понеділок"/>
+        <Index_3 Value="вівторок"/>
+        <Index_4 Value="середа"/>
+        <Index_5 Value="четвер"/>
+        <Index_6 Value="п'ятниця"/>
+        <Index_7 Value="субота"/>
+      </LongDayNames>
+      <TwoDigitYearCenturyWindow Value="50"/>
+    </FormatSettings>
+  </Application>
+  <Controls>
+    <fMain Caption="Codepage Witch">
+      <alMain>
+        <actOpen Hint="Відкрити текстовий файл." Caption="Відкрити файл..."/>
+        <actExportCodepage Hint="Експортувати текстовий файл у кодуванні певної кодової сторінки." Caption="Експортувати кодову сторінку..."/>
+        <actPreferences Hint="Переглянути або змінити налаштування Codepage Witch." Caption="Налаштування..."/>
+        <actOnlineUpdate Hint="Перевірити наявність оновлень для Codepage Witch." Caption="Перевірка оновлень..."/>
+        <actDebugLog Hint="Переглянути журнал налагодження." Caption="Журнал налагодження..."/>
+        <actListAll Hint="Показати всі відомі кодові сторінки." Caption="Всі відомі"/>
+        <actListPartial Hint="Показати частково сумісні кодові сторінки." Caption="Будь-які можливі"/>
+        <actListCompatible Hint="Показати тільки повністю сумісні кодові сторінки." Caption="Тільки сумісні"/>
+        <actCodepageFilter Hint="Фільтрувати список кодових сторінок." Caption="Фільтр кодових сторінок"/>
+        <actExportUnicode Hint="Експортувати текстовий файл у форматі UTF-8." Caption="Експортувати UTF-8..."/>
+        <actClose Hint="Закрити поточний текстовий файл." Caption="Закрити файл"/>
+      </alMain>
+      <pFileList>
+        <pFileListLabel>
+          <lbFileList Caption="Текстові файли"/>
+        </pFileListLabel>
+      </pFileList>
+      <pCodepageList>
+        <pCodepageListLabel>
+          <lbCodepageLabel Caption="Кодові сторінки"/>
+        </pCodepageListLabel>
+        <lvCodepageList>
+          <Analyzing Caption="Аналіз"/>
+          <Not_implemented Caption="Не реалізовано"/>
+          <Any_Codepage Caption="Будь-яка кодова сторінка"/>
+        </lvCodepageList>
+      </pCodepageList>
+      <pViewers>
+        <pViewUnicode>
+          <pViewUnicodeLabel>
+            <lbUnicodeViewLabel Caption="Відображається як Unicode"/>
+          </pViewUnicodeLabel>
+        </pViewUnicode>
+        <pCodepage>
+          <pViewCodepageLabel>
+            <lbViewCodepageLabel Value="Відображається як кодова сторінка %s"/>
+          </pViewCodepageLabel>
+        </pCodepage>
+      </pViewers>
+      <statBar>
+        <Processing Caption="Обробка"/>
+        <Codepage Caption="Кодова сторінка"/>
+        <Unicode Caption="Unicode"/>
+        <NoEncoding Caption="ASCII"/>
+      </statBar>
+    </fMain>
+    <fPreferences Caption="Налаштування Codepage Witch">
+      <fPreferencePages>
+        <tsAbout Hint="Про програму &quot;%s&quot;" Caption="Про програму">
+          <lbCopyright Caption="Copyright %s"/>
+          <lbVersion Caption="Версія %0:s (збірка %1:s)"/>
+          <lbApplication Caption="Програма &quot;%s&quot;"/>
+        </tsAbout>
+        <tsGeneral Hint="Загальні налаштування програми." Caption="Загальні">
+          <gbUserLanguage Caption="Мова інтерфейсу">
+            <cxLanguageChoice Default="(за замовчуванням)"/>
+            <pLanguagePreferred>
+              <lbLanguagePreferred Caption="Бажана мова:"/>
+            </pLanguagePreferred>
+            <lbLanguageSystem Caption="Системна мова:  %s"/>
+          </gbUserLanguage>
+          <gbMiscellaneous Caption="Різне">
+            <cbShowHints Caption="Показувати підказки при наведенні миші."/>
+            <cbColorButtons Caption="Кольорові кнопки на панелі інструментів."/>
+          </gbMiscellaneous>
+          <gbOnlineUpdate Caption="Онлайн-оновлення">
+            <cbAutoCheck Caption="Автоматично перевіряти наявність оновлень"/>
+            <pUpdateButton>
+              <btnUpdateCheck Hint="Перевірити наявність останнього оновлення на сервері." Caption="Перевірити зараз..."/>
+            </pUpdateButton>
+          </gbOnlineUpdate>
+        </tsGeneral>
+      </fPreferencePages>
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnAccept Hint="Прийняти та застосувати будь-які зміни." Caption="Прийняти"/>
+          <btnCancel Hint="Ігнорувати всі зміни." Caption="Скасувати"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <fMiddlePanel>
+        <fBodyPanel>
+          <pSectionsPanel>
+            <pSectionLabel>
+              <lbSections Caption="Параметри"/>
+            </pSectionLabel>
+          </pSectionsPanel>
+        </fBodyPanel>
+      </fMiddlePanel>
+    </fPreferences>
+    <fUpdateCheckDialog Caption="Перевірка оновлень">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Скасувати"/>
+          <btnRetry Caption="Повторити"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Check Text="Перевірка наявності доступних оновлень для &quot;%s&quot;, версія %s."/>
+        <Error Text="Наразі неможливо визначити наявність оновлень для &quot;%s&quot;. Будь ласка, спробуйте пізніше."/>
+        <None Text="Наразі немає доступних оновлень для &quot;%s&quot;. Будь ласка, спробуйте пізніше."/>
+      </Message>
+    </fUpdateCheckDialog>
+    <fUpdateFoundDialog Caption="Доступне оновлення">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Скасувати"/>
+          <btnDownload Caption="Завантажити"/>
+          <btnSkip Caption="Пропустити"/>
+        </fButtonPanel>
+        <fAuxPanel>
+          <cbSkipVersion Caption="Пропустити цю версію"/>
+        </fAuxPanel>
+      </fLowerPanel>
+      <Message>
+        <Note Text="Для версії %1:s програми &quot;%0:s&quot; немає приміток до випуску."/>
+      </Message>
+    </fUpdateFoundDialog>
+    <fUpdateDownloadDialog Caption="Завантаження оновлення">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Скасувати"/>
+          <btnRetry Caption="Повторити"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Fetch Text="Завантаження оновлення для &quot;%s&quot;."/>
+        <Error Text="Помилка завантаження оновлення &quot;%s&quot;. Будь ласка, спробуйте пізніше."/>
+      </Message>
+    </fUpdateDownloadDialog>
+    <fUpdateSaveDialog Caption="Оновлення завантажено">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Скасувати"/>
+          <btnSaveAs Caption="Зберегти як..."/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Downloaded Text="Завантажено &quot;%s&quot; версії %s."/>
+      </Message>
+    </fUpdateSaveDialog>
+  </Controls>
+</CONFIG>

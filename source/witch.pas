@@ -111,7 +111,7 @@ type
 
   { TWitchAnalyzeThread }
 
-  TWitchAnalyzeThread=class(TThreadTask)
+  TWitchAnalyzeThread=class(TThread)
   private
     FEncoding: TWitchEncoding;
     FResults: TCodepageResults;
@@ -127,7 +127,8 @@ type
     procedure AnalyzeUTF8;
     procedure AnalyzeCP;
   public
-    constructor Create(CreateSuspended:Boolean);
+    procedure AfterConstruction; override;
+    // constructor Create(CreateSuspended:Boolean); override;
     property Witch : TWitch read FWitch write SetWitch;
     property WitchItem : TWitchItem read FWitchItem write SetWitchItem;
     property Text : RawByteString read FText write SetText;
@@ -162,17 +163,17 @@ var
 begin
   If Not (Assigned(FWitch) and Assigned(FWitchItem)) then Exit;
 
+  {$IFDEF Slow_Analyze}
+    Sleep(100);
+  {$ENDIF}
+
   FEncoding:=weNone;
   // Test for characters above ASCII 127
   for I := 1 to Length(FText) do
     if Byte(FText[I]) > 127 then begin
       FEncoding:=weCodepage;
       Break;
-  {$IFDEF Slow_Analyze}
-    end else Sleep(3);
-  {$ELSE}
     end;
-  {$ENDIF}
   // Now if there are, see if it is Codepage or UTF-8.
   if FEncoding <> weNone then begin
     if UTF8ToValues(FText, V) then begin
@@ -209,10 +210,11 @@ begin
   { TODO 9 -cDevel Witch analyze Codepage. Requires Language Dictionaries. }
 end;
 
-constructor TWitchAnalyzeThread.Create(CreateSuspended: Boolean);
+procedure TWitchAnalyzeThread.AfterConstruction;
 begin
-  inherited Create(CreateSuspended);
+  inherited AfterConstruction;
   FreeOnTerminate:=True;
+  Priority:=tpLowest;
   FText:='';
   FWitch:=nil;
   FWitchItem:=nil;

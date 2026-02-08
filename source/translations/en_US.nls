@@ -157,8 +157,8 @@
       <statBar>
         <Processing Caption="Processing"/>
         <Codepage Caption="Codepage"/>
-        <NoEncoding Caption="ASCII"/>
         <Unicode Caption="Unicode"/>
+        <NoEncoding Caption="ASCII"/>
       </statBar>
     </fMain>
     <fPreferences Caption="Codepage Witch Preferences">

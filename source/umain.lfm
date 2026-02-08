@@ -374,7 +374,7 @@ object fMain: TfMain
     Top = 104
   end
   object dlgOpenFile: TOpenDialog
-    Options = [ofAllowMultiSelect, ofFileMustExist, ofEnableSizing, ofDontAddToRecent, ofViewDetail]
+    Options = [ofAllowMultiSelect, ofFileMustExist, ofEnableSizing, ofViewDetail]
     Left = 380
     Top = 219
   end

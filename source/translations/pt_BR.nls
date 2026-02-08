@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CONFIG Name="Português (Brasil)" Language="pt_BR">
+  <Translation>
+    <Revision_0 Date="2026-02-08" Contributor="Google Gemini"/>
+  </Translation>
+  <Application>
+    <ModalButtons>
+      <Ok Value="Ok"/>
+      <Cancel Value="Cancelar"/>
+      <Yes Value="Sim"/>
+      <No Value="Não"/>
+      <Close Value="Fechar"/>
+      <Abort Value="Abortar"/>
+      <Retry Value="Repetir"/>
+      <Ignore Value="Ignorar"/>
+      <All Value="Todos"/>
+      <NoToAll Value="Não para todos"/>
+      <YesToAll Value="Sim para todos"/>
+    </ModalButtons>
+    <Error>
+      <File>
+        <Read>
+          <Caption Value="Erro de leitura de arquivo"/>
+          <Message Value="Ocorreu o erro #%1:s (%2:s) ao ler o arquivo &quot;%0:s&quot;."/>
+        </Read>
+        <Write>
+          <Caption Value="Erro de escrita de arquivo"/>
+          <Message Value="Ocorreu o erro #%1:s (%2:s) ao gravar no arquivo &quot;%0:s&quot;."/>
+        </Write>
+      </File>
+      <Codes>
+        <ecUnknown Value="Erro desconhecido."/>
+        <ec0 Value="Sem erro"/>
+        <ec2 Value="Arquivo não encontrado"/>
+        <ec3 Value="Caminho não encontrado"/>
+        <ec4 Value="Muitos arquivos abertos"/>
+        <ec5 Value="Acesso negado"/>
+        <ec6 Value="Identificador de arquivo inválido"/>
+        <ec12 Value="Modo de acesso inválido"/>
+        <ec17 Value="Não é possível renomear entre dispositivos"/>
+        <ec100 Value="Erro de leitura de disco"/>
+        <ec101 Value="Erro de escrita no disco"/>
+        <ec102 Value="Arquivo não atribuído"/>
+        <ec103 Value="Arquivo não aberto"/>
+        <ec104 Value="Arquivo não aberto para entrada"/>
+        <ec105 Value="Arquivo não aberto para saída"/>
+        <ec106 Value="Formato numérico inválido"/>
+        <ec150 Value="O disco está protegido contra gravação"/>
+      </Codes>
+    </Error>
+    <FormatSettings>
+      <CurrencyFormat Value="0"/>
+      <NegCurrFormat Value="1"/>
+      <DecimalSeparator Value=","/>
+      <CurrencyDecimals Value="2"/>
+      <DateSeparator Value="/"/>
+      <TimeSeparator Value=":"/>
+      <ListSeparator Value=";"/>
+      <CurrencyString Value="R$"/>
+      <ShortDateFormat Value="dd/mm/yyyy"/>
+      <LongDateFormat Value="d' de 'mmmm' de 'yyyy"/>
+      <TimeAMString Value=""/>
+      <TimePMString Value=""/>
+      <ShortTimeFormat Value="HH:mm"/>
+      <LongTimeFormat Value="HH:mm:ss"/>
+      <ShortMonthNames>
+        <Index_1 Value="Jan"/>
+        <Index_2 Value="Fev"/>
+        <Index_3 Value="Mar"/>
+        <Index_4 Value="Abr"/>
+        <Index_5 Value="Mai"/>
+        <Index_6 Value="Jun"/>
+        <Index_7 Value="Jul"/>
+        <Index_8 Value="Ago"/>
+        <Index_9 Value="Set"/>
+        <Index_10 Value="Out"/>
+        <Index_11 Value="Nov"/>
+        <Index_12 Value="Dez"/>
+      </ShortMonthNames>
+      <LongMonthNames>
+        <Index_1 Value="Janeiro"/>
+        <Index_2 Value="Fevereiro"/>
+        <Index_3 Value="Março"/>
+        <Index_4 Value="Abril"/>
+        <Index_5 Value="Maio"/>
+        <Index_6 Value="Junho"/>
+        <Index_7 Value="Julho"/>
+        <Index_8 Value="Agosto"/>
+        <Index_9 Value="Setembro"/>
+        <Index_10 Value="Outubro"/>
+        <Index_11 Value="Novembro"/>
+        <Index_12 Value="Dezembro"/>
+      </LongMonthNames>
+      <ShortDayNames>
+        <Index_1 Value="Dom"/>
+        <Index_2 Value="Seg"/>
+        <Index_3 Value="Ter"/>
+        <Index_4 Value="Qua"/>
+        <Index_5 Value="Qui"/>
+        <Index_6 Value="Sex"/>
+        <Index_7 Value="Sáb"/>
+      </ShortDayNames>
+      <LongDayNames>
+        <Index_1 Value="Domingo"/>
+        <Index_2 Value="Segunda-feira"/>
+        <Index_3 Value="Terça-feira"/>
+        <Index_4 Value="Quarta-feira"/>
+        <Index_5 Value="Quinta-feira"/>
+        <Index_6 Value="Sexta-feira"/>
+        <Index_7 Value="Sábado"/>
+      </LongDayNames>
+      <TwoDigitYearCenturyWindow Value="50"/>
+    </FormatSettings>
+  </Application>
+  <Controls>
+    <fMain Caption="Codepage Witch">
+      <alMain>
+        <actOpen Hint="Abrir um arquivo de texto." Caption="Abrir Arquivo..."/>
+        <actExportCodepage Hint="Exportar um arquivo de texto codificado no formato codepage." Caption="Exportar Codepage..."/>
+        <actPreferences Hint="Visualizar ou modificar as preferências do Codepage Witch." Caption="Preferências..."/>
+        <actOnlineUpdate Hint="Verificar atualizações para o Codepage Witch." Caption="Verificar Atualizações..."/>
+        <actDebugLog Hint="Visualizar o registro de depuração." Caption="Registro de Depuração..."/>
+        <actListAll Hint="Listar todas as codepages conhecidas." Caption="Todas conhecidas"/>
+        <actListPartial Hint="Listar codepages parcialmente compatíveis." Caption="Qualquer possível"/>
+        <actListCompatible Hint="Listar apenas codepages totalmente compatíveis." Caption="Apenas compatíveis"/>
+        <actCodepageFilter Hint="Filtrar a lista de codepages." Caption="Filtro de Codepage"/>
+        <actExportUnicode Hint="Exportar um arquivo de texto codificado no formato UTF-8." Caption="Exportar UTF-8..."/>
+        <actClose Hint="Fechar o arquivo de texto atual." Caption="Fechar Arquivo"/>
+      </alMain>
+      <pFileList>
+        <pFileListLabel>
+          <lbFileList Caption="Arquivos de Texto"/>
+        </pFileListLabel>
+      </pFileList>
+      <pCodepageList>
+        <pCodepageListLabel>
+          <lbCodepageLabel Caption="Codepages"/>
+        </pCodepageListLabel>
+        <lvCodepageList>
+          <Analyzing Caption="Analisando"/>
+          <Not_implemented Caption="Não implementado"/>
+          <Any_Codepage Caption="Qualquer Codepage"/>
+        </lvCodepageList>
+      </pCodepageList>
+      <pViewers>
+        <pViewUnicode>
+          <pViewUnicodeLabel>
+            <lbUnicodeViewLabel Caption="Visualizado como Unicode"/>
+          </pViewUnicodeLabel>
+        </pViewUnicode>
+        <pCodepage>
+          <pViewCodepageLabel>
+            <lbViewCodepageLabel Value="Visualizado como Codepage %s"/>
+          </pViewCodepageLabel>
+        </pCodepage>
+      </pViewers>
+      <statBar>
+        <Processing Caption="Processando"/>
+        <Codepage Caption="Codepage"/>
+        <Unicode Caption="Unicode"/>
+        <NoEncoding Caption="ASCII"/>
+      </statBar>
+    </fMain>
+    <fPreferences Caption="Preferências do Codepage Witch">
+      <fPreferencePages>
+        <tsAbout Hint="Sobre o &quot;%s&quot;" Caption="Sobre">
+          <lbCopyright Caption="Copyright %s"/>
+          <lbVersion Caption="Versão %0:s (build %1:s)"/>
+          <lbApplication Caption="O &quot;%s&quot;"/>
+        </tsAbout>
+        <tsGeneral Hint="Configurações gerais do aplicativo." Caption="Geral">
+          <gbUserLanguage Caption="Idioma do Usuário">
+            <cxLanguageChoice Default="(padrão)"/>
+            <pLanguagePreferred>
+              <lbLanguagePreferred Caption="Idioma Preferido:"/>
+            </pLanguagePreferred>
+            <lbLanguageSystem Caption="Idioma do Sistema:  %s"/>
+          </gbUserLanguage>
+          <gbMiscellaneous Caption="Diversos">
+            <cbShowHints Caption="Mostrar dicas ao passar o mouse."/>
+            <cbColorButtons Caption="Usar botões coloridos na barra de ferramentas."/>
+          </gbMiscellaneous>
+          <gbOnlineUpdate Caption="Atualização Online">
+            <cbAutoCheck Caption="Verificar atualizações automaticamente"/>
+            <pUpdateButton>
+              <btnUpdateCheck Hint="Verificar o servidor online para a atualização mais recente." Caption="Verificar agora..."/>
+            </pUpdateButton>
+          </gbOnlineUpdate>
+        </tsGeneral>
+      </fPreferencePages>
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnAccept Hint="Aceitar e aplicar quaisquer alterações." Caption="Aceitar"/>
+          <btnCancel Hint="Ignorar todas as alterações." Caption="Cancelar"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <fMiddlePanel>
+        <fBodyPanel>
+          <pSectionsPanel>
+            <pSectionLabel>
+              <lbSections Caption="Opções"/>
+            </pSectionLabel>
+          </pSectionsPanel>
+        </fBodyPanel>
+      </fMiddlePanel>
+    </fPreferences>
+    <fUpdateCheckDialog Caption="Verificação de Atualização">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnRetry Caption="Repetir"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Check Text="Verificando atualizações disponíveis para &quot;%s&quot;, versão %s."/>
+        <Error Text="Não foi possível determinar se existem atualizações para &quot;%s&quot; no momento. Tente novamente mais tarde."/>
+        <None Text="Não há atualizações disponíveis para &quot;%s&quot; no momento. Tente novamente mais tarde."/>
+      </Message>
+    </fUpdateCheckDialog>
+    <fUpdateFoundDialog Caption="Atualização Disponível">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnDownload Caption="Baixar"/>
+          <btnSkip Caption="Pular"/>
+        </fButtonPanel>
+        <fAuxPanel>
+          <cbSkipVersion Caption="Pular esta versão"/>
+        </fAuxPanel>
+      </fLowerPanel>
+      <Message>
+        <Note Text="Não foram fornecidas notas de lançamento para a versão %1:s de &quot;%0:s&quot;"/>
+      </Message>
+    </fUpdateFoundDialog>
+    <fUpdateDownloadDialog Caption="Download da Atualização">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnRetry Caption="Repetir"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Fetch Text="Baixando atualização para &quot;%s&quot;."/>
+        <Error Text="Erro ao baixar a atualização de &quot;%s&quot;. Tente novamente mais tarde."/>
+      </Message>
+    </fUpdateDownloadDialog>
+    <fUpdateSaveDialog Caption="Atualização Baixada">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnSaveAs Caption="Salvar como..."/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Downloaded Text="Baixado &quot;%s&quot; versão %s."/>
+      </Message>
+    </fUpdateSaveDialog>
+  </Controls>
+</CONFIG>
