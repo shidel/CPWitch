@@ -85,10 +85,10 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
-    procedure lvCodepageListChange(Sender: TObject; Item: TListItem;
-      Change: TItemChange);
-    procedure lvFileListChange(Sender: TObject; Item: TListItem;
-      Change: TItemChange);
+    procedure lvCodepageListSelectItem(Sender: TObject; Item: TListItem;
+      Selected: Boolean);
+    procedure lvFileListSelectItem(Sender: TObject; Item: TListItem;
+      Selected: Boolean);
     procedure tAnimateTimer(Sender: TObject);
     private
       FActiveCodepage: integer;
@@ -115,6 +115,8 @@ type
       procedure UpdateCodepageView;
       procedure UpdateButtons;
       procedure UpdateFilterCheck;
+      procedure SelectCodepage(Sender : TObject);
+      procedure SelectFile(Sender : TObject);
     public
       procedure ApplyUserLanguage; override;
       procedure OpenFile(FileName : String; Select : boolean = False); overload;
@@ -246,7 +248,7 @@ end;
 
 procedure TfMain.FormCreate(Sender: TObject);
 
-{$IFDEF WINDOWS}
+{$IFNDEF DARWIN}
   procedure Flatten(C : TWinControl);
   begin
     if C is TPanel then begin
@@ -274,6 +276,9 @@ begin
   { TODO 0 -cDevel Convert to BorderSpacing when supported by TCustomDosCRT }
   fCodepageText.Left:=8;
   fCodepageText.Top:=8;
+  {$IFNDEF DARWIN}
+  fCodepageText.Scale:=Point(2,2);
+  {$ENDIF}
 
   fUFF:=TUnicodeDosFont.Create;
   if fUFF.LoadFromFile(AppDataPath + '0816norm.uff') = 0 then
@@ -315,8 +320,10 @@ begin
   CreateToolButton(tbMain, actDebugLog);
 
   // Set Toolbar width
-  { TODO 3 -cUI Adjust for DPI and Windows }
-  {$IFDEF WINDOWS}
+  { TODO 3 -cUI Adjust for DPI and Windows/Linux }
+  {$IFDEF DARWIN}
+  tbMain.Width:=(tbMain.Images.Width + 4) * 10 + tbMain.Indent * 2;
+  {$ELSE}
   tbMain.Width:=(tbMain.Images.Width + 4) * 12 + tbMain.Indent * 2;
   Flatten(pFileList);
   Flatten(pCodepageList);
@@ -328,8 +335,6 @@ begin
   sbCodePage.HorzScrollBar.Tracking:=True;
   sbCodePage.VertScrollBar.Increment:=32;
   sbCodePage.VertScrollBar.Tracking:=True;
-  {$ELSE}
-  tbMain.Width:=(tbMain.Images.Width + 4) * 10 + tbMain.Indent * 2;
   {$ENDIF}
 
   // Create at runtime without name to not save Caption iduring NLS generation.
@@ -357,32 +362,18 @@ begin
     OpenFile(FileNames[I], I=0);
 end;
 
-procedure TfMain.lvCodepageListChange(Sender: TObject; Item: TListItem;
-  Change: TItemChange);
-var
-  E : integer;
+procedure TfMain.lvCodepageListSelectItem(Sender: TObject; Item: TListItem;
+  Selected: Boolean);
 begin
-  IgnoreParameter(Sender);
   IgnoreParameter(Item);
-  IgnoreParameter(Change);
-  FActiveCodepage:= 437;
-  if Assigned(lvCodepageList.Selected) then begin
-    Val(CutDelim(lvCodepageList.Selected.Caption,SPACE,1,1),FActiveCodepage, E);
-    if E <> 0 then FActiveCodepage:=437;
-  end;
-  LogMessage(vbVerbose, 'Selected Codepage ' + IntToStr(FActiveCodepage));
-  UpdateStatusBar;
-  UpdateCodepageViewlabel;
-  UpdateCodePageView;
+  if Selected then SelectCodepage(Sender);
 end;
 
-procedure TfMain.lvFileListChange(Sender: TObject; Item: TListItem;
-  Change: TItemChange);
+procedure TfMain.lvFileListSelectItem(Sender: TObject; Item: TListItem;
+  Selected: Boolean);
 begin
-  IgnoreParameter(Sender);
   IgnoreParameter(Item);
-  IgnoreParameter(Change);
-  UpdateMetaData;
+  if Selected then SelectFile(Sender);
 end;
 
 procedure TfMain.tAnimateTimer(Sender: TObject);
@@ -512,20 +503,25 @@ begin
     '<div style="font-family: monospace; ">'+ S + '</div>' +
     '<br></body></html>';
   hpUnicodeText.SetHtmlFromStr(S);
-  FileSave(AppBasePath + '/test.html',PasExt.ToBytes(S));
+  // FileSave(AppBasePath + '/test.html',PasExt.ToBytes(S));
 end;
 
 procedure TfMain.FormSettingsLoad(Sender: TObject);
 var
   S : String;
+  SX, SY : Integer;
 begin
-  S:=Trim(Lowercase(GetConfig('Codepage_Filter', 'partial')));
+  S:=Trim(Lowercase(GetConfig('Codepage_List/Filter', 'partial')));
   case S of
     'complete' : FCodepageFilter:=cpfComplete;
     'partial' : FCodepageFilter:=cpfPartial;
   else
     FCodepageFilter:=cpfAll;
   end;
+  SX:=GetConfig('Codepage_Scale/Horizontal', fCodepageText.Scale.X);
+  SY:=GetConfig('Codepage_Scale/Vertical', fCodepageText.Scale.Y);
+  fCodepageText.Scale:=Point(SX,SY);
+
   UpdateFilterCheck;
   SetApplicationIcons;
   { TODO 5 -cDevel Add load color settings for Good/Bad mappings }
@@ -541,7 +537,9 @@ begin
     cpfPartial : S := 'Partial';
     cpfAll : S := 'All';
   end;
-  SetConfig('Codepage_Filter', S);
+  SetConfig('Codepage_List/Filter', S);
+  SetConfig('Codepage_Scale/Horizontal', fCodepageText.Scale.X);
+  SetConfig('Codepage_Scale/Vertical', fCodepageText.Scale.Y);
   { TODO 5 -cDevel Add save color settings for Good/Bad mappings }
 end;
 
@@ -813,6 +811,35 @@ begin
   actListCompatible.Checked:=FCodepageFilter=cpfComplete;
   actListPartial.Checked:=FCodepageFilter=cpfPartial;
   actListAll.Checked:=FCodepageFilter=cpfAll;
+end;
+
+procedure TfMain.SelectCodepage(Sender: TObject);
+var
+  E: Integer;
+begin
+  IgnoreParameter(Sender);
+  FActiveCodepage:= 437;
+  if Assigned(lvCodepageList.Selected) then begin
+    Val(CutDelim(lvCodepageList.Selected.Caption,SPACE,1,1),FActiveCodepage, E);
+    if E <> 0 then FActiveCodepage:=437;
+  end;
+  LogMessage(vbVerbose, 'Selected Codepage ' + IntToStr(FActiveCodepage));
+  UpdateStatusBar;
+  UpdateCodepageViewlabel;
+  UpdateCodePageView;
+end;
+
+procedure TfMain.SelectFile(Sender: TObject);
+var
+  S : String;
+begin
+  if Assigned(lvFileList.Selected) then
+    S:=lvFileList.Selected.Caption
+  else
+    S:='(null)';
+  LogMessage(vbVerbose, 'Select File: ' + S);
+  IgnoreParameter(Sender);
+  UpdateMetaData;
 end;
 
 procedure TfMain.ApplyUserLanguage;

@@ -114,7 +114,7 @@ object fMain: TfMain
       SortType = stText
       TabOrder = 1
       ViewStyle = vsReport
-      OnChange = lvFileListChange
+      OnSelectItem = lvFileListSelectItem
     end
   end
   object spFilesCPs: TSplitter
@@ -174,7 +174,7 @@ object fMain: TfMain
       SmallImagesWidth = 20
       TabOrder = 1
       ViewStyle = vsReport
-      OnChange = lvCodepageListChange
+      OnSelectItem = lvCodepageListSelectItem
     end
   end
   object spCPsViewers: TSplitter

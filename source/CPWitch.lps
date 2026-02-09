@@ -18,7 +18,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <CursorPos X="48" Y="20"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="364"/>
+        <CursorPos X="43" Y="377"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -39,17 +41,15 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="1423"/>
         <CursorPos X="7" Y="1466"/>
-        <UsageCount Value="106"/>
+        <UsageCount Value="105"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/multiapp.pp"/>
         <UnitName Value="MultiApp"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="3"/>
-        <TopLine Value="338"/>
-        <CursorPos X="11" Y="365"/>
-        <UsageCount Value="90"/>
-        <Loaded Value="True"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="495"/>
+        <CursorPos X="42" Y="368"/>
+        <UsageCount Value="88"/>
       </Unit>
       <Unit>
         <Filename Value="upreferences.pas"/>
@@ -61,7 +61,7 @@
         <TopLine Value="36"/>
         <CursorPos X="33" Y="36"/>
         <FoldState Value=" T3j60Q82111 PjClc0-"/>
-        <UsageCount Value="54"/>
+        <UsageCount Value="53"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/preferences.pp"/>
@@ -70,17 +70,16 @@
         <TopLine Value="591"/>
         <CursorPos X="30" Y="628"/>
         <FoldState Value=" T3n90L11131126]8 PpRr90d"/>
-        <UsageCount Value="24"/>
+        <UsageCount Value="23"/>
       </Unit>
       <Unit>
         <Filename Value="witch.pas"/>
         <UnitName Value="Witch"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="3"/>
         <CursorPos X="32" Y="19"/>
         <FoldState Value=" T3kB042113A pj6lD0A019 piZja0W5 PViJ0$"/>
-        <UsageCount Value="104"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="103"/>
       </Unit>
       <Unit>
         <Filename Value="codepages.pp"/>
@@ -89,7 +88,7 @@
         <TopLine Value="40"/>
         <CursorPos X="42" Y="44"/>
         <FoldState Value=" T7i4Ne3 PfifH T3kc0A3 pjQk10Z0111E plcnP04321 POlQ0d"/>
-        <UsageCount Value="95"/>
+        <UsageCount Value="94"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/bintree.pp"/>
@@ -98,7 +97,7 @@
         <TopLine Value="247"/>
         <CursorPos Y="165"/>
         <FoldState Value=" T3jK079 piZjN051153317 pm2o5031M"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="19"/>
       </Unit>
       <Unit>
         <Filename Value="doscrt.pp"/>
@@ -107,7 +106,7 @@
         <TopLine Value="8"/>
         <CursorPos X="63" Y="24"/>
         <FoldState Value=" T7jPCK1 PXMI T3lK0411A13 pkRlg0S4 piXjT0J6]9ZjP04226 PiAjI0+"/>
-        <UsageCount Value="69"/>
+        <UsageCount Value="68"/>
       </Unit>
       <Unit>
         <Filename Value="dosfont.pp"/>
@@ -116,14 +115,14 @@
         <TopLine Value="91"/>
         <CursorPos X="37" Y="109"/>
         <FoldState Value=" T7i2J9 T3lE057 piZjJ094]9bjD0{Z5]AalZ062 PIE0T"/>
-        <UsageCount Value="53"/>
+        <UsageCount Value="52"/>
       </Unit>
       <Unit>
         <Filename Value="/Applications/Lazarus/fpc/3.2.2/sources/rtl/inc/systemh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="440"/>
         <CursorPos X="3" Y="465"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/dosfont.pp"/>
@@ -132,7 +131,7 @@
         <TopLine Value="62"/>
         <CursorPos X="42" Y="40"/>
         <FoldState Value=" T3jQ0~7P"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/codepages.pp"/>
@@ -141,7 +140,7 @@
         <TopLine Value="33"/>
         <CursorPos X="11" Y="663"/>
         <FoldState Value=" T3l70C2 pjEjW0Z0484151 PlCqJ0N"/>
-        <UsageCount Value="35"/>
+        <UsageCount Value="34"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/doscrt.pp"/>
@@ -150,7 +149,7 @@
         <TopLine Value="7"/>
         <CursorPos X="63" Y="29"/>
         <FoldState Value=" T3rf0D4 pibjH0J017 PiFj00L"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="33"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/logview.pp"/>
@@ -158,74 +157,44 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="386"/>
         <CursorPos X="38" Y="413"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/updater.pp"/>
         <UnitName Value="Updater"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <CursorPos Y="39"/>
-        <UsageCount Value="10"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/taskmngr.pp"/>
         <UnitName Value="TaskMngr"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="20" Y="19"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="11"/>
       </Unit>
       <Unit>
         <Filename Value="/Applications/Lazarus/fpc/3.2.2/sources/rtl/objpas/classes/classesh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1702"/>
         <CursorPos X="3" Y="1708"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/patches.pp"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="-1"/>
         <CursorPos Y="22"/>
-        <UsageCount Value="10"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="9"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="8">
+    <JumpHistory HistoryIndex="1">
       <Position>
-        <Filename Value="witch.pas"/>
-        <Caret Line="130" Column="54" TopLine="100"/>
+        <Filename Value="umain.pas"/>
+        <Caret Line="384" TopLine="342"/>
       </Position>
       <Position>
-        <Filename Value="witch.pas"/>
-        <Caret Line="114" Column="36" TopLine="99"/>
-      </Position>
-      <Position>
-        <Filename Value="witch.pas"/>
-        <Caret Line="129" Column="22" TopLine="105"/>
-      </Position>
-      <Position>
-        <Filename Value="witch.pas"/>
-        <Caret Line="215" TopLine="176"/>
-      </Position>
-      <Position>
-        <Filename Value="witch.pas"/>
-        <Caret Line="130" TopLine="121"/>
-      </Position>
-      <Position>
-        <Filename Value="witch.pas"/>
-        <Caret Line="108" Column="3" TopLine="83"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/multiapp.pp"/>
-        <Caret Line="45" Column="16"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/multiapp.pp"/>
-        <Caret Line="21" Column="63"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/multiapp.pp"/>
-        <Caret Line="57" TopLine="34"/>
+        <Filename Value="umain.pas"/>
+        <Caret Line="383" Column="59" TopLine="340"/>
       </Position>
     </JumpHistory>
     <RunParams>
