@@ -1,7 +1,7 @@
 object fMain: TfMain
-  Left = 1381
+  Left = 1670
   Height = 320
-  Top = 649
+  Top = 693
   Width = 480
   AllowDropFiles = True
   Caption = 'Codepage Witch'
@@ -367,6 +367,13 @@ object fMain: TfMain
       Hint = 'Close the current text file.'
       OnExecute = actCloseExecute
       OnUpdate = actCloseUpdate
+    end
+    object actCloseAll: TAction
+      Category = 'File'
+      Caption = 'Close All'
+      Hint = 'Close all open text files.'
+      OnExecute = actCloseAllExecute
+      OnUpdate = actCloseAllUpdate
     end
   end
   object mmMain: TMainMenu

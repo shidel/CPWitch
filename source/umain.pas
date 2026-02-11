@@ -28,6 +28,7 @@ type
 
   TfMain = class(TMultiAppForm)
       actExportUnicode: TAction;
+      actCloseAll: TAction;
       actOpen: TAction;
       actExportCodepage: TAction;
       actDebugLog: TAction;
@@ -69,6 +70,8 @@ type
       statBar: TStatusBar;
       tbMain: TToolBar;
       tAnimate: TTimer;
+    procedure actCloseAllExecute(Sender: TObject);
+    procedure actCloseAllUpdate(Sender: TObject);
     procedure actCodepageFilterExecute(Sender: TObject);
     procedure actDebugLogExecute(Sender: TObject);
     procedure actCloseExecute(Sender: TObject);
@@ -143,6 +146,29 @@ procedure TfMain.actCodepageFilterExecute(Sender: TObject);
 begin
   if Assigned(btnCodepageFilter.DropdownMenu) then
     btnCodepageFilter.CheckMenuDropdown;
+end;
+
+procedure TfMain.actCloseAllUpdate(Sender: TObject);
+begin
+  actCloseAll.Enabled := lvFileList.Items.Count > 0;
+end;
+
+procedure TfMain.actCloseAllExecute(Sender: TObject);
+var
+  I : Integer;
+  L : TListItem;
+begin
+  I := 0;
+  while I < lvFileList.Items.Count do begin
+    L := lvFileList.Items[I];
+    if not (Assigned(L) and Assigned(L.Data) and TWitchItem(L.Data).Analyzed) then begin
+      Inc(I);
+      Continue;
+    end;
+    fWitch.Delete(TWitchItem(L.Data));
+    lvFileList.Items[I].Delete;
+  end;
+  UpdateMetaData;
 end;
 
 procedure TfMain.actCloseExecute(Sender: TObject);
@@ -246,9 +272,6 @@ begin
   PreferencesShow;
 end;
 
-type
-  TCrackHead = class(TToolBar);
-
 procedure TfMain.FormCreate(Sender: TObject);
 
 begin
@@ -291,6 +314,7 @@ begin
   actExportUnicode.ImageIndex:=idxButtonFileExport;
   actExportCodepage.ImageIndex:=idxButtonFileExportGreen;
   actClose.ImageIndex:=idxButtonFileClose;
+  actCloseAll.ImageIndex:=idxButtonFileCloseAll;
   actPreferences.ImageIndex:=idxButtonPreferences;
   actOnlineUpdate.ImageIndex:=idxButtonUpdateCheck;
   actDebugLog.ImageIndex:=idxButtonDebugLog;
@@ -303,6 +327,7 @@ begin
   CreateToolButton(tbMain, actOpen);
   btnExportFile:=CreateToolButton(tbMain, actExportCodepage);
   CreateToolButton(tbMain, actClose);
+  CreateToolButton(tbMain, actCloseAll);
   CreateToolButton(tbMain, tbsDivider, 'btnDivider1');
   btnCodepageFilter:=CreateToolButton(tbMain, actCodepageFilter);
   btnCodepageFilter.Style:=tbsButtonDrop;
