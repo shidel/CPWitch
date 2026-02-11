@@ -280,6 +280,7 @@ begin
   fWitch.OnAnalyzed:=@WitchOnAnalyzed;
 
   fCodepageText := TDosCrt.Create(Self);
+  fCodePageText.Resolution:=Point(8,2);
   // fCodepageText.Name:='fCodepageText';
   fCodepageText.Parent:=sbCodepage;
   fCodepageText.Color:=clBlue;
