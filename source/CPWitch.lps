@@ -19,8 +19,9 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="364"/>
-        <CursorPos X="43" Y="377"/>
+        <TopLine Value="306"/>
+        <CursorPos Y="253"/>
+        <FoldState Value=" T3k703A piYjG031k"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -38,18 +39,20 @@
       <Unit>
         <Filename Value="mpla/pasext.pp"/>
         <UnitName Value="PasExt"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="1423"/>
-        <CursorPos X="7" Y="1466"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="864"/>
+        <CursorPos X="23" Y="908"/>
         <UsageCount Value="105"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/multiapp.pp"/>
         <UnitName Value="MultiApp"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="495"/>
-        <CursorPos X="42" Y="368"/>
-        <UsageCount Value="88"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="1254"/>
+        <CursorPos Y="1278"/>
+        <UsageCount Value="90"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="upreferences.pas"/>
@@ -145,11 +148,11 @@
       <Unit>
         <Filename Value="mpla/doscrt.pp"/>
         <UnitName Value="DosCRT"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="7"/>
-        <CursorPos X="63" Y="29"/>
-        <FoldState Value=" T3rf0D4 pibjH0J017 PiFj00L"/>
-        <UsageCount Value="33"/>
+        <EditorIndex Value="2"/>
+        <CursorPos X="44" Y="24"/>
+        <FoldState Value=" T3l505F22 pkTmP0S4 piXjT0J51A]K7lc0D2j"/>
+        <UsageCount Value="35"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/logview.pp"/>
@@ -186,8 +189,31 @@
         <CursorPos Y="22"/>
         <UsageCount Value="9"/>
       </Unit>
+      <Unit>
+        <Filename Value="version.def"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="27" Y="25"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="None"/>
+      </Unit>
+      <Unit>
+        <Filename Value="version.pp"/>
+        <UnitName Value="Version"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="8"/>
+        <CursorPos X="12" Y="44"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/Applications/Lazarus/lcl/comctrls.pp"/>
+        <UnitName Value="ComCtrls"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="2234"/>
+        <CursorPos X="3" Y="2101"/>
+        <UsageCount Value="10"/>
+      </Unit>
     </Units>
-    <JumpHistory HistoryIndex="1">
+    <JumpHistory HistoryIndex="16">
       <Position>
         <Filename Value="umain.pas"/>
         <Caret Line="384" TopLine="342"/>
@@ -195,6 +221,66 @@
       <Position>
         <Filename Value="umain.pas"/>
         <Caret Line="383" Column="59" TopLine="340"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="324" Column="7" TopLine="293"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="262" Column="27" TopLine="223"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/multiapp.pp"/>
+        <Caret Line="236" Column="56" TopLine="192"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="256" Column="30" TopLine="238"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="261" Column="70" TopLine="229"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="256" Column="11" TopLine="234"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="263" Column="53" TopLine="234"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="259" Column="53" TopLine="234"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="261" Column="53" TopLine="234"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="270" TopLine="234"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="275" Column="14" TopLine="239"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="270" Column="65" TopLine="233"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="339" Column="6" TopLine="296"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="291" Column="14" TopLine="239"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/multiapp.pp"/>
+        <Caret Line="237" Column="63" TopLine="205"/>
       </Position>
     </JumpHistory>
     <RunParams>

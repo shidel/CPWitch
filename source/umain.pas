@@ -246,17 +246,10 @@ begin
   PreferencesShow;
 end;
 
-procedure TfMain.FormCreate(Sender: TObject);
+type
+  TCrackHead = class(TToolBar);
 
-{$IFNDEF DARWIN}
-  procedure Flatten(C : TWinControl);
-  begin
-    if C is TPanel then begin
-      TPanel(C).BevelOuter:=bvNone;
-      TPanel(C).BorderStyle:=bsSingle;
-    end;
-  end;
-{$ENDIF}
+procedure TfMain.FormCreate(Sender: TObject);
 
 begin
   FActiveCodepage := 437;
@@ -295,8 +288,8 @@ begin
 
   // Assign Images to Actions
   actOpen.ImageIndex:=idxButtonFileOpen;
-  actExportUnicode.ImageIndex:=idxButtonFileExportGreen;
-  actExportCodepage.ImageIndex:=idxButtonFileExport;
+  actExportUnicode.ImageIndex:=idxButtonFileExport;
+  actExportCodepage.ImageIndex:=idxButtonFileExportGreen;
   actClose.ImageIndex:=idxButtonFileClose;
   actPreferences.ImageIndex:=idxButtonPreferences;
   actOnlineUpdate.ImageIndex:=idxButtonUpdateCheck;
@@ -319,23 +312,25 @@ begin
   CreateToolButton(tbMain, actOnlineUpdate);
   CreateToolButton(tbMain, actDebugLog);
 
-  // Set Toolbar width
-  { TODO 3 -cUI Adjust for DPI and Windows/Linux }
-  {$IFDEF DARWIN}
-  tbMain.Width:=(tbMain.Images.Width + 4) * 10 + tbMain.Indent * 2;
-  {$ELSE}
-  tbMain.Width:=(tbMain.Images.Width + 4) * 12 + tbMain.Indent * 2;
-  Flatten(pFileList);
-  Flatten(pCodepageList);
-  Flatten(pViewUnicode);
-  Flatten(pCodepage);
+  // Make controls "flat", UI looks weird without doing thins on Windows and
+  // Linux. Has no effect on macOS.
+  FlattenControl(pFileList);
+  FlattenControl(pCodepageList);
+  FlattenControl(pViewUnicode);
+  FlattenControl(pCodepage);
+  // Disable HideSelection for Windows. Or, when selecting things like the
+  // codepage, The current File Selected becomes no longer highlighted.
   lvFileList.HideSelection:=False;
   lvCodepageList.HideSelection:=False;
+
+  // Adjust stepping for codepage view parent ScrollBox.
   sbCodePage.HorzScrollBar.Increment:=16;
   sbCodePage.HorzScrollBar.Tracking:=True;
   sbCodePage.VertScrollBar.Increment:=32;
   sbCodePage.VertScrollBar.Tracking:=True;
-  {$ENDIF}
+
+  // Make toolbar the width of the visible buttons
+  AdjustToolBarWidth(tbMain);
 
   // Create at runtime without name to not save Caption iduring NLS generation.
   lbViewCodepageLabel :=TLabel.Create(Self);
