@@ -3,6 +3,7 @@ program CPWitch;
 {$mode objfpc}{$H+}
 
 {$I patches.pp}  // Various compiler directives to "fix" things.
+{$I version.def}
 
 uses
   {$IFDEF UNIX}
@@ -19,8 +20,8 @@ uses
 {$R *.res}
 
 begin
-  {$IFDEF SUPPORT_NOLANG}
-  Create_No_Language:=BUILD_PRERELEASE;
+  {$IFDEF BUILD_PRERELEASE}
+  Create_No_Language:=True;
   {$ENDIF}
   CreateIconSets;
   RequireDerivedFormResource:=True;

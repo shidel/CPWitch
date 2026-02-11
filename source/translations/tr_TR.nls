@@ -126,6 +126,7 @@
         <actCodepageFilter Hint="Kod sayfaları listesini filtrele." Caption="Kod Sayfası Filtresi"/>
         <actExportUnicode Hint="Bir metin dosyasını UTF-8 formatında dışa aktar." Caption="UTF-8 Dışa Aktar..."/>
         <actClose Hint="Mevcut metin dosyasını kapat." Caption="Dosyayı Kapat"/>
+        <actCloseAll Hint="Tüm açık metin dosyalarını kapat." Caption="Tümünü Kapat"/>
       </alMain>
       <pFileList>
         <pFileListLabel>

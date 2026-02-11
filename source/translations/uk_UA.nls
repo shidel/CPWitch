@@ -126,6 +126,7 @@
         <actCodepageFilter Hint="Фільтрувати список кодових сторінок." Caption="Фільтр кодових сторінок"/>
         <actExportUnicode Hint="Експортувати текстовий файл у форматі UTF-8." Caption="Експортувати UTF-8..."/>
         <actClose Hint="Закрити поточний текстовий файл." Caption="Закрити файл"/>
+        <actCloseAll Hint="Закрити всі відкриті текстові файли." Caption="Закрити всі"/>
       </alMain>
       <pFileList>
         <pFileListLabel>

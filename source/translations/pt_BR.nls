@@ -126,6 +126,7 @@
         <actCodepageFilter Hint="Filtrar a lista de codepages." Caption="Filtro de Codepage"/>
         <actExportUnicode Hint="Exportar um arquivo de texto codificado no formato UTF-8." Caption="Exportar UTF-8..."/>
         <actClose Hint="Fechar o arquivo de texto atual." Caption="Fechar Arquivo"/>
+        <actCloseAll Hint="Fechar todos os arquivos de texto abertos." Caption="Fechar Todos"/>
       </alMain>
       <pFileList>
         <pFileListLabel>
