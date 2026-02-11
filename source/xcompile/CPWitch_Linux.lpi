@@ -11,10 +11,8 @@
       <SessionStorage Value="InProjectDir"/>
       <Title Value="Codepage Witch"/>
       <Scaled Value="True"/>
+      <UseAppBundle Value="False"/>
       <ResourceType Value="res"/>
-      <XPManifest>
-        <DpiAware Value="True"/>
-      </XPManifest>
       <Icon Value="0"/>
     </General>
     <VersionInfo>
@@ -35,60 +33,35 @@
     </RunParams>
     <RequiredPackages>
       <Item>
-        <PackageName Value="TurboPowerIPro"/>
+        <PackageName Value="LCL"/>
       </Item>
       <Item>
-        <PackageName Value="LCL"/>
+        <PackageName Value="TurboPowerIPro"/>
       </Item>
     </RequiredPackages>
     <Units>
       <Unit>
-        <Filename Value="CPWitch.lpr"/>
+        <Filename Value="CPWitch_Linux.lpr"/>
         <IsPartOfProject Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="umain.pas"/>
-        <IsPartOfProject Value="True"/>
-        <ComponentName Value="fMain"/>
-        <HasResources Value="True"/>
-        <ResourceBaseClass Value="Form"/>
-        <UnitName Value="uMain"/>
-      </Unit>
-      <Unit>
-        <Filename Value="uprefs.pas"/>
-        <IsPartOfProject Value="True"/>
-        <ComponentName Value="fPreferences"/>
-        <ResourceBaseClass Value="Form"/>
-        <UnitName Value="uPrefs"/>
       </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="11"/>
     <Target>
-      <Filename Value="CPWitch"/>
+      <Filename Value="../../bin/Linux/CPWitch"/>
     </Target>
     <SearchPaths>
-      <IncludeFiles Value="$(ProjOutDir);mpla"/>
-      <OtherUnitFiles Value="mpla"/>
+      <IncludeFiles Value="$(ProjOutDir);../mpla"/>
+      <OtherUnitFiles Value="../mpla"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>
       <Debugging>
+        <GenerateDebugInfo Value="False"/>
         <RunWithoutDebug Value="True"/>
       </Debugging>
-      <Options>
-        <Win32>
-          <GraphicApplication Value="True"/>
-        </Win32>
-      </Options>
     </Linking>
-    <Other>
-      <ExecuteBefore>
-        <Command Value="/bin/bash ./mpla/prepare.sh"/>
-        <CompileReasons Run="False"/>
-      </ExecuteBefore>
-    </Other>
   </CompilerOptions>
   <Debugging>
     <Exceptions>
