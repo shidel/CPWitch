@@ -18,8 +18,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="370"/>
+        <TopLine Value="255"/>
         <CursorPos X="61" Y="812"/>
         <FoldState Value=" T3kA038 piZjD096 pjMk2045]95jL064]9GjW09[94EjX0M2]91jT054 PiRi00@"/>
         <UsageCount Value="201"/>
@@ -148,8 +147,11 @@
       <Unit>
         <Filename Value="mpla/doscrt.pp"/>
         <UnitName Value="DosCRT"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <CursorPos X="44" Y="24"/>
+        <TopLine Value="652"/>
+        <CursorPos X="31" Y="677"/>
+        <FoldState Value=" T3mY0C315 pkAl50S4 piXjT0J1 PJL0;"/>
         <UsageCount Value="35"/>
         <Loaded Value="True"/>
       </Unit>
@@ -212,7 +214,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="23">
+    <JumpHistory HistoryIndex="26">
       <Position>
         <Filename Value="umain.pas"/>
         <Caret Line="384" TopLine="342"/>
@@ -308,6 +310,18 @@
       <Position>
         <Filename Value="umain.pas"/>
         <Caret Line="162" Column="14" TopLine="137"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="103" Column="18" TopLine="75"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="678" Column="10" TopLine="646"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="675" Column="7" TopLine="650"/>
       </Position>
     </JumpHistory>
     <RunParams>
