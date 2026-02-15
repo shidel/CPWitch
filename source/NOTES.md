@@ -1,7 +1,5 @@
 # Upcoming release notes
 
-* Improved cross platform support.
-* Added Tab expansion to codepage viewer
-* Added Close All files button.
-* Improved Toolbar Autosizing.
+* Added option to reopen previous session files.
+* Fixed opening files ending in UTF-8 character.
 

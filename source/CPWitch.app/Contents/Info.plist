@@ -19,9 +19,9 @@
   <key>CFBundleSignature</key>
   <string>CPWi</string>
   <key>CFBundleShortVersionString</key>
-  <string>0.2</string>
+  <string>0.3</string>
   <key>CFBundleVersion</key>
-  <string>0.2.0.75</string>
+  <string>0.3.0.78</string>
   <key>CSResourcesFileMapped</key>
   <true/>
   <key>CFBundleDocumentTypes</key>

@@ -1,0 +1,70 @@
+object fOptionsDialog: TfOptionsDialog
+  Left = 1499
+  Height = 335
+  Top = 287
+  Width = 366
+  Caption = 'Codepage Witch Preferences'
+  ClientHeight = 335
+  ClientWidth = 366
+  Position = poMainFormCenter
+  LCLVersion = '4.0.0.4'
+  object pPages: TPageControl
+    Left = 44
+    Height = 267
+    Top = 37
+    Width = 276
+    ActivePage = tsSession
+    TabIndex = 0
+    TabOrder = 0
+    object tsSession: TTabSheet
+      Hint = 'Application session options.'
+      Caption = 'Session'
+      ClientHeight = 231
+      ClientWidth = 270
+      object gbSessionFiles: TGroupBox
+        Left = 0
+        Height = 79
+        Top = 0
+        Width = 270
+        Align = alTop
+        AutoSize = True
+        Caption = 'Session files'
+        ClientHeight = 60
+        ClientWidth = 260
+        TabOrder = 0
+        object cbReopenFiles: TCheckBox
+          Left = 8
+          Height = 18
+          Hint = 'Reopen unclosed files from previous session.'
+          Top = 8
+          Width = 244
+          Align = alTop
+          BorderSpacing.Around = 8
+          Caption = 'Reopen previous files.'
+          TabOrder = 0
+          OnChange = cbReopenFilesChange
+        end
+        object cbWarnMissing: TCheckBox
+          Left = 8
+          Height = 18
+          Hint = 'Warn when a file from the previous session does not exist.'
+          Top = 34
+          Width = 244
+          Align = alTop
+          BorderSpacing.Around = 8
+          Caption = 'Warn when missing.'
+          Enabled = False
+          TabOrder = 1
+        end
+      end
+    end
+    object tsEncoding: TTabSheet
+      Hint = 'File input and output encoding options.'
+      Caption = 'Encoding'
+    end
+    object tsViewer: TTabSheet
+      Hint = 'Unicode and DOS viewer options.'
+      Caption = 'Viewer'
+    end
+  end
+end

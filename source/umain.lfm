@@ -103,7 +103,7 @@ object fMain: TfMain
       Columns = <      
         item
           AutoSize = True
-          Width = 57
+          Width = 96
         end>
       ReadOnly = True
       RowSelect = True
@@ -165,7 +165,7 @@ object fMain: TfMain
       Columns = <      
         item
           AutoSize = True
-          Width = 57
+          Width = 64
         end>
       ReadOnly = True
       RowSelect = True

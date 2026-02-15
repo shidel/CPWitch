@@ -157,54 +157,18 @@
       </pViewers>
       <statBar>
         <Processing Caption="Traitement en cours"/>
-        <Codepage Caption="Codepage"/>
         <Unicode Caption="Unicode"/>
+        <Codepage Caption="Codepage"/>
         <NoEncoding Caption="ASCII"/>
       </statBar>
     </fMain>
-    <fPreferences Caption="Préférences de Codepage Witch">
-      <fPreferencePages>
-        <tsAbout Hint="À propos de &quot;%s&quot;" Caption="À propos">
-          <lbCopyright Caption="Copyright %s"/>
-          <lbVersion Caption="Version %0:s (build %1:s)"/>
-          <lbApplication Caption="Le &quot;%s&quot;"/>
-        </tsAbout>
-        <tsGeneral Hint="Paramètres généraux de l'application." Caption="Général">
-          <gbUserLanguage Caption="Langue de l'utilisateur">
-            <cxLanguageChoice Default="(par défaut)"/>
-            <pLanguagePreferred>
-              <lbLanguagePreferred Caption="Langue préférée :"/>
-            </pLanguagePreferred>
-            <lbLanguageSystem Caption="Langue du système :  %s"/>
-          </gbUserLanguage>
-          <gbMiscellaneous Caption="Divers">
-            <cbShowHints Caption="Afficher les info-bulles au survol de la souris."/>
-            <cbColorButtons Caption="Utiliser des boutons de barre d'outils en couleur."/>
-          </gbMiscellaneous>
-          <gbOnlineUpdate Caption="Mise à jour en ligne">
-            <cbAutoCheck Caption="Vérifier automatiquement les mises à jour"/>
-            <pUpdateButton>
-              <btnUpdateCheck Hint="Vérifier la dernière mise à jour sur le serveur en ligne." Caption="Vérifier maintenant..."/>
-            </pUpdateButton>
-          </gbOnlineUpdate>
-        </tsGeneral>
-      </fPreferencePages>
+    <fMissingFiles Caption="Missing document files">
       <fLowerPanel>
         <fButtonPanel>
-          <btnAccept Hint="Accepter et appliquer les modifications." Caption="Accepter"/>
-          <btnCancel Hint="Ignorer toutes les modifications." Caption="Annuler"/>
+          <btnCancel Caption="Cancel"/>
         </fButtonPanel>
       </fLowerPanel>
-      <fMiddlePanel>
-        <fBodyPanel>
-          <pSectionsPanel>
-            <pSectionLabel>
-              <lbSections Caption="Options"/>
-            </pSectionLabel>
-          </pSectionsPanel>
-        </fBodyPanel>
-      </fMiddlePanel>
-    </fPreferences>
+    </fMissingFiles>
     <fUpdateCheckDialog Caption="Vérification de mise à jour">
       <fLowerPanel>
         <fButtonPanel>
@@ -256,5 +220,69 @@
         <Downloaded Text="Version %s de &quot;%s&quot; téléchargée."/>
       </Message>
     </fUpdateSaveDialog>
+    <fOptionsDialog Caption="Codepage Witch Preferences">
+      <pPages>
+        <tsAbout Hint="About the &quot;%s&quot;" Caption="About">
+          <lbCopyright Caption="Copyright %s"/>
+          <lbVersion Caption="Version %0:s (build %1:s)"/>
+          <lbApplication Caption="The &quot;%s&quot;"/>
+        </tsAbout>
+        <tsGeneral Hint="General application settings." Caption="General">
+          <gbUserLanguage Caption="User Language">
+            <cxLanguageChoice Default="(default)"/>
+            <pLanguagePreferred>
+              <lbLanguagePreferred Caption="Preferred Language:"/>
+            </pLanguagePreferred>
+            <lbLanguageSystem Caption="System Language:  %s"/>
+          </gbUserLanguage>
+          <gbMiscellaneous Caption="Miscellaneous">
+            <cbShowHints Caption="Show hints when mouse hovers."/>
+            <cbColorButtons Caption="Use color toolbar buttons."/>
+          </gbMiscellaneous>
+          <gbOnlineUpdate Caption="Online Update">
+            <cbAutoCheck Caption="Automatically check for updates"/>
+            <pUpdateButton>
+              <btnUpdateCheck Hint="Check the online server for the latest update." Caption="Check now..."/>
+            </pUpdateButton>
+          </gbOnlineUpdate>
+        </tsGeneral>
+        <tsSession Hint="Options regarding application sessions." Caption="Session">
+          <gbSessionFiles Caption="Session files">
+            <cbReopenFiles Hint="Reopen unclosed files from previous session." Caption="Reopen previous files."/>
+            <cbWarnMissing Hint="Warn when a file from the previous session does not exist." Caption="Warn when missing."/>
+          </gbSessionFiles>
+        </tsSession>
+      </pPages>
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnAccept Hint="Accept and apply any changes." Caption="Accept"/>
+          <btnCancel Hint="Ignore all changes." Caption="Cancel"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <fMiddlePanel>
+        <fBodyPanel>
+          <pSectionsPanel>
+            <pSectionLabel>
+              <lbSections Caption="Options"/>
+            </pSectionLabel>
+          </pSectionsPanel>
+        </fBodyPanel>
+      </fMiddlePanel>
+    </fOptionsDialog>
+    <fLoggerViewForm Caption="Debug log">
+      <LineCount Plural="%.0n log entries" Singular="%.0n log entry"/>
+      <pControls>
+        <pButtons>
+          <btnClear Caption="Clear"/>
+          <btnSaveAs Caption="Save As..."/>
+        </pButtons>
+        <pVerbose>
+          <cbVerbosity>
+            <Items Index_0="Critical" Index_1="Minimal" Index_2="Normal" Index_3="Verbose" Index_4="Excessive"/>
+          </cbVerbosity>
+          <lbVerbosity Caption="Verbosity:"/>
+        </pVerbose>
+      </pControls>
+    </fLoggerViewForm>
   </Controls>
 </CONFIG>

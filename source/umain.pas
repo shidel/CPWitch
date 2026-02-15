@@ -16,9 +16,9 @@ interface
 uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  ExtCtrls, ComCtrls, ActnList, Menus, IpHtml,
+  ExtCtrls, ComCtrls, ActnList, Menus, IpHtml, XMLConf,
   Version, PasExt, Icons, MultiApp, LogView, Updater, Preferences,
-  DosCRT, DosFont, Codepages, Witch;
+  DosCRT, DosFont, Codepages, Witch, uPrefs, uLostFile;
 
 type
 
@@ -102,6 +102,8 @@ type
       fWitch : TWitch;
       fCodepageText : TDosCrt;
       fUFF : TUnicodeDosFont;
+      fFileReopen:boolean;
+      fFileWarn:boolean;
       procedure PopulateCodepageList(Item : TWitchItem);
       procedure SetCodepageFilter(AValue: TCodepageFilter);
       procedure SetUnicodeView( S : String );
@@ -109,6 +111,7 @@ type
       procedure FormSettingsLoad(Sender: TObject);
       procedure FormSettingsSave(Sender: TObject);
       procedure WitchOnAnalyzed(Sender : TObject);
+      procedure FirstShow(Sender : TObject);
       procedure SetApplicationIcons;
       procedure UpdateCodepageViewLabel;
       procedure UpdateMetaData;
@@ -120,6 +123,8 @@ type
       procedure UpdateFilterCheck;
       procedure SelectCodepage(Sender : TObject);
       procedure SelectFile(Sender : TObject);
+      procedure SessionSave;
+      procedure SessionLoad;
     public
       procedure ApplyUserLanguage; override;
       procedure OpenFile(FileName : String; Select : boolean = False); overload;
@@ -269,12 +274,15 @@ end;
 
 procedure TfMain.actPreferencesExecute(Sender: TObject);
 begin
-  PreferencesShow;
+  // PreferencesShow;
+  if not Assigned(fOptionsDialog) then
+    Application.CreateForm(TfOptionsDialog, fOptionsDialog);
+  fOptionsDialog.Show;
 end;
 
 procedure TfMain.FormCreate(Sender: TObject);
-
 begin
+  OnFirstShow:=@FirstShow;
   FActiveCodepage := 437;
   fWitch := TWitch.Create;
   fWitch.OnAnalyzed:=@WitchOnAnalyzed;
@@ -547,6 +555,14 @@ begin
   SetApplicationIcons;
   { TODO 5 -cDevel Add load color settings for Good/Bad mappings }
   sbCodepage.Color:=fCodepageText.Background;
+
+  // Values set and managed through OptionsDialog preferences.
+  fFileReopen:=StringToCheckBoxState(UserConfig.GetValue(
+    'Preferences/tsSession/cbReopenFiles/State', 'Unchecked')) = cbChecked;
+  fFileWarn:=StringToCheckBoxState(UserConfig.GetValue(
+    'Preferences/tsSession/cbWarnMissing/State', 'Unchecked')) = cbChecked;
+  // LogMessage(vbNormal, 'File Reopen: ' + BoolStr(fFileReopen));
+  // LogMessage(vbNormal, 'File Warning: ' + BoolStr(fFileWarn));
 end;
 
 procedure TfMain.FormSettingsSave(Sender: TObject);
@@ -562,6 +578,7 @@ begin
   SetConfig('Codepage_Scale/Horizontal', fCodepageText.Scale.X);
   SetConfig('Codepage_Scale/Vertical', fCodepageText.Scale.Y);
   { TODO 5 -cDevel Add save color settings for Good/Bad mappings }
+  SessionSave;
 end;
 
 procedure TfMain.WitchOnAnalyzed(Sender: TObject);
@@ -591,6 +608,12 @@ begin
 
   if W.ListItem = lvFileList.Selected then
     UpdateMetaData;
+end;
+
+procedure TfMain.FirstShow(Sender: TObject);
+begin
+  // LogMessage(vbNormal, 'First Show: ' + BoolStr(fFileReopen));
+  SessionLoad;
 end;
 
 procedure TfMain.SetApplicationIcons;
@@ -863,6 +886,79 @@ begin
   UpdateMetaData;
 end;
 
+procedure TfMain.SessionSave;
+var
+  XML : TXMLConfig;
+  I, X : integer;
+begin
+  if not fFileReopen then Exit;
+  XML:=TXMLConfig.Create(nil);
+  try
+    XML.SetValue('Files/Count', UnicodeString(IntToStr(fWitch.Count)));
+    X:=-1;
+    if Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data) then begin
+      X:=TWitchItem(lvFileList.Selected.Data).Index;
+    end;
+    XML.SetValue('Files/Selected', UnicodeString(IntToStr(X)));
+    for I := 0 to fWitch.Count - 1 do
+      XML.SetValue(UnicodeString('Files/File_' + IntToStr(I)) + '/Name',
+        UnicodeString(fWitch.Items[I].FileName));
+    XML.SaveToFile(UserDataPath + 'session.xml');
+  finally
+    XML.Free;
+  end;
+end;
+
+procedure TfMain.SessionLoad;
+var
+  XML : TXMLConfig;
+  MFL : TStringList;
+  C, I, X : integer;
+  S, F : String;
+
+begin
+  if not fFileReopen then Exit;
+  if not FileExists(UserDataPath + 'session.xml') then Exit;
+  LogMessage(vbNormal,'Reopen previous session files.');
+  if fFileWarn then
+    MFL := TStringList.Create
+  else
+    MFL := nil;
+  XML:=TXMLConfig.Create(nil);
+  try
+    XML.LoadFromFile(UserDataPath + 'session.xml');
+    F:='';
+    C:=StrToInt(RawByteString(XML.GetValue('Files/Count','0')));
+    X:=StrToInt(RawByteString(XML.GetValue('Files/Selected', '-1')));
+    for I := 0 to C - 1 do begin
+      S:=Trim(RawByteString(XML.GetValue(UnicodeString('Files/File_' + IntToStr(I)) +
+        '/Name', '')));
+      if S = '' then Continue;
+      if FileExists(S) then begin
+        if I=X then F:=S;
+        OpenFile(S, False)
+      end
+      else if Assigned(MFL) then begin
+        MFL.Add(S);
+        LogMessage(vbNormal, 'Unable to locate previously open file: ' + S);
+      end;
+    end;
+  except
+    FreeAndNil(XML);
+  end;
+
+  if F <> '' then
+    OpenFile(F, True);
+
+  if Assigned(XML) then
+    FreeAndNil(XML);
+  if Assigned(MFL) then begin
+    if MFL.Count <> 0 then
+      ShowMissingFiles(MFL);
+    FreeAndNil(MFL);
+  end;
+end;
+
 procedure TfMain.ApplyUserLanguage;
 begin
   inherited ApplyUserLanguage;
@@ -890,18 +986,15 @@ begin
   I:=fWitch.Find(FileName);
   if I <> -1 then begin
     LogMessage(vbVerbose, 'Open file "' + FileName + '" already open.');
-    fWitch.Select(I);
-    Exit;
+  end else begin
+    try
+      I := fWitch.Add(FileName, lvFileList.Items.Add);
+    except
+      LogMessage(vbVerbose, 'Open file "' + FileName + '" Failed!');
+      Exit;
+    end;
+    LogMessage(vbVerbose, 'Opened file "' + FileName + '"');
   end;
-
-  try
-    I := fWitch.Add(FileName, lvFileList.Items.Add);
-  except
-    LogMessage(vbVerbose, 'Open file "' + FileName + '" Failed!');
-    Exit;
-  end;
-
-  LogMessage(vbVerbose, 'Opened file "' + FileName + '"');
   if Select then begin
     lvFileList.Sort;
     fWitch.Select(I);

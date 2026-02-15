@@ -19,9 +19,10 @@
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
-      <MinorVersionNr Value="2"/>
-      <BuildNr Value="75"/>
-      <StringTable Comments="UTF-8 and Codepage Utility" CompanyName="Jerome Shidel" FileDescription="CPWitch" InternalName="CPWitch" LegalCopyright="2026 (c) Jerome Shidel" OriginalFilename="CPWitch" ProductName="Codepage Witch" ProductVersion="0.2"/>
+      <MinorVersionNr Value="3"/>
+      <BuildNr Value="78"/>
+      <Attributes pvaPreRelease="True"/>
+      <StringTable Comments="UTF-8 and Codepage Utility" CompanyName="Jerome Shidel" FileDescription="CPWitch" InternalName="CPWitch" LegalCopyright="2026 (c) Jerome Shidel" OriginalFilename="CPWitch" ProductName="Codepage Witch" ProductVersion="0.3"/>
     </VersionInfo>
     <BuildModes>
       <Item Name="Default" Default="True"/>
@@ -57,7 +58,8 @@
       <Unit>
         <Filename Value="uprefs.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="fPreferences"/>
+        <ComponentName Value="fOptionsDialog"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uPrefs"/>
       </Unit>
