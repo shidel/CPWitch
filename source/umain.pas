@@ -104,6 +104,8 @@ type
       fUFF : TUnicodeDosFont;
       fFileReopen:boolean;
       fFileWarn:boolean;
+      fUnicodeScale : integer;
+      fDOSScale: integer;
       procedure PopulateCodepageList(Item : TWitchItem);
       procedure SetCodepageFilter(AValue: TCodepageFilter);
       procedure SetUnicodeView( S : String );
@@ -284,6 +286,8 @@ procedure TfMain.FormCreate(Sender: TObject);
 begin
   OnFirstShow:=@FirstShow;
   FActiveCodepage := 437;
+  FUnicodeScale:=100;
+  FDOSScale:=1;
   fWitch := TWitch.Create;
   fWitch.OnAnalyzed:=@WitchOnAnalyzed;
 
@@ -495,6 +499,7 @@ procedure TfMain.SetUnicodeView(S: String);
 var
   C : TColor;
   B, F, EB, EF : String;
+  { Scale:integer; }
 begin
   { TODO 0 -cLazarus_Bug On macOS, setting the VertScrollBar.Position does
     not scroll a TMemo }
@@ -527,10 +532,22 @@ begin
   { TODO 6 -cDevel Add support to view unmapped characters as errors in UnicodeView }
   IgnoreParameter([EF, EB]);
   S:='<html><body style="' +
-    'color:' + F + '; background-color:' + B + '; '+
-    'margin:0; font-weight:light; font-size:90%;">' + CR +
-    '<div style="font-family: monospace; ">'+ S + '</div>' +
+    'color:' + F + '; background-color:' + B + '; '+ 'margin:0; ">' + CR+
+    '<div style="font-family: monospace; font-weight:light; font-size:' +
+    IntToStr(FUnicodeScale) + '%;" >' + CR +
+    S + '</div>' +
     '<br></body></html>';
+  (* // Maybe switch to Points for font size.
+  Scale:=16;
+  Scale:=Scale * FUnicodeScale div 100;
+  S:='<html><body style="' +
+    'color:' + F + '; background-color:' + B + '; '+ 'margin:0; font-size:10pt; ">' + CR+
+    '<div style="font-family: monospace; font-weight:light; font-size:' +
+    IntToStr(Scale) + 'pt;" >' + CR +
+    S + '</div>' +
+    '<br></body></html>'; *)
+
+  hpUnicodeText.SetHtmlFromStr(''); // Clear Cache, apparently this may be needed sometimes.
   hpUnicodeText.SetHtmlFromStr(S);
   // FileSave(AppBasePath + '/test.html',PasExt.ToBytes(S));
 end;
@@ -538,7 +555,7 @@ end;
 procedure TfMain.FormSettingsLoad(Sender: TObject);
 var
   S : String;
-  SX, SY : Integer;
+  V, E : Integer;
 begin
   S:=Trim(Lowercase(GetConfig('Codepage_List/Filter', 'partial')));
   case S of
@@ -547,9 +564,22 @@ begin
   else
     FCodepageFilter:=cpfAll;
   end;
-  SX:=GetConfig('Codepage_Scale/Horizontal', fCodepageText.Scale.X);
-  SY:=GetConfig('Codepage_Scale/Vertical', fCodepageText.Scale.Y);
-  fCodepageText.Scale:=Point(SX,SY);
+  Val(RawByteString(UserConfig.GetValue(
+    'Preferences/tsViewer/tbUnicodeScale/Value',
+    UnicodeString(IntToStr(FUnicodeScale div 10)))),
+    V, E);
+  if (E = 0) and (V>1) and (V<101) and (FUnicodeScale <> V*10) then begin
+    FUnicodeScale:=V*10;
+    // RescaleUnicodeView;
+  end;
+  Val(RawByteString(UserConfig.GetValue(
+    'Preferences/tsViewer/tbDOSScale/Value',
+    UnicodeString(IntToStr(FUnicodeScale div 10)))),
+    V, E);
+  if (E = 0) and (V>0) and (V<11) then begin
+    FDOSScale:=V;
+    fCodepageText.Scale:=Point(V,V);
+  end;
 
   UpdateFilterCheck;
   SetApplicationIcons;
@@ -962,8 +992,9 @@ end;
 procedure TfMain.ApplyUserLanguage;
 begin
   inherited ApplyUserLanguage;
-  UpdateStatusBar;
-  UpdateCodepageViewlabel;
+  { UpdateStatusBar;
+  UpdateCodepageViewlabel; }
+  UpdateMetaData;
 end;
 
 procedure TfMain.OpenFile(FileName: String; Select: boolean);

@@ -11,7 +11,7 @@ uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ExtCtrls, ComCtrls,
-  Preferences;
+  MultiApp, Preferences;
 
 type
 
@@ -21,14 +21,27 @@ type
     cbReopenFiles: TCheckBox;
     cbWarnMissing: TCheckBox;
     gbSessionFiles: TGroupBox;
+    gbUnicodeView: TGroupBox;
+    gbDOSView: TGroupBox;
+    lbDOSScale: TLabel;
+    lbUnicodeScale: TLabel;
     pPages: TPageControl;
+    tbUnicodeScale: TTrackBar;
+    tbDOSScale: TTrackBar;
     tsEncoding: TTabSheet;
     tsViewer: TTabSheet;
     tsSession: TTabSheet;
     procedure cbReopenFilesChange(Sender: TObject);
+    procedure tbDOSScaleChange(Sender: TObject);
+    procedure tbUnicodeScaleChange(Sender: TObject);
   private
 
+  protected
+    procedure UpdateUnicodeScale;
+    procedure UpdateDOSScale;
+
   public
+    procedure ApplyUserLanguage; override;
 
   end;
 
@@ -44,6 +57,41 @@ implementation
 procedure TfOptionsDialog.cbReopenFilesChange(Sender: TObject);
 begin
   cbWarnMissing.Enabled:=cbReopenFiles.Checked;
+end;
+
+procedure TfOptionsDialog.tbDOSScaleChange(Sender: TObject);
+begin
+  UpdateDOSScale;
+end;
+
+procedure TfOptionsDialog.tbUnicodeScaleChange(Sender: TObject);
+begin
+  UpdateUnicodeScale;
+end;
+
+procedure TfOptionsDialog.UpdateUnicodeScale;
+var
+  S : String;
+begin
+  S:=IntToStr(tbUnicodeScale.Position * 10);
+  lbUnicodeScale.Caption:=GetFormat(ComponentNamePath(tsViewer, Self, True) +
+    'lbUnicodeScale/Caption', [S], 'Font scale %s%%');
+end;
+
+procedure TfOptionsDialog.UpdateDOSScale;
+var
+  S : String;
+begin
+  S:=IntToStr(tbDOSScale.Position * 100);
+  lbDOSScale.Caption:=GetFormat(ComponentNamePath(tsViewer, Self, True) +
+    'lbDOSScale/Caption', [S], 'Font scale %s%%');
+end;
+
+procedure TfOptionsDialog.ApplyUserLanguage;
+begin
+  inherited ApplyUserLanguage;
+  UpdateUnicodeScale;
+  UpdateDOSScale;
 end;
 
 initialization

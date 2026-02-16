@@ -13,8 +13,8 @@ object fOptionsDialog: TfOptionsDialog
     Height = 267
     Top = 37
     Width = 276
-    ActivePage = tsSession
-    TabIndex = 0
+    ActivePage = tsViewer
+    TabIndex = 2
     TabOrder = 0
     object tsSession: TTabSheet
       Hint = 'Application session options.'
@@ -65,6 +65,77 @@ object fOptionsDialog: TfOptionsDialog
     object tsViewer: TTabSheet
       Hint = 'Unicode and DOS viewer options.'
       Caption = 'Viewer'
+      ClientHeight = 231
+      ClientWidth = 270
+      object gbUnicodeView: TGroupBox
+        Left = 0
+        Height = 84
+        Top = 0
+        Width = 270
+        Align = alTop
+        AutoSize = True
+        Caption = 'Unicode View'
+        ClientHeight = 65
+        ClientWidth = 260
+        TabOrder = 0
+        object lbUnicodeScale: TLabel
+          Left = 8
+          Height = 16
+          Top = 8
+          Width = 244
+          Align = alTop
+          BorderSpacing.Around = 8
+          Caption = 'lbUnicodeScale'
+        end
+        object tbUnicodeScale: TTrackBar
+          Left = 8
+          Height = 25
+          Top = 32
+          Width = 244
+          Max = 50
+          Min = 2
+          Position = 10
+          OnChange = tbUnicodeScaleChange
+          Align = alTop
+          BorderSpacing.Around = 8
+          TabOrder = 0
+        end
+      end
+      object gbDOSView: TGroupBox
+        Left = 0
+        Height = 84
+        Top = 92
+        Width = 270
+        Align = alTop
+        AutoSize = True
+        BorderSpacing.Top = 8
+        Caption = 'DOS View'
+        ClientHeight = 65
+        ClientWidth = 260
+        TabOrder = 1
+        object lbDOSScale: TLabel
+          Left = 8
+          Height = 16
+          Top = 8
+          Width = 244
+          Align = alTop
+          BorderSpacing.Around = 8
+          Caption = 'lbDOSScale'
+        end
+        object tbDOSScale: TTrackBar
+          Left = 8
+          Height = 25
+          Top = 32
+          Width = 244
+          Max = 5
+          Min = 1
+          Position = 1
+          OnChange = tbDOSScaleChange
+          Align = alTop
+          BorderSpacing.Around = 8
+          TabOrder = 0
+        end
+      end
     end
   end
 end
