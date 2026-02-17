@@ -211,6 +211,7 @@ var
   TCP : TUTF8ToCodepage;
   R : integer;
   N : String;
+  D : RawByteString;
 begin
   if Not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then
     Exit;
@@ -220,9 +221,20 @@ begin
   dlgFileSave.InitialDir:=UserWorkPath;
   N := ExcludeTrailing(W.DisplayName, '.UTF-8', false);
   dlgFileSave.FileName:=FileIterative(UserWorkPath + N);
+  if fEndBlankOnExport then begin
+    D:=NormalizeLineEndings(TCP.Converted, W.LineEndings);
+    case W.LineEndings of
+      leCRLF : D:=IncludeTrailing(D, CRLF);
+      leLF   : D:=IncludeTrailing(D, LF);
+      leCR   : D:=IncludeTrailing(D, CR);
+    end;
+    D:=NormalizeLineEndings(D, W.LineEndings);
+  end else begin
+    D:=TCP.Converted;
+  end;
   repeat
     if dlgFileSave.Execute then begin
-      R:=FileSave(dlgFileSave.FileName, PasExt.ToBytes(TCP.Converted));
+      R:=FileSave(dlgFileSave.FileName, D);
       if R <> 0 then
         if FileErrorDialog(dlgFileSave.FileName, R, True) <> mrRetry then
           R:=0;
@@ -668,8 +680,10 @@ begin
   Cat(M, ' file "'+W.DisplayName+'"');
   LogMessage(vbVerbose, M);
 
-  if W.ListItem = lvFileList.Selected then
+  if W.ListItem = lvFileList.Selected then begin
     UpdateMetaData;
+    SelectFile(Self);
+  end;
 end;
 
 procedure TfMain.FirstShow(Sender: TObject);
@@ -1064,6 +1078,7 @@ begin
   for I := 0 to fWitch.Count - 1 do
     if fWitch.Items[I].Analyzed then
       WitchOnAnalyzed(fWitch.Items[I]);
+  SelectFile(Self);
 end;
 
 procedure TfMain.ApplyUserLanguage;
