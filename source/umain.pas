@@ -18,7 +18,7 @@ uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ExtCtrls, ComCtrls, ActnList, Menus, IpHtml, XMLConf,
   Version, PasExt, Icons, MultiApp, LogView, Updater, Preferences,
-  DosCRT, DosFont, Codepages, Witch, uPrefs, uLostFile;
+  DosCRT, DosFont, Codepages, Witch, uPrefs, uLostFile, uFixEnding;
 
 type
 
@@ -955,8 +955,11 @@ begin
 end;
 
 procedure TfMain.SelectFile(Sender: TObject);
+const
+  SuspendCheck : boolean = false;
 var
   S : String;
+  W : TWitchItem;
 begin
   if Assigned(lvFileList.Selected) then
     S:=lvFileList.Selected.Caption
@@ -965,6 +968,20 @@ begin
   LogMessage(vbVerbose, 'Select File: ' + S);
   IgnoreParameter(Sender);
   UpdateMetaData;
+  if SuspendCheck then Exit;
+  if fEndBlankOnInput and Assigned(lvFileList.Selected) then begin
+    W:=TWitchItem(lvFileList.Selected.Data);
+    if W.Encoding = weBinary then Exit;
+    if Assigned(W) and (W.Analyzed) and (W.EndsWithBlank = false) then begin
+      S:=W.FileName;
+      if FixFileLineEnding(S) = mrOK then begin
+        SuspendCheck:=True;
+        actCloseExecute(Self);
+        SuspendCheck:=False;
+        OpenFile(S, True);
+      end;
+    end;
+  end;
 end;
 
 procedure TfMain.SessionSave;
@@ -1017,7 +1034,7 @@ begin
       if S = '' then Continue;
       if FileExists(S) then begin
         if I=X then F:=S;
-        OpenFile(S, False)
+        OpenFile(S, False);
       end
       else if Assigned(MFL) then begin
         MFL.Add(S);
@@ -1061,6 +1078,7 @@ procedure TfMain.OpenFile(FileName: String; Select: boolean);
 var
   I : integer;
   F : TStringList;
+  LI : TListItem;
 begin
   if DirectoryExists(FileName) then begin
     F := TStringList.Create;
@@ -1079,13 +1097,16 @@ begin
     LogMessage(vbVerbose, 'Open file "' + FileName + '" already open.');
   end else begin
     try
-      I := fWitch.Add(FileName, lvFileList.Items.Add);
+      LI:=lvFileList.Items.Add;
+      I := fWitch.Add(FileName, LI);
     except
+      LI.Delete;
       LogMessage(vbVerbose, 'Open file "' + FileName + '" Failed!');
       Exit;
     end;
     LogMessage(vbVerbose, 'Opened file "' + FileName + '"');
   end;
+
   if Select then begin
     lvFileList.Sort;
     fWitch.Select(I);

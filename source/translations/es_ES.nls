@@ -169,6 +169,75 @@
         <NoEncoding Caption="ASCII"/>
       </statBar>
     </fMain>
+    <fCorrectFileEndingDialog Caption="No final line ending">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCorrect Caption="Correct"/>
+          <btnIgnore Caption="Ignore"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message Text="The file &quot;%s&quot; does not end on a blank line.&#xA;&#xA;Do you wish to correct this by adding a final new line to the end of the file?"/>
+    </fCorrectFileEndingDialog>
+    <fUpdateCheckDialog Caption="Comprobación de Actualización">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnRetry Caption="Reintentar"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Check Text="Buscando actualizaciones disponibles para &quot;%s&quot;, versión %s."/>
+        <Error Text="No se puede determinar si hay actualizaciones para &quot;%s&quot; en este momento. Por favor, inténtelo de nuevo más tarde."/>
+        <None Text="No hay actualizaciones disponibles para &quot;%s&quot; en este momento. Por favor, inténtelo de nuevo más tarde."/>
+      </Message>
+    </fUpdateCheckDialog>
+    <fUpdateFoundDialog Caption="Actualización Disponible">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnDownload Caption="Descargar"/>
+          <btnSkip Caption="Omitir"/>
+        </fButtonPanel>
+        <fAuxPanel>
+          <cbSkipVersion Caption="Omitir esta versión"/>
+        </fAuxPanel>
+      </fLowerPanel>
+      <Message>
+        <Note Text="No se han proporcionado notas de lanzamiento para la versión %1:s de &quot;%0:s&quot;"/>
+      </Message>
+    </fUpdateFoundDialog>
+    <fUpdateDownloadDialog Caption="Descarga de Actualización">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnRetry Caption="Reintentar"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Fetch Text="Descargando actualización para &quot;%s&quot;."/>
+        <Error Text="Error al descargar la actualización de &quot;%s&quot;. Por favor, inténtelo de nuevo más tarde."/>
+      </Message>
+    </fUpdateDownloadDialog>
+    <fUpdateSaveDialog Caption="Actualización Descargada">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnSaveAs Caption="Guardar como..."/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Downloaded Text="Descargado &quot;%s&quot; versión %s."/>
+      </Message>
+    </fUpdateSaveDialog>
+    <fCorrectFileEnding Caption="No final line ending" Message="The file &quot;%s&quot; does not end on a blank line. Do you wish to correct this by adding a final new line to the end of the file?">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCorrect Caption="Correct"/>
+          <btnIgnore Caption="Ignore"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message Text="The file &quot;%s&quot; does not end on a blank line.&#xA;Do you wish to correct this by adding a final new line to the end of the file?"/>
+    </fCorrectFileEnding>
     <fOptionsDialog Caption="Codepage Witch Preferences">
       <pPages>
         <tsAbout Hint="About the &quot;%s&quot;" Caption="About">
@@ -243,57 +312,6 @@
         </fBodyPanel>
       </fMiddlePanel>
     </fOptionsDialog>
-    <fUpdateCheckDialog Caption="Comprobación de Actualización">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-          <btnRetry Caption="Reintentar"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Check Text="Buscando actualizaciones disponibles para &quot;%s&quot;, versión %s."/>
-        <Error Text="No se puede determinar si hay actualizaciones para &quot;%s&quot; en este momento. Por favor, inténtelo de nuevo más tarde."/>
-        <None Text="No hay actualizaciones disponibles para &quot;%s&quot; en este momento. Por favor, inténtelo de nuevo más tarde."/>
-      </Message>
-    </fUpdateCheckDialog>
-    <fUpdateFoundDialog Caption="Actualización Disponible">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-          <btnDownload Caption="Descargar"/>
-          <btnSkip Caption="Omitir"/>
-        </fButtonPanel>
-        <fAuxPanel>
-          <cbSkipVersion Caption="Omitir esta versión"/>
-        </fAuxPanel>
-      </fLowerPanel>
-      <Message>
-        <Note Text="No se han proporcionado notas de lanzamiento para la versión %1:s de &quot;%0:s&quot;"/>
-      </Message>
-    </fUpdateFoundDialog>
-    <fUpdateDownloadDialog Caption="Descarga de Actualización">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-          <btnRetry Caption="Reintentar"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Fetch Text="Descargando actualización para &quot;%s&quot;."/>
-        <Error Text="Error al descargar la actualización de &quot;%s&quot;. Por favor, inténtelo de nuevo más tarde."/>
-      </Message>
-    </fUpdateDownloadDialog>
-    <fUpdateSaveDialog Caption="Actualización Descargada">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-          <btnSaveAs Caption="Guardar como..."/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Downloaded Text="Descargado &quot;%s&quot; versión %s."/>
-      </Message>
-    </fUpdateSaveDialog>
     <fLoggerViewForm Caption="Debug log">
       <LineCount Plural="%.0n log entries" Singular="%.0n log entry"/>
       <pControls>

@@ -169,6 +169,75 @@
         <NoEncoding Caption="ASCII"/>
       </statBar>
     </fMain>
+    <fCorrectFileEndingDialog Caption="No final line ending">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCorrect Caption="Correct"/>
+          <btnIgnore Caption="Ignore"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message Text="The file &quot;%s&quot; does not end on a blank line.&#xA;&#xA;Do you wish to correct this by adding a final new line to the end of the file?"/>
+    </fCorrectFileEndingDialog>
+    <fUpdateCheckDialog Caption="Güncelleme Kontrolü">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="İptal"/>
+          <btnRetry Caption="Yeniden Dene"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Check Text="&quot;%s&quot; için mevcut güncellemeler kontrol ediliyor, sürüm %s."/>
+        <Error Text="Şu anda &quot;%s&quot; için herhangi bir güncelleme olup olmadığı belirlenemiyor. Lütfen daha sonra tekrar deneyiniz."/>
+        <None Text="Şu anda &quot;%s&quot; için mevcut bir güncelleme yok. Lütfen daha sonra tekrar deneyiniz."/>
+      </Message>
+    </fUpdateCheckDialog>
+    <fUpdateFoundDialog Caption="Güncelleme Mevcut">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="İptal"/>
+          <btnDownload Caption="İndir"/>
+          <btnSkip Caption="Atla"/>
+        </fButtonPanel>
+        <fAuxPanel>
+          <cbSkipVersion Caption="Bu sürümü atla"/>
+        </fAuxPanel>
+      </fLowerPanel>
+      <Message>
+        <Note Text="&quot;%0:s&quot; uygulamasının %1:s sürümü için sürüm notu sağlanmadı."/>
+      </Message>
+    </fUpdateFoundDialog>
+    <fUpdateDownloadDialog Caption="Güncelleme İndiriliyor">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="İptal"/>
+          <btnRetry Caption="Yeniden Dene"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Fetch Text="&quot;%s&quot; güncellemesi indiriliyor."/>
+        <Error Text="&quot;%s&quot; güncellemesi indirilirken hata oluştu. Lütfen daha sonra tekrar deneyiniz."/>
+      </Message>
+    </fUpdateDownloadDialog>
+    <fUpdateSaveDialog Caption="Güncelleme İndirildi">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="İptal"/>
+          <btnSaveAs Caption="Farklı kaydet..."/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Downloaded Text="&quot;%s&quot; sürüm %s indirildi."/>
+      </Message>
+    </fUpdateSaveDialog>
+    <fCorrectFileEnding Caption="No final line ending" Message="The file &quot;%s&quot; does not end on a blank line. Do you wish to correct this by adding a final new line to the end of the file?">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCorrect Caption="Correct"/>
+          <btnIgnore Caption="Ignore"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message Text="The file &quot;%s&quot; does not end on a blank line.&#xA;Do you wish to correct this by adding a final new line to the end of the file?"/>
+    </fCorrectFileEnding>
     <fOptionsDialog Caption="Codepage Witch Preferences">
       <pPages>
         <tsAbout Hint="About the &quot;%s&quot;" Caption="About">
@@ -243,57 +312,6 @@
         </fBodyPanel>
       </fMiddlePanel>
     </fOptionsDialog>
-    <fUpdateCheckDialog Caption="Güncelleme Kontrolü">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="İptal"/>
-          <btnRetry Caption="Yeniden Dene"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Check Text="&quot;%s&quot; için mevcut güncellemeler kontrol ediliyor, sürüm %s."/>
-        <Error Text="Şu anda &quot;%s&quot; için herhangi bir güncelleme olup olmadığı belirlenemiyor. Lütfen daha sonra tekrar deneyiniz."/>
-        <None Text="Şu anda &quot;%s&quot; için mevcut bir güncelleme yok. Lütfen daha sonra tekrar deneyiniz."/>
-      </Message>
-    </fUpdateCheckDialog>
-    <fUpdateFoundDialog Caption="Güncelleme Mevcut">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="İptal"/>
-          <btnDownload Caption="İndir"/>
-          <btnSkip Caption="Atla"/>
-        </fButtonPanel>
-        <fAuxPanel>
-          <cbSkipVersion Caption="Bu sürümü atla"/>
-        </fAuxPanel>
-      </fLowerPanel>
-      <Message>
-        <Note Text="&quot;%0:s&quot; uygulamasının %1:s sürümü için sürüm notu sağlanmadı."/>
-      </Message>
-    </fUpdateFoundDialog>
-    <fUpdateDownloadDialog Caption="Güncelleme İndiriliyor">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="İptal"/>
-          <btnRetry Caption="Yeniden Dene"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Fetch Text="&quot;%s&quot; güncellemesi indiriliyor."/>
-        <Error Text="&quot;%s&quot; güncellemesi indirilirken hata oluştu. Lütfen daha sonra tekrar deneyiniz."/>
-      </Message>
-    </fUpdateDownloadDialog>
-    <fUpdateSaveDialog Caption="Güncelleme İndirildi">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="İptal"/>
-          <btnSaveAs Caption="Farklı kaydet..."/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Downloaded Text="&quot;%s&quot; sürüm %s indirildi."/>
-      </Message>
-    </fUpdateSaveDialog>
     <fLoggerViewForm Caption="Debug log">
       <LineCount Plural="%.0n log entries" Singular="%.0n log entry"/>
       <pControls>

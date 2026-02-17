@@ -1,0 +1,8 @@
+object fFixEnding: TfFixEnding
+  Left = 1422
+  Height = 240
+  Top = 331
+  Width = 320
+  Caption = 'fFixEnding'
+  LCLVersion = '4.0.0.4'
+end

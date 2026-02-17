@@ -63,6 +63,13 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uPrefs"/>
       </Unit>
+      <Unit>
+        <Filename Value="ufixending.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fFixEnding"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uFixEnding"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

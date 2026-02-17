@@ -187,8 +187,7 @@ begin
       FEncoding:=weCodepage;
     end;
 
-  // Now if there are, see if it is Codepage or UTF-8.
-  if (FEncoding = weCodepage) then begin
+  if (FEncoding <> weBinary) then begin
     FLineEndings:=DetectLineEndings(FText, FLineEndings);
     case FLineEndings of
       leCRLF : if (Length(FText) > 1) then
@@ -198,6 +197,10 @@ begin
       leCR : if Length(FText) > 0 then
         FEndsWithBlank:=Copy(FText, Length(FText), 1) = CR;
     end;
+  end;
+
+  // Now if there are, see if it is Codepage or UTF-8.
+  if (FEncoding = weCodepage) then begin
     if UTF8ToValues(FText, V) then begin
       if Length(V) <> Length(FText) then
         FEncoding:=weUnicode;
