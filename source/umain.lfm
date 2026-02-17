@@ -56,7 +56,11 @@ object fMain: TfMain
         Width = 50
       end    
       item
-        Width = 100
+        Alignment = taCenter
+        Width = 50
+      end    
+      item
+        Width = 50
       end>
     SimplePanel = False
   end

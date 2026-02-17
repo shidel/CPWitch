@@ -157,18 +157,12 @@
       </pViewers>
       <statBar>
         <Processing Caption="A processar"/>
+        <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
         <Unicode Caption="Unicode"/>
         <Codepage Caption="Codepage"/>
         <NoEncoding Caption="ASCII"/>
       </statBar>
     </fMain>
-    <fMissingFiles Caption="Missing document files">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancel"/>
-        </fButtonPanel>
-      </fLowerPanel>
-    </fMissingFiles>
     <fUpdateCheckDialog Caption="Verificação de Atualização">
       <fLowerPanel>
         <fButtonPanel>
@@ -252,6 +246,23 @@
             <cbWarnMissing Hint="Warn when a file from the previous session does not exist." Caption="Warn when missing."/>
           </gbSessionFiles>
         </tsSession>
+        <tsEncoding Hint="File input and output encoding options." Caption="Encoding">
+          <rgFileEnding Hint="Require that files must end on a blank line." Caption="Files end with New Line">
+            <rbFileEndWhatever Hint="All files can end wth text or blank line." Caption="Don't care."/>
+            <rbFineEndExport Hint="Make sure that exported files end with a blank line." Caption="Insure only for Export."/>
+            <rbFileEndAll Hint="Require original files to end on a blank line." Caption="Enforce an all text files."/>
+          </rgFileEnding>
+        </tsEncoding>
+        <tsViewer Hint="Unicode and DOS viewer options." Caption="Viewer">
+          <gbUnicodeView Caption="Unicode View">
+            <lbUnicodeScale Caption="lbUnicodeScale"/>
+            <tbUnicodeScale Caption="10"/>
+          </gbUnicodeView>
+          <gbDOSView Caption="DOS View">
+            <lbDOSScale Caption="lbDOSScale"/>
+            <tbDOSScale Caption="1"/>
+          </gbDOSView>
+        </tsViewer>
       </pPages>
       <fLowerPanel>
         <fButtonPanel>
@@ -266,9 +277,24 @@
               <lbSections Caption="Options"/>
             </pSectionLabel>
           </pSectionsPanel>
+          <pPagesPanel>
+            <pPages>
+              <tsViewer>
+                <lbUnicodeScale Caption="Font scale %s%%"/>
+                <lbDOSScale Caption="Font scale %s%%"/>
+              </tsViewer>
+            </pPages>
+          </pPagesPanel>
         </fBodyPanel>
       </fMiddlePanel>
     </fOptionsDialog>
+    <fMissingFiles Caption="Missing document files">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancel"/>
+        </fButtonPanel>
+      </fLowerPanel>
+    </fMissingFiles>
     <fLoggerViewForm Caption="Debug log">
       <LineCount Plural="%.0n log entries" Singular="%.0n log entry"/>
       <pControls>

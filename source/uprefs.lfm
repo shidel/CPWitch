@@ -13,8 +13,8 @@ object fOptionsDialog: TfOptionsDialog
     Height = 267
     Top = 37
     Width = 276
-    ActivePage = tsViewer
-    TabIndex = 2
+    ActivePage = tsEncoding
+    TabIndex = 1
     TabOrder = 0
     object tsSession: TTabSheet
       Hint = 'Application session options.'
@@ -61,6 +61,65 @@ object fOptionsDialog: TfOptionsDialog
     object tsEncoding: TTabSheet
       Hint = 'File input and output encoding options.'
       Caption = 'Encoding'
+      ClientHeight = 231
+      ClientWidth = 270
+      object rgFileEnding: TRadioGroup
+        Left = 0
+        Height = 101
+        Hint = 'Require that files must end on a blank line.'
+        Top = 0
+        Width = 270
+        Align = alTop
+        AutoFill = True
+        AutoSize = True
+        BorderSpacing.InnerBorder = 2
+        Caption = 'Files end with New Line'
+        ChildSizing.LeftRightSpacing = 6
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.ShrinkHorizontal = crsScaleChilds
+        ChildSizing.ShrinkVertical = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 1
+        ClientHeight = 82
+        ClientWidth = 260
+        TabOrder = 0
+        object rbFileEndWhatever: TRadioButton
+          Left = 6
+          Height = 19
+          Hint = 'All files can end wth text or blank line.'
+          Top = 6
+          Width = 248
+          BorderSpacing.Top = 6
+          BorderSpacing.Bottom = 6
+          Caption = 'Don''t care.'
+          TabOrder = 0
+        end
+        object rbFineEndExport: TRadioButton
+          Left = 6
+          Height = 20
+          Hint = 'Make sure that exported files end with a blank line.'
+          Top = 31
+          Width = 248
+          BorderSpacing.Top = 6
+          BorderSpacing.Bottom = 6
+          Caption = 'Insure only for Export.'
+          TabOrder = 1
+        end
+        object rbFileEndAll: TRadioButton
+          Left = 6
+          Height = 19
+          Hint = 'Require original files to end on a blank line.'
+          Top = 57
+          Width = 248
+          BorderSpacing.Top = 6
+          BorderSpacing.Bottom = 6
+          Caption = 'Enforce an all text files.'
+          Checked = True
+          TabOrder = 2
+          TabStop = True
+        end
+      end
     end
     object tsViewer: TTabSheet
       Hint = 'Unicode and DOS viewer options.'

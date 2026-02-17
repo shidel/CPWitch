@@ -26,6 +26,10 @@ type
     lbDOSScale: TLabel;
     lbUnicodeScale: TLabel;
     pPages: TPageControl;
+    rbFileEndWhatever: TRadioButton;
+    rbFineEndExport: TRadioButton;
+    rbFileEndAll: TRadioButton;
+    rgFileEnding: TRadioGroup;
     tbUnicodeScale: TTrackBar;
     tbDOSScale: TTrackBar;
     tsEncoding: TTabSheet;

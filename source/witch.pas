@@ -21,7 +21,7 @@ uses
 
 type
 
-  TWitchEncoding = (weNone, weCodepage, weUnicode);
+  TWitchEncoding = (weNone, weCodepage, weUnicode, weBinary);
 
   TWitch = class;
 
@@ -33,8 +33,10 @@ type
     FAnalyzing: boolean;
     FDetected: String;
     FEncoding: TWitchEncoding;
+    FEndsWithBlank: boolean;
     FFileName: String;
     FData : TArrayOfByte;
+    FLineEndings: TLineEndings;
     FListItem: TListItem;
     FOwner: TWitch;
     FIndex: Integer;
@@ -55,6 +57,7 @@ type
     property Owner : TWitch read FOwner;
     property ListItem : TListItem read FListItem;
     property FileName : String read FFileName write SetFileName;
+    property LineEndings : TLineEndings read FLineEndings;
     property FileData: TArrayOfByte read FData;
     property DisplayName : String read GetDisplayName;
     property Index : integer read GetIndex;
@@ -63,6 +66,7 @@ type
     property Results : TCodepageResults read FResults;
     property Detected : String read FDetected; // Detected Language
     property Preferred : integer read FPreferred; // Preferred Codepage
+    property EndsWithBlank : boolean read FEndsWithBlank;
     function AsCodePage(Codepage : integer; Convert : boolean = true) : TUTF8ToCodepage;
     function AsUnicode(Codepage : integer; Convert : boolean = true) : TCodepageToUTF8;
   published
@@ -114,6 +118,8 @@ type
   TWitchAnalyzeThread=class(TThread)
   private
     FEncoding: TWitchEncoding;
+    FEndsWithBlank: boolean;
+    FLineEndings: TLineEndings;
     FResults: TCodepageResults;
     FText: RawByteString;
     FWitch: TWitch;
@@ -134,6 +140,8 @@ type
     property Text : RawByteString read FText write SetText;
     property Encoding : TWitchEncoding read FEncoding;
     property Results : TCodepageResults read FResults;
+    property LineEndings : TLineEndings read FLineEndings;
+    property EndsWithBlank : boolean read FEndsWithBlank;
   end;
 
 { TWitchAnalyzeThread }
@@ -167,15 +175,29 @@ begin
     Sleep(100);
   {$ENDIF}
 
+  FLineEndings:=leCRLF;
+  FEndsWithBlank:=False;
   FEncoding:=weNone;
   // Test for characters above ASCII 127
   for I := 1 to Length(FText) do
-    if Byte(FText[I]) > 127 then begin
-      FEncoding:=weCodepage;
+    if Byte(FText[I]) = 0 then begin
+      FEncoding:=weBinary;
       Break;
+    end else if Byte(FText[I]) > 127 then begin
+      FEncoding:=weCodepage;
     end;
+
   // Now if there are, see if it is Codepage or UTF-8.
-  if FEncoding <> weNone then begin
+  if (FEncoding = weCodepage) then begin
+    FLineEndings:=DetectLineEndings(FText, FLineEndings);
+    case FLineEndings of
+      leCRLF : if (Length(FText) > 1) then
+        FEndsWithBlank:=Copy(FText, Length(FText) -1, 2) = CRLF;
+      leLF : if Length(FText) > 0 then
+        FEndsWithBlank:=Copy(FText, Length(FText), 1) = LF;
+      leCR : if Length(FText) > 0 then
+        FEndsWithBlank:=Copy(FText, Length(FText), 1) = CR;
+    end;
     if UTF8ToValues(FText, V) then begin
       if Length(V) <> Length(FText) then
         FEncoding:=weUnicode;
@@ -183,7 +205,7 @@ begin
   end;
 
   case FEncoding of
-    weCodepage:AnalyzeCP;
+    weBinary, weCodepage:AnalyzeCP;
     weUnicode:AnalyzeUTF8;
   end;
 
@@ -192,6 +214,8 @@ end;
 
 procedure TWitchAnalyzeThread.Completed;
 begin
+  FWitchItem.FLineEndings:=LineEndings;
+  FWitchItem.FEndsWithBlank:=FEndsWithBlank;
   FWitchItem.FResults:=Results;
   FWitch.ThreadComplete(Self);
 end;
@@ -247,6 +271,8 @@ end;
 procedure TWitchItem.ClearData;
 begin
   FFileName:='';
+  FEndsWithBlank:=False;
+  FLineEndings:=leCRLF;
   FEncoding:=weNone;
   FAnalyzed:=False;
   FAnalyzing:=False;

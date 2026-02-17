@@ -717,10 +717,11 @@ end;
 procedure TfMain.UpdateStatusBar;
 const
   spiEncoding = 0;               // displayed when file is selected
-  spiCompatiblity = 1;           // displayed when Codepage is selected
-  // spiLanguage = 2;            // not yet implemented
-  // spiPrefered = 3;            // not yet implemented
-  spiFileName = 2;               // displayed when file is selected
+  spiLineEndings = 1;            // displayed when file is selected
+  spiCompatiblity = 2;           // displayed when Codepage is selected
+  // spiLanguage = 3;            // not yet implemented
+  // spiPrefered = 4;            // not yet implemented
+  spiFileName = 3;               // displayed when file is selected
 var
   W : TWitchItem;
   K : String;
@@ -740,6 +741,14 @@ begin
   statBar.Panels[spiFileName].Text:=SPACE2+W.FileName;
   K:=ComponentNamePath(statBar, Self, True);
   if W.Analyzed then begin
+    case W.LineEndings of
+      leCRLF : statBar.Panels[spiLineEndings].Text:=
+        GetTranslation(K+'LineEnding/CRLF', 'CRLF');
+      leLF : statBar.Panels[spiLineEndings].Text:=
+        GetTranslation(K+'LineEnding/LF', 'LF');
+      leCR : statBar.Panels[spiLineEndings].Text:=
+        GetTranslation(K+'LineEnding/CR', 'CR');
+    end;
     case W.Encoding of
       weNone : statBar.Panels[spiEncoding].Text:=
         GetTranslation(K+'NoEncoding/Caption', 'ASCII');
