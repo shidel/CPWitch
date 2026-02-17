@@ -233,14 +233,16 @@ procedure TfMain.actExportCodepageUpdate(Sender: TObject);
 begin
   actExportCodepage.Enabled:=Assigned(lvCodepageList.Selected) and
   Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data) and
-  TWitchItem(lvFileList.Selected.Data).Analyzed;
+  TWitchItem(lvFileList.Selected.Data).Analyzed and
+  (TWitchItem(lvFileList.Selected.Data).Encoding<>weBinary);
 end;
 
 procedure TfMain.actExportUnicodeUpdate(Sender: TObject);
 begin
   actExportUnicode.Enabled:=Assigned(lvCodepageList.Selected) and
   Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data) and
-  TWitchItem(lvFileList.Selected.Data).Analyzed;
+  TWitchItem(lvFileList.Selected.Data).Analyzed and
+  (TWitchItem(lvFileList.Selected.Data).Encoding<>weBinary);
 end;
 
 procedure TfMain.actOpenExecute(Sender: TObject);
@@ -445,6 +447,13 @@ begin
         L.Caption:=GetTranslation(K+'Any_Codepage/Caption', 'Any Codepage');
         L.ImageIndex:=High(iconPercentageNames);
       end;
+      weBinary : begin
+         // Binary Data FIle , not supported
+         lvCodepageList.SmallImages:=ilGeneralColor;
+         L:=lvCodepageList.Items.Add;
+         L.Caption:=GetTranslation(K+'Binary_data/Caption', 'Binary File');
+         L.ImageIndex:=idxGeneralError;
+       end;
       weUnicode : begin
         // UTF-8/Unicode encoded file
         for I := 0 to High(Item.Results) do begin
@@ -624,6 +633,10 @@ begin
       Cat(M, 'ASCII');
       W.ListItem.ImageIndex:=idxFileTypeFilePlainGray;
     end;
+    weBinary : begin
+      Cat(M, 'Binary');
+      W.ListItem.ImageIndex:=idxFileTypeFilePlainRed;
+    end;
     weCodepage : begin
       Cat(M, 'Codepage');
       W.ListItem.ImageIndex:=idxFileTypeFilePlainBlue;
@@ -730,6 +743,7 @@ var
 begin
   if not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data))then begin
     statBar.Panels[spiEncoding].Text:='';
+    statBar.Panels[spiLineEndings].Text:='';
     statBar.Panels[spiCompatiblity].Text:='';
     // statBar.Panels[spiLanguage].Text:='';
     // statBar.Panels[spiPrefered].Text:='';
@@ -741,7 +755,9 @@ begin
   statBar.Panels[spiFileName].Text:=SPACE2+W.FileName;
   K:=ComponentNamePath(statBar, Self, True);
   if W.Analyzed then begin
-    case W.LineEndings of
+    if W.Encoding = weBinary then
+      statBar.Panels[spiLineEndings].Text:=''
+    else case W.LineEndings of
       leCRLF : statBar.Panels[spiLineEndings].Text:=
         GetTranslation(K+'LineEnding/CRLF', 'CRLF');
       leLF : statBar.Panels[spiLineEndings].Text:=
@@ -752,6 +768,8 @@ begin
     case W.Encoding of
       weNone : statBar.Panels[spiEncoding].Text:=
         GetTranslation(K+'NoEncoding/Caption', 'ASCII');
+      weBinary : statBar.Panels[spiEncoding].Text:=
+        GetTranslation(K+'Binary/Caption', 'Binary');
       weCodepage : statBar.Panels[spiEncoding].Text:=
         GetTranslation(K+'Codepage/Caption', 'Codepage');
       weUnicode : statBar.Panels[spiEncoding].Text:=
@@ -786,6 +804,10 @@ begin
         weNone, weUnicode : begin
           H:=EscapeHTML(PasExt.ToString(W.FileData));
         end;
+        weBinary : begin
+         H:= GetTranslation(ComponentNamePath(pViewUnicode, Self, True)
+          +'Unsupported_file/Binary/Text', 'Binary data files are not supported.');
+        end;
         weCodepage : begin
 { TODO 9 -cDevel Implement Unicode View for Codepage encoded files. }
           H:= GetTranslation(ComponentNamePath(lvCodepageList, Self, True)
@@ -819,7 +841,8 @@ begin
   end else begin
     fCodepageText.BeginUpdate;
     SL := TStringList.Create;
-    SL.AddText(PasExt.ToString(W.FileData));
+    if W.Encoding <> weBinary then
+      SL.AddText(PasExt.ToString(W.FileData));
     TW:=Longest(SL);
     if TW < 1 then TW:=1;
     TH:=SL.Count;
@@ -827,7 +850,7 @@ begin
     Inc(TW);
     Inc(TH);
     case W.Encoding of
-      weNone : begin
+      weNone, weBinary : begin
         fCodepageText.Codepage:=-1;
         fCodepageText.Resolution:=Point(TW,TH);
         fCodepageText.ClrScr;

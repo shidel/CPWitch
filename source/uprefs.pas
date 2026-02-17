@@ -27,7 +27,7 @@ type
     lbUnicodeScale: TLabel;
     pPages: TPageControl;
     rbFileEndWhatever: TRadioButton;
-    rbFineEndExport: TRadioButton;
+    rbFileEndExport: TRadioButton;
     rbFileEndAll: TRadioButton;
     rgFileEnding: TRadioGroup;
     tbUnicodeScale: TTrackBar;

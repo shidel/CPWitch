@@ -139,6 +139,7 @@
         </pCodepageListLabel>
         <lvCodepageList>
           <Analyzing Caption="Analyzing"/>
+          <Binary_data Caption="Binary File"/>
           <Not_implemented Caption="Not implemented"/>
           <Any_Codepage Caption="Any Codepage"/>
         </lvCodepageList>
@@ -148,6 +149,9 @@
           <pViewUnicodeLabel>
             <lbUnicodeViewLabel Caption="Viewed as Unicode"/>
           </pViewUnicodeLabel>
+          <Unsupported_file>
+            <Binary Text="Binary data files are not supported."/>
+          </Unsupported_file>
         </pViewUnicode>
         <pCodepage>
           <pViewCodepageLabel>
@@ -159,10 +163,85 @@
         <Processing Caption="Processing"/>
         <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
         <Unicode Caption="Unicode"/>
+        <Binary Caption="Binary"/>
         <Codepage Caption="Codepage"/>
         <NoEncoding Caption="ASCII"/>
       </statBar>
     </fMain>
+    <fOptionsDialog Caption="Codepage Witch Preferences">
+      <pPages>
+        <tsAbout Hint="About this application." Caption="About">
+          <lbCopyright Caption="Copyright %s"/>
+          <lbVersion Caption="Version %0:s (build %1:s)"/>
+          <lbApplication Caption="The &quot;%s&quot;"/>
+        </tsAbout>
+        <tsGeneral Hint="General application settings." Caption="General">
+          <gbUserLanguage Caption="User Language">
+            <cxLanguageChoice Default="(default)"/>
+            <pLanguagePreferred>
+              <lbLanguagePreferred Caption="Preferred Language:"/>
+            </pLanguagePreferred>
+            <lbLanguageSystem Caption="System Language:  %s"/>
+          </gbUserLanguage>
+          <gbMiscellaneous Caption="Miscellaneous">
+            <cbShowHints Caption="Show hints when mouse hovers."/>
+            <cbColorButtons Caption="Use color toolbar buttons."/>
+          </gbMiscellaneous>
+          <gbOnlineUpdate Caption="Online Update">
+            <cbAutoCheck Caption="Automatically check for updates"/>
+            <pUpdateButton>
+              <btnUpdateCheck Hint="Check the online server for the latest update." Caption="Check now..."/>
+            </pUpdateButton>
+          </gbOnlineUpdate>
+        </tsGeneral>
+        <tsSession Hint="Options regarding application sessions." Caption="Session">
+          <gbSessionFiles Caption="Session files">
+            <cbReopenFiles Hint="Reopen unclosed files from previous session." Caption="Reopen previous files."/>
+            <cbWarnMissing Hint="Warn when a file from the previous session does not exist." Caption="Warn when missing."/>
+          </gbSessionFiles>
+        </tsSession>
+        <tsEncoding Hint="File input and output encoding options." Caption="Encoding">
+          <rgFileEnding Hint="Require that files must end on a blank line." Caption="Files end with New Line">
+            <rbFileEndWhatever Hint="All files can end wth text or blank line." Caption="Don't care."/>
+            <rbFileEndExport Hint="Make sure that exported files end with a blank line." Caption="Ensure only for Export."/>
+            <rbFileEndAll Hint="Require original files to end on a blank line." Caption="Enforce an all text files."/>
+          </rgFileEnding>
+        </tsEncoding>
+        <tsViewer Hint="Unicode and DOS viewer options." Caption="Viewer">
+          <gbUnicodeView Caption="Unicode View">
+            <lbUnicodeScale Caption="lbUnicodeScale"/>
+            <tbUnicodeScale Caption="10"/>
+          </gbUnicodeView>
+          <gbDOSView Caption="DOS View">
+            <lbDOSScale Caption="lbDOSScale"/>
+            <tbDOSScale Caption="1"/>
+          </gbDOSView>
+        </tsViewer>
+      </pPages>
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnAccept Hint="Accept and apply any changes." Caption="Accept"/>
+          <btnCancel Hint="Ignore all changes." Caption="Cancel"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <fMiddlePanel>
+        <fBodyPanel>
+          <pSectionsPanel>
+            <pSectionLabel>
+              <lbSections Caption="Options"/>
+            </pSectionLabel>
+          </pSectionsPanel>
+          <pPagesPanel>
+            <pPages>
+              <tsViewer>
+                <lbUnicodeScale Caption="Font scale %s%%"/>
+                <lbDOSScale Caption="Font scale %s%%"/>
+              </tsViewer>
+            </pPages>
+          </pPagesPanel>
+        </fBodyPanel>
+      </fMiddlePanel>
+    </fOptionsDialog>
     <fUpdateCheckDialog Caption="Update Check">
       <fLowerPanel>
         <fButtonPanel>
@@ -214,87 +293,6 @@
         <Downloaded Text="Downloaded &quot;%s&quot; version %s."/>
       </Message>
     </fUpdateSaveDialog>
-    <fOptionsDialog Caption="Codepage Witch Preferences">
-      <pPages>
-        <tsAbout Hint="About this application." Caption="About">
-          <lbCopyright Caption="Copyright %s"/>
-          <lbVersion Caption="Version %0:s (build %1:s)"/>
-          <lbApplication Caption="The &quot;%s&quot;"/>
-        </tsAbout>
-        <tsGeneral Hint="General application settings." Caption="General">
-          <gbUserLanguage Caption="User Language">
-            <cxLanguageChoice Default="(default)"/>
-            <pLanguagePreferred>
-              <lbLanguagePreferred Caption="Preferred Language:"/>
-            </pLanguagePreferred>
-            <lbLanguageSystem Caption="System Language:  %s"/>
-          </gbUserLanguage>
-          <gbMiscellaneous Caption="Miscellaneous">
-            <cbShowHints Caption="Show hints when mouse hovers."/>
-            <cbColorButtons Caption="Use color toolbar buttons."/>
-          </gbMiscellaneous>
-          <gbOnlineUpdate Caption="Online Update">
-            <cbAutoCheck Caption="Automatically check for updates"/>
-            <pUpdateButton>
-              <btnUpdateCheck Hint="Check the online server for the latest update." Caption="Check now..."/>
-            </pUpdateButton>
-          </gbOnlineUpdate>
-        </tsGeneral>
-        <tsSession Hint="Options regarding application sessions." Caption="Session">
-          <gbSessionFiles Caption="Session files">
-            <cbReopenFiles Hint="Reopen unclosed files from previous session." Caption="Reopen previous files."/>
-            <cbWarnMissing Hint="Warn when a file from the previous session does not exist." Caption="Warn when missing."/>
-          </gbSessionFiles>
-        </tsSession>
-        <tsEncoding Hint="File input and output encoding options." Caption="Encoding">
-          <rgFileEnding Hint="Require that files must end on a blank line." Caption="Files end with New Line">
-            <rbFileEndWhatever Hint="All files can end wth text or blank line." Caption="Don't care."/>
-            <rbFineEndExport Hint="Make sure that exported files end with a blank line." Caption="Insure only for Export."/>
-            <rbFileEndAll Hint="Require original files to end on a blank line." Caption="Enforce an all text files."/>
-          </rgFileEnding>
-        </tsEncoding>
-        <tsViewer Hint="Unicode and DOS viewer options." Caption="Viewer">
-          <gbUnicodeView Caption="Unicode View">
-            <lbUnicodeScale Caption="lbUnicodeScale"/>
-            <tbUnicodeScale Caption="10"/>
-          </gbUnicodeView>
-          <gbDOSView Caption="DOS View">
-            <lbDOSScale Caption="lbDOSScale"/>
-            <tbDOSScale Caption="1"/>
-          </gbDOSView>
-        </tsViewer>
-      </pPages>
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnAccept Hint="Accept and apply any changes." Caption="Accept"/>
-          <btnCancel Hint="Ignore all changes." Caption="Cancel"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <fMiddlePanel>
-        <fBodyPanel>
-          <pSectionsPanel>
-            <pSectionLabel>
-              <lbSections Caption="Options"/>
-            </pSectionLabel>
-          </pSectionsPanel>
-          <pPagesPanel>
-            <pPages>
-              <tsViewer>
-                <lbUnicodeScale Caption="Font scale %s%%"/>
-                <lbDOSScale Caption="Font scale %s%%"/>
-              </tsViewer>
-            </pPages>
-          </pPagesPanel>
-        </fBodyPanel>
-      </fMiddlePanel>
-    </fOptionsDialog>
-    <fMissingFiles Caption="Missing document files">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancel"/>
-        </fButtonPanel>
-      </fLowerPanel>
-    </fMissingFiles>
     <fLoggerViewForm Caption="Debug log">
       <LineCount Plural="%.0n log entries" Singular="%.0n log entry"/>
       <pControls>
@@ -310,5 +308,12 @@
         </pVerbose>
       </pControls>
     </fLoggerViewForm>
+    <fMissingFiles Caption="Missing document files">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancel"/>
+        </fButtonPanel>
+      </fLowerPanel>
+    </fMissingFiles>
   </Controls>
 </CONFIG>

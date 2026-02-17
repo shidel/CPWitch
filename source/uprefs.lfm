@@ -95,7 +95,7 @@ object fOptionsDialog: TfOptionsDialog
           Caption = 'Don''t care.'
           TabOrder = 0
         end
-        object rbFineEndExport: TRadioButton
+        object rbFileEndExport: TRadioButton
           Left = 6
           Height = 20
           Hint = 'Make sure that exported files end with a blank line.'
@@ -103,7 +103,7 @@ object fOptionsDialog: TfOptionsDialog
           Width = 248
           BorderSpacing.Top = 6
           BorderSpacing.Bottom = 6
-          Caption = 'Insure only for Export.'
+          Caption = 'Ensure only for Export.'
           TabOrder = 1
         end
         object rbFileEndAll: TRadioButton
