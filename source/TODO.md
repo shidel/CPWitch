@@ -8,7 +8,6 @@
 * Preferred Codepage Recommendation
 * CodePage To UTF-8 Analysis
 * Additional Codepages
-* User settings for DOS Preview Scaling
 * User Settings for Un-mappable character color
 * Automatic file extensions on export.
 * Ignore attempts to add non-text files.
