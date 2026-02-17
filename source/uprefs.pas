@@ -1,3 +1,9 @@
+{
+   Copyright (c) 2026 Jerome Shidel
+   The Clear BSD License
+   All rights reserved.
+}
+
 unit uPrefs;
 
 {$mode ObjFPC}{$H+}
