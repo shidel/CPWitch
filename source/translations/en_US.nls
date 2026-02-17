@@ -204,7 +204,7 @@
           <rgFileEnding Hint="Require that files must end on a blank line." Caption="Files end with New Line">
             <rbFileEndWhatever Hint="All files can end wth text or blank line." Caption="Don't care."/>
             <rbFileEndExport Hint="Make sure that exported files end with a blank line." Caption="Ensure only for Export."/>
-            <rbFileEndAll Hint="Require original files to end on a blank line." Caption="Enforce an all text files."/>
+            <rbFileEndAll Hint="Require original files to end with a blank line." Caption="Enforce on all text files."/>
           </rgFileEnding>
         </tsEncoding>
         <tsViewer Hint="Unicode and DOS viewer options." Caption="Viewer">

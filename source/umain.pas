@@ -106,6 +106,8 @@ type
       fFileWarn:boolean;
       fUnicodeScale : integer;
       fDOSScale: integer;
+      fEndBlankOnInput : boolean;
+      fEndBlankOnExport : boolean;
       procedure PopulateCodepageList(Item : TWitchItem);
       procedure SetCodepageFilter(AValue: TCodepageFilter);
       procedure SetUnicodeView( S : String );
@@ -127,6 +129,7 @@ type
       procedure SelectFile(Sender : TObject);
       procedure SessionSave;
       procedure SessionLoad;
+      procedure RefreshFileEndsOnBlank;
     public
       procedure ApplyUserLanguage; override;
       procedure OpenFile(FileName : String; Select : boolean = False); overload;
@@ -290,6 +293,9 @@ begin
   FActiveCodepage := 437;
   FUnicodeScale:=100;
   FDOSScale:=1;
+  fEndBlankOnInput:=True;
+  fEndBlankOnExport:=True;
+
   fWitch := TWitch.Create;
   fWitch.OnAnalyzed:=@WitchOnAnalyzed;
 
@@ -565,6 +571,7 @@ procedure TfMain.FormSettingsLoad(Sender: TObject);
 var
   S : String;
   V, E : Integer;
+  B : Boolean;
 begin
   S:=Trim(Lowercase(GetConfig('Codepage_List/Filter', 'partial')));
   case S of
@@ -600,8 +607,14 @@ begin
     'Preferences/tsSession/cbReopenFiles/State', 'Unchecked')) = cbChecked;
   fFileWarn:=StringToCheckBoxState(UserConfig.GetValue(
     'Preferences/tsSession/cbWarnMissing/State', 'Unchecked')) = cbChecked;
-  // LogMessage(vbNormal, 'File Reopen: ' + BoolStr(fFileReopen));
-  // LogMessage(vbNormal, 'File Warning: ' + BoolStr(fFileWarn));
+  B:=StrToBool(UserConfig.GetValue(
+    'Preferences/tsEncoding/rbFileEndAll/Checked', ''), fEndBlankOnInput);
+  fEndBlankOnExport:=B or StrToBool(UserConfig.GetValue(
+    'Preferences/tsEncoding/rbFileEndExport/Checked', ''), fEndBlankOnExport);
+  if B <> fEndBlankOnInput then begin
+    fEndBlankOnInput:=B;
+    RefreshFileEndsOnBlank;
+  end;
 end;
 
 procedure TfMain.FormSettingsSave(Sender: TObject);
@@ -639,11 +652,17 @@ begin
     end;
     weCodepage : begin
       Cat(M, 'Codepage');
-      W.ListItem.ImageIndex:=idxFileTypeFilePlainBlue;
+      if fEndBlankOnInput and (not W.EndsWithBlank) then
+        W.ListItem.ImageIndex:=idxFileTypeFilePlainYellow
+      else
+        W.ListItem.ImageIndex:=idxFileTypeFilePlainBlue;
     end;
     weUnicode : begin
       Cat(M, 'Unicode');
-      W.ListItem.ImageIndex:=idxFileTypeFilePlainGreen;
+      if fEndBlankOnInput and (not W.EndsWithBlank) then
+        W.ListItem.ImageIndex:=idxFileTypeFilePlainYellow
+      else
+        W.ListItem.ImageIndex:=idxFileTypeFilePlainGreen;
     end;
   end;
   Cat(M, ' file "'+W.DisplayName+'"');
@@ -1019,6 +1038,15 @@ begin
       ShowMissingFiles(MFL);
     FreeAndNil(MFL);
   end;
+end;
+
+procedure TfMain.RefreshFileEndsOnBlank;
+var
+  I : Integer;
+begin
+  for I := 0 to fWitch.Count - 1 do
+    if fWitch.Items[I].Analyzed then
+      WitchOnAnalyzed(fWitch.Items[I]);
 end;
 
 procedure TfMain.ApplyUserLanguage;

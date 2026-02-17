@@ -109,12 +109,12 @@ object fOptionsDialog: TfOptionsDialog
         object rbFileEndAll: TRadioButton
           Left = 6
           Height = 19
-          Hint = 'Require original files to end on a blank line.'
+          Hint = 'Require original files to end with a blank line.'
           Top = 57
           Width = 248
           BorderSpacing.Top = 6
           BorderSpacing.Bottom = 6
-          Caption = 'Enforce an all text files.'
+          Caption = 'Enforce on all text files.'
           Checked = True
           TabOrder = 2
           TabStop = True
