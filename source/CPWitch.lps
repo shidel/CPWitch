@@ -7,9 +7,10 @@
       <Unit>
         <Filename Value="CPWitch.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="34"/>
+        <EditorIndex Value="1"/>
+        <CursorPos X="21" Y="26"/>
         <UsageCount Value="201"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="umain.pas"/>
@@ -18,10 +19,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="141"/>
-        <CursorPos Y="208"/>
-        <FoldState Value=" T3kK036 pibjB068 pk3kR04212 pj7jS06[94HjT0E6[94k20+[I4Dkd0F21[e4Pk6kW0E"/>
+        <CursorPos X="40" Y="20"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -33,25 +31,41 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uPrefs"/>
-        <EditorIndex Value="-1"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
         <CursorPos X="63" Y="24"/>
-        <UsageCount Value="84"/>
+        <UsageCount Value="92"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="ufixending.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fFixEnding"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uFixEnding"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="15"/>
+        <CursorPos X="9" Y="22"/>
+        <UsageCount Value="39"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/pasext.pp"/>
         <UnitName Value="PasExt"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="3302"/>
-        <CursorPos X="63" Y="3323"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="1210"/>
+        <CursorPos Y="1226"/>
         <UsageCount Value="101"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/multiapp.pp"/>
         <UnitName Value="MultiApp"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="1880"/>
-        <CursorPos X="70" Y="2040"/>
-        <FoldState Value=" TL0041267A411121F pg*W01071 p1wB21 TMa03134 pFijN[H44i604 T7mbIt3 Pi7kGN T8l32A017 pibkR255 PIiS2 TCpeI3 T3r9098]UajK03[94ZjH[96YjJ0B9 pjCjO262 pkBa286]H1l20I3211[D4elT03A[v5N0D7 picjO0RC]9dk8032]aTjc07B[{35O]j]I3jM04412 PiEie0 T6rB01f]ZX&apos;J01 T1rD05D]g8kT09C[y4kQ08[94akR235]9fje0X211]38]gQmW]p]Oel808B[{,5g026 pk6kX06G]IXk8029[R5W0G012 PDi30 T0sGW5F]*NsMQMD2A]sMwWaCA piYp9H33 PBk3Vy"/>
+        <TopLine Value="2044"/>
+        <CursorPos X="19" Y="1095"/>
+        <FoldState Value=" TL0041267A411121G pg*a01071 p1wB21 TMa03134 pFijR[H44i604 T7mbIt012 PFkGN T8l32A01715 PjCmC2 TCpeI3 T3r9098 piajK03[94ZjH[96YjJ0B9 pjCjO262 pkBa286]H1l20I021211[F4GlX03A[x5N0D7]9cjO0RC]9dk8032]aTjc07B[{55O]j]I3jM04412 PiEie0 T6rB01f]ZX&apos;N01 T1rD05D]g8kT09C[y4kQ08[94akR235]9fje0X1[{v58]gHma]p]Oel808B[{,5g026 pk6kX06G]IXk8029[R5W0G[~e5Di30 T0sGW5F]*NsMQMD2A]sMwaaCA piYp9H33 PBk3V:"/>
         <UsageCount Value="100"/>
       </Unit>
       <Unit>
@@ -78,10 +92,9 @@
       <Unit>
         <Filename Value="witch.pas"/>
         <UnitName Value="Witch"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="4"/>
         <TopLine Value="253"/>
         <CursorPos X="31" Y="347"/>
-        <FoldState Value=" T3kJ042391A pkLnT05215 PiIjH0m"/>
         <UsageCount Value="100"/>
         <Loaded Value="True"/>
       </Unit>
@@ -211,26 +224,22 @@
         <UsageCount Value="16"/>
       </Unit>
       <Unit>
-        <Filename Value="ufixending.pas"/>
-        <IsPartOfProject Value="True"/>
-        <ComponentName Value="fFixEnding"/>
-        <ResourceBaseClass Value="Form"/>
-        <UnitName Value="uFixEnding"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="77"/>
-        <CursorPos Y="118"/>
-        <UsageCount Value="31"/>
-        <Loaded Value="True"/>
-      </Unit>
-      <Unit>
         <Filename Value="/Applications/Lazarus/fpc/3.2.2/sources/rtl/inc/systemh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="664"/>
         <CursorPos X="10" Y="685"/>
         <UsageCount Value="10"/>
       </Unit>
+      <Unit>
+        <Filename Value="mpla/logview.pp"/>
+        <UnitName Value="LogView"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="384"/>
+        <CursorPos X="90" Y="422"/>
+        <UsageCount Value="10"/>
+      </Unit>
     </Units>
-    <JumpHistory HistoryIndex="10">
+    <JumpHistory HistoryIndex="22">
       <Position>
         <Filename Value="umain.pas"/>
         <Caret Line="748" Column="44" TopLine="643"/>
@@ -274,6 +283,54 @@
       <Position>
         <Filename Value="umain.pas"/>
         <Caret Line="1101" Column="25" TopLine="1068"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="328" Column="14" TopLine="310"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="23" Column="31"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="1021" Column="29" TopLine="825"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="131" Column="28" TopLine="107"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="689" Column="14" TopLine="398"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/pasext.pp"/>
+        <Caret Line="242" Column="42" TopLine="216"/>
+      </Position>
+      <Position>
+        <Filename Value="CPWitch.lpr"/>
+        <Caret Line="54" Column="72" TopLine="6"/>
+      </Position>
+      <Position>
+        <Filename Value="CPWitch.lpr"/>
+        <Caret Line="16" Column="32" TopLine="9"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/pasext.pp"/>
+        <Caret Line="245" Column="18" TopLine="226"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/pasext.pp"/>
+        <Caret Line="246" Column="22" TopLine="226"/>
+      </Position>
+      <Position>
+        <Filename Value="CPWitch.lpr"/>
+        <Caret Line="28" Column="25" TopLine="9"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/pasext.pp"/>
+        <Caret Line="1235" Column="26" TopLine="1210"/>
       </Position>
     </JumpHistory>
     <RunParams>

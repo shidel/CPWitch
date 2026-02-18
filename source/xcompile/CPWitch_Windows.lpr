@@ -1,4 +1,4 @@
-program CPWitch_Windows;
+program CPWitch;
 
 {$mode objfpc}{$H+}
 
@@ -13,15 +13,19 @@ uses
   athreads,
   {$ENDIF}
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
-  Interfaces, Forms,
+  Interfaces, Forms, SysUtils, Classes, // this includes the LCL widgetset
   Version, PasExt, MultiApp, Icons, Preferences,
-  uMain;
+  uMain, uPrefs, uFixEnding;
 
 {$R *.res}
 
 begin
-  {$IFDEF SUPPORT_NOLANG}
-  Create_No_Language:=BUILD_PRERELEASE;
+  try
+  {$IFDEF BUILD_PRERELEASE}
+  Create_No_Language:=True;
+  {$ENDIF}
+  {$IFDEF BUILD_DEBUG}
+  LogMessage(vbNormal, 'Generating icon sets...');
   {$ENDIF}
   CreateIconSets;
   RequireDerivedFormResource:=True;
@@ -29,8 +33,26 @@ begin
   {$PUSH}{$WARN 5044 OFF}
   Application.MainFormOnTaskbar:=True;
   {$POP}
+  {$IFDEF BUILD_DEBUG}
+  LogMessage(vbNormal, 'Initializing application...');
+  {$ENDIF}
   Application.Initialize;
+  {$IFDEF BUILD_DEBUG}
+  LogMessage(vbNormal, 'Creating main form...');
+  {$ENDIF}
   Application.CreateForm(TfMain, fMain);
+  {$IFDEF BUILD_DEBUG}
+  LogMessage(vbNormal, 'Starting application...');
+  {$ENDIF}
   Application.Run;
+  {$IFDEF BUILD_DEBUG}
+  LogMessage(vbNormal, 'Shut down...');
+  {$ENDIF}
+  except
+    on E:Exception do begin
+      WriteLn('Critical exception: ' + E.ClassName + ', ' + E.Message);
+      LogMessage(vbCritical, 'Critical exception: ' + E.ClassName + ', ' + E.Message);
+    end;
+  end;
 end.
 

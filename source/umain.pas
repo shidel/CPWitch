@@ -325,9 +325,6 @@ begin
   { TODO 0 -cDevel Convert to BorderSpacing when supported by TCustomDosCRT }
   fCodepageText.Left:=8;
   fCodepageText.Top:=8;
-  {$IFNDEF DARWIN}
-  fCodepageText.Scale:=Point(2,2);
-  {$ENDIF}
 
   fUFF:=TUnicodeDosFont.Create;
   if fUFF.LoadFromFile(AppDataPath + '0816norm.uff') = 0 then
@@ -1036,10 +1033,10 @@ begin
     MFL := TStringList.Create
   else
     MFL := nil;
+  F:='';
   XML:=TXMLConfig.Create(nil);
   try
     XML.LoadFromFile(UserDataPath + 'session.xml');
-    F:='';
     C:=StrToInt(RawByteString(XML.GetValue('Files/Count','0')));
     X:=StrToInt(RawByteString(XML.GetValue('Files/Selected', '-1')));
     for I := 0 to C - 1 do begin
@@ -1058,10 +1055,8 @@ begin
   except
     FreeAndNil(XML);
   end;
-
   if F <> '' then
     OpenFile(F, True);
-
   if Assigned(XML) then
     FreeAndNil(XML);
   if Assigned(MFL) then begin
@@ -1069,6 +1064,7 @@ begin
       ShowMissingFiles(MFL);
     FreeAndNil(MFL);
   end;
+
 end;
 
 procedure TfMain.RefreshFileEndsOnBlank;
@@ -1105,6 +1101,7 @@ begin
     Exit;
   end;
 
+  if Not FileExists(FileName) then Exit;
   UserWorkPath:=IncludeTrailingPathDelimiter(ExtractFilePath(FileName));
 
   I:=fWitch.Find(FileName);

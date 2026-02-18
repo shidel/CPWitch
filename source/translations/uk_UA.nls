@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CONFIG Name="Українська" Language="uk_UA">
+<CONFIG Language="uk_UA" Name="Українська">
   <Translation>
-    <Revision_0 Date="2026-02-08" Contributor="Google Gemini"/>
+    <Revision_0 Date="2026-02-17" Contributor="Google Gemini"/>
   </Translation>
   <Application>
     <ModalButtons>
-      <Ok Value="ОК"/>
+      <Ok Value="Ок"/>
       <Cancel Value="Скасувати"/>
       <Yes Value="Так"/>
       <No Value="Ні"/>
@@ -13,7 +13,7 @@
       <Abort Value="Перервати"/>
       <Retry Value="Повторити"/>
       <Ignore Value="Ігнорувати"/>
-      <All Value="Усі"/>
+      <All Value="Всі"/>
       <NoToAll Value="Ні для всіх"/>
       <YesToAll Value="Так для всіх"/>
     </ModalButtons>
@@ -21,36 +21,36 @@
       <File>
         <Read>
           <Caption Value="Помилка читання файлу"/>
-          <Message Value="Помилка #%1:s (%2:s) виникла під час читання з файлу &quot;%0:s&quot;."/>
+          <Message Value="Сталася помилка #%1:s (%2:s) під час читання файлу &quot;%0:s&quot;."/>
         </Read>
         <Write>
           <Caption Value="Помилка запису файлу"/>
-          <Message Value="Помилка #%1:s (%2:s) виникла під час запису до файлу &quot;%0:s&quot;."/>
+          <Message Value="Сталася помилка #%1:s (%2:s) під час запису до файлу &quot;%0:s&quot;."/>
         </Write>
       </File>
       <Codes>
         <ecUnknown Value="Невідома помилка."/>
-        <ec0 Value="Помилок немає"/>
+        <ec0 Value="Без помилок"/>
         <ec2 Value="Файл не знайдено"/>
         <ec3 Value="Шлях не знайдено"/>
-        <ec4 Value="Відкрито занадто багато файлів"/>
+        <ec4 Value="Забагато відкритих файлів"/>
         <ec5 Value="Доступ заборонено"/>
         <ec6 Value="Недійсний дескриптор файлу"/>
         <ec12 Value="Недійсний режим доступу"/>
-        <ec17 Value="Неможливо перейменувати між різними пристроями"/>
+        <ec17 Value="Неможливо перейменувати між пристроями"/>
         <ec100 Value="Помилка читання диска"/>
-        <ec101 Value="Помилка запису диска"/>
+        <ec101 Value="Помилка запису на диск"/>
         <ec102 Value="Файл не призначено"/>
         <ec103 Value="Файл не відкрито"/>
-        <ec104 Value="Файл не відкрито для читання"/>
-        <ec105 Value="Файл не відкрито для запису"/>
+        <ec104 Value="Файл не відкрито для введення"/>
+        <ec105 Value="Файл не відкрито для виведення"/>
         <ec106 Value="Недійсний числовий формат"/>
         <ec150 Value="Диск захищено від запису"/>
       </Codes>
     </Error>
     <FormatSettings>
-      <CurrencyFormat Value="0"/>
-      <NegCurrFormat Value="1"/>
+      <CurrencyFormat Value="1"/>
+      <NegCurrFormat Value="5"/>
       <DecimalSeparator Value=","/>
       <CurrencyDecimals Value="2"/>
       <DateSeparator Value="."/>
@@ -58,7 +58,7 @@
       <ListSeparator Value=";"/>
       <CurrencyString Value="₴"/>
       <ShortDateFormat Value="dd.mm.yyyy"/>
-      <LongDateFormat Value="d mmmm yyyy &quot;р.&quot;"/>
+      <LongDateFormat Value="d mmmm yyyy' р.'"/>
       <TimeAMString Value=""/>
       <TimePMString Value=""/>
       <ShortTimeFormat Value="HH:mm"/>
@@ -78,18 +78,18 @@
         <Index_12 Value="груд"/>
       </ShortMonthNames>
       <LongMonthNames>
-        <Index_1 Value="січень"/>
-        <Index_2 Value="лютий"/>
-        <Index_3 Value="березень"/>
-        <Index_4 Value="квітень"/>
-        <Index_5 Value="травень"/>
-        <Index_6 Value="червень"/>
-        <Index_7 Value="липень"/>
-        <Index_8 Value="серпень"/>
-        <Index_9 Value="вересень"/>
-        <Index_10 Value="жовтень"/>
-        <Index_11 Value="листопад"/>
-        <Index_12 Value="грудень"/>
+        <Index_1 Value="січня"/>
+        <Index_2 Value="лютого"/>
+        <Index_3 Value="березня"/>
+        <Index_4 Value="квітня"/>
+        <Index_5 Value="травня"/>
+        <Index_6 Value="червня"/>
+        <Index_7 Value="липня"/>
+        <Index_8 Value="серпня"/>
+        <Index_9 Value="вересня"/>
+        <Index_10 Value="жовтня"/>
+        <Index_11 Value="листопада"/>
+        <Index_12 Value="грудня"/>
       </LongMonthNames>
       <ShortDayNames>
         <Index_1 Value="Нд"/>
@@ -101,13 +101,13 @@
         <Index_7 Value="Сб"/>
       </ShortDayNames>
       <LongDayNames>
-        <Index_1 Value="неділя"/>
-        <Index_2 Value="понеділок"/>
-        <Index_3 Value="вівторок"/>
-        <Index_4 Value="середа"/>
-        <Index_5 Value="четвер"/>
-        <Index_6 Value="п'ятниця"/>
-        <Index_7 Value="субота"/>
+        <Index_1 Value="Неділя"/>
+        <Index_2 Value="Понеділок"/>
+        <Index_3 Value="Вівторок"/>
+        <Index_4 Value="Середа"/>
+        <Index_5 Value="Четвер"/>
+        <Index_6 Value="П'ятниця"/>
+        <Index_7 Value="Субота"/>
       </LongDayNames>
       <TwoDigitYearCenturyWindow Value="50"/>
     </FormatSettings>
@@ -116,15 +116,15 @@
     <fMain Caption="Codepage Witch">
       <alMain>
         <actOpen Hint="Відкрити текстовий файл." Caption="Відкрити файл..."/>
-        <actExportCodepage Hint="Експортувати текстовий файл у кодуванні певної кодової сторінки." Caption="Експортувати кодову сторінку..."/>
+        <actExportCodepage Hint="Експортувати текстовий файл, закодований у форматі кодової сторінки." Caption="Експортувати кодову сторінку..."/>
         <actPreferences Hint="Переглянути або змінити налаштування Codepage Witch." Caption="Налаштування..."/>
         <actOnlineUpdate Hint="Перевірити наявність оновлень для Codepage Witch." Caption="Перевірка оновлень..."/>
         <actDebugLog Hint="Переглянути журнал налагодження." Caption="Журнал налагодження..."/>
-        <actListAll Hint="Показати всі відомі кодові сторінки." Caption="Всі відомі"/>
-        <actListPartial Hint="Показати частково сумісні кодові сторінки." Caption="Будь-які можливі"/>
-        <actListCompatible Hint="Показати тільки повністю сумісні кодові сторінки." Caption="Тільки сумісні"/>
+        <actListAll Hint="Список усіх відомих кодових сторінок." Caption="Усі відомі"/>
+        <actListPartial Hint="Список частково сумісних кодових сторінок." Caption="Будь-яка можлива"/>
+        <actListCompatible Hint="Список лише повністю сумісних кодових сторінок." Caption="Тільки сумісні"/>
         <actCodepageFilter Hint="Фільтрувати список кодових сторінок." Caption="Фільтр кодових сторінок"/>
-        <actExportUnicode Hint="Експортувати текстовий файл у форматі UTF-8." Caption="Експортувати UTF-8..."/>
+        <actExportUnicode Hint="Експортувати текстовий файл, закодований у форматі UTF-8." Caption="Експортувати UTF-8..."/>
         <actClose Hint="Закрити поточний текстовий файл." Caption="Закрити файл"/>
         <actCloseAll Hint="Закрити всі відкриті текстові файли." Caption="Закрити всі"/>
       </alMain>
@@ -139,7 +139,7 @@
         </pCodepageListLabel>
         <lvCodepageList>
           <Analyzing Caption="Аналіз"/>
-          <Binary_data Caption="Binary File"/>
+          <Binary_data Caption="Бінарний файл"/>
           <Not_implemented Caption="Не реалізовано"/>
           <Any_Codepage Caption="Будь-яка кодова сторінка"/>
         </lvCodepageList>
@@ -150,9 +150,8 @@
             <lbUnicodeViewLabel Caption="Відображається як Unicode"/>
           </pViewUnicodeLabel>
           <Unsupported_file>
-            <Binary Text="Binary data files are not supported."/>
+            <Binary Text="Бінарні файли даних не підтримуються."/>
           </Unsupported_file>
-          <Unsupported Binary="Binary data files are not supported."/>
         </pViewUnicode>
         <pCodepage>
           <pViewCodepageLabel>
@@ -164,19 +163,19 @@
         <Processing Caption="Обробка"/>
         <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
         <Unicode Caption="Unicode"/>
-        <Binary Caption="Binary"/>
+        <Binary Caption="Бінарний"/>
         <Codepage Caption="Кодова сторінка"/>
         <NoEncoding Caption="ASCII"/>
       </statBar>
     </fMain>
-    <fCorrectFileEndingDialog Caption="No final line ending">
+    <fCorrectFileEndingDialog Caption="Відсутній кінцевий розрив рядка">
       <fLowerPanel>
         <fButtonPanel>
-          <btnCorrect Caption="Correct"/>
-          <btnIgnore Caption="Ignore"/>
+          <btnCorrect Caption="Виправити"/>
+          <btnIgnore Caption="Ігнорувати"/>
         </fButtonPanel>
       </fLowerPanel>
-      <Message Text="The file &quot;%s&quot; does not end on a blank line.&#xA;&#xA;Do you wish to correct this by adding a final new line to the end of the file?"/>
+      <Message Text="Файл &quot;%s&quot; не закінчується порожнім рядком.&#xA;&#xA;Бажаєте виправити це, додавши новий рядок в кінці файлу?"/>
     </fCorrectFileEndingDialog>
     <fUpdateCheckDialog Caption="Перевірка оновлень">
       <fLowerPanel>
@@ -186,7 +185,7 @@
         </fButtonPanel>
       </fLowerPanel>
       <Message>
-        <Check Text="Перевірка наявності доступних оновлень для &quot;%s&quot;, версія %s."/>
+        <Check Text="Пошук доступних оновлень для &quot;%s&quot;, версія %s."/>
         <Error Text="Наразі неможливо визначити наявність оновлень для &quot;%s&quot;. Будь ласка, спробуйте пізніше."/>
         <None Text="Наразі немає доступних оновлень для &quot;%s&quot;. Будь ласка, спробуйте пізніше."/>
       </Message>
@@ -203,7 +202,7 @@
         </fAuxPanel>
       </fLowerPanel>
       <Message>
-        <Note Text="Для версії %1:s програми &quot;%0:s&quot; немає приміток до випуску."/>
+        <Note Text="Примітки до релізу версії %1:s для &quot;%0:s&quot; відсутні"/>
       </Message>
     </fUpdateFoundDialog>
     <fUpdateDownloadDialog Caption="Завантаження оновлення">
@@ -215,7 +214,7 @@
       </fLowerPanel>
       <Message>
         <Fetch Text="Завантаження оновлення для &quot;%s&quot;."/>
-        <Error Text="Помилка завантаження оновлення &quot;%s&quot;. Будь ласка, спробуйте пізніше."/>
+        <Error Text="Помилка під час завантаження оновлення &quot;%s&quot;. Будь ласка, спробуйте пізніше."/>
       </Message>
     </fUpdateDownloadDialog>
     <fUpdateSaveDialog Caption="Оновлення завантажено">
@@ -229,108 +228,99 @@
         <Downloaded Text="Завантажено &quot;%s&quot; версії %s."/>
       </Message>
     </fUpdateSaveDialog>
-    <fCorrectFileEnding Caption="No final line ending" Message="The file &quot;%s&quot; does not end on a blank line. Do you wish to correct this by adding a final new line to the end of the file?">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCorrect Caption="Correct"/>
-          <btnIgnore Caption="Ignore"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message Text="The file &quot;%s&quot; does not end on a blank line.&#xA;Do you wish to correct this by adding a final new line to the end of the file?"/>
-    </fCorrectFileEnding>
-    <fOptionsDialog Caption="Codepage Witch Preferences">
+    <fOptionsDialog Caption="Налаштування Codepage Witch">
       <pPages>
-        <tsAbout Hint="About the &quot;%s&quot;" Caption="About">
-          <lbCopyright Caption="Copyright %s"/>
-          <lbVersion Caption="Version %0:s (build %1:s)"/>
-          <lbApplication Caption="The &quot;%s&quot;"/>
+        <tsAbout Hint="Про цю програму." Caption="Про програму">
+          <lbCopyright Caption="Авторські права %s"/>
+          <lbVersion Caption="Версія %0:s (збірка %1:s)"/>
+          <lbApplication Caption="Програма &quot;%s&quot;"/>
         </tsAbout>
-        <tsGeneral Hint="General application settings." Caption="General">
-          <gbUserLanguage Caption="User Language">
-            <cxLanguageChoice Default="(default)"/>
+        <tsGeneral Hint="Загальні налаштування програми." Caption="Загальні">
+          <gbUserLanguage Caption="Мова користувача">
+            <cxLanguageChoice Default="(за замовчуванням)"/>
             <pLanguagePreferred>
-              <lbLanguagePreferred Caption="Preferred Language:"/>
+              <lbLanguagePreferred Caption="Бажана мова:"/>
             </pLanguagePreferred>
-            <lbLanguageSystem Caption="System Language:  %s"/>
+            <lbLanguageSystem Caption="Системна мова:  %s"/>
           </gbUserLanguage>
-          <gbMiscellaneous Caption="Miscellaneous">
-            <cbShowHints Caption="Show hints when mouse hovers."/>
-            <cbColorButtons Caption="Use color toolbar buttons."/>
+          <gbMiscellaneous Caption="Різне">
+            <cbShowHints Caption="Показувати підказки при наведенні миші."/>
+            <cbColorButtons Caption="Використовувати кольорові кнопки на панелі інструментів."/>
           </gbMiscellaneous>
-          <gbOnlineUpdate Caption="Online Update">
-            <cbAutoCheck Caption="Automatically check for updates"/>
+          <gbOnlineUpdate Caption="Онлайн-оновлення">
+            <cbAutoCheck Caption="Автоматично перевіряти наявність оновлень"/>
             <pUpdateButton>
-              <btnUpdateCheck Hint="Check the online server for the latest update." Caption="Check now..."/>
+              <btnUpdateCheck Hint="Перевірити онлайн-сервер на наявність останнього оновлення." Caption="Перевірити зараз..."/>
             </pUpdateButton>
           </gbOnlineUpdate>
         </tsGeneral>
-        <tsSession Hint="Options regarding application sessions." Caption="Session">
-          <gbSessionFiles Caption="Session files">
-            <cbReopenFiles Hint="Reopen unclosed files from previous session." Caption="Reopen previous files."/>
-            <cbWarnMissing Hint="Warn when a file from the previous session does not exist." Caption="Warn when missing."/>
+        <tsSession Hint="Параметри сеансів програми." Caption="Сеанс">
+          <gbSessionFiles Caption="Файли сеансу">
+            <cbReopenFiles Hint="Знову відкрити незакриті файли з попереднього сеансу." Caption="Відкрити попередні файли."/>
+            <cbWarnMissing Hint="Попереджати, якщо файл із попереднього сеансу відсутній." Caption="Попереджати про відсутність."/>
           </gbSessionFiles>
         </tsSession>
-        <tsEncoding Hint="File input and output encoding options." Caption="Encoding">
-          <rgFileEnding Hint="Require that files must end on a blank line." Caption="Files end with New Line">
-            <rbFileEndWhatever Hint="All files can end wth text or blank line." Caption="Don't care."/>
-            <rbFileEndExport Hint="Make sure that exported files end with a blank line." Caption="Ensure only for Export."/>
-            <rbFileEndAll Hint="Require original files to end on a blank line." Caption="Enforce an all text files."/>
+        <tsEncoding Hint="Параметри кодування вводу та виводу файлів." Caption="Кодування">
+          <rgFileEnding Hint="Вимагати, щоб файли закінчувалися порожнім рядком." Caption="Файли закінчуються новим рядком">
+            <rbFileEndWhatever Hint="Усі файли можуть закінчуватися текстом або порожнім рядком." Caption="Неважливо."/>
+            <rbFileEndExport Hint="Забезпечити, щоб експортовані файли закінчувалися порожнім рядком." Caption="Забезпечити лише для експорту."/>
+            <rbFileEndAll Hint="Вимагати, щоб оригінальні файли закінчувалися порожнім рядком." Caption="Застосовувати до всіх текстових файлів."/>
           </rgFileEnding>
         </tsEncoding>
-        <tsViewer Hint="Unicode and DOS viewer options." Caption="Viewer">
-          <gbUnicodeView Caption="Unicode View">
-            <lbUnicodeScale Caption="lbUnicodeScale"/>
+        <tsViewer Hint="Параметри перегляду Unicode та DOS." Caption="Перегляд">
+          <gbUnicodeView Caption="Перегляд Unicode">
+            <lbUnicodeScale Caption="Масштаб шрифту %s%%"/>
             <tbUnicodeScale Caption="10"/>
           </gbUnicodeView>
-          <gbDOSView Caption="DOS View">
-            <lbDOSScale Caption="lbDOSScale"/>
+          <gbDOSView Caption="Перегляд DOS">
+            <lbDOSScale Caption="Масштаб шрифту %s%%"/>
             <tbDOSScale Caption="1"/>
           </gbDOSView>
         </tsViewer>
       </pPages>
       <fLowerPanel>
         <fButtonPanel>
-          <btnAccept Hint="Accept and apply any changes." Caption="Accept"/>
-          <btnCancel Hint="Ignore all changes." Caption="Cancel"/>
+          <btnAccept Hint="Прийняти та застосувати всі зміни." Caption="Прийняти"/>
+          <btnCancel Hint="Ігнорувати всі зміни." Caption="Скасувати"/>
         </fButtonPanel>
       </fLowerPanel>
       <fMiddlePanel>
         <fBodyPanel>
           <pSectionsPanel>
             <pSectionLabel>
-              <lbSections Caption="Options"/>
+              <lbSections Caption="Опції"/>
             </pSectionLabel>
           </pSectionsPanel>
           <pPagesPanel>
             <pPages>
               <tsViewer>
-                <lbUnicodeScale Caption="Font scale %s%%"/>
-                <lbDOSScale Caption="Font scale %s%%"/>
+                <lbUnicodeScale Caption="Масштаб шрифту %s%%"/>
+                <lbDOSScale Caption="Масштаб шрифту %s%%"/>
               </tsViewer>
             </pPages>
           </pPagesPanel>
         </fBodyPanel>
       </fMiddlePanel>
     </fOptionsDialog>
-    <fLoggerViewForm Caption="Debug log">
-      <LineCount Plural="%.0n log entries" Singular="%.0n log entry"/>
+    <fLoggerViewForm Caption="Журнал налагодження">
+      <LineCount Plural="%.0n записів журналу" Singular="%.0n запис журналу"/>
       <pControls>
         <pButtons>
-          <btnClear Caption="Clear"/>
-          <btnSaveAs Caption="Save As..."/>
+          <btnClear Caption="Очистити"/>
+          <btnSaveAs Caption="Зберегти як..."/>
         </pButtons>
         <pVerbose>
           <cbVerbosity>
-            <Items Index_0="Critical" Index_1="Minimal" Index_2="Normal" Index_3="Verbose" Index_4="Excessive"/>
+            <Items Index_0="Критична" Index_1="Мінімальна" Index_2="Нормальна" Index_3="Детальна" Index_4="Надмірна"/>
           </cbVerbosity>
-          <lbVerbosity Caption="Verbosity:"/>
+          <lbVerbosity Caption="Деталізація:"/>
         </pVerbose>
       </pControls>
     </fLoggerViewForm>
-    <fMissingFiles Caption="Missing document files">
+    <fMissingFiles Caption="Відсутні файли документів">
       <fLowerPanel>
         <fButtonPanel>
-          <btnCancel Caption="Cancel"/>
+          <btnCancel Caption="Скасувати"/>
         </fButtonPanel>
       </fLowerPanel>
     </fMissingFiles>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CONFIG Name="Português (Brasil)" Language="pt_BR">
+<CONFIG Language="pt_BR" Name="Português (Brasil)">
   <Translation>
-    <Revision_0 Date="2026-02-08" Contributor="Google Gemini"/>
+    <Revision_0 Date="2026-02-17" Contributor="Google Gemini"/>
   </Translation>
   <Application>
     <ModalButtons>
@@ -139,7 +139,7 @@
         </pCodepageListLabel>
         <lvCodepageList>
           <Analyzing Caption="Analisando"/>
-          <Binary_data Caption="Binary File"/>
+          <Binary_data Caption="Arquivo Binário"/>
           <Not_implemented Caption="Não implementado"/>
           <Any_Codepage Caption="Qualquer Codepage"/>
         </lvCodepageList>
@@ -150,9 +150,8 @@
             <lbUnicodeViewLabel Caption="Visualizado como Unicode"/>
           </pViewUnicodeLabel>
           <Unsupported_file>
-            <Binary Text="Binary data files are not supported."/>
+            <Binary Text="Arquivos de dados binários não são suportados."/>
           </Unsupported_file>
-          <Unsupported Binary="Binary data files are not supported."/>
         </pViewUnicode>
         <pCodepage>
           <pViewCodepageLabel>
@@ -164,19 +163,19 @@
         <Processing Caption="Processando"/>
         <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
         <Unicode Caption="Unicode"/>
-        <Binary Caption="Binary"/>
+        <Binary Caption="Binário"/>
         <Codepage Caption="Codepage"/>
         <NoEncoding Caption="ASCII"/>
       </statBar>
     </fMain>
-    <fCorrectFileEndingDialog Caption="No final line ending">
+    <fCorrectFileEndingDialog Caption="Sem terminação de linha final">
       <fLowerPanel>
         <fButtonPanel>
-          <btnCorrect Caption="Correct"/>
-          <btnIgnore Caption="Ignore"/>
+          <btnCorrect Caption="Corrigir"/>
+          <btnIgnore Caption="Ignorar"/>
         </fButtonPanel>
       </fLowerPanel>
-      <Message Text="The file &quot;%s&quot; does not end on a blank line.&#xA;&#xA;Do you wish to correct this by adding a final new line to the end of the file?"/>
+      <Message Text="O arquivo &quot;%s&quot; não termina em uma linha em branco.&#xA;&#xA;Deseja corrigir isso adicionando uma nova linha final ao fim do arquivo?"/>
     </fCorrectFileEndingDialog>
     <fUpdateCheckDialog Caption="Verificação de Atualização">
       <fLowerPanel>
@@ -229,108 +228,99 @@
         <Downloaded Text="Baixado &quot;%s&quot; versão %s."/>
       </Message>
     </fUpdateSaveDialog>
-    <fCorrectFileEnding Caption="No final line ending" Message="The file &quot;%s&quot; does not end on a blank line. Do you wish to correct this by adding a final new line to the end of the file?">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCorrect Caption="Correct"/>
-          <btnIgnore Caption="Ignore"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message Text="The file &quot;%s&quot; does not end on a blank line.&#xA;Do you wish to correct this by adding a final new line to the end of the file?"/>
-    </fCorrectFileEnding>
-    <fOptionsDialog Caption="Codepage Witch Preferences">
+    <fOptionsDialog Caption="Preferências do Codepage Witch">
       <pPages>
-        <tsAbout Hint="About the &quot;%s&quot;" Caption="About">
+        <tsAbout Hint="Sobre este aplicativo." Caption="Sobre">
           <lbCopyright Caption="Copyright %s"/>
-          <lbVersion Caption="Version %0:s (build %1:s)"/>
-          <lbApplication Caption="The &quot;%s&quot;"/>
+          <lbVersion Caption="Versão %0:s (build %1:s)"/>
+          <lbApplication Caption="O &quot;%s&quot;"/>
         </tsAbout>
-        <tsGeneral Hint="General application settings." Caption="General">
-          <gbUserLanguage Caption="User Language">
-            <cxLanguageChoice Default="(default)"/>
+        <tsGeneral Hint="Configurações gerais do aplicativo." Caption="Geral">
+          <gbUserLanguage Caption="Idioma do Usuário">
+            <cxLanguageChoice Default="(padrão)"/>
             <pLanguagePreferred>
-              <lbLanguagePreferred Caption="Preferred Language:"/>
+              <lbLanguagePreferred Caption="Idioma Preferido:"/>
             </pLanguagePreferred>
-            <lbLanguageSystem Caption="System Language:  %s"/>
+            <lbLanguageSystem Caption="Idioma do Sistema:  %s"/>
           </gbUserLanguage>
-          <gbMiscellaneous Caption="Miscellaneous">
-            <cbShowHints Caption="Show hints when mouse hovers."/>
-            <cbColorButtons Caption="Use color toolbar buttons."/>
+          <gbMiscellaneous Caption="Diversos">
+            <cbShowHints Caption="Mostrar dicas ao passar o mouse."/>
+            <cbColorButtons Caption="Usar botões coloridos na barra de ferramentas."/>
           </gbMiscellaneous>
-          <gbOnlineUpdate Caption="Online Update">
-            <cbAutoCheck Caption="Automatically check for updates"/>
+          <gbOnlineUpdate Caption="Atualização Online">
+            <cbAutoCheck Caption="Verificar atualizações automaticamente"/>
             <pUpdateButton>
-              <btnUpdateCheck Hint="Check the online server for the latest update." Caption="Check now..."/>
+              <btnUpdateCheck Hint="Verificar o servidor online para a atualização mais recente." Caption="Verificar agora..."/>
             </pUpdateButton>
           </gbOnlineUpdate>
         </tsGeneral>
-        <tsSession Hint="Options regarding application sessions." Caption="Session">
-          <gbSessionFiles Caption="Session files">
-            <cbReopenFiles Hint="Reopen unclosed files from previous session." Caption="Reopen previous files."/>
-            <cbWarnMissing Hint="Warn when a file from the previous session does not exist." Caption="Warn when missing."/>
+        <tsSession Hint="Opções relativas às sessões do aplicativo." Caption="Sessão">
+          <gbSessionFiles Caption="Arquivos de sessão">
+            <cbReopenFiles Hint="Reabrir arquivos não fechados da sessão anterior." Caption="Reabrir arquivos anteriores."/>
+            <cbWarnMissing Hint="Avisar quando um arquivo da sessão anterior não existir." Caption="Avisar quando faltar."/>
           </gbSessionFiles>
         </tsSession>
-        <tsEncoding Hint="File input and output encoding options." Caption="Encoding">
-          <rgFileEnding Hint="Require that files must end on a blank line." Caption="Files end with New Line">
-            <rbFileEndWhatever Hint="All files can end wth text or blank line." Caption="Don't care."/>
-            <rbFileEndExport Hint="Make sure that exported files end with a blank line." Caption="Ensure only for Export."/>
-            <rbFileEndAll Hint="Require original files to end on a blank line." Caption="Enforce an all text files."/>
+        <tsEncoding Hint="Opções de codificação de entrada e saída de arquivos." Caption="Codificação">
+          <rgFileEnding Hint="Exigir que os arquivos terminem em uma linha em branco." Caption="Arquivos terminam com Nova Linha">
+            <rbFileEndWhatever Hint="Todos os arquivos podem terminar com texto ou linha em branco." Caption="Tanto faz."/>
+            <rbFileEndExport Hint="Garantir que os arquivos exportados terminem com uma linha em branco." Caption="Garantir apenas para Exportação."/>
+            <rbFileEndAll Hint="Exigir que os arquivos originais terminem com uma linha em branco." Caption="Impor em todos os arquivos de texto."/>
           </rgFileEnding>
         </tsEncoding>
-        <tsViewer Hint="Unicode and DOS viewer options." Caption="Viewer">
-          <gbUnicodeView Caption="Unicode View">
-            <lbUnicodeScale Caption="lbUnicodeScale"/>
+        <tsViewer Hint="Opções de visualização Unicode e DOS." Caption="Visualizador">
+          <gbUnicodeView Caption="Vista Unicode">
+            <lbUnicodeScale Caption="Escala da fonte %s%%"/>
             <tbUnicodeScale Caption="10"/>
           </gbUnicodeView>
-          <gbDOSView Caption="DOS View">
-            <lbDOSScale Caption="lbDOSScale"/>
+          <gbDOSView Caption="Vista DOS">
+            <lbDOSScale Caption="Escala da fonte %s%%"/>
             <tbDOSScale Caption="1"/>
           </gbDOSView>
         </tsViewer>
       </pPages>
       <fLowerPanel>
         <fButtonPanel>
-          <btnAccept Hint="Accept and apply any changes." Caption="Accept"/>
-          <btnCancel Hint="Ignore all changes." Caption="Cancel"/>
+          <btnAccept Hint="Aceitar e aplicar quaisquer alterações." Caption="Aceitar"/>
+          <btnCancel Hint="Ignorar todas as alterações." Caption="Cancelar"/>
         </fButtonPanel>
       </fLowerPanel>
       <fMiddlePanel>
         <fBodyPanel>
           <pSectionsPanel>
             <pSectionLabel>
-              <lbSections Caption="Options"/>
+              <lbSections Caption="Opções"/>
             </pSectionLabel>
           </pSectionsPanel>
           <pPagesPanel>
             <pPages>
               <tsViewer>
-                <lbUnicodeScale Caption="Font scale %s%%"/>
-                <lbDOSScale Caption="Font scale %s%%"/>
+                <lbUnicodeScale Caption="Escala da fonte %s%%"/>
+                <lbDOSScale Caption="Escala da fonte %s%%"/>
               </tsViewer>
             </pPages>
           </pPagesPanel>
         </fBodyPanel>
       </fMiddlePanel>
     </fOptionsDialog>
-    <fLoggerViewForm Caption="Debug log">
-      <LineCount Plural="%.0n log entries" Singular="%.0n log entry"/>
+    <fLoggerViewForm Caption="Registro de depuração">
+      <LineCount Plural="%.0n entradas de registro" Singular="%.0n entrada de registro"/>
       <pControls>
         <pButtons>
-          <btnClear Caption="Clear"/>
-          <btnSaveAs Caption="Save As..."/>
+          <btnClear Caption="Limpar"/>
+          <btnSaveAs Caption="Salvar como..."/>
         </pButtons>
         <pVerbose>
           <cbVerbosity>
-            <Items Index_0="Critical" Index_1="Minimal" Index_2="Normal" Index_3="Verbose" Index_4="Excessive"/>
+            <Items Index_0="Crítico" Index_1="Mínimo" Index_2="Normal" Index_3="Detalhado" Index_4="Excessivo"/>
           </cbVerbosity>
-          <lbVerbosity Caption="Verbosity:"/>
+          <lbVerbosity Caption="Verbosidade:"/>
         </pVerbose>
       </pControls>
     </fLoggerViewForm>
-    <fMissingFiles Caption="Missing document files">
+    <fMissingFiles Caption="Documentos ausentes">
       <fLowerPanel>
         <fButtonPanel>
-          <btnCancel Caption="Cancel"/>
+          <btnCancel Caption="Cancelar"/>
         </fButtonPanel>
       </fLowerPanel>
     </fMissingFiles>

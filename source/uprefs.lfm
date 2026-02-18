@@ -13,8 +13,8 @@ object fOptionsDialog: TfOptionsDialog
     Height = 267
     Top = 37
     Width = 276
-    ActivePage = tsEncoding
-    TabIndex = 1
+    ActivePage = tsViewer
+    TabIndex = 2
     TabOrder = 0
     object tsSession: TTabSheet
       Hint = 'Application session options.'
@@ -153,6 +153,7 @@ object fOptionsDialog: TfOptionsDialog
           Width = 244
           Max = 50
           Min = 2
+          PageSize = 1
           Position = 10
           OnChange = tbUnicodeScaleChange
           Align = alTop
@@ -188,6 +189,7 @@ object fOptionsDialog: TfOptionsDialog
           Width = 244
           Max = 5
           Min = 1
+          PageSize = 1
           Position = 1
           OnChange = tbDOSScaleChange
           Align = alTop
