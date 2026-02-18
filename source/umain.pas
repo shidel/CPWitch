@@ -11,6 +11,8 @@ unit uMain;
 {$I patches.pp}  // Various compiler directives to "fix" things.
 {$I version.def} // Include directives for project option build flags.
 
+{$DEFINE OLDCRT}
+
 interface
 
 uses
@@ -100,7 +102,11 @@ type
       btnExportFile : TToolButton;
       btnCodepageFilter : TToolButton;
       fWitch : TWitch;
+      {$IFDEF OLDCRT}
       fCodepageText : TDosCrt;
+      {$ELSE}
+      fCodePageText:TDosView;
+      {$ENDIF}
       fUFF : TUnicodeDosFont;
       fFileReopen:boolean;
       fFileWarn:boolean;
@@ -311,6 +317,7 @@ begin
   fWitch := TWitch.Create;
   fWitch.OnAnalyzed:=@WitchOnAnalyzed;
 
+  {$IFDEF OLDCRT}
   fCodepageText := TDosCrt.Create(Self);
   fCodePageText.Resolution:=Point(8,2);
   // fCodepageText.Name:='fCodepageText';
@@ -325,6 +332,10 @@ begin
   { TODO 0 -cDevel Convert to BorderSpacing when supported by TCustomDosCRT }
   fCodepageText.Left:=8;
   fCodepageText.Top:=8;
+  {$ELSE}
+  fCodepageText := TDosView.Create(Self);
+  fCodepageText.Parent:=sbCodepage;
+  {$ENDIF}
 
   fUFF:=TUnicodeDosFont.Create;
   if fUFF.LoadFromFile(AppDataPath + '0816norm.uff') = 0 then
@@ -337,7 +348,9 @@ begin
 
   SetApplicationIcons;
 
+  {$IFDEF OLDCRT}
   fCodepageText.ClrScr;
+  {$ENDIF}
 
   // Assign Images to Actions
   actOpen.ImageIndex:=idxButtonFileOpen;
@@ -853,22 +866,34 @@ end;
 procedure TfMain.UpdateCodepageView;
 var
   W : TWitchItem;
+  {$IFDEF OLDCRT}
   SL : TStringList;
   I, Y, TW, TH : Integer;
   S : String;
   TCP : TUTF8ToCodepage;
+  {$ELSE}
+  {$ENDIF}
 begin
   if Not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then begin
+    {$IFDEF OLDCRT}
     fCodepageText.Resolution:=Point(1,1);
     fCodepageText.ClrScr;
+    {$ELSE}
+    fCodepageText.Clear;
+    {$ENDIF}
     Exit;
   end;
   W:=TWitchItem(lvFileList.Selected.Data);
   if not W.Analyzed then begin
+    {$IFDEF OLDCRT}
     fCodepageText.Resolution:=Point(1,1);
     fCodepageText.ClrScr;
+    {$ELSE}
+    fCodepageText.Clear;
+    {$ENDIF}
     Exit;
   end else begin
+    {$IFDEF OLDCRT}
     fCodepageText.BeginUpdate;
     SL := TStringList.Create;
     if W.Encoding <> weBinary then
@@ -922,6 +947,9 @@ begin
     end;
     SL.Free;
     fCodepageText.EndUpdate;
+    {$ELSE}
+    {$ENDIF}
+
   end;
 end;
 

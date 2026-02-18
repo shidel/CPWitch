@@ -7,8 +7,9 @@
       <Unit>
         <Filename Value="CPWitch.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="1"/>
-        <CursorPos X="21" Y="26"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="8"/>
+        <CursorPos Y="57"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
       </Unit>
@@ -19,7 +20,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <CursorPos X="40" Y="20"/>
+        <TopLine Value="167"/>
+        <CursorPos X="3" Y="14"/>
+        <FoldState Value=" TL00406 p0tO2107]9uB21 T4H05 T3kQ03]UibjB0671]Bk6nG062 pjHjT0E6[94k20+115]BNnI0l3 PiDiO0 T1kR029];ajc0241[k4AmW05013]B3l003[t4FkD0M0[V5Mn1052 PgK];6]X2E pbzY[U4PEk7]M0l5c88 piYngH6B]9cm0h3A]9Xk3i36412C]$dmcX35 PTiTH TMpc211A254]\teE TKuH28}"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -31,12 +34,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uPrefs"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="62"/>
         <CursorPos X="63" Y="24"/>
-        <UsageCount Value="92"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
+        <UsageCount Value="97"/>
       </Unit>
       <Unit>
         <Filename Value="ufixending.pas"/>
@@ -48,16 +49,16 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="15"/>
         <CursorPos X="9" Y="22"/>
-        <UsageCount Value="39"/>
+        <UsageCount Value="44"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/pasext.pp"/>
         <UnitName Value="PasExt"/>
-        <EditorIndex Value="3"/>
-        <TopLine Value="1210"/>
-        <CursorPos Y="1226"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="954"/>
+        <CursorPos X="32" Y="983"/>
+        <FoldState Value=" T3=C0E4 pj4jS0e515 plFn9042 PiEF0g"/>
         <UsageCount Value="101"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/multiapp.pp"/>
@@ -66,7 +67,7 @@
         <TopLine Value="2044"/>
         <CursorPos X="19" Y="1095"/>
         <FoldState Value=" TL0041267A411121G pg*a01071 p1wB21 TMa03134 pFijR[H44i604 T7mbIt012 PFkGN T8l32A01715 PjCmC2 TCpeI3 T3r9098 piajK03[94ZjH[96YjJ0B9 pjCjO262 pkBa286]H1l20I021211[F4GlX03A[x5N0D7]9cjO0RC]9dk8032]aTjc07B[{55O]j]I3jM04412 PiEie0 T6rB01f]ZX&apos;N01 T1rD05D]g8kT09C[y4kQ08[94akR235]9fje0X1[{v58]gHma]p]Oel808B[{,5g026 pk6kX06G]IXk8029[R5W0G[~e5Di30 T0sGW5F]*NsMQMD2A]sMwaaCA piYp9H33 PBk3V:"/>
-        <UsageCount Value="100"/>
+        <UsageCount Value="99"/>
       </Unit>
       <Unit>
         <Filename Value="upreferences.pas"/>
@@ -78,7 +79,7 @@
         <TopLine Value="36"/>
         <CursorPos X="33" Y="36"/>
         <FoldState Value=" T3j60Q82111 PjClc0-"/>
-        <UsageCount Value="45"/>
+        <UsageCount Value="44"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/preferences.pp"/>
@@ -87,16 +88,15 @@
         <TopLine Value="26"/>
         <CursorPos Y="728"/>
         <FoldState Value=" T3jV087 pk1kR052113112]5]A PsIrO0E"/>
-        <UsageCount Value="45"/>
+        <UsageCount Value="44"/>
       </Unit>
       <Unit>
         <Filename Value="witch.pas"/>
         <UnitName Value="Witch"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="253"/>
         <CursorPos X="31" Y="347"/>
         <UsageCount Value="100"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="codepages.pp"/>
@@ -105,7 +105,7 @@
         <TopLine Value="40"/>
         <CursorPos X="42" Y="44"/>
         <FoldState Value=" T7i4Ne3 PfifH T3kc0A3 pjQk10Z0111E plcnP04321 POlQ0d"/>
-        <UsageCount Value="86"/>
+        <UsageCount Value="85"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/bintree.pp"/>
@@ -114,7 +114,7 @@
         <TopLine Value="247"/>
         <CursorPos Y="165"/>
         <FoldState Value=" T3jK079 piZjN051153317 pm2o5031M"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="doscrt.pp"/>
@@ -123,7 +123,7 @@
         <TopLine Value="8"/>
         <CursorPos X="63" Y="24"/>
         <FoldState Value=" T7jPCK1 PXMI T3lK0411A13 pkRlg0S4 piXjT0J6]9ZjP04226 PiAjI0+"/>
-        <UsageCount Value="60"/>
+        <UsageCount Value="59"/>
       </Unit>
       <Unit>
         <Filename Value="dosfont.pp"/>
@@ -132,7 +132,7 @@
         <TopLine Value="91"/>
         <CursorPos X="37" Y="109"/>
         <FoldState Value=" T7i2J9 T3lE057 piZjJ094]9bjD0{Z5]AalZ062 PIE0T"/>
-        <UsageCount Value="44"/>
+        <UsageCount Value="43"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/dosfont.pp"/>
@@ -141,7 +141,7 @@
         <TopLine Value="62"/>
         <CursorPos X="42" Y="40"/>
         <FoldState Value=" T3jQ0~7P"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/codepages.pp"/>
@@ -150,15 +150,18 @@
         <TopLine Value="33"/>
         <CursorPos X="11" Y="663"/>
         <FoldState Value=" T3l70C2 pjEjW0Z0484151 PlCqJ0N"/>
-        <UsageCount Value="26"/>
+        <UsageCount Value="25"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/doscrt.pp"/>
         <UnitName Value="DosCRT"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="677"/>
-        <CursorPos X="5" Y="687"/>
-        <UsageCount Value="40"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="309"/>
+        <CursorPos Y="559"/>
+        <FoldState Value=" TL004011F1 TCSM4 T7kJCK TMkN013 T3lN05E piXjR05716 pl7m50S4[K5T0J517]fPkKlf0 T1oF033422136122[l4Bt70A2 T6oL01D15 Pdsg]h0s5Pj5 pj6bO3F]&apos;dlbL2112 PBjW4F"/>
+        <UsageCount Value="41"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/updater.pp"/>
@@ -166,26 +169,26 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="716"/>
         <CursorPos X="91" Y="737"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/taskmngr.pp"/>
         <UnitName Value="TaskMngr"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="20" Y="19"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/patches.pp"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="22"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit>
       <Unit>
         <Filename Value="version.def"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="27" Y="25"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit>
       <Unit>
@@ -194,7 +197,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="8"/>
         <CursorPos X="12" Y="44"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit>
       <Unit>
         <Filename Value="/Applications/Lazarus/lcl/comctrls.pp"/>
@@ -202,7 +205,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="2234"/>
         <CursorPos X="3" Y="2101"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit>
       <Unit>
         <Filename Value="../../mpla/source/mpla/ulostfile.pas"/>
@@ -210,7 +213,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uLostFile"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="16"/>
+        <UsageCount Value="15"/>
       </Unit>
       <Unit>
         <Filename Value="ulostfile.pas"/>
@@ -221,14 +224,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="18"/>
         <CursorPos Y="57"/>
-        <UsageCount Value="16"/>
+        <UsageCount Value="15"/>
       </Unit>
       <Unit>
         <Filename Value="/Applications/Lazarus/fpc/3.2.2/sources/rtl/inc/systemh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="664"/>
         <CursorPos X="10" Y="685"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/logview.pp"/>
@@ -236,101 +239,129 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="384"/>
         <CursorPos X="90" Y="422"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="22">
+    <JumpHistory HistoryIndex="29">
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="748" Column="44" TopLine="643"/>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="860" TopLine="818"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="629" Column="53" TopLine="590"/>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="171" Column="3" TopLine="137"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="751" TopLine="679"/>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="870" Column="3" TopLine="843"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="295" Column="13" TopLine="270"/>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="824" TopLine="624"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="296" Column="22" TopLine="233"/>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="42" TopLine="17"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="609" Column="67" TopLine="584"/>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="46" Column="22" TopLine="35"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="615" Column="38" TopLine="580"/>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="73" Column="59" TopLine="53"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="132" Column="17" TopLine="105"/>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="63" Column="48" TopLine="36"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="93" Column="21" TopLine="68"/>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="72" Column="61" TopLine="38"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="976" Column="27" TopLine="933"/>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="73" Column="46" TopLine="48"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="1101" Column="25" TopLine="1068"/>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="279" TopLine="221"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="328" Column="14" TopLine="310"/>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="53" Column="31" TopLine="28"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="23" Column="31"/>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="42" Column="41" TopLine="6"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="1021" Column="29" TopLine="825"/>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="105" TopLine="69"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="131" Column="28" TopLine="107"/>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="363" Column="28" TopLine="325"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="689" Column="14" TopLine="398"/>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="383" Column="12" TopLine="358"/>
       </Position>
       <Position>
-        <Filename Value="mpla/pasext.pp"/>
-        <Caret Line="242" Column="42" TopLine="216"/>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="432" Column="12" TopLine="350"/>
       </Position>
       <Position>
-        <Filename Value="CPWitch.lpr"/>
-        <Caret Line="54" Column="72" TopLine="6"/>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="53" Column="19" TopLine="35"/>
       </Position>
       <Position>
-        <Filename Value="CPWitch.lpr"/>
-        <Caret Line="16" Column="32" TopLine="9"/>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="284" Column="5" TopLine="182"/>
       </Position>
       <Position>
-        <Filename Value="mpla/pasext.pp"/>
-        <Caret Line="245" Column="18" TopLine="226"/>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="109" Column="38" TopLine="76"/>
       </Position>
       <Position>
-        <Filename Value="mpla/pasext.pp"/>
-        <Caret Line="246" Column="22" TopLine="226"/>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="361" Column="16" TopLine="314"/>
       </Position>
       <Position>
-        <Filename Value="CPWitch.lpr"/>
-        <Caret Line="28" Column="25" TopLine="9"/>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="400" Column="15" TopLine="369"/>
       </Position>
       <Position>
-        <Filename Value="mpla/pasext.pp"/>
-        <Caret Line="1235" Column="26" TopLine="1210"/>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="130" Column="30" TopLine="98"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="738" Column="6" TopLine="710"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="87" Column="22" TopLine="62"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="103" TopLine="88"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="113" Column="29" TopLine="94"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="16" Column="3"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="537" Column="12" TopLine="451"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/doscrt.pp"/>
+        <Caret Line="536" Column="14" TopLine="404"/>
       </Position>
     </JumpHistory>
     <RunParams>
