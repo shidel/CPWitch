@@ -334,7 +334,7 @@ begin
   fCodepageText.Align:=alClient;
   {$ENDIF}
 
-  fCodepageText.Color:=clBlue;
+  fCodepageText.Color:=clWindow;
   fCodepageText.Foreground := clWindowText;
   fCodepageText.Background := clWindow;
   fCodepageText.ErrorForeground := clRed;
@@ -952,7 +952,7 @@ begin
     SL.Free;
     fCodepageText.EndUpdate;
     {$ELSE}
-      fCodepageText.BeginUpdate;
+      // fCodepageText.BeginUpdate;
       fCodePageText.Clear;
       case W.Encoding of
         weNone, weBinary : begin
@@ -966,12 +966,13 @@ begin
             +'Not_implemented/Caption', 'Not implemented'));
         end;
         weUnicode : begin
+          LogMessage(vbNormal, 'Unicode Item: ' + W.DisplayName);
           fCodepageText.Codepage:=FActiveCodepage;
-          fCodepageText.Lines.Add(PasExt.ToString(W.FileData));
+          fCodepageText.AddText(PasExt.ToString(W.FileData));
         end;
       end;
 
-      fCodepageText.EndUpdate;
+      // fCodepageText.EndUpdate;
     {$ENDIF}
 
   end;
