@@ -11,7 +11,7 @@ unit uMain;
 {$I patches.pp}  // Various compiler directives to "fix" things.
 {$I version.def} // Include directives for project option build flags.
 
-{$DEFINE OLDCRT}
+{ DEFINE OLDCRT}
 
 interface
 
@@ -49,6 +49,7 @@ type
       lbFileList: TLabel;
       lvCodepageList: TListView;
       lvFileList: TListView;
+      Memo1: TMemo;
       miListGood: TMenuItem;
       miListPotential: TMenuItem;
       miListAll: TMenuItem;
@@ -319,30 +320,33 @@ begin
 
   {$IFDEF OLDCRT}
   fCodepageText := TDosCrt.Create(Self);
+  fCodepageText.Parent:=sbCodepage;
   fCodePageText.Resolution:=Point(8,2);
   // fCodepageText.Name:='fCodepageText';
-  fCodepageText.Parent:=sbCodepage;
+  fCodepageText.Wrapping:=False;
+  { TODO 0 -cDevel Convert to BorderSpacing when supported by TCustomDosCRT }
+  fCodepageText.Left:=8;
+  fCodepageText.Top:=8;
+  {$ELSE}
+  sbCodePage.Hide;
+  fCodepageText := TDosView.Create(Self);
+  fCodepageText.Parent:=pCodepage;
+  fCodepageText.Align:=alClient;
+  {$ENDIF}
+
   fCodepageText.Color:=clBlue;
   fCodepageText.Foreground := clWindowText;
   fCodepageText.Background := clWindow;
   fCodepageText.ErrorForeground := clRed;
   fCodepageText.ErrorBackground := clBlack;
   fCodepageText.ControlCodes:=False;
-  fCodepageText.Wrapping:=False;
-  { TODO 0 -cDevel Convert to BorderSpacing when supported by TCustomDosCRT }
-  fCodepageText.Left:=8;
-  fCodepageText.Top:=8;
-  {$ELSE}
-  fCodepageText := TDosView.Create(Self);
-  fCodepageText.Parent:=sbCodepage;
-  {$ENDIF}
 
   fUFF:=TUnicodeDosFont.Create;
-  if fUFF.LoadFromFile(AppDataPath + '0816norm.uff') = 0 then
-    fCodepageText.Font:=fUFF
-  else
+  if fUFF.LoadFromFile(AppDataPath + '0816norm.uff') = 0 then begin
+    fCodepageText.Font:=fUFF;
+    fCodepageText.ErrorChar:=$bf;
+  end else
     FreeAndNil(fUFF);
-
   OnSettingsLoad:=@FormSettingsLoad;
   OnSettingsSave:=@FormSettingsSave;
 
@@ -948,6 +952,26 @@ begin
     SL.Free;
     fCodepageText.EndUpdate;
     {$ELSE}
+      fCodepageText.BeginUpdate;
+      fCodePageText.Clear;
+      case W.Encoding of
+        weNone, weBinary : begin
+        end;
+        weCodepage : begin
+          fCodepageText.Codepage:=-1;
+  { TODO 9 -cDevel Implement Codepage View for Codepage encoded files. }
+
+          fCodepageText.Lines.Add(
+            GetTranslation(ComponentNamePath(lvCodepageList, Self, True)
+            +'Not_implemented/Caption', 'Not implemented'));
+        end;
+        weUnicode : begin
+          fCodepageText.Codepage:=FActiveCodepage;
+          fCodepageText.Lines.Add(PasExt.ToString(W.FileData));
+        end;
+      end;
+
+      fCodepageText.EndUpdate;
     {$ENDIF}
 
   end;
