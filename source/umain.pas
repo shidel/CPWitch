@@ -11,8 +11,6 @@ unit uMain;
 {$I patches.pp}  // Various compiler directives to "fix" things.
 {$I version.def} // Include directives for project option build flags.
 
-{ DEFINE OLDCRT}
-
 interface
 
 uses
@@ -20,7 +18,7 @@ uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ExtCtrls, ComCtrls, ActnList, Menus, IpHtml, XMLConf,
   Version, PasExt, Icons, MultiApp, LogView, Updater, Preferences,
-  DosCRT, DosFont, Codepages, Witch, uPrefs, uLostFile, uFixEnding;
+  DosView, DosFont, Codepages, Witch, uPrefs, uLostFile, uFixEnding;
 
 type
 
@@ -49,7 +47,6 @@ type
       lbFileList: TLabel;
       lvCodepageList: TListView;
       lvFileList: TListView;
-      Memo1: TMemo;
       miListGood: TMenuItem;
       miListPotential: TMenuItem;
       miListAll: TMenuItem;
@@ -103,11 +100,7 @@ type
       btnExportFile : TToolButton;
       btnCodepageFilter : TToolButton;
       fWitch : TWitch;
-      {$IFDEF OLDCRT}
-      fCodepageText : TDosCrt;
-      {$ELSE}
       fCodePageText:TDosView;
-      {$ENDIF}
       fUFF : TUnicodeDosFont;
       fFileReopen:boolean;
       fFileWarn:boolean;
@@ -318,21 +311,10 @@ begin
   fWitch := TWitch.Create;
   fWitch.OnAnalyzed:=@WitchOnAnalyzed;
 
-  {$IFDEF OLDCRT}
-  fCodepageText := TDosCrt.Create(Self);
-  fCodepageText.Parent:=sbCodepage;
-  fCodePageText.Resolution:=Point(8,2);
-  // fCodepageText.Name:='fCodepageText';
-  fCodepageText.Wrapping:=False;
-  { TODO 0 -cDevel Convert to BorderSpacing when supported by TCustomDosCRT }
-  fCodepageText.Left:=8;
-  fCodepageText.Top:=8;
-  {$ELSE}
   sbCodePage.Hide;
   fCodepageText := TDosView.Create(Self);
   fCodepageText.Parent:=pCodepage;
   fCodepageText.Align:=alClient;
-  {$ENDIF}
 
   fCodepageText.Color:=clWindow;
   fCodepageText.Foreground := clWindowText;
@@ -351,10 +333,6 @@ begin
   OnSettingsSave:=@FormSettingsSave;
 
   SetApplicationIcons;
-
-  {$IFDEF OLDCRT}
-  fCodepageText.ClrScr;
-  {$ENDIF}
 
   // Assign Images to Actions
   actOpen.ImageIndex:=idxButtonFileOpen;
@@ -394,12 +372,6 @@ begin
   // codepage, The current File Selected becomes no longer highlighted.
   lvFileList.HideSelection:=False;
   lvCodepageList.HideSelection:=False;
-
-  // Adjust stepping for codepage view parent ScrollBox.
-  sbCodePage.HorzScrollBar.Increment:=16;
-  sbCodePage.HorzScrollBar.Tracking:=True;
-  sbCodePage.VertScrollBar.Increment:=32;
-  sbCodePage.VertScrollBar.Tracking:=True;
 
   // Make toolbar the width of the visible buttons
   AdjustToolBarWidth(tbMain);
@@ -870,111 +842,40 @@ end;
 procedure TfMain.UpdateCodepageView;
 var
   W : TWitchItem;
-  {$IFDEF OLDCRT}
-  SL : TStringList;
-  I, Y, TW, TH : Integer;
-  S : String;
-  TCP : TUTF8ToCodepage;
-  {$ELSE}
-  {$ENDIF}
 begin
   if Not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then begin
-    {$IFDEF OLDCRT}
-    fCodepageText.Resolution:=Point(1,1);
-    fCodepageText.ClrScr;
-    {$ELSE}
     fCodepageText.Clear;
-    {$ENDIF}
     Exit;
   end;
   W:=TWitchItem(lvFileList.Selected.Data);
   if not W.Analyzed then begin
-    {$IFDEF OLDCRT}
-    fCodepageText.Resolution:=Point(1,1);
-    fCodepageText.ClrScr;
-    {$ELSE}
     fCodepageText.Clear;
-    {$ENDIF}
     Exit;
   end else begin
-    {$IFDEF OLDCRT}
     fCodepageText.BeginUpdate;
-    SL := TStringList.Create;
-    if W.Encoding <> weBinary then
-      SL.AddText(PasExt.ToString(W.FileData));
-    TW:=Longest(SL);
-    if TW < 1 then TW:=1;
-    TH:=SL.Count;
-    if TH < 1 then TH:=1;
-    Inc(TW);
-    Inc(TH);
+    fCodePageText.Clear;
     case W.Encoding of
-      weNone, weBinary : begin
+      weNone : begin
         fCodepageText.Codepage:=-1;
-        fCodepageText.Resolution:=Point(TW,TH);
-        fCodepageText.ClrScr;
-        for Y := 0 to SL.Count - 1 do begin
-          fCodepageText.GotoXY(1, Y + 1);
-          fCodepageText.WriteCRT(SL[Y]);
-        end;
+        fCodepageText.AddText(PasExt.ToString(W.FileData));
+      end;
+      weBinary : begin
       end;
       weCodepage : begin
-{ TODO 9 -cDevel Implement Codepage View for Codepage encoded files. }
-        S:=GetTranslation(ComponentNamePath(lvCodepageList, Self, True)
-         +'Not_implemented/Caption', 'Not implemented');
         fCodepageText.Codepage:=-1;
-        fCodepageText.Resolution:=Point(Length(S),1);
-        fCodepageText.ClrScr;
-        fCodepageText.WriteCRT(S);
-        fCodepageText.WriteError(S);
-      end;
-      weUnicode : begin
-        fCodepageText.Codepage:=-1;
-        fCodepageText.Resolution:=Point(TW,TH);
-        fCodepageText.ClrScr;
-        TCP:=W.AsCodePage(FActiveCodepage);
-        Y := 1;
-        for I := Low(TCP.Values) to High(TCP.Values) do begin
-          if TCP.Chars[I] = Byte(LF) then begin
-            Inc(Y);
-            fCodepageText.GotoXY(1, Y);
-          end else
-          if TCP.Values[I] < 0 then
-              // if $bf not defined in the Unicode Font, DosCRT will have its
-              // own charcter error and use $3f.
-              fCodepageText.WriteError($bf)
-            else
-              fCodepageText.WriteCRT(TCP.Values[I]);
-        end;
-        FreeAndNil(TCP);
-      end;
-    end;
-    SL.Free;
-    fCodepageText.EndUpdate;
-    {$ELSE}
-      // fCodepageText.BeginUpdate;
-      fCodePageText.Clear;
-      case W.Encoding of
-        weNone, weBinary : begin
-        end;
-        weCodepage : begin
-          fCodepageText.Codepage:=-1;
   { TODO 9 -cDevel Implement Codepage View for Codepage encoded files. }
 
-          fCodepageText.Lines.Add(
-            GetTranslation(ComponentNamePath(lvCodepageList, Self, True)
-            +'Not_implemented/Caption', 'Not implemented'));
-        end;
-        weUnicode : begin
-          LogMessage(vbNormal, 'Unicode Item: ' + W.DisplayName);
-          fCodepageText.Codepage:=FActiveCodepage;
-          fCodepageText.AddText(PasExt.ToString(W.FileData));
-        end;
+        fCodepageText.AddError(
+        GetTranslation(ComponentNamePath(lvCodepageList, Self, True)
+          +'Not_implemented/Caption', 'Not implemented'));
       end;
-
-      // fCodepageText.EndUpdate;
-    {$ENDIF}
-
+      weUnicode : begin
+        LogMessage(vbNormal, 'Unicode Item: ' + W.DisplayName);
+        fCodepageText.Codepage:=FActiveCodepage;
+        fCodepageText.AddText(PasExt.ToString(W.FileData));
+      end;
+    end;
+    fCodepageText.EndUpdate;
   end;
 end;
 

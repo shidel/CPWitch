@@ -282,25 +282,13 @@ object fMain: TfMain
         Height = 125
         Top = 1
         Width = 228
-        HorzScrollBar.Page = 166
-        VertScrollBar.Page = 110
+        HorzScrollBar.Page = 1
+        VertScrollBar.Page = 1
         Align = alClient
-        ClientHeight = 123
-        ClientWidth = 226
         Color = clWindow
         ParentBackground = False
         ParentColor = False
         TabOrder = 1
-        object Memo1: TMemo
-          Left = 16
-          Height = 90
-          Top = 20
-          Width = 150
-          Lines.Strings = (
-            'Memo1'
-          )
-          TabOrder = 0
-        end
       end
     end
     object spUnicodeCP: TSplitter
