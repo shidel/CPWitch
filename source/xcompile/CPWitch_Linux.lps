@@ -26,8 +26,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="76"/>
-        <CursorPos Y="125"/>
+        <CursorPos X="42" Y="21"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -44,12 +43,23 @@
       <Unit>
         <Filename Value="../mpla/multiapp.pp"/>
         <UnitName Value="MultiApp"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="1223"/>
-        <CursorPos X="6" Y="1285"/>
+        <TopLine Value="1224"/>
+        <CursorPos X="72" Y="1228"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="uprefs.pas"/>
+        <ComponentName Value="fOptionsDialog"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uPrefs"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="2">

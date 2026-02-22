@@ -41,6 +41,8 @@ object fOptionsDialog: TfOptionsDialog
           Align = alTop
           BorderSpacing.Around = 8
           Caption = 'Reopen previous files.'
+          Checked = True
+          State = cbChecked
           TabOrder = 0
           OnChange = cbReopenFilesChange
         end
@@ -155,6 +157,7 @@ object fOptionsDialog: TfOptionsDialog
           Min = 2
           PageSize = 1
           Position = 10
+          ShowSelRange = False
           OnChange = tbUnicodeScaleChange
           Align = alTop
           BorderSpacing.Around = 8
@@ -191,6 +194,7 @@ object fOptionsDialog: TfOptionsDialog
           Min = 1
           PageSize = 1
           Position = 1
+          ShowSelRange = False
           OnChange = tbDOSScaleChange
           Align = alTop
           BorderSpacing.Around = 8

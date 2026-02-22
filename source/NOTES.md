@@ -1,3 +1,6 @@
 # Upcoming release notes
 
-* New DOS view text rendering engine.
+* Some windows compatibility stuff.
+* Some debug logging improvements.
+* Temporarily, always on debug log to file.
+* New DOS text view rendering engine.

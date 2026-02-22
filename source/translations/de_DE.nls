@@ -136,7 +136,7 @@
       <pCodepageList>
         <pCodepageListLabel>
           <lbCodepageLabel Caption="Codepages"/>
-        </pCodepageLabel>
+        </pCodepageListLabel>
       </pCodepageList>
       <lvCodepageList>
         <Analyzing Caption="Analysiere"/>

@@ -63,7 +63,6 @@ type
       pFileListLabel: TPanel;
       pFileList: TPanel;
       dlgFileSave: TSaveDialog;
-      sbCodepage: TScrollBox;
       spFilesCPs: TSplitter;
       spCPsViewers: TSplitter;
       spUnicodeCP: TSplitter;
@@ -311,7 +310,6 @@ begin
   fWitch := TWitch.Create;
   fWitch.OnAnalyzed:=@WitchOnAnalyzed;
 
-  sbCodePage.Hide;
   fCodepageText := TDosView.Create(Self);
   fCodepageText.Parent:=pCodepage;
   fCodepageText.Align:=alClient;
@@ -512,7 +510,6 @@ procedure TfMain.SetUnicodeView(S: String);
 var
   C : TColor;
   B, F, EB, EF : String;
-  { Scale:integer; }
 begin
   { TODO 0 -cLazarus_Bug On macOS, setting the VertScrollBar.Position does
     not scroll a TMemo }
@@ -550,16 +547,6 @@ begin
     IntToStr(FUnicodeScale) + '%;" >' + CR +
     S + '</div>' +
     '<br></body></html>';
-  (* // Maybe switch to Points for font size.
-  Scale:=16;
-  Scale:=Scale * FUnicodeScale div 100;
-  S:='<html><body style="' +
-    'color:' + F + '; background-color:' + B + '; '+ 'margin:0; font-size:10pt; ">' + CR+
-    '<div style="font-family: monospace; font-weight:light; font-size:' +
-    IntToStr(Scale) + 'pt;" >' + CR +
-    S + '</div>' +
-    '<br></body></html>'; *)
-
   hpUnicodeText.SetHtmlFromStr(''); // Clear Cache, apparently this may be needed sometimes.
   hpUnicodeText.SetHtmlFromStr(S);
   // FileSave(AppBasePath + '/test.html',PasExt.ToBytes(S));
@@ -588,7 +575,7 @@ begin
   end;
   Val(RawByteString(UserConfig.GetValue(
     'Preferences/tsViewer/tbDOSScale/Value',
-    UnicodeString(IntToStr(FUnicodeScale div 10)))),
+    UnicodeString(IntToStr(FDOSScale)))),
     V, E);
   if (E = 0) and (V>0) and (V<11) then begin
     FDOSScale:=V;
@@ -598,7 +585,6 @@ begin
   UpdateFilterCheck;
   SetApplicationIcons;
   { TODO 5 -cDevel Add load color settings for Good/Bad mappings }
-  sbCodepage.Color:=fCodepageText.Background;
 
   // Values set and managed through OptionsDialog preferences.
   fFileReopen:=StringToCheckBoxState(UserConfig.GetValue(
@@ -625,8 +611,6 @@ begin
     cpfAll : S := 'All';
   end;
   SetConfig('Codepage_List/Filter', S);
-  SetConfig('Codepage_Scale/Horizontal', fCodepageText.Scale.X);
-  SetConfig('Codepage_Scale/Vertical', fCodepageText.Scale.Y);
   { TODO 5 -cDevel Add save color settings for Good/Bad mappings }
   SessionSave;
 end;
@@ -856,13 +840,20 @@ begin
     fCodePageText.Clear;
     case W.Encoding of
       weNone : begin
+        LogMessage(vbVerbose, 'ASCII Item: ' + W.DisplayName + ' (No Codepage)');
         fCodepageText.Codepage:=-1;
         fCodepageText.AddText(PasExt.ToString(W.FileData));
       end;
       weBinary : begin
-      end;
+        fCodepageText.Codepage:=-1;
+        LogMessage(vbVerbose, 'Binary Item: ' + W.DisplayName + ' (Not supported)');
+        fCodepageText.AddError(GetTranslation(ComponentNamePath(pViewUnicode, Self, True)
+          +'Unsupported_file/Binary/Text', 'Binary data files are not supported.'));
+       end;
       weCodepage : begin
         fCodepageText.Codepage:=-1;
+        LogMessage(vbVerbose, 'Codepage Item: ' + W.DisplayName + ' (Codepage ' +
+          IntToStr(FActiveCodepage) + ')');
   { TODO 9 -cDevel Implement Codepage View for Codepage encoded files. }
 
         fCodepageText.AddError(
@@ -870,7 +861,8 @@ begin
           +'Not_implemented/Caption', 'Not implemented'));
       end;
       weUnicode : begin
-        LogMessage(vbNormal, 'Unicode Item: ' + W.DisplayName);
+        LogMessage(vbVerbose, 'Unicode Item: ' + W.DisplayName + ' (Codepage ' +
+          IntToStr(FActiveCodepage) + ')');
         fCodepageText.Codepage:=FActiveCodepage;
         fCodepageText.AddText(PasExt.ToString(W.FileData));
       end;
