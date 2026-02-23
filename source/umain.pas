@@ -42,6 +42,7 @@ type
       alMain: TActionList;
       ctrlBar: TControlBar;
       hpUnicodeText: TIpHtmlPanel;
+      FileWatchTimer: TIdleTimer;
       lbUnicodeViewLabel: TLabel;
       lbCodepageLabel: TLabel;
       lbFileList: TLabel;
@@ -87,6 +88,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
+    procedure FileWatchTimerTimer(Sender: TObject);
     procedure lvCodepageListSelectItem(Sender: TObject; Item: TListItem;
       Selected: Boolean);
     procedure lvFileListSelectItem(Sender: TObject; Item: TListItem;
@@ -107,6 +109,7 @@ type
       fDOSScale: integer;
       fEndBlankOnInput : boolean;
       fEndBlankOnExport : boolean;
+      fWatchIndex : integer;
       procedure PopulateCodepageList(Item : TWitchItem);
       procedure SetCodepageFilter(AValue: TCodepageFilter);
       procedure SetUnicodeView( S : String );
@@ -114,7 +117,6 @@ type
       procedure FormSettingsLoad(Sender: TObject);
       procedure FormSettingsSave(Sender: TObject);
       procedure WitchOnAnalyzed(Sender : TObject);
-      procedure WitchOnModified(Sender : TObject);
       procedure FirstShow(Sender : TObject);
       procedure SetApplicationIcons;
       procedure UpdateCodepageViewLabel;
@@ -312,6 +314,7 @@ begin
   FDOSScale:=1;
   fEndBlankOnInput:=True;
   fEndBlankOnExport:=True;
+  fWatchIndex:=0;
 
   fWitch := TWitch.Create;
   fWitch.OnAnalyzed:=@WitchOnAnalyzed;
@@ -403,6 +406,22 @@ var
 begin
   for I := High(FileNames) downto 0 do
     OpenFile(FileNames[I], I=0);
+end;
+
+procedure TfMain.FileWatchTimerTimer(Sender: TObject);
+var
+  I : integer;
+begin
+  if (not Assigned(FWitch)) or (FWitch.Count= 0) then Exit;
+  I:=50;
+  while I > 0 do begin
+    if FWatchIndex >= FWitch.Count then begin
+      FWatchIndex:=0;
+      Break;
+    end;
+    FWitch.Modified[FWatchIndex]; // Ignore Result
+    Inc(FWatchIndex);
+  end;
 end;
 
 procedure TfMain.lvCodepageListSelectItem(Sender: TObject; Item: TListItem;
@@ -663,11 +682,6 @@ begin
     UpdateMetaData;
     SelectFile(Self);
   end;
-end;
-
-procedure TfMain.WitchOnModified(Sender: TObject);
-begin
-
 end;
 
 procedure TfMain.FirstShow(Sender: TObject);

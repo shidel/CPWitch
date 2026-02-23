@@ -400,4 +400,10 @@ object fMain: TfMain
     Left = 328
     Top = 219
   end
+  object FileWatchTimer: TIdleTimer
+    Interval = 500
+    OnTimer = FileWatchTimerTimer
+    Left = 272
+    Top = 229
+  end
 end
