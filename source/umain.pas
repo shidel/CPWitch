@@ -626,7 +626,10 @@ begin
   case W.Encoding of
     weNone : begin
       Cat(M, 'ASCII');
-      W.ListItem.ImageIndex:=idxFileTypeFilePlainGray;
+      if fEndBlankOnInput and (not W.EndsWithBlank) then
+        W.ListItem.ImageIndex:=idxFileTypeFilePlainYellow
+      else
+        W.ListItem.ImageIndex:=idxFileTypeFilePlainGray;
     end;
     weBinary : begin
       Cat(M, 'Binary');
