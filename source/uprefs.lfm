@@ -13,8 +13,8 @@ object fOptionsDialog: TfOptionsDialog
     Height = 267
     Top = 37
     Width = 276
-    ActivePage = tsViewer
-    TabIndex = 2
+    ActivePage = tsSession
+    TabIndex = 0
     TabOrder = 0
     object tsSession: TTabSheet
       Hint = 'Application session options.'
@@ -23,20 +23,20 @@ object fOptionsDialog: TfOptionsDialog
       ClientWidth = 270
       object gbSessionFiles: TGroupBox
         Left = 0
-        Height = 79
+        Height = 105
         Top = 0
         Width = 270
         Align = alTop
         AutoSize = True
         Caption = 'Session files'
-        ClientHeight = 60
+        ClientHeight = 86
         ClientWidth = 260
         TabOrder = 0
         object cbReopenFiles: TCheckBox
           Left = 8
           Height = 18
           Hint = 'Reopen unclosed files from previous session.'
-          Top = 8
+          Top = 34
           Width = 244
           Align = alTop
           BorderSpacing.Around = 8
@@ -47,16 +47,28 @@ object fOptionsDialog: TfOptionsDialog
           OnChange = cbReopenFilesChange
         end
         object cbWarnMissing: TCheckBox
-          Left = 8
+          Left = 24
           Height = 18
           Hint = 'Warn when a file from the previous session does not exist.'
-          Top = 34
-          Width = 244
+          Top = 60
+          Width = 228
           Align = alTop
+          BorderSpacing.Left = 16
           BorderSpacing.Around = 8
           Caption = 'Warn when missing.'
           Enabled = False
           TabOrder = 1
+        end
+        object cbOpenExport: TCheckBox
+          Left = 8
+          Height = 18
+          Hint = 'Automatically open export files for review.'
+          Top = 8
+          Width = 244
+          Align = alTop
+          BorderSpacing.Around = 8
+          Caption = 'Open exported files.'
+          TabOrder = 2
         end
       end
     end

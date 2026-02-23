@@ -109,6 +109,7 @@ type
       fDOSScale: integer;
       fEndBlankOnInput : boolean;
       fEndBlankOnExport : boolean;
+      fOpenExported : boolean;
       fWatchIndex : integer;
       procedure PopulateCodepageList(Item : TWitchItem);
       procedure SetCodepageFilter(AValue: TCodepageFilter);
@@ -214,7 +215,7 @@ var
   R : integer;
   N : String;
   D : RawByteString;
-  A : Boolean;
+  CM, AO : Boolean;
 begin
   if Not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then
     Exit;
@@ -235,11 +236,13 @@ begin
   end else begin
     D:=TCP.Converted;
   end;
-  A:=False;
+  CM:=False;
+  AO:=False;
   repeat
     if dlgFileSave.Execute then begin
-      A:=True;
       R:=FileSave(dlgFileSave.FileName, D);
+      CM:=True;
+      AO:=R=0;
       if R <> 0 then
         if FileErrorDialog(dlgFileSave.FileName, R, True) <> mrRetry then
           R:=0;
@@ -247,8 +250,12 @@ begin
       R:=0;
   until R=0;
   FreeAndNil(TCP);
-  if A then
+  if CM then
     FWitch.FileModified(dlgFileSave.FileName);
+  if AO and fOpenExported then begin
+    OpenFile(dlgFileSave.FileName, false);
+    lvFileList.Sort;
+  end;
 end;
 
 procedure TfMain.actExportCodepageUpdate(Sender: TObject);
@@ -314,6 +321,7 @@ begin
   FDOSScale:=1;
   fEndBlankOnInput:=True;
   fEndBlankOnExport:=True;
+  fOpenExported:=False;
   fWatchIndex:=0;
 
   fWitch := TWitch.Create;
@@ -616,6 +624,8 @@ begin
     'Preferences/tsSession/cbReopenFiles/State', 'Unchecked')) = cbChecked;
   fFileWarn:=StringToCheckBoxState(UserConfig.GetValue(
     'Preferences/tsSession/cbWarnMissing/State', 'Unchecked')) = cbChecked;
+  fOpenExported:=StringToCheckBoxState(UserConfig.GetValue(
+    'Preferences/tsSession/cbOpenExport/State', 'Unchecked')) = cbChecked;
   B:=StrToBool(UserConfig.GetValue(
     'Preferences/tsEncoding/rbFileEndAll/Checked', ''), fEndBlankOnInput);
   fEndBlankOnExport:=B or StrToBool(UserConfig.GetValue(
@@ -1081,6 +1091,7 @@ begin
   I:=fWitch.Find(FileName);
   if I <> -1 then begin
     LogMessage(vbVerbose, 'Open file "' + FileName + '" already open.');
+    fWitch.Modified[I];
   end else begin
     try
       LI:=lvFileList.Items.Add;

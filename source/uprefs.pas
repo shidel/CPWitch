@@ -26,6 +26,7 @@ type
   TfOptionsDialog = class(TMultiAppPreferences)
     cbReopenFiles: TCheckBox;
     cbWarnMissing: TCheckBox;
+    cbOpenExport: TCheckBox;
     gbSessionFiles: TGroupBox;
     gbUnicodeView: TGroupBox;
     gbDOSView: TGroupBox;
