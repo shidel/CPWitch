@@ -13,11 +13,16 @@ unit Witch;
 
 interface
 
+{$DEFINE Slow_Analyze}
+
 uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
   Classes, SysUtils, Controls, ComCtrls,
   Version, PasExt, Icons, MultiApp, Codepages;
   { other forms }
+
+ { TODO 2 -cDevel Improve TWitchItem to load files in Analize Thread. Report
+   errors back to UI. UI show in Red and prompt when selected. }
 
 type
 
@@ -42,6 +47,7 @@ type
     FIndex: Integer;
     FPreferred: integer;
     FResults: TCodepageResults;
+    FDateTime : TDateTime;
     function GetDisplayName: String;
     function GetIndex: integer;
     procedure SetFileName(AValue: String);
@@ -51,6 +57,7 @@ type
     procedure AnalyzeStart;
     procedure AnalyzeDone(Sender : TObject);
     procedure LoadFile(AFileName : String);
+    function FileChanged : boolean;
   public
     constructor Create(AOwner: TWitch);
     destructor Destroy; override;
@@ -82,9 +89,13 @@ type
   private
     FItems: TWitchItems;
     FOnAnalyzed: TNotifyEvent;
+    FOnModified: TNotifyEvent;
     function GetCount: integer;
+    function GetModified(Index : integer): boolean;
     procedure SetItems(AValue: TWitchItems);
+    procedure SetModified(Index : integer; AValue: boolean);
     procedure SetOnAnalyzed(AValue: TNotifyEvent);
+    procedure SetOnModified(AValue: TNotifyEvent);
   protected
     procedure ValidIndex(Index : integer);
     procedure Remove(Index:integer);
@@ -101,15 +112,17 @@ type
     procedure Delete(Item : TWitchItem); overload;
     procedure Select(Index : Integer); overload;
     procedure Select(Item : TWitchItem); overload;
+    function FileModified(Index : integer) : boolean; overload;
+    function FileModified(FileName : String) : boolean; overload;
+    property Modified[Index : integer] : boolean read GetModified write SetModified;
   published
     property OnAnalyzed : TNotifyEvent read FOnAnalyzed write SetOnAnalyzed;
+    property OnModified : TNotifyEvent read FOnModified write SetOnModified;
   end;
 
 implementation
 
 uses TaskMngr;
-
-{$DEFINE Slow_Analyze}
 
 type
 
@@ -281,6 +294,7 @@ begin
   FAnalyzing:=False;
   FDetected:='';
   FPreferred:=-1;
+  FDateTime:=-1;
   SetLength(FResults, 0);
   SetLength(FData, 0);
 end;
@@ -302,11 +316,11 @@ begin
     T.Text:=PasExt.ToString(FData);
     QueueTask(T);
   end;
-
 end;
 
 procedure TWitchItem.AnalyzeDone(Sender: TObject);
 begin
+  if FileChanged then Exit;
   FAnalyzing:=False;
   FAnalyzed:=True;
   if Sender is TWitchAnalyzeThread then begin
@@ -323,6 +337,8 @@ begin
   ClearData;
   if AFileName = '' then Exit;
   repeat
+    if not FileAge(AFileName, FDateTime) then
+      FDateTime:=-1;
     E:=FileLoad(AFileName, FData);
     if E <> 0 then begin
       ClearData;
@@ -331,6 +347,24 @@ begin
     end;
   until E=0;
   FFileName:=AFileName;
+end;
+
+function TWitchItem.FileChanged: boolean;
+var
+  DT : TDateTime;
+begin
+  Result:=False;
+  if FileAge(FFileName, DT) then
+    Result:=DT <> FDateTime;
+  if Result then
+    LoadFile(FFileName);
+  if Assigned(FListItem) then begin
+    ListItem.ImageIndex:=idxFileTypeFilePlainOrange;
+    if Assigned(FOwner) and Assigned(FOwner.FOnModified) then
+    FOwner.FOnModified(Self);
+  end;
+  if Assigned(FListItem) and Assigned(FOwner) and Assigned(FOwner.FOnAnalyzed) then
+    AnalyzeStart;
 end;
 
 constructor TWitchItem.Create(AOwner: TWitch);
@@ -383,10 +417,26 @@ begin
   Result:=Length(FItems);
 end;
 
+function TWitch.GetModified(Index : integer): boolean;
+begin
+  ValidIndex(Index);
+  if FItems[Index].FDateTime = -1 then
+    Result:=False
+  else
+    Result:= FItems[Index].FileChanged;
+end;
+
 procedure TWitch.SetItems(AValue: TWitchItems);
 begin
   if FItems=AValue then Exit;
   FItems:=AValue;
+end;
+
+procedure TWitch.SetModified(Index : integer; AValue: boolean);
+begin
+  ValidIndex(Index);
+  if AValue=True then
+    FItems[Index].FDateTime:=FItems[Index].FDateTime - 1;
 end;
 
 procedure TWitch.SetOnAnalyzed(AValue: TNotifyEvent);
@@ -398,6 +448,12 @@ begin
   if Assigned(FOnAnalyzed) then
     for I := Low(FItems) to High(FItems) do
       FItems[I].AnalyzeStart;
+end;
+
+procedure TWitch.SetOnModified(AValue: TNotifyEvent);
+begin
+  if FOnModified=AValue then Exit;
+  FOnModified:=AValue;
 end;
 
 procedure TWitch.ValidIndex(Index: integer);
@@ -438,6 +494,7 @@ begin
   inherited Create;
   FItems:=[];
   FOnAnalyzed:=nil;
+  FOnModified:=nil;
 end;
 
 destructor TWitch.Destroy;
@@ -534,6 +591,22 @@ end;
 procedure TWitch.Select(Item: TWitchItem);
 begin
   Select(IndexOf(Item));
+end;
+
+function TWitch.FileModified(Index: integer): boolean;
+begin
+  Result:=GetModified(Index);
+end;
+
+function TWitch.FileModified(FileName: String): boolean;
+var
+  Index:Integer;
+begin
+  Index:=Find(FileName);
+  if Index = -1 then
+    Result:=False
+  else
+    Result:=GetModified(Index);
 end;
 
 function TWitch.IndexOf(Item: TWitchItem): integer;

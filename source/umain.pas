@@ -114,6 +114,7 @@ type
       procedure FormSettingsLoad(Sender: TObject);
       procedure FormSettingsSave(Sender: TObject);
       procedure WitchOnAnalyzed(Sender : TObject);
+      procedure WitchOnModified(Sender : TObject);
       procedure FirstShow(Sender : TObject);
       procedure SetApplicationIcons;
       procedure UpdateCodepageViewLabel;
@@ -211,6 +212,7 @@ var
   R : integer;
   N : String;
   D : RawByteString;
+  A : Boolean;
 begin
   if Not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then
     Exit;
@@ -231,16 +233,20 @@ begin
   end else begin
     D:=TCP.Converted;
   end;
+  A:=False;
   repeat
     if dlgFileSave.Execute then begin
+      A:=True;
       R:=FileSave(dlgFileSave.FileName, D);
       if R <> 0 then
         if FileErrorDialog(dlgFileSave.FileName, R, True) <> mrRetry then
           R:=0;
-    end else R:=0;
+    end else
+      R:=0;
   until R=0;
-
   FreeAndNil(TCP);
+  if A then
+    FWitch.FileModified(dlgFileSave.FileName);
 end;
 
 procedure TfMain.actExportCodepageUpdate(Sender: TObject);
@@ -657,6 +663,11 @@ begin
     UpdateMetaData;
     SelectFile(Self);
   end;
+end;
+
+procedure TfMain.WitchOnModified(Sender: TObject);
+begin
+
 end;
 
 procedure TfMain.FirstShow(Sender: TObject);
