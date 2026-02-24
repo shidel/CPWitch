@@ -199,6 +199,7 @@ begin
   mEdit.Align:=alClient;
   mEdit.ScrollBars:=ssAutoBoth;
   mEdit.WordWrap:=False;
+  mEdit.Font.Name:='Monospace';
 
   btnSave:=TButton.Create(Self);
   btnSave.Parent:=pBottom;
