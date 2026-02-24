@@ -29,6 +29,12 @@ type
   TfMain = class(TMultiAppForm)
       actExportUnicode: TAction;
       actCloseAll: TAction;
+      actExportASCII: TAction;
+      actEditASCII: TAction;
+      actEditCodepage: TAction;
+      actEditUnicode: TAction;
+      actExportNone: TAction;
+      actEditNone: TAction;
       actOpen: TAction;
       actExportCodepage: TAction;
       actDebugLog: TAction;
@@ -98,6 +104,8 @@ type
       FActiveCodepage: integer;
       fCodepageFilter: TCodepageFilter;
       lbViewCodepageLabel : TLabel;
+      btnCloseFile : TToolButton;
+      btnEditFile : TToolButton;
       btnExportFile : TToolButton;
       btnCodepageFilter : TToolButton;
       fWitch : TWitch;
@@ -353,6 +361,12 @@ begin
   actOpen.ImageIndex:=idxButtonFileOpen;
   actExportUnicode.ImageIndex:=idxButtonFileExport;
   actExportCodepage.ImageIndex:=idxButtonFileExportGreen;
+  actExportASCII.ImageIndex:=idxButtonFileExportGray;
+  actExportNone.ImageIndex:=idxButtonFileExportRed;
+  actEditUnicode.ImageIndex:=idxButtonFileEdit;
+  actEditCodepage.ImageIndex:=idxButtonFileEditGreen;
+  actEditASCII.ImageIndex:=idxButtonFileEditGray;
+  actEditNone.ImageIndex:=idxButtonFileEditRed;
   actClose.ImageIndex:=idxButtonFileClose;
   actCloseAll.ImageIndex:=idxButtonFileCloseAll;
   actPreferences.ImageIndex:=idxButtonPreferences;
@@ -365,14 +379,17 @@ begin
 
   // Add Main ToolBar Buttons
   CreateToolButton(tbMain, actOpen);
+  CreateToolButton(tbMain, tbsDivider, 'btnDivider0');
+  btnEditFile:=CreateToolButton(tbMain, actEditCodepage);
+  CreateToolButton(tbMain, tbsDivider, 'btnDivider1');
   btnExportFile:=CreateToolButton(tbMain, actExportCodepage);
   CreateToolButton(tbMain, actClose);
   CreateToolButton(tbMain, actCloseAll);
-  CreateToolButton(tbMain, tbsDivider, 'btnDivider1');
+  CreateToolButton(tbMain, tbsDivider, 'btnDivider2');
   btnCodepageFilter:=CreateToolButton(tbMain, actCodepageFilter);
   btnCodepageFilter.Style:=tbsButtonDrop;
   btnCodepageFilter.DropdownMenu:=pmListMode;
-  CreateToolButton(tbMain, tbsDivider, 'btnDivider2');
+  CreateToolButton(tbMain, tbsDivider, 'btnDivider3');
   CreateToolButton(tbMain, actPreferences);
   CreateToolButton(tbMain, actOnlineUpdate);
   CreateToolButton(tbMain, actDebugLog);
@@ -703,7 +720,8 @@ end;
 procedure TfMain.SetApplicationIcons;
 begin
   tbMain.Images:=IconTheme.ButtonEnabled;
-  tbMain.DisabledImages:=IconTheme.ButtonDisabled;
+  // tbMain.DisabledImages:=IconTheme.ButtonDisabled;
+  tbMain.DisabledImages:=ilButtonDisabled;
   tbMain.HotImages:=IconTheme.ButtonHover;
   pmListMode.Images:=IconTheme.ButtonEnabled;
 
@@ -913,14 +931,25 @@ procedure TfMain.UpdateButtons;
 begin
   if Assigned(lvFileList.Selected) then begin
     case TWitchItem(lvFileList.Selected.Data).Encoding of
-      weNone, weCodepage : begin
+      weNone : begin
+        actClose.ImageIndex:=idxButtonFileCloseGray;
+        btnExportFile.Action:=actExportASCII;
+        btnEditFile.Action:=actEditASCII;
+      end;
+      weCodepage : begin
         actClose.ImageIndex:=idxButtonFileClose;
         btnExportFile.Action:=actExportUnicode;
+        btnEditFile.Action:=actEditUnicode;
       end;
       weUnicode: begin
         actClose.ImageIndex:=idxButtonFileCloseGreen;
         btnExportFile.Action:=actExportCodepage;
+        btnEditFile.Action:=actEditCodepage;
       end;
+    else
+      actClose.ImageIndex:=idxButtonFileCloseRed;
+      btnExportFile.Action:=actExportNone;
+      btnEditFile.Action:=actEditNone;
     end;
   end;
 

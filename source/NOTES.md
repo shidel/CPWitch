@@ -1,5 +1,7 @@
 # Upcoming release notes
 
+* Additional button icons for file type consistency.
+* Switched to B&W for Color button when disabled.
 * Option to automatically open exported files.
 * Background file modification detection when Idle.
 * Reload and analyze files that are overriten by export.

@@ -297,13 +297,6 @@ object fMain: TfMain
       Hint = 'Open a text file.'
       OnExecute = actOpenExecute
     end
-    object actExportCodepage: TAction
-      Category = 'File'
-      Caption = 'Export Codepage...'
-      Hint = 'Export a text file encoded in codepage format.'
-      OnExecute = actExportCodepageExecute
-      OnUpdate = actExportCodepageUpdate
-    end
     object actPreferences: TAction
       Category = 'Application'
       Caption = 'Preferences...'
@@ -346,11 +339,43 @@ object fMain: TfMain
       Hint = 'Filter the codepages list.'
       OnExecute = actCodepageFilterExecute
     end
+    object actExportASCII: TAction
+      Category = 'File'
+      Caption = 'Export ASCII...'
+      Hint = 'Export a text file as 7-BIT ASCII that requires no specific codepage or unicode characters.'
+    end
+    object actExportCodepage: TAction
+      Category = 'File'
+      Caption = 'Export Codepage...'
+      Hint = 'Export a text file encoded in codepage format.'
+      OnExecute = actExportCodepageExecute
+      OnUpdate = actExportCodepageUpdate
+    end
     object actExportUnicode: TAction
       Category = 'File'
       Caption = 'Export UTF-8...'
       Hint = 'Export a text file encoded in UTF-8 format.'
       OnUpdate = actExportUnicodeUpdate
+    end
+    object actEditASCII: TAction
+      Category = 'Edit'
+      Caption = 'Edit ASCII...'
+      Hint = 'Edit simple 7-BIT ASCII file.'
+    end
+    object actEditCodepage: TAction
+      Category = 'Edit'
+      Caption = 'Edit Codepage...'
+      Hint = 'Edit codepage file.'
+    end
+    object actEditUnicode: TAction
+      Category = 'Edit'
+      Caption = 'Edit Unicode...'
+      Hint = 'Edit Unicode text file.'
+    end
+    object actExportNone: TAction
+      Category = 'File'
+      Caption = 'No Export'
+      Hint = 'Can not export this type of file.'
     end
     object actClose: TAction
       Category = 'File'
@@ -365,6 +390,11 @@ object fMain: TfMain
       Hint = 'Close all open text files.'
       OnExecute = actCloseAllExecute
       OnUpdate = actCloseAllUpdate
+    end
+    object actEditNone: TAction
+      Category = 'Edit'
+      Caption = 'No Editor'
+      Hint = 'Can not edit this type of file.'
     end
   end
   object mmMain: TMainMenu
