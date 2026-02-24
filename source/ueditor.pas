@@ -43,8 +43,13 @@ type
     pBody : TPanel;
     pBottom : TPanel;
     pStatus : TStatusBar;
+    mEdit : TMemo;
+    btnClose : TButton;
+    btnSave : TButton;
     procedure DoCreate; override;
     procedure DoClose(var CloseAction : TCloseAction); override;
+    procedure OnCloseButton(Sender : TObject);
+    procedure OnSaveButton(Sender : TObject);
   public
     constructor Create(TheOwner: TComponent); override;
     constructor CreateNew(TheOwner: TComponent;Num:Integer=0); override;
@@ -100,13 +105,24 @@ end;
 procedure FileEditor(FileName: String; OnSaveNotify : TNotifyEvent = nil);
 var
   Editor : TEditorForm;
+  I : Integer;
 begin
   LogMessage(vbNormal, 'Edit file: ' + FileName);
-  Editor:=TEditorForm.CreateNew(Application);
-  Editor.OnSave:=OnSaveNotify;
-  Editor.FileName:=FileName;
+  Editor:=nil;
+  for I := 0 to High(FileEditors) do
+    if Assigned(FileEditors[I]) and (FileEditors[I].FileName=FileName) then begin
+      Editor:=FileEditors[I];
+      Break;
+    end;
+  if Not Assigned(Editor) then begin
+    Editor:=TEditorForm.CreateNew(Application);
+    Editor.OnSave:=OnSaveNotify;
+    Editor.FileName:=FileName;
+  end;
   Editor.ApplyUserLanguage;
   Editor.Show;
+  Editor.BringToFront;
+  Editor.SetFocus;
 end;
 
 { TEditorForm }
@@ -115,6 +131,15 @@ procedure TEditorForm.SetFileName(AValue: String);
 begin
   if FFileName=AValue then Exit;
   FFileName:=AValue;
+  try
+    mEdit.Lines.LoadFromFile(FFileName);
+  except
+    mEdit.Clear;
+    mEdit.Lines.Add('File Read Error');
+    mEdit.Enabled:=False;
+    mEdit.ReadOnly:=True;
+    btnSave.Enabled:=False;
+  end;
 end;
 
 procedure TEditorForm.SetOnSave(AValue: TNotifyEvent);
@@ -133,28 +158,64 @@ begin
   Constraints.MinHeight:=320;
   DesignTimePPI:=96;
 
-  pBody:=TPanel.Create(Self);
-  FlattenControl(pBody);
-  pBody.BorderStyle:=bsNone;
-  pBody.Parent:=Self;
-  pBody.Align:=alClient;
-  pBody.BorderSpacing.Around:=8;
+  pStatus:=TStatusBar.Create(Self);
+  pStatus.Parent:=Self;
+  pStatus.SizeGrip:=True;
+  pStatus.SimplePanel:=True;
+  // Cludge to put Status Bar at the bottom of the form
+  pStatus.Top:=100000;
 
   pBottom:=TPanel.Create(Self);
   FlattenControl(pBottom);
   //pBottom.BorderStyle:=bsNone;
   pBottom.Parent:=Self;
-  pBottom.Align:=alBottom;
   pBottom.BorderStyle:=bsNone;
   pBottom.BorderSpacing.Around:=8;
+  pBottom.AutoSize:=True;
+  // Cludge to put Bottom Panel above the Status Bar.
+  pStatus.Top:=99999;
 
   pTop:=TPanel.Create(Self);
   FlattenControl(pTop);
   pTop.BorderStyle:=bsNone;
   pTop.Parent:=Self;
-  pTop.Align:=alTop;
   pTop.BorderSpacing.Around:=8;
   pTop.Visible:=False;
+
+  pBody:=TPanel.Create(Self);
+  FlattenControl(pBody);
+  pBody.BorderStyle:=bsNone;
+  pBody.Parent:=Self;
+  pBody.BorderSpacing.Around:=8;
+
+  pStatus.Align:=alBottom;
+  pBottom.Align:=alBottom;
+  pTop.Align:=alTop;
+  pBody.Align:=alClient;
+
+  mEdit:=TMemo.Create(Self);
+  mEdit.Parent:=pBody;
+  mEdit.Clear;
+  mEdit.Align:=alClient;
+  mEdit.ScrollBars:=ssAutoBoth;
+  mEdit.WordWrap:=False;
+
+  btnSave:=TButton.Create(Self);
+  btnSave.Parent:=pBottom;
+  btnSave.ModalResult:=mrCancel;
+  btnSave.AutoSize:=True;
+  btnSave.Align:=alRight;
+  btnSave.BorderSpacing.Around:=8;
+
+  btnClose:=TButton.Create(Self);
+  btnClose.Parent:=pBottom;
+  btnClose.ModalResult:=mrCancel;
+  btnClose.AutoSize:=True;
+  btnClose.Align:=alRight;
+  btnClose.BorderSpacing.Around:=8;
+
+  btnSave.OnClick:=@OnSaveButton;
+  btnClose.OnClick:=@OnCloseButton;
 
 end;
 
@@ -162,6 +223,16 @@ procedure TEditorForm.DoClose(var CloseAction: TCloseAction);
 begin
   inherited DoClose(CloseAction);
   CloseAction := caFree;
+end;
+
+procedure TEditorForm.OnCloseButton(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TEditorForm.OnSaveButton(Sender: TObject);
+begin
+
 end;
 
 constructor TEditorForm.Create(TheOwner: TComponent);
@@ -190,22 +261,32 @@ end;
 
 procedure TEditorForm.ApplyUserLanguage;
 var
-  K, S, V : String;
+  K, S, V, BS, BC : String;
 begin
-  inherited ApplyUserLanguage;
+  // Adjust Language Strings Based on first Editor Form, not current index
+  // inherited ApplyUserLanguage;
   K:='/Controls/fFileEditor/';
   S:='Codepage Witch - %s';
+  BC:='Cancel';
+  BS:='Save';
   if Assigned(Translations) then begin
     {$IFDEF SUPPORT_NOLANG}
     No_Language.SetValue(UnicodeString(K+'Caption'), UnicodeString(S));
+    No_Language.SetValue(UnicodeString(K+'btnCancel/Caption'), UnicodeString(BC));
+    No_Language.SetValue(UnicodeString(K+'btnSave/Caption'), UnicodeString(BS));
     {$ENDIF}
     V:=RawByteString(Translations.GetValue(UnicodeString(K+'Caption'), UnicodeString(S)));
+    BC:=RawByteString(Translations.GetValue(UnicodeString(K+'btnCancel/Caption'), UnicodeString(BC)));
+    BS:=RawByteString(Translations.GetValue(UnicodeString(K+'btnSave/Caption'), UnicodeString(BS)));
   end;
   try
     S:=Format(V, [ExtractFileName(FileName)]);
   finally
   end;
   Caption:=S;
+  pStatus.SimpleText:=SPACE2 + FileName;
+  btnClose.Caption:=BC;
+  btnSave.Caption:=BS;
 end;
 
 initialization

@@ -215,19 +215,19 @@ end;
 
 procedure TfMain.actEditASCIIExecute(Sender: TObject);
 begin
-  if CanExport then
+  if CanEdit then
     FileEditor(TWitchItem(lvFileList.Selected.Data).FileName, @FileWasEdited);
 end;
 
 procedure TfMain.actEditCodepageExecute(Sender: TObject);
 begin
-  if CanExport then
+  if CanEdit then
     FileEditor(TWitchItem(lvFileList.Selected.Data).FileName, @FileWasEdited);
 end;
 
 procedure TfMain.actEditUnicodeExecute(Sender: TObject);
 begin
-  if CanExport then
+  if CanEdit then
     FileEditor(TWitchItem(lvFileList.Selected.Data).FileName, @FileWasEdited);
 end;
 

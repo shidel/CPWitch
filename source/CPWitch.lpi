@@ -20,7 +20,7 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <MinorVersionNr Value="4"/>
-      <BuildNr Value="92"/>
+      <BuildNr Value="93"/>
       <Attributes pvaDebug="True" pvaPreRelease="True"/>
       <StringTable Comments="UTF-8 and Codepage Utility" CompanyName="Jerome Shidel" FileDescription="CPWitch" InternalName="CPWitch" LegalCopyright="2026 (c) Jerome Shidel" OriginalFilename="CPWitch" ProductName="Codepage Witch" ProductVersion="0.4"/>
     </VersionInfo>

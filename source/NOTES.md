@@ -1,5 +1,6 @@
 # Upcoming release notes
 
+* Included simple text editor.
 * Improved button state change responsiveness.
 * Additional button icons for file type consistency.
 * Switched to B&W for Color button when disabled.
