@@ -48,7 +48,7 @@ type
       alMain: TActionList;
       ctrlBar: TControlBar;
       hpUnicodeText: TIpHtmlPanel;
-      FileWatchTimer: TIdleTimer;
+      tiFileWatch: TIdleTimer;
       lbUnicodeViewLabel: TLabel;
       lbCodepageLabel: TLabel;
       lbFileList: TLabel;
@@ -75,13 +75,15 @@ type
       spUnicodeCP: TSplitter;
       statBar: TStatusBar;
       tbMain: TToolBar;
-      tAnimate: TTimer;
+      ttAnimate: TTimer;
     procedure actCloseAllExecute(Sender: TObject);
     procedure actCloseAllUpdate(Sender: TObject);
     procedure actCodepageFilterExecute(Sender: TObject);
     procedure actDebugLogExecute(Sender: TObject);
     procedure actCloseExecute(Sender: TObject);
     procedure actCloseUpdate(Sender: TObject);
+    procedure actExportASCIIExecute(Sender: TObject);
+    procedure actExportASCIIUpdate(Sender: TObject);
     procedure actExportCodepageExecute(Sender: TObject);
     procedure actExportCodepageUpdate(Sender: TObject);
     procedure actExportUnicodeUpdate(Sender: TObject);
@@ -94,17 +96,17 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
-    procedure FileWatchTimerTimer(Sender: TObject);
+    procedure tiFileWatchTimer(Sender: TObject);
     procedure lvCodepageListSelectItem(Sender: TObject; Item: TListItem;
       Selected: Boolean);
     procedure lvFileListSelectItem(Sender: TObject; Item: TListItem;
       Selected: Boolean);
-    procedure tAnimateTimer(Sender: TObject);
+    procedure ttAnimateTimer(Sender: TObject);
     private
       FActiveCodepage: integer;
+      FViewedCodepage : integer;
       fCodepageFilter: TCodepageFilter;
       lbViewCodepageLabel : TLabel;
-      btnCloseFile : TToolButton;
       btnEditFile : TToolButton;
       btnExportFile : TToolButton;
       btnCodepageFilter : TToolButton;
@@ -216,6 +218,19 @@ begin
   TWitchItem(lvFileList.Selected.Data).Analyzed;
 end;
 
+procedure TfMain.actExportASCIIExecute(Sender: TObject);
+begin
+  actExportCodepageExecute(Sender);
+end;
+
+procedure TfMain.actExportASCIIUpdate(Sender: TObject);
+begin
+  actExportCodepage.Enabled:=Assigned(lvCodepageList.Selected) and
+  Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data) and
+  TWitchItem(lvFileList.Selected.Data).Analyzed and
+  (TWitchItem(lvFileList.Selected.Data).Encoding<>weBinary);
+end;
+
 procedure TfMain.actExportCodepageExecute(Sender: TObject);
 var
   W : TWitchItem;
@@ -276,10 +291,11 @@ end;
 
 procedure TfMain.actExportUnicodeUpdate(Sender: TObject);
 begin
-  actExportUnicode.Enabled:=Assigned(lvCodepageList.Selected) and
+  actExportUnicode.Enabled:=false;
+{  Assigned(lvCodepageList.Selected) and
   Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data) and
   TWitchItem(lvFileList.Selected.Data).Analyzed and
-  (TWitchItem(lvFileList.Selected.Data).Encoding<>weBinary);
+  (TWitchItem(lvFileList.Selected.Data).Encoding<>weBinary); }
 end;
 
 procedure TfMain.actOpenExecute(Sender: TObject);
@@ -325,6 +341,7 @@ procedure TfMain.FormCreate(Sender: TObject);
 begin
   OnFirstShow:=@FirstShow;
   FActiveCodepage := 437;
+  FViewedCodePage :=-2;
   FUnicodeScale:=100;
   FDOSScale:=1;
   fEndBlankOnInput:=True;
@@ -433,7 +450,7 @@ begin
     OpenFile(FileNames[I], I=0);
 end;
 
-procedure TfMain.FileWatchTimerTimer(Sender: TObject);
+procedure TfMain.tiFileWatchTimer(Sender: TObject);
 var
   I : integer;
 begin
@@ -463,7 +480,7 @@ begin
   if Selected then SelectFile(Sender);
 end;
 
-procedure TfMain.tAnimateTimer(Sender: TObject);
+procedure TfMain.ttAnimateTimer(Sender: TObject);
 var
   I : integer;
 begin
@@ -488,7 +505,7 @@ begin
   if not Assigned(Item) then Exit;
   if Item.Analyzed then begin
     // Processing complete
-    tAnimate.Enabled:=False;
+    ttAnimate.Enabled:=False;
     lvCodepageList.Enabled:=True;
     lvCodepageList.SmallImages:=ilPercentageColor;
     K:=ComponentNamePath(lvCodepageList, Self, True);
@@ -544,7 +561,7 @@ begin
     K:=ComponentNamePath(lvCodepageList, Self, True);
     L.Caption:=GetTranslation(K+'Analyzing/Caption', 'Analyzing');
     L.ImageIndex:=0;
-    tAnimate.Enabled:=True;
+    ttAnimate.Enabled:=True;
   end;
 end;
 
@@ -884,14 +901,18 @@ var
   W : TWitchItem;
 begin
   if Not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then begin
+    FViewedCodepage:=-2;
     fCodepageText.Clear;
     Exit;
   end;
   W:=TWitchItem(lvFileList.Selected.Data);
   if not W.Analyzed then begin
+    FViewedCodepage:=-2;
     fCodepageText.Clear;
     Exit;
   end else begin
+    if FViewedCodePage=FActiveCodePage then Exit;
+    FViewedCodePage:=FActiveCodepage;
     fCodepageText.BeginUpdate;
     fCodePageText.Clear;
     case W.Encoding of
@@ -985,6 +1006,7 @@ var
   S : String;
   W : TWitchItem;
 begin
+  FViewedCodepage:=-2;
   if Assigned(lvFileList.Selected) then
     S:=lvFileList.Selected.Caption
   else

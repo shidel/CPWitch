@@ -21,9 +21,9 @@
         <UnitName Value="uMain"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="558"/>
-        <CursorPos Y="939"/>
-        <FoldState Value=" TL00404 p0u42107]9tG21 T3kV035181]JlQq3062 pj7jJ0C6]9Lk40+215]TFna082 Pi6I0 T1kW023111]T]42214 piJtb030143[n5pR051 T6l50202241[\4NzE016 PEk7]/0lAc82A45]zIsUF303A]BXkQi312111BA PiPn8a TMq9]I9263 PDqN4I"/>
+        <TopLine Value="317"/>
+        <CursorPos X="23" Y="344"/>
+        <FoldState Value=" TL00405 p0uL2107]9t]9 T3kX038 pjEjZ0671]QkLnQ062]K7jJ0C6]9Lk40+]IiXkG0Q213]K9k]n1 Pi080 T1kY02311651212214]j9u9030143[F4Pl3q9]f6l702022411 p5sZ0]A7 PVr6]T0lCc82A45]-It2F303A[{b5Qi312111BA PiPnDa TMqQ]I9263 PDqN4M"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -36,8 +36,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uPrefs"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="44"/>
-        <CursorPos X="20" Y="20"/>
+        <TopLine Value="63"/>
+        <CursorPos X="58" Y="58"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -61,7 +61,7 @@
         <TopLine Value="3648"/>
         <CursorPos X="35" Y="3656"/>
         <FoldState Value=" TK0071 TL904032M1W13221112[444S4D2HD pjbtQ22817G24422F226C66392316]f649]aTxM46 T4@O01 T3.H05C piYjb034]W8jW0G5]90jS0E722 PlRlV0 T1.I04E]iXkT053[94jJ0Z6134]bjao0]b6@S01C2 pOsX04 TM\441143 T0=2HJD16 PkOsSXc"/>
-        <UsageCount Value="109"/>
+        <UsageCount Value="108"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/multiapp.pp"/>
@@ -70,7 +70,7 @@
         <TopLine Value="895"/>
         <CursorPos Y="1135"/>
         <FoldState Value=" TL0041267A411121G pg*d01071 p1wB21 TMa03134 pFijU[H44i604 T7mbIt012 PFkGN T8l32A01715 PjCmC2 TCpeI3 T3r9098 piajK03[94ZjH[96YjJ0B9 pjCjO262 pkBa286]H1l20I[i6U075[95B03A]R2jX0E7]98je0DD]RXjV0{UC]Afm8[b63jM043 PNjE0 T6rB01f PiX&apos;9]F1rD05D[,4kT09823211[F4apT0v298]BgpH0AE pidkc0PF pl7n206G]IXk802922 Pj5l[&apos;40sGW5429 pjIsMQMD2A pkMwdaCA13]d2sTVe"/>
-        <UsageCount Value="96"/>
+        <UsageCount Value="95"/>
       </Unit>
       <Unit>
         <Filename Value="upreferences.pas"/>
@@ -82,7 +82,7 @@
         <TopLine Value="36"/>
         <CursorPos X="33" Y="36"/>
         <FoldState Value=" T3j60Q82111 PjClc0-"/>
-        <UsageCount Value="27"/>
+        <UsageCount Value="26"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/preferences.pp"/>
@@ -91,7 +91,7 @@
         <TopLine Value="234"/>
         <CursorPos X="35" Y="256"/>
         <FoldState Value=" T3jV086135112131 pndtM04111 Pk5iX0&apos;"/>
-        <UsageCount Value="57"/>
+        <UsageCount Value="56"/>
       </Unit>
       <Unit>
         <Filename Value="witch.pas"/>
@@ -109,7 +109,7 @@
         <TopLine Value="40"/>
         <CursorPos X="42" Y="44"/>
         <FoldState Value=" T7i4Ne3 PfifH T3kc0A3 pjQk10Z0111E plcnP04321 POlQ0d"/>
-        <UsageCount Value="68"/>
+        <UsageCount Value="67"/>
       </Unit>
       <Unit>
         <Filename Value="doscrt.pp"/>
@@ -118,7 +118,7 @@
         <TopLine Value="8"/>
         <CursorPos X="63" Y="24"/>
         <FoldState Value=" T7jPCK1 PXMI T3lK0411A13 pkRlg0S4 piXjT0J6]9ZjP04226 PiAjI0+"/>
-        <UsageCount Value="42"/>
+        <UsageCount Value="41"/>
       </Unit>
       <Unit>
         <Filename Value="dosfont.pp"/>
@@ -127,7 +127,7 @@
         <TopLine Value="91"/>
         <CursorPos X="37" Y="109"/>
         <FoldState Value=" T7i2J9 T3lE057 piZjJ094]9bjD0{Z5]AalZ062 PIE0T"/>
-        <UsageCount Value="26"/>
+        <UsageCount Value="25"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/codepages.pp"/>
@@ -136,7 +136,7 @@
         <TopLine Value="156"/>
         <CursorPos X="65" Y="206"/>
         <FoldState Value=" TL004011211]5 PDxb0 T4L02 TCQH3]77i4Ne3 PfifH T8i528B PiEj[T4MkML10413[-4p6v8A1 T3ke0A[H5jQkE033 pkOi82FE]IcmY04]l]BFlU08 T6kf0111A]JVtg04 T1l007[:6BkC0241D plNng03[w66]w7 T0l3e37 pibjVc9A]9ZnWL9367]aIkYr56]91i3B911"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/doscrt.pp"/>
@@ -145,7 +145,7 @@
         <TopLine Value="600"/>
         <CursorPos X="63" Y="635"/>
         <FoldState Value=" T3kA05G pifjb051113]52212 PmJob0a"/>
-        <UsageCount Value="67"/>
+        <UsageCount Value="66"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/dosview.pp"/>
@@ -154,22 +154,10 @@
         <TopLine Value="119"/>
         <CursorPos Y="356"/>
         <FoldState Value=" T3kH05H pj5k3053]9Yk40F12B plCmA045 PiTiW0~"/>
-        <UsageCount Value="45"/>
+        <UsageCount Value="44"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="342" Column="28" TopLine="313"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="343" Column="29" TopLine="313"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="344" Column="25" TopLine="313"/>
-      </Position>
       <Position>
         <Filename Value="umain.pas"/>
         <Caret Line="345" Column="31" TopLine="313"/>
@@ -277,6 +265,18 @@
       <Position>
         <Filename Value="umain.pas"/>
         <Caret Line="364" Column="51" TopLine="330"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="275" Column="62" TopLine="253"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="288" Column="63" TopLine="268"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="230" Column="61" TopLine="172"/>
       </Position>
     </JumpHistory>
     <RunParams>

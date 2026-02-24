@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CONFIG Language="uk_UA" Name="Українська">
+<CONFIG Name="Українська" Language="uk_UA">
   <Translation>
     <Revision_0 Date="2026-02-17" Contributor="Google Gemini"/>
   </Translation>
@@ -116,7 +116,6 @@
     <fMain Caption="Codepage Witch">
       <alMain>
         <actOpen Hint="Відкрити текстовий файл." Caption="Відкрити файл..."/>
-        <actExportCodepage Hint="Експортувати текстовий файл, закодований у форматі кодової сторінки." Caption="Експортувати кодову сторінку..."/>
         <actPreferences Hint="Переглянути або змінити налаштування Codepage Witch." Caption="Налаштування..."/>
         <actOnlineUpdate Hint="Перевірити наявність оновлень для Codepage Witch." Caption="Перевірка оновлень..."/>
         <actDebugLog Hint="Переглянути журнал налагодження." Caption="Журнал налагодження..."/>
@@ -124,9 +123,16 @@
         <actListPartial Hint="Список частково сумісних кодових сторінок." Caption="Будь-яка можлива"/>
         <actListCompatible Hint="Список лише повністю сумісних кодових сторінок." Caption="Тільки сумісні"/>
         <actCodepageFilter Hint="Фільтрувати список кодових сторінок." Caption="Фільтр кодових сторінок"/>
+        <actExportASCII Hint="Export a text file as 7-BIT ASCII that requires no specific codepage or unicode characters." Caption="Export ASCII..."/>
+        <actExportCodepage Hint="Експортувати текстовий файл, закодований у форматі кодової сторінки." Caption="Експортувати кодову сторінку..."/>
         <actExportUnicode Hint="Експортувати текстовий файл, закодований у форматі UTF-8." Caption="Експортувати UTF-8..."/>
+        <actEditASCII Hint="Edit simple 7-BIT ASCII file." Caption="Edit ASCII..."/>
+        <actEditCodepage Hint="Edit codepage file." Caption="Edit Codepage..."/>
+        <actEditUnicode Hint="Edit Unicode text file." Caption="Edit Unicode..."/>
+        <actExportNone Hint="Can not export this type of file." Caption="No Export"/>
         <actClose Hint="Закрити поточний текстовий файл." Caption="Закрити файл"/>
         <actCloseAll Hint="Закрити всі відкриті текстові файли." Caption="Закрити всі"/>
+        <actEditNone Hint="Can not edit this type of file." Caption="No Editor"/>
       </alMain>
       <pFileList>
         <pFileListLabel>
@@ -139,9 +145,9 @@
         </pCodepageListLabel>
         <lvCodepageList>
           <Analyzing Caption="Аналіз"/>
-          <Binary_data Caption="Бінарний файл"/>
           <Not_implemented Caption="Не реалізовано"/>
           <Any_Codepage Caption="Будь-яка кодова сторінка"/>
+          <Binary_data Caption="Бінарний файл"/>
         </lvCodepageList>
       </pCodepageList>
       <pViewers>
@@ -163,9 +169,9 @@
         <Processing Caption="Обробка"/>
         <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
         <Unicode Caption="Unicode"/>
-        <Binary Caption="Бінарний"/>
         <Codepage Caption="Кодова сторінка"/>
         <NoEncoding Caption="ASCII"/>
+        <Binary Caption="Бінарний"/>
       </statBar>
     </fMain>
     <fCorrectFileEndingDialog Caption="Відсутній кінцевий розрив рядка">

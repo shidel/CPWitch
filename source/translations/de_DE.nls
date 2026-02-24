@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CONFIG Language="de_DE" Name="Deutsch">
+<CONFIG Name="Deutsch" Language="de_DE">
   <Translation>
     <Revision_0 Date="2026-02-17" Contributor="Google Gemini"/>
   </Translation>
@@ -116,7 +116,6 @@
     <fMain Caption="Codepage Witch">
       <alMain>
         <actOpen Hint="Eine Textdatei öffnen." Caption="Datei öffnen..."/>
-        <actExportCodepage Hint="Eine Textdatei im Codepage-Format exportieren." Caption="Codepage exportieren..."/>
         <actPreferences Hint="Codepage Witch Einstellungen anzeigen oder ändern." Caption="Einstellungen..."/>
         <actOnlineUpdate Hint="Nach Updates für Codepage Witch suchen." Caption="Update-Prüfung..."/>
         <actDebugLog Hint="Das Debug-Protokoll anzeigen." Caption="Debug-Protokoll..."/>
@@ -124,9 +123,16 @@
         <actListPartial Hint="Teilweise kompatible Codepages auflisten." Caption="Alle möglichen"/>
         <actListCompatible Hint="Nur vollständig kompatible Codepages auflisten." Caption="Nur kompatible"/>
         <actCodepageFilter Hint="Die Codepage-Liste filtern." Caption="Codepage-Filter"/>
+        <actExportASCII Hint="Export a text file as 7-BIT ASCII that requires no specific codepage or unicode characters." Caption="Export ASCII..."/>
+        <actExportCodepage Hint="Eine Textdatei im Codepage-Format exportieren." Caption="Codepage exportieren..."/>
         <actExportUnicode Hint="Eine Textdatei im UTF-8-Format exportieren." Caption="UTF-8 exportieren..."/>
+        <actEditASCII Hint="Edit simple 7-BIT ASCII file." Caption="Edit ASCII..."/>
+        <actEditCodepage Hint="Edit codepage file." Caption="Edit Codepage..."/>
+        <actEditUnicode Hint="Edit Unicode text file." Caption="Edit Unicode..."/>
+        <actExportNone Hint="Can not export this type of file." Caption="No Export"/>
         <actClose Hint="Die aktuelle Textdatei schließen." Caption="Datei schließen"/>
         <actCloseAll Hint="Alle offenen Textdateien schließen." Caption="Alle schließen"/>
+        <actEditNone Hint="Can not edit this type of file." Caption="No Editor"/>
       </alMain>
       <pFileList>
         <pFileListLabel>
@@ -137,13 +143,12 @@
         <pCodepageListLabel>
           <lbCodepageLabel Caption="Codepages"/>
         </pCodepageListLabel>
+        <lvCodepageList>
+          <Analyzing Caption="Analyzing"/>
+          <Not_implemented Caption="Not implemented"/>
+          <Any_Codepage Caption="Any Codepage"/>
+        </lvCodepageList>
       </pCodepageList>
-      <lvCodepageList>
-        <Analyzing Caption="Analysiere"/>
-        <Binary_data Caption="Binärdatei"/>
-        <Not_implemented Caption="Nicht implementiert"/>
-        <Any_Codepage Caption="Beliebige Codepage"/>
-      </lvCodepageList>
       <pViewers>
         <pViewUnicode>
           <pViewUnicodeLabel>
@@ -163,10 +168,16 @@
         <Processing Caption="Verarbeitung"/>
         <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
         <Unicode Caption="Unicode"/>
-        <Binary Caption="Binär"/>
         <Codepage Caption="Codepage"/>
         <NoEncoding Caption="ASCII"/>
+        <Binary Caption="Binär"/>
       </statBar>
+      <lvCodepageList>
+        <Analyzing Caption="Analysiere"/>
+        <Binary_data Caption="Binärdatei"/>
+        <Not_implemented Caption="Nicht implementiert"/>
+        <Any_Codepage Caption="Beliebige Codepage"/>
+      </lvCodepageList>
     </fMain>
     <fCorrectFileEndingDialog Caption="Kein Zeilenende am Schluss">
       <fLowerPanel>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CONFIG Language="es_ES" Name="Español">
+<CONFIG Name="Español" Language="es_ES">
   <Translation>
     <Revision_0 Date="2026-02-17" Contributor="Google Gemini"/>
   </Translation>
@@ -116,7 +116,6 @@
     <fMain Caption="Codepage Witch">
       <alMain>
         <actOpen Hint="Abrir un archivo de texto." Caption="Abrir Archivo..."/>
-        <actExportCodepage Hint="Exportar un archivo de texto codificado en formato codepage." Caption="Exportar Codepage..."/>
         <actPreferences Hint="Ver o modificar las preferencias de Codepage Witch." Caption="Preferencias..."/>
         <actOnlineUpdate Hint="Buscar actualizaciones de Codepage Witch." Caption="Comprobar Actualizaciones..."/>
         <actDebugLog Hint="Ver el registro de depuración." Caption="Registro de Depuración..."/>
@@ -124,9 +123,16 @@
         <actListPartial Hint="Listar codepages parcialmente compatibles." Caption="Cualquier posible"/>
         <actListCompatible Hint="Listar solo codepages totalmente compatibles." Caption="Solo compatibles"/>
         <actCodepageFilter Hint="Filtrar la lista de codepages." Caption="Filtro de Codepage"/>
+        <actExportASCII Hint="Export a text file as 7-BIT ASCII that requires no specific codepage or unicode characters." Caption="Export ASCII..."/>
+        <actExportCodepage Hint="Exportar un archivo de texto codificado en formato codepage." Caption="Exportar Codepage..."/>
         <actExportUnicode Hint="Exportar un archivo de texto codificado en formato UTF-8." Caption="Exportar UTF-8..."/>
+        <actEditASCII Hint="Edit simple 7-BIT ASCII file." Caption="Edit ASCII..."/>
+        <actEditCodepage Hint="Edit codepage file." Caption="Edit Codepage..."/>
+        <actEditUnicode Hint="Edit Unicode text file." Caption="Edit Unicode..."/>
+        <actExportNone Hint="Can not export this type of file." Caption="No Export"/>
         <actClose Hint="Cerrar el archivo de texto actual." Caption="Cerrar Archivo"/>
         <actCloseAll Hint="Cerrar todos los archivos de texto abiertos." Caption="Cerrar todo"/>
+        <actEditNone Hint="Can not edit this type of file." Caption="No Editor"/>
       </alMain>
       <pFileList>
         <pFileListLabel>
@@ -139,9 +145,9 @@
         </pCodepageListLabel>
         <lvCodepageList>
           <Analyzing Caption="Analizando"/>
-          <Binary_data Caption="Archivo Binario"/>
           <Not_implemented Caption="No implementado"/>
           <Any_Codepage Caption="Cualquier Codepage"/>
+          <Binary_data Caption="Archivo Binario"/>
         </lvCodepageList>
       </pCodepageList>
       <pViewers>
@@ -163,9 +169,9 @@
         <Processing Caption="Procesando"/>
         <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
         <Unicode Caption="Unicode"/>
-        <Binary Caption="Binario"/>
         <Codepage Caption="Codepage"/>
         <NoEncoding Caption="ASCII"/>
+        <Binary Caption="Binario"/>
       </statBar>
     </fMain>
     <fCorrectFileEndingDialog Caption="Sin salto de línea final">

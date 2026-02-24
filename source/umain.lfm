@@ -342,11 +342,15 @@ object fMain: TfMain
     object actExportASCII: TAction
       Category = 'File'
       Caption = 'Export ASCII...'
+      Enabled = False
       Hint = 'Export a text file as 7-BIT ASCII that requires no specific codepage or unicode characters.'
+      OnExecute = actExportASCIIExecute
+      OnUpdate = actExportASCIIUpdate
     end
     object actExportCodepage: TAction
       Category = 'File'
       Caption = 'Export Codepage...'
+      Enabled = False
       Hint = 'Export a text file encoded in codepage format.'
       OnExecute = actExportCodepageExecute
       OnUpdate = actExportCodepageUpdate
@@ -354,22 +358,26 @@ object fMain: TfMain
     object actExportUnicode: TAction
       Category = 'File'
       Caption = 'Export UTF-8...'
+      Enabled = False
       Hint = 'Export a text file encoded in UTF-8 format.'
       OnUpdate = actExportUnicodeUpdate
     end
     object actEditASCII: TAction
       Category = 'Edit'
       Caption = 'Edit ASCII...'
+      Enabled = False
       Hint = 'Edit simple 7-BIT ASCII file.'
     end
     object actEditCodepage: TAction
       Category = 'Edit'
       Caption = 'Edit Codepage...'
+      Enabled = False
       Hint = 'Edit codepage file.'
     end
     object actEditUnicode: TAction
       Category = 'Edit'
       Caption = 'Edit Unicode...'
+      Enabled = False
       Hint = 'Edit Unicode text file.'
     end
     object actExportNone: TAction
@@ -406,10 +414,10 @@ object fMain: TfMain
     Left = 380
     Top = 219
   end
-  object tAnimate: TTimer
+  object ttAnimate: TTimer
     Enabled = False
     Interval = 100
-    OnTimer = tAnimateTimer
+    OnTimer = ttAnimateTimer
     Left = 432
     Top = 219
   end
@@ -430,9 +438,9 @@ object fMain: TfMain
     Left = 328
     Top = 219
   end
-  object FileWatchTimer: TIdleTimer
+  object tiFileWatch: TIdleTimer
     Interval = 500
-    OnTimer = FileWatchTimerTimer
+    OnTimer = tiFileWatchTimer
     Left = 272
     Top = 229
   end
