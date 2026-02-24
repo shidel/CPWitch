@@ -81,12 +81,8 @@ type
     procedure actCodepageFilterExecute(Sender: TObject);
     procedure actDebugLogExecute(Sender: TObject);
     procedure actCloseExecute(Sender: TObject);
-    procedure actCloseUpdate(Sender: TObject);
     procedure actExportASCIIExecute(Sender: TObject);
-    procedure actExportASCIIUpdate(Sender: TObject);
     procedure actExportCodepageExecute(Sender: TObject);
-    procedure actExportCodepageUpdate(Sender: TObject);
-    procedure actExportUnicodeUpdate(Sender: TObject);
     procedure actOpenExecute(Sender: TObject);
     procedure actListAllExecute(Sender: TObject);
     procedure actListCompatibleExecute(Sender: TObject);
@@ -124,6 +120,7 @@ type
       procedure PopulateCodepageList(Item : TWitchItem);
       procedure SetCodepageFilter(AValue: TCodepageFilter);
       procedure SetUnicodeView( S : String );
+      function CanExport:boolean;
     protected
       procedure FormSettingsLoad(Sender: TObject);
       procedure FormSettingsSave(Sender: TObject);
@@ -210,25 +207,18 @@ begin
   UpdateMetaData;
 end;
 
+{
 procedure TfMain.actCloseUpdate(Sender: TObject);
 begin
  // actClose.Enabled:=Assigned(lvFileList.Selected);
   actClose.Enabled:=
   Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data) and
   TWitchItem(lvFileList.Selected.Data).Analyzed;
-end;
+end;                                             }
 
 procedure TfMain.actExportASCIIExecute(Sender: TObject);
 begin
   actExportCodepageExecute(Sender);
-end;
-
-procedure TfMain.actExportASCIIUpdate(Sender: TObject);
-begin
-  actExportCodepage.Enabled:=Assigned(lvCodepageList.Selected) and
-  Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data) and
-  TWitchItem(lvFileList.Selected.Data).Analyzed and
-  (TWitchItem(lvFileList.Selected.Data).Encoding<>weBinary);
 end;
 
 procedure TfMain.actExportCodepageExecute(Sender: TObject);
@@ -279,23 +269,6 @@ begin
     OpenFile(dlgFileSave.FileName, false);
     lvFileList.Sort;
   end;
-end;
-
-procedure TfMain.actExportCodepageUpdate(Sender: TObject);
-begin
-  actExportCodepage.Enabled:=Assigned(lvCodepageList.Selected) and
-  Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data) and
-  TWitchItem(lvFileList.Selected.Data).Analyzed and
-  (TWitchItem(lvFileList.Selected.Data).Encoding<>weBinary);
-end;
-
-procedure TfMain.actExportUnicodeUpdate(Sender: TObject);
-begin
-  actExportUnicode.Enabled:=false;
-{  Assigned(lvCodepageList.Selected) and
-  Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data) and
-  TWitchItem(lvFileList.Selected.Data).Analyzed and
-  (TWitchItem(lvFileList.Selected.Data).Encoding<>weBinary); }
 end;
 
 procedure TfMain.actOpenExecute(Sender: TObject);
@@ -617,6 +590,20 @@ begin
   hpUnicodeText.SetHtmlFromStr(''); // Clear Cache, apparently this may be needed sometimes.
   hpUnicodeText.SetHtmlFromStr(S);
   // FileSave(AppBasePath + '/test.html',PasExt.ToBytes(S));
+end;
+
+function TfMain.CanExport: boolean;
+begin
+  Result:=False;
+  if Not Assigned(lvFileList.Selected) then Exit;
+  if Not Assigned(lvFileList.Selected.Data) then Exit;
+  if Not TWitchItem(lvFileList.Selected.Data).Analyzed then Exit;
+  case TWitchItem(lvFileList.Selected.Data).Encoding of
+    weBinary : Exit;
+    weNone : Result:=True;
+    weCodepage : Result:=False;
+    weUnicode : Result:=Assigned(lvCodepageList.Selected);
+  end;
 end;
 
 procedure TfMain.FormSettingsLoad(Sender: TObject);
@@ -950,31 +937,40 @@ begin
 end;
 
 procedure TfMain.UpdateButtons;
+var
+  E : TWitchEncoding;
 begin
-  if Assigned(lvFileList.Selected) then begin
-    case TWitchItem(lvFileList.Selected.Data).Encoding of
-      weNone : begin
-        actClose.ImageIndex:=idxButtonFileCloseGray;
-        btnExportFile.Action:=actExportASCII;
-        btnEditFile.Action:=actEditASCII;
-      end;
-      weCodepage : begin
-        actClose.ImageIndex:=idxButtonFileClose;
-        btnExportFile.Action:=actExportUnicode;
-        btnEditFile.Action:=actEditUnicode;
-      end;
-      weUnicode: begin
-        actClose.ImageIndex:=idxButtonFileCloseGreen;
-        btnExportFile.Action:=actExportCodepage;
-        btnEditFile.Action:=actEditCodepage;
-      end;
-    else
-      actClose.ImageIndex:=idxButtonFileCloseRed;
-      btnExportFile.Action:=actExportNone;
-      btnEditFile.Action:=actEditNone;
-    end;
+  if Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data) then begin
+    actClose.Enabled:=TWitchItem(lvFileList.Selected.Data).Analyzed;
+    E:=TWitchItem(lvFileList.Selected.Data).Encoding;
+  end else begin
+    actClose.Enabled:=False;
+    E:=weBinary;
   end;
-
+  case E of
+    weNone : begin
+      actClose.ImageIndex:=idxButtonFileCloseGray;
+      actExportASCII.Enabled:=CanExport;
+      btnExportFile.Action:=actExportASCII;
+      btnEditFile.Action:=actEditASCII;
+    end;
+    weCodepage : begin
+      actClose.ImageIndex:=idxButtonFileClose;
+      actExportUnicode.Enabled:=CanExport;
+      btnExportFile.Action:=actExportUnicode;
+      btnEditFile.Action:=actEditUnicode;
+    end;
+    weUnicode: begin
+      actClose.ImageIndex:=idxButtonFileCloseGreen;
+      actExportCodepage.Enabled:=CanExport;
+      btnExportFile.Action:=actExportCodepage;
+      btnEditFile.Action:=actEditCodepage;
+    end;
+  else
+    actClose.ImageIndex:=idxButtonFileCloseRed;
+    btnExportFile.Action:=actExportNone;
+    btnEditFile.Action:=actEditNone;
+  end;
 end;
 
 procedure TfMain.UpdateFilterCheck;

@@ -345,7 +345,6 @@ object fMain: TfMain
       Enabled = False
       Hint = 'Export a text file as 7-BIT ASCII that requires no specific codepage or unicode characters.'
       OnExecute = actExportASCIIExecute
-      OnUpdate = actExportASCIIUpdate
     end
     object actExportCodepage: TAction
       Category = 'File'
@@ -353,14 +352,12 @@ object fMain: TfMain
       Enabled = False
       Hint = 'Export a text file encoded in codepage format.'
       OnExecute = actExportCodepageExecute
-      OnUpdate = actExportCodepageUpdate
     end
     object actExportUnicode: TAction
       Category = 'File'
       Caption = 'Export UTF-8...'
       Enabled = False
       Hint = 'Export a text file encoded in UTF-8 format.'
-      OnUpdate = actExportUnicodeUpdate
     end
     object actEditASCII: TAction
       Category = 'Edit'
@@ -383,6 +380,7 @@ object fMain: TfMain
     object actExportNone: TAction
       Category = 'File'
       Caption = 'No Export'
+      Enabled = False
       Hint = 'Can not export this type of file.'
     end
     object actClose: TAction
@@ -390,7 +388,6 @@ object fMain: TfMain
       Caption = 'Close File'
       Hint = 'Close the current text file.'
       OnExecute = actCloseExecute
-      OnUpdate = actCloseUpdate
     end
     object actCloseAll: TAction
       Category = 'File'
@@ -402,6 +399,7 @@ object fMain: TfMain
     object actEditNone: TAction
       Category = 'Edit'
       Caption = 'No Editor'
+      Enabled = False
       Hint = 'Can not edit this type of file.'
     end
   end
