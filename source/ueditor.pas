@@ -11,6 +11,15 @@ unit uEditor;
 {$I patches.pp}  // Various compiler directives to "fix" things.
 {$I version.def} // Include directives for project option build flags.
 
+(* Application conditional defines *)
+{$IFDEF BUILD_PRERELEASE}
+// Include support for the possible creation of a 'no_language.nls' by the
+// MultiApp unit. Strings are only written into ths file when the program
+// requests a string for the first time. Subsequent requests will not update
+// the text stored in the file.
+  {$DEFINE SUPPORT_NOLANG}
+{$ENDIF}
+
 interface
 
 uses
@@ -30,6 +39,10 @@ type
     procedure SetFileName(AValue: String);
     procedure SetOnSave(AValue: TNotifyEvent);
   protected
+    pTop : TPanel;
+    pBody : TPanel;
+    pBottom : TPanel;
+    pStatus : TStatusBar;
     procedure DoCreate; override;
     procedure DoClose(var CloseAction : TCloseAction); override;
   public
@@ -120,6 +133,29 @@ begin
   Constraints.MinHeight:=320;
   DesignTimePPI:=96;
 
+  pBody:=TPanel.Create(Self);
+  FlattenControl(pBody);
+  pBody.BorderStyle:=bsNone;
+  pBody.Parent:=Self;
+  pBody.Align:=alClient;
+  pBody.BorderSpacing.Around:=8;
+
+  pBottom:=TPanel.Create(Self);
+  FlattenControl(pBottom);
+  //pBottom.BorderStyle:=bsNone;
+  pBottom.Parent:=Self;
+  pBottom.Align:=alBottom;
+  pBottom.BorderStyle:=bsNone;
+  pBottom.BorderSpacing.Around:=8;
+
+  pTop:=TPanel.Create(Self);
+  FlattenControl(pTop);
+  pTop.BorderStyle:=bsNone;
+  pTop.Parent:=Self;
+  pTop.Align:=alTop;
+  pTop.BorderSpacing.Around:=8;
+  pTop.Visible:=False;
+
 end;
 
 procedure TEditorForm.DoClose(var CloseAction: TCloseAction);
@@ -134,7 +170,7 @@ var
 begin
   inherited Create(TheOwner);
   Idx:=AddEditor(Self);
-  Name:='fFileEditor_'+IntToStr(Idx);
+  Name:='fFileEditor' + WhenTrue(IDX > 0, '_'+IntToStr(Idx));
 end;
 
 constructor TEditorForm.CreateNew(TheOwner: TComponent; Num: Integer);
@@ -143,7 +179,7 @@ var
 begin
   inherited CreateNew(TheOwner, Num);
   Idx:=AddEditor(Self);
-  Name:='fFileEditor_'+IntToStr(Idx);
+  Name:='fFileEditor' + WhenTrue(IDX > 0, '_'+IntToStr(Idx));
 end;
 
 destructor TEditorForm.Destroy;
@@ -154,15 +190,20 @@ end;
 
 procedure TEditorForm.ApplyUserLanguage;
 var
-  K, S : String;
+  K, S, V : String;
 begin
   inherited ApplyUserLanguage;
-  K:='Controls/fFileEditor/';
-  S:=GetTranslation(K+'Caption', 'Codepage Witch - %s');
+  K:='/Controls/fFileEditor/';
+  S:='Codepage Witch - %s';
+  if Assigned(Translations) then begin
+    {$IFDEF SUPPORT_NOLANG}
+    No_Language.SetValue(UnicodeString(K+'Caption'), UnicodeString(S));
+    {$ENDIF}
+    V:=RawByteString(Translations.GetValue(UnicodeString(K+'Caption'), UnicodeString(S)));
+  end;
   try
-    S:=Format(S, [ExtractFileName(FileName)]);
-  except
-    S:='resource error';
+    S:=Format(V, [ExtractFileName(FileName)]);
+  finally
   end;
   Caption:=S;
 end;

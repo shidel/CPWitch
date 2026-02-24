@@ -20,8 +20,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="638"/>
-        <CursorPos X="53" Y="867"/>
+        <CursorPos X="49" Y="20"/>
         <FoldState Value=" TL00404 p0u921 T3ka03438 pjTkX0{F7]AUmD06123 pkIlK0A512]BDmI0c5]VWkd08011 Pi0I0 T1kb0237]c1221]:i4uZ030134[=4PjNqO]d6lA0202241 p5t6]C1[o47 PLrX]W0lFc82A45]:ItGF3047142111E9]=SrNa TMqE]I9263 PDrL4h"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
@@ -34,12 +33,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uPrefs"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="63"/>
         <CursorPos X="58" Y="58"/>
         <UsageCount Value="200"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="ufixending.pas"/>
@@ -65,12 +62,11 @@
       <Unit>
         <Filename Value="mpla/multiapp.pp"/>
         <UnitName Value="MultiApp"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="1422"/>
-        <CursorPos Y="1448"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="2071"/>
+        <CursorPos X="28" Y="2087"/>
         <FoldState Value=" TL0041267A411121G pg*d0109 p0wB21 TMa03134 pFijU[H44i604 T7q2I41 PB8N T8l32A07133 PNmC2 TCpeI3 T3r9098 piajK03[94ZjH[96YjJ0B9 pjCjO262 pkBa286]H1l20I019[t4k60A03A[v4lA0D248]XHlL067121C]s2o2037]Xbj7046 PiCiU0 T6rB01X]OK,e016 T1rD05D]+8kT09823211[F4apT0v2923D4]&apos;4t008C[&apos;4k50B21]b2G14 Pjar10 T0sGW5429 pjIsMQMD2A]sMwdaC71213 PigsTVI"/>
         <UsageCount Value="100"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="upreferences.pas"/>
@@ -96,12 +92,11 @@
       <Unit>
         <Filename Value="witch.pas"/>
         <UnitName Value="Witch"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="441"/>
         <CursorPos X="17" Y="29"/>
         <FoldState Value=" TL004 T4H03 T7k1MR T8k22A2 PDG2 T3kW042141]515111117 pm3qK08321 PNi10 T1kX03[d435]b3[e524[W4jLrN]X6l802[L4611 T0lNV2453221]Zi0qbTE"/>
         <UsageCount Value="102"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="codepages.pp"/>
@@ -151,41 +146,31 @@
       <Unit>
         <Filename Value="mpla/dosview.pp"/>
         <UnitName Value="DosView"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="6"/>
         <CursorPos X="61" Y="30"/>
         <FoldState Value=" T3kJ05B1712 plVnE0F03A16 PkEo00u"/>
-        <UsageCount Value="49"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="50"/>
       </Unit>
       <Unit>
         <Filename Value="ueditor.pas"/>
         <UnitName Value="uEditor"/>
         <IsVisibleTab Value="True"/>
-        <EditorIndex Value="3"/>
-        <TopLine Value="58"/>
-        <CursorPos X="28" Y="95"/>
-        <UsageCount Value="15"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="116"/>
+        <CursorPos X="10" Y="148"/>
+        <UsageCount Value="16"/>
         <Loaded Value="True"/>
       </Unit>
+      <Unit>
+        <Filename Value="mpla/updater.pp"/>
+        <UnitName Value="Updater"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos Y="39"/>
+        <UsageCount Value="10"/>
+      </Unit>
     </Units>
-    <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="86" TopLine="73"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="939" Column="32" TopLine="886"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/dosview.pp"/>
-        <Caret Line="297" Column="45" TopLine="188"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/dosview.pp"/>
-        <Caret Line="115" Column="69" TopLine="105"/>
-      </Position>
+    <JumpHistory HistoryIndex="21">
       <Position>
         <Filename Value="ueditor.pas"/>
         <Caret Line="30" Column="34"/>
@@ -239,16 +224,8 @@
         <Caret Line="33" TopLine="13"/>
       </Position>
       <Position>
-        <Filename Value="mpla/multiapp.pp"/>
-        <Caret Line="294" Column="25" TopLine="276"/>
-      </Position>
-      <Position>
         <Filename Value="ueditor.pas"/>
         <Caret Line="34" TopLine="13"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/multiapp.pp"/>
-        <Caret Line="290" Column="17" TopLine="275"/>
       </Position>
       <Position>
         <Filename Value="ueditor.pas"/>
@@ -267,28 +244,20 @@
         <Caret Line="219" Column="79" TopLine="215"/>
       </Position>
       <Position>
-        <Filename Value="mpla/multiapp.pp"/>
-        <Caret Line="234" Column="27" TopLine="214"/>
-      </Position>
-      <Position>
         <Filename Value="ueditor.pas"/>
         <Caret Line="39" Column="42" TopLine="11"/>
       </Position>
       <Position>
-        <Filename Value="mpla/multiapp.pp"/>
-        <Caret Line="1985" Column="67" TopLine="1848"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/multiapp.pp"/>
-        <Caret Line="223" Column="23" TopLine="200"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/multiapp.pp"/>
-        <Caret Line="224" Column="23" TopLine="200"/>
+        <Filename Value="ueditor.pas"/>
+        <Caret Line="91" Column="12" TopLine="66"/>
       </Position>
       <Position>
         <Filename Value="ueditor.pas"/>
-        <Caret Line="91" Column="12" TopLine="66"/>
+        <Caret Line="174" Column="19" TopLine="139"/>
+      </Position>
+      <Position>
+        <Filename Value="ueditor.pas"/>
+        <Caret Line="176" Column="33" TopLine="139"/>
       </Position>
     </JumpHistory>
     <RunParams>
