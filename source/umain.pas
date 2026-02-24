@@ -917,8 +917,9 @@ begin
     fCodePageText.Clear;
     case W.Encoding of
       weNone : begin
-        LogMessage(vbVerbose, 'ASCII Item: ' + W.DisplayName + ' (No Codepage)');
-        fCodepageText.Codepage:=-1;
+        LogMessage(vbVerbose, 'ASCII Item: ' + W.DisplayName + ' (Any Codepage, using ' +
+         IntToStr(FActiveCodepage) + ')');
+        fCodepageText.Codepage:=FActiveCodepage;
         fCodepageText.AddText(PasExt.ToString(W.FileData));
       end;
       weBinary : begin
@@ -991,7 +992,9 @@ begin
   FActiveCodepage:= 437;
   if Assigned(lvCodepageList.Selected) then begin
     Val(CutDelim(lvCodepageList.Selected.Caption,SPACE,1,1),FActiveCodepage, E);
-    if E <> 0 then FActiveCodepage:=437;
+    if E <> 0 then begin
+      FActiveCodepage:=437;
+    end;
   end;
   LogMessage(vbVerbose, 'Selected Codepage ' + IntToStr(FActiveCodepage));
   UpdateStatusBar;
