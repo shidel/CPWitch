@@ -18,7 +18,8 @@ uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ExtCtrls, ComCtrls, ActnList, Menus, IpHtml, XMLConf,
   Version, PasExt, Icons, MultiApp, LogView, Updater, Preferences,
-  DosView, DosFont, Codepages, Witch, uPrefs, uLostFile, uFixEnding;
+  DosView, DosFont, Codepages, Witch, uPrefs, uLostFile, uFixEnding,
+  uEditor;
 
 type
 
@@ -81,6 +82,9 @@ type
     procedure actCodepageFilterExecute(Sender: TObject);
     procedure actDebugLogExecute(Sender: TObject);
     procedure actCloseExecute(Sender: TObject);
+    procedure actEditASCIIExecute(Sender: TObject);
+    procedure actEditCodepageExecute(Sender: TObject);
+    procedure actEditUnicodeExecute(Sender: TObject);
     procedure actExportASCIIExecute(Sender: TObject);
     procedure actExportCodepageExecute(Sender: TObject);
     procedure actOpenExecute(Sender: TObject);
@@ -121,10 +125,12 @@ type
       procedure SetCodepageFilter(AValue: TCodepageFilter);
       procedure SetUnicodeView( S : String );
       function CanExport:boolean;
+      function CanEdit:boolean;
     protected
       procedure FormSettingsLoad(Sender: TObject);
       procedure FormSettingsSave(Sender: TObject);
       procedure WitchOnAnalyzed(Sender : TObject);
+      procedure FileWasEdited(Sender : TObject);
       procedure FirstShow(Sender : TObject);
       procedure SetApplicationIcons;
       procedure UpdateCodepageViewLabel;
@@ -207,14 +213,23 @@ begin
   UpdateMetaData;
 end;
 
-{
-procedure TfMain.actCloseUpdate(Sender: TObject);
+procedure TfMain.actEditASCIIExecute(Sender: TObject);
 begin
- // actClose.Enabled:=Assigned(lvFileList.Selected);
-  actClose.Enabled:=
-  Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data) and
-  TWitchItem(lvFileList.Selected.Data).Analyzed;
-end;                                             }
+  if CanExport then
+    FileEditor(TWitchItem(lvFileList.Selected.Data).FileName, @FileWasEdited);
+end;
+
+procedure TfMain.actEditCodepageExecute(Sender: TObject);
+begin
+  if CanExport then
+    FileEditor(TWitchItem(lvFileList.Selected.Data).FileName, @FileWasEdited);
+end;
+
+procedure TfMain.actEditUnicodeExecute(Sender: TObject);
+begin
+  if CanExport then
+    FileEditor(TWitchItem(lvFileList.Selected.Data).FileName, @FileWasEdited);
+end;
 
 procedure TfMain.actExportASCIIExecute(Sender: TObject);
 begin
@@ -353,8 +368,8 @@ begin
   actExportCodepage.ImageIndex:=idxButtonFileExportGreen;
   actExportASCII.ImageIndex:=idxButtonFileExportGray;
   actExportNone.ImageIndex:=idxButtonFileExportRed;
-  actEditUnicode.ImageIndex:=idxButtonFileEdit;
-  actEditCodepage.ImageIndex:=idxButtonFileEditGreen;
+  actEditUnicode.ImageIndex:=idxButtonFileEditGreen;
+  actEditCodepage.ImageIndex:=idxButtonFileEdit;
   actEditASCII.ImageIndex:=idxButtonFileEditGray;
   actEditNone.ImageIndex:=idxButtonFileEditRed;
   actClose.ImageIndex:=idxButtonFileClose;
@@ -606,6 +621,21 @@ begin
   end;
 end;
 
+function TfMain.CanEdit: boolean;
+begin
+  Result:=False;
+  if Not Assigned(lvFileList.Selected) then Exit;
+  if Not Assigned(lvFileList.Selected.Data) then Exit;
+  if Not TWitchItem(lvFileList.Selected.Data).Analyzed then Exit;
+  case TWitchItem(lvFileList.Selected.Data).Encoding of
+    weBinary : Exit;
+    weNone : Result:=True;
+    weCodepage : Result:=False;
+    weUnicode : Result:=True;
+  end;
+
+end;
+
 procedure TfMain.FormSettingsLoad(Sender: TObject);
 var
   S : String;
@@ -712,6 +742,18 @@ begin
   if W.ListItem = lvFileList.Selected then begin
     UpdateMetaData;
     SelectFile(Self);
+  end;
+end;
+
+procedure TfMain.FileWasEdited(Sender: TObject);
+var
+  I : Integer;
+begin
+  if not Assigned(fWitch) then Exit;
+  if Sender is TEditorForm then begin
+    I:=fWitch.Find(TEditorForm(Sender).FileName);
+    if I >= 0 then
+      fWitch.Modified[I]:=True;
   end;
 end;
 
@@ -952,19 +994,22 @@ begin
       actClose.ImageIndex:=idxButtonFileCloseGray;
       actExportASCII.Enabled:=CanExport;
       btnExportFile.Action:=actExportASCII;
+      actEditASCII.Enabled:=CanEdit;
       btnEditFile.Action:=actEditASCII;
     end;
     weCodepage : begin
       actClose.ImageIndex:=idxButtonFileClose;
       actExportUnicode.Enabled:=CanExport;
       btnExportFile.Action:=actExportUnicode;
-      btnEditFile.Action:=actEditUnicode;
+      actEditCodepage.Enabled:=CanEdit;
+      btnEditFile.Action:=actEditCodepage;
     end;
     weUnicode: begin
       actClose.ImageIndex:=idxButtonFileCloseGreen;
       actExportCodepage.Enabled:=CanExport;
       btnExportFile.Action:=actExportCodepage;
-      btnEditFile.Action:=actEditCodepage;
+      actEditUnicode.Enabled:=CanEdit;
+      btnEditFile.Action:=actEditUnicode;
     end;
   else
     actClose.ImageIndex:=idxButtonFileCloseRed;

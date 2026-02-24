@@ -364,18 +364,21 @@ object fMain: TfMain
       Caption = 'Edit ASCII...'
       Enabled = False
       Hint = 'Edit simple 7-BIT ASCII file.'
+      OnExecute = actEditASCIIExecute
     end
     object actEditCodepage: TAction
       Category = 'Edit'
       Caption = 'Edit Codepage...'
       Enabled = False
       Hint = 'Edit codepage file.'
+      OnExecute = actEditCodepageExecute
     end
     object actEditUnicode: TAction
       Category = 'Edit'
       Caption = 'Edit Unicode...'
       Enabled = False
       Hint = 'Edit Unicode text file.'
+      OnExecute = actEditUnicodeExecute
     end
     object actExportNone: TAction
       Category = 'File'

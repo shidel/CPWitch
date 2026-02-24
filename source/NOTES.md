@@ -1,5 +1,6 @@
 # Upcoming release notes
 
+* Improved button state change responsiveness.
 * Additional button icons for file type consistency.
 * Switched to B&W for Color button when disabled.
 * Option to automatically open exported files.
