@@ -1,5 +1,6 @@
 # Upcoming release notes
 
+* Improved scroll wheel support for Linux and Windows.
 * Included simple text editor.
 * Improved button state change responsiveness.
 * Additional button icons for file type consistency.

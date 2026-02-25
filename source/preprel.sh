@@ -26,7 +26,7 @@ fi
 
 # cross compile file update
 echo "Update Cross-compile source files"
-cp -f *.lfm *.pas version.* xcompile/
+cp -f *.lfm *.pas version.* icons.* xcompile/
 cp -f CPWitch.lpr xcompile/CPWitch_Linux.lpr
 cp -f CPWitch.lpr xcompile/CPWitch_Windows.lpr
 

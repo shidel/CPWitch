@@ -8,7 +8,7 @@
       <Unit>
         <Filename Value="CPWitch_Windows.lpr"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="24" Y="17"/>
+        <CursorPos X="6" Y="18"/>
         <UsageCount Value="33"/>
         <Loaded Value="True"/>
       </Unit>
@@ -34,10 +34,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="287"/>
-        <CursorPos Y="328"/>
+        <EditorIndex Value="1"/>
+        <CursorPos X="7" Y="21"/>
         <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla\logview.pp"/>
@@ -66,11 +66,10 @@
       <Unit>
         <Filename Value="icons.pp"/>
         <UnitName Value="Icons"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="545"/>
         <CursorPos X="17" Y="569"/>
         <UsageCount Value="14"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="version.pp"/>
@@ -105,35 +104,34 @@
       <Unit>
         <Filename Value="..\..\..\mpla\source\mpla\multiapp.pp"/>
         <UnitName Value="MultiApp"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="25"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="37"/>
         <CursorPos X="13" Y="54"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="..\..\..\mpla\source\mpla\pasext.pp"/>
         <UnitName Value="PasExt"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="1385"/>
         <CursorPos X="44" Y="1429"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\mpla\source\mpla\dosview.pp"/>
+        <UnitName Value="DosView"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="247"/>
+        <CursorPos X="57" Y="284"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="2">
+    <JumpHistory>
       <Position>
         <Filename Value="CPWitch_Windows.lpr"/>
         <Caret Line="16" Column="74"/>
-      </Position>
-      <Position>
-        <Filename Value="..\..\..\mpla\source\mpla\pasext.pp"/>
-        <Caret Line="1205" Column="58" TopLine="1185"/>
-      </Position>
-      <Position>
-        <Filename Value="..\..\..\mpla\source\mpla\pasext.pp"/>
-        <Caret Line="1430" Column="20" TopLine="1396"/>
       </Position>
     </JumpHistory>
     <RunParams>
