@@ -21,11 +21,11 @@
       <File>
         <Read>
           <Caption Value="Dateilesefehler"/>
-          <Message Value="Fehler #%1:s (%2:s) ist beim Lesen der Datei &quot;%0:s&quot; aufgetreten."/>
+          <Message Value="Fehler #%1:s (%2:s) trat beim Lesen der Datei &quot;%0:s&quot; auf."/>
         </Read>
         <Write>
           <Caption Value="Dateischreibfehler"/>
-          <Message Value="Fehler #%1:s (%2:s) ist beim Schreiben in die Datei &quot;%0:s&quot; aufgetreten."/>
+          <Message Value="Fehler #%1:s (%2:s) trat beim Schreiben in die Datei &quot;%0:s&quot; auf."/>
         </Write>
       </File>
       <Codes>
@@ -33,19 +33,19 @@
         <ec0 Value="Kein Fehler"/>
         <ec2 Value="Datei nicht gefunden"/>
         <ec3 Value="Pfad nicht gefunden"/>
-        <ec4 Value="Zu viele Dateien offen"/>
+        <ec4 Value="Zu viele offene Dateien"/>
         <ec5 Value="Zugriff verweigert"/>
         <ec6 Value="Ungültiges Dateihandle"/>
         <ec12 Value="Ungültiger Zugriffsmodus"/>
-        <ec17 Value="Umbenennen über Gerätegrenzen nicht möglich"/>
+        <ec17 Value="Umbenennen über Gerätegrenzen hinweg nicht möglich"/>
         <ec100 Value="Disk-Lesefehler"/>
         <ec101 Value="Disk-Schreibfehler"/>
         <ec102 Value="Datei nicht zugewiesen"/>
-        <ec103 Value="Datei nicht offen"/>
+        <ec103 Value="Datei nicht geöffnet"/>
         <ec104 Value="Datei nicht zum Lesen geöffnet"/>
         <ec105 Value="Datei nicht zum Schreiben geöffnet"/>
         <ec106 Value="Ungültiges numerisches Format"/>
-        <ec150 Value="Diskette ist schreibgeschützt"/>
+        <ec150 Value="Datenträger ist schreibgeschützt"/>
       </Codes>
     </Error>
     <FormatSettings>
@@ -115,24 +115,24 @@
   <Controls>
     <fMain Caption="Codepage Witch">
       <alMain>
-        <actOpen Hint="Eine Textdatei öffnen." Caption="Datei öffnen..."/>
+        <actOpen Hint="Textdatei öffnen." Caption="Datei öffnen..."/>
         <actPreferences Hint="Codepage Witch Einstellungen anzeigen oder ändern." Caption="Einstellungen..."/>
-        <actOnlineUpdate Hint="Nach Updates für Codepage Witch suchen." Caption="Update-Prüfung..."/>
-        <actDebugLog Hint="Das Debug-Protokoll anzeigen." Caption="Debug-Protokoll..."/>
+        <actOnlineUpdate Hint="Nach Updates für Codepage Witch suchen." Caption="Update-Check..."/>
+        <actDebugLog Hint="Das Debugging-Log anzeigen." Caption="Debug-Log..."/>
         <actListAll Hint="Alle bekannten Codepages auflisten." Caption="Alle bekannten"/>
         <actListPartial Hint="Teilweise kompatible Codepages auflisten." Caption="Alle möglichen"/>
         <actListCompatible Hint="Nur vollständig kompatible Codepages auflisten." Caption="Nur kompatible"/>
         <actCodepageFilter Hint="Die Codepage-Liste filtern." Caption="Codepage-Filter"/>
-        <actExportASCII Hint="Export a text file as 7-BIT ASCII that requires no specific codepage or unicode characters." Caption="Export ASCII..."/>
-        <actExportCodepage Hint="Eine Textdatei im Codepage-Format exportieren." Caption="Codepage exportieren..."/>
-        <actExportUnicode Hint="Eine Textdatei im UTF-8-Format exportieren." Caption="UTF-8 exportieren..."/>
-        <actEditASCII Hint="Edit simple 7-BIT ASCII file." Caption="Edit ASCII..."/>
-        <actEditCodepage Hint="Edit codepage file." Caption="Edit Codepage..."/>
-        <actEditUnicode Hint="Edit Unicode text file." Caption="Edit Unicode..."/>
-        <actExportNone Hint="Can not export this type of file." Caption="No Export"/>
+        <actExportASCII Hint="Textdatei als 7-BIT ASCII exportieren, die keine spezifische Codepage oder Unicode-Zeichen erfordert." Caption="ASCII exportieren..."/>
+        <actExportCodepage Hint="Textdatei im Codepage-Format exportieren." Caption="Codepage exportieren..."/>
+        <actExportUnicode Hint="Textdatei im UTF-8-Format exportieren." Caption="UTF-8 exportieren..."/>
+        <actEditASCII Hint="Einfache 7-BIT ASCII-Datei bearbeiten." Caption="ASCII bearbeiten..."/>
+        <actEditCodepage Hint="Codepage-Datei bearbeiten." Caption="Codepage bearbeiten..."/>
+        <actEditUnicode Hint="Unicode-Textdatei bearbeiten." Caption="Unicode bearbeiten..."/>
+        <actExportNone Hint="Dieser Dateityp kann nicht exportiert werden." Caption="Kein Export"/>
         <actClose Hint="Die aktuelle Textdatei schliessen." Caption="Datei schliessen"/>
         <actCloseAll Hint="Alle offenen Textdateien schliessen." Caption="Alle schliessen"/>
-        <actEditNone Hint="Can not edit this type of file." Caption="No Editor"/>
+        <actEditNone Hint="Dieser Dateityp kann nicht bearbeitet werden." Caption="Kein Editor"/>
       </alMain>
       <pFileList>
         <pFileListLabel>
@@ -144,9 +144,10 @@
           <lbCodepageLabel Caption="Codepages"/>
         </pCodepageListLabel>
         <lvCodepageList>
-          <Analyzing Caption="Analyzing"/>
-          <Not_implemented Caption="Not implemented"/>
-          <Any_Codepage Caption="Any Codepage"/>
+          <Analyzing Caption="Analysiere"/>
+          <Not_implemented Caption="Nicht implementiert"/>
+          <Any_Codepage Caption="Beliebige Codepage"/>
+          <Binary_data Caption="Binärdatei"/>
         </lvCodepageList>
       </pCodepageList>
       <pViewers>
@@ -172,23 +173,97 @@
         <NoEncoding Caption="ASCII"/>
         <Binary Caption="Binär"/>
       </statBar>
-      <lvCodepageList>
-        <Analyzing Caption="Analysiere"/>
-        <Binary_data Caption="Binärdatei"/>
-        <Not_implemented Caption="Nicht implementiert"/>
-        <Any_Codepage Caption="Beliebige Codepage"/>
-      </lvCodepageList>
     </fMain>
-    <fCorrectFileEndingDialog Caption="Kein Zeilenende am Schluss">
+    <fOptionsDialog Caption="Codepage Witch Einstellungen">
+      <pPages>
+        <tsAbout Hint="Über diese Anwendung." Caption="Über">
+          <lbCopyright Caption="Copyright %s"/>
+          <lbVersion Caption="Version %0:s (Build %1:s)"/>
+          <lbApplication Caption="Die &quot;%s&quot;"/>
+        </tsAbout>
+        <tsGeneral Hint="Allgemeine Anwendungseinstellungen." Caption="Allgemein">
+          <gbUserLanguage Caption="Benutzersprache">
+            <cxLanguageChoice Default="(Standard)"/>
+            <pLanguagePreferred>
+              <lbLanguagePreferred Caption="Bevorzugte Sprache:"/>
+            </pLanguagePreferred>
+            <lbLanguageSystem Caption="Systemsprache: %s"/>
+          </gbUserLanguage>
+          <gbMiscellaneous Caption="Verschiedenes">
+            <cbShowHints Caption="Hinweise beim Überfahren mit der Maus anzeigen."/>
+            <cbColorButtons Caption="Farbige Symbole in der Symbolleiste verwenden."/>
+          </gbMiscellaneous>
+          <gbOnlineUpdate Caption="Online-Update">
+            <cbAutoCheck Caption="Automatisch nach Updates suchen"/>
+            <pUpdateButton>
+              <btnUpdateCheck Hint="Den Online-Server nach dem neuesten Update abfragen." Caption="Jetzt prüfen..."/>
+            </pUpdateButton>
+          </gbOnlineUpdate>
+        </tsGeneral>
+        <tsSession Hint="Optionen bezüglich der Anwendungssitzungen." Caption="Sitzung">
+          <gbSessionFiles Caption="Sitzungsdateien">
+            <cbReopenFiles Hint="Nicht geschlossene Dateien der vorherigen Sitzung erneut öffnen." Caption="Vorherige Dateien erneut öffnen."/>
+            <cbWarnMissing Hint="Warnen, wenn eine Datei aus der vorherigen Sitzung nicht existiert." Caption="Warnen, wenn fehlend."/>
+            <cbOpenExport Hint="Exportierte Dateien zur Überprüfung automatisch öffnen." Caption="Exportierte Dateien öffnen."/>
+          </gbSessionFiles>
+        </tsSession>
+        <tsEncoding Hint="Optionen für Ein- und Ausgabekodierung von Dateien." Caption="Kodierung">
+          <rgFileEnding Hint="Erfordern, dass Dateien mit einer Leerzeile enden." Caption="Dateien enden mit Zeilenumbruch">
+            <rbFileEndWhatever Hint="Alle Dateien können mit Text oder einer Leerzeile enden." Caption="Egal."/>
+            <rbFileEndExport Hint="Sicherstellen, dass exportierte Dateien mit einer Leerzeile enden." Caption="Nur für Export sicherstellen."/>
+            <rbFileEndAll Hint="Erfordern, dass Originaldateien mit einer Leerzeile enden." Caption="Auf alle Textdateien anwenden."/>
+          </rgFileEnding>
+        </tsEncoding>
+        <tsViewer Hint="Optionen für Unicode- und DOS-Viewer." Caption="Viewer">
+          <gbUnicodeView Caption="Unicode-Ansicht">
+            <lbUnicodeScale Caption="Schriftgrösse %s%%"/>
+            <tbUnicodeScale Caption="10"/>
+          </gbUnicodeView>
+          <gbDOSView Caption="DOS-Ansicht">
+            <lbDOSScale Caption="Schriftgrösse %s%%"/>
+            <tbDOSScale Caption="1"/>
+          </gbDOSView>
+        </tsViewer>
+      </pPages>
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnAccept Hint="Alle Änderungen akzeptieren und anwenden." Caption="Übernehmen"/>
+          <btnCancel Hint="Alle Änderungen ignorieren." Caption="Abbrechen"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <fMiddlePanel>
+        <fBodyPanel>
+          <pSectionsPanel>
+            <pSectionLabel>
+              <lbSections Caption="Optionen"/>
+            </pSectionLabel>
+          </pSectionsPanel>
+          <pPagesPanel>
+            <pPages>
+              <tsViewer>
+                <lbUnicodeScale Caption="Schriftgrösse %s%%"/>
+                <lbDOSScale Caption="Schriftgrösse %s%%"/>
+              </tsViewer>
+            </pPages>
+          </pPagesPanel>
+        </fBodyPanel>
+      </fMiddlePanel>
+    </fOptionsDialog>
+    <fFileEditor Caption="Codepage Witch - %s">
+      <btnCancel Caption="Abbrechen"/>
+      <btnSave Caption="Speichern"/>
+      <dlgSaveAs Title="Dateispeicherfehler, Datei speichern unter"/>
+    </fFileEditor>
+    <fCorrectFileEndingDialog Caption="Kein abschliessender Zeilenumbruch">
       <fLowerPanel>
         <fButtonPanel>
           <btnCorrect Caption="Korrigieren"/>
           <btnIgnore Caption="Ignorieren"/>
         </fButtonPanel>
       </fLowerPanel>
-      <Message Text="Die Datei &quot;%s&quot; endet nicht mit einer Leerzeile.&#xA;&#xA;Möchten Sie dies korrigieren, indem Sie am Ende der Datei einen abschliessenden Zeilenumbruch hinzufügen?"/>
+      <Message Text="Die Datei &quot;%s&quot; endet nicht mit einer Leerzeile.&#xA;&#xA;Möchten Sie dies korrigieren, indem Sie einen abschliessenden Zeilenumbruch am Ende der Datei hinzufügen?"/>
     </fCorrectFileEndingDialog>
-    <fUpdateCheckDialog Caption="Update-Prüfung">
+    <fUpdateCheckDialog Caption="Update-Check">
       <fLowerPanel>
         <fButtonPanel>
           <btnCancel Caption="Abbrechen"/>
@@ -197,7 +272,7 @@
       </fLowerPanel>
       <Message>
         <Check Text="Suche nach verfügbaren Updates für &quot;%s&quot;, Version %s."/>
-        <Error Text="Derzeit kann nicht festgestellt werden, ob Updates für &quot;%s&quot; verfügbar sind. Bitte versuchen Sie es später erneut."/>
+        <Error Text="Es kann derzeit nicht festgestellt werden, ob Updates für &quot;%s&quot; verfügbar sind. Bitte versuchen Sie es später erneut."/>
         <None Text="Derzeit sind keine Updates für &quot;%s&quot; verfügbar. Bitte versuchen Sie es später erneut."/>
       </Message>
     </fUpdateCheckDialog>
@@ -213,7 +288,7 @@
         </fAuxPanel>
       </fLowerPanel>
       <Message>
-        <Note Text="Für Version %1:s von &quot;%0:s&quot; sind keine Versionshinweise verfügbar"/>
+        <Note Text="Für die Version %1:s von &quot;%0:s&quot; wurden keine Versionshinweise bereitgestellt."/>
       </Message>
     </fUpdateFoundDialog>
     <fUpdateDownloadDialog Caption="Update-Download">
@@ -236,85 +311,11 @@
         </fButtonPanel>
       </fLowerPanel>
       <Message>
-        <Downloaded Text="Version %s von &quot;%s&quot; heruntergeladen."/>
+        <Downloaded Text="&quot;%s&quot; Version %s wurde heruntergeladen."/>
       </Message>
     </fUpdateSaveDialog>
-    <fOptionsDialog Caption="Codepage Witch Einstellungen">
-      <pPages>
-        <tsAbout Hint="Über diese Anwendung." Caption="Über">
-          <lbCopyright Caption="Copyright %s"/>
-          <lbVersion Caption="Version %0:s (Build %1:s)"/>
-          <lbApplication Caption="Das Programm &quot;%s&quot;"/>
-        </tsAbout>
-        <tsGeneral Hint="Allgemeine Anwendungseinstellungen." Caption="Allgemein">
-          <gbUserLanguage Caption="Benutzersprache">
-            <cxLanguageChoice Default="(Standard)"/>
-            <pLanguagePreferred>
-              <lbLanguagePreferred Caption="Bevorzugte Sprache:"/>
-            </pLanguagePreferred>
-            <lbLanguageSystem Caption="Systemsprache:  %s"/>
-          </gbUserLanguage>
-          <gbMiscellaneous Caption="Verschiedenes">
-            <cbShowHints Caption="Hinweise beim Mouseover anzeigen."/>
-            <cbColorButtons Caption="Farbige Symbole in der Symbolleiste verwenden."/>
-          </gbMiscellaneous>
-          <gbOnlineUpdate Caption="Online-Update">
-            <cbAutoCheck Caption="Automatisch nach Updates suchen"/>
-            <pUpdateButton>
-              <btnUpdateCheck Hint="Den Online-Server nach dem neuesten Update abfragen." Caption="Jetzt prüfen..."/>
-            </pUpdateButton>
-          </gbOnlineUpdate>
-        </tsGeneral>
-        <tsSession Hint="Optionen bezüglich Anwendungssitzungen." Caption="Sitzung">
-          <gbSessionFiles Caption="Sitzungsdateien">
-            <cbReopenFiles Hint="Nicht geschlossene Dateien der vorherigen Sitzung erneut öffnen." Caption="Vorherige Dateien wieder öffnen."/>
-            <cbWarnMissing Hint="Warnen, wenn eine Datei aus der vorherigen Sitzung nicht existiert." Caption="Warnen, wenn fehlend."/>
-          </gbSessionFiles>
-        </tsSession>
-        <tsEncoding Hint="Dateieingabe- und -ausgabe-Kodierungsoptionen." Caption="Kodierung">
-          <rgFileEnding Hint="Vorschreiben, dass Dateien mit einer Leerzeile enden müssen." Caption="Dateien enden mit Zeilenumbruch">
-            <rbFileEndWhatever Hint="Alle Dateien können mit Text oder Leerzeile enden." Caption="Nicht beachten."/>
-            <rbFileEndExport Hint="Sicherstellen, dass exportierte Dateien mit einer Leerzeile enden." Caption="Nur für Export sicherstellen."/>
-            <rbFileEndAll Hint="Vorschreiben, dass Originaldateien mit einer Leerzeile enden." Caption="Bei allen Textdateien erzwingen."/>
-          </rgFileEnding>
-        </tsEncoding>
-        <tsViewer Hint="Optionen für Unicode- und DOS-Viewer." Caption="Anzeige">
-          <gbUnicodeView Caption="Unicode-Ansicht">
-            <lbUnicodeScale Caption="Schriftgrösse %s%%"/>
-            <tbUnicodeScale Caption="10"/>
-          </gbUnicodeView>
-          <gbDOSView Caption="DOS-Ansicht">
-            <lbDOSScale Caption="Schriftgrösse %s%%"/>
-            <tbDOSScale Caption="1"/>
-          </gbDOSView>
-        </tsViewer>
-      </pPages>
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnAccept Hint="Alle Änderungen akzeptieren und anwenden." Caption="Übernehmen"/>
-          <btnCancel Hint="Alle Änderungen verwerfen." Caption="Abbrechen"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <fMiddlePanel>
-        <fBodyPanel>
-          <pSectionsPanel>
-            <pSectionLabel>
-              <lbSections Caption="Optionen"/>
-            </pSectionLabel>
-          </pSectionsPanel>
-          <pPagesPanel>
-            <pPages>
-              <tsViewer>
-                <lbUnicodeScale Caption="Schriftgrösse %s%%"/>
-                <lbDOSScale Caption="Schriftgrösse %s%%"/>
-              </tsViewer>
-            </pPages>
-          </pPagesPanel>
-        </fBodyPanel>
-      </fMiddlePanel>
-    </fOptionsDialog>
-    <fLoggerViewForm Caption="Debug-Protokoll">
-      <LineCount Plural="%.0n Protokolleinträge" Singular="%.0n Protokolleintrag"/>
+    <fLoggerViewForm Caption="Debug-Log">
+      <LineCount Plural="%.0n Log-Einträge" Singular="%.0n Log-Eintrag"/>
       <pControls>
         <pButtons>
           <btnClear Caption="Löschen"/>
@@ -322,7 +323,7 @@
         </pButtons>
         <pVerbose>
           <cbVerbosity>
-            <Items Index_0="Kritisch" Index_1="Minimal" Index_2="Normal" Index_3="Ausführlich" Index_4="Exzessiv"/>
+            <Items Index_0="Kritisch" Index_1="Minimal" Index_2="Normal" Index_3="Detailliert" Index_4="Exzessiv"/>
           </cbVerbosity>
           <lbVerbosity Caption="Ausführlichkeit:"/>
         </pVerbose>

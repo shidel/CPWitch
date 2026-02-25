@@ -46,6 +46,9 @@ type
     mEdit : TMemo;
     btnClose : TButton;
     btnSave : TButton;
+    dlgSave : TSaveDialog;
+    fEndings : TLineEndings;
+    fOriginal : RawByteString;
     procedure DoCreate; override;
     procedure DoClose(var CloseAction : TCloseAction); override;
     procedure OnCloseButton(Sender : TObject);
@@ -131,9 +134,14 @@ procedure TEditorForm.SetFileName(AValue: String);
 begin
   if FFileName=AValue then Exit;
   FFileName:=AValue;
+  fOriginal:='';
   try
-    mEdit.Lines.LoadFromFile(FFileName);
+    if FileLoad(FFileName, fOriginal) <> 0 then
+      raise Exception.Create('read error');
+    fEndings:=DetectLineEndings(fOriginal, leCRLF);
+    mEdit.Caption:=fOriginal;
   except
+    LogMessage(vbMinimal, 'File read error: '+FFileName);
     mEdit.Clear;
     mEdit.Lines.Add('File Read Error');
     mEdit.Enabled:=False;
@@ -218,6 +226,8 @@ begin
   btnSave.OnClick:=@OnSaveButton;
   btnClose.OnClick:=@OnCloseButton;
 
+  dlgSave:=TSaveDialog.Create(Self);
+
 end;
 
 procedure TEditorForm.DoClose(var CloseAction: TCloseAction);
@@ -232,8 +242,38 @@ begin
 end;
 
 procedure TEditorForm.OnSaveButton(Sender: TObject);
+var
+  Saved:Boolean;
+  SaveName:String;
+  Data : String;
 begin
-
+  SaveName:=FFileName;
+  try
+    Data := NormalizeLineEndings(mEdit.Caption, fEndings);
+    repeat
+      Saved:=False;
+      try
+        Saved:=FileSave(SaveName, Data) = 0;
+      except
+        Saved:=False;
+      end;
+      if not Saved then begin
+        LogMessage(vbMinimal, 'File save error: ' + SaveName);
+        dlgSave.FileName:=FileIterative(FileName);
+        if dlgSave.Execute then
+          SaveName:=dlgSave.FileName
+        else
+          Break;
+      end;
+    until Saved;
+    if Saved then begin
+      FFileName:=SaveName;
+      if Assigned(FOnSave) then
+        FOnSave(Self);
+      Close;
+    end;
+  finally
+  end;
 end;
 
 constructor TEditorForm.Create(TheOwner: TComponent);
@@ -262,7 +302,7 @@ end;
 
 procedure TEditorForm.ApplyUserLanguage;
 var
-  K, S, V, BS, BC : String;
+  K, S, V, BS, BC, SE : String;
 begin
   // Adjust Language Strings Based on first Editor Form, not current index
   // inherited ApplyUserLanguage;
@@ -270,15 +310,18 @@ begin
   S:='Codepage Witch - %s';
   BC:='Cancel';
   BS:='Save';
+  SE:='File save error, Save file as';
   if Assigned(Translations) then begin
     {$IFDEF SUPPORT_NOLANG}
     No_Language.SetValue(UnicodeString(K+'Caption'), UnicodeString(S));
     No_Language.SetValue(UnicodeString(K+'btnCancel/Caption'), UnicodeString(BC));
     No_Language.SetValue(UnicodeString(K+'btnSave/Caption'), UnicodeString(BS));
+    No_Language.SetValue(UnicodeString(K+'dlgSaveAs/Title'), UnicodeString(SE));
     {$ENDIF}
     V:=RawByteString(Translations.GetValue(UnicodeString(K+'Caption'), UnicodeString(S)));
     BC:=RawByteString(Translations.GetValue(UnicodeString(K+'btnCancel/Caption'), UnicodeString(BC)));
     BS:=RawByteString(Translations.GetValue(UnicodeString(K+'btnSave/Caption'), UnicodeString(BS)));
+    SE:=RawByteString(Translations.GetValue(UnicodeString(K+'dlgSaveAs/Title'), UnicodeString(SE)));
   end;
   try
     S:=Format(V, [ExtractFileName(FileName)]);
@@ -288,6 +331,7 @@ begin
   pStatus.SimpleText:=SPACE2 + FileName;
   btnClose.Caption:=BC;
   btnSave.Caption:=BS;
+  dlgSave.Title:=SE;
 end;
 
 initialization

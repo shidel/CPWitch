@@ -753,7 +753,11 @@ begin
   if Sender is TEditorForm then begin
     I:=fWitch.Find(TEditorForm(Sender).FileName);
     if I >= 0 then
-      fWitch.Modified[I]:=True;
+      fWitch.Modified[I]:=True
+    else if fOpenExported then begin
+      OpenFile(TEditorForm(Sender).FileName,false);
+      lvFileList.Sort;
+    end;
   end;
 end;
 

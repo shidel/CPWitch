@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CONFIG Name="Português" Language="pt_PT">
   <Translation>
-    <Revision_0 Date="2026-02-17" Contributor="Google Gemini"/>
+    <Revision_0 Date="2026-02-24" Contributor="Google Gemini"/>
   </Translation>
   <Application>
     <ModalButtons>
-      <Ok Value="Ok"/>
+      <Ok Value="OK"/>
       <Cancel Value="Cancelar"/>
       <Yes Value="Sim"/>
       <No Value="Não"/>
@@ -13,7 +13,7 @@
       <Abort Value="Abortar"/>
       <Retry Value="Repetir"/>
       <Ignore Value="Ignorar"/>
-      <All Value="Todos"/>
+      <All Value="Tudo"/>
       <NoToAll Value="Não para todos"/>
       <YesToAll Value="Sim para todos"/>
     </ModalButtons>
@@ -37,13 +37,13 @@
         <ec5 Value="Acesso negado"/>
         <ec6 Value="Identificador de ficheiro inválido"/>
         <ec12 Value="Modo de acesso inválido"/>
-        <ec17 Value="Não é possível renomear entre dispositivos"/>
-        <ec100 Value="Erro de leitura do disco"/>
-        <ec101 Value="Erro de escrita no disco"/>
+        <ec17 Value="Não é possível renomear entre dispositivos diferentes"/>
+        <ec100 Value="Erro de leitura de disco"/>
+        <ec101 Value="Erro de escrita de disco"/>
         <ec102 Value="Ficheiro não atribuído"/>
         <ec103 Value="Ficheiro não aberto"/>
-        <ec104 Value="Ficheiro não aberto para entrada"/>
-        <ec105 Value="Ficheiro não aberto para saída"/>
+        <ec104 Value="Ficheiro não aberto para leitura"/>
+        <ec105 Value="Ficheiro não aberto para escrita"/>
         <ec106 Value="Formato numérico inválido"/>
         <ec150 Value="O disco está protegido contra escrita"/>
       </Codes>
@@ -58,56 +58,56 @@
       <ListSeparator Value=";"/>
       <CurrencyString Value="€"/>
       <ShortDateFormat Value="dd/mm/yyyy"/>
-      <LongDateFormat Value="d' de 'mmmm' de 'yyyy"/>
+      <LongDateFormat Value="d 'de' mmmm 'de' yyyy"/>
       <TimeAMString Value=""/>
       <TimePMString Value=""/>
       <ShortTimeFormat Value="HH:mm"/>
       <LongTimeFormat Value="HH:mm:ss"/>
       <ShortMonthNames>
-        <Index_1 Value="Jan"/>
-        <Index_2 Value="Fev"/>
-        <Index_3 Value="Mar"/>
-        <Index_4 Value="Abr"/>
-        <Index_5 Value="Mai"/>
-        <Index_6 Value="Jun"/>
-        <Index_7 Value="Jul"/>
-        <Index_8 Value="Ago"/>
-        <Index_9 Value="Set"/>
-        <Index_10 Value="Out"/>
-        <Index_11 Value="Nov"/>
-        <Index_12 Value="Dez"/>
+        <Index_1 Value="jan"/>
+        <Index_2 Value="fev"/>
+        <Index_3 Value="mar"/>
+        <Index_4 Value="abr"/>
+        <Index_5 Value="mai"/>
+        <Index_6 Value="jun"/>
+        <Index_7 Value="jul"/>
+        <Index_8 Value="ago"/>
+        <Index_9 Value="set"/>
+        <Index_10 Value="out"/>
+        <Index_11 Value="nov"/>
+        <Index_12 Value="dez"/>
       </ShortMonthNames>
       <LongMonthNames>
-        <Index_1 Value="Janeiro"/>
-        <Index_2 Value="Fevereiro"/>
-        <Index_3 Value="Março"/>
-        <Index_4 Value="Abril"/>
-        <Index_5 Value="Maio"/>
-        <Index_6 Value="Junho"/>
-        <Index_7 Value="Julho"/>
-        <Index_8 Value="Agosto"/>
-        <Index_9 Value="Setembro"/>
-        <Index_10 Value="Outubro"/>
-        <Index_11 Value="Novembro"/>
-        <Index_12 Value="Dezembro"/>
+        <Index_1 Value="janeiro"/>
+        <Index_2 Value="fevereiro"/>
+        <Index_3 Value="março"/>
+        <Index_4 Value="abril"/>
+        <Index_5 Value="maio"/>
+        <Index_6 Value="junho"/>
+        <Index_7 Value="julho"/>
+        <Index_8 Value="agosto"/>
+        <Index_9 Value="setembro"/>
+        <Index_10 Value="outubro"/>
+        <Index_11 Value="novembro"/>
+        <Index_12 Value="dezembro"/>
       </LongMonthNames>
       <ShortDayNames>
-        <Index_1 Value="Dom"/>
-        <Index_2 Value="Seg"/>
-        <Index_3 Value="Ter"/>
-        <Index_4 Value="Qua"/>
-        <Index_5 Value="Qui"/>
-        <Index_6 Value="Sex"/>
-        <Index_7 Value="Sáb"/>
+        <Index_1 Value="dom"/>
+        <Index_2 Value="seg"/>
+        <Index_3 Value="ter"/>
+        <Index_4 Value="qua"/>
+        <Index_5 Value="qui"/>
+        <Index_6 Value="sex"/>
+        <Index_7 Value="sáb"/>
       </ShortDayNames>
       <LongDayNames>
-        <Index_1 Value="Domingo"/>
-        <Index_2 Value="Segunda-feira"/>
-        <Index_3 Value="Terça-feira"/>
-        <Index_4 Value="Quarta-feira"/>
-        <Index_5 Value="Quinta-feira"/>
-        <Index_6 Value="Sexta-feira"/>
-        <Index_7 Value="Sábado"/>
+        <Index_1 Value="domingo"/>
+        <Index_2 Value="segunda-feira"/>
+        <Index_3 Value="terça-feira"/>
+        <Index_4 Value="quarta-feira"/>
+        <Index_5 Value="quinta-feira"/>
+        <Index_6 Value="sexta-feira"/>
+        <Index_7 Value="sábado"/>
       </LongDayNames>
       <TwoDigitYearCenturyWindow Value="50"/>
     </FormatSettings>
@@ -115,24 +115,24 @@
   <Controls>
     <fMain Caption="Codepage Witch">
       <alMain>
-        <actOpen Hint="Abrir um ficheiro de texto." Caption="Abrir Ficheiro..."/>
-        <actPreferences Hint="Ver ou modificar as preferências do Codepage Witch." Caption="Preferências..."/>
-        <actOnlineUpdate Hint="Procurar atualizações para o Codepage Witch." Caption="Verificar Atualizações..."/>
+        <actOpen Hint="Abrir um ficheiro de texto." Caption="Abrir ficheiro..."/>
+        <actPreferences Hint="Ver ou alterar as definições do Codepage Witch." Caption="Preferências..."/>
+        <actOnlineUpdate Hint="Procurar atualizações para o Codepage Witch." Caption="Atualização..."/>
         <actDebugLog Hint="Ver o registo de depuração." Caption="Registo de Depuração..."/>
-        <actListAll Hint="Listar todas as codepages conhecidas." Caption="Todas conhecidas"/>
-        <actListPartial Hint="Listar codepages parcialmente compatíveis." Caption="Qualquer possível"/>
-        <actListCompatible Hint="Listar apenas codepages totalmente compatíveis." Caption="Apenas compatíveis"/>
-        <actCodepageFilter Hint="Filtrar a lista de codepages." Caption="Filtro de Codepage"/>
-        <actExportASCII Hint="Export a text file as 7-BIT ASCII that requires no specific codepage or unicode characters." Caption="Export ASCII..."/>
-        <actExportCodepage Hint="Exportar um ficheiro de texto codificado em formato codepage." Caption="Exportar Codepage..."/>
-        <actExportUnicode Hint="Exportar um ficheiro de texto codificado em formato UTF-8." Caption="Exportar UTF-8..."/>
-        <actEditASCII Hint="Edit simple 7-BIT ASCII file." Caption="Edit ASCII..."/>
-        <actEditCodepage Hint="Edit codepage file." Caption="Edit Codepage..."/>
-        <actEditUnicode Hint="Edit Unicode text file." Caption="Edit Unicode..."/>
-        <actExportNone Hint="Can not export this type of file." Caption="No Export"/>
+        <actListAll Hint="Listar todas as codificações (codepages) conhecidas." Caption="Todas as conhecidas"/>
+        <actListPartial Hint="Listar todas as codificações possíveis." Caption="Qualquer possível"/>
+        <actListCompatible Hint="Listar apenas codificações totalmente compatíveis." Caption="Apenas compatíveis"/>
+        <actCodepageFilter Hint="Filtrar a lista de codificações." Caption="Filtro de Codificação"/>
+        <actExportASCII Hint="Exportar ficheiro de texto como ASCII de 7 bits (não requer codificação específica nem caracteres Unicode)." Caption="Exportar ASCII..."/>
+        <actExportCodepage Hint="Exportar ficheiro de texto no formato de codificação." Caption="Exportar Codificação..."/>
+        <actExportUnicode Hint="Exportar ficheiro de texto no formato UTF-8." Caption="Exportar UTF-8..."/>
+        <actEditASCII Hint="Editar ficheiro ASCII de 7 bits simples." Caption="Editar ASCII..."/>
+        <actEditCodepage Hint="Editar ficheiro com codificação específica." Caption="Editar Codificação..."/>
+        <actEditUnicode Hint="Editar ficheiro de texto Unicode." Caption="Editar Unicode..."/>
+        <actExportNone Hint="Este tipo de ficheiro não pode ser exportado." Caption="Sem Exportação"/>
         <actClose Hint="Fechar o ficheiro de texto atual." Caption="Fechar Ficheiro"/>
-        <actCloseAll Hint="Fechar todos os ficheiros de texto abertos." Caption="Fechar Todos"/>
-        <actEditNone Hint="Can not edit this type of file." Caption="No Editor"/>
+        <actCloseAll Hint="Fechar todos os ficheiros de texto abertos." Caption="Fechar Tudo"/>
+        <actEditNone Hint="Este tipo de ficheiro não tem editor." Caption="Sem Editor"/>
       </alMain>
       <pFileList>
         <pFileListLabel>
@@ -141,13 +141,13 @@
       </pFileList>
       <pCodepageList>
         <pCodepageListLabel>
-          <lbCodepageLabel Caption="Codepages"/>
+          <lbCodepageLabel Caption="Codificações"/>
         </pCodepageListLabel>
         <lvCodepageList>
           <Analyzing Caption="A analisar"/>
           <Not_implemented Caption="Não implementado"/>
-          <Any_Codepage Caption="Qualquer Codepage"/>
-          <Binary_data Caption="Ficheiro Binário"/>
+          <Any_Codepage Caption="Qualquer codificação"/>
+          <Binary_data Caption="Dados binários"/>
         </lvCodepageList>
       </pCodepageList>
       <pViewers>
@@ -161,7 +161,7 @@
         </pViewUnicode>
         <pCodepage>
           <pViewCodepageLabel>
-            <lbViewCodepageLabel Value="Visualizado como Codepage %s"/>
+            <lbViewCodepageLabel Value="Visualizado como codificação %s"/>
           </pViewCodepageLabel>
         </pCodepage>
       </pViewers>
@@ -169,21 +169,101 @@
         <Processing Caption="A processar"/>
         <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
         <Unicode Caption="Unicode"/>
-        <Codepage Caption="Codepage"/>
+        <Codepage Caption="Codificação"/>
         <NoEncoding Caption="ASCII"/>
         <Binary Caption="Binário"/>
       </statBar>
     </fMain>
-    <fCorrectFileEndingDialog Caption="Sem terminação de linha final">
+    <fOptionsDialog Caption="Definições do Codepage Witch">
+      <pPages>
+        <tsAbout Hint="Sobre esta aplicação." Caption="Sobre">
+          <lbCopyright Caption="Copyright %s"/>
+          <lbVersion Caption="Versão %0:s (Build %1:s)"/>
+          <lbApplication Caption="O &quot;%s&quot;"/>
+        </tsAbout>
+        <tsGeneral Hint="Definições gerais da aplicação." Caption="Geral">
+          <gbUserLanguage Caption="Idioma do Utilizador">
+            <cxLanguageChoice Default="(predefinido)"/>
+            <pLanguagePreferred>
+              <lbLanguagePreferred Caption="Idioma preferido:"/>
+            </pLanguagePreferred>
+            <lbLanguageSystem Caption="Idioma do sistema: %s"/>
+          </gbUserLanguage>
+          <gbMiscellaneous Caption="Diversos">
+            <cbShowHints Caption="Mostrar dicas ao passar o rato."/>
+            <cbColorButtons Caption="Usar ícones coloridos na barra de ferramentas."/>
+          </gbMiscellaneous>
+          <gbOnlineUpdate Caption="Atualização Online">
+            <cbAutoCheck Caption="Procurar atualizações automaticamente"/>
+            <pUpdateButton>
+              <btnUpdateCheck Hint="Consultar o servidor para procurar a atualização mais recente." Caption="Verificar agora..."/>
+            </pUpdateButton>
+          </gbOnlineUpdate>
+        </tsGeneral>
+        <tsSession Hint="Opções relacionadas com as sessões da aplicação." Caption="Sessão">
+          <gbSessionFiles Caption="Ficheiros de Sessão">
+            <cbReopenFiles Hint="Reabrir ficheiros que não foram fechados na sessão anterior." Caption="Reabrir ficheiros anteriores."/>
+            <cbWarnMissing Hint="Avisar se um ficheiro da sessão anterior não existir." Caption="Avisar se faltar."/>
+            <cbOpenExport Hint="Abrir automaticamente ficheiros exportados para revisão." Caption="Abrir ficheiros exportados."/>
+          </gbSessionFiles>
+        </tsSession>
+        <tsEncoding Hint="Opções de codificação de entrada e saída de ficheiros." Caption="Codificação">
+          <rgFileEnding Hint="Exigir que os ficheiros terminem com uma linha em branco." Caption="Ficheiros terminam com nova linha">
+            <rbFileEndWhatever Hint="Os ficheiros podem terminar com texto ou uma linha em branco." Caption="Indiferente."/>
+            <rbFileEndExport Hint="Garantir que os ficheiros exportados terminam com uma linha em branco." Caption="Garantir apenas na exportação."/>
+            <rbFileEndAll Hint="Exigir que os ficheiros originais terminem com uma linha em branco." Caption="Aplicar a todos os ficheiros de texto."/>
+          </rgFileEnding>
+        </tsEncoding>
+        <tsViewer Hint="Opções para os visualizadores Unicode e DOS." Caption="Visualizador">
+          <gbUnicodeView Caption="Vista Unicode">
+            <lbUnicodeScale Caption="Escala da letra %s%%"/>
+            <tbUnicodeScale Caption="10"/>
+          </gbUnicodeView>
+          <gbDOSView Caption="Vista DOS">
+            <lbDOSScale Caption="Escala da letra %s%%"/>
+            <tbDOSScale Caption="1"/>
+          </gbDOSView>
+        </tsViewer>
+      </pPages>
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnAccept Hint="Aceitar e aplicar todas as alterações." Caption="Aceitar"/>
+          <btnCancel Hint="Ignorar todas as alterações." Caption="Cancelar"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <fMiddlePanel>
+        <fBodyPanel>
+          <pSectionsPanel>
+            <pSectionLabel>
+              <lbSections Caption="Opções"/>
+            </pSectionLabel>
+          </pSectionsPanel>
+          <pPagesPanel>
+            <pPages>
+              <tsViewer>
+                <lbUnicodeScale Caption="Escala da letra %s%%"/>
+                <lbDOSScale Caption="Escala da letra %s%%"/>
+              </tsViewer>
+            </pPages>
+          </pPagesPanel>
+        </fBodyPanel>
+      </fMiddlePanel>
+    </fOptionsDialog>
+    <fFileEditor Caption="Codepage Witch - %s">
+      <btnCancel Caption="Cancelar"/>
+      <btnSave Caption="Guardar"/>
+      <dlgSaveAs Title="Erro ao guardar ficheiro, guardar como"/>
+    </fFileEditor>
+    <fCorrectFileEndingDialog Caption="Falta quebra de linha final">
       <fLowerPanel>
         <fButtonPanel>
           <btnCorrect Caption="Corrigir"/>
           <btnIgnore Caption="Ignorar"/>
         </fButtonPanel>
       </fLowerPanel>
-      <Message Text="O ficheiro &quot;%s&quot; não termina com uma linha em branco.&#xA;&#xA;Deseja corrigir isto adicionando uma nova linha final no fim do ficheiro?"/>
+      <Message Text="O ficheiro &quot;%s&quot; não termina com uma linha em branco.&#xA;&#xA;Deseja corrigir isto adicionando uma quebra de linha ao fim do ficheiro?"/>
     </fCorrectFileEndingDialog>
-    <fUpdateCheckDialog Caption="Verificação de Atualização">
+    <fUpdateCheckDialog Caption="Procurar Atualização">
       <fLowerPanel>
         <fButtonPanel>
           <btnCancel Caption="Cancelar"/>
@@ -191,9 +271,9 @@
         </fButtonPanel>
       </fLowerPanel>
       <Message>
-        <Check Text="A procurar atualizações disponíveis para &quot;%s&quot;, versão %s."/>
-        <Error Text="Não é possível determinar se existem atualizações para &quot;%s&quot; neste momento. Por favor, tente novamente mais tarde."/>
-        <None Text="Não existem atualizações disponíveis para &quot;%s&quot; neste momento. Por favor, tente novamente mais tarde."/>
+        <Check Text="A procurar atualizações para &quot;%s&quot;, versão %s."/>
+        <Error Text="De momento não é possível determinar se existem atualizações para &quot;%s&quot;. Por favor, tente mais tarde."/>
+        <None Text="Não existem atualizações para &quot;%s&quot; no momento. Por favor, verifique mais tarde."/>
       </Message>
     </fUpdateCheckDialog>
     <fUpdateFoundDialog Caption="Atualização Disponível">
@@ -208,10 +288,10 @@
         </fAuxPanel>
       </fLowerPanel>
       <Message>
-        <Note Text="Não foram fornecidas notas de lançamento para a versão %1:s de &quot;%0:s&quot;"/>
+        <Note Text="Não foram fornecidas notas de lançamento para a versão %1:s de &quot;%0:s&quot;."/>
       </Message>
     </fUpdateFoundDialog>
-    <fUpdateDownloadDialog Caption="Transferência de Atualização">
+    <fUpdateDownloadDialog Caption="Transferir Atualização">
       <fLowerPanel>
         <fButtonPanel>
           <btnCancel Caption="Cancelar"/>
@@ -220,7 +300,7 @@
       </fLowerPanel>
       <Message>
         <Fetch Text="A transferir atualização para &quot;%s&quot;."/>
-        <Error Text="Erro ao transferir a atualização de &quot;%s&quot;. Por favor, tente novamente mais tarde."/>
+        <Error Text="Erro ao transferir a atualização de &quot;%s&quot;. Por favor, tente mais tarde."/>
       </Message>
     </fUpdateDownloadDialog>
     <fUpdateSaveDialog Caption="Atualização Transferida">
@@ -231,84 +311,10 @@
         </fButtonPanel>
       </fLowerPanel>
       <Message>
-        <Downloaded Text="Transferido &quot;%s&quot; versão %s."/>
+        <Downloaded Text="Transferida a versão %s de &quot;%s&quot;."/>
       </Message>
     </fUpdateSaveDialog>
-    <fOptionsDialog Caption="Preferências do Codepage Witch">
-      <pPages>
-        <tsAbout Hint="Acerca desta aplicação." Caption="Acerca de">
-          <lbCopyright Caption="Copyright %s"/>
-          <lbVersion Caption="Versão %0:s (build %1:s)"/>
-          <lbApplication Caption="O &quot;%s&quot;"/>
-        </tsAbout>
-        <tsGeneral Hint="Definições gerais da aplicação." Caption="Geral">
-          <gbUserLanguage Caption="Idioma do Utilizador">
-            <cxLanguageChoice Default="(predefinido)"/>
-            <pLanguagePreferred>
-              <lbLanguagePreferred Caption="Idioma Preferido:"/>
-            </pLanguagePreferred>
-            <lbLanguageSystem Caption="Idioma do Sistema:  %s"/>
-          </gbUserLanguage>
-          <gbMiscellaneous Caption="Diversos">
-            <cbShowHints Caption="Mostrar dicas ao passar o rato."/>
-            <cbColorButtons Caption="Usar botões coloridos na barra de ferramentas."/>
-          </gbMiscellaneous>
-          <gbOnlineUpdate Caption="Atualização Online">
-            <cbAutoCheck Caption="Procurar atualizações automaticamente"/>
-            <pUpdateButton>
-              <btnUpdateCheck Hint="Verificar o servidor online para a atualização mais recente." Caption="Verificar agora..."/>
-            </pUpdateButton>
-          </gbOnlineUpdate>
-        </tsGeneral>
-        <tsSession Hint="Opções relativas às sessões da aplicação." Caption="Sessão">
-          <gbSessionFiles Caption="Ficheiros de sessão">
-            <cbReopenFiles Hint="Reabrir ficheiros não fechados da sessão anterior." Caption="Reabrir ficheiros anteriores."/>
-            <cbWarnMissing Hint="Avisar quando um ficheiro da sessão anterior não existe." Caption="Avisar se faltar."/>
-          </gbSessionFiles>
-        </tsSession>
-        <tsEncoding Hint="Opções de codificação de entrada e saída de ficheiros." Caption="Codificação">
-          <rgFileEnding Hint="Exigir que os ficheiros terminem numa linha em branco." Caption="Ficheiros terminam com Nova Linha">
-            <rbFileEndWhatever Hint="Todos os ficheiros podem terminar com texto ou linha em branco." Caption="Não importa."/>
-            <rbFileEndExport Hint="Garantir que os ficheiros exportados terminam com uma linha em branco." Caption="Garantir apenas na Exportação."/>
-            <rbFileEndAll Hint="Exigir que os ficheiros originais terminem com uma linha em branco." Caption="Impor em todos os ficheiros de texto."/>
-          </rgFileEnding>
-        </tsEncoding>
-        <tsViewer Hint="Opções de visualização Unicode e DOS." Caption="Visualizador">
-          <gbUnicodeView Caption="Vista Unicode">
-            <lbUnicodeScale Caption="Escala da fonte %s%%"/>
-            <tbUnicodeScale Caption="10"/>
-          </gbUnicodeView>
-          <gbDOSView Caption="Vista DOS">
-            <lbDOSScale Caption="Escala da fonte %s%%"/>
-            <tbDOSScale Caption="1"/>
-          </gbDOSView>
-        </tsViewer>
-      </pPages>
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnAccept Hint="Aceitar e aplicar quaisquer alterações." Caption="Aceitar"/>
-          <btnCancel Hint="Ignorar todas as alterações." Caption="Cancelar"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <fMiddlePanel>
-        <fBodyPanel>
-          <pSectionsPanel>
-            <pSectionLabel>
-              <lbSections Caption="Opções"/>
-            </pSectionLabel>
-          </pSectionsPanel>
-          <pPagesPanel>
-            <pPages>
-              <tsViewer>
-                <lbUnicodeScale Caption="Escala da fonte %s%%"/>
-                <lbDOSScale Caption="Escala da fonte %s%%"/>
-              </tsViewer>
-            </pPages>
-          </pPagesPanel>
-        </fBodyPanel>
-      </fMiddlePanel>
-    </fOptionsDialog>
-    <fLoggerViewForm Caption="Registo de depuração">
+    <fLoggerViewForm Caption="Registo de Depuração">
       <LineCount Plural="%.0n entradas de registo" Singular="%.0n entrada de registo"/>
       <pControls>
         <pButtons>
@@ -319,11 +325,11 @@
           <cbVerbosity>
             <Items Index_0="Crítico" Index_1="Mínimo" Index_2="Normal" Index_3="Detalhado" Index_4="Excessivo"/>
           </cbVerbosity>
-          <lbVerbosity Caption="Verbosidade:"/>
+          <lbVerbosity Caption="Detalhe:"/>
         </pVerbose>
       </pControls>
     </fLoggerViewForm>
-    <fMissingFiles Caption="Documentos em falta">
+    <fMissingFiles Caption="Ficheiros de Documentos em Falta">
       <fLowerPanel>
         <fButtonPanel>
           <btnCancel Caption="Cancelar"/>

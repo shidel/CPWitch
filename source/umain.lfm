@@ -1,7 +1,7 @@
 object fMain: TfMain
   Left = 1720
   Height = 320
-  Top = 810
+  Top = 809
   Width = 480
   AllowDropFiles = True
   Caption = 'Codepage Witch'

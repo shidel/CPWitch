@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CONFIG Name="Español" Language="es_ES">
   <Translation>
-    <Revision_0 Date="2026-02-17" Contributor="Google Gemini"/>
+    <Revision_0 Date="2026-02-24" Contributor="Google Gemini"/>
   </Translation>
   <Application>
     <ModalButtons>
@@ -37,19 +37,19 @@
         <ec5 Value="Acceso denegado"/>
         <ec6 Value="Identificador de archivo no válido"/>
         <ec12 Value="Modo de acceso no válido"/>
-        <ec17 Value="No se puede renombrar entre dispositivos"/>
+        <ec17 Value="No se puede renombrar entre diferentes dispositivos"/>
         <ec100 Value="Error de lectura de disco"/>
-        <ec101 Value="Error de escritura en disco"/>
+        <ec101 Value="Error de escritura de disco"/>
         <ec102 Value="Archivo no asignado"/>
         <ec103 Value="Archivo no abierto"/>
-        <ec104 Value="Archivo no abierto para entrada"/>
-        <ec105 Value="Archivo no abierto para salida"/>
+        <ec104 Value="Archivo no abierto para lectura"/>
+        <ec105 Value="Archivo no abierto para escritura"/>
         <ec106 Value="Formato numérico no válido"/>
         <ec150 Value="El disco está protegido contra escritura"/>
       </Codes>
     </Error>
     <FormatSettings>
-      <CurrencyFormat Value="3"/>
+      <CurrencyFormat Value="1"/>
       <NegCurrFormat Value="8"/>
       <DecimalSeparator Value=","/>
       <CurrencyDecimals Value="2"/>
@@ -58,11 +58,11 @@
       <ListSeparator Value=";"/>
       <CurrencyString Value="€"/>
       <ShortDateFormat Value="dd/mm/yyyy"/>
-      <LongDateFormat Value="d' de 'mmmm' de 'yyyy"/>
+      <LongDateFormat Value="d 'de' mmmm 'de' yyyy"/>
       <TimeAMString Value=""/>
       <TimePMString Value=""/>
-      <ShortTimeFormat Value="HH:mm"/>
-      <LongTimeFormat Value="HH:mm:ss"/>
+      <ShortTimeFormat Value="H:mm"/>
+      <LongTimeFormat Value="H:mm:ss"/>
       <ShortMonthNames>
         <Index_1 Value="ene"/>
         <Index_2 Value="feb"/>
@@ -115,39 +115,39 @@
   <Controls>
     <fMain Caption="Codepage Witch">
       <alMain>
-        <actOpen Hint="Abrir un archivo de texto." Caption="Abrir Archivo..."/>
-        <actPreferences Hint="Ver o modificar las preferencias de Codepage Witch." Caption="Preferencias..."/>
-        <actOnlineUpdate Hint="Buscar actualizaciones de Codepage Witch." Caption="Comprobar Actualizaciones..."/>
-        <actDebugLog Hint="Ver el registro de depuración." Caption="Registro de Depuración..."/>
-        <actListAll Hint="Listar todas las codepages conocidas." Caption="Todas conocidas"/>
-        <actListPartial Hint="Listar codepages parcialmente compatibles." Caption="Cualquier posible"/>
-        <actListCompatible Hint="Listar solo codepages totalmente compatibles." Caption="Solo compatibles"/>
-        <actCodepageFilter Hint="Filtrar la lista de codepages." Caption="Filtro de Codepage"/>
-        <actExportASCII Hint="Export a text file as 7-BIT ASCII that requires no specific codepage or unicode characters." Caption="Export ASCII..."/>
-        <actExportCodepage Hint="Exportar un archivo de texto codificado en formato codepage." Caption="Exportar Codepage..."/>
-        <actExportUnicode Hint="Exportar un archivo de texto codificado en formato UTF-8." Caption="Exportar UTF-8..."/>
-        <actEditASCII Hint="Edit simple 7-BIT ASCII file." Caption="Edit ASCII..."/>
-        <actEditCodepage Hint="Edit codepage file." Caption="Edit Codepage..."/>
-        <actEditUnicode Hint="Edit Unicode text file." Caption="Edit Unicode..."/>
-        <actExportNone Hint="Can not export this type of file." Caption="No Export"/>
-        <actClose Hint="Cerrar el archivo de texto actual." Caption="Cerrar Archivo"/>
+        <actOpen Hint="Abrir un archivo de texto." Caption="Abrir archivo..."/>
+        <actPreferences Hint="Ver o cambiar la configuración de Codepage Witch." Caption="Preferencias..."/>
+        <actOnlineUpdate Hint="Buscar actualizaciones para Codepage Witch." Caption="Actualización..."/>
+        <actDebugLog Hint="Ver el registro de depuración." Caption="Registro de depuración..."/>
+        <actListAll Hint="Listar todas las páginas de códigos conocidas." Caption="Todas las conocidas"/>
+        <actListPartial Hint="Listar cualquier página de códigos posible." Caption="Cualquier posible"/>
+        <actListCompatible Hint="Listar solo páginas de códigos totalmente compatibles." Caption="Solo compatibles"/>
+        <actCodepageFilter Hint="Filtrar la lista de páginas de códigos." Caption="Filtro de página de códigos"/>
+        <actExportASCII Hint="Exportar archivo de texto como ASCII de 7 bits que no requiere una página de códigos específica ni caracteres Unicode." Caption="Exportar ASCII..."/>
+        <actExportCodepage Hint="Exportar archivo de texto en formato de página de códigos." Caption="Exportar página de códigos..."/>
+        <actExportUnicode Hint="Exportar archivo de texto en formato UTF-8." Caption="Exportar UTF-8..."/>
+        <actEditASCII Hint="Editar archivo ASCII simple de 7 bits." Caption="Editar ASCII..."/>
+        <actEditCodepage Hint="Editar archivo de página de códigos." Caption="Editar página de códigos..."/>
+        <actEditUnicode Hint="Editar archivo de texto Unicode." Caption="Editar Unicode..."/>
+        <actExportNone Hint="Este tipo de archivo no se puede exportar." Caption="Sin exportación"/>
+        <actClose Hint="Cerrar el archivo de texto actual." Caption="Cerrar archivo"/>
         <actCloseAll Hint="Cerrar todos los archivos de texto abiertos." Caption="Cerrar todo"/>
-        <actEditNone Hint="Can not edit this type of file." Caption="No Editor"/>
+        <actEditNone Hint="Este tipo de archivo no tiene editor." Caption="Sin editor"/>
       </alMain>
       <pFileList>
         <pFileListLabel>
-          <lbFileList Caption="Archivos de Texto"/>
+          <lbFileList Caption="Archivos de texto"/>
         </pFileListLabel>
       </pFileList>
       <pCodepageList>
         <pCodepageListLabel>
-          <lbCodepageLabel Caption="Codepages"/>
+          <lbCodepageLabel Caption="Páginas de códigos"/>
         </pCodepageListLabel>
         <lvCodepageList>
           <Analyzing Caption="Analizando"/>
           <Not_implemented Caption="No implementado"/>
-          <Any_Codepage Caption="Cualquier Codepage"/>
-          <Binary_data Caption="Archivo Binario"/>
+          <Any_Codepage Caption="Cualquier página de códigos"/>
+          <Binary_data Caption="Datos binarios"/>
         </lvCodepageList>
       </pCodepageList>
       <pViewers>
@@ -156,12 +156,12 @@
             <lbUnicodeViewLabel Caption="Visto como Unicode"/>
           </pViewUnicodeLabel>
           <Unsupported_file>
-            <Binary Text="Los archivos de datos binarios no son compatibles."/>
+            <Binary Text="No se admiten archivos de datos binarios."/>
           </Unsupported_file>
         </pViewUnicode>
         <pCodepage>
           <pViewCodepageLabel>
-            <lbViewCodepageLabel Value="Visto como Codepage %s"/>
+            <lbViewCodepageLabel Value="Visto como página de códigos %s"/>
           </pViewCodepageLabel>
         </pCodepage>
       </pViewers>
@@ -169,111 +169,52 @@
         <Processing Caption="Procesando"/>
         <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
         <Unicode Caption="Unicode"/>
-        <Codepage Caption="Codepage"/>
+        <Codepage Caption="Cód. Página"/>
         <NoEncoding Caption="ASCII"/>
         <Binary Caption="Binario"/>
       </statBar>
     </fMain>
-    <fCorrectFileEndingDialog Caption="Sin salto de línea final">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCorrect Caption="Corregir"/>
-          <btnIgnore Caption="Ignorar"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message Text="El archivo &quot;%s&quot; no termina en una línea en blanco.&#xA;&#xA;¿Desea corregir esto agregando una nueva línea al final del archivo?"/>
-    </fCorrectFileEndingDialog>
-    <fUpdateCheckDialog Caption="Comprobación de Actualización">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-          <btnRetry Caption="Reintentar"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Check Text="Buscando actualizaciones disponibles para &quot;%s&quot;, versión %s."/>
-        <Error Text="No se puede determinar si hay actualizaciones para &quot;%s&quot; en este momento. Por favor, inténtelo de nuevo más tarde."/>
-        <None Text="No hay actualizaciones disponibles para &quot;%s&quot; en este momento. Por favor, inténtelo de nuevo más tarde."/>
-      </Message>
-    </fUpdateCheckDialog>
-    <fUpdateFoundDialog Caption="Actualización Disponible">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-          <btnDownload Caption="Descargar"/>
-          <btnSkip Caption="Omitir"/>
-        </fButtonPanel>
-        <fAuxPanel>
-          <cbSkipVersion Caption="Omitir esta versión"/>
-        </fAuxPanel>
-      </fLowerPanel>
-      <Message>
-        <Note Text="No se han proporcionado notas de lanzamiento para la versión %1:s de &quot;%0:s&quot;"/>
-      </Message>
-    </fUpdateFoundDialog>
-    <fUpdateDownloadDialog Caption="Descarga de Actualización">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-          <btnRetry Caption="Reintentar"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Fetch Text="Descargando actualización para &quot;%s&quot;."/>
-        <Error Text="Error al descargar la actualización de &quot;%s&quot;. Por favor, inténtelo de nuevo más tarde."/>
-      </Message>
-    </fUpdateDownloadDialog>
-    <fUpdateSaveDialog Caption="Actualización Descargada">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-          <btnSaveAs Caption="Guardar como..."/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Downloaded Text="Descargado &quot;%s&quot; versión %s."/>
-      </Message>
-    </fUpdateSaveDialog>
-    <fOptionsDialog Caption="Preferencias de Codepage Witch">
+    <fOptionsDialog Caption="Configuración de Codepage Witch">
       <pPages>
         <tsAbout Hint="Acerca de esta aplicación." Caption="Acerca de">
           <lbCopyright Caption="Copyright %s"/>
-          <lbVersion Caption="Versión %0:s (build %1:s)"/>
-          <lbApplication Caption="El &quot;%s&quot;"/>
+          <lbVersion Caption="Versión %0:s (Compilación %1:s)"/>
+          <lbApplication Caption="La &quot;%s&quot;"/>
         </tsAbout>
         <tsGeneral Hint="Configuración general de la aplicación." Caption="General">
-          <gbUserLanguage Caption="Idioma del Usuario">
-            <cxLanguageChoice Default="(predeterminado)"/>
+          <gbUserLanguage Caption="Idioma del usuario">
+            <cxLanguageChoice Default="(por defecto)"/>
             <pLanguagePreferred>
-              <lbLanguagePreferred Caption="Idioma Preferido:"/>
+              <lbLanguagePreferred Caption="Idioma preferido:"/>
             </pLanguagePreferred>
-            <lbLanguageSystem Caption="Idioma del Sistema:  %s"/>
+            <lbLanguageSystem Caption="Idioma del sistema: %s"/>
           </gbUserLanguage>
-          <gbMiscellaneous Caption="Miscelánea">
+          <gbMiscellaneous Caption="Varios">
             <cbShowHints Caption="Mostrar sugerencias al pasar el ratón."/>
-            <cbColorButtons Caption="Usar botones de colores en la barra de herramientas."/>
+            <cbColorButtons Caption="Usar iconos en color en la barra de herramientas."/>
           </gbMiscellaneous>
           <gbOnlineUpdate Caption="Actualización en línea">
             <cbAutoCheck Caption="Buscar actualizaciones automáticamente"/>
             <pUpdateButton>
-              <btnUpdateCheck Hint="Comprobar el servidor en línea para la última actualización." Caption="Comprobar ahora..."/>
+              <btnUpdateCheck Hint="Consultar el servidor en línea para buscar la última actualización." Caption="Comprobar ahora..."/>
             </pUpdateButton>
           </gbOnlineUpdate>
         </tsGeneral>
-        <tsSession Hint="Opciones sobre las sesiones de la aplicación." Caption="Sesión">
+        <tsSession Hint="Opciones relacionadas con las sesiones de la aplicación." Caption="Sesión">
           <gbSessionFiles Caption="Archivos de sesión">
-            <cbReopenFiles Hint="Reabrir los archivos no cerrados de la sesión anterior." Caption="Reabrir archivos anteriores."/>
-            <cbWarnMissing Hint="Advertir cuando no exista un archivo de la sesión anterior." Caption="Advertir si falta."/>
+            <cbReopenFiles Hint="Reabrir los archivos que no se cerraron en la sesión anterior." Caption="Reabrir archivos anteriores."/>
+            <cbWarnMissing Hint="Avisar si un archivo de la sesión anterior no existe." Caption="Avisar si falta."/>
+            <cbOpenExport Hint="Abrir automáticamente los archivos exportados para su revisión." Caption="Abrir archivos exportados."/>
           </gbSessionFiles>
         </tsSession>
         <tsEncoding Hint="Opciones de codificación de entrada y salida de archivos." Caption="Codificación">
-          <rgFileEnding Hint="Requerir que los archivos terminen en una línea en blanco." Caption="Los archivos terminan con Nueva Línea">
-            <rbFileEndWhatever Hint="Todos los archivos pueden terminar con texto o línea en blanco." Caption="No importa."/>
-            <rbFileEndExport Hint="Asegurar que los archivos exportados terminen con una línea en blanco." Caption="Asegurar solo para Exportación."/>
-            <rbFileEndAll Hint="Requerir que los archivos originales terminen con una línea en blanco." Caption="Imponer en todos los archivos de texto."/>
+          <rgFileEnding Hint="Requerir que los archivos terminen con una línea en blanco." Caption="Los archivos terminan con una nueva línea">
+            <rbFileEndWhatever Hint="Cualquier archivo puede terminar con texto o con una línea en blanco." Caption="No importa."/>
+            <rbFileEndExport Hint="Asegurar que los archivos exportados terminen con una línea en blanco." Caption="Asegurar solo para exportación."/>
+            <rbFileEndAll Hint="Requerir que los archivos originales terminen con una línea en blanco." Caption="Aplicar en todos los archivos de texto."/>
           </rgFileEnding>
         </tsEncoding>
-        <tsViewer Hint="Opciones de visualización Unicode y DOS." Caption="Visor">
+        <tsViewer Hint="Opciones para los visores Unicode y DOS." Caption="Visor">
           <gbUnicodeView Caption="Vista Unicode">
             <lbUnicodeScale Caption="Escala de fuente %s%%"/>
             <tbUnicodeScale Caption="10"/>
@@ -286,7 +227,7 @@
       </pPages>
       <fLowerPanel>
         <fButtonPanel>
-          <btnAccept Hint="Aceptar y aplicar cualquier cambio." Caption="Aceptar"/>
+          <btnAccept Hint="Aceptar y aplicar todos los cambios." Caption="Aceptar"/>
           <btnCancel Hint="Ignorar todos los cambios." Caption="Cancelar"/>
         </fButtonPanel>
       </fLowerPanel>
@@ -308,6 +249,71 @@
         </fBodyPanel>
       </fMiddlePanel>
     </fOptionsDialog>
+    <fFileEditor Caption="Codepage Witch - %s">
+      <btnCancel Caption="Cancelar"/>
+      <btnSave Caption="Guardar"/>
+      <dlgSaveAs Title="Error al guardar archivo, guardar archivo como"/>
+    </fFileEditor>
+    <fCorrectFileEndingDialog Caption="Falta el salto de línea final">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCorrect Caption="Corregir"/>
+          <btnIgnore Caption="Ignorar"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message Text="El archivo &quot;%s&quot; no termina con una línea en blanco.&#xA;&#xA;¿Desea corregirlo añadiendo un salto de línea al final del archivo?"/>
+    </fCorrectFileEndingDialog>
+    <fUpdateCheckDialog Caption="Comprobar actualización">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnRetry Caption="Reintentar"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Check Text="Buscando actualizaciones disponibles para &quot;%s&quot;, versión %s."/>
+        <Error Text="Actualmente no se puede determinar si hay actualizaciones disponibles para &quot;%s&quot;. Por favor, inténtelo de nuevo más tarde."/>
+        <None Text="No hay actualizaciones disponibles para &quot;%s&quot; en este momento. Por favor, vuelva a comprobarlo más tarde."/>
+      </Message>
+    </fUpdateCheckDialog>
+    <fUpdateFoundDialog Caption="Actualización disponible">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnDownload Caption="Descargar"/>
+          <btnSkip Caption="Omitir"/>
+        </fButtonPanel>
+        <fAuxPanel>
+          <cbSkipVersion Caption="Omitir esta versión"/>
+        </fAuxPanel>
+      </fLowerPanel>
+      <Message>
+        <Note Text="No se proporcionaron notas de la versión para la versión %1:s de &quot;%0:s&quot;."/>
+      </Message>
+    </fUpdateFoundDialog>
+    <fUpdateDownloadDialog Caption="Descargar actualización">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnRetry Caption="Reintentar"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Fetch Text="Descargando actualización para &quot;%s&quot;."/>
+        <Error Text="Error al descargar la actualización de &quot;%s&quot;. Por favor, inténtelo de nuevo más tarde."/>
+      </Message>
+    </fUpdateDownloadDialog>
+    <fUpdateSaveDialog Caption="Actualización descargada">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnSaveAs Caption="Guardar como..."/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Downloaded Text="Descargado &quot;%s&quot; versión %s."/>
+      </Message>
+    </fUpdateSaveDialog>
     <fLoggerViewForm Caption="Registro de depuración">
       <LineCount Plural="%.0n entradas de registro" Singular="%.0n entrada de registro"/>
       <pControls>
@@ -323,7 +329,7 @@
         </pVerbose>
       </pControls>
     </fLoggerViewForm>
-    <fMissingFiles Caption="Documentos faltantes">
+    <fMissingFiles Caption="Archivos de documentos faltantes">
       <fLowerPanel>
         <fButtonPanel>
           <btnCancel Caption="Cancelar"/>
