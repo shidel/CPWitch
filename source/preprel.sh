@@ -37,6 +37,7 @@ cp -f CPWitch  ../bin/macOS/CPWitch.app/Contents/MacOS/
 cp -f codepages.ini  ../bin/macOS/CPWitch.app/Contents/Resources/
 cp -f translations/*.nls ../bin/macOS/CPWitch.app/Contents/Resources/
 cp -f 0816norm.uff ../bin/macOS/CPWitch.app/Contents/Resources/
+cp -f dictionary.cpw ../bin/macOS/CPWitch.app/Contents/Resources/
 cp -f TODO.md ../bin/macOS/
 
 # Linux Release files excluding binary
@@ -44,6 +45,7 @@ echo 'Update Linux Package data files'
 cp -f codepages.ini  ../bin/Linux/
 cp -f translations/*.nls ../bin/Linux/
 cp -f 0816norm.uff ../bin/Linux/
+cp -f dictionary.cpw ../bin/Linux/
 cp -f TODO.md ../bin/Linux/
 
 # Windows Release files excluding binary
@@ -51,6 +53,7 @@ echo 'Update Windows Package data files'
 cp -f codepages.ini  ../bin/Windows/
 cp -f translations/*.nls ../bin/Windows/
 cp -f 0816norm.uff ../bin/Windows/
+cp -f dictionary.cpw ../bin/Windows/
 cp -f TODO.md ../bin/Windows/
 
 build_flag DEBUG

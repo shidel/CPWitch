@@ -18,8 +18,8 @@ interface
 uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
   Classes, SysUtils, Controls, ComCtrls,
-  Version, PasExt, Icons, MultiApp, Codepages;
-  { other forms }
+  Version, PasExt, Icons, MultiApp, Codepages, Dictionary;
+
 
  { TODO 2 -cDevel Improve TWitchItem to load files in Analize Thread. Report
    errors back to UI. UI show in Red and prompt when selected. }
@@ -221,7 +221,8 @@ begin
   end;
 
   case FEncoding of
-    weBinary, weCodepage:AnalyzeCP;
+    weBinary:begin end;
+    weCodepage:AnalyzeCP;
     weUnicode:AnalyzeUTF8;
   end;
 
