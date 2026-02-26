@@ -19,10 +19,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="30" Y="20"/>
-        <FoldState Value=" TL00404 p0u921 T3ka039 pjEjb096]9Sk804[94Qk1064]9Wk50C]IiejN0c2]I3k40p[R42kK0L4 PjIj40 T1kb023751212217]p4ud030134123]dNqO]d6lA0202241 p5t6]C1[o47 PLrb]W0lFc82A45]:ItGF3057142111E9]=SrRa TMqE]I9263 PDrP4E"/>
+        <CursorPos X="27" Y="21"/>
+        <FoldState Value=" TL00404 p0u921 T3ka039 pjEjb096]9Sk804[94Qk1064]9Wk50C]IiejN0c2]I3k40p[R42kK0L3 PiIj40 T1kb023751212217]p4ud03013412]djNqO]d6lA0202241 p5t6]C1[o47 PLrb]W0lFc82A45]:ItGF3057142111E9]=SrRa TMqE]I9263 PDrP4F"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -129,11 +128,13 @@
       <Unit>
         <Filename Value="mpla/codepages.pp"/>
         <UnitName Value="Codepages"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="156"/>
-        <CursorPos X="65" Y="206"/>
-        <FoldState Value=" TL004011211]5 PDxb0 T4L02 TCQH3]77i4Ne3 PfifH T8i528B PiEj[T4MkML10413[-4p6v8A1 T3ke0A[H5jQkE033 pkOi82FE]IcmY04]l]BFlU08 T6kf0111A]JVtg04 T1l007[:6BkC0241D plNng03[w66]w7 T0l3e37 pibjVc9A]9ZnWL9367]aIkYr56]91i3B911"/>
-        <UsageCount Value="5"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="248"/>
+        <CursorPos X="66" Y="314"/>
+        <FoldState Value=" TL004011211]5 PD-00 T4L02 TCkdK3 T7iFNe3 PfifH T8iG28B PiEj3]aMkXL10413 p1sW23012A1 T3l90A13124 plOnG2FE pjcmY04311]BFlU08 T6lA01158 pNva04 T1lC071651D]vYt503[m66]m7 T0lFe]H3512A]McsIt5267]BDkUr56]91i3B91O"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/doscrt.pp"/>
@@ -147,11 +148,12 @@
       <Unit>
         <Filename Value="mpla/dosview.pp"/>
         <UnitName Value="DosView"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="6"/>
-        <CursorPos X="61" Y="30"/>
-        <FoldState Value=" T3kJ05B1712 plVnE0F03A16 PkEo00u"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="252"/>
+        <CursorPos X="24" Y="279"/>
+        <FoldState Value=" T3kJ05B151112 PlFm80V"/>
         <UsageCount Value="48"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="ueditor.pas"/>
@@ -178,7 +180,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="6">
+    <JumpHistory HistoryIndex="15">
       <Position>
         <Filename Value="umain.pas"/>
         <Caret Line="21" Column="69"/>
@@ -206,6 +208,42 @@
       <Position>
         <Filename Value="umain.pas"/>
         <Caret Line="62" Column="25" TopLine="34"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/codepages.pp"/>
+        <Caret Line="53" Column="36" TopLine="22"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/codepages.pp"/>
+        <Caret Line="220" Column="7" TopLine="140"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/codepages.pp"/>
+        <Caret Line="180" Column="20" TopLine="155"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/codepages.pp"/>
+        <Caret Line="45" Column="21" TopLine="20"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/codepages.pp"/>
+        <Caret Line="294" Column="15" TopLine="237"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/codepages.pp"/>
+        <Caret Line="271" Column="25" TopLine="246"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/codepages.pp"/>
+        <Caret Line="310" Column="79" TopLine="241"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/codepages.pp"/>
+        <Caret Line="289" Column="41" TopLine="248"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/codepages.pp"/>
+        <Caret Line="310" Column="7" TopLine="248"/>
       </Position>
     </JumpHistory>
     <RunParams>
