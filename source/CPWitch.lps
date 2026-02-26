@@ -181,9 +181,9 @@
         <UnitName Value="Dictionary"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="66"/>
-        <CursorPos X="17" Y="101"/>
-        <UsageCount Value="12"/>
+        <TopLine Value="48"/>
+        <CursorPos X="66" Y="97"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -192,7 +192,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="334"/>
         <CursorPos X="3" Y="384"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/dosfont.pp"/>
@@ -203,7 +203,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="7">
+    <JumpHistory HistoryIndex="8">
       <Position>
         <Filename Value="dictionary.pp"/>
         <Caret Line="24" Column="43" TopLine="4"/>
@@ -235,6 +235,10 @@
       <Position>
         <Filename Value="dictionary.pp"/>
         <Caret Line="85" Column="23" TopLine="60"/>
+      </Position>
+      <Position>
+        <Filename Value="dictionary.pp"/>
+        <Caret Line="34" Column="22" TopLine="10"/>
       </Position>
     </JumpHistory>
     <RunParams>

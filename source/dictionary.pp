@@ -30,12 +30,15 @@ implementation
 
 {$UNDEF CaseSpecific}
 
+var
+  DictionaryLanguages : RawByteString;
+
 procedure LoadDictionary;
 var
+  Sects : TBinaryTree;
   E : integer;
   FileName: String;
   FileText : RawByteString;
-  Sects : TStringList;
   Sect, Line, S : RawByteString;
   U : UnicodeString;
   N : TBinaryTreeNode;
@@ -50,22 +53,25 @@ begin
   E :=FileLoad(FileName, FileText);
   if E <> 0 then
     raise Exception.Create('reading file: ' + ExtractRelativepath(AppBasePath, FileName));
+  Sects:=TBinaryTree.Create;
   try
     LogMessage(vbExcessive, 'Processing dictionary file');
     Sect:='';
-    Sects:=TStringList.Create;
     FileText:=StringReplace(FileText, CR, LF, [rfReplaceAll]);
     while Length(FileText) > 0 do begin
       Line:=Trim(PopDelim(FileText, LF));
       if Length(Line) = 0 then Continue;
       if HasEnds(Line, '[', ']') then begin
-        Line:=Trim(ExcludeEnds(Line, '[', ']'));
+        Line:=StringReplace(Trim(ExcludeEnds(Line, '[', ']')), '-', '_', [rfReplaceAll]);
         if Line = '' then
           raise Exception.Create('null section name');
-        if Sects.IndexOf(UpperCase(Line)) <> -1 then
+        if Assigned(Sects.Find(Line, false)) then
           raise Exception.Create('duplicate section name: ' + Line);
-        Sects.Add(UpperCase(Line));
+        Sects.Add(Line);
         Sect:=Line;
+        if DictionaryLanguages <> '' then
+          Cat(DictionaryLanguages, COMMA + SPACE);
+        Cat(DictionaryLanguages, Sect);
         LogMessage(vbExcessive, TAB + 'Language: ' + Sect);
         Sect:=Sect + ';';
         Continue;
@@ -82,28 +88,33 @@ begin
         if not Assigned(N) then begin
           S:=';' + Sect;
           N:=DictionaryWords.Add(U, PasExt.ToBytes(S));
+          Inc(WC);
         end else begin
           S:=PasExt.ToString(N.Data);
           if Pos(';' + Sect, S) > 0 then begin
-            LogMessage(vbExcessive, TAB2 + 'duplicate word: ' + RawByteString(U));
+            LogMessage(vbVerbose, WhenTrue(VerboseLevel=vbExcessive,
+              TAB + 'duplicate word: ', 'duplicate dictionary word: ') +
+              RawByteString(U) + ' [' + ExcludeTrailing(Sect, ';') + ']');
             Continue;
           end;
           N.Data:=PasExt.ToBytes(S+Sect);
         end;
-        Inc(WC);
       end;
     end;
     DictionaryWords.Balance;
     {$IFDEF BUILD_DEBUG}
-    N:=DictionaryWords.First;
-    While Assigned(N) do begin
-      LogMessage(VerboseLevel, N.UniqueID + ' ' + PasExt.ToString(N.Data));
-      N:=N.Next;
+    if VerboseLevel = vbExcessive then begin
+      N:=DictionaryWords.First;
+      While Assigned(N) do begin
+        LogMessage(VerboseLevel, N.UniqueID + ' ' + PasExt.ToString(N.Data));
+        N:=N.Next;
+      end;
     end;
     {$ENDIF}
   finally
-    LogMessage(vbVerbose, 'Dictionary contains ' + IntToStr(WC) + ' and ' +
+    LogMessage(vbVerbose, 'Dictionary contains ' + IntToStr(WC) + ' unique words and ' +
       IntToStr(Sects.Count) + ' languages.');
+    LogMessage(vbVerbose, TAB+DictionaryLanguages);
     Sects.Free;
   end;
 end;
@@ -111,6 +122,7 @@ end;
 procedure Initialize;
 begin
   try
+    DictionaryLanguages:='';
     DictionaryWords:=TBinaryTree.Create;
     LoadDictionary;
   except
