@@ -41,6 +41,19 @@ object fDictEditForm: TfDictEditForm
       BorderSpacing.Around = 8
       Caption = 'Locale:'
     end
+    object btnInvert: TButton
+      Left = 371
+      Height = 20
+      Top = 8
+      Width = 124
+      Align = alRight
+      AutoSize = True
+      BorderSpacing.Around = 8
+      Caption = 'Invert Selections'
+      Enabled = False
+      TabOrder = 1
+      OnClick = btnInvertClick
+    end
   end
   object pStatusBar: TStatusBar
     Left = 0
@@ -85,7 +98,9 @@ object fDictEditForm: TfDictEditForm
       AutoSize = True
       BorderSpacing.Around = 16
       Caption = 'Save'
+      Enabled = False
       TabOrder = 0
+      OnClick = btnSaveClick
     end
     object btnReload: TButton
       Left = 371
@@ -96,7 +111,22 @@ object fDictEditForm: TfDictEditForm
       AutoSize = True
       BorderSpacing.Around = 16
       Caption = 'Reload'
+      Enabled = False
       TabOrder = 1
+      OnClick = btnReloadClick
+    end
+    object btnAdd: TButton
+      Left = 16
+      Height = 20
+      Top = 16
+      Width = 128
+      Align = alLeft
+      AutoSize = True
+      BorderSpacing.Around = 16
+      Caption = 'Add to Dictionary'
+      Enabled = False
+      TabOrder = 2
+      OnClick = btnAddClick
     end
   end
   object pBody: TPanel

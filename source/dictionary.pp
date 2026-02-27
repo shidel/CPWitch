@@ -35,13 +35,16 @@ type
     FFileName: String;
     procedure SetFileName(AValue: String);
     procedure Load;
+    procedure SetModified(AValue: boolean);
   public
     constructor Create; override;
     procedure Clear; override;
     property FileName : String read FFileName write SetFileName;
     procedure Reload;
     procedure Save;
-    property Languages : RawByteString read FLanguages;
+    property Locales : RawByteString read FLanguages;
+    property Modified : boolean read FModified write SetModified;
+    procedure AddLocale(Locale : String);
   end;
 
 var
@@ -56,7 +59,6 @@ begin
   Dictionaries:=TDictionaries.Create;
   try
     Dictionaries.FileName:=AppDataPath+'dictionary.cpw';
-    DIctionaries.FModified:=True;
   except
     FreeAndNil(Dictionaries);
   end;
@@ -65,8 +67,8 @@ end;
 procedure Finalize;
 begin
   if Assigned(Dictionaries) then begin
-    if Dictionaries.FModified then
-      Dictionaries.Save;
+    // if Dictionaries.FModified then
+    //  Dictionaries.Save;
     FreeAndNil(Dictionaries);
   end;
 end;
@@ -165,6 +167,12 @@ begin
   end;
 end;
 
+procedure TDictionaries.SetModified(AValue: boolean);
+begin
+  if FModified=AValue then Exit;
+  FModified:=AValue;
+end;
+
 procedure TDictionaries.Reload;
 begin
   FModified:=False;
@@ -187,6 +195,7 @@ var
   N : TBinaryTreeNode;
   LW : integer;
 begin
+  FModified:=False;
   if FFileName = '' then Exit;
   SS:=TStringStream.Create('');
   try
@@ -221,13 +230,26 @@ begin
         SS.WriteString(LF);
     end;
     SS.SaveToFile(FFileName);
-    FModified:=False;
   except
     on E : Exception do begin
       LogMessage(vbCritical, 'Exception saving dictionary. ' + E.Message);
      end;
   end;
   SS.Free;
+end;
+
+procedure TDictionaries.AddLocale(Locale: String);
+var
+  L : TArrayOfString;
+  I : Integer;
+begin
+  L:=Explode(FLanguages, COMMA + SPACE);
+  for I := 0 to Length(L) -1 do
+    if UpperCase(Locale) = UpperCase(L[I]) then Exit;
+  if FLanguages='' then
+    FLanguages:=Locale
+  else
+    Flanguages:=FLanguages + COMMA + SPACE + Locale;
 end;
 
 constructor TDictionaries.Create;

@@ -1057,6 +1057,7 @@ begin
   FViewedCodepage:=-2;
   if Assigned(FDictEditForm) then begin
     FDictEditForm.WitchItem:=nil;
+    FDictEditForm.WitchList:=FWitch;
     {$IFDEF BUILD_SPECIAL}
        if fDictEditForm.Visible = False then
          fDictEditForm.Show;

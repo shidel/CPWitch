@@ -26,6 +26,8 @@ type
   TfDictEditForm = class(TMultiAppForm)
     btnSave: TButton;
     btnReload: TButton;
+    btnInvert: TButton;
+    btnAdd: TButton;
     cbLocale: TComboBox;
     clWords: TCheckListBox;
     lbLocale: TLabel;
@@ -33,21 +35,29 @@ type
     pButtons: TPanel;
     pTop: TPanel;
     pStatusBar: TStatusBar;
+    procedure btnAddClick(Sender: TObject);
+    procedure btnInvertClick(Sender: TObject);
+    procedure btnReloadClick(Sender: TObject);
+    procedure btnSaveClick(Sender: TObject);
     procedure cbLocaleChange(Sender: TObject);
   private
     FWitchItem: TWitchItem;
+    FWitchList: TWitch;
     FWords : TBinaryTree;
     procedure SetWitchItem(AValue: TWitchItem);
+    procedure SetWitchList(AValue: TWitch);
   protected
     procedure DoUpdateLocales;
     procedure DoUpdateWords;
     procedure DoUpdateWordList;
+    procedure DoUpdateButtons;
+    procedure DoWitchReanalyze;
     procedure DoCreate; override;
     procedure DoDestroy; override;
     procedure DoShow; override;
   public
     property WitchItem : TWitchItem read FWitchItem write SetWitchItem;
-
+    property WitchList : TWitch read FWitchList write SetWitchList;
 
   end;
 
@@ -83,12 +93,67 @@ begin
   DoUpdateWordList;
 end;
 
+procedure TfDictEditForm.btnInvertClick(Sender: TObject);
+var
+  I : Integer;
+begin
+  for I := 0 to clWords.Count - 1 do
+    clWords.Checked[I]:= not clWords.Checked[I];
+end;
+
+procedure TfDictEditForm.btnReloadClick(Sender: TObject);
+begin
+  if not Assigned(Dictionaries) then Exit;
+  Dictionaries.Reload;
+  DoUpdateWordList;
+  DoWitchReanalyze;
+end;
+
+procedure TfDictEditForm.btnSaveClick(Sender: TObject);
+begin
+  if not Assigned(Dictionaries) then Exit;
+  Dictionaries.Save;
+  DoUpdateWordList;
+end;
+
+procedure TfDictEditForm.btnAddClick(Sender: TObject);
+var
+  I : Integer;
+  LCA, LCB, S : String;
+  DN : TBinaryTreeNode;
+begin
+  if not Assigned(Dictionaries) then Exit;
+  LCB:=Trim(cbLocale.Text);
+  if LCB = '' then Exit;
+  Dictionaries.AddLocale(LCB);
+  LCB:=LCB + ';';
+  LCA:=';'+LCB;
+  for I := 0 to clWords.Count - 1 do
+    if clWords.Checked[I] then begin
+      S:=LowerCase(clWords.Items[I]);
+      DN:=Dictionaries.Find(S);
+      if not Assigned(DN) then
+        DN:=Dictionaries.Add(S, PasExt.ToBytes(LCA))
+      else if Pos(LCA, PasExt.ToString(DN.Data))=0 then
+        DN.Data:=PasExt.ToBytes(PasExt.ToString(DN.Data) + LCB);
+    end;
+  Dictionaries.Modified:=True;
+  DoUpdateWordList;
+  DoWitchReanalyze;
+end;
+
 procedure TfDictEditForm.SetWitchItem(AValue: TWitchItem);
 begin
   if FWitchItem=AValue then Exit;
   FWitchItem:=AValue;
   DoUpdateWords;
   DoUpdateWordList;
+end;
+
+procedure TfDictEditForm.SetWitchList(AValue: TWitch);
+begin
+  if FWitchList=AValue then Exit;
+  FWitchList:=AValue;
 end;
 
 procedure TfDictEditForm.DoUpdateLocales;
@@ -99,7 +164,7 @@ var
 begin
   cbLocale.Clear;
   if not Assigned(Dictionaries) then Exit;
-  LL := Dictionaries.Languages;
+  LL := Dictionaries.Locales;
   LLL:='';
   while LL <> '' do begin
     L:=Trim(PopDelim(LL, COMMA));
@@ -121,7 +186,6 @@ var
   P : integer;
   W : TStringList;
   I : Integer;
-  N : TBinaryTreeNode;
 begin
   FWords.Clear;
   if not Assigned(FWitchItem) then Exit;
@@ -140,7 +204,7 @@ begin
     W.Clear;
     WordsOfString(Line, W);
     for I := 0 to W.Count - 1 do begin
-      if Not Assigned(FWords.Find(W[I], false)) then
+      if (Length(W[I]) > 1) and (Not Assigned(FWords.Find(W[I], false))) then
         FWords.Add(W[I]);
     end;
   end;
@@ -156,7 +220,9 @@ var
   SC : integer;
 begin
   clWords.Clear;
+  DoUpdateButtons;
   if FWords.Count = 0 then Exit;
+  if Not Assigned(Dictionaries) then Exit;
   SL:=[];
   SC:=0;
   SetLength(SL, FWords.Count);
@@ -173,8 +239,27 @@ begin
     FN:=FN.Next;
   end;
   SetLength(SL, SC);
-  if SC > 0 then
-    clWOrds.Items.AddStrings(SL);
+  if SC > 0 then begin
+    clWords.Items.AddStrings(SL);
+  end;
+  DoUpdateButtons;
+end;
+
+procedure TfDictEditForm.DoUpdateButtons;
+begin
+  btnAdd.Enabled:=(clWords.Items.Count > 0) and (Trim(cbLocale.Text) <> '');
+  btnInvert.Enabled:=btnAdd.Enabled;
+  btnSave.Enabled:=Assigned(Dictionaries) and (Dictionaries.Modified);
+  btnReload.Enabled:=btnSave.Enabled;
+end;
+
+procedure TfDictEditForm.DoWitchReanalyze;
+var
+  I : Integer;
+begin
+  if Not Assigned(FWitchList) then Exit;
+  for I := 0 to FWitchList.Count - 1 do
+    FWitchList.Modified[I]:=True;
 end;
 
 procedure TfDictEditForm.DoCreate;
@@ -195,6 +280,9 @@ procedure TfDictEditForm.DoShow;
 begin
   inherited DoShow;
   DoUpdateLocales;
+  DoUpdateWords;
+  DoUpdateWordList;
+  DoUpdateButtons;
 end;
 
 initialization

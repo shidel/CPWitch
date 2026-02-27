@@ -1,14 +1,465 @@
 [en_US]
 
-above, back, beyond, center, coming, fall, forward, free, freedos, leap, lines
-middle, space, spring, summer, total, winter
+above, access, again, all, an, any, artificial, asset, audio, available, back
+beyond, blocks, bsd, bump, can, center, check, clause, click, coming
+compressed, copyright, could, data, denied, destroy, dispose, driver, elapsed
+english, error, failure, fall, file, files, find, for, format, found, function
+game, graphics, groups, help, if, image, initialization, initialize, invalid
+is, it, joystick, keyboard, keys, land, language, large, level, license, like
+lives, locate, locked, maligned, many, memory, mode, more, mouse, move
+necessary, not, of, on, once, open, opening, operation, or, ouch, out, over
+overflow, path, paused, pointer, providing, range, really, recognize, reserved
+rights, score, simply, slow, special, speed, stack, start, structure, suitable
+thanks, the, them, they, this, to, too, translations, try, type, unable
+unassigned, unsupported, use, verification, version, you
 
 [de_DE]
 
-auf, blöcke, das, dem, drei, einfach, fallen, freedos, gruppen, ist, kein
-klicke, landen, nach, tetris, von
+abgelaufen, an, arbeitsspeicher, audiotreiberfehler, auf, aus, autsch
+bereitstellung, beschädigter, blöcke, blöcken, dank, das, datei, dateien
+dateiformat, dateizugriff, datenbereichsprüfung, datentypprüfung
+datenüberprüfung, dem, den, der, die, diese, drei, du, eine, einfach, ende
+entferne, erforderlich, ergebnis, erkennen, erzeugst, es, fallen, fehler
+finden, format, freedos, funktion, für, gefunden, geschwindigkeitsbegrenzung
+gesperrtes, gleichartigen, grafiktreiber, grafiktreiberfehler, groß, gruppen
+hilfe, in, initialisieren, initialisierungsfehler, ist, joysticktreiberfehler
+kann, kein, klicke, klicken, komprimierter, konnte, künstliche, landen, leben
+level, license, maus, maustreiberfehler, mehr, mit, modus, nach, nicht, nochmal
+objekt, oder, offene, operation, passender, pausiert, pfad, pointer, reicht
+sie, speicherüberlauf, spiel, sprachübersetzung, stapelüberlauf, starten
+struktur, tastaturtreiberfehler, tasten, treiber, treibertyp
+treiberüberprüfung, um, unbedingt, ungültige, ungültiger, ungültiges
+unterstützte, unterstützter, verfügbar, versuche, verweigert, viele, vielen
+von, zeigeroperation, zerstören, zu, zugewiesener, zum, Öffne
 
 [tr_TR]
 
-bir, bulunamadı, etmek, freedos, grafik, hız, için, onları, sürücüsü
-tümseği, uygun, yapay, yerleştiklerinde, yok
+alanı, aman, at, atanmamış, açık, açılıyor, başarısız, başlamak
+başlatma, başlatılamadı, bellek, benzer, bir, bitti, biçimi, bloklar
+bloktan, bu, bulunamadı, büyük, daha, deneyin, desteklenmeyen, değil
+dilinde, dosya, dosyasının, dosyaya, duraklatıldı, düşer, ederiz
+ediliyor, erişim, etmek, fare, fazla, gereklidir, geçersiz, geçmiş, grafik
+gruplara, hakikaten, hakkı, hakları, hatası, hayat, hız, için, işaretçi
+işlem, işlemi, işlev, kilitli, kipinde, kişisine, klavye, kolu, kontrol
+koşullu, kullanın, kötü, lisansı, mevcut, oluşan, onları, oyun
+reddedildi, resim, sadece, saklıdır, sağladığı, ses, seviye, skor, süre
+sürücü, sürücüsü, sürüm, sıkıştırılmış, tanınamadı, taşması
+tekrar, telif, tercümeyi, teşekkür, tuşlarını, tüm, tümseği, türkçe
+türü, tıklayın, unsuru, uygun, var, veri, veriler, veya, yapay, yapı
+yardım, yerleştiklerinde, yetersiz, yok, yol, yığın, çok
+
+[da_DK]
+
+af, aktiv, alle, at, av, billedfejl, blokke, brug, dansk, dataintervalkontrol
+datatypekontrol, dataverifikation, de, delægge, dem, den, det, dette, driver
+drivertype, driververifikation, du, eens, eller, en, er, falder, fil, filadgang
+filer, filformat, finde, fler, flytte, for, forbeholdes, forkert, forløbet
+formatet, frigør, fundet, funktion, genkende, grafikdriver, grafikdriverfejl
+grupper, hastighedsforøgelse, hjælp, hukommelse, hukommelsesoverløb, hvis
+igen, ikke, initialisere, initialiseringsfejl, joystickdriverfejl, justeret
+kan, klik, komprimeret, kunne, kunstig, lander, langsomt, levere, liv
+lyddriverfejl, låst, mange, musdriverfejl, musen, niveau, nogen, nok, når
+nægtet, nødvendig, operation, oversættelser, passende, pause, pointer
+pointeroperation, prøv, på, rettigheder, sat, simpelthen, slut, spillet
+sprog, stakoverløb, starte, sti, stor, struktur, særlig, tak
+tastaturdriverfejl, tasternetil, til, tilgængelig, tilstand, uallokeret
+ugyldig, ugyldigt, understøttet, version, virkelig, åbne, åbner
+
+[eo]
+
+akceli, al, aliro, aŭ, bildo, blokoj, ciuj, da, dankoj, datuma, datumtipo, de
+denove, densigita, difektita, disponeblas, dosierformato, dosiero, dosieroj
+eblas, eblis, elementon, elĉerpita, eraro, esperanto, estas, falas, finita
+forigi, formaton, funkcio, gamo, grafika, grafikan, granda, grupoj, haltas
+helpo, ili, ilin, kiam, klaku, klavara, klavojn, komenci, konfirmo, kontrolo
+kopirajto, la, lingvaj, livero, ludo, ludstila, malfermas, malfermitaj
+malrapide, malsukceso, memoro, movi, muson, muspelilo, ne, neasignita, necesa
+nesubtenata, nevalida, nivelo, operacio, pasis, paŭzita, pelila, pelilo
+pelilon, peliltipo, pli, poentaro, por, povas, pravalorigi, pravalorigo, pro
+provu, rajtoj, referenca, referenco, rekoni, rezervitaj, reĝimo, rifuzita
+samaj, se, simple, sonpelilo, specialaj, stako, strukturo, superfluo, sur
+taŭgan, tetriso, tio, tradukoj, tro, trovi, trovita, uzu, ve, vere, versio, vi
+vivoj, vojo, ĝi, ŝlositan
+
+[es_ES]
+
+abiertos, abriendo, acceso, adecuado, agradecimientos, archivo, archivos
+artificial, asignado, aterrizan, audio, aumento, ay, ayuda, bloqueado, bloques
+caen, clic, comprimida, comprobación, controlador, datos, de, del, demasiado
+demasiados, denegado, derechos, desalineado, desbordamiento, descartar
+destruirlos, disponible, el, en, encontrada, encontrado, encontrar, error, es
+español, especiales, esto, estructura, fallo, formato, función, grande
+grupos, gráfico, gráficos, haz, idioma, iguales, imagen, inicialización
+inicializar, iniciar, inténtalo, inválida, inválido, joystick, juego, las
+lento, localizar, loques, los, memoria, modo, moverlos, másb, necesario
+ningún, nivel, no, nuevo, operación, para, pausa, pila, por, proporcionar
+pudo, puedes, puntero, puntuación, que, rango, ratón, realmente, reconocer
+recurso, reservados, ruta, se, si, simplemente, sin, soportada, soportado
+teclado, teclas, terminado, tipo, todos, traducciones, transcurrido, un, una
+usa, velocidad, verificación, versión, vez, vidas
+
+[et_EE]
+
+abi, aeglane, aitäh, alustamiseks, andmete, andmetüübi, andmevahemiku
+audiodraiveri, avamine, avatud, draiver, draiveri, draiverit, eest, eesti, ei
+elud, enama, eriline, et, faile, faili, failile, failivorming, funktsioon
+graafikadraiver, graafikadraiveri, graafikadraiverit, hiiredraiveri, hiirt
+hävitada, initsialiseerida, initsialiseerimise, joondamata, joysticki
+juurdepääs, kasutage, keelatud, keele, kiiruse, klahve, klaviatuuridraiveri
+kliki, klotsi, klotsid, klõpsake, kontroll, kui, kukuvad, kunstlikuks, kõik
+le, leitud, license, lihtsalt, liiga, liigutada, lukustatud, läbi, maandunud
+mälu, mäng, määramata, möödunud, need, neid, on, operatsioon, palju
+peatatud, pildi, pole, proovi, puudus, reserveeritud, režiim, rühmadel, saa
+saadaval, sarnase, see, skoor, sobimatu, sobivat, struktuur, suudetud, suur
+suurendamiseks, tase, te, teed, tihendatud, toetamatu, tuvastada, tänu
+tõesti, tõlgete, tõrge, tüüp, uuesti, vabastamine, vajalik, vara
+verifitseerimine, versioon, viga, viida, viit, virna, vormingut, või, õigused
+õnnestunud, ületäitumine
+
+[fi_FI]
+
+ajuri, ajuria, ajurin, ajurityyppi, aloittaaksesi, alueen, alustaa, alustus
+apua, auts, avataan, avointa, datan, datatyyppitarkistus, ei, elämät
+epäonnistui, erityiset, estetty, et, formaattia, funktio, grafiikka, hidasta
+hiiri, hiirtä, jos, joystick, kaikki, keinotekoisen, kielen, kiitokset
+kohdistamaton, kohdistettu, kulunut, kun, kuvan, käyttö, käytä
+käännöksistä, laskeutuneet, liian, liikuttaa, lisäykseen, lle, loppu
+lukittu, luovuta, löydy, monta, muistin, muistista, napsauta, ne, niitä
+nopeuden, näppäimistöajurin, näppäimiä, ohi, oikeudet, ole, omaisuus, on
+operaatio, osoitin, osoitinoperaatio, ovat, pakatun, palikan, palikat, peli
+pidätetään, pinon, pisteet, polkua, putoavat, pysäytetty, rakenne, ryhmiä
+saatavilla, samanlaisen, se, sopivaa, suomi, suuri, tai, tarkistus
+tarpeellinen, taso, tekijänoikeus, tiedostoa, tiedostomuoto, tiedoston
+tilassa, todella, tuhotaksesi, tukematon, tunnistettu, tämä, useamman
+uudelleen, vain, varmennus, versio, virhe, virheellinen, virheellisesti, voi
+voitu, ylivuoto, yritä, ääni
+
+[fr_FR]
+
+accès, actif, adapté, aide, artificiel, atterrissent, attribué, au, audio
+avoir, aïe, blocs, ce, chemin, clauses, clavier, cliquez, compressée, créer
+de, des, disponible, disposer, données, droit, du, débordement, démarrer
+détruire, elle, en, erreur, essayez, est, fichier, fichiers, fois, fonction
+fourni, français, grande, graphique, groupes, identiques, ils, initialisation
+initialiser, insuffisante, introuvable, invalide, jeu, la, le, les, localiser
+manette, mauvais, merci, mémoire, niveau, non, nouveau, nécessaire
+opération, ou, ouverts, ouverture, pas, pause, pile, pilote, plage, plus
+pointeur, pour, pris, prise, qu, ralentisseur, reconnaître, refusé
+réservés, souris, structure, sur, terminé, tombent, touches, tous
+traduction, trop, trouver, un, une, utilisez, verrouillé, vies, vraiment
+vérification, Écoulé, à, échec
+
+[hu_HU]
+
+adat, adattípus, amint, audio, az, azonos, billentyűket, billentyűzet, blokk
+blokkok, csoportjaira, egyszerűen, egér, ellenőrzés, elpusztítsd, eltelt
+elérhető, esnek, eszköz, ez, fel, felszabadítása, fenntartva
+fordításokért, formátuma, funkció, fájl, fájlformátum, grafikus, ha
+használd, hiba, hogy, hozzáférés, hozzárendelt, illesztett
+illesztőprogram, inicializálható, inicializálási, ismerhető, jaj, jog
+játék, kattints, kattintás, kezdéshez, kép, kívül, köszönet, külön
+landolnak, lassú, lezárt, magyar, megfelelő, megnyitása, megtagadva
+memória, memórián, mesterséges, minden, mozgatni, mutató, mód, művelet
+nagy, nak, nem, nyelvű, nyitott, pontszám, próbáld, rosszul
+sebességfokozásra, sok, struktúra, szerzői, szint, szükséges
+szüneteltetve, súgó, található, tartomány, tudod, támogatott, típus
+több, tömörített, túl, túlcsordulás, vagy, valóban, verem, verzió
+vége, Életek, érvénytelen, újra, útvonal, őket
+
+[is_IS]
+
+af, aftur, að, aðgangi, aðgerð, bendil, bendill, bið, boði, bygging, ef
+eign, einfaldlega, eins, ekki, er, eyða, eða, falla, farga, finn, fleiri
+frumstillingar, frumstillt, fundin, fyrir, fært, gagna, gat
+gervihraðahindrun, get, getur, ham, hefja, hentugan, hjálp, hljóðkortsrekil
+hægt, hópa, höfundaréttur, hún, kubbar, kubbum, leik, leikur, lenda
+liðinn, lokið, lyklaborðsrekil, læstri, líf, margar, minnis, minnislaust
+mynd, músarrekil, músina, nauðsynleg, neinn, neitað, notaðu, of, opna
+opnar, rangt, rekil, rekill, rekiltegund, reyndu, réttindi, skjákortsrekil
+skrá, skráar, skráarsnið, skrár, slóð, smelltu, snið, stafla
+staðfesting, stig, stilltur, stór, stýripinna, svið, sérstakar, takkana
+tegund, til, tungumálaþýðingar, tékk, tími, villa, virkilega, yfirfall
+Íslenska, Öll, Þegar, Þetta, Þú, á, áskilin, í, ógild, ógilt
+óstudd, óstuddur, óúthlutaður, úps, útgáfa, útvega, þakkir, það
+þeim, þeir, þekkt, þjöppuð, þá
+
+[it_IT]
+
+accesso, adatto, ahi, aiuto, al, allineato, aperti, apertura, artificiale
+assegnato, atterrati, audio, aumento, aver, bloccata, blocchi, cadono, clicca
+compressa, controllo, dati, dato, davvero, del, della, dello, di, diritti
+disponibile, driver, errore, fallimento, file, finito, formato, fornito
+funzione, gioco, grafico, grande, gruppi, il, immagine, impossibile, in
+individuare, inizializzare, inizializzazione, iniziare, insufficiente
+intervallo, istruggerli, italiano, joystick, le, lento, libera, lingua, livello
+male, memoria, modalità, mouse, muoverli, necessario, negato, non, operazione
+pausa, per, percorso, più, puntatore, punteggio, puoi, questo, riconoscere
+ringraziamento, riprova, riservati, risorsa, se, semplicemente, simili
+speciale, struttura, su, supportata, supportato, tasti, tastiera, tempo, tetris
+tipo, traduzioni, trascorso, troppi, troppo, trovare, trovato, tutti, un, una
+usa, valida, valido, velocità, verifica, versione, vite, volta
+
+[lt_LT]
+
+ant, ar, atidaroma, atidarytų, atminties, atpažinti, autorinės, ačiū
+baigtas, bandykite, blogai, blokai, blokų, dar, daug, daugiau, diapazono
+didelė, dirbtiniam, duomenų, failas, failo, failų, formatas, formato
+funkcija, garso, grafikos, greičio, grupių, gyvybės, inicijavimo, inicijuoti
+išmesti, jei, ji, jie, judinti, juos, jūs, jų, kad, kai, kalbos, kartą
+kelias, klaida, klaviatūros, klavišus, krenta, lietuvių, lygis, lėta
+mažai, naudokite, ne, negaliojanti, negaliojantis, negalite, nepalaikoma
+nepalaikomas, nepasiekiama, nepavyko, nepriskirtas, nerastas, norėdami
+nusileidžia, oj, operacija, padidinimui, pagalba, patikrinimas, patvirtinimas
+pelės, per, perpildymas, perpildytas, pradėti, praėjęs, prie, prieiga
+pristabdytas, rasti, reikalinga, režimu, rodyklė, rodyklės, saugomos
+spauskite, stekas, struktūra, suderinta, suglaudinto, sunaikintumėte, tai
+taškai, teisės, tiesiog, tikrai, tinkamo, tipas, tipo, turtą, tvarkyklė
+tvarkyklės, už, uždrausta, užrakintą, vairasvirtės, vaizdo, versija
+vertimus, vienodų, visos, ypatingas, žaidimas
+
+[lv_LV]
+
+aktīvu, apturēta, atbrīvot, atmiņas, atpazīt, atrast, atrasts, attēla
+atver, atvērtu, au, autortiesības, beigusies, bloki, bloku, bloķētu, ceļš
+datu, daudz, diapazona, draivera, draiveri, draiveris, dzīvības, faila
+failam, fails, failu, formāts, formātu, funkcija, grafikas, grupām
+inicializācijas, inicializēt, ir, izlīdzināts, izmantojiet, iznīcinātu
+ja, jūs, kad, klaviatūras, klikšķiniet, krīt, kursorsviras, kļūda, lai
+latviešu, liegta, liela, lēns, līdzīgu, līmenis, mākslīgai, mēģiniet
+nav, neatbalstīta, neatbalstīts, nederīga, nederīgs, nepareizi
+nepieciešama, nepiešķirts, nevar, nevarat, nevarēja, nodrošināšanu
+noklikšķiniet, operācija, pagājis, paldies, palielināšanai, palīdzība
+par, patiešām, paturētas, peles, peli, pieejama, piekļuve, piemērotu
+pietiekami, piezemējušies, punkti, pārbaude, pārpilde, pārvietot, pārāk
+režīmā, rādītāja, rādītājs, saspiesta, spēle, steka, struktūra
+sāktu, tas, taustiņus, tie, tiesības, tipa, tips, tos, tulkojumu, tā, uz
+vai, vairāk, valodu, verifikācija, versija, vienkārši, visas, vēlreiz
+ātruma, Īpašs
+
+[nl_NL]
+
+aan, aanwijzer, aanwijzerbewerking, afbeelding, alle, als, auteursrecht
+beschikbaar, bestand, bestanden, bestandsformaat, bestandstoegang, bewerking
+bij, blokken, controle, dank, de, deze, dit, driverfout, drivertype
+driververificatie, echt, een, formaat, fout, functie, gebruik, gecomprimeerde
+geen, gegevensbereik, gegevenstype, gegevensverificatie, geheugen
+geheugenoverloop, gelijke, gepauzeerd, geschikte, gevonden, geweigerd, gewoon
+grafische, groepen, groot, herkennen, het, hulp, initialisatiefout
+initialiseren, is, je, joystick, kan, klik, kon, kunstmatige, kunt, landen
+langzaam, levens, leveren, meer, modus, muis, nederlands, niet, niveau, nodig
+object, of, om, ondersteund, ondersteunde, ongeldig, ongeldige, onvoldoende, op
+open, openen, opnieuw, ouch, pad, probeer, rechten, snelheidsverhoging
+speciale, spel, stapeloverloop, starten, structuur, taalvertalingen, te, tetris
+toegewezen, toetsen, toetsenbord, uitgelijnde, vallen, van, veel, vergrendeld
+verkeerd, vernietigen, verplaatsen, versie, verstreken, vinden, voor
+voorbehouden, voorbij, vrijgeven, ze, zodra
+
+[no_NO]
+
+alle, au, av, bare, bildefunksjonsfeil, blokker, bruk, dataområdekontroll
+datatypekontroll, dataverifisering, de, dem, den, det, dette, driver
+drivertype, driververifisering, du, eiendel, eller, en, er, faller
+fartsøkning, feiljustert, fil, filer, filformat, filtilgang, finner, flere
+flytte, for, forbeholdes, forløpt, formatet, frigjør, funksjon, funnet
+gjenkjenne, grafikkdriver, grafikkdriverfeil, grupper, hjelp, hvis, igjen, ikke
+ingen, initialisere, initialiseringsfeil, joystickdriverfeil, kan, klikk
+komprimert, kunne, kunstig, lander, levere, liv, lyddriverfeil, låst, mange
+minne, minneoverskridelse, modus, musdriverfeil, musen, nektet, nivå, norsk
+når, nødvendig, operasjon, passende, peker, pekereoperasjon, poengsum, prøv
+på, rettigheter, sakte, satt, slutt, spesiell, spillet, språkoversettelsene
+stakkoverskridelse, starte, sti, stor, struktur, støttet, takk
+tastaturdriverfeil, tastene, til, tilgjengelig, uallokert, ugyldig, versjon
+virkelig, å, åpne, åpner, ødelegge
+
+[pt_BR]
+
+abertos, abrindo, acesso, adequado, agradecimentos, ai, ajuda, ao, arquivo
+arquivos, artificial, as, aterrissam, atribuído, aumento, blocos, bloqueado
+brasil, caem, caminho, clique, compactada, dado, dados, de, decorrido
+desalinhado, descartar, destruí, direitos, disponível, do, driver, ele, eles
+em, encontrado, encontrar, erro, especiais, estiver, estouro, estrutura, falha
+fim, foi, formato, fornecer, função, grande, grupos, gráfico, idioma, iguais
+imagem, inicializar, inicialização, iniciar, intervalo, inválida, inválido
+isto, jogo, lento, localizar, los, mais, memória, movê, muito, muitos
+necessário, negado, nenhum, novamente, não, nível, operação, os, ou, para
+pausado, pilha, pode, ponteiro, pontuação, por, português, possível, que
+realmente, reconhecer, recurso, reservados, se, sem, simplesmente, suportada
+suportado, teclado, teclas, tente, tetris, tipo, todos, traduções, um, uma
+use, velocidade, verificação, versão, vez, vidas, você, áudio
+
+[pl_PL]
+
+aby, audio, autorskie, auć, bloki, bloków, brak, błąd, czas, danych, dla
+do, dostarczenie, dostęp, duża, dużo, format, formatu, funkcja, gdy, gra
+graficznego, grupy, gry, ich, inicjalizacji, je, jest, jeśli, joysticka
+języku, klawiatury, klawiszy, kliknij, koniec, konieczna, lub, możesz, można
+myszy, na, naprawdę, nie, niedostępna, nieobsługiwana, nieobsługiwany
+nieprawidłowa, nieprawidłowo, nieprawidłowy, nieprzypisany, obrazu
+odpowiedniego, operacja, otwartych, otwieranie, pamięci, plik, pliku, plików
+po, podziękowania, polski, pomoc, ponownie, poziom, prawa, prostu
+przepełnienie, przesuwać, prędkości, rozpocząć, rozpoznać, samych
+skompresowanego, spadają, specjalne, sprawdzenie, spróbuj, sterownik
+sterownika, stosu, struktura, sztucznego, takich, tryb, typ, typu, tłumaczeń
+użyj, wersja, weryfikacja, więcej, wolno, wskaźnik, wskaźnika, wstrzymana
+wszystkie, wylądują, wynik, wyrównany, za, zablokowany, zabroniony
+zainicjalizować, zakresu, zastrzeżone, zasób, zlokalizować, znaleziono
+znaleźć, zniszczyć, zwiększenia, zwolnij, ścieżka, Życia, żadnego
+
+[pt_PT]
+
+abertos, abrindo, acesso, adequado, agradecimentos, ajuda, ao, arquivo
+arquivos, artificial, as, aterrissam, atribuído, aumento, blocos, bloqueado
+caem, caminho, clique, compactada, dado, dados, de, decorrido, desalinhado
+descartar, destruí, direitos, disponível, do, driver, ele, eles, em
+encontrado, encontrar, erro, especiais, estiver, estouro, estrutura, falha, fim
+foi, formato, fornecer, função, grande, grupos, gráfico, idioma, iguais
+imagem, inicializar, inicialização, iniciar, intervalo, inválida, inválido
+isto, jogo, lento, localizar, los, mais, memória, modo, movê, muito, muitos
+necessário, negado, nenhum, novamente, não, nível, operação, ou, para
+pausado, pilha, pode, ponteiro, pontuação, por, português, possível, que
+realmente, reconhecer, recurso, reservados, se, sem, simplesmente, suportada
+suportado, teclado, teclas, tente, tipo, todos, traduções, um, uma
+velocidade, verificação, versão, vez, vidas, você, áudio
+
+[ru_RU]
+
+Авторское, Блоки, Все, Вы, Если, Жизни, Как
+Особая, Очки, Прошло, Русский, Тетрис
+Уровень, Это, актив, аудио, благодарность
+блоков, более, велика, версия, выровненный
+графический, графического, группы, данных
+двигать, действительно, джойстика
+диапазона, для, доступ, драйвер, драйвера
+еще, за, заблокированный, запрещен
+защищены, игра, из, изображения, или
+инициализации, инициализировать
+искусственного, используйте, их, к
+клавиатуры, клавиши, медленно, много
+можете, мыши, мышь, на, нажмите, найден
+найти, не, недействительная
+недействительный, недопустимый
+недостаточно, недоступна, неназначенный
+необходима, неподдерживаемая
+неподдерживаемый, неправильно, одинаковых
+ой, окончена, она, они, операция, освободить
+открытие, открытых, ошибка, падают, памяти
+паузе, переводов, переполнение, подходящий
+помощь, попробуйте, права, право
+предоставление, приземлятся, проверка
+просто, путь, раз, распознать, режим
+сжатого, скорости, слишком, старта, стека
+структура, тип, типа, только, увеличения
+удалось, указателем, указатель, уничтожить
+файл, файла, файлов, файлу, формат, функция
+чтобы, язык
+
+[sk_SK]
+
+aby, ak, akonáhle, alebo, au, autorské, blokov, bloky, cesta, chyba
+dispozícii, dopadnú, dát, dátového, formát, funkcia, grafického
+grafický, hra, hry, hýbať, ich, inicializovať, inicializácie, jazykových
+je, jednoducho, joysticku, kliknite, klávesnice, klávesy, komprimovaného
+koniec, kontrola, myš, myši, na, naozaj, nedostatok, nemô, nenájdená
+nenájdený, neplatná, neplatný, nepodarilo, nepodporovaná, nepodporovaný
+nepridelený, nesprávne, nie, nimi, nájsť, obrázka, odopretý, operácia
+osobitné, otvorených, otvára, overenie, ovládač, ovládača, padajú
+pamäte, pomalé, pomoc, poskytnutie, potrebná, použite, pozastavená
+poďakovanie, pre, prekladov, pretečenie, práva, príliš, prístup, režim
+rovnakých, rozpoznať, rozsahu, rýchlosti, sa, skupiny, skóre, skúste
+slovenčina, ste, súbor, súborov, súboru, to, toto, typ, typu, ukazovateľ
+ukazovateľa, umelé, uplynulo, uvoľniť, uzamknutý, verzia, veľa, veľká
+vhodný, viacerých, vyhradené, všetky, za, zarovnaný, zdroj, zničili
+znova, zvukového, zvýšenie, zásobníka, Úroveň, štart, štruktúra
+Životy, žete, žiadny
+
+[sl_SI]
+
+ali, auč, avtorske, bloki, blokov, da, datotek, datoteke, do, dostop, enakih
+funkcija, gonilnik, gonilnika, grafičnega, hitrosti, igra, igralne, igre
+inicializaciji, inicializirati, je, jezikovnih, jih, kazalca, kazalec, kliknite
+ko, konec, miške, mogoče, morem, morete, na, najti, napaka, način, ne
+nedodeljen, nepodprta, nepravilno, neveljavna, ni, oblika, oblike, obsega
+odpiranje, odprtih, odstrani, operacija, padajo, palice, podatkov, podatkovnega
+pomnilnika, pomoč, poravnan, posebna, poskusite, potekel, poti, potrebna
+povečanje, pravice, prelivanje, premikati, prepoznati, prepočasi, preprosto
+prevelika, preverjanje, preveč, prevodov, pri, pridržane, primernega
+pristanejo, raven, različica, res, sklada, skupine, slike, slovenščina
+sredstvo, stisnjene, struktura, tipa, tipke, tipkovnice, to, točke, umetno
+uničite, uporabite, ustavljena, več, voljo, vrsta, vse, za, zagotavljanje
+zahvala, zaklenjeno, zavrnjen, začetek, zmanjkuje, znova, zvočnega, Če, čas
+Življenja
+
+[sr_RS]
+
+Ако, Ауторска, Блокови, Животи, Када, Не
+Ниво, Ово, Поени, Посебна, Протекло, Сва
+Српски, Тетрис, аудио, бисте, блокова
+брзине, верзија, верификација, вештачко
+више, графички, графичког, грешка, групе, да
+датотека, датотеке, датотеци, довољно
+доступна, драјвер, драјвера, за, завршена
+задржана, закључано, захвалност, игра, или
+иницијализацији, иницијализовати, истих
+их, кликните, компресоване, користите
+лоцирати, меморије, миша, могуће, можете, на
+неважећа, неважећи, недодељени, нема
+неопходан, неподржана, неподржани, није, од
+одбијен, одговарајући, операција, опсега
+ослободи, отварање, отворених, оу, падају
+паузирана, повећање, погрешно, података
+показивач, показивача, покушајте, померате
+помоћ, поново, поравнат, почетак, права
+превелика, превише, превода, преливање
+препознати, преспоро, при, приступ, провера
+пронађена, пронаћи, пружање, путања, режим
+слете, слике, средство, стварно, стека
+структура, тастатуре, тастере, тип, типа
+уништили, формат, функција, је, једноставно
+језик, џојстика
+
+[sv_SE]
+
+aj, alla, använd, att, av, avbild, baktalad, bara, block, blocken
+dataintervall, datatyp, dataverifikation, de, dem, den, det, drivrutin
+drivrutinstyp, drivrutinsverifikation, du, ej, eller, en, ett, faller, fel, fil
+filer, filformat, filåtkomst, fler, flytta, format, funktion, för
+förbehållna, förflutit, förstöra, grafikdrivrutin, grupper, går, har
+hastighetsökning, hitta, hittades, hjälp, här, identifiera, igen, initiera
+initieringsfel, inte, joystickdrivrutin, kan, klausulers, klicka, komprimerad
+konstgjord, kontroll, kunde, landat, licens, likadana, liv, ljuddrivrutin
+läge, lämplig, långsamt, låst, med, minne, minnesöverspill, musdrivrutin
+musen, många, nekad, nivå, när, någon, nödvändig, ogiltig, ogiltigt, om
+operation, otilldelad, pausat, pekare, pekaroperation, poäng, prova, på
+resurs, rättigheter, slut, släng, speciellt, spel, spelet, stacköverspill
+starta, stor, struktur, stöds, svenska, sökväg, tack, tangentbordsdrivrutin
+tangenterna, till, tillgänglig, version, är, öppna, öppnar, över
+översättningen
+
+[uk_UA]
+
+Блоки, Ви, Життя, Коли, Ліцензія, Минуло
+Особлива, Рахунок, Рівень, Тетріс
+Українська, Усі, Це, Якщо, або
+аудіодрайвера, блоків, більше, вдалося
+велика, версія, видалення, вона, вони
+впадуть, відкритих, відкриття, відповідний
+гра, графічний, графічного, гру, групи
+даних, джойстика, для, до, довідка, доступ
+драйвер, драйвера, діапазону, дійсно, з, за
+забагато, заблокованого, заборонено
+закінчено, занадто, захищені, знайдено
+знайти, зображення, клавіатури, клавіші
+клацайте, мишу, миші, мову, можете, на
+надання, натисніть, не, невірний
+недопустима, недостатньо, недоступна
+непризначений, непідтримувана
+непідтримуваний, однакових, ой, операція
+падають, пам, перевірка, перекладу
+переповнення, повільно, подяка, покажчик
+покажчиком, помилка, потрібна, початку
+пошкоджений, права, призупинена, просто
+раз, режим, ресурсу, розпізнати, рухати
+спробуйте, стека, стисненого, структура
+тип, типу, тисніть, файл, файлу, файлів
+формат, функція, швидкості, шлях, ще, яті
+ініціалізації, ініціалізувати, їх
