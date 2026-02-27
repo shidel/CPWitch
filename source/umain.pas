@@ -19,7 +19,7 @@ uses
   ExtCtrls, ComCtrls, ActnList, Menus, IpHtml, XMLConf,
   Version, PasExt, Icons, MultiApp, LogView, Updater, Preferences,
   DosView, DosFont, Codepages, Witch, uPrefs, uLostFile, uFixEnding,
-  uEditor;
+  uEditor, uDictEdit;
 
 type
 
@@ -421,7 +421,7 @@ begin
   lbViewCodepageLabel.BorderSpacing.Around:=8;
 
   SetUnicodeView('');
-end;
+ end;
 
 procedure TfMain.FormDestroy(Sender: TObject);
 begin
@@ -495,14 +495,14 @@ begin
     // Processing complete
     ttAnimate.Enabled:=False;
     lvCodepageList.Enabled:=True;
-    lvCodepageList.SmallImages:=ilPercentageColor;
+    lvCodepageList.SmallImages:=ilCompatibleColor;
     K:=ComponentNamePath(lvCodepageList, Self, True);
     case Item.Encoding of
       weNone : begin
         // Only Liwer 7-Bit ASCII characters, compatible with any Codepage
         L:=lvCodepageList.Items.Add;
         L.Caption:=GetTranslation(K+'Any_Codepage/Caption', 'Any Codepage');
-        L.ImageIndex:=High(iconPercentageNames);
+        L.ImageIndex:=High(iconCompatibleNames);
       end;
       weBinary : begin
          // Binary Data FIle , not supported
@@ -514,11 +514,11 @@ begin
       weUnicode : begin
         // UTF-8/Unicode encoded file
         for I := 0 to High(Item.Results) do begin
-          P := High(iconPercentageNames) * Item.Results[I].Compatible div 100;
+          P := High(iconCompatibleNames) * Item.Results[I].Compatible div 100;
           if (P = 0) and (Item.Results[I].Compatible <> 0) then
             P := 1
-          else if (P = High(iconPercentageNames)) and (Item.Results[I].Compatible <> 100) then
-            P := High(iconPercentageNames) - 1;
+          else if (P = High(iconCompatibleNames)) and (Item.Results[I].Compatible <> 100) then
+            P := High(iconCompatibleNames) - 1;
 
           if (Item.Results[I].Compatible<>100) and (CodepageFilter=cpfComplete) then
             Continue
@@ -776,7 +776,7 @@ begin
   pmListMode.Images:=IconTheme.ButtonEnabled;
 
   lvFileList.SmallImages:=ilFileTypeColor;
-  lvCodepageList.SmallImages:=ilPercentageColor;
+  lvCodepageList.SmallImages:=ilCompatibleColor;
 end;
 
 procedure TfMain.UpdateCodepageViewLabel;
@@ -1055,9 +1055,18 @@ var
   W : TWitchItem;
 begin
   FViewedCodepage:=-2;
-  if Assigned(lvFileList.Selected) then
-    S:=lvFileList.Selected.Caption
-  else
+  if Assigned(FDictEditForm) then begin
+    FDictEditForm.WitchItem:=nil;
+    {$IFDEF BUILD_SPECIAL}
+       if fDictEditForm.Visible = False then
+         fDictEditForm.Show;
+    {$ENDIF}
+  end;
+  if Assigned(lvFileList.Selected) then begin
+    S:=lvFileList.Selected.Caption;
+    if Assigned(FDictEditForm) then
+      FDictEditForm.WitchItem:=TWitchItem(lvFileList.Selected.Data);
+  end else
     S:='(null)';
   LogMessage(vbVerbose, 'Select File: ' + S);
   IgnoreParameter(Sender);

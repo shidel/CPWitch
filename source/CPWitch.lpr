@@ -15,7 +15,7 @@ uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
   Interfaces, Forms, SysUtils, Classes, // this includes the LCL widgetset
   Version, PasExt, MultiApp, Icons, Preferences,
-  uMain, uPrefs, uFixEnding;
+  uMain, uPrefs, uFixEnding, uDictEdit;
 
 {$R *.res}
 
@@ -41,6 +41,7 @@ begin
     LogMessage(vbNormal, 'Creating main form...');
     {$ENDIF}
     Application.CreateForm(TfMain, fMain);
+    Application.CreateForm(TfDictEditForm, fDictEditForm);
     {$IFDEF BUILD_DEBUG}
     LogMessage(vbNormal, 'Starting application...');
     {$ENDIF}

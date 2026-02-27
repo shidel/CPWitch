@@ -41,6 +41,7 @@ type
     property FileName : String read FFileName write SetFileName;
     procedure Reload;
     procedure Save;
+    property Languages : RawByteString read FLanguages;
   end;
 
 var
@@ -100,7 +101,7 @@ begin
     raise Exception.Create('reading file: ' + ExtractRelativepath(AppBasePath, FileName));
   Sects:=TBinaryTree.Create;
   try
-    LogMessage(vbExcessive, 'Processing dictionary file');
+    LogMessage(vbVerbose, 'Processing dictionary file: '+ ExtractRelativepath(AppBasePath, FileName));
     Sect:='';
     FileText:=StringReplace(FileText, CR, LF, [rfReplaceAll]);
     while Length(FileText) > 0 do begin

@@ -1,0 +1,65 @@
+object fDictEditForm: TfDictEditForm
+  Left = 1410
+  Height = 370
+  Top = 664
+  Width = 519
+  Caption = 'Dictionary Updater'
+  ClientHeight = 370
+  ClientWidth = 519
+  LCLVersion = '4.0.0.4'
+  object pTop: TPanel
+    Left = 8
+    Height = 36
+    Top = 8
+    Width = 503
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Around = 8
+    BevelOuter = bvNone
+    BorderStyle = bsSingle
+    ClientHeight = 36
+    ClientWidth = 503
+    TabOrder = 0
+    object cbLocale: TComboBox
+      Left = 59
+      Height = 20
+      Top = 8
+      Width = 100
+      Align = alLeft
+      BorderSpacing.Around = 8
+      ItemHeight = 19
+      TabOrder = 0
+      Text = 'cbLocale'
+    end
+    object lbLocale: TLabel
+      Left = 8
+      Height = 17
+      Top = 11
+      Width = 43
+      Align = alLeft
+      BorderSpacing.Top = 3
+      BorderSpacing.Around = 8
+      Caption = 'Locale:'
+    end
+  end
+  object pStatusBar: TStatusBar
+    Left = 0
+    Height = 18
+    Top = 352
+    Width = 519
+    Panels = <    
+      item
+        Width = 50
+      end    
+      item
+        Width = 50
+      end    
+      item
+        Width = 50
+      end    
+      item
+        Width = 50
+      end>
+    SimplePanel = False
+  end
+end
