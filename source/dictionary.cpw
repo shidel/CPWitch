@@ -1,22 +1,14 @@
 [en_US]
 
-; English words
-
-above,beyond,space,total,free
-center,lines,middle,fall,spring,summer,winter
-coming,leap,forward,spring,back,Middle,FreeDOS
+above, back, beyond, center, coming, fall, forward, free, freedos, leap, lines
+middle, space, spring, summer, total, winter
 
 [de_DE]
 
-; German words
-
-Das,ist,kein,Tetris,Blöcke,fallen,einfach,Klicke,nach
-dem,Landen,auf,Gruppen,von,drei,FreeDOS
+auf, blöcke, das, dem, drei, einfach, fallen, freedos, gruppen, ist, kein
+klicke, landen, nach, tetris, von
 
 [tr_TR]
 
-; Turkish words
-
-Yerleştiklerinde,onları,yok,etmek
-Yapay,hız,tümseği,için,FreeDOS
-uygun,bir,grafik,sürücüsü,bulunamadı
+bir, bulunamadı, etmek, freedos, grafik, hız, için, onları, sürücüsü
+tümseği, uygun, yapay, yerleştiklerinde, yok

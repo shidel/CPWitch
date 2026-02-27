@@ -23,21 +23,67 @@ uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
   Classes, SysUtils, PasExt, BinTree;
 
+type
+
+  { TDictionaries }
+
+  TDictionaries = class(TBinaryTree)
+    FLanguages : RawByteString;
+    FLoaded : boolean;
+    FModified : boolean;
+  private
+    FFileName: String;
+    procedure SetFileName(AValue: String);
+    procedure Load;
+  public
+    constructor Create; override;
+    procedure Clear; override;
+    property FileName : String read FFileName write SetFileName;
+    procedure Reload;
+    procedure Save;
+  end;
+
 var
-  DictionaryWords : TBinaryTree;
+  Dictionaries : TDictionaries;
 
 implementation
 
 {$UNDEF CaseSpecific}
 
-var
-  DictionaryLanguages : RawByteString;
+procedure Initialize;
+begin
+  Dictionaries:=TDictionaries.Create;
+  try
+    Dictionaries.FileName:=AppDataPath+'dictionary.cpw';
+    DIctionaries.FModified:=True;
+  except
+    FreeAndNil(Dictionaries);
+  end;
+end;
 
-procedure LoadDictionary;
+procedure Finalize;
+begin
+  if Assigned(Dictionaries) then begin
+    if Dictionaries.FModified then
+      Dictionaries.Save;
+    FreeAndNil(Dictionaries);
+  end;
+end;
+
+{ TDictionaries }
+
+procedure TDictionaries.SetFileName(AValue: String);
+begin
+  if FFileName=AValue then Exit;
+  FFileName:=AValue;
+  if not FLoaded then
+    Reload;
+end;
+
+procedure TDictionaries.Load;
 var
   Sects : TBinaryTree;
   E : integer;
-  FileName: String;
   FileText : RawByteString;
   Sect, Line, S : RawByteString;
   U : UnicodeString;
@@ -45,7 +91,6 @@ var
   WC:Integer;
 begin
   WC:=0;
-  FileName:=AppDataPath+'dictionary.cpw';
   if not FileExists(FileName) then begin
     LogMessage(vbMinimal, 'Cannot find dictionary file: ' + ExtractRelativepath(AppBasePath, FileName));
     Exit;
@@ -69,9 +114,9 @@ begin
           raise Exception.Create('duplicate section name: ' + Line);
         Sects.Add(Line);
         Sect:=Line;
-        if DictionaryLanguages <> '' then
-          Cat(DictionaryLanguages, COMMA + SPACE);
-        Cat(DictionaryLanguages, Sect);
+        if FLanguages <> '' then
+          Cat(FLanguages, COMMA + SPACE);
+        Cat(FLanguages, Sect);
         LogMessage(vbExcessive, TAB + 'Language: ' + Sect);
         Sect:=Sect + ';';
         Continue;
@@ -84,10 +129,10 @@ begin
         {$IFNDEF CaseSpecific}
         U:=Lowercase(U);
         {$ENDIF}
-        N:=DictionaryWords.Find(U);
+        N:=Find(U);
         if not Assigned(N) then begin
           S:=';' + Sect;
-          N:=DictionaryWords.Add(U, PasExt.ToBytes(S));
+          N:=Add(U, PasExt.ToBytes(S));
           Inc(WC);
         end else begin
           S:=PasExt.ToString(N.Data);
@@ -101,10 +146,10 @@ begin
         end;
       end;
     end;
-    DictionaryWords.Balance;
+    Balance;
     {$IFDEF BUILD_DEBUG}
     if VerboseLevel = vbExcessive then begin
-      N:=DictionaryWords.First;
+      N:=First;
       While Assigned(N) do begin
         LogMessage(VerboseLevel, N.UniqueID + ' ' + PasExt.ToString(N.Data));
         N:=N.Next;
@@ -114,29 +159,90 @@ begin
   finally
     LogMessage(vbVerbose, 'Dictionary contains ' + IntToStr(WC) + ' unique words and ' +
       IntToStr(Sects.Count) + ' languages.');
-    LogMessage(vbVerbose, TAB+DictionaryLanguages);
+    LogMessage(vbVerbose, TAB+FLanguages);
     Sects.Free;
   end;
 end;
 
-procedure Initialize;
+procedure TDictionaries.Reload;
 begin
+  FModified:=False;
   try
-    DictionaryLanguages:='';
-    DictionaryWords:=TBinaryTree.Create;
-    LoadDictionary;
+    Clear;
+    Load;
+    FLoaded:=True;
   except
     on E : Exception do begin
       LogMessage(vbCritical, 'Exception opening dictionary. ' + E.Message);
-      DictionaryWords:=nil;
-    end;
+      Clear;
+     end;
   end;
 end;
 
-procedure Finalize;
+procedure TDictionaries.Save;
+var
+  SS : TStringStream;
+  Lang, Langs : String;
+  N : TBinaryTreeNode;
+  LW : integer;
 begin
-  if Assigned(DictionaryWords) then
-    FreeAndNil(DictionaryWords);
+  if FFileName = '' then Exit;
+  SS:=TStringStream.Create('');
+  try
+    SS.Position:=0;
+    Langs:=FLanguages;
+    while Langs <> '' do begin
+      Lang:=Trim(PopDelim(Langs, COMMA));
+      if Lang='' then Continue;
+      SS.WriteString('[' + Lang + ']' + LF + LF);
+      Lang:=';'+Lang+';';
+      N:=First;
+      LW:=0;
+      While Assigned(N) do begin
+        if Pos(Lang, PasExt.ToString(N.Data)) > 0 then begin
+          if (LW > 0) then begin
+            if (LW + Length(N.UniqueID) + 2 > 79) then begin
+              LW:=0;
+              SS.WriteString(LF)
+            end else begin
+              Inc(LW, 2);
+              SS.WriteString(COMMA + SPACE)
+            end;
+          end;
+          INc(LW, Length(N.UniqueID));
+          SS.WriteString(N.UniqueID);
+        end;
+        N:=N.Next;
+      end;
+      if LW <> 0 then
+        SS.WriteString(LF);
+      if Langs <> '' then
+        SS.WriteString(LF);
+    end;
+    SS.SaveToFile(FFileName);
+    FModified:=False;
+  except
+    on E : Exception do begin
+      LogMessage(vbCritical, 'Exception saving dictionary. ' + E.Message);
+     end;
+  end;
+  SS.Free;
+end;
+
+constructor TDictionaries.Create;
+begin
+  inherited Create;
+  FLoaded:=False;
+  FLanguages:='';
+  FModified:=False;
+end;
+
+procedure TDictionaries.Clear;
+begin
+  inherited Clear;
+  FLanguages:='';
+  FLoaded:=False;
+  FModified:=False;
 end;
 
 
