@@ -197,6 +197,7 @@ var
 begin
   FModified:=False;
   if FFileName = '' then Exit;
+  LogMessage(vbVerbose, 'Saving dictionary file: '+ ExtractRelativepath(AppBasePath, FileName));
   SS:=TStringStream.Create('');
   try
     SS.Position:=0;
@@ -219,7 +220,7 @@ begin
               SS.WriteString(COMMA + SPACE)
             end;
           end;
-          INc(LW, Length(N.UniqueID));
+          Inc(LW, Length(N.UniqueID));
           SS.WriteString(N.UniqueID);
         end;
         N:=N.Next;
@@ -230,6 +231,8 @@ begin
         SS.WriteString(LF);
     end;
     SS.SaveToFile(FFileName);
+    LogMessage(vbVerbose, 'saved dictionary file. ' + IntToStr(Dictionaries.Count) +
+     ' unique words.');
   except
     on E : Exception do begin
       LogMessage(vbCritical, 'Exception saving dictionary. ' + E.Message);
