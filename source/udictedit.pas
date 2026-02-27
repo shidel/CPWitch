@@ -16,23 +16,34 @@ interface
 uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-  ComCtrls, Version, PasExt, Icons, MultiApp, Witch, Codepages, Dictionary;
+  ComCtrls, CheckLst, Version, PasExt, Icons, MultiApp, Witch, Codepages,
+  BinTree, Dictionary;
 
 type
 
   { TfDictEditForm }
 
   TfDictEditForm = class(TMultiAppForm)
+    btnSave: TButton;
+    btnReload: TButton;
     cbLocale: TComboBox;
+    clWords: TCheckListBox;
     lbLocale: TLabel;
+    pBody: TPanel;
+    pButtons: TPanel;
     pTop: TPanel;
     pStatusBar: TStatusBar;
+    procedure cbLocaleChange(Sender: TObject);
   private
     FWitchItem: TWitchItem;
+    FWords : TBinaryTree;
     procedure SetWitchItem(AValue: TWitchItem);
   protected
     procedure DoUpdateLocales;
+    procedure DoUpdateWords;
+    procedure DoUpdateWordList;
     procedure DoCreate; override;
+    procedure DoDestroy; override;
     procedure DoShow; override;
   public
     property WitchItem : TWitchItem read FWitchItem write SetWitchItem;
@@ -49,10 +60,35 @@ implementation
 
 { TfDictEditForm }
 
+procedure TfDictEditForm.cbLocaleChange(Sender: TObject);
+var
+  LC : TLocale;
+begin
+  if Locale(Trim(cbLocale.Text), LC) then begin
+    pStatusBar.Panels[0].Text:=LC.Identifier;
+    pStatusBar.Panels[1].Text:=LC.LetterCode;
+    if LC.Codepage = -1 then
+      pStatusBar.Panels[2].Text:='n/a'
+    else
+      pStatusBar.Panels[2].Text:=IntToStr(LC.Codepage);
+    pStatusBar.Panels[3].Text:=SPACE2+RawByteString(LC.Language);
+  end else begin
+    pStatusBar.Panels[0].Text:=Trim(cbLocale.Text);
+    pStatusBar.Panels[1].Text:='n/a';
+    pStatusBar.Panels[2].Text:='n/a';
+    pStatusBar.Panels[3].Text:=SPACE2+'(unknown locale)';
+  end;
+  if FWords.Count < 10 then
+    DoUpdateWords;
+  DoUpdateWordList;
+end;
+
 procedure TfDictEditForm.SetWitchItem(AValue: TWitchItem);
 begin
   if FWitchItem=AValue then Exit;
   FWitchItem:=AValue;
+  DoUpdateWords;
+  DoUpdateWordList;
 end;
 
 procedure TfDictEditForm.DoUpdateLocales;
@@ -79,10 +115,80 @@ begin
   end;
 end;
 
+procedure TfDictEditForm.DoUpdateWords;
+var
+  S, Line : RawByteString;
+  P : integer;
+  W : TStringList;
+  I : Integer;
+  N : TBinaryTreeNode;
+begin
+  FWords.Clear;
+  if not Assigned(FWitchItem) then Exit;
+  LogMessage(vbVerbose, 'Detecting words in file data...');
+  W:=TStringList.Create;
+  S:=NormalizeLineEndings(PasExt.ToString(FWitchItem.FileData), LF) + LF;
+  while Length(S) > 0 do begin
+    Line:=Trim(PopDelim(S, LF));
+    if HasLeading(Line, ';') or HasLeading(Line, '#') then Continue;
+    P := Pos(EQUAL, Line);
+    if P <> 0 then begin
+      if Pos(SPACE, Copy(Line, 1, P)) = 0 then
+        Line:=Trim(Copy(Line, P+1));
+    end;
+    if Line = '' then Continue;
+    W.Clear;
+    WordsOfString(Line, W);
+    for I := 0 to W.Count - 1 do begin
+      if Not Assigned(FWords.Find(W[I], false)) then
+        FWords.Add(W[I]);
+    end;
+  end;
+  W.Free;
+  LogMessage(vbVerbose, 'File contains ' + IntToStr(FWords.Count) + ' unique usable words.');
+end;
+
+procedure TfDictEditForm.DoUpdateWordList;
+var
+  LC : String;
+  FN, DN : TBinaryTreeNode;
+  SL : Array of String;
+  SC : integer;
+begin
+  clWords.Clear;
+  if FWords.Count = 0 then Exit;
+  SL:=[];
+  SC:=0;
+  SetLength(SL, FWords.Count);
+  LC:=Trim(cbLocale.Text);
+  if LC = '' then Exit;
+  LC:=';' + LC + ';';
+  FN:=FWords.First;
+  while Assigned(FN) do begin
+    DN:=Dictionaries.Find(Lowercase(FN.UniqueID));
+    if (not Assigned(DN)) or (Pos(LC, PasExt.ToString(DN.Data)) = 0) then begin
+      SL[SC]:=LowerCase(FN.UniqueID);
+      Inc(SC);
+    end;
+    FN:=FN.Next;
+  end;
+  SetLength(SL, SC);
+  if SC > 0 then
+    clWOrds.Items.AddStrings(SL);
+end;
+
 procedure TfDictEditForm.DoCreate;
 begin
   inherited DoCreate;
   FWitchItem:=nil;
+  FWords:=TBinaryTree.Create;
+end;
+
+procedure TfDictEditForm.DoDestroy;
+begin
+  if Assigned(FWords) then
+    FreeAndNil(FWords);
+  inherited DoDestroy;
 end;
 
 procedure TfDictEditForm.DoShow;
