@@ -28,11 +28,15 @@ type
   { TDictionaries }
 
   TDictionaries = class(TBinaryTree)
-    FLanguages : RawByteString;
+    FLocales : TArrayOfRawByteString;
+
     FLoaded : boolean;
     FModified : boolean;
   private
     FFileName: String;
+    function GetLocalCount: integer;
+    function GetLocale(Index : integer): RawByteString;
+    function GetLocales: RawByteString;
     procedure SetFileName(AValue: String);
     procedure Load;
     procedure SetModified(AValue: boolean);
@@ -42,9 +46,12 @@ type
     property FileName : String read FFileName write SetFileName;
     procedure Reload;
     procedure Save;
-    property Locales : RawByteString read FLanguages;
+    property Locales : RawByteString read GetLocales;
+    property LocaleCount : integer read GetLocalCount;
+    property Locale[Index : integer] : RawByteString read GetLocale;
     property Modified : boolean read FModified write SetModified;
-    procedure AddLocale(Locale : String);
+    function AddLocale(LocaleID : String) : integer;
+    function IndexOfLocale(LocaleID : String) : integer;
   end;
 
 var
@@ -83,12 +90,40 @@ begin
     Reload;
 end;
 
+function TDictionaries.GetLocalCount: integer;
+begin
+  Result:=Length(FLocales);
+end;
+
+function TDictionaries.GetLocale(Index : integer): RawByteString;
+begin
+  if (Index < 0) or (Index > High(FLocales)) then Exit('');
+  Result:=FLocales[Index];
+end;
+
+function TDictionaries.GetLocales: RawByteString;
+var
+  SL : TStringList;
+  I : Integer;
+begin
+  SL := TStringList.Create;
+  try
+    for I := 0 to High(FLocales) do
+      SL.Add(FLocales[I]);
+    SL.Sort;
+    Result:=Implode(SL, COMMA + SPACE);
+  except
+    Result:='';
+  end;
+  SL.Free;
+end;
+
 procedure TDictionaries.Load;
 var
-  Sects : TBinaryTree;
-  E : integer;
+  Sect, E : integer;
+  SS, ST : TArrayOfInt32;
   FileText : RawByteString;
-  Sect, Line, S : RawByteString;
+  Line : RawByteString;
   U : UnicodeString;
   N : TBinaryTreeNode;
   WC:Integer;
@@ -101,10 +136,9 @@ begin
   E :=FileLoad(FileName, FileText);
   if E <> 0 then
     raise Exception.Create('reading file: ' + ExtractRelativepath(AppBasePath, FileName));
-  Sects:=TBinaryTree.Create;
   try
     LogMessage(vbVerbose, 'Processing dictionary file: '+ ExtractRelativepath(AppBasePath, FileName));
-    Sect:='';
+    Sect:=-1;
     FileText:=StringReplace(FileText, CR, LF, [rfReplaceAll]);
     while Length(FileText) > 0 do begin
       Line:=Trim(PopDelim(FileText, LF));
@@ -113,15 +147,11 @@ begin
         Line:=StringReplace(Trim(ExcludeEnds(Line, '[', ']')), '-', '_', [rfReplaceAll]);
         if Line = '' then
           raise Exception.Create('null section name');
-        if Assigned(Sects.Find(Line, false)) then
+        if IndexOfLocale(Line) <> -1 then
           raise Exception.Create('duplicate section name: ' + Line);
-        Sects.Add(Line);
-        Sect:=Line;
-        if FLanguages <> '' then
-          Cat(FLanguages, COMMA + SPACE);
-        Cat(FLanguages, Sect);
-        LogMessage(vbExcessive, TAB + 'Language: ' + Sect);
-        Sect:=Sect + ';';
+        Sect:=AddLocale(Line);
+        SS:=[Sect];
+        LogMessage(vbExcessive, TAB + 'Language: ' + Locale[Sect]);
         Continue;
       end;
       if HasLeading(Line, ';') then Continue;
@@ -134,18 +164,18 @@ begin
         {$ENDIF}
         N:=Find(U);
         if not Assigned(N) then begin
-          S:=';' + Sect;
-          N:=Add(U, PasExt.ToBytes(S));
+          N:=Add(U, SS);
           Inc(WC);
         end else begin
-          S:=PasExt.ToString(N.Data);
-          if Pos(';' + Sect, S) > 0 then begin
+          if InArray(N.Data32, Sect) <> -1 then begin
             LogMessage(vbVerbose, WhenTrue(VerboseLevel=vbExcessive,
               TAB + 'duplicate word: ', 'duplicate dictionary word: ') +
-              RawByteString(U) + ' [' + ExcludeTrailing(Sect, ';') + ']');
+              RawByteString(U) + ' [' + Locale[Sect] + ']');
             Continue;
           end;
-          N.Data:=PasExt.ToBytes(S+Sect);
+          ST:=N.Data32;
+          Cat(ST, Sect);
+          N.Data32:=ST;
         end;
       end;
     end;
@@ -161,10 +191,10 @@ begin
     {$ENDIF}
   finally
     LogMessage(vbVerbose, 'Dictionary contains ' + IntToStr(WC) + ' unique words and ' +
-      IntToStr(Sects.Count) + ' languages.');
-    LogMessage(vbVerbose, TAB+FLanguages);
-    Sects.Free;
+      IntToStr(Length(FLocales)) + ' languages.');
+    LogMessage(vbVerbose, TAB+Locales);
   end;
+  fModified:=False;
 end;
 
 procedure TDictionaries.SetModified(AValue: boolean);
@@ -190,8 +220,8 @@ end;
 
 procedure TDictionaries.Save;
 var
+  I : Integer;
   SS : TStringStream;
-  Lang, Langs : String;
   N : TBinaryTreeNode;
   LW : integer;
 begin
@@ -201,16 +231,12 @@ begin
   SS:=TStringStream.Create('');
   try
     SS.Position:=0;
-    Langs:=FLanguages;
-    while Langs <> '' do begin
-      Lang:=Trim(PopDelim(Langs, COMMA));
-      if Lang='' then Continue;
-      SS.WriteString('[' + Lang + ']' + LF + LF);
-      Lang:=';'+Lang+';';
+    for I := 0 to High(FLocales) do begin
+      SS.WriteString('[' + FLocales[I] + ']' + LF + LF);
       N:=First;
       LW:=0;
       While Assigned(N) do begin
-        if Pos(Lang, PasExt.ToString(N.Data)) > 0 then begin
+        if InArray(N.Data32, I) <> -1 then begin
           if (LW > 0) then begin
             if (LW + Length(N.UniqueID) + 2 > 79) then begin
               LW:=0;
@@ -227,7 +253,7 @@ begin
       end;
       if LW <> 0 then
         SS.WriteString(LF);
-      if Langs <> '' then
+      if I < High(FLocales) then
         SS.WriteString(LF);
     end;
     SS.SaveToFile(FFileName);
@@ -241,32 +267,37 @@ begin
   SS.Free;
 end;
 
-procedure TDictionaries.AddLocale(Locale: String);
+function TDictionaries.AddLocale(LocaleID: String) : integer;
+begin
+  Result:=IndexOfLocale(LocaleID);
+  if Result <> -1 then Exit;
+  SetLength(FLocales, Length(FLocales) + 1);
+  FLocales[High(FLocales)]:=LocaleID;
+  FModified:=True;
+  Result:=High(FLocales);
+end;
+
+function TDictionaries.IndexOfLocale(LocaleID: String): integer;
 var
-  L : TArrayOfString;
   I : Integer;
 begin
-  L:=Explode(FLanguages, COMMA + SPACE);
-  for I := 0 to Length(L) -1 do
-    if UpperCase(Locale) = UpperCase(L[I]) then Exit;
-  if FLanguages='' then
-    FLanguages:=Locale
-  else
-    Flanguages:=FLanguages + COMMA + SPACE + Locale;
+  for I := 0 to Length(FLocales) -1 do
+    if UpperCase(LocaleID) = UpperCase(FLocales[I]) then Exit(I);
+  Result:=-1;
 end;
 
 constructor TDictionaries.Create;
 begin
   inherited Create;
   FLoaded:=False;
-  FLanguages:='';
+  FLocales:=[];
   FModified:=False;
 end;
 
 procedure TDictionaries.Clear;
 begin
   inherited Clear;
-  FLanguages:='';
+  FLocales:=[];
   FLoaded:=False;
   FModified:=False;
 end;

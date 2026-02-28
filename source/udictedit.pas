@@ -118,24 +118,27 @@ end;
 
 procedure TfDictEditForm.btnAddClick(Sender: TObject);
 var
+  LC : Int32;
   I : Integer;
-  LCA, LCB, S : String;
+  S : String;
+  SS, TS : TArrayOfInt32;
   DN : TBinaryTreeNode;
 begin
   if not Assigned(Dictionaries) then Exit;
-  LCB:=Trim(cbLocale.Text);
-  if LCB = '' then Exit;
-  Dictionaries.AddLocale(LCB);
-  LCB:=LCB + ';';
-  LCA:=';'+LCB;
+  if Trim(cbLocale.Text) = '' then Exit;
+  LC:=Dictionaries.AddLocale(Trim(cbLocale.Text));
+  SS:=[LC];
   for I := 0 to clWords.Count - 1 do
     if clWords.Checked[I] then begin
       S:=LowerCase(clWords.Items[I]);
       DN:=Dictionaries.Find(S);
       if not Assigned(DN) then
-        DN:=Dictionaries.Add(S, PasExt.ToBytes(LCA))
-      else if Pos(LCA, PasExt.ToString(DN.Data))=0 then
-        DN.Data:=PasExt.ToBytes(PasExt.ToString(DN.Data) + LCB);
+        DN:=Dictionaries.Add(S, SS)
+      else if InArray(DN.Data32, LC) = -1 then begin
+        TS:=DN.Data32;
+        Cat(TS, LC);
+        DN.Data32:=TS;
+      end;
     end;
   Dictionaries.Modified:=True;
   DoUpdateWordList;
@@ -214,7 +217,7 @@ end;
 
 procedure TfDictEditForm.DoUpdateWordList;
 var
-  LC : String;
+  LC : Int32;
   FN, DN : TBinaryTreeNode;
   SL : Array of String;
   SC : integer;
@@ -226,14 +229,12 @@ begin
   SL:=[];
   SC:=0;
   SetLength(SL, FWords.Count);
-  LC:=Trim(cbLocale.Text);
-  if LC = '' then Exit;
-  LC:=';' + LC + ';';
+  LC:=Dictionaries.IndexOfLocale(Trim(cbLocale.Text));
   FN:=FWords.First;
   while Assigned(FN) do begin
     DN:=Dictionaries.Find(Lowercase(FN.UniqueID));
-    if (not Assigned(DN)) or (Pos(LC, PasExt.ToString(DN.Data)) = 0) then begin
-      SL[SC]:=LowerCase(FN.UniqueID);
+    if (not Assigned(DN)) or (LC=-1) or (InArray(DN.Data32, LC) = -1) then begin
+      SL[SC]:=FN.UniqueID;
       Inc(SC);
     end;
     FN:=FN.Next;
@@ -241,6 +242,7 @@ begin
   SetLength(SL, SC);
   if SC > 0 then begin
     clWords.Items.AddStrings(SL);
+    btnInvertClick(Self);
   end;
   DoUpdateButtons;
 end;

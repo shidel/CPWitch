@@ -1,23 +1,25 @@
 object fDictEditForm: TfDictEditForm
-  Left = 1410
-  Height = 370
-  Top = 664
-  Width = 519
+  Left = 183
+  Height = 320
+  Top = 215
+  Width = 315
   Caption = 'Dictionary Updater'
-  ClientHeight = 370
-  ClientWidth = 519
+  ClientHeight = 320
+  ClientWidth = 315
+  Constraints.MinHeight = 240
+  Constraints.MinWidth = 320
   LCLVersion = '4.0.0.4'
   object pTop: TPanel
     Left = 8
     Height = 36
     Top = 8
-    Width = 503
+    Width = 299
     Align = alTop
     AutoSize = True
     BorderSpacing.Around = 8
     BevelOuter = bvNone
     ClientHeight = 36
-    ClientWidth = 503
+    ClientWidth = 299
     TabOrder = 0
     object cbLocale: TComboBox
       Left = 59
@@ -42,7 +44,7 @@ object fDictEditForm: TfDictEditForm
       Caption = 'Locale:'
     end
     object btnInvert: TButton
-      Left = 371
+      Left = 167
       Height = 20
       Top = 8
       Width = 124
@@ -58,8 +60,8 @@ object fDictEditForm: TfDictEditForm
   object pStatusBar: TStatusBar
     Left = 0
     Height = 18
-    Top = 352
-    Width = 519
+    Top = 302
+    Width = 315
     Panels = <    
       item
         Alignment = taCenter
@@ -81,16 +83,16 @@ object fDictEditForm: TfDictEditForm
   object pButtons: TPanel
     Left = 0
     Height = 52
-    Top = 300
-    Width = 519
+    Top = 250
+    Width = 315
     Align = alBottom
     AutoSize = True
     BevelOuter = bvNone
     ClientHeight = 52
-    ClientWidth = 519
+    ClientWidth = 315
     TabOrder = 2
     object btnSave: TButton
-      Left = 451
+      Left = 247
       Height = 20
       Top = 16
       Width = 52
@@ -103,7 +105,7 @@ object fDictEditForm: TfDictEditForm
       OnClick = btnSaveClick
     end
     object btnReload: TButton
-      Left = 371
+      Left = 167
       Height = 20
       Top = 16
       Width = 64
@@ -131,20 +133,20 @@ object fDictEditForm: TfDictEditForm
   end
   object pBody: TPanel
     Left = 8
-    Height = 240
+    Height = 190
     Top = 52
-    Width = 503
+    Width = 299
     Align = alClient
     BorderSpacing.Around = 8
     BevelOuter = bvNone
-    ClientHeight = 240
-    ClientWidth = 503
+    ClientHeight = 190
+    ClientWidth = 299
     TabOrder = 3
     object clWords: TCheckListBox
       Left = 0
-      Height = 240
+      Height = 190
       Top = 0
-      Width = 503
+      Width = 299
       Align = alClient
       ItemHeight = 0
       TabOrder = 0
