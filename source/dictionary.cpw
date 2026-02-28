@@ -1,73 +1,138 @@
 [en_US]
 
-above, access, again, all, an, any, artificial, asset, audio, available, back
-beyond, blocks, bsd, bump, can, center, check, clause, click, coming
-compressed, copyright, could, data, denied, destroy, dispose, driver, elapsed
-english, error, failure, fall, file, files, find, for, format, found, function
-game, graphics, groups, help, if, image, initialization, initialize, invalid
-is, it, joystick, keyboard, keys, land, language, large, level, license, like
-lives, locate, locked, maligned, many, memory, mode, more, mouse, move
-necessary, not, of, on, once, open, opening, operation, or, ouch, out, over
-overflow, path, paused, pointer, providing, range, really, recognize, reserved
-rights, score, simply, slow, special, speed, stack, start, structure, suitable
-thanks, the, them, they, this, to, too, translations, try, type, unable
-unassigned, unsupported, use, verification, version, you
+abbreviated, above, access, action, active, after, again, all, allowed, already
+also, an, and, any, append, appended, applies, are, area, artificial, as, asset
+assign, assigned, assignment, assignments, at, audio, august, available, back
+be, because, been, being, between, beyond, block, blocks, broken, bsd, bugs
+bump, but, can, case, cd, center, check, clause, clear, clears, click, colons
+coming, command, commands, compressed, containing, contributors, copy
+copyright, could, current, data, de, default, defaults, defines, denied
+description, destroy, detected, deutschland, different, directories, directory
+display, displayed, displays, dispose, do, down, drive, driver, easily, effects
+elapsed, enables, english, environment, equal, error, exclude, execution
+existing, extend, extension, fail, failure, fall, fh, file, files, find, finds
+first, follow, for, form, format, found, freedos, from, function, further, game
+germany, gnu, gpl, graphics, groups, has, help, hides, high, if, ignored, image
+in, include, includes, initialization, initialize, install, installation
+installed, installs, instead, internal, interrupt, into, invalid, invocation
+invocations, is, it, its, itself, join, joystick, keyboard, keys, known, land
+language, large, later, letter, letters, level, lh, license, like, line, list
+little, lives, load, loaded, loadhigh, loading, locate, locked, made, mail
+makes, maligned, many, mapping, maps, marked, may, memory, menden, mode, more
+mostly, mouse, move, must, name, necessary, neither, no, nor, not, note, notice
+of, off, on, once, one, only, open, opening, operation, option, optional
+options, or, original, ouch, out, output, over, overflow, parameters, part
+path, paths, paused, performed, point, pointer, points, pops, portion, possible
+prevent, prevents, previously, process, processor, program, programs, providing
+range, rather, really, recognize, remains, requests, reserved, resident, result
+returns, rhein, rights, same, score, screen, searches, second, secondary, see
+setting, sh, shadow, shall, shell, shells, sign, simply, slow, so, some
+special, specified, specify, speed, stack, standard, start, status, still
+stores, structure, subsequent, subst, successive, suitable, suspended, switches
+synopsis, syntax, system, table, terms, than, thanks, that, the, them
+themselves, there, they, this, to, too, translations, try, type, unable
+unassigned, under, uninstall, unsupported, up, use, used, verification, version
+via, want, warning, were, what, when, where, whereas, whitespaces, will, with
+without, working, you
 
 [de_DE]
 
-abgelaufen, als, an, angeben, angegebenen, angehängte, arbeitsspeicher
-audiotreiberfehler, auf, aufruf, aufrufe, aus, autsch, beachte, befehl
-befehles, befehlsausführung, beim, beinhalten, bereits, bereitstellung
-beschädigter, blöcke, blöcken, dank, das, datei, dateianforderun, dateien
-dateiendung, dateiformat, dateipfad, dateizugriff, datenbereichsprüfung
-datendateien, datentypprüfung, datenüberprüfung, dem, den, der, des, die
-dies, diese, drei, drive, du, durchsucht, dÜrfen, ein, eine, einen, einfach
-ende, entferne, enthalten, erforderlich, ergebnis, erkennen, ermöglicht
-ersten, erweitert, erzeugst, es, fallen, fehler, finden, format, freedos
-funktion, für, gefunden, gen, geschwindigkeitsbegrenzung, gesperrtes
-gleichartigen, gleichen, grafiktreiber, grafiktreiberfehler, groß, gruppen
-hilfe, im, in, initialisieren, initialisierungsfehler, installiert, interner
-ist, joysticktreiberfehler, kann, kein, keine, klicke, klicken, kommandozeile
-komprimierter, konnte, können, künstliche, landen, laufwerk, leben, level
-license, liste, löscht, maus, maustreiberfehler, mehr, mit, modus, momentanen
-nach, nicht, nochmal, nur, objekt, oder, of, off, offene, ohne, on, operation
-parameter, passender, path, pausiert, pfad, pfade, pointer, programmen, reicht
-schaltet, seinem, sich, sie, so, speichert, speicherüberlauf, spiel
-sprachübersetzung, standard, standardeinstellung, stapelüberlauf, starten
-struktur, suchpfad, suchpfade, suchvorgänge, syntax, tastaturtreiberfehler
-tasten, terms, the, treiber, treibertyp, treiberüberprüfung, um
-umgebungsspeicher, unbedingt, und, under, ungültige, ungültiger, ungültiges
-unterstützte, unterstützter, verfügbar, version, versuche, verweigert
-verwendet, verzeichnis, verzeichnisse, verzeichnissen, viele, vielen, von
-weitere, wenn, werden, wie, wären, zeigeroperation, zeigt, zerstören, zu
-zugewiesener, zum, zusätzlich, zweiter, Öffne, öffnen
+abgekürzt, abgelaufen, aktion, aktiv, aktuellen, alle, allem, allzuleichtem
+als, an, anderes, angeben, angegeben, angegebenen, angehängte, angelegt
+angezeigt, arbeitsspeicher, auch, audiotreiberfehler, auf, aufruf, aufrufe
+aufrufen, augustin, aus, ausgeführt, auswirkungen, autsch, beachte
+beeinflußt, befehl, befehles, befehlsausführung, beim, beinhalten, beinhaltet
+bekannte, bereich, bereits, bereitstellung, beschreibung, beschädigter
+besteht, bestimmt, bis, blöcke, blöcken, bzw, da, dank, das, datei
+dateianforderun, dateien, dateiendung, dateiformat, dateipfad, dateizugriff
+datenbereichsprüfung, datendateien, datentypprüfung, datenüberprüfung, daß
+de, definiert, dem, den, der, des, deutschland, die, dies, diese, diesem
+dieser, dieses, doppelpunkte, doppelpunkten, drei, drive, du, durchsucht
+dÜrfen, ebenfalls, ein, eine, einen, einer, einfach, einige, ende
+entdecktwerden, entferne, entfernen, entfernt, enthalten, enthaltenen, er
+erforderlich, ergebnis, erkennen, erlaubt, ermöglicht, ersten, erweitert
+erzeugen, erzeugst, es, fallen, fehler, fehlschlagen, fehlt, fh, finden, folgen
+folgender, format, freedos, funktion, für, gefunden, geladen, gelöscht, gen
+geschwindigkeitsbegrenzung, gesperrtes, gleichartigen, gleichen
+gleichheitszeichen, grafiktreiber, grafiktreiberfehler, groß, gruppen, hilfe
+hilfebildschirm, hochladen, im, immernoch, in, initialisieren
+initialisierungsfehler, installationstest, installieren, installiert
+installierte, interner, ist, jedoch, joysticktreiberfehler, kann, kein, keine
+kleinen, klicke, klicken, kommandoprozessor, kommandos, kommandozeile
+kompatibilitätsgründen, komprimierter, konnte, kopie, können, künstliche
+laden, landen, laufwerk, laufwerksbuchstaben, leben, leerzeichen, leitet, level
+license, liefert, liste, löscht, markiert, maus, maustreiberfehler, mehr
+menden, mit, mittels, mittelstraße, modus, momentanen, möchten, möglich
+müssen, nach, nicht, nichts, noch, nochmal, notiz, nur, objekt, oder, of, off
+offene, ohne, on, operation, optionen, original, parameter, passender, path
+pausiert, pfad, pfadanteil, pfade, pfaden, pointer, programm, programmen
+reicht, residente, residenten, resultat, rhein, rufe, sankt, schaltet, seine
+seinem, sekundären, selbst, sich, sie, sieg, sind, so, soll, sollten, speicher
+speicherblock, speichert, speicherüberlauf, spiel, sprachübersetzung, später
+standard, standardeinstellung, stapelüberlauf, starten, steffen, struktur
+suchpfad, suchpfade, suchvorgänge, synopsis, syntax, tastaturtreiberfehler
+tasten, teil, terms, the, treiber, treibertyp, treiberüberprüfung, trotz, um
+umb, umgebungsspeicher, umgesetzt, umgewiesenen, umleitung, umleitungen
+umweisung, unbedingt, und, under, ungültige, ungültiger, ungültiges
+unterbinden, unterscheidet, unterstützte, unterstützter, verbleibt
+verfügbar, verhindern, version, versteckt, versuche, verweigert, verwenden
+verwendet, verzeichnis, verzeichnisse, verzeichnissen, viele, vielen, von, vor
+warnung, weder, weiter, weitere, weiteren, weiterhin, wenn, werden, wie, wieder
+wiederfindet, wird, wobei, wohingegen, wurde, wären, zeigen, zeigeroperation
+zeigt, zerstören, zu, zugewiesener, zugriffe, zukünftig, zum, zurück
+zusätzlich, zuvor, zweiter, zwischen, Öffne, öffnen
 
 [tr_TR]
 
-alanı, altında, aman, aramalara, arar, at, atanmamış, ayardır, aynı
-açabilmelerini, açma, açık, açılıyor, başarısız, başlamak, başlatma
-başlatılamadı, belirli, bellek, benzer, bir, bitti, biçimi, bloklar
-bloktan, bu, bulunamadı, büyük, daha, deneyin, depolar, desteklenmeyen
-değil, dilinde, dizin, dizindeymiş, dizinlerdeki, dizinleri, dizinlerin
-dosya, dosyalar, dosyalarını, dosyasının, dosyaya, duraklatıldı, düşer
-ederiz, ediliyor, erişim, etmek, fare, fazla, freedos, genişletir, gereklidir
-geçerli, geçersiz, geçmiş, gibi, grafik, gruplara, görüntüler, hakikaten
-hakkı, hakları, halihazırda, hariç, hatası, hayat, herhangi, hız, ile
-iliştirilen, ilk, in, istekleri, isteklerine, iç, içeremezsiniz, içeren
-için, işaretçi, işlem, işlemi, işlev, kapatır, kendisini, kilitli
-kipinde, kişisine, klavye, kolu, komut, kontrol, koşullu, kullanılabilir
-kullanın, kullanır, kötü, lisansı, listesini, mevcut, olarak, olmadan
-oluşan, onları, ortamda, oyun, parametre, programların, reddedildi, resim
-sadece, saklıdır, satırında, sağladığı, sağlar, ses, seviye, skor
-sonra, sonraki, sözdizim, süre, sürücü, sürücüsü, sürüm
-sıkıştırılmış, tanınamadı, taşması, tekrar, telif, temizler
-tercümeyi, teşekkür, tutmalıdır, tuşlarını, tüm, tümseği, türkçe
-türü, tıklayın, unsuru, uygular, uygun, uzantısını, var, varsayılan, ve
-veri, veriler, veya, yalnızca, yapay, yapı, yardım, yayımlanmıştır
-yerleştiklerinde, yetersiz, yok, yol, yolu, yükler, yığın
-çalıştırmalar, çalıştırmalarına, çalıştırılmasında
-çalıştırılmasından, çok, öntanımlı, İkinci, İliştirilecek
-İliştirilen
+alanı, alanına, almanya, altında, alınmaz, aman, ancak, aramalara, arar
+arasında, ardından, askıya, at, ata, atama, atamalar, atanan, atanmamış
+atanmasını, ayardır, aynı, ayrica, aÇiklama, açabilmelerini, açma
+açık, açılıyor, ağustos, bakiniz, bazı, bağlıdır, başarısız
+başka, başlamak, başlatma, başlatılamadı, belirli, belirtilmemişse
+belirtmeniz, bellek, bellekte, belleğe, benzer, bir, bitti, biçimde, biçimi
+bloklar, bloktan, bloku, boşluğa, bu, bulmasına, bulunamadı, bulunanlar
+bunun, burada, bütün, büyük, bİlİnen, cevabını, da, daha, davranış
+de, denetleme, deneyin, depolar, desteklenmeyen, değil, değilse, dilinde
+dizin, dizindeymiş, dizinine, dizinlerdeki, dizinleri, dizinlerin, dosya
+dosyalar, dosyalarını, dosyasının, dosyaya, duraklatıldı, durumda
+düşer, edecekleri, eder, ederiz, ediliyor, edilmekten, ekranı, ekseriyetle
+engeller, erişim, etkiler, etkin, etmek, etmesi, ettiği, eğer, eşit
+eşleştirir, eşleştirme, fakat, fare, farklı, fazla, freedos, gelinir
+genişletir, gerekir, gereklidir, getirilecektir, geçerli, geçersiz, geçmiş
+gibi, grafik, gruplara, görmezden, görüntülenmeyecektir, görüntüler
+gösterilecektir, gösterilmeden, gösterir, güncel, hakikaten, hakkı
+hakları, halbuki, halihazırda, harfi, harfini, harfleri, harflerin
+harflerini, hariç, hatalar, hatası, hayat, herhangi, hiçbir, hâlâ, hız
+iki, ikinci, ile, iliştirilen, ilk, imine, imlenir, in, interrupt, ise
+istekleri, isteklerine, istiyorsanız, izin, izinli, iç, içeremezsiniz
+içeren, için, işaret, işaretçi, işlem, işlemi, işlev, kabuk, kabuklar
+kabuğun, kalan, kaldırılması, kaldırır, kalır, kapatır, kapsamaz
+kapsar, katkida, kendilerine, kendisi, kendisini, kesintisi, kilitli, kipinde
+kişisine, klasörünü, klavye, kolayca, kolu, komut, komutlarının
+komutlarıyla, komutundan, komutunu, kontrol, kopyasından, kopyasını, korur
+koşullu, kullanılabilir, kullanılmadan, kullanın, kullanır, kurulan
+kurulduysa, kurulu, kurulum, kötü, küçük, kılar, kırılır
+kısaltılabilir, kısmı, kısmın, kısmını, kısım, lisansı, listesini
+mani, menden, mevcut, mittelstrass, mümkünse, ne, nokta, noktaya, olabilir
+olan, olarak, olmadan, olmadığından, olur, oluşan, onları, onu, orijinal
+ortamda, oyun, parametre, parçası, posta, program, programlar, programların
+reddedildi, resim, rhein, sadece, saklıdır, satırında, sağladığı
+sağlar, sebebi, ses, seviye, seÇenekler, seçenek, seçenekle, seçenekleri
+seçeneksiz, seçeneğini, seçime, sieg, silmek, sistemin, skor, sonra
+sonradan, sonraki, standardına, subst, sözdizim, süre, sürecine, sürücü
+sürücüdür, sürücüsü, sürücüye, sürüm, sıkıştırılmış
+tablosunu, tanımlar, tanınamadı, taşması, taşır, tekrar, telif, temizler
+tercümeyi, tespit, teşekkür, tutmalıdır, tuşlarını, tüm, tümseği
+türkçe, türü, tıklayın, unsuru, uyarı, uygular, uygun, uymazlar
+uyumluluktur, uzantısını, var, varsayılan, ve, veri, veriler, verilir
+verilmez, verir, veya, yalnızca, yapay, yapı, yapılmışsa, yardım
+yayımlanmıştır, yerine, yerleştiklerinde, yetersiz, yi, yok, yoksa, yol
+yolları, yolu, yüklemek, yüklemenin, yüklemeyiniz, yüklendiğinde
+yüklenecektir, yüklenmesi, yüklenmesini, yükler, yüklü, yığın, zaten
+Özet, çalışma, çalıştırmalar, çalıştırmalarına
+çalıştırılmasında, çalıştırılmasından, çağrılar, çok, çıktı
+öntanımlı, örneğin, üst, İki, İkinci, İliştirilecek, İliştirilen
+ın, Şayet, şekilde, şu, şunları
 
 [da_DK]
 
@@ -620,29 +685,48 @@ freedos, na, Ако, Ауторска, Блокови, ГНУ, ГПЛ, Диск
 
 [sv_SE]
 
-aj, aktuella, alla, andra, angivna, använd, användas, applicerar, att, av
-avbild, baktalad, bara, begäran, block, blocken, datafiler, dataintervall
-datatyp, dataverifikation, de, dem, den, det, detta, drivrutin, drivrutinstyp
-drivrutinsverifikation, du, efter, ej, eller, en, endast, enhet, ett
-exekveringar, exekveringen, exkludera, faller, fanns, fel, fil, filbegäran
-filer, filerna, filformat, filsökväg, filåtkomst, fler, flytta, format
-freedos, funktion, får, för, förbehållna, förflutit, första, förstöra
-genom, grafikdrivrutin, grupper, går, har, hastighetsökning, hitta, hittades
-hjälp, här, identifiera, igen, initiera, initieringsfel, inkludera
-inkluderar, installerar, inte, internt, joystickdrivrutin, kan, katalog
-katalogen, kataloger, kataloglista, klausulers, klicka, kommando
-kommandokörning, kommandorad, komprimerad, konstgjord, kontroll, kunde
-körningen, lagrar, landat, licens, likadana, listan, liv, ljuddrivrutin, läge
-lägga, lämplig, långsamt, låst, låter, med, miljön, minne
-minnesöverspill, musdrivrutin, musen, mÅste, många, nekad, nivå, när
-någon, några, nödvändig, och, ogiltig, ogiltigt, om, operation, otilldelad
-parametrar, pausat, pekare, pekaroperation, poäng, program, prova, på
-påföljande, redan, rensar, resurs, rättigheter, samma, sig, själv, slut
-släng, som, speciellt, spel, spelet, stacköverspill, standardinställningen
-standardvärde, starta, stor, struktur, stänger, stöds, sv, svenska, syntax
-söker, sökningar, sökväg, sökvägar, tack, tangentbordsdrivrutin
-tangenterna, till, tillagda, tillgänglig, under, utan, utöka, version, vid
-villkoren, visar, ändelse, är, öppna, öppnar, över, översättningen
+aj, aktivt, aktuell, aktuella, alla, alls, andra, ange, angiven, angivna, annan
+anrop, använd, användas, applicerar, att, augusti, augustin, av, avbild
+avbrottet, avbrytas, avinstallationsproceduren, avinstallera, baktalad, bara
+begäran, beskrivning, bidragsgivare, blanktecken, block, blocken, brytar
+datafiler, dataintervall, datatyp, dataverifikation, de, definierar, delen, dem
+den, denna, det, detekteras, detta, deutschland, drivrutin, drivrutinstyp
+drivrutinsverifikation, du, där, då, efter, eftersom, ej, eller, en, endast
+enhet, enheten, enhetsbokstav, enhetsbokstaven, enhetsbokstäver
+enhetsbokstäverna, er, ett, ex, exekveringar, exekveringen, existerande
+exkludera, faller, fanns, fel, fil, filbegäran, filer, filerna, filformat
+filsökväg, filåtkomst, finns, flagga, flaggan, flaggor, flaggorna
+flaggstandarden, fler, flytta, format, formen, fortfarande, freedos, från
+funktion, får, följer, för, förbehållna, förbli, förflutit, förhindra
+förhindrar, förkortas, första, förstöra, genom, grafikdrivrutin, grund
+grupper, går, gömmer, görs, har, hastighetsökning, hitta, hittades, hittar
+hjälp, hjälpskärm, här, högt, identifiera, igen, ignoreras, inga, ingen
+inget, initiera, initieringsfel, inkludera, inkluderar, inläsning, innehåller
+installationskontroll, installerad, installerade, installerar, installeras
+installerats, inte, internt, istället, join, joystickdrivrutin, kan, katalog
+katalogen, kataloger, kataloglista, klausulers, klicka, kolonen, komma
+kommando, kommandohanterare, kommandokörning, kommandona, kommandorad
+kommandorader, kommandot, kommer, kompatibilitet, komprimerad, konstgjord
+kontroll, kopia, kunde, kÄnda, körningen, ladda, lagrar, landat, licens
+likadana, likhetstecknet, listan, liten, liv, ljuddrivrutin, loadhigh, lov
+läge, lägga, lämplig, läsa, lätt, långsamt, låst, låter, mappar
+mappning, markeras, matas, med, medan, mellan, menden, mestadels, miljön
+minne, minnesblocket, minnesöverspill, minnet, misslyckas, mittelstraáe
+musdrivrutin, musen, mÅste, många, måste, möjligt, namn, nekad, nivå, när
+någon, några, nödvändig, och, också, ogiltig, ogiltigt, om, området
+operation, original, otilldelad, parametrar, pausat, peka, pekar, pekare
+pekaroperation, poäng, program, prova, på, påföljande, påverkar, redan
+rensa, rensar, residenta, resurs, returnerar, rhein, rättigheter, samma, sankt
+se, sekundär, senare, sh, sieg, sig, sin, själv, själva, ska, skal, skalet
+skiljer, slut, släng, snarare, som, speciellt, spel, spelet, stacköverspill
+standardinställningen, standardvärde, starta, stor, struktur, stänger
+stöds, sv, svenska, synopsis, syntax, systemet, så, söker, sökningar
+sökväg, sökvägar, sökvägen, tack, tangentbordsdrivrutin, tangenterna
+tidigare, till, tillagda, tilldela, tilldelade, tilldelning, tilldelningar
+tilldelningstabellen, tillgänglig, tillåts, tyskland, under, ut, utan
+utförs, utöka, valfria, varken, varning, version, via, vid, vidare, vilket
+vill, villkoren, visa, visar, visas, vissa, än, ändelse, är, åtgärden
+öppna, öppnar, över, översättningen
 
 [uk_UA]
 
@@ -690,13 +774,33 @@ freedos, Блоки, Ви, Вимкнути, Диск, Дозволяє
 
 [cs_CZ]
 
-adresář, adresáři, adresářích, adresářů, aktuálním, ani, bez, by
-byly, být, cesta, cestu, cesty, další, datové, do, druhé, freedos, hledá
-interní, jako, je, jednotka, již, které, licencí, může, na, nainstaluje
-nastavení, nesmÍ, nesmí, obsahovat, obsahují, off, on, otevírat
-otevření, parametrů, path, po, pouze, použije, použito, poznámka
-požadavky, pro, programům, prostředí, prvním, při, připojení
-připojených, příkaz, příkazů, příponu, rozšíří, se, seznam
-souboru, soubory, souborů, souladu, spouštění, spuštění, stejné
-syntaxe, toto, uloží, umožňuje, verze, volbu, volání, vyhledávání
-vymaže, vypne, výchozí, zadaných, zobrazí, řádce, žádné
+adresář, adresáře, adresáři, adresářích, adresářů, akce, aktivní
+aktuálním, aktuálními, ale, ani, bez, blok, brání, bude, by, byly, být
+cesta, cestami, cestu, cesty, chcete, chyby, což, další, dalšího, datové
+definuje, detekcí, do, druhé, dvojtečkami, dvojtečky, dříve, důvodu
+formátu, freedos, hledá, ignorována, instalace, interní, jako, je, jednotce
+jednotek, jednotka, jednotku, jednotky, jej, ještě, jinou, jiné, již
+jmÉno, jsou, kam, kde, kompatibility, kontrola, které, li, licencí, lze
+mapování, mapuje, mezery, mezi, možné, musíte, má, místo, může, na
+nainstalované, nainstalovaný, nainstalována, nainstalováno, nainstaluje
+např, nastavení, načte, načtena, načtení, načíst, nebo, nebyla
+neexistuje, nejsou, nenainstalováno, není, neodpovídají, nepovolena, nesmÍ
+nesmí, nezavádějte, nezobrazí, nikoli, nápovědu, následná, ní, oblasti
+obsahovat, obsahují, obsahující, od, odinstalace, odinstaluje, odlišuje
+off, on, otevírat, otevření, ovlivňuje, označen, paměti, paměťový
+parametrů, path, po, pokud, pomocí, popis, pouze, použije, použijte
+použito, povoleny, později, poznámka, požadavky, pracovními, pro, procesu
+programy, programům, prostředí, protože, provedena, prvním, písmen
+písmeno, písmeny, pŘispĚvatelÉ, před, přesune, při, připojení
+připojených, přiřadí, přiřazené, přiřazení, příkaz, příkazech
+příkazem, příkazové, příkazový, příkazů, případě, příponu
+původním, rezidentní, rovnítkem, rozšíří, se, sekundární, selhat
+seznam, skryje, snadnou, sobě, souboru, soubory, souborů, souladu, součást
+spouštění, spuštění, srpna, standardu, status, stejné, stručnou, stále
+stávající, subst, syntaxe, systému, sám, tabulky, takovém, takÉ, také
+tato, temp, tento, to, toho, toto, touto, ukazovat, ukazuje, uloží
+umožňuje, upozornění, varování, ve, verze, viz, volba, volbou, volbu
+volby, voleb, volitelné, volání, vrací, vyhledávání, vymazání, vymaže
+vypne, vysoko, výchozí, výstup, většinou, všechna, zabrání, zadaných
+zadat, zadáno, zahrnuje, zatímco, zkrátit, znÁmÉ, zobrazí, zrušena
+zůstane, část, části, řádce, žádná, žádné, žádný
