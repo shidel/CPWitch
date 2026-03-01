@@ -1,3 +1,4 @@
 # Upcoming release notes
 
-* Changed 100% compatible icon
+* Codepage filter dropdown now reflects current filter.
+* Changed 100% compatible icon in codepage list

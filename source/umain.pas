@@ -1027,6 +1027,11 @@ begin
   actListCompatible.Checked:=FCodepageFilter=cpfComplete;
   actListPartial.Checked:=FCodepageFilter=cpfPartial;
   actListAll.Checked:=FCodepageFilter=cpfAll;
+  case FCodepageFilter of
+    cpfComplete : actCodepageFilter.ImageIndex:=actListCompatible.ImageIndex;
+    cpfPartial  : actCodepageFilter.ImageIndex:=actListPartial.ImageIndex;
+    cpfAll      : actCodepageFilter.ImageIndex:=actListAll.ImageIndex;
+  end;
 end;
 
 procedure TfMain.SelectCodepage(Sender: TObject);
@@ -1063,14 +1068,14 @@ begin
          fDictEditForm.Show;
   end;
   {$ELSE}
-  if Assigned(FDictEditForm) and (fDictEditForm.Visible = True) then begin
+  if Assigned(FDictEditForm)  then begin
     FDictEditForm.WitchItem:=nil;
     FDictEditForm.WitchList:=FWitch;
   end;
   {$ENDIF}
   if Assigned(lvFileList.Selected) then begin
     S:=lvFileList.Selected.Caption;
-    if Assigned(FDictEditForm) then
+    if Assigned(FDictEditForm) and (fDictEditForm.Visible = True) then
       FDictEditForm.WitchItem:=TWitchItem(lvFileList.Selected.Data);
   end else
     S:='(null)';
