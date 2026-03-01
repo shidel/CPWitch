@@ -1055,14 +1055,19 @@ var
   W : TWitchItem;
 begin
   FViewedCodepage:=-2;
+  {$IFDEF BUILD_SPECIAL}
   if Assigned(FDictEditForm) then begin
     FDictEditForm.WitchItem:=nil;
     FDictEditForm.WitchList:=FWitch;
-    {$IFDEF BUILD_SPECIAL}
        if fDictEditForm.Visible = False then
          fDictEditForm.Show;
-    {$ENDIF}
   end;
+  {$ELSE}
+  if Assigned(FDictEditForm) and (fDictEditForm.Visible = True) then begin
+    FDictEditForm.WitchItem:=nil;
+    FDictEditForm.WitchList:=FWitch;
+  end;
+  {$ENDIF}
   if Assigned(lvFileList.Selected) then begin
     S:=lvFileList.Selected.Caption;
     if Assigned(FDictEditForm) then
