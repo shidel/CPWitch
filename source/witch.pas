@@ -13,7 +13,7 @@ unit Witch;
 
 interface
 
-{$DEFINE Slow_Analyze}
+{ DEFINE Slow_Analyze}
 
 uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
@@ -36,7 +36,7 @@ type
   private
     FAnalyzed: boolean;
     FAnalyzing: boolean;
-    FDetected: String;
+    FLocale: String;
     FEncoding: TWitchEncoding;
     FEndsWithBlank: boolean;
     FFileName: String;
@@ -71,7 +71,7 @@ type
     property Analyzed : boolean read FAnalyzed;
     property Encoding : TWitchEncoding read FEncoding;
     property Results : TCodepageResults read FResults;
-    property Detected : String read FDetected; // Detected Language
+    property Locale : String read FLocale; // Detected Language
     property Preferred : integer read FPreferred; // Preferred Codepage
     property EndsWithBlank : boolean read FEndsWithBlank;
     function AsCodePage(Codepage : integer; Convert : boolean = true) : TUTF8ToCodepage;
@@ -133,6 +133,7 @@ type
     FEncoding: TWitchEncoding;
     FEndsWithBlank: boolean;
     FLineEndings: TLineEndings;
+    FLocale: RawByteString;
     FResults: TCodepageResults;
     FText: RawByteString;
     FWitch: TWitch;
@@ -143,8 +144,10 @@ type
   protected
     procedure Execute; override;
     procedure Completed;
+    function NoComments : RawByteString;
     procedure AnalyzeUTF8;
     procedure AnalyzeCP;
+    procedure AnalyzeASCII;
   public
     procedure AfterConstruction; override;
     // constructor Create(CreateSuspended:Boolean); override;
@@ -155,6 +158,7 @@ type
     property Results : TCodepageResults read FResults;
     property LineEndings : TLineEndings read FLineEndings;
     property EndsWithBlank : boolean read FEndsWithBlank;
+    property Locale : RawByteString read FLocale;
   end;
 
 { TWitchAnalyzeThread }
@@ -191,6 +195,7 @@ begin
   FLineEndings:=leCRLF;
   FEndsWithBlank:=False;
   FEncoding:=weNone;
+  FLocale:='';
   // Test for characters above ASCII 127
   for I := 1 to Length(FText) do
     if Byte(FText[I]) = 0 then begin
@@ -222,6 +227,7 @@ begin
 
   case FEncoding of
     weBinary:begin end;
+    weNone : AnalyzeASCII;
     weCodepage:AnalyzeCP;
     weUnicode:AnalyzeUTF8;
   end;
@@ -234,21 +240,60 @@ begin
   FWitchItem.FLineEndings:=LineEndings;
   FWitchItem.FEndsWithBlank:=FEndsWithBlank;
   FWitchItem.FResults:=Results;
+  FWitchItem.FLocale:=Flocale;
   FWitch.ThreadComplete(Self);
+end;
+
+function TWitchAnalyzeThread.NoComments: RawByteString;
+var
+  S : RawByteString;
+  I, C : integer;
+begin
+  Result:='';
+  try
+    S:=NormalizeLineEndings(FText, LF) + LF;
+    SetLength(Result, Length(S));
+    I:=1;
+    C:=1;
+    While I <= Length(S) do begin
+     // Trim Indentation
+     While ((S[I] = SPACE) or (S[I]=TAB)) do Inc(I);
+     // Check for Comment, Skip to EOL
+     if (S[I] = ';') or (S[I] = '#') then
+       While (S[I] <> LF) do Inc(I);
+     // Add Line, could be blank, don't care
+     repeat
+       Result[C]:=S[I];
+       Inc(C);
+       Inc(I);
+     until S[I-1]=LF;
+    end;
+  except
+    Result:='';
+  end;
 end;
 
 procedure TWitchAnalyzeThread.AnalyzeUTF8;
 var
   A : TUTF8Analyze;
+  S : RawByteString;
 begin
-  A:=TUTF8Analyze.Create(ToBytes(FText));
+  S:=NoComments;
+  A:=TUTF8Analyze.Create(ToBytes(S));
   FResults:=A.Results;
   A.Free;
+  if Assigned(Dictionaries) then
+  FLocale:=Dictionaries.DetectLocale(S);
 end;
 
 procedure TWitchAnalyzeThread.AnalyzeCP;
 begin
   { TODO 9 -cDevel Witch analyze Codepage. Requires Language Dictionaries. }
+end;
+
+procedure TWitchAnalyzeThread.AnalyzeASCII;
+begin
+
 end;
 
 procedure TWitchAnalyzeThread.AfterConstruction;
@@ -293,7 +338,7 @@ begin
   FEncoding:=weNone;
   FAnalyzed:=False;
   FAnalyzing:=False;
-  FDetected:='';
+  FLocale:='';
   FPreferred:=-1;
   FDateTime:=-1;
   SetLength(FResults, 0);
@@ -326,6 +371,7 @@ begin
   FAnalyzed:=True;
   if Sender is TWitchAnalyzeThread then begin
     FEncoding:=TWitchAnalyzeThread(Sender).Encoding;
+    LogMessage(vbVerbose, Self.DisplayName + ' is ' + FLocale);
   end;
   if Assigned(FListItem) and Assigned(FOwner) and Assigned(FOwner.FOnAnalyzed) then
     FOwner.FOnAnalyzed(Self);

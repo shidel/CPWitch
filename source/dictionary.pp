@@ -52,6 +52,8 @@ type
     property Modified : boolean read FModified write SetModified;
     function AddLocale(LocaleID : String) : integer;
     function IndexOfLocale(LocaleID : String) : integer;
+    function DetectLocale(S : RawByteString; out Stats : TArrayOfInt32) : Int32; overload;
+    function DetectLocale(S : RawByteString) : String; overload;
   end;
 
 var
@@ -118,14 +120,101 @@ begin
   SL.Free;
 end;
 
+
+procedure StressTest;
+var
+  N, T : TBinaryTreeNode;
+  C, I : Integer;
+  B : Boolean;
+begin
+
+  N:=Dictionaries.First;
+  C:=Dictionaries.Count;
+  B:=True;
+  try
+    While C > 0 do begin
+      T:=N;
+      for I := 0 to Random(100) do begin
+        While (T=N) and (C>1) do begin
+          if B then T:=T.Next else T:=T.Previous;
+          if not Assigned(T) then begin
+            if not Dictionaries.CheckIntegrity then
+              raise Exception.Create('failed integrity');
+            if B then
+              T:=Dictionaries.Last
+            else
+              T:=Dictionaries.First;
+            B:=Not B;
+            LogMessage(vbVerbose, 'Direction Change');
+          end;
+        end;
+      end;
+      if not assigned(N) then
+        raise Exception.Create('Current Node is nil');
+      if not assigned(T) then
+        raise Exception.Create('Next Node is nil');
+      Dictionaries.Delete(N);
+      Dec(C);
+      if N <> T then
+        N:=T
+      else
+        N:=Dictionaries.Root;
+    end;
+    LogMessage(vbVerbose,'Tree Should be empty');
+    if C <> 0 then
+      raise Exception.Create ('Did not remove all items');
+    if Dictionaries.Count <> 0 then
+      raise Exception.Create ('Item count is off');
+    if Dictionaries.First <> nil then
+      raise Exception.Create ('Tree not empty');
+  except
+    on E : Exception do begin
+      LogMessage(vbCritical, 'Stress test failed at ' +  IntToStr(C) +
+      '. ' + E.Message);
+      raise Exception.Create(E.Message);
+    end;
+  end;
+end;
+
+
+procedure StressTest2;
+var
+  C : Integer;
+  B : Boolean;
+  N : TBinaryTreeNode;
+begin
+  C:=Dictionaries.Count;
+  try
+    While C > 0 do begin
+      N:=Dictionaries.Root;
+      Dictionaries.Delete(N);
+      Dec(C);
+    end;
+    LogMessage(vbVerbose,'Tree Should be empty');
+    if C <> 0 then
+      raise Exception.Create ('Did not remove all items');
+    if Dictionaries.Count <> 0 then
+      raise Exception.Create ('Item count is off');
+    if Dictionaries.First <> nil then
+      raise Exception.Create ('Tree not empty');
+  except
+    on E : Exception do begin
+      LogMessage(vbCritical, 'Stress test failed at ' +  IntToStr(C) +
+      '. ' + E.Message);
+      raise Exception.Create(E.Message);
+    end;
+  end;
+end;
+
 procedure TDictionaries.Load;
 var
-  Sect, E : integer;
-  SS, ST : TArrayOfInt32;
+  Sect, E, J : integer;
+  ST : TArrayOfInt32;
   FileText : RawByteString;
   Line : RawByteString;
   U : UnicodeString;
   N : TBinaryTreeNode;
+  S : String;
   WC:Integer;
 begin
   WC:=0;
@@ -133,6 +222,7 @@ begin
     LogMessage(vbMinimal, 'Cannot find dictionary file: ' + ExtractRelativepath(AppBasePath, FileName));
     Exit;
   end;
+
   E :=FileLoad(FileName, FileText);
   if E <> 0 then
     raise Exception.Create('reading file: ' + ExtractRelativepath(AppBasePath, FileName));
@@ -150,7 +240,6 @@ begin
         if IndexOfLocale(Line) <> -1 then
           raise Exception.Create('duplicate section name: ' + Line);
         Sect:=AddLocale(Line);
-        SS:=[Sect];
         LogMessage(vbExcessive, TAB + 'Language: ' + Locale[Sect]);
         Continue;
       end;
@@ -164,13 +253,16 @@ begin
         {$ENDIF}
         N:=Find(U);
         if not Assigned(N) then begin
-          N:=Add(U, SS);
+          N:=Add(U, [Sect]);
           Inc(WC);
         end else begin
           if InArray(N.Data32, Sect) <> -1 then begin
+            S:='';
+            for J:= 0 to Length(N.Data32) - 1 do
+              S:=S+Locale[J] + SPACE;
             LogMessage(vbVerbose, WhenTrue(VerboseLevel=vbExcessive,
               TAB + 'duplicate word: ', 'duplicate dictionary word: ') +
-              RawByteString(U) + ' [' + Locale[Sect] + ']');
+              RawByteString(U) + ' [' + Locale[Sect] + '] ' + S + IntToStr(InArray(N.Data32, Sect)));
             Continue;
           end;
           ST:=N.Data32;
@@ -179,12 +271,20 @@ begin
         end;
       end;
     end;
-    Balance;
+    LogMessage(vbVerbose, 'Balancing dictionary');
+    Optimize;
+    LogMessage(vbExcessive, 'Verifying tree integrity');
+    CheckIntegrity;
+    LogMessage(vbExcessive, 'Stress Test');
+    StressTest;
     {$IFDEF BUILD_DEBUG}
     if VerboseLevel = vbExcessive then begin
       N:=First;
       While Assigned(N) do begin
-        LogMessage(VerboseLevel, N.UniqueID + ' ' + PasExt.ToString(N.Data));
+        S:='';
+          for J:= 0 to Length(N.Data32) - 1 do
+            S:=S+Locale[J] + SPACE;
+        LogMessage(VerboseLevel, N.UniqueID + ' ' + S);
         N:=N.Next;
       end;
     end;
@@ -284,6 +384,51 @@ begin
   for I := 0 to Length(FLocales) -1 do
     if UpperCase(LocaleID) = UpperCase(FLocales[I]) then Exit(I);
   Result:=-1;
+end;
+
+function TDictionaries.DetectLocale(S: RawByteString; out Stats: TArrayOfInt32
+  ): Int32;
+var
+  I, J, P : integer;
+  W : TStringList;
+  N : TBinaryTreeNode;
+begin
+  Result:=0;
+  Stats:=[];
+  SetLength(Stats, Length(FLocales));
+  for I := 0 to High(Stats) do
+    Stats[I]:=0;
+  W := TStringList.Create;
+  try
+    WordsOfString(S, W);
+    Result:=W.Count;
+    for I := 0 to W.Count -1 do begin
+      N:=Find(LowerCase(W[I]));
+      if Assigned(N) then begin
+        // Unique words 2 points, common words 1 point
+        if Length(N.Data32) > 1 then P:=1 else P:=2;
+        for J := 0 to High(N.Data32) do
+          Inc(Stats[N.Data32[J]], P);
+      end;
+    end;
+  finally
+    W.Free;
+    Result:=0;
+  end;
+end;
+
+function TDictionaries.DetectLocale(S: RawByteString): String;
+var
+  I, P : integer;
+  Stats:TArrayOfInt32;
+begin
+  Result:='';
+  DetectLocale(S, Stats);
+  P:=-1;
+  for I := 0 to High(Stats) do
+    if (P<0) or (Stats[I]>Stats[P]) then P:=I;
+  if P<0 then Exit;
+  Result:=FLocales[P];
 end;
 
 constructor TDictionaries.Create;
