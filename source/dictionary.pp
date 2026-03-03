@@ -52,12 +52,14 @@ type
     property Modified : boolean read FModified write SetModified;
     function AddLocale(LocaleID : String) : integer;
     function IndexOfLocale(LocaleID : String) : integer;
-    function DetectLocale(S : RawByteString; out Stats : TArrayOfInt32) : Int32; overload;
-    function DetectLocale(S : RawByteString) : String; overload;
   end;
 
 var
   Dictionaries : TDictionaries;
+  UserDictionary : TDictionaries;
+
+  function DetectLocale(S : RawByteString; out Stats : TArrayOfInt32) : Int32; overload;
+  function DetectLocale(S : RawByteString) : String; overload;
 
 implementation
 
@@ -71,6 +73,12 @@ begin
     Dictionaries.FileName:=AppDataPath+'dictionary.cpw';
   except
     FreeAndNil(Dictionaries);
+  end;
+  UserDictionary:=TDictionaries.Create;
+  try
+    UserDictionary.FileName:=UserDataPath+'user_words.cpw';
+  except
+    FreeAndNil(UserDictionary);
   end;
 end;
 
@@ -220,15 +228,15 @@ var
 begin
   WC:=0;
   if not FileExists(FileName) then begin
-    LogMessage(vbMinimal, 'Cannot find dictionary file: ' + ExtractRelativepath(AppBasePath, FileName));
+    LogMessage(vbMinimal, 'Cannot find dictionary file: ' + FriendlyPath(AppBasePath, FileName));
     Exit;
   end;
 
   E :=FileLoad(FileName, FileText);
   if E <> 0 then
-    raise Exception.Create('reading file: ' + ExtractRelativepath(AppBasePath, FileName));
+    raise Exception.Create('reading file: ' + FriendlyPath(AppBasePath, FileName));
   try
-    LogMessage(vbVerbose, 'Processing dictionary file: '+ ExtractRelativepath(AppBasePath, FileName));
+    LogMessage(vbVerbose, 'Processing dictionary file: '+ FriendlyPath(AppBasePath, FileName));
     Sect:=-1;
     FileText:=StringReplace(FileText, CR, LF, [rfReplaceAll]);
     while Length(FileText) > 0 do begin
@@ -384,51 +392,6 @@ begin
   Result:=-1;
 end;
 
-function TDictionaries.DetectLocale(S: RawByteString; out Stats: TArrayOfInt32
-  ): Int32;
-var
-  I, J, P : integer;
-  W : TStringList;
-  N : TBinaryTreeNode;
-begin
-  Result:=0;
-  Stats:=[];
-  SetLength(Stats, Length(FLocales));
-  for I := 0 to High(Stats) do
-    Stats[I]:=0;
-  W := TStringList.Create;
-  try
-    WordsOfString(S, W);
-    Result:=W.Count;
-    for I := 0 to W.Count -1 do begin
-      N:=Find(LowerCase(W[I]));
-      if Assigned(N) then begin
-        // Unique words 2 points, common words 1 point
-        if Length(N.Data32) > 1 then P:=1 else P:=2;
-        for J := 0 to High(N.Data32) do
-          Inc(Stats[N.Data32[J]], P);
-      end;
-    end;
-  finally
-    W.Free;
-    Result:=0;
-  end;
-end;
-
-function TDictionaries.DetectLocale(S: RawByteString): String;
-var
-  I, P : integer;
-  Stats:TArrayOfInt32;
-begin
-  Result:='';
-  DetectLocale(S, Stats);
-  P:=-1;
-  for I := 0 to High(Stats) do
-    if (P<0) or (Stats[I]>Stats[P]) then P:=I;
-  if P<0 then Exit;
-  Result:=FLocales[P];
-end;
-
 constructor TDictionaries.Create;
 begin
   inherited Create;
@@ -443,6 +406,67 @@ begin
   FLocales:=[];
   FLoaded:=False;
   FModified:=False;
+end;
+
+{ Unit functions }
+
+function DetectDict(D : TDictionaries; S: RawByteString; out Stats: TArrayOfInt32
+  ): Int32;
+var
+  I, J, P : integer;
+  W : TStringList;
+  N : TBinaryTreeNode;
+begin
+  Result:=0;
+  Stats:=[];
+  SetLength(Stats, Length(D.FLocales));
+  for I := 0 to High(Stats) do
+    Stats[I]:=0;
+  W := TStringList.Create;
+  try
+    WordsOfString(S, W);
+    Result:=W.Count;
+    for I := 0 to W.Count -1 do begin
+      N:=D.Find(LowerCase(W[I]));
+      if Assigned(N) then begin
+        // Unique words 2 points, common words 1 point
+        if Length(N.Data32) > 1 then P:=1 else P:=2;
+        for J := 0 to High(N.Data32) do
+          Inc(Stats[N.Data32[J]], P);
+      end;
+    end;
+  finally
+    W.Free;
+    Result:=0;
+  end;
+end;
+
+function DetectLocale(S: RawByteString; out Stats: TArrayOfInt32
+  ): Int32;
+begin
+  Stats:=[];
+  if Not Assigned(Dictionaries) then Exit(0);
+  try
+    Result:=DetectDict(Dictionaries, S, Stats);
+  except
+    Stats:=[];
+    Result:=0;
+  end;
+end;
+
+function DetectLocale(S: RawByteString): String;
+var
+  I, P : integer;
+  Stats:TArrayOfInt32;
+begin
+  if Not Assigned(Dictionaries) then Exit('');
+  Result:='';
+  DetectLocale(S, Stats);
+  P:=-1;
+  for I := 0 to High(Stats) do
+    if (P<0) or (Stats[I]>Stats[P]) then P:=I;
+  if P<0 then Exit;
+  Result:=Dictionaries.FLocales[P];
 end;
 
 

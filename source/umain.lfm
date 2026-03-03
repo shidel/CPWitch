@@ -53,6 +53,14 @@ object fMain: TfMain
       end    
       item
         Alignment = taCenter
+        Width = 70
+      end    
+      item
+        Alignment = taCenter
+        Width = 50
+      end    
+      item
+        Alignment = taCenter
         Width = 50
       end    
       item
@@ -225,8 +233,8 @@ object fMain: TfMain
           Left = 8
           Height = 16
           Top = 8
-          Width = 212
-          Align = alClient
+          Width = 115
+          Align = alLeft
           BorderSpacing.Around = 8
           Caption = 'Viewed as Unicode'
         end

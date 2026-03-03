@@ -283,7 +283,7 @@ begin
   FResults:=A.Results;
   A.Free;
   if Assigned(Dictionaries) then
-  FLocale:=Dictionaries.DetectLocale(S);
+  FLocale:=DetectLocale(S);
 end;
 
 procedure TWitchAnalyzeThread.AnalyzeCP;

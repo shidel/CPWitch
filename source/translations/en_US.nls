@@ -145,8 +145,8 @@
         </pCodepageListLabel>
         <lvCodepageList>
           <Analyzing Caption="Analyzing"/>
-          <Not_implemented Caption="Not implemented"/>
           <Any_Codepage Caption="Any Codepage"/>
+          <Not_implemented Caption="Not implemented"/>
           <Binary_data Caption="Binary File"/>
         </lvCodepageList>
       </pCodepageList>
@@ -165,12 +165,61 @@
           </pViewCodepageLabel>
         </pCodepage>
       </pViewers>
+      <Locales>
+        <ar_SA Text="Arabic (Saudi Arabia)"/>
+        <cs_CZ Text="Czech (Czechia)"/>
+        <da_DK Text="Danish (Denmark)"/>
+        <de_CH Text="German (Switzerland)"/>
+        <de_DE Text="German (Germany)"/>
+        <en_US Text="English (United States)"/>
+        <eo Text="Esperanto"/>
+        <es_ES Text="Spanish (Spain)"/>
+        <et_EE Text="Estonian (Estonia)"/>
+        <fi_FI Text="Finnish (Finland)"/>
+        <fr_CA Text="French (Canada)"/>
+        <fr_FR Text="French (France)"/>
+        <he_IL Text="Hebrew (Israel)"/>
+        <hu_HU Text="Hungarian (Hungary)"/>
+        <is_IS Text="Icelandic (Iceland)"/>
+        <it_IT Text="Italian (Italy)"/>
+        <ja_JP Text="Japanese (Japan)"/>
+        <lt_LT Text="Lithuanian (Lithuania)"/>
+        <la Text="Latin"/>
+        <lv_LV Text="Latvian (Latvia)"/>
+        <nl_NL Text="Dutch (Netherlands)"/>
+        <no_NO Text="Norwegian (Norway)"/>
+        <pl_PL Text="Polish (Poland)"/>
+        <pl_MAZ Text="Polish (Mazovian)"/>
+        <pt_BR Text="Portuguese (Brazil)"/>
+        <pt_PT Text="Portuguese (Portugal)"/>
+        <ru_RU Text="Russian (Russia)"/>
+        <sk_SK Text="Slovak (Slovakia)"/>
+        <sl_SI Text="Slovenian (Slovenia)"/>
+        <sr_RS Text="Serbian (Serbia)"/>
+        <zh_CN Text="Chinese (Simplified)"/>
+        <sv_SE Text="Swedish (Sweden)"/>
+        <tr_TR Text="Turkish (Turkey)"/>
+        <uk_UA Text="Ukrainian (Ukraine)"/>
+        <bg_BG Text="Bulgarian (Bulgaria)"/>
+        <el_GR Text="Greek (Greece)"/>
+        <fil_PH Text="Filipino (Philippines)"/>
+        <tl_PH Text="Tagalog (Philippines)"/>
+        <haw_US Text="Hawaiian (United States)"/>
+        <id_ID Text="Indonesian (Indonesia)"/>
+        <ko_KR Text="Korean (South Korea)"/>
+        <nb_NO Text="Norwegian Bokmål (Norway)"/>
+        <nn_NO Text="Norwegian Nynorsk (Norway)"/>
+        <ro_RO Text="Romanian (Romania)"/>
+        <sm_WS Text="Samoan (Samoa)"/>
+        <th_TH Text="Thai (Thailand)"/>
+        <vi_VN Text="Vietnamese (Vietnam)"/>
+      </Locales>
       <statBar>
         <Processing Caption="Processing"/>
         <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
         <Unicode Caption="Unicode"/>
-        <Codepage Caption="Codepage"/>
         <NoEncoding Caption="ASCII"/>
+        <Codepage Caption="Codepage"/>
         <Binary Caption="Binary"/>
       </statBar>
     </fMain>

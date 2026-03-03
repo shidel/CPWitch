@@ -1,33 +1,33 @@
 [en_US]
 
 abbreviated, abbreviation, ability, able, about, above, absolute, absolutely
-accepted, access, accessing, action, activity, actual, add, added, adding
+accepted, access, accessing, action, activity, actual, ad, add, added, adding
 addition, additional, address, adds, adjusted, adjustment, advances, advantage
-after, again, against, algorithm, algorithms, all, allow, allowed, allowing
-allows, already, also, alternative, although, always, among, and, another, any
-anything, append, appended, application, applications, applied, applies, apply
-arbitrary, area, areas, around, artificial, aspect, assign, assigned
-assignment, assignments, associate, associated, assume, assumed, attach
-attribute, attributes, audio, author, automated, automatic, automatically
-available, back, background, backward, bad, bar, base, basic, batch, be
-because, become, before, begin, beginning, behaves, behavior, being, below
-better, between, binary, bit, block, blocks, body, bomb, bombs, boot, booting
-border, bottom, boundary, box, broken, buffer, buffers, bump, button, buttons
-byte, bytes, calculate, calculation, call, calls, can, cannot, capacity, card
-cards, case, cases, cause, centered, central, chain, chains, change, changed
-changes, changing, character, characters, check, checkbox, checked, choice
-choices, choose, clause, clean, clear, clears, click, clicked, clipboard, close
-closed, closing, cluster, code, codes, collapse, color, colored, colors, column
-columns, combined, command, commands, comment, common, commonly, compare
-compares, comparison, compile, compiled, complete, completed, completely
-compressed, computer, computers, condition, configuration, continue, continued
-contributers, control, conversion, conversions, convert, converted, coordinate
-copy, copying, copyright, correct, corrections, could, count, create, created
-creating, current, cursor, data, date, death, debug, debugging, decimal
-default, defaulting, defaults, define, defined, defines, delay, delete, deleted
-deleting, deletion, delimiter, depth, description, design, desktop, destination
-detail, detailed, detect, detected, detects, development, device, devices
-diagram, dial, dialog, difference, differences, different, difficult
+after, again, against, alert, algorithm, algorithms, all, allow, allowable
+allowed, allowing, allows, already, also, alternative, although, always, among
+an, and, another, any, anything, append, appended, application, applications
+applied, applies, apply, arbitrary, area, areas, around, artificial, as, aspect
+assign, assigned, assignment, assignments, associate, associated, assume
+assumed, at, attach, attribute, attributes, audio, author, automated, automatic
+automatically, available, back, background, backward, bad, bar, base, basic
+batch, be, because, become, beep, before, begin, beginning, behaves, behavior
+being, below, better, between, binary, bit, block, blocks, body, bomb, bombs
+boot, booting, border, bottom, boundary, box, broken, buffer, buffers, bump
+button, buttons, byte, bytes, calculate, calculation, call, calls, can, cannot
+capacity, card, cards, case, cases, cause, centered, central, chain, chains
+change, changed, changes, changing, character, characters, check, checkbox
+checked, choice, choices, choose, clause, clean, clear, clears, click, clicked
+clipboard, close, closed, closing, cluster, code, codes, collapse, color
+colored, colors, column, columns, combined, command, commands, comment, common
+commonly, compare, compares, comparison, compile, compiled, complete, completed
+completely, compressed, computer, computers, condition, configuration, continue
+continued, contributers, control, conversion, conversions, convert, converted
+coordinate, copy, copying, copyright, correct, corrections, could, count
+create, created, creating, current, cursor, data, date, death, debug, debugging
+decimal, default, defaulting, defaults, define, defined, defines, delay, delete
+deleted, deleting, deletion, delimiter, depth, description, design, desktop
+destination, detail, detailed, detect, detected, detects, development, device
+devices, diagram, dial, dialog, difference, differences, different, difficult
 difficulty, dimension, directories, directory, discard, disk, display
 displayed, displaying, displays, distance, distributed, do, document, documents
 does, done, down, downward, drive, driver, drivers, drives, drop, early, easily
@@ -35,79 +35,81 @@ edit, editable, editing, edition, editor, effect, effective, effects, either
 elapsed, element, elements, else, email, empty, end, ending, endings, enter
 enters, entire, entry, environment, equal, equals, erroneous, error, errors
 escape, even, event, eventually, every, everything, exact, exceed, execution
-exercise, exit, experience, experienced, explain, extended, extension
+exercise, exit, expected, experience, experienced, explain, extended, extension
 extensions, external, fail, failure, fall, falling, falls, fast, fastest, feed
 field, file, files, fill, filter, filters, find, finds, fine, finish, first
 fix, fixed, flip, flush, flushing, follow, following, follows, font, fonts, for
 force, foreground, form, format, formats, forward, found, frame, free, from
 full, fully, function, functions, further, furthermore, future, game, gameplay
 games, gap, general, generally, generated, generation, german, germany, get
-getting, given, go, graphics, group, groups, guide, handle, happen, happens
-hard, has, have, header, heading, help, hesitate, hidden, high, highlighted
-history, horizontal, how, however, idea, identification, identify, ignore
-ignored, image, images, immediate, improvement, include, included, includes
-including, increase, increment, independent, independently, index, indicate
-indicated, individual, information, initial, initialization, initialize, input
-install, installation, installed, installs, instance, instances, instruction
-instructional, instructions, interaction, interactive, intercept, interest
-internal, interrupt, into, invalid, invocation, invocations, issue, item, items
-itself, jam, join, jump, jumps, just, key, keyboard, keyboards, keys, keyword
-kilobyte, kind, kinds, know, known, label, land, lands, language, languages
-large, larger, last, late, later, layout, lead, left, length, level, levels
-library, license, life, light, like, limit, limited, line, lines, link, links
-list, listed, lists, load, loading, local, locate, location, lock, locked, long
-look, looks, loose, lower, main, mainboard, make, makes, mapping, mark, marked
-master, match, matching, matter, maximum, may, mean, meaning, meanings, meant
-media, medium, memory, menu, message, messages, metadata, middle, minus, mirror
-mirrored, missing, mode, modified, modify, more, mostly, motherboard, mouse
-move, movement, movements, moves, multiple, must, name, names, navigate, near
-nearby, nearly, necessary, need, needs, neither, network, never, new, next, no
-non, none, nor, normal, not, note, notice, now, null, number, numbers, numerous
-object, occur, occurrence, of, off, offset, omit, ommited, on, once, one, only
-open, opened, opening, opens, operation, operations, optimal, option, optional
-options, or, order, original, other, otherwise, ouch, out, output, outputs
-over, overall, overflow, overly, overwrite, package, packages, page, pages
-panel, panels, parameter, parameters, part, partition, path, paths, pattern
-pause, paused, perform, performance, performed, permanent, permanently
-physical, pick, picture, pixel, place, placed, plane, play, player, please
-plus, point, pointer, points, popular, portion, position, possible, power
-powers, prefer, preferred, presence, preserve, press, pressure, prevent
-prevented, prevents, preview, previous, primary, print, printed, process
-processor, program, programmed, programs, progress, prompt, provide, provided
-providing, public, push, quality, question, quick, quit, quote, random, range
-rate, rather, reach, reaches, read, ready, really, reboot, recognize, recommend
-record, red, redirect, redirected, reduce, reference, regardless, register
-relation, release, releases, reload, remain, remains, removal, remove, removed
-removes, rename, replace, report, reports, representation, representative
-request, requests, require, required, requires, reserved, resident, resize
-resizing, resolution, resources, result, results, return, returns, reverse
-right, rights, root, rotate, row, rows, run, running, safe, same, save, saved
-saves, say, screen, screens, screenshot, search, searches, searching, second
-section, sector, sectors, see, select, selected, selection, send, sentence
-separate, sequence, serial, server, service, set, sets, setting, settings
-several, shall, shared, shell, shells, short, shortcut, shorter, should, show
-shown, shows, shrink, side, sign, signal, simple, simply, simultaneous
-simultaneously, single, site, size, skip, slow, slower, small, software, solve
-some, someday, something, sometimes, source, space, special, specified, specify
-speed, stack, standard, start, startup, state, status, still, stop, storage
-store, stores, straight, string, strings, structure, sub, subdirectories
-subdirectory, subject, submenu, subsequent, subsequently, substitute, success
-successful, successfully, successive, such, support, supported, supporting
-sure, surface, switch, switched, switches, synopsis, syntax, system, systems
-table, tables, target, task, tasks, technical, temporary, term, terminate
-terms, test, testing, testings, tetris, text, than, thank, thanks, that, the
-their, them, themselves, then, there, these, they, thing, things, think, third
-this, those, though, thousand, three, through, time, times, title, to, together
-too, topic, topics, total, touch, toward, trace, track, translation
-translations, translator, try, type, types, typical, unable, unassigned, unbind
-under, understand, unique, unit, universal, unless, unmount, unstable
-unsupported, until, up, update, upon, upper, url, usage, use, used, user, users
-using, utilities, utility, valid, value, values, variable, variables, version
-versions, vertical, vicinity, video, view, viewed, viewer, views, visit, wait
-want, wants, warn, warned, warning, warnings, was, way, ways, welcome, well
-were, what, when, where, whereas, whether, which, while, whitespace, who, wide
-wildcard, wildcards, will, window, wish, with, within, without, word, words
-work, working, workplace, works, would, wrap, wrapping, write, writing, written
+getting, given, go, graphics, group, groups, guide, hall, handle, happen
+happens, hard, has, have, header, heading, help, hesitate, hidden, high
+highlighted, history, horizontal, how, however, idea, identification, identify
+ignore, ignored, image, images, immediate, improvement, in, include, included
+includes, including, incorrect, increase, increment, independent, independently
+index, indicate, indicated, individual, information, initial, initialization
+initialize, input, install, installation, installed, installs, instance
+instances, instruction, instructional, instructions, interaction, interactive
+intercept, interest, internal, interrupt, into, invalid, invocation
+invocations, is, issue, item, items, itself, jam, join, jump, jumps, just, key
+keyboard, keyboards, keys, keyword, kilobyte, kind, kinds, know, known, label
+land, lands, language, languages, large, larger, last, late, later, layout
+lead, left, length, level, levels, library, license, life, light, like, limit
+limited, line, lines, link, links, list, listed, lists, load, loading, local
+locate, location, lock, locked, long, look, looks, loose, lower, main
+mainboard, make, makes, mapping, mark, marked, master, match, matching, matter
+maximum, may, mean, meaning, meanings, meant, media, medium, memory, menu
+message, messages, metadata, middle, minus, mirror, mirrored, missing, mode
+modified, modify, more, mostly, motherboard, mouse, move, movement, movements
+moves, multiple, must, name, names, navigate, near, nearby, nearly, necessary
+need, needs, neither, network, never, new, next, no, non, none, nor, normal
+not, note, notice, now, null, number, numbers, numerous, object, occur
+occurrence, of, off, offset, omit, ommited, on, once, one, only, open, opened
+opening, opens, operation, operations, optimal, option, optional, options, or
+order, original, other, otherwise, ouch, out, output, outputs, over, overall
+overflow, overly, overwrite, package, packages, page, pages, panel, panels
+parameter, parameters, part, partition, path, paths, pattern, pause, paused
+perform, performance, performed, permanent, permanently, physical, pick
+picture, pixel, place, placed, plane, play, player, please, plus, point
+pointer, points, popular, portion, position, possible, power, powers, prefer
+preferred, presence, preserve, press, pressure, prevent, prevented, prevents
+preview, previous, primary, print, printed, process, processor, program
+programmed, programs, progress, prompt, provide, provided, providing, public
+push, quality, question, quick, quit, quote, random, range, rate, rather, reach
+reaches, read, ready, really, reboot, recognize, recommend, record, red
+redirect, redirected, reduce, reference, regardless, register, relation
+release, releases, reload, remain, remains, removal, remove, removed, removes
+rename, replace, report, reports, representation, representative, request
+requests, require, required, requires, reserved, resident, resize, resizing
+resolution, resources, result, results, return, returns, reverse, right, rights
+root, rotate, row, rows, run, running, safe, same, save, saved, saves, say
+screen, screens, screenshot, search, searches, searching, second, seconds
+section, sector, sectors, see, select, selected, selection, send, sensitive
+sentence, separate, sequence, serial, server, service, set, sets, setting
+settings, several, shall, shared, shell, shells, short, shortcut, shorter
+should, show, shown, shows, shrink, side, sign, signal, simple, simply
+simultaneous, simultaneously, single, site, size, skip, slow, slower, small
+software, solve, some, someday, something, sometimes, sound, source, space
+special, specified, specifies, specify, speed, stack, standard, start, startup
+state, status, still, stop, storage, store, stores, straight, string, strings
+structure, sub, subdirectories, subdirectory, subject, submenu, subsequent
+subsequently, substitute, success, successful, successfully, successive, such
+support, supported, supporting, sure, surface, switch, switched, switches
+synopsis, syntax, system, systems, table, tables, target, task, tasks
+technical, temporary, term, terminate, terms, test, testing, testings, tetris
+text, than, thank, thanks, that, the, their, them, themselves, then, there
+these, they, thing, things, think, third, this, those, though, thousand, three
+through, time, timeout, times, title, to, together, too, topic, topics, total
+touch, toward, trace, track, translation, translations, translator, try, type
+types, typical, unable, unassigned, unbind, under, understand, unique, unit
+universal, unless, unmount, unstable, unsupported, until, up, update, upon
+upper, url, usage, use, used, user, users, using, utilities, utility, valid
+value, values, variable, variables, version, versions, vertical, vicinity
+video, view, viewed, viewer, views, visit, wait, waits, want, wants, warn
+warned, warning, warnings, was, way, ways, welcome, well, were, what, when
+where, whereas, whether, which, while, whitespace, who, wide, wildcard
+wildcards, will, window, wish, with, within, without, word, words, work
+working, workplace, works, would, wrap, wrapping, write, writing, written
 wrong, year, years, yes, yet, you, your, zero, zone
 
 [de_DE]
@@ -258,116 +260,129 @@ zögern, Öffne, ändern, änderungen, öffentlich, öffnen, öffnet, über
 
 ad, adlandır, adlar, adres, adresler, ah, aksi, al, alan, alanlar, algoritma
 algoritmalar, algıla, algılandı, algılar, alt, alternatif, altında
-alıntı, alıyor, alıştırma, amaçlanan, ana, anahtar, anahtarlar, anakart
-ancak, anla, anlama, anlamlar, ara, arabellek, aralık, arama, aramalar
-arasında, ardışık, arka, artı, artır, artış, arıyor, asla, at, atama
-atamalar, atandı, atanmamış, atanmış, atla, atlamalar, atlandı, avantaj
-ayar, ayarla, ayarlandı, ayarlanmış, ayarlar, aygıt, aygıtlar, ayna
-aynalandı, aynı, ayrı, ayrıca, ayrıntı, ayrıntılı, ayıklama, ayır
-ayırıcı, azalt, aç, açar, açık, açıkla, açıklama, açıldı
-açılış, ağ, aşar, aşağı, aşağıda, aşağıya, aşmak, aşırı, bak
-bakar, bakmaksızın, bakılmaksızın, bas, basit, basitçe, basınç, bayt
-baytlar, bazen, bazı, bağlantı, bağlantılar, bağlantıyı, bağı
-bağımsız, başarı, başarılı, başarısız, başarısızlık, başka
-başla, başlangıç, başlat, başlatma, başlık, bekle, belge, belgeler
-belirt, belirtildi, belirtilen, bellek, benzersiz, besleme, bil, bile, bilgi
-bilgisayar, bilgisayarlar, bilinen, bilmek, bin, bir, birden, bireysel, birim
-birincil, birkaç, birleşik, birlikte, bitir, bitiş, biçim, biçimler, blok
-bloklar, bomba, bombalar, boyut, boyutlandırma, boyutu, bozuk, boş, boşalt
-boşaltma, boşluk, bu, bul, bulundu, bulur, bunlar, bölge, bölüm, bölüme
+alıntı, alıyor, alıştırma, amaçlanan, ana, anahtar, anahtarlar
+anahtarı, anahtarını, anakart, ancak, anla, anlama, anlamlar, ara, arabellek
+aralık, arama, aramalar, arasında, arasındadır, ardlarından, ardışık
+arka, artı, artır, artış, arıyor, asla, at, atama, atamalar, atandı
+atanmamış, atanmış, atla, atlamalar, atlandı, avantaj, ayar, ayarla
+ayarlandı, ayarlanmış, ayarlanır, ayarlar, aygıt, aygıtlar, ayna
+aynalandı, aynı, ayrı, ayrıca, ayrılmış, ayrıntı, ayrıntılı
+ayıklama, ayır, ayırıcı, azalt, aç, açar, açık, açıkla, açıklama
+açıldı, açılış, ağ, aşar, aşağı, aşağıda, aşağıya, aşmak
+aşırı, bak, bakar, bakmaksızın, bakılmaksızın, bas, basit, basitçe
+basılmış, basım, basımını, basınç, bayt, baytlar, bazen, bazı
+bağlantı, bağlantılar, bağlantıyı, bağlıdır, bağı, bağımsız
+başarı, başarılı, başarısız, başarısızlık, başka, başla
+başlangıç, başlat, başlatma, başlık, bekle, bekleme, beklenileceğini
+bekler, bekletir, belge, belgeler, belirt, belirteceği, belirtildi, belirtilen
+belirtilirse, belirtilmediyse, belirtir, belirtmezseniz, bellek, benzersiz
+besleme, bil, bile, bilgi, bilgisayar, bilgisayarlar, bilinen, bilmek, bin, bip
+bir, birden, bireysel, birim, birincil, birkaç, birleşik, birlikte, bitir
+bitiş, biçim, biçimde, biçimler, blok, bloklar, bomba, bombalar, boyut
+boyutlandırma, boyutu, bozuk, boş, boşalt, boşaltma, boşluk, bu, bul
+bulunacak, bulundu, bulur, bunlar, bÜyÜk, bölge, bölüm, bölüme
 bölüntü, böyle, büyük, bırak, cihaz, civar, cümle, da, daha, dahası
 dahil, dahili, daralt, davranır, davranış, dağıtılmış, de, den, dene
-denetle, denetlendi, deneyim, deneyimli, denkleştirme, depolama, derinlik
-derle, derlendi, desen, destek, desteklendi, desteklenmeyen, destekleyici
-devam, değer, değerler, değil, değişiklikler, değişiyor, değişken
-değişkenler, değiştir, değiştirildi, değiştirilmiş, dikey, dil, dilek
-diller, diyagram, dize, dizeler, dizi, dizimi, dizin, dizinler, diğer, dokunma
-dokunuş, doldur, dolu, dosya, dosyalar, doğru, dur, duraklat, duraklatıldı
-durdur, durum, durumlar, dön, döndür, döner, dönüşmek, dönüştür
-dönüştürüldü, dönüştürülmüş, dönüşüm, dönüşümler, düz
-düzelt, düzeltmeler, düzen, düzenle, düzenleme, düzenlenebilir
-düzenleyici, düzlem, düğme, düğmeler, düşer, düşme, düşmek
-düşün, düşüyor, dış, dışarı, ecek, ecekti, eden, edildi, edilen, ek
-ekle, ekleme, eklendi, ekran, ekranlar, eksi, eksik, emin, en, erişiliyor
-erişim, erken, et, etiket, etki, etkiler, etkileşim, etkileşimli, etkili
-etkinlik, etme, etrafında, evet, evrensel, eylem, eş, eşit, eşittir
-eşleme, eşleşen, eşleşme, eşzamanlı, fare, fark, farklar, farklı, fazla
-fikir, filtre, filtreler, fiziksel, format, gecikme, geldiniz, gelecek, gelir
-geliştirme, gelmek, genel, genellikle, geniş, genişletilmiş, gerekli
-gerektir, gerektirir, geri, geriye, gerçek, gerçekleşir, gerçekleşmek
-gerçekleştir, gerçekten, gevşek, gezin, geç, geçen, geçerli, geçersiz
-geçici, geçmiş, gibi, girdi, girer, giriş, git, gizli, grafik, grup
-gruplar, gönder, gör, görev, görevler, görüldü, görüntü, görüntüle
-görüntüleme, görüntülendi, görüntüler, görüntüleyici, görüntüsü
+denetle, denetlendi, deneyim, deneyimli, dengeleyecek, denkleştirme, depolama
+derinlik, derle, derlendi, desen, destek, desteklendi, desteklenmeyen
+destekleyici, devam, deĞer, değer, değerler, değil, değişiklikler
+değişiyor, değişken, değişkenler, değiştir, değiştirildi
+değiştirilmiş, dikey, dil, dilek, diller, diyagram, dize, dizeler, dizesi
+dizi, dizimi, dizin, dizinler, diğer, dokunma, dokunuş, doldur, dolu, dosya
+dosyalar, doğru, dur, duraklat, duraklatıldı, durdur, durum, durumlar
+duyarlı, dön, döndür, döner, dönüşmek, dönüştür, dönüştürüldü
+dönüştürülmüş, dönüşüm, dönüşümler, düz, düzelt, düzeltmeler
+düzen, düzenle, düzenleme, düzenlenebilir, düzenleyici, düzeyi, düzlem
+düğme, düğmeler, düğmeleri, düğmenin, düğmeye, düşer, düşme
+düşmek, düşün, düşüyor, dış, dışarı, ecek, ecekti, edecektir, eden
+edildi, edilebilir, edilen, edilmesinden, eh, ek, ekle, ekleme, eklendi, ekran
+ekranlar, eksi, eksik, emin, en, erişiliyor, erişim, erken, errorlevel, et
+etiket, etki, etkiler, etkileşim, etkileşimli, etkili, etkinlik, etme
+etrafında, evet, evrensel, eylem, eğer, eş, eşit, eşittir, eşleme
+eşleşen, eşleşme, eşzamanlı, fare, fark, farklar, farklı, fazla, fikir
+filtre, filtreler, fiziksel, format, gecikme, geldiniz, gelecek, gelecektir
+gelir, geliştirme, gelmek, gelİŞtİrİcİ, genel, genellikle, geniş
+genişletilmiş, gerekli, gerekmektedir, gerektir, gerektirir, geri, geriye
+gerçek, gerçekleşir, gerçekleşmek, gerçekleştir, gerçekten, gerİ
+gevşek, gezin, geç, geçen, geçerli, geçersiz, geçici, geçmiş, gibi
+girdi, girer, giriş, git, gizli, grafik, grup, gruplar, gÖnderİlen, gönder
+gör, görev, görevler, görüldü, görüntü, görüntüle, görüntüleme
+görüntülendi, görüntülendiklerinde, görüntülenecek
+görüntülenecektir, görüntüler, görüntüleyici, görüntüsü
 görünüm, görünümlü, göster, gösterilen, gösterir, gösteriyor, gövde
 gün, güncel, güncelle, güvenli, güç, güçler, hakkı, hakkında, hala
-halde, hangi, hareket, hareketler, harici, hata, hatalar, hatalı, hatta
+halde, hangi, hareket, hareketler, harf, harici, hata, hatalar, hatalı, hatta
 hayır, hazır, hedef, hemen, henüz, her, herhangi, hesapla, hesaplama, hizmet
-hiçbiri, hoş, hız, hızlı, idi, idiler, ihtiyaç, ihtiyaçlar, iken, ikili
-ile, ileri, ilerleme, ilerlemeler, ileti, iletiler, iletişim, ilgi, ilişki
-ilişkilendir, ilişkili, ilk, ilklendir, ilklendirme, imleç, ince, isim, iste
-istek, istekler, istem, ister, istiyor, it, iyi, iyileştirme, iz, izin, izler
-izleyici, içerir, için, içinde, içine, iş, işaret, işaretli, işaretçi
-işle, işlem, işlemci, işlemler, işlev, işlevler, joker, kabuk, kabuklar
-kabul, kadar, kal, kaldır, kaldırma, kaldırıldı, kaldırır, kalite
-kalıcı, kalır, kamu, kapalı, kapanış, kapasite, kapat, kapatma, kara
-karakter, karakteri, karakterler, kararsız, kart, kartlar, karşı
-karşılaştır, karşılaştırma, karşılaştırır, kastedilen, katıl
-kaydeder, kaydedildi, kaydet, kaydol, kaydırma, kaynak, kaynaklar, kayıt
-kaçış, kelime, kelimeler, kenar, kenarlık, kendileri, kendiliğinden
-kendisi, kes, kesin, kesinlikle, kesme, keyfi, kez, kilitle, kilitli, kilobayt
-kim, kimlik, klavye, klavyeler, kod, kodlar, kolayca, komut, komutlar, kontrol
-konu, konular, konum, konumlandır, koordinat, kopya, kopyala, kopyalama, koru
-koy, koyma, koşul, kullan, kullanarak, kullanıcı, kullanıcılar
-kullanıldı, kullanım, kur, kurar, kurulu, kurulum, kurşun, kutu, kutusu
-kök, kötü, küme, kümeler, kütüphane, küçük, küçült, kılavuz
-kırmızı, kısa, kısaltma, kısaltmalar, kısayol, liderlik, lisans, liste
-listelendi, listeler, lütfen, madde, maksimum, malı, masaüstü, medikçe
-medya, meli, menü, merkezi, mesafe, mesaj, meta, metin, mevcut, mod, mutlak
-müdahale, nasıl, ne, neden, nerede, neredeyse, nesil, nesne, nokta, noktalar
-normal, not, ofset, oku, olabilir, olacak, olarak, olası, olay, oldukça, olma
-olmadığı, olmak, olmayan, olup, olur, oluştur, oluşturma, oluşturuldu
-oluşum, oluşur, onay, ondalık, onlar, onları, onların, orada, oran
-orijinal, orta, ortak, ortalanmış, ortam, otomatik, otomatikleştirilmiş
-oyna, oynanış, oynat, oysa, oyun, oyuncu, oyunlar, paket, paketler, panel
-paneller, pano, parametre, parametreler, parça, paylaşılan, pencere
-performans, piksel, plan, popüler, porsiyon, posta, program, programlanmış
-programlar, rapor, raporlar, rastgele, rağmen, referans, renk, renkler, renkli
-resim, sabit, sadece, sahip, sakla, saklar, saniye, sarma, satır, satırlar
-say, sayfa, sayfalar, sayı, sayılar, sayım, sayısız, sağ, sağla
-sağlandı, sağlayarak, sebep, sektör, sektörler, sen, senin, seri, servis
-ses, setler, seviye, seviyeler, seç, seçenek, seçenekler, seçildi, seçim
-sil, silindi, siliyor, silme, sinyal, sistem, site, siz, sol, son, sonlandır
-sonlar, sonra, sonraki, sonuna, sonunda, sonuç, sonuçlar, soru, sorun
-standart, sunucu, sök, söyle, söylüyor, söz, sözdizimi, sürücü
-sürücüler, sürükle, sürüm, sürümler, sütun, sütunlar, sıfır
-sıkışma, sıkıştırılmış, sınır, sınırla, sınırlayıcı
-sınırlı, sıra, sız, tablo, tablolar, takdirde, takip, talimat, talimatlar
-tam, tamamen, tamamla, tamamlandı, tamponlar, tanı, tanımla, tanımlandı
-tanımlanmış, tanımlar, tarih, tasarım, taşma, taşı, taşır, tek
-teknik, tekrar, telif, temel, temizle, temizler, temsil, tercih, tereddüt
-terim, terimler, ters, test, testler, teşekkürler, tipi, tipik, tipleri
-toplam, topraklar, tümü, tür, türler, tıkla, tıklandı, ulaş, ulaşır
-usta, uyar, uyarı, uyarılar, uyarıldı, uygula, uygulama, uygulamalar
-uygulandı, uygular, uygun, uzantı, uzantılar, uzun, uzunluk, varlık, varsay
-varsaymak, varsayılan, varsayılanlar, vasıtasıyla, vazgeç, ve, ver, veri
-verildi, verilen, verimli, vermek, veya, video, vurgulanan, vurgulandı, ya
-yakın, yakındaki, yakınlık, yan, yanlış, yap, yapabilen, yapamaz, yapar
-yapay, yapı, yapılandırma, yapıldı, yardım, yardımcı, yatay, yavaş
-yaygın, yaz, yazdır, yazdırıldı, yazma, yazı, yazılmış, yazılı
-yazılım, yaşam, yeni, yeniden, yer, yerel, yeri, yerine, yerleşik
-yerleştirildi, yetenek, yetenekler, yoksa, yoksay, yoksayıldı, yol, yollar
-yorum, yukarı, yön, yönlendir, yönlendirildi, yükle, yükleme, yüklü
-yüksek, yürüt, yürütme, yürütüldü, yüzey, yıl, yıllar, yığın
-zaman, zamanlar, zamanlı, zaten, zincir, zincirler, ziyaret, zor, zorla
-zorluk, zorunlu, çalış, çalıştır, çalışıyor, çarpma, çağrı
-çağrılar, çağırma, çağırmalar, çerçeve, çevir, çeviri, çeviriler
-çevirmen, çok, çoklu, çoğunlukla, çubuk, çöz, çözünürlük, çünkü
-çık, çıktı, çıktılar, çıkış, öge, ögeler, ölüm, ön, önce
-önceki, öner, önizleme, önle, önlendi, önler, önyükleme, örnek
+hiçbiri, hoş, hâlâ, hız, hızlı, idi, idiler, ihtiyaç, ihtiyaçlar, iken
+iki, ikili, ile, ileri, ilerleme, ilerlemeler, ileti, iletiler, iletişim, ilgi
+ilişki, ilişkilendir, ilişkili, ilk, ilklendir, ilklendirme, imi, imleç
+ince, isim, iste, istek, istekler, istem, istemden, ister, isteğe, istiyor, it
+iyi, iyileştirme, iz, izin, izler, izleyici, içerir, için, içinde, içine
+iş, işaret, işaretli, işaretçi, işle, işlem, işlemci, işlemler, işlev
+işlevler, joker, kabuk, kabuklar, kabul, kadar, kal, kaldır, kaldırma
+kaldırıldı, kaldırır, kalite, kalıcı, kalır, kamu, kapalı, kapanış
+kapasite, kapat, kapatma, kara, karakter, karakteri, karakterin, karakterler
+kararsız, kart, kartlar, karşı, karşılaştır, karşılaştırma
+karşılaştırır, kastedilen, katıl, kaydeder, kaydedildi, kaydet, kaydol
+kaydırma, kaynak, kaynaklar, kayıt, kaç, kaçış, kelime, kelimeler, kenar
+kenarlık, kendileri, kendiliğinden, kendisi, kes, kesin, kesinlikle, kesme
+keyfi, kez, kilitle, kilitli, kilobayt, kim, kimlik, klavye, klavyeler, kod
+kodlar, kolayca, komut, komutlar, kontrol, konu, konular, konum, konumlandır
+koordinat, kopya, kopyala, kopyalama, koru, koy, koyma, koşul, kullan
+kullanarak, kullanıcı, kullanıcılar, kullanıcının, kullanıldı
+kullanım, kullanır, kur, kurar, kurulu, kurulum, kurşun, kutu, kutusu, kök
+kötü, köşeli, küme, kümeler, kümesinde, kütüphane, küçük, küçült
+kılavuz, kırmızı, kısa, kısaltma, kısaltmalar, kısayol, liderlik
+lisans, liste, listeden, listelendi, listeler, lütfen, madde, maksimum, malı
+masaüstü, medikçe, medya, meli, menü, merkezi, mesafe, mesaj, meta, metin
+mevcut, mod, mutlak, müdahale, nasıl, ne, neden, nerede, neredeyse, nesil
+nesne, nokta, noktalar, normal, not, ofset, ofsetleyecek, oku, olabilir, olacak
+olacaktır, olarak, olası, olay, oldukça, olma, olmadığı, olmak, olması
+olmayacaktır, olmayan, olup, olur, oluştur, oluşturma, oluşturuldu, oluşum
+oluşur, onay, ondalık, onlar, onları, onların, orada, oran, orijinal, orta
+ortak, ortalanmış, ortam, otomatik, otomatikleştirilmiş, oyna, oynanış
+oynat, oysa, oyun, oyuncu, oyunlar, paket, paketler, panel, paneller, pano
+parametre, parametreler, parantez, parça, paylaşılan, pencere, performans
+piksel, plan, popüler, porsiyon, posta, program, programlanmış, programlar
+rapor, raporlar, rastgele, rağmen, referans, renk, renkler, renkli, resim
+sabit, sadece, sahip, sakla, saklar, saniye, sarma, satır, satırlar, say
+sayfa, sayfalar, sayı, sayılar, sayılmasından, sayım, sayısız, sağ
+sağla, sağlandı, sağlayarak, sebep, sektör, sektörler, sen, senin, seri
+servis, ses, setler, seviye, seviyeler, seÇenekler, seç, seçenek
+seçenekler, seçildi, seçim, seçimini, seçimler, sil, silindi, siliyor
+silme, sinyal, sistem, site, siz, sol, son, sonlandır, sonlar, sonra, sonraki
+sonuna, sonunda, sonuç, sonuçlar, soru, sorun, standart, sunucu, sök, söyle
+söylüyor, söz, sözdizimi, süresi, sürücü, sürücüler, sürükle
+sürüm, sürümler, sütun, sütunlar, sıfır, sıkışma
+sıkıştırılmış, sınır, sınırla, sınırlayıcı, sınırlı, sıra
+sız, tablo, tablolar, takdirde, takip, talimat, talimatlar, tam, tamamen
+tamamla, tamamlandı, tamponlar, tanı, tanımla, tanımlandı, tanımlanmış
+tanımlar, tarafından, tarih, tasarım, taşma, taşı, taşır, tek, teknik
+tekrar, telif, temel, temizle, temizler, temsil, tercih, tereddüt, terim
+terimler, ters, test, testler, teşekkürler, tipi, tipik, tipleri, toplam
+topraklar, tümü, tür, türler, tıkla, tıklandı, ulaş, ulaşır, un, usta
+uyar, uyarı, uyarılar, uyarıldı, uygula, uygulama, uygulamalar, uygulandı
+uygular, uygun, uzantı, uzantılar, uzun, uzunluk, varlık, varsay, varsaymak
+varsayılan, varsayılanlar, vasıtasıyla, vazgeç, ve, ver, veri, verildi
+verilecek, verilen, verilirse, verimli, vermek, veya, video, virgüllerle
+vurgulanan, vurgulandı, ya, yakın, yakındaki, yakınlık, yan, yanlış, yap
+yapabilen, yapamaz, yapar, yapay, yapmasını, yapı, yapılandırma, yapıldı
+yardım, yardımcı, yatay, yavaş, yaygın, yaz, yazdır, yazdırıldı, yazma
+yazı, yazılmış, yazılı, yazılım, yaşam, yeni, yeniden, yer, yerel
+yeri, yerine, yerleşik, yerleştirildi, yetenek, yetenekler, yine, yoksa
+yoksay, yoksayıldı, yol, yollar, yorum, yukarı, yön, yönlendir
+yönlendirildi, yükle, yükleme, yüklü, yüksek, yürüt, yürütme
+yürütüldü, yüzey, yıl, yıllar, yığın, zaman, zamanlar, zamanlı
+zaten, zincir, zincirler, ziyaret, zor, zorla, zorluk, zorunlu, Özet, Üst
+çalar, çalış, çalıştır, çalışıyor, çarpma, çağrı, çağrılar
+çağırma, çağırmalar, çerçeve, çevir, çeviri, çeviriler, çevirmen
+çok, çoklu, çoğunlukla, çubuk, çöz, çözünürlük, çünkü, çık
+çıktı, çıktılar, çıkış, öge, ögeler, ölüm, ön, önce, önceki
+öner, önizleme, önle, önlendi, önler, öntanımlı, önyükleme, örnek
 örnekler, özel, öznitelik, öznitelikler, öğe, öğretici, ücretsiz
-ülke, üst, üstünde, üzerinde, üzerine, üç, üçüncü, ın, ışık
-şekilde, şey, şeyler, şimdi, şu, şunlar
+ülke, üst, üste, üstünde, üzerinde, üzerine, üç, üçüncü, İstemde
+İstemi, ın, ışık, şekilde, şey, şeyler, şimdi, şu, şunlar
+şöyledir
 
 [fr_FR]
 
@@ -841,25 +856,25 @@ zóna, zůstat, zůstává, úkol, úkoly, úložiště, únik, úplný
 [da_DK]
 
 absolut, accepteret, adgang, adresse, adresser, advar, advaret, advarsel
-advarsler, af, afbrydelse, afgrænser, afkortet, afkortning, afkrydsningsfelt
+advarsler, afbrydelse, afgrænser, afkortet, afkortning, afkrydsningsfelt
 afmonter, afmontér, afslut, afspil, afstand, aktivitet, aldrig, algoritme
 algoritmer, alle, allerede, almindeligt, almindeligvis, alt, alternativ, altid
 anbefal, anden, angiv, angivet, anmodning, anmodninger, antag, antaget, anvend
 anvender, anvendt, applikation, applikationer, arbejde, arbejder, arbejdsplads
 aspekt, attribut, attributter, automatiseret, automatisk, av, baggrund
-baglæns, bar, bare, basis, batch, beboer, bedre, begivenhed, begræns
+baglæns, bare, basis, batch, beboer, bedre, begivenhed, begræns
 begrænset, begynd, begyndelse, behov, behøver, bemærk, bemærkning, beregn
 beregning, berøring, besked, beskeder, beskrivelse, besøg, betingelse, betyde
 betyder, betydning, betydninger, bevar, bevægelse, bevægelser, bibliotek
-billede, billeder, binding, binær, bit, bjælke, blandt, blive, blok
+billede, billeder, binding, binær, bjælke, blandt, blive, blok
 blokering, blokke, boks, bombe, bomber, bred, brug, bruger, brugere, brugt
-bump, bund, bunder, bundkort, burde, bytes, central, centreret, citat, computer
+ bund, bunder, bundkort, burde, bytes, central, centreret, citat, computer
 computere, dag, data, dato, de, decimal, definer, definerer, defineret, del
 delt, deltag, dem, den, der, derefter, deres, design, destination, det, detalje
 detaljeret, detekter, detekterer, detekteret, dette, diagram, dialog, dimension
 din, disk, disse, distribueret, dog, dokument, dokumenter, drev, driver
 drivere, du, dybde, dårlig, død, effekt, effekter, effektiv, efter
-efterfølgende, ekstern, element, elementer, eller, ellers, emne, emner, en
+efterfølgende, ekstern, elementer, eller, ellers, emne, emner, en
 end, endda, endnu, enhed, enheder, enhver, enkel, enkelt, enten, erfaren
 erfaring, erstat, etiket, evne, evner, faktisk, fald, falde, faldende, falder
 farve, farver, farvet, fast, fejl, fejlagtig, fejle, fejlfind, fejlfinding
@@ -1948,128 +1963,144 @@ votum, vult, zona
 
 [pl_PL]
 
-absolutny, adres, adresy, akcja, aktualizuj, aktualny, aktywność, albo
-algorytm, algorytmy, alternatywa, ani, aplikacja, aplikacje, aspekt, atrybut
-atrybuty, au, automatycznie, automatyczny, autorskie, awaria, aż, bajty, bez
-bezpieczny, biblioteka, bieżący, binarny, blisko, bliskość, blok, bloki
-bomba, bomby, brakujący, bufor, bufory, byli, być, był, byłby, byłoby
-będzie, będąc, będący, błąd, błędny, błędy, całkowicie, całkowity
-cel, centralny, chce, chcieć, chociaż, chyba, ciało, ciąg, ciągi
-ciśnienie, co, cokolwiek, coś, cytat, czas, czasami, czasy, czcionka
-czcionki, czekaj, czerwony, czy, czysty, czyszczenie, czytaj, czyści, część
-dalej, dane, darmowy, data, debugowanie, definiuj, definiuje, diagram, dialog
-dla, do, dobrze, docelowe, dodaj, dodano, dodatkowy, dodawanie, dokument
+absolutny, aby, adres, adresy, akcja, aktualizuj, aktualny, aktywność, albo
+ale, algorytm, algorytmy, alternatywa, ani, aplikacja, aplikacje, aspekt
+atrybut, atrybuty, au, automatycznie, automatyczny, autorskie, autorzy, awaria
+aż, bajty, bez, bezpieczny, biblioteka, bieżący, bieżących, binarny
+blisko, bliskość, blok, bloki, bomba, bomby, brak, brakujący, bufor, bufory
+byli, być, był, byłby, byłoby, będzie, będą, będąc, będący, bŁĘdy
+błąd, błędny, błędy, całkowicie, całkowity, cel, centralny, chce
+chcieć, chociaż, chyba, ciało, ciąg, ciągi, ciśnienie, co, cokolwiek
+coś, cytat, czas, czasami, czasy, czcionka, czcionki, czekaj, czerwony, czy
+czysty, czyszczenie, czytaj, czyści, często, części, część, dalej, dane
+darmowy, data, debugowanie, definiuj, definiuje, diagram, dialog, dla, do
+dobrze, docelowe, docelowy, dodaj, dodano, dodatkowy, dodawanie, dokument
 dokumenty, dokładny, domyślne, domyślny, dopasowanie, dopasuj, dopóki
 dostarcz, dostarczony, dostosowany, dostęp, dostępny, dotyczy, dotyk, dowolny
 dozwolone, dozwolony, dołącz, doświadczenie, doświadczony, drobny, droga
-drogi, drukuj, duży, dysk, dyski, działa, działający, działanie, dzieje
-dziesiętny, dziękuję, dół, długi, długość, edycja, edytowalny, edytuj
-efekt, efekty, efektywny, ekran, ekranu, ekrany, element, elementy, etykieta
-faktyczny, filtr, filtry, fizyczny, format, formaty, funkcja, funkcje, gdy
-gdzie, generacja, gotowe, gotowy, gra, gracz, grafika, graj, granica, grupa
-grupy, gry, górny, górę, główna, głównie, główny, głębokość
-historia, ich, identyfikacja, identyfikuj, idź, ignoruj, inaczej, indeks
-indywidualny, informacja, inicjalizacja, inicjalizuj, inny, instalacja
+drogi, drukuj, duży, dwukropkami, dwukropki, dysk, dyski, działa
+działający, działanie, dzieje, dziesiętny, dziękuję, dół, długi
+długość, edycja, edytowalny, edytuj, efekt, efekty, efektywny, ekran, ekranu
+ekrany, element, elementy, etykieta, faktyczny, filtr, filtry, fizyczny, format
+formaty, formie, funkcja, funkcje, gdy, gdzie, generacja, gotowe, gotowy, gra
+gracz, grafika, graj, granica, grupa, grupy, gry, górny, górę, główna
+głównie, główny, głębokość, historia, ich, identyfikacja, identyfikuj
+idź, ignorowana, ignoruj, inaczej, indeks, indywidualny, informacja
+inicjalizacja, inicjalizuj, inne, innego, inny, instalacja, instalację
 instaluje, instancja, instancje, instrukcja, instrukcje, interakcja
-interaktywny, interes, jak, jakikolwiek, jakość, jeden, jednak, jednoczesny
-jednocześnie, jednostka, jedyny, jeszcze, już, język, języki, karta, karty
-katalog, katalogi, każdy, kiedy, kiedyś, kilka, kilobajt, klaster, klawiatura
-klawiatury, kliknij, kliknięto, klucz, klucze, kluczowe, kod, kody
-kolejność, kolejny, kolor, kolorowy, kolory, kolumna, kolumny, komentarz
-kompiluj, kompletny, komputer, komputery, konfiguracja, koniec, kontrola
-kontynuowano, kontynuuj, konwersja, konwersje, konwertuj, kopia, kopiowanie
-kopiuj, korzeń, końce, końcu, kończący, kraj, kraje, krawędź, krótki
-krótszy, kto, który, kursor, lata, lepiej, lewo, lewy, licencja, licz, liczny
-linia, linie, link, linki, lista, listy, lokalizacja, lokalny, losowy, lub
-luka, lustro, lustrzany, luźny, ma, mail, maksimum, mapowanie, materia, mały
-media, metadane, miejsce, miniony, minus, mistrz, między, moc, moce, modyfikuj
-monit, może, możliwy, można, musi, mysz, myśl, mógłby, na, nacisk
-naciśnij, nad, nadmiernie, nadpisz, nagranie, nagłówek, najszybszy, napisany
-napraw, naprawdę, naprzód, narzędzia, narzędzie, następny, następuje
-natychmiastowy, nawet, nawiguj, nazwa, nazwy, nazwę, nic, nie, niektóre
-niektórzy, nieobsługiwany, niepowodzenie, nieprawidłowy, nieprzypisany
-niestabilny, niezależnie, niezależny, niezbędny, niezdolny, nigdy, niż
-niższy, normalny, notatka, nowy, nośnik, numer, numery, obecność, obiekt
-oblicz, obliczenia, obraz, obrazy, obróć, obszar, obszary, obsłuż, od
-oddzielny, odinstaluj, odległość, odmontuj, odniesienie, odrzuć, odwiedź
-odwiąż, odwrotny, odwróć, odłącz, odśwież, ogranicz, ogranicznik
-ograniczony, ogólnie, ogólny, okno, określ, określony, oni, opcja, opcje
-operacja, operacje, opis, oprogramowanie, optymalny, opóźnienie, oryginalny
-osiągnij, ostatni, ostrzeż, ostrzeżenia, ostrzeżenie, ostrzeżony, otoczka
-otwarcie, otwarty, otwiera, otwieranie, otwórz, oznaczać, oznaczony, pakiet
-pakiety, pamięć, panel, panele, parametr, parametry, partia, partycja, pasek
-pasujący, patrz, patrzy, pauza, pchaj, pewny, pełny, pierwszy, piksel
-pionowy, pisz, pisze, plan, plik, pliki, plus, po, pobieranie, pobierz
-pobliżu, początek, początkowy, pod, podany, podczas, podgląd, podkatalog
-podkatalogi, podmenu, podstawa, podstawowy, podążaj, podświetlony
-pojedynczy, pojemność, pokazany, pokazać, pokazuje, pokaż, pole, polecenia
-polecenie, poleć, pominięty, pominąć, pomiń, pomoc, pomysł, ponieważ
+interaktywny, interes, istniejące, jak, jakikolwiek, jako, jakość, jeden
+jednak, jednoczesny, jednocześnie, jednostka, jedyny, jest, jeszcze, jeśli
+już, język, języki, karta, karty, katalog, katalogi, każdy, kiedy, kiedyś
+kilka, kilobajt, klaster, klawiatura, klawiatury, kliknij, kliknięto, klucz
+klucze, kluczowe, kod, kody, kolejne, kolejność, kolejny, kolor, kolorowy
+kolory, kolumna, kolumny, komendach, komentarz, kompatybilność, kompiluj
+kompletny, komputer, komputery, konfiguracja, koniec, kontrola, kontynuowano
+kontynuuj, konwersja, konwersje, konwertuj, kopia, kopiowanie, kopiuj, korzeń
+końce, końcu, kończący, kraj, kraje, krawędź, krótki, krótszy, kto
+który, kursor, lata, lepiej, lewo, lewy, licencja, licz, liczny, linia, linie
+link, linki, lista, listy, litera, literami, litery, literę, lokalizacja
+lokalny, losowy, lub, luka, lustro, lustrzany, luźny, ma, mail, maksimum
+mapowanie, mapuje, materia, mały, media, metadane, miejsce, miniony, minus
+mistrz, między, moc, moce, modyfikuj, monit, może, możliwe, możliwy, można
+musi, mysz, myśl, mógłby, na, nacisk, naciśnij, nad, nadal, nadmiernie
+nadpisz, nagranie, nagłówek, najszybszy, należy, napisany, napraw, naprawdę
+naprzód, napęd, napędu, napędów, narzędzia, narzędzie, następny
+następuje, natomiast, natychmiastowy, nawet, nawiguj, nazwa, nazwy, nazwę
+nic, nie, niedozwolona, niej, niektóre, niektórzy, nieobsługiwany
+niepowodzenie, nieprawidłowy, nieprzypisany, niestabilny, niezależnie
+niezależny, niezbędny, niezdolny, nigdy, niż, niższy, normalny, notatka
+nowy, nośnik, np, numer, numery, obecność, obejmuje, obiekt, oblicz
+obliczenia, obraz, obrazy, obróć, obszar, obszaru, obszary, obsłuż, od
+oddzielny, odinstalowanie, odinstalowuje, odinstaluj, odległość, odmontuj
+odniesienie, odrzuć, odróżnia, odwiedź, odwiąż, odwrotny, odwróć
+odłącz, odśwież, ogranicz, ogranicznik, ograniczony, ogólnie, ogólny
+okno, określ, określony, ona, oni, opcja, opcje, opcji, opcjonalne, opcją
+opcję, operacja, operacje, opis, oprogramowanie, optymalny, opóźnienie
+oryginalny, oryginalnym, osiągnij, ostatni, ostrzeż, ostrzeżenia
+ostrzeżenie, ostrzeżony, otoczka, otwarcie, otwarty, otwiera, otwieranie
+otwórz, oznaczać, oznaczony, pakiet, pakiety, pamięci, pamięć, panel
+panele, parametr, parametry, partia, partycja, pasek, pasujący, patrz, patrzy
+pauza, pchaj, pewny, pełny, pierwszy, piksel, pionowy, pisz, pisze, plan, plik
+pliki, plus, po, pobieranie, pobierz, pobliżu, początek, początkowy, pod
+podano, podany, podczas, podgląd, podkatalog, podkatalogi, podmenu, podstawa
+podstawowy, podążaj, podświetlony, pojawi, pojedynczy, pojemność, pokazany
+pokazać, pokazuje, pokaż, pole, polecenia, poleceniami, polecenie, poleceń
+poleć, pominięty, pominąć, pomiń, pomoc, pomocy, pomysł, ponieważ
 poniżej, ponownie, poprawki, poprawne, poprzedni, popularny, porcja, porównaj
-porównanie, porównuje, postęp, potrzeba, potrzeby, powiedz, powierzchnia
-powinien, powodzeniem, powszechnie, powłoka, poziom, poziomy, pozostaje
-pozostań, pozwól, pozycja, połączenie, połączony, praca, pracujący
-pracy, prawa, prawie, prawo, prawy, preferowany, preferuj, problem, proces
-procesor, program, programy, projekt, prostu, prosty, proszę, prowadzić
-prowadź, prośba, prośby, przechowywanie, przechwyć, przeciw, przeciwko
-przeciwnym, przed, przedstawiciel, przeglądarka, przekierowany, przekieruj
-przekroczyć, przepełnienie, przerwa, przerwanie, przesunięcie, przesuwa
-przesuń, przeważnie, przewodnik, przez, przeładuj, przełącz, przełącznik
-przełączniki, przełączony, przycisk, przyciski, przyczyna, przypadek
-przypisanie, przypisano, przypisany, przyrost, przyszłość, prędkość
-publiczny, pudełko, pulpit, punkt, punkty, pusty, pytanie, później, późno
+porównanie, porównuje, postęp, potrzeba, potrzeby, powiadomienia, powiedz
+powierzchnia, powinien, powodzeniem, powszechnie, powłoka, powłoki, poziom
+poziomy, pozostaje, pozostań, pozwól, pozycja, połączenie, połączony
+praca, pracujący, pracy, prawa, prawie, prawo, prawy, preferowany, preferuj
+problem, proces, procesor, program, programem, programy, projekt, prostu
+prosty, proszę, prowadzić, prowadź, prośba, prośby, przechowywanie
+przechwyć, przeciw, przeciwko, przeciwnym, przed, przedstawiciel
+przeglądarka, przekierowany, przekieruj, przekroczyć, przenosi
+przepełnienie, przerwa, przerwanie, przesunięcie, przesuwa, przesuń
+przeważnie, przewodnik, przez, przeładuj, przełącz, przełącznik
+przełączniki, przełączony, przy, przycisk, przyciski, przyczyna, przypadek
+przypisana, przypisane, przypisania, przypisanie, przypisano, przypisany
+przypisań, przypisuje, przyrost, przyszłość, prędkość, publiczny
+pudełko, pulpit, punkt, punkty, pusty, pytanie, później, późno
 płaszczyzna, płyta, raczej, ramka, raport, raporty, raz, razem, razie
 redukuj, referencja, regulacja, rekord, relacja, reprezentacja, rezydent
-rezydentny, robi, rodzaj, rodzaje, rok, rozdzielczość, rozgrywka, rozmiar
-rozpoznaj, rozproszony, rozruch, rozszerzenia, rozszerzenie, rozszerzony
-rozumieć, rozwiąż, rozwój, ruch, ruchy, rzecz, rzeczy, rzeczywisty, rząd
-rób, równe, równy, różnica, różnice, różny, sam, sami, schemat
-schowek, sekcja, sektor, sektory, sekunda, sekwencja, seryjny, sieć, się
-sięga, sięgnij, siła, skacz, skocz, skoki, skompilowany, skompresowany
-skonwertowany, skrót, skróty, składnia, spacja, spada, spadający, specjalny
-sprawdzone, sprawdź, spróbuj, stan, standardowy, start, status, stawka, stać
-stały, sterownik, sterowniki, stop, stos, strefa, strona, strony, stronę
-struktura, sukces, sygnał, symbol, system, systemy, szczegół, szczegółowy
-szeroki, sztuczny, szukaj, szukający, szybki, szybko, sąsiedztwo, słowa
-słowo, tabela, tabele, tak, taki, także, tam, tamte, tamten, tamto, te
-techniczny, temat, tematy, ten, teraz, termin, terminy, test, testowanie, testy
-to, trudność, trudny, trwały, tryb, trzeci, trzy, twardy, tworzenie, twój
-ty, tylko, tym, tymczasowy, typ, typowy, typy, tysiąc, tytuł, tyłu, tło
-tłumacz, tłumaczenia, tłumaczenie, ucieczka, udany, udostępniony, ukryty
-układ, ulepszenie, umieszczony, unikalny, uniwersalny, upadek, upuść
-upłynęło, url, uruchom, urządzenia, urządzenie, ustaw, ustawienia
-ustawienie, usunięcie, usunięto, usunięty, usuwa, usuwanie, usuń
-uszkodzony, usługa, utworzono, utworzony, utwórz, uwzględnij, uwzględniony
-użycie, użyj, użytkownicy, użytkownik, używając, używany, wahać
-wartości, wartość, warunek, ważny, wciąż, wcześnie, wejście, wersja
+rezydentna, rezydentnej, rezydentny, rezydentną, robi, roboczych, rodzaj
+rodzaje, rok, rozdzielczość, rozgrywka, rozmiar, rozpoznaj, rozproszony
+rozruch, rozszerzenia, rozszerzenie, rozszerzony, rozumieć, rozwiąż, rozwój
+ruch, ruchy, rzecz, rzeczy, rzeczywisty, rząd, rób, równe, również
+równości, równy, różnica, różnice, różny, sam, sami, schemat, schowek
+sekcja, sektor, sektory, sekunda, sekwencja, seryjny, shadow, sierpnia, sieć
+się, sięga, sięgnij, siła, skacz, skocz, skoki, skompilowany, skompresowany
+skonwertowany, skrócić, skrót, skróty, skŁadnia, składnia, spacja, spacje
+spada, spadający, specjalny, sprawdzające, sprawdzone, sprawdź, spróbuj
+stan, standardem, standardowy, start, status, stawka, stać, stały, sterownik
+sterowniki, stop, stos, strefa, strona, strony, stronę, struktura, sukces
+sygnał, symbol, system, systemu, systemy, szczegół, szczegółowy, szeroki
+sztuczny, szukaj, szukający, szybki, szybko, są, sąsiedztwo, słowa, słowo
+tabela, tabele, tabelę, tak, taki, takŻe, także, tam, tamte, tamten, tamto
+te, techniczny, temat, tematy, ten, teraz, termin, terminy, test, testowanie
+testy, to, trudność, trudny, trwały, tryb, trzeci, trzy, twardy, tworzenie
+twój, ty, tylko, tym, tymczasowy, typ, typowy, typowym, typy, tysiąc, tytuł
+tyłu, tą, tło, tłumacz, tłumaczenia, tłumaczenie, ucieczka, udany, udać
+udostępniony, ukryty, ukrywa, układ, ulepszenie, umieszczony
+uniemożliwiają, unikalny, uniwersalny, upadek, upuść, upłynęło, url
+uruchom, urządzenia, urządzenie, ustaw, ustawienia, ustawienie, usunięcie
+usunięte, usunięto, usunięty, usuwa, usuwanie, usuń, uszkodzony, usługa
+utworzono, utworzony, utwórz, uwzględnij, uwzględniony, użycie, użyj
+użytkownicy, użytkownik, używając, używany, użyć, wahać, wartości
+wartość, warunek, ważny, wciąż, wcześnie, wcześniej, wejście, wersja
 wersje, wewnątrz, wewnętrzny, wiadomości, wiadomość, widok, widoki, widz
 widziany, widzieć, wiedzieć, wiele, wielokrotny, wieloznacznik
 wieloznaczniki, wieloznaczny, wiersz, wiersze, witaj, witryna, więcej
-większy, wokół, woleć, wolniejszy, wolny, wprowadza, wraca, wróć, wsadowy
-wskazany, wskaźnik, wskaż, wsparcie, wspierający, wspierany, wspólny
-współrzędna, wstecz, wszystkie, wszystko, wtedy, wybierz, wyboru, wybrano
-wybrany, wybrać, wybrzuszenie, wybór, wyczyść, wydajność, wydajny
-wydanie, wydrukowany, wygenerowano, wygenerowany, wyjaśnij, wyjdź, wyjście
-wykonaj, wykonanie, wykonany, wykryj, wykryto, wykrywa, wymaga, wymagaj
-wymagany, wymiar, wymieniony, wynik, wyniki, wypełnij, wysoki, wystąpienie
-wyszukiwania, wyszukiwanie, wywołanie, wyłączone, wyłączony, wyślij
-wyśrodkowany, wyświetl, wyświetla, wyświetlany, względu, wzór, włącznie
-włączone, wśród, zaakceptowano, zaakceptowany, zablokowany, zablokuj
-zachowaj, zachowanie, zachęty, zacięcie, zacznij, zadania, zadanie
-zainstalowany, zainstaluj, zainteresowanie, zakończ, zakres, zaleta
+większy, wokół, woleć, wolniejszy, wolny, wprowadza, wpływa, wraca, wróć
+wsadowy, wskazany, wskazuje, wskazywać, wskaźnik, wskaż, wsparcie
+wspierający, wspierany, wspólny, współrzędna, wstecz, wszystkie, wszystko
+wtedy, wybierz, wyboru, wybrano, wybrany, wybrać, wybrzuszenie, wybór
+wyczyścić, wyczyść, wydajność, wydajny, wydanie, wydaniu, wydrukowany
+wygenerowano, wygenerowany, wyjaśnij, wyjdź, wyjście, wykonaj, wykonana
+wykonanie, wykonany, wykryciem, wykryj, wykryto, wykrywa, wymaga, wymagaj
+wymagany, wymiar, wymieniony, wynik, wyniki, wypełnij, wysoki, wysoko
+wystąpienie, wyszukiwania, wyszukiwanie, wywołania, wywołanie, wyłączone
+wyłączony, wyślij, wyśrodkowany, wyświetl, wyświetla, wyświetlany
+wyświetlone, względu, wzór, włącznie, włączone, wśród, zaakceptowano
+zaakceptowany, zablokowany, zablokuj, zachowaj, zachowanie, zachęty, zacięcie
+zacznij, zadania, zadanie, zainstalowana, zainstalowane, zainstalowano
+zainstalowany, zainstaluj, zainteresowanie, zakończ, zakres, zaleta, zamiast
 zamierzony, zamknij, zamknięcie, zamknięte, zamknięty, zapauzowany, zapewnij
 zapisany, zapisuje, zapisz, zapobiega, zapobiegaj, zapobiegnięto
 zaprogramowany, zarejestruj, zasięg, zasoby, zastosowano, zastosowany, zastąp
-zator, zatrzymaj, zautomatyzowany, zauważ, zawiera, zawieść, zawijanie
-zawsze, załóż, załącz, zbyt, zdanie, zdarzenie, zdarzyć, zdefiniowano
-zdefiniowany, zdefiniuj, zdjęcie, zdolności, zdolność, zdolny, zepsuty
-zero, zestaw, zestawy, zewnątrz, zewnętrzny, zignorowany, zlokalizuj, zmiany
-zmieniający, zmieniono, zmieniony, zmienna, zmienne, zmień, zmniejsz
-zmodyfikowany, znaczenia, znaczenie, znaczyć, znajduje, znajdź, znak, znaki
-znaleziono, znany, zobacz, zostań, zrestartuj, zrobione, zrozumieć, zrzut
-zwiększ, zwiń, zwykle, zły, ćwiczenie, ładowanie, ładuj, łatwo
-łańcuch, łańcuchy, łącznie, ścieżka, ścieżki, ślad, śmierć
+zator, zatrzymaj, zautomatyzowany, zauważ, zawiera, zawierający, zawieść
+zawijanie, zawsze, załadowana, załadować, załóż, załącz, zbyt, zdanie
+zdarzenie, zdarzyć, zdefiniowano, zdefiniowany, zdefiniuj, zdjęcie
+zdolności, zdolność, zdolny, ze, zepsuty, zero, zestaw, zestawy, zewnątrz
+zewnętrzny, zgodne, zignorowany, zlokalizuj, zmiany, zmieniający, zmieniono
+zmieniony, zmienna, zmienne, zmień, zmniejsz, zmodyfikowany, znaczenia
+znaczenie, znaczyć, znajduje, znajdź, znak, znaki, znakiem, znaleziono, znany
+zobacz, zostają, zostanie, została, zostań, zrestartuj, zrobione, zrozumieć
+zrzut, zwiększ, zwiń, zwraca, zwykle, zły, ćwiczenie, ładowanie
+ładowaniu, ładować, ładuj, łatwo, łatwym, łańcuch, łańcuchy
+łącznie, ścieżka, ścieżkach, ścieżki, ścieżkę, ślad, śmierć
 środek, środka, środowisko, światło, świetny, źle, źródło, żaden
-że, życie, życzenie
+żadnych, że, życie, życzenie
 
 [hu_HU]
 

@@ -19,11 +19,16 @@ uses
   ExtCtrls, ComCtrls, ActnList, Menus, IpHtml, XMLConf,
   Version, PasExt, Icons, MultiApp, LogView, Updater, Preferences,
   DosView, DosFont, Codepages, Witch, uPrefs, uLostFile, uFixEnding,
-  uEditor, uDictEdit;
+  uEditor, uDictEdit, Dictionary;
 
 type
 
   TCodepageFilter = (cpfAll, cpfPartial, cpfComplete);
+  TLocaleItem = record
+    ID : String;
+    Name : RawByteString;
+  end;
+  TLocaleItems = array of TLocaleItem;
 
   { TfMain }
 
@@ -107,6 +112,8 @@ type
       FViewedCodepage : integer;
       fCodepageFilter: TCodepageFilter;
       lbViewCodepageLabel : TLabel;
+      lbUnicodeLanguage : TLabel;
+      lbCodepageLanguage : TLabel;
       btnEditFile : TToolButton;
       btnExportFile : TToolButton;
       btnCodepageFilter : TToolButton;
@@ -121,6 +128,7 @@ type
       fEndBlankOnExport : boolean;
       fOpenExported : boolean;
       fWatchIndex : integer;
+      fLocales : TLocaleItems;
       procedure PopulateCodepageList(Item : TWitchItem);
       procedure SetCodepageFilter(AValue: TCodepageFilter);
       procedure SetUnicodeView( S : String );
@@ -141,6 +149,8 @@ type
       procedure UpdateCodepageView;
       procedure UpdateButtons;
       procedure UpdateFilterCheck;
+      procedure UpdateLocale;
+      procedure UpdateLocaleList;
       procedure SelectCodepage(Sender : TObject);
       procedure SelectFile(Sender : TObject);
       procedure SessionSave;
@@ -176,6 +186,7 @@ end;
 
 procedure TfMain.actCloseAllUpdate(Sender: TObject);
 begin
+  UpdateButtons;
   actCloseAll.Enabled := lvFileList.Items.Count > 0;
 end;
 
@@ -336,6 +347,7 @@ begin
   fEndBlankOnExport:=True;
   fOpenExported:=False;
   fWatchIndex:=0;
+  fLocales:=[];
 
   fWitch := TWitch.Create;
   fWitch.OnAnalyzed:=@WitchOnAnalyzed;
@@ -413,12 +425,32 @@ begin
   // Make toolbar the width of the visible buttons
   AdjustToolBarWidth(tbMain);
 
-  // Create at runtime without name to not save Caption iduring NLS generation.
+  // Controls that are Created at runtime, without a Name so they will not
+  // save their Caption properties at runtime during their NLS generation
+  // when the BUILD_PRERELEASE version flag is set.
+
+  // Displays "Viewed as Codepage NNN"
   lbViewCodepageLabel :=TLabel.Create(Self);
   lbViewCodepageLabel.Parent:=pViewCodepageLabel;
-  lbViewCodepageLabel.Align:=alTop;
+  lbViewCodepageLabel.Align:=alLeft;
   lbViewCodepageLabel.AutoSize:=True;
   lbViewCodepageLabel.BorderSpacing.Around:=8;
+
+  // Displays language/local in Codepage pane like "German (Germany)"
+  lbCodepageLanguage :=TLabel.Create(Self);
+  lbCodepageLanguage.Parent:=pViewCodepageLabel;
+  lbCodepageLanguage.Align:=alRight;
+  lbCodepageLanguage.AutoSize:=True;
+  lbCodepageLanguage.BorderSpacing.Around:=8;
+  // lbCodepageLanguage.Caption:='Language';
+
+  // Displays language/local in Unicode pane like "German (Germany)"
+  lbUnicodeLanguage :=TLabel.Create(Self);
+  lbUnicodeLanguage.Parent:=pViewUnicodeLabel;
+  lbUnicodeLanguage.Align:=alRight;
+  lbUnicodeLanguage.AutoSize:=True;
+  lbUnicodeLanguage.BorderSpacing.Around:=8;
+  // lbUnicodeLanguage.Caption:='Language';
 
   SetUnicodeView('');
  end;
@@ -789,11 +821,12 @@ end;
 procedure TfMain.UpdateMetaData;
 begin
   UpdateCodepagelist;
-  UpdateButtons;
   UpdateStatusBar;
   UpdateUnicodeView;
   UpdateCodepageView;
   UpdateCodepageViewLabel;
+  UpdateLocale;
+  UpdateButtons;
 end;
 
 procedure TfMain.UpdateCodepageList;
@@ -839,11 +872,11 @@ end;
 procedure TfMain.UpdateStatusBar;
 const
   spiEncoding = 0;               // displayed when file is selected
-  spiLineEndings = 1;            // displayed when file is selected
-  spiCompatiblity = 2;           // displayed when Codepage is selected
-  // spiLanguage = 3;            // not yet implemented
-  // spiPrefered = 4;            // not yet implemented
-  spiFileName = 3;               // displayed when file is selected
+  spiLanguage = 1;            // not yet implemented
+  spiPrefered = 2;            // not yet implemented
+  spiLineEndings = 3;            // displayed when file is selected
+  spiCompatiblity = 4;           // displayed when Codepage is selected
+  spiFileName = 5;               // displayed when file is selected
 var
   W : TWitchItem;
   K : String;
@@ -854,8 +887,8 @@ begin
     statBar.Panels[spiEncoding].Text:='';
     statBar.Panels[spiLineEndings].Text:='';
     statBar.Panels[spiCompatiblity].Text:='';
-    // statBar.Panels[spiLanguage].Text:='';
-    // statBar.Panels[spiPrefered].Text:='';
+    statBar.Panels[spiLanguage].Text:='';
+    statBar.Panels[spiPrefered].Text:='';
     statBar.Panels[spiFileName].Text:='';
     Exit;
   end;
@@ -866,13 +899,20 @@ begin
   if W.Analyzed then begin
     if W.Encoding = weBinary then
       statBar.Panels[spiLineEndings].Text:=''
-    else case W.LineEndings of
+    else begin
+      case W.LineEndings of
       leCRLF : statBar.Panels[spiLineEndings].Text:=
         GetTranslation(K+'LineEnding/CRLF', 'CRLF');
       leLF : statBar.Panels[spiLineEndings].Text:=
         GetTranslation(K+'LineEnding/LF', 'LF');
       leCR : statBar.Panels[spiLineEndings].Text:=
         GetTranslation(K+'LineEnding/CR', 'CR');
+      end;
+      statBar.Panels[spiLanguage].Text:=W.Locale;
+      if W.Preferred <> -1 then
+        statBar.Panels[spiPrefered].Text:=IntToStr(W.Preferred)
+      else
+        statBar.Panels[spiPrefered].Text:='';
     end;
     case W.Encoding of
       weNone : statBar.Panels[spiEncoding].Text:=
@@ -1034,6 +1074,85 @@ begin
   end;
 end;
 
+procedure TfMain.UpdateLocale;
+var
+  S, L : String;
+  I : Integer;
+  W : TWitchItem;
+begin
+  if not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then begin
+    lbCodepageLanguage.Caption:='';
+    lbUnicodeLanguage.Caption:='';
+    Exit;
+  end;
+  W:=TWitchItem(lvFileList.Selected.Data);
+  if W.Analyzed then begin
+    L:='';
+    S:=LowerCase(W.Locale);
+    for I := 0 to High(FLocales) do
+      if S=LowerCase(FLocales[I].ID) then begin
+        L:=FLocales[I].Name;
+        Break;
+      end;
+    if L='' then L:=S;
+    case W.Encoding of
+     weNone, weUnicode : begin
+       lbCodepageLanguage.Caption:='';
+       lbUnicodeLanguage.Caption:=L;
+     end;
+     weCodepage : begin
+       lbCodepageLanguage.Caption:=L;
+       lbUnicodeLanguage.Caption:='';
+     end;
+     else
+       lbCodepageLanguage.Caption:='';
+       lbUnicodeLanguage.Caption:='';
+     end;
+  end else begin
+    lbCodepageLanguage.Caption:='';
+    lbUnicodeLanguage.Caption:='';
+  end;
+end;
+
+procedure TfMain.UpdateLocaleList;
+var
+  I : integer;
+  S, T : String;
+  L : TArrayOfString;
+  X : TLocale;
+begin
+  FLocales:=[];
+  L:=LocaleList;
+  S:='';
+  if Assigned(Dictionaries) then Cat(S, Dictionaries.Locales);
+  Cat(S, SPACE);
+  if Assigned(UserDictionary) then Cat(S, UserDictionary.Locales);
+  S:=Trim(S);
+  while S <> '' do begin
+    T:=Trim(PopDelim(S, COMMA));
+    if T = '' then Continue;
+    if InArray(L, T, 0, False) = -1 then
+      Cat(L, T);
+  end;
+  LogMessage(vbVerbose, 'Locales: ' + Implode(L, COMMA + SPACE));
+  SetLength(FLocales, Length(L));
+  for I:=0 to High(L) do begin
+    if Locale(L[I], X) then begin
+      FLocales[I].ID:=X.Identifier;
+      FLocales[I].Name:=RawByteString(X.Language);
+    end else begin
+      FLocales[I].ID:=L[I];
+      FLocales[I].Name:=L[I];
+    end;
+    try
+      FLocales[I].Name:=GetTranslation('Locales/' + FLocales[I].ID + '/Text',
+        FLocales[I].Name);
+    except
+      LogMessage(vbMinimal, 'Exception for bad locale code: ' + FLocales[I].ID);
+    end;
+  end;
+end;
+
 procedure TfMain.SelectCodepage(Sender: TObject);
 var
   E: Integer;
@@ -1186,9 +1305,8 @@ end;
 procedure TfMain.ApplyUserLanguage;
 begin
   inherited ApplyUserLanguage;
-  { UpdateStatusBar;
-  UpdateCodepageViewlabel; }
   UpdateMetaData;
+  UpdateLocaleList;
 end;
 
 procedure TfMain.OpenFile(FileName: String; Select: boolean);
@@ -1212,7 +1330,8 @@ begin
 
   I:=fWitch.Find(FileName);
   if I <> -1 then begin
-    LogMessage(vbVerbose, 'Open file "' + FileName + '" already open.');
+    LogMessage(vbVerbose, 'Open file "' + FriendlyPath(AppBasePath, FileName) +
+      '" already open.');
     fWitch.Modified[I];
   end else begin
     try
@@ -1220,10 +1339,11 @@ begin
       I := fWitch.Add(FileName, LI);
     except
       LI.Delete;
-      LogMessage(vbVerbose, 'Open file "' + FileName + '" Failed!');
+      LogMessage(vbVerbose, 'Open file "' + FriendlyPath(AppBasePath, FileName) +
+        '" Failed!');
       Exit;
     end;
-    LogMessage(vbVerbose, 'Opened file "' + FileName + '"');
+    LogMessage(vbVerbose, 'Opened file "' + FriendlyPath(AppBasePath, FileName) + '"');
   end;
 
   if Select then begin
