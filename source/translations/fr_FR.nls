@@ -166,53 +166,53 @@
         </pCodepage>
       </pViewers>
       <Locales>
-        <ar_SA Text="Arabic (Saudi Arabia)"/>
-        <cs_CZ Text="Czech (Czechia)"/>
-        <da_DK Text="Danish (Denmark)"/>
-        <de_CH Text="German (Switzerland)"/>
-        <de_DE Text="German (Germany)"/>
-        <en_US Text="English (United States)"/>
-        <eo Text="Esperanto"/>
-        <es_ES Text="Spanish (Spain)"/>
-        <et_EE Text="Estonian (Estonia)"/>
-        <fi_FI Text="Finnish (Finland)"/>
-        <fr_CA Text="French (Canada)"/>
-        <fr_FR Text="French (France)"/>
-        <he_IL Text="Hebrew (Israel)"/>
-        <hu_HU Text="Hungarian (Hungary)"/>
-        <is_IS Text="Icelandic (Iceland)"/>
-        <it_IT Text="Italian (Italy)"/>
-        <ja_JP Text="Japanese (Japan)"/>
-        <lt_LT Text="Lithuanian (Lithuania)"/>
+        <ar_SA Text="Arabe (Arabie saoudite)"/>
+        <cs_CZ Text="Tchèque (Tchéquie)"/>
+        <da_DK Text="Danois (Danemark)"/>
+        <de_CH Text="Allemand (Suisse)"/>
+        <de_DE Text="Allemand (Allemagne)"/>
+        <en_US Text="Anglais (États-Unis)"/>
+        <eo Text="Espéranto"/>
+        <es_ES Text="Espagnol (Espagne)"/>
+        <et_EE Text="Estonien (Estonie)"/>
+        <fi_FI Text="Finnois (Finlande)"/>
+        <fr_CA Text="Français (Canada)"/>
+        <fr_FR Text="Français (France)"/>
+        <he_IL Text="Hébreu (Israël)"/>
+        <hu_HU Text="Hongrois (Hongrie)"/>
+        <is_IS Text="Islandais (Islande)"/>
+        <it_IT Text="Italien (Italie)"/>
+        <ja_JP Text="Japonais (Japon)"/>
+        <lt_LT Text="Lituanien (Lituanie)"/>
         <la Text="Latin"/>
-        <lv_LV Text="Latvian (Latvia)"/>
-        <nl_NL Text="Dutch (Netherlands)"/>
-        <no_NO Text="Norwegian (Norway)"/>
-        <pl_PL Text="Polish (Poland)"/>
-        <pl_MAZ Text="Polish (Mazovian)"/>
-        <pt_BR Text="Portuguese (Brazil)"/>
-        <pt_PT Text="Portuguese (Portugal)"/>
-        <ru_RU Text="Russian (Russia)"/>
-        <sk_SK Text="Slovak (Slovakia)"/>
-        <sl_SI Text="Slovenian (Slovenia)"/>
-        <sr_RS Text="Serbian (Serbia)"/>
-        <zh_CN Text="Chinese (Simplified)"/>
-        <sv_SE Text="Swedish (Sweden)"/>
-        <tr_TR Text="Turkish (Turkey)"/>
-        <uk_UA Text="Ukrainian (Ukraine)"/>
-        <bg_BG Text="Bulgarian (Bulgaria)"/>
-        <el_GR Text="Greek (Greece)"/>
+        <lv_LV Text="Letton (Lettonie)"/>
+        <nl_NL Text="Néerlandais (Pays-Bas)"/>
+        <no_NO Text="Norvégien (Norvège)"/>
+        <pl_PL Text="Polonais (Pologne)"/>
+        <pl_MAZ Text="Polonais (Mazovie)"/>
+        <pt_BR Text="Portugais (Brésil)"/>
+        <pt_PT Text="Portugais (Portugal)"/>
+        <ru_RU Text="Russe (Russie)"/>
+        <sk_SK Text="Slovaque (Slovaquie)"/>
+        <sl_SI Text="Slovène (Slovénie)"/>
+        <sr_RS Text="Serbe (Serbie)"/>
+        <zh_CN Text="Chinois (Simplifié)"/>
+        <sv_SE Text="Suédois (Suède)"/>
+        <tr_TR Text="Turc (Turquie)"/>
+        <uk_UA Text="Ukrainien (Ukraine)"/>
+        <bg_BG Text="Bulgare (Bulgarie)"/>
+        <el_GR Text="Grec (Grèce)"/>
         <fil_PH Text="Filipino (Philippines)"/>
         <tl_PH Text="Tagalog (Philippines)"/>
-        <haw_US Text="Hawaiian (United States)"/>
-        <id_ID Text="Indonesian (Indonesia)"/>
-        <ko_KR Text="Korean (South Korea)"/>
-        <nb_NO Text="Norwegian Bokmål (Norway)"/>
-        <nn_NO Text="Norwegian Nynorsk (Norway)"/>
-        <ro_RO Text="Romanian (Romania)"/>
+        <haw_US Text="Hawaïen (États-Unis)"/>
+        <id_ID Text="Indonésien (Indonésie)"/>
+        <ko_KR Text="Coréen (Corée du Sud)"/>
+        <nb_NO Text="Norvégien bokmål (Norvège)"/>
+        <nn_NO Text="Norvégien nynorsk (Norvège)"/>
+        <ro_RO Text="Roumain (Roumanie)"/>
         <sm_WS Text="Samoan (Samoa)"/>
-        <th_TH Text="Thai (Thailand)"/>
-        <vi_VN Text="Vietnamese (Vietnam)"/>
+        <th_TH Text="Thaï (Thaïlande)"/>
+        <vi_VN Text="Vietnamien (Vietnam)"/>
       </Locales>
       <statBar>
         <Processing Caption="Traitement"/>
@@ -223,16 +223,16 @@
         <Binary Caption="Binaire"/>
       </statBar>
     </fMain>
-    <fDictEditForm Caption="Dictionary Updater">
+    <fDictEditForm Caption="Mise à jour du dictionnaire">
       <pTop>
-        <lbLocale Caption="Locale:"/>
-        <btnInvert Caption="Invert Selections"/>
-        <btnNone Caption="None"/>
+        <lbLocale Caption="Paramètres régionaux :"/>
+        <btnInvert Caption="Invertir"/>
+        <btnNone Caption="Aucun"/>
       </pTop>
       <pButtons>
-        <btnSave Caption="Save"/>
-        <btnReload Caption="Reload"/>
-        <btnAdd Caption="Add to Dictionary"/>
+        <btnSave Caption="Enregistrer"/>
+        <btnReload Caption="Recharger"/>
+        <btnAdd Caption="Ajouter au dictionnaire"/>
       </pButtons>
     </fDictEditForm>
     <fUpdateCheckDialog Caption="Recherche de mise à jour">

@@ -3,6 +3,7 @@ object fDictEditForm: TfDictEditForm
   Height = 320
   Top = 215
   Width = 320
+  BorderStyle = bsSizeToolWin
   Caption = 'Dictionary Updater'
   ClientHeight = 320
   ClientWidth = 320

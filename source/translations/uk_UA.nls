@@ -166,53 +166,53 @@
         </pCodepage>
       </pViewers>
       <Locales>
-        <ar_SA Text="Arabic (Saudi Arabia)"/>
-        <cs_CZ Text="Czech (Czechia)"/>
-        <da_DK Text="Danish (Denmark)"/>
-        <de_CH Text="German (Switzerland)"/>
-        <de_DE Text="German (Germany)"/>
-        <en_US Text="English (United States)"/>
-        <eo Text="Esperanto"/>
-        <es_ES Text="Spanish (Spain)"/>
-        <et_EE Text="Estonian (Estonia)"/>
-        <fi_FI Text="Finnish (Finland)"/>
-        <fr_CA Text="French (Canada)"/>
-        <fr_FR Text="French (France)"/>
-        <he_IL Text="Hebrew (Israel)"/>
-        <hu_HU Text="Hungarian (Hungary)"/>
-        <is_IS Text="Icelandic (Iceland)"/>
-        <it_IT Text="Italian (Italy)"/>
-        <ja_JP Text="Japanese (Japan)"/>
-        <lt_LT Text="Lithuanian (Lithuania)"/>
-        <la Text="Latin"/>
-        <lv_LV Text="Latvian (Latvia)"/>
-        <nl_NL Text="Dutch (Netherlands)"/>
-        <no_NO Text="Norwegian (Norway)"/>
-        <pl_PL Text="Polish (Poland)"/>
-        <pl_MAZ Text="Polish (Mazovian)"/>
-        <pt_BR Text="Portuguese (Brazil)"/>
-        <pt_PT Text="Portuguese (Portugal)"/>
-        <ru_RU Text="Russian (Russia)"/>
-        <sk_SK Text="Slovak (Slovakia)"/>
-        <sl_SI Text="Slovenian (Slovenia)"/>
-        <sr_RS Text="Serbian (Serbia)"/>
-        <zh_CN Text="Chinese (Simplified)"/>
-        <sv_SE Text="Swedish (Sweden)"/>
-        <tr_TR Text="Turkish (Turkey)"/>
-        <uk_UA Text="Ukrainian (Ukraine)"/>
-        <bg_BG Text="Bulgarian (Bulgaria)"/>
-        <el_GR Text="Greek (Greece)"/>
-        <fil_PH Text="Filipino (Philippines)"/>
-        <tl_PH Text="Tagalog (Philippines)"/>
-        <haw_US Text="Hawaiian (United States)"/>
-        <id_ID Text="Indonesian (Indonesia)"/>
-        <ko_KR Text="Korean (South Korea)"/>
-        <nb_NO Text="Norwegian Bokmål (Norway)"/>
-        <nn_NO Text="Norwegian Nynorsk (Norway)"/>
-        <ro_RO Text="Romanian (Romania)"/>
-        <sm_WS Text="Samoan (Samoa)"/>
-        <th_TH Text="Thai (Thailand)"/>
-        <vi_VN Text="Vietnamese (Vietnam)"/>
+        <ar_SA Text="Арабська (Саудівська Аравія)"/>
+        <cs_CZ Text="Чеська (Чехія)"/>
+        <da_DK Text="Данська (Данія)"/>
+        <de_CH Text="Німецька (Швейцарія)"/>
+        <de_DE Text="Німецька (Німеччина)"/>
+        <en_US Text="Англійська (Сполучені Штати)"/>
+        <eo Text="Есперанто"/>
+        <es_ES Text="Іспанська (Іспанія)"/>
+        <et_EE Text="Естонська (Естонія)"/>
+        <fi_FI Text="Фінська (Фінляндія)"/>
+        <fr_CA Text="Французька (Канада)"/>
+        <fr_FR Text="Французька (Франція)"/>
+        <he_IL Text="Іврит (Ізраїль)"/>
+        <hu_HU Text="Угорська (Угорщина)"/>
+        <is_IS Text="Ісландська (Ісландія)"/>
+        <it_IT Text="Італійська (Італія)"/>
+        <ja_JP Text="Японська (Японія)"/>
+        <lt_LT Text="Литовська (Литва)"/>
+        <la Text="Латина"/>
+        <lv_LV Text="Латиська (Латвія)"/>
+        <nl_NL Text="Нідерландська (Нідерланди)"/>
+        <no_NO Text="Норвезька (Норвегія)"/>
+        <pl_PL Text="Польська (Польща)"/>
+        <pl_MAZ Text="Польська (Мазовецька)"/>
+        <pt_BR Text="Португальська (Бразилія)"/>
+        <pt_PT Text="Португальська (Португалія)"/>
+        <ru_RU Text="Російська (Росія)"/>
+        <sk_SK Text="Словацька (Словаччина)"/>
+        <sl_SI Text="Словенська (Словенія)"/>
+        <sr_RS Text="Сербська (Сербія)"/>
+        <zh_CN Text="Китайська (Спрощена)"/>
+        <sv_SE Text="Шведська (Швеція)"/>
+        <tr_TR Text="Турецька (Туреччина)"/>
+        <uk_UA Text="Українська (Україна)"/>
+        <bg_BG Text="Болгарська (Болгарія)"/>
+        <el_GR Text="Грецька (Греція)"/>
+        <fil_PH Text="Філіппінська (Філіппіни)"/>
+        <tl_PH Text="Тагальська (Філіппіни)"/>
+        <haw_US Text="Гавайська (Сполучені Штати)"/>
+        <id_ID Text="Індонезійська (Індонезія)"/>
+        <ko_KR Text="Корейська (Південна Корея)"/>
+        <nb_NO Text="Норвезька букмол (Норвегія)"/>
+        <nn_NO Text="Норвезька нюношк (Норвегія)"/>
+        <ro_RO Text="Румунська (Румунія)"/>
+        <sm_WS Text="Самоанська (Самоа)"/>
+        <th_TH Text="Тайська (Таїланд)"/>
+        <vi_VN Text="В'єтнамська (В'єтнам)"/>
       </Locales>
       <statBar>
         <Processing Caption="Обробка"/>
@@ -223,16 +223,16 @@
         <Binary Caption="Бінарний"/>
       </statBar>
     </fMain>
-    <fDictEditForm Caption="Dictionary Updater">
+    <fDictEditForm Caption="Оновлення словника">
       <pTop>
-        <lbLocale Caption="Locale:"/>
-        <btnInvert Caption="Invert Selections"/>
-        <btnNone Caption="None"/>
+        <lbLocale Caption="Локаль:"/>
+        <btnInvert Caption="Інвертувати"/>
+        <btnNone Caption="Нічого"/>
       </pTop>
       <pButtons>
-        <btnSave Caption="Save"/>
-        <btnReload Caption="Reload"/>
-        <btnAdd Caption="Add to Dictionary"/>
+        <btnSave Caption="Зберегти"/>
+        <btnReload Caption="Перезавантажити"/>
+        <btnAdd Caption="Додати до словника"/>
       </pButtons>
     </fDictEditForm>
     <fUpdateCheckDialog Caption="Перевірка оновлень">

@@ -1305,8 +1305,8 @@ end;
 procedure TfMain.ApplyUserLanguage;
 begin
   inherited ApplyUserLanguage;
-  UpdateMetaData;
   UpdateLocaleList;
+  UpdateMetaData;
 end;
 
 procedure TfMain.OpenFile(FileName: String; Select: boolean);
