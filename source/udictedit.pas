@@ -28,6 +28,7 @@ type
     btnReload: TButton;
     btnInvert: TButton;
     btnAdd: TButton;
+    btnNone: TButton;
     cbLocale: TComboBox;
     clWords: TCheckListBox;
     lbLocale: TLabel;
@@ -37,6 +38,7 @@ type
     pStatusBar: TStatusBar;
     procedure btnAddClick(Sender: TObject);
     procedure btnInvertClick(Sender: TObject);
+    procedure btnNoneClick(Sender: TObject);
     procedure btnReloadClick(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
     procedure cbLocaleChange(Sender: TObject);
@@ -99,6 +101,14 @@ var
 begin
   for I := 0 to clWords.Count - 1 do
     clWords.Checked[I]:= not clWords.Checked[I];
+end;
+
+procedure TfDictEditForm.btnNoneClick(Sender: TObject);
+var
+  I : Integer;
+begin
+  for I := 0 to clWords.Count - 1 do
+    clWords.Checked[I]:=False;
 end;
 
 procedure TfDictEditForm.btnReloadClick(Sender: TObject);
@@ -220,7 +230,7 @@ var
   LC : Int32;
   FN, DN : TBinaryTreeNode;
   SL : Array of String;
-  SC : integer;
+  SC, EC, I : integer;
 begin
   clWords.Clear;
   DoUpdateButtons;
@@ -242,7 +252,11 @@ begin
   SetLength(SL, SC);
   if SC > 0 then begin
     clWords.Items.AddStrings(SL);
-    btnInvertClick(Self);
+    EC:=Dictionaries.IndexOfLocale('en_US');
+    for I := 0 to clWords.Count - 1 do begin
+      DN:=Dictionaries.Find(Lowercase(clWords.Items[I]));
+      clWords.Checked[I]:=(LC <> -1) and ((Not Assigned(DN)) or (InArray(DN.Data32, EC) = -1));
+    end;
   end;
   DoUpdateButtons;
 end;
@@ -251,6 +265,7 @@ procedure TfDictEditForm.DoUpdateButtons;
 begin
   btnAdd.Enabled:=(clWords.Items.Count > 0) and (Trim(cbLocale.Text) <> '');
   btnInvert.Enabled:=btnAdd.Enabled;
+  btnNone.Enabled:=btnAdd.Enabled;
   btnSave.Enabled:=Assigned(Dictionaries) and (Dictionaries.Modified);
   btnReload.Enabled:=btnSave.Enabled;
 end;

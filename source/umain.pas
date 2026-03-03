@@ -1064,8 +1064,11 @@ begin
   if Assigned(FDictEditForm) then begin
     FDictEditForm.WitchItem:=nil;
     FDictEditForm.WitchList:=FWitch;
-       if fDictEditForm.Visible = False then
-         fDictEditForm.Show;
+    if fDictEditForm.Visible = False then begin
+      fDictEditForm.Show;
+    end;
+    fDictEditForm.BringToFront;
+
   end;
   {$ELSE}
   if Assigned(FDictEditForm)  then begin

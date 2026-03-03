@@ -178,6 +178,7 @@
       <pTop>
         <lbLocale Caption="Locale:"/>
         <btnInvert Caption="Invert Selections"/>
+        <btnNone Caption="None"/>
       </pTop>
       <pButtons>
         <btnSave Caption="Save"/>
@@ -185,6 +186,57 @@
         <btnAdd Caption="Add to Dictionary"/>
       </pButtons>
     </fDictEditForm>
+    <fUpdateCheckDialog Caption="Procurar Atualização">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnRetry Caption="Repetir"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Check Text="A procurar atualizações para &quot;%s&quot;, versão %s."/>
+        <Error Text="De momento não é possível determinar se existem atualizações para &quot;%s&quot;. Por favor, tente mais tarde."/>
+        <None Text="Não existem atualizações para &quot;%s&quot; no momento. Por favor, verifique mais tarde."/>
+      </Message>
+    </fUpdateCheckDialog>
+    <fUpdateFoundDialog Caption="Atualização Disponível">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnDownload Caption="Transferir"/>
+          <btnSkip Caption="Ignorar"/>
+        </fButtonPanel>
+        <fAuxPanel>
+          <cbSkipVersion Caption="Ignorar esta versão"/>
+        </fAuxPanel>
+      </fLowerPanel>
+      <Message>
+        <Note Text="Não foram fornecidas notas de lançamento para a versão %1:s de &quot;%0:s&quot;."/>
+      </Message>
+    </fUpdateFoundDialog>
+    <fUpdateDownloadDialog Caption="Transferir Atualização">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnRetry Caption="Repetir"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Fetch Text="A transferir atualização para &quot;%s&quot;."/>
+        <Error Text="Erro ao transferir a atualização de &quot;%s&quot;. Por favor, tente mais tarde."/>
+      </Message>
+    </fUpdateDownloadDialog>
+    <fUpdateSaveDialog Caption="Atualização Transferida">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnSaveAs Caption="Guardar como..."/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Downloaded Text="Transferida a versão %s de &quot;%s&quot;."/>
+      </Message>
+    </fUpdateSaveDialog>
     <fOptionsDialog Caption="Definições do Codepage Witch">
       <pPages>
         <tsAbout Hint="Sobre esta aplicação." Caption="Sobre">
@@ -274,57 +326,6 @@
       </fLowerPanel>
       <Message Text="O ficheiro &quot;%s&quot; não termina com uma linha em branco.&#xA;&#xA;Deseja corrigir isto adicionando uma quebra de linha ao fim do ficheiro?"/>
     </fCorrectFileEndingDialog>
-    <fUpdateCheckDialog Caption="Procurar Atualização">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-          <btnRetry Caption="Repetir"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Check Text="A procurar atualizações para &quot;%s&quot;, versão %s."/>
-        <Error Text="De momento não é possível determinar se existem atualizações para &quot;%s&quot;. Por favor, tente mais tarde."/>
-        <None Text="Não existem atualizações para &quot;%s&quot; no momento. Por favor, verifique mais tarde."/>
-      </Message>
-    </fUpdateCheckDialog>
-    <fUpdateFoundDialog Caption="Atualização Disponível">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-          <btnDownload Caption="Transferir"/>
-          <btnSkip Caption="Ignorar"/>
-        </fButtonPanel>
-        <fAuxPanel>
-          <cbSkipVersion Caption="Ignorar esta versão"/>
-        </fAuxPanel>
-      </fLowerPanel>
-      <Message>
-        <Note Text="Não foram fornecidas notas de lançamento para a versão %1:s de &quot;%0:s&quot;."/>
-      </Message>
-    </fUpdateFoundDialog>
-    <fUpdateDownloadDialog Caption="Transferir Atualização">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-          <btnRetry Caption="Repetir"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Fetch Text="A transferir atualização para &quot;%s&quot;."/>
-        <Error Text="Erro ao transferir a atualização de &quot;%s&quot;. Por favor, tente mais tarde."/>
-      </Message>
-    </fUpdateDownloadDialog>
-    <fUpdateSaveDialog Caption="Atualização Transferida">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-          <btnSaveAs Caption="Guardar como..."/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Downloaded Text="Transferida a versão %s de &quot;%s&quot;."/>
-      </Message>
-    </fUpdateSaveDialog>
     <fLoggerViewForm Caption="Registo de Depuração">
       <LineCount Plural="%.0n entradas de registo" Singular="%.0n entrada de registo"/>
       <pControls>

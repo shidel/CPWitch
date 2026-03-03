@@ -1,11 +1,11 @@
 object fDictEditForm: TfDictEditForm
-  Left = 183
+  Left = 353
   Height = 320
   Top = 215
-  Width = 315
+  Width = 320
   Caption = 'Dictionary Updater'
   ClientHeight = 320
-  ClientWidth = 315
+  ClientWidth = 320
   Constraints.MinHeight = 240
   Constraints.MinWidth = 320
   LCLVersion = '4.0.0.4'
@@ -13,13 +13,13 @@ object fDictEditForm: TfDictEditForm
     Left = 8
     Height = 36
     Top = 8
-    Width = 299
+    Width = 304
     Align = alTop
     AutoSize = True
     BorderSpacing.Around = 8
     BevelOuter = bvNone
     ClientHeight = 36
-    ClientWidth = 299
+    ClientWidth = 304
     TabOrder = 0
     object cbLocale: TComboBox
       Left = 59
@@ -44,24 +44,37 @@ object fDictEditForm: TfDictEditForm
       Caption = 'Locale:'
     end
     object btnInvert: TButton
-      Left = 167
+      Left = 239
       Height = 20
       Top = 8
-      Width = 124
+      Width = 57
       Align = alRight
       AutoSize = True
       BorderSpacing.Around = 8
-      Caption = 'Invert Selections'
+      Caption = 'Invert'
       Enabled = False
       TabOrder = 1
       OnClick = btnInvertClick
+    end
+    object btnNone: TButton
+      Left = 176
+      Height = 20
+      Top = 8
+      Width = 55
+      Align = alRight
+      AutoSize = True
+      BorderSpacing.Top = 8
+      BorderSpacing.Bottom = 8
+      Caption = 'None'
+      TabOrder = 2
+      OnClick = btnNoneClick
     end
   end
   object pStatusBar: TStatusBar
     Left = 0
     Height = 18
     Top = 302
-    Width = 315
+    Width = 320
     Panels = <    
       item
         Alignment = taCenter
@@ -84,34 +97,38 @@ object fDictEditForm: TfDictEditForm
     Left = 0
     Height = 52
     Top = 250
-    Width = 315
+    Width = 320
     Align = alBottom
     AutoSize = True
     BevelOuter = bvNone
     ClientHeight = 52
-    ClientWidth = 315
+    ClientWidth = 320
     TabOrder = 2
     object btnSave: TButton
-      Left = 247
+      Left = 252
       Height = 20
       Top = 16
       Width = 52
       Align = alRight
       AutoSize = True
-      BorderSpacing.Around = 16
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 16
+      BorderSpacing.Right = 16
+      BorderSpacing.Bottom = 16
       Caption = 'Save'
       Enabled = False
       TabOrder = 0
       OnClick = btnSaveClick
     end
     object btnReload: TButton
-      Left = 167
+      Left = 180
       Height = 20
       Top = 16
       Width = 64
       Align = alRight
       AutoSize = True
-      BorderSpacing.Around = 16
+      BorderSpacing.Top = 16
+      BorderSpacing.Bottom = 16
       Caption = 'Reload'
       Enabled = False
       TabOrder = 1
@@ -135,18 +152,18 @@ object fDictEditForm: TfDictEditForm
     Left = 8
     Height = 190
     Top = 52
-    Width = 299
+    Width = 304
     Align = alClient
     BorderSpacing.Around = 8
     BevelOuter = bvNone
     ClientHeight = 190
-    ClientWidth = 299
+    ClientWidth = 304
     TabOrder = 3
     object clWords: TCheckListBox
       Left = 0
       Height = 190
       Top = 0
-      Width = 299
+      Width = 304
       Align = alClient
       ItemHeight = 0
       TabOrder = 0

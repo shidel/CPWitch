@@ -178,6 +178,7 @@
       <pTop>
         <lbLocale Caption="Locale:"/>
         <btnInvert Caption="Invert Selections"/>
+        <btnNone Caption="None"/>
       </pTop>
       <pButtons>
         <btnSave Caption="Save"/>
@@ -185,6 +186,57 @@
         <btnAdd Caption="Add to Dictionary"/>
       </pButtons>
     </fDictEditForm>
+    <fUpdateCheckDialog Caption="Comprobar actualización">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnRetry Caption="Reintentar"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Check Text="Buscando actualizaciones disponibles para &quot;%s&quot;, versión %s."/>
+        <Error Text="Actualmente no se puede determinar si hay actualizaciones disponibles para &quot;%s&quot;. Por favor, inténtelo de nuevo más tarde."/>
+        <None Text="No hay actualizaciones disponibles para &quot;%s&quot; en este momento. Por favor, vuelva a comprobarlo más tarde."/>
+      </Message>
+    </fUpdateCheckDialog>
+    <fUpdateFoundDialog Caption="Actualización disponible">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnDownload Caption="Descargar"/>
+          <btnSkip Caption="Omitir"/>
+        </fButtonPanel>
+        <fAuxPanel>
+          <cbSkipVersion Caption="Omitir esta versión"/>
+        </fAuxPanel>
+      </fLowerPanel>
+      <Message>
+        <Note Text="No se proporcionaron notas de la versión para la versión %1:s de &quot;%0:s&quot;."/>
+      </Message>
+    </fUpdateFoundDialog>
+    <fUpdateDownloadDialog Caption="Descargar actualización">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnRetry Caption="Reintentar"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Fetch Text="Descargando actualización para &quot;%s&quot;."/>
+        <Error Text="Error al descargar la actualización de &quot;%s&quot;. Por favor, inténtelo de nuevo más tarde."/>
+      </Message>
+    </fUpdateDownloadDialog>
+    <fUpdateSaveDialog Caption="Actualización descargada">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnSaveAs Caption="Guardar como..."/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Downloaded Text="Descargado &quot;%s&quot; versión %s."/>
+      </Message>
+    </fUpdateSaveDialog>
     <fOptionsDialog Caption="Configuración de Codepage Witch">
       <pPages>
         <tsAbout Hint="Acerca de esta aplicación." Caption="Acerca de">
@@ -274,57 +326,6 @@
       </fLowerPanel>
       <Message Text="El archivo &quot;%s&quot; no termina con una línea en blanco.&#xA;&#xA;¿Desea corregirlo añadiendo un salto de línea al final del archivo?"/>
     </fCorrectFileEndingDialog>
-    <fUpdateCheckDialog Caption="Comprobar actualización">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-          <btnRetry Caption="Reintentar"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Check Text="Buscando actualizaciones disponibles para &quot;%s&quot;, versión %s."/>
-        <Error Text="Actualmente no se puede determinar si hay actualizaciones disponibles para &quot;%s&quot;. Por favor, inténtelo de nuevo más tarde."/>
-        <None Text="No hay actualizaciones disponibles para &quot;%s&quot; en este momento. Por favor, vuelva a comprobarlo más tarde."/>
-      </Message>
-    </fUpdateCheckDialog>
-    <fUpdateFoundDialog Caption="Actualización disponible">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-          <btnDownload Caption="Descargar"/>
-          <btnSkip Caption="Omitir"/>
-        </fButtonPanel>
-        <fAuxPanel>
-          <cbSkipVersion Caption="Omitir esta versión"/>
-        </fAuxPanel>
-      </fLowerPanel>
-      <Message>
-        <Note Text="No se proporcionaron notas de la versión para la versión %1:s de &quot;%0:s&quot;."/>
-      </Message>
-    </fUpdateFoundDialog>
-    <fUpdateDownloadDialog Caption="Descargar actualización">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-          <btnRetry Caption="Reintentar"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Fetch Text="Descargando actualización para &quot;%s&quot;."/>
-        <Error Text="Error al descargar la actualización de &quot;%s&quot;. Por favor, inténtelo de nuevo más tarde."/>
-      </Message>
-    </fUpdateDownloadDialog>
-    <fUpdateSaveDialog Caption="Actualización descargada">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-          <btnSaveAs Caption="Guardar como..."/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Downloaded Text="Descargado &quot;%s&quot; versión %s."/>
-      </Message>
-    </fUpdateSaveDialog>
     <fLoggerViewForm Caption="Registro de depuración">
       <LineCount Plural="%.0n entradas de registro" Singular="%.0n entrada de registro"/>
       <pControls>

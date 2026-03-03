@@ -19,10 +19,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="704"/>
-        <CursorPos X="59" Y="1033"/>
-        <FoldState Value=" T3ka039 pjEjb09033]BJk804614 pmFn60C6 piejN0c2]T3k40p11[e4XlK0l3 PiEiO0 T1kb023A21212A paud030137]YjJr1]Y6lA0202241 p5t6]C1[j47 PLsE]W0lFc82A]K5 pMtGF3057142111I8]*Gs4a TMqE]I9263 PDrP4 TLu921n"/>
+        <TopLine Value="764"/>
+        <CursorPos X="5" Y="1070"/>
+        <FoldState Value=" T3ka039 pjEjb09033]BJk804614 pmFn60C6 piejN0c2]T3k40p31]ekBmd061 Pi080 T1kb023A21212A paud0301373 PjJr4]Y6lA0202241 p5t6]C1[j47 PLsH]W0lFc82A]K5 pMtGF3057142111J8]*Gs7a TMqE]I9263 PDrP4 TLu921R"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -58,7 +59,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uDictEdit"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="153"/>
+        <UsageCount Value="180"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/pasext.pp"/>
@@ -67,7 +68,7 @@
         <TopLine Value="1788"/>
         <CursorPos Y="2142"/>
         <FoldState Value=" TK0071B p3jme0U TL904122M1W13221112324Y4W2H piQt625C1917G24422465226C66392 pl6t]w06]r6491]IHtW680B p0ii601 T4S02]E=Q[D43=405C piYjb034 pj8jW0G5]90jS0E7 pkDlA0431[B4AmI03E[l5O04419[M4l6mW0841A]rPkU08[^4b]-7B[g5M07[^49]IM4 pj2jY0M7]RZjU07A[I5V0M9[s5a06[s4cjP0F8[{O7C[j4XjL0e[I4dkB042]9fJ29[Q4ekV0b7[-4kc06[}K6I033[{85D03[r4gjK0E[I4CiY0x6]96ja[R8M067]ILk00e T1=504E piXkT053[{g5J0ZA]9Zl20B4[}J5f0h01E[B4mV09C191C1H pn5tQ05J]Oal50I5 pj4kF[98C02[{86B0I9[y4k605[I4gkO0AD]aAl2058[~D5c0M6]9Y]s68]R1]\29]9JlI024[{/5M0LA pj5kX0[~E5fk502A[+5g035[a5P0b T6*F01c]GJ=G01y[P4/M02Y[94=a015 TM!Y411432 p5tW221 p2#N0]70-e]ET0*WHJE pk2qFTE[#O6aK8F2T]KN*NX3I[K4r8B5A piXm5a9F]9fnRJ99[~M5YG6[{(5lWT9F[95T/1E[}+5VW3C PiElLV1"/>
-        <UsageCount Value="104"/>
+        <UsageCount Value="101"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/multiapp.pp"/>
@@ -76,7 +77,7 @@
         <TopLine Value="816"/>
         <CursorPos X="53" Y="972"/>
         <FoldState Value=" TL0041267A411121H pg*e0109 p0wB21 TMa03134 pFijV[H47q2I41 PB8N T8l32A07133 PNmC2 TCpeI3 T3r9098 piajK03[94ZjH[96YjJ0B9 pjCjO26117]BDld0I[c6U0741A pkOlT0D7]KcjO0RC]9dk8032]lTjc0711C[T5d03[c4bj704112 PbiU0 T6rB01J pXuZ01C17 PW:I]O1rD05D]=8kT09823211D129 pkfv00413D4B]DTqG0541]U2G[64 Pk8rK]:0sGW54282 piOsSw30842A pjUwYaC7]i3 PigsTVo"/>
-        <UsageCount Value="81"/>
+        <UsageCount Value="79"/>
       </Unit>
       <Unit>
         <Filename Value="upreferences.pas"/>
@@ -88,7 +89,7 @@
         <TopLine Value="36"/>
         <CursorPos X="33" Y="36"/>
         <FoldState Value=" T3j60Q82111 PjClc0-"/>
-        <UsageCount Value="5"/>
+        <UsageCount Value="3"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/preferences.pp"/>
@@ -97,12 +98,12 @@
         <TopLine Value="116"/>
         <CursorPos X="47" Y="277"/>
         <FoldState Value=" TL00403122 pGw222011 T7SP: T8T2h3 PHiJ2 TMvE4]Q3jV087 pk5kV053 pigj00{Y6[A4ke0N4 pjAi72C3]9MkK0,1 PS2],1jW077]MY]x44]nXjE282]I0jN248]9Z].3]wicjO0V T0jZI2D[h4vFRJ1 T6kJ02C PMvD0H"/>
-        <UsageCount Value="35"/>
+        <UsageCount Value="33"/>
       </Unit>
       <Unit>
         <Filename Value="witch.pas"/>
         <UnitName Value="Witch"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="3"/>
         <TopLine Value="102"/>
         <CursorPos X="10" Y="125"/>
         <FoldState Value=" TL004 T3ka04221311]31711[64 pmZrK08321 PNi10 T1kb0326]d55]5[e524[W4jAsN]X6pa010[Y4 T0sZw32221]VKkTTq"/>
@@ -116,7 +117,7 @@
         <TopLine Value="40"/>
         <CursorPos X="42" Y="44"/>
         <FoldState Value=" T7i4Ne3 PfifH T3kc0A3 pjQk10Z0111E plcnP04321 POlQ0d"/>
-        <UsageCount Value="46"/>
+        <UsageCount Value="44"/>
       </Unit>
       <Unit>
         <Filename Value="doscrt.pp"/>
@@ -125,7 +126,7 @@
         <TopLine Value="8"/>
         <CursorPos X="63" Y="24"/>
         <FoldState Value=" T7jPCK1 PXMI T3lK0411A13 pkRlg0S4 piXjT0J6]9ZjP04226 PiAjI0+"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="18"/>
       </Unit>
       <Unit>
         <Filename Value="dosfont.pp"/>
@@ -134,15 +135,16 @@
         <TopLine Value="91"/>
         <CursorPos X="37" Y="109"/>
         <FoldState Value=" T7i2J9 T3lE057 piZjJ094]9bjD0{Z5]AalZ062 PIE0T"/>
-        <UsageCount Value="4"/>
+        <UsageCount Value="2"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/codepages.pp"/>
         <UnitName Value="Codepages"/>
-        <EditorIndex Value="6"/>
-        <CursorPos X="21" Y="215"/>
-        <UsageCount Value="77"/>
-        <Loaded Value="True"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="811"/>
+        <CursorPos X="9" Y="838"/>
+        <FoldState Value=" TL004011211]5 PD-90 T4L02 TCkeK3 T7iGNe3 PfifH T8iH28B PiEj3]aMkYL10413 p1se23012A1 T3lA0A142133D pmgtF04321 POlU0 T6lB01168 pNw]- T1lD07173111]mlNtD03[m5K[m50lGe]S3512715 pk4v0H342117 PjAjQDZ"/>
+        <UsageCount Value="90"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/doscrt.pp"/>
@@ -151,7 +153,7 @@
         <TopLine Value="600"/>
         <CursorPos X="63" Y="635"/>
         <FoldState Value=" T3kA05G pifjb051113]52212 PmJob0a"/>
-        <UsageCount Value="45"/>
+        <UsageCount Value="43"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/dosview.pp"/>
@@ -160,7 +162,7 @@
         <TopLine Value="252"/>
         <CursorPos X="24" Y="279"/>
         <FoldState Value=" T3kJ05B151112 PlFm80V"/>
-        <UsageCount Value="35"/>
+        <UsageCount Value="33"/>
       </Unit>
       <Unit>
         <Filename Value="ueditor.pas"/>
@@ -169,28 +171,25 @@
         <TopLine Value="204"/>
         <CursorPos Y="230"/>
         <FoldState Value=" T3iT0H1 PEJ0I"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="4"/>
       </Unit>
       <Unit>
         <Filename Value="dictionary.pp"/>
         <UnitName Value="Dictionary"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="3"/>
-        <TopLine Value="235"/>
-        <CursorPos X="15" Y="279"/>
-        <FoldState Value=" T3iM08535 pjSoM0T012 PCiA0s"/>
-        <UsageCount Value="93"/>
-        <Loaded Value="True"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="242"/>
+        <CursorPos X="72" Y="275"/>
+        <FoldState Value=" T3iN086 pj2jR0Q01114]D9mN0C1s"/>
+        <UsageCount Value="106"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/bintree.pp"/>
         <UnitName Value="BinTree"/>
-        <EditorIndex Value="4"/>
-        <TopLine Value="362"/>
-        <CursorPos X="8" Y="438"/>
-        <FoldState Value=" T3ke0F9 piXjR0642411312C ppLtb0P3 PWiF02"/>
-        <UsageCount Value="20"/>
-        <Loaded Value="True"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="29"/>
+        <CursorPos Y="602"/>
+        <FoldState Value=" T3k7079 piZjR063]9bj80G936 plXmc034 pjOjd0=119 Pj6l30\"/>
+        <UsageCount Value="34"/>
       </Unit>
       <Unit>
         <Filename Value="udictedit.pas"/>
@@ -199,151 +198,38 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uDictEdit"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="95"/>
-        <CursorPos X="29" Y="196"/>
-        <FoldState Value=" T3iT0L716 Pk7la0n"/>
-        <UsageCount Value="75"/>
+        <TopLine Value="231"/>
+        <CursorPos X="47" Y="262"/>
+        <FoldState Value=" T3iV0L8 pidjZ0U024 POjE0F"/>
+        <UsageCount Value="89"/>
         <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/taskmngr.pp"/>
         <UnitName Value="TaskMngr"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="42"/>
         <CursorPos Y="59"/>
-        <UsageCount Value="22"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="35"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/dosfont.pp"/>
         <UnitName Value="DosFont"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="840"/>
         <CursorPos X="18" Y="882"/>
-        <UsageCount Value="18"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="21"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="29">
+    <JumpHistory HistoryIndex="1">
       <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="374" Column="26" TopLine="208"/>
+        <Filename Value="udictedit.pas"/>
+        <Caret Line="223" Column="75" TopLine="26"/>
       </Position>
       <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="375" Column="18" TopLine="209"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="382" Column="21" TopLine="216"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="389" Column="20" TopLine="239"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="391" Column="25" TopLine="258"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="392" Column="15" TopLine="259"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="395" Column="26" TopLine="284"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="399" Column="16" TopLine="293"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="402" Column="15" TopLine="301"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="403" Column="27" TopLine="350"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="404" Column="18" TopLine="351"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="411" Column="21" TopLine="369"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="417" Column="20" TopLine="375"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="419" Column="25" TopLine="377"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="420" Column="15" TopLine="378"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="423" Column="27" TopLine="381"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="71" Column="22" TopLine="39"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="107" Column="19" TopLine="68"/>
-      </Position>
-      <Position>
-        <Filename Value="dictionary.pp"/>
-        <Caret Line="155" Column="12" TopLine="75"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="14" Column="3"/>
-      </Position>
-      <Position>
-        <Filename Value="dictionary.pp"/>
-        <Caret Line="142" Column="15" TopLine="105"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="106" Column="22" TopLine="82"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="89" Column="18" TopLine="56"/>
-      </Position>
-      <Position>
-        <Filename Value="dictionary.pp"/>
-        <Caret Line="276" Column="16" TopLine="244"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="104" Column="18" TopLine="79"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="126" Column="31" TopLine="87"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="44" Column="3"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="69" Column="5" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="90" TopLine="58"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/bintree.pp"/>
-        <Caret Line="147" Column="3" TopLine="121"/>
+        <Filename Value="udictedit.pas"/>
+        <Caret Line="230" Column="75" TopLine="59"/>
       </Position>
     </JumpHistory>
     <RunParams>

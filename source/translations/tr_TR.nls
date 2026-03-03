@@ -178,6 +178,7 @@
       <pTop>
         <lbLocale Caption="Locale:"/>
         <btnInvert Caption="Invert Selections"/>
+        <btnNone Caption="None"/>
       </pTop>
       <pButtons>
         <btnSave Caption="Save"/>
@@ -185,6 +186,57 @@
         <btnAdd Caption="Add to Dictionary"/>
       </pButtons>
     </fDictEditForm>
+    <fUpdateCheckDialog Caption="Güncelleme Kontrolü">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="İptal"/>
+          <btnRetry Caption="Yeniden Dene"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Check Text="&quot;%s&quot; (sürüm %s) için mevcut güncellemeler aranıyor."/>
+        <Error Text="Şu anda &quot;%s&quot; için güncelleme olup olmadığı belirlenemiyor. Lütfen daha sonra tekrar deneyin."/>
+        <None Text="Şu anda &quot;%s&quot; için yeni bir güncelleme yok. Lütfen daha sonra kontrol edin."/>
+      </Message>
+    </fUpdateCheckDialog>
+    <fUpdateFoundDialog Caption="Güncelleme Mevcut">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="İptal"/>
+          <btnDownload Caption="İndir"/>
+          <btnSkip Caption="Atla"/>
+        </fButtonPanel>
+        <fAuxPanel>
+          <cbSkipVersion Caption="Bu sürümü atla"/>
+        </fAuxPanel>
+      </fLowerPanel>
+      <Message>
+        <Note Text="&quot;%0:s&quot; uygulamasının %1:s sürümü için sürüm notu sağlanmadı."/>
+      </Message>
+    </fUpdateFoundDialog>
+    <fUpdateDownloadDialog Caption="Güncelleme İndiriliyor">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="İptal"/>
+          <btnRetry Caption="Yeniden Dene"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Fetch Text="&quot;%s&quot; için güncelleme indiriliyor."/>
+        <Error Text="&quot;%s&quot; güncellemesi indirilirken hata oluştu. Lütfen daha sonra tekrar deneyin."/>
+      </Message>
+    </fUpdateDownloadDialog>
+    <fUpdateSaveDialog Caption="Güncelleme İndirildi">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="İptal"/>
+          <btnSaveAs Caption="Farklı Kaydet..."/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Downloaded Text="&quot;%s&quot; sürüm %s indirildi."/>
+      </Message>
+    </fUpdateSaveDialog>
     <fOptionsDialog Caption="Codepage Witch Ayarları">
       <pPages>
         <tsAbout Hint="Bu uygulama hakkında." Caption="Hakkında">
@@ -274,57 +326,6 @@
       </fLowerPanel>
       <Message Text="&quot;%s&quot; dosyası boş bir satırla bitmiyor.&#xA;&#xA;Dosyanın sonuna bir satır sonu ekleyerek bunu düzeltmek ister misiniz?"/>
     </fCorrectFileEndingDialog>
-    <fUpdateCheckDialog Caption="Güncelleme Kontrolü">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="İptal"/>
-          <btnRetry Caption="Yeniden Dene"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Check Text="&quot;%s&quot; (sürüm %s) için mevcut güncellemeler aranıyor."/>
-        <Error Text="Şu anda &quot;%s&quot; için güncelleme olup olmadığı belirlenemiyor. Lütfen daha sonra tekrar deneyin."/>
-        <None Text="Şu anda &quot;%s&quot; için yeni bir güncelleme yok. Lütfen daha sonra kontrol edin."/>
-      </Message>
-    </fUpdateCheckDialog>
-    <fUpdateFoundDialog Caption="Güncelleme Mevcut">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="İptal"/>
-          <btnDownload Caption="İndir"/>
-          <btnSkip Caption="Atla"/>
-        </fButtonPanel>
-        <fAuxPanel>
-          <cbSkipVersion Caption="Bu sürümü atla"/>
-        </fAuxPanel>
-      </fLowerPanel>
-      <Message>
-        <Note Text="&quot;%0:s&quot; uygulamasının %1:s sürümü için sürüm notu sağlanmadı."/>
-      </Message>
-    </fUpdateFoundDialog>
-    <fUpdateDownloadDialog Caption="Güncelleme İndiriliyor">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="İptal"/>
-          <btnRetry Caption="Yeniden Dene"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Fetch Text="&quot;%s&quot; için güncelleme indiriliyor."/>
-        <Error Text="&quot;%s&quot; güncellemesi indirilirken hata oluştu. Lütfen daha sonra tekrar deneyin."/>
-      </Message>
-    </fUpdateDownloadDialog>
-    <fUpdateSaveDialog Caption="Güncelleme İndirildi">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="İptal"/>
-          <btnSaveAs Caption="Farklı Kaydet..."/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Downloaded Text="&quot;%s&quot; sürüm %s indirildi."/>
-      </Message>
-    </fUpdateSaveDialog>
     <fLoggerViewForm Caption="Hata Ayıklama Günlüğü">
       <LineCount Plural="%.0n günlük girişi" Singular="%.0n günlük girişi"/>
       <pControls>

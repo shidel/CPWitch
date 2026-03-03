@@ -178,6 +178,7 @@
       <pTop>
         <lbLocale Caption="Locale:"/>
         <btnInvert Caption="Invert Selections"/>
+        <btnNone Caption="None"/>
       </pTop>
       <pButtons>
         <btnSave Caption="Save"/>
@@ -185,6 +186,57 @@
         <btnAdd Caption="Add to Dictionary"/>
       </pButtons>
     </fDictEditForm>
+    <fUpdateCheckDialog Caption="Перевірка оновлень">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Скасувати"/>
+          <btnRetry Caption="Повторити"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Check Text="Пошук доступних оновлень для &quot;%s&quot;, версія %s."/>
+        <Error Text="Наразі неможливо визначити наявність оновлень для &quot;%s&quot;. Будь ласка, спробуйте пізніше."/>
+        <None Text="На даний момент оновлень для &quot;%s&quot; немає. Будь ласка, перевірте пізніше."/>
+      </Message>
+    </fUpdateCheckDialog>
+    <fUpdateFoundDialog Caption="Доступне оновлення">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Скасувати"/>
+          <btnDownload Caption="Завантажити"/>
+          <btnSkip Caption="Пропустити"/>
+        </fButtonPanel>
+        <fAuxPanel>
+          <cbSkipVersion Caption="Пропустити цю версію"/>
+        </fAuxPanel>
+      </fLowerPanel>
+      <Message>
+        <Note Text="Примітки до випуску для версії %1:s програми &quot;%0:s&quot; відсутні."/>
+      </Message>
+    </fUpdateFoundDialog>
+    <fUpdateDownloadDialog Caption="Завантаження оновлення">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Скасувати"/>
+          <btnRetry Caption="Повторити"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Fetch Text="Завантаження оновлення для &quot;%s&quot;."/>
+        <Error Text="Помилка завантаження оновлення &quot;%s&quot;. Будь ласка, спробуйте пізніше."/>
+      </Message>
+    </fUpdateDownloadDialog>
+    <fUpdateSaveDialog Caption="Оновлення завантажено">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Скасувати"/>
+          <btnSaveAs Caption="Зберегти як..."/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Downloaded Text="Завантажено &quot;%s&quot; версії %s."/>
+      </Message>
+    </fUpdateSaveDialog>
     <fOptionsDialog Caption="Налаштування Codepage Witch">
       <pPages>
         <tsAbout Hint="Про програму." Caption="Про програму">
@@ -274,57 +326,6 @@
       </fLowerPanel>
       <Message Text="Файл &quot;%s&quot; не закінчується порожнім рядком.&#xA;&#xA;Бажаєте виправити це, додавши перехід рядка в кінець файлу?"/>
     </fCorrectFileEndingDialog>
-    <fUpdateCheckDialog Caption="Перевірка оновлень">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Скасувати"/>
-          <btnRetry Caption="Повторити"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Check Text="Пошук доступних оновлень для &quot;%s&quot;, версія %s."/>
-        <Error Text="Наразі неможливо визначити наявність оновлень для &quot;%s&quot;. Будь ласка, спробуйте пізніше."/>
-        <None Text="На даний момент оновлень для &quot;%s&quot; немає. Будь ласка, перевірте пізніше."/>
-      </Message>
-    </fUpdateCheckDialog>
-    <fUpdateFoundDialog Caption="Доступне оновлення">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Скасувати"/>
-          <btnDownload Caption="Завантажити"/>
-          <btnSkip Caption="Пропустити"/>
-        </fButtonPanel>
-        <fAuxPanel>
-          <cbSkipVersion Caption="Пропустити цю версію"/>
-        </fAuxPanel>
-      </fLowerPanel>
-      <Message>
-        <Note Text="Примітки до випуску для версії %1:s програми &quot;%0:s&quot; відсутні."/>
-      </Message>
-    </fUpdateFoundDialog>
-    <fUpdateDownloadDialog Caption="Завантаження оновлення">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Скасувати"/>
-          <btnRetry Caption="Повторити"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Fetch Text="Завантаження оновлення для &quot;%s&quot;."/>
-        <Error Text="Помилка завантаження оновлення &quot;%s&quot;. Будь ласка, спробуйте пізніше."/>
-      </Message>
-    </fUpdateDownloadDialog>
-    <fUpdateSaveDialog Caption="Оновлення завантажено">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Скасувати"/>
-          <btnSaveAs Caption="Зберегти як..."/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Downloaded Text="Завантажено &quot;%s&quot; версії %s."/>
-      </Message>
-    </fUpdateSaveDialog>
     <fLoggerViewForm Caption="Журнал налагодження">
       <LineCount Plural="%.0n записів" Singular="%.0n запис"/>
       <pControls>

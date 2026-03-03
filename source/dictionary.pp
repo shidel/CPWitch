@@ -62,6 +62,7 @@ var
 implementation
 
 {$UNDEF CaseSpecific}
+{$UNDEF StressTest}
 
 procedure Initialize;
 begin
@@ -120,7 +121,7 @@ begin
   SL.Free;
 end;
 
-
+{$IFDEF StressTest}
 procedure StressTest;
 var
   N, T : TBinaryTreeNode;
@@ -176,11 +177,9 @@ begin
   end;
 end;
 
-
 procedure StressTest2;
 var
   C : Integer;
-  B : Boolean;
   N : TBinaryTreeNode;
 begin
   C:=Dictionaries.Count;
@@ -205,6 +204,8 @@ begin
     end;
   end;
 end;
+
+{$ENDIF}
 
 procedure TDictionaries.Load;
 var
@@ -271,30 +272,16 @@ begin
         end;
       end;
     end;
-    LogMessage(vbVerbose, 'Balancing dictionary');
+    LogMessage(vbExcessive, 'Balancing dictionary');
     Optimize;
     LogMessage(vbExcessive, 'Verifying tree integrity');
     CheckIntegrity;
-    LogMessage(vbExcessive, 'Stress Test');
-    StressTest;
-    {$IFDEF BUILD_DEBUG}
-    if VerboseLevel = vbExcessive then begin
-      N:=First;
-      While Assigned(N) do begin
-        S:='';
-          for J:= 0 to Length(N.Data32) - 1 do
-            S:=S+Locale[J] + SPACE;
-        LogMessage(VerboseLevel, N.UniqueID + ' ' + S);
-        N:=N.Next;
-      end;
-    end;
-    {$ENDIF}
   finally
-    LogMessage(vbVerbose, 'Dictionary contains ' + IntToStr(WC) + ' unique words and ' +
-      IntToStr(Length(FLocales)) + ' languages.');
-    LogMessage(vbVerbose, TAB+Locales);
+    LogMessage(vbNormal, 'Dictionary contains ' + IntToStr(WC) + ' unique words and ' +
+      IntToStr(Length(FLocales)) + ' locales.' + LF + TAB+Locales);
   end;
   fModified:=False;
+
 end;
 
 procedure TDictionaries.SetModified(AValue: boolean);
@@ -307,6 +294,17 @@ procedure TDictionaries.Reload;
 begin
   FModified:=False;
   try
+    {$IFDEF StressTest}
+    Clear;
+    Load;
+    LogMessage(vbVerbose, 'Stress Test #1');
+    StressTest;
+    FLocales:=[];
+    FLoaded:=False;
+    Load;
+    LogMessage(vbVerbose, 'Stress Test #2');
+    StressTest;
+    {$ENDIF}
     Clear;
     Load;
     FLoaded:=True;
