@@ -13,7 +13,7 @@ unit Witch;
 
 interface
 
-{ DEFINE Slow_Analyze}
+{$DEFINE Slow_Analyze}
 
 uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}

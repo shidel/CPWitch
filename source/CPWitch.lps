@@ -21,9 +21,9 @@
         <UnitName Value="uMain"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="764"/>
-        <CursorPos X="5" Y="1070"/>
-        <FoldState Value=" T3ka039 pjEjb09033]BJk804614 pmFn60C6 piejN0c2]T3k40p31]ekBmd061 Pi080 T1kb023A21212A paud0301373 PjJr4]Y6lA0202241 p5t6]C1[j47 PLsH]W0lFc82A]K5 pMtGF3057142111J8]*Gs7a TMqE]I9263 PDrP4 TLu921R"/>
+        <TopLine Value="1036"/>
+        <CursorPos Y="1070"/>
+        <FoldState Value=" T3ka039 pjEjb09033]BJk804614 pmFn60C6 piejN0c2]T3k40p31]ekBmd06 T1kb023A21212A paud0301373 PjJr40 T6lA0202241 p5t6]C1[j47 PLsH]W0lFc82A]K5 pMtGF3057142111L6]*3s7a TMqE]I9263 PDrP4 TLu921I"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -104,8 +104,8 @@
         <Filename Value="witch.pas"/>
         <UnitName Value="Witch"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="102"/>
-        <CursorPos X="10" Y="125"/>
+        <TopLine Value="8"/>
+        <CursorPos X="3" Y="16"/>
         <FoldState Value=" TL004 T3ka04221311]31711[64 pmZrK08321 PNi10 T1kb0326]d55]5[e524[W4jAsN]X6pa010[Y4 T0sZw32221]VKkTTq"/>
         <UsageCount Value="102"/>
         <Loaded Value="True"/>
@@ -199,8 +199,8 @@
         <UnitName Value="uDictEdit"/>
         <EditorIndex Value="2"/>
         <TopLine Value="231"/>
-        <CursorPos X="47" Y="262"/>
-        <FoldState Value=" T3iV0L8 pidjZ0U024 POjE0F"/>
+        <CursorPos X="29" Y="256"/>
+        <FoldState Value=" T3iV0L8 pidjZ0U024 POjP0*"/>
         <UsageCount Value="89"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>

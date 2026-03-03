@@ -1066,8 +1066,8 @@ begin
     FDictEditForm.WitchList:=FWitch;
     if fDictEditForm.Visible = False then begin
       fDictEditForm.Show;
+      fDictEditForm.BringToFront;
     end;
-    fDictEditForm.BringToFront;
 
   end;
   {$ELSE}

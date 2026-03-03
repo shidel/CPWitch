@@ -241,13 +241,24 @@ begin
   SetLength(SL, FWords.Count);
   LC:=Dictionaries.IndexOfLocale(Trim(cbLocale.Text));
   FN:=FWords.First;
-  while Assigned(FN) do begin
-    DN:=Dictionaries.Find(Lowercase(FN.UniqueID));
-    if (not Assigned(DN)) or (LC=-1) or (InArray(DN.Data32, LC) = -1) then begin
-      SL[SC]:=FN.UniqueID;
-      Inc(SC);
+  if LC = -1 then begin
+    while Assigned(FN) do begin
+      DN:=Dictionaries.Find(Lowercase(FN.UniqueID));
+      if not Assigned(DN) then begin
+        SL[SC]:=FN.UniqueID;
+        Inc(SC);
+      end;
+      FN:=FN.Next;
     end;
-    FN:=FN.Next;
+  end else begin
+    while Assigned(FN) do begin
+      DN:=Dictionaries.Find(Lowercase(FN.UniqueID));
+      if (not Assigned(DN)) or (InArray(DN.Data32, LC) = -1) then begin
+        SL[SC]:=FN.UniqueID;
+        Inc(SC);
+      end;
+      FN:=FN.Next;
+    end;
   end;
   SetLength(SL, SC);
   if SC > 0 then begin
