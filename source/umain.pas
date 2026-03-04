@@ -531,7 +531,6 @@ begin
   if Item.Analyzed then begin
     // Processing complete
     ttAnimate.Enabled:=False;
-    lvCodepageList.Enabled:=True;
     lvCodepageList.SmallImages:=ilCompatibleColor;
     K:=ComponentNamePath(lvCodepageList, Self, True);
     case Item.Encoding of
@@ -578,6 +577,7 @@ begin
         L.Caption:=GetTranslation(K+'Not_implemented/Caption', 'Not implemented');
       end;
     end;
+    lvCodepageList.Enabled:=True;
   end else begin
     // Still srocessing text file in background thread
     lvCodepageList.Enabled:=False;
@@ -1054,6 +1054,11 @@ begin
       actClose.ImageIndex:=idxButtonFileCloseGray;
       actExportASCII.Enabled:=CanExport;
       btnExportFile.Action:=actExportASCII;
+      { TODO 0 -cLazarus_Bug In Lazarus 4.4, on Linux (and probably windows)
+      simply switching from one Action to another will not cause the
+      button to re-enable. It seems to get stuck for a little while as disabled
+      until another Codepage list item is selected. }
+      btnExportFile.Enabled:=CanEdit;
       actEditASCII.Enabled:=CanEdit;
       btnEditFile.Action:=actEditASCII;
     end;
@@ -1061,6 +1066,9 @@ begin
       actClose.ImageIndex:=idxButtonFileClose;
       actExportUnicode.Enabled:=CanExport;
       btnExportFile.Action:=actExportUnicode;
+      { TODO 0 -cLazarus_Bug Without forcing it to Enable, the Button
+      state can get "stuck" as disabled for a while. }
+      btnExportFile.Enabled:=CanEdit;
       actEditCodepage.Enabled:=CanEdit;
       btnEditFile.Action:=actEditCodepage;
     end;
@@ -1068,12 +1076,18 @@ begin
       actClose.ImageIndex:=idxButtonFileCloseGreen;
       actExportCodepage.Enabled:=CanExport;
       btnExportFile.Action:=actExportCodepage;
+      { TODO 0 -cLazarus_Bug Without forcing it to Enable, the Button
+      state can get "stuck" as disabled for a while. }
+      btnExportFile.Enabled:=CanEdit;
       actEditUnicode.Enabled:=CanEdit;
       btnEditFile.Action:=actEditUnicode;
     end;
   else
     actClose.ImageIndex:=idxButtonFileCloseRed;
     btnExportFile.Action:=actExportNone;
+    { TODO 0 -cLazarus_Bug Without forcing it to Enable, the Button
+    state can get "stuck" as disabled for a while. }
+    btnExportFile.Enabled:=CanEdit;
     btnEditFile.Action:=actEditNone;
   end;
 end;

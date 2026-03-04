@@ -19,7 +19,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
+        <TopLine Value="1030"/>
         <CursorPos X="40" Y="20"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
@@ -161,9 +163,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uDictEdit"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="238"/>
+        <TopLine Value="278"/>
         <CursorPos X="31" Y="241"/>
         <UsageCount Value="102"/>
         <Loaded Value="True"/>
@@ -191,7 +192,6 @@
         <EditorIndex Value="2"/>
         <TopLine Value="238"/>
         <CursorPos X="32" Y="243"/>
-        <FoldState Value=" T3iT0A4 PdiA0P"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit>

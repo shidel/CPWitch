@@ -8,7 +8,7 @@
         <Filename Value="CPWitch_Linux.lpr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="49" Y="22"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -25,10 +25,14 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <EditorIndex Value="2"/>
-        <CursorPos X="7" Y="21"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="988"/>
+        <CursorPos Y="1107"/>
+        <FoldState Value=" TCQG3 T3l40311716 pmInP042212123 plCoQ0E322 pjTlT0p01]MiglQ0H3[K4kB082 Pi7H0t"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/doscrt.pp"/>
@@ -42,11 +46,10 @@
       <Unit>
         <Filename Value="../mpla/multiapp.pp"/>
         <UnitName Value="MultiApp"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="626"/>
         <CursorPos X="26" Y="653"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="uprefs.pas"/>
@@ -60,47 +63,32 @@
       <Unit>
         <Filename Value="../mpla/dosview.pp"/>
         <UnitName Value="DosView"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="255"/>
         <CursorPos X="27" Y="281"/>
         <FoldState Value=" T3v40j8"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="witch.pas"/>
         <UnitName Value="Witch"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="4"/>
-        <CursorPos X="62" Y="3"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="45" Y="6"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="5">
+    <JumpHistory HistoryIndex="1">
       <Position>
         <Filename Value="CPWitch_Linux.lpr"/>
         <Caret Line="21" Column="70"/>
       </Position>
       <Position>
-        <Filename Value="../mpla/multiapp.pp"/>
-        <Caret Line="34" Column="55"/>
+        <Filename Value="umain.pas"/>
+        <Caret Line="1081" TopLine="960"/>
       </Position>
       <Position>
-        <Filename Value="../mpla/multiapp.pp"/>
-        <Caret Line="237" Column="25" TopLine="194"/>
-      </Position>
-      <Position>
-        <Filename Value="../mpla/dosview.pp"/>
-        <Caret Line="282" Column="57" TopLine="242"/>
-      </Position>
-      <Position>
-        <Filename Value="../mpla/dosview.pp"/>
-        <Caret Line="285" Column="10" TopLine="257"/>
-      </Position>
-      <Position>
-        <Filename Value="../mpla/dosview.pp"/>
-        <Caret Line="281" Column="27" TopLine="255"/>
+        <Filename Value="umain.pas"/>
+        <Caret Line="1069" Column="51" TopLine="876"/>
       </Position>
     </JumpHistory>
     <RunParams>
