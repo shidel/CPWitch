@@ -19,11 +19,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="660"/>
-        <CursorPos X="37" Y="839"/>
-        <FoldState Value=" T3l4039 pjFjc0951322]DcnY064]9Yk70C6 pifjO0l[R4AkK0p3]90kG0b3]Rgk10l3 PiFiN0 T1l502111A212D pSvO030F p0sc05 T6lM0202241 p5tX]C4156 PGuR]z0lRc82A1215 pMu0F309[%4]4V4 pVuHa8 TMqS211E2 TLv321k"/>
+        <CursorPos X="40" Y="20"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -35,12 +32,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uPrefs"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="23"/>
+        <EditorIndex Value="-1"/>
         <CursorPos X="53" Y="49"/>
         <UsageCount Value="200"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="ufixending.pas"/>
@@ -76,8 +70,9 @@
         <Filename Value="mpla/multiapp.pp"/>
         <UnitName Value="MultiApp"/>
         <EditorIndex Value="-1"/>
+        <TopLine Value="2074"/>
         <CursorPos X="56" Y="34"/>
-        <FoldState Value=" TL0041267A411121H pg*e0109 p0wB21 TMa03134 pFijV[H47q2I41 PB8N T8l32A07133 PNmC2 TCpeI3 T3r9098 piajK03[94ZjH[96YjJ0B9 pjCjO26117]BDld0I[c6U0741A pkOlT0D7]KcjO0RC]9dk8032]lTjc0711C[T5d03[c4bj704112 PbiU0 T6rB01J pXuZ01C17 PW:I]O1rD05D]=8kT09823211D129 pkfv00413D4B]DTqG0541]U2G[64 Pk8rK]:0sGW54282 piOsSw30842A pjUwYaC7]i3 PigsTVo"/>
+        <FoldState Value=" TL0041267A411121H pg*e0109 p0wB21 TMa03134 pFijV[H47q2I41 PB8N T8l32A07133 PNmC2 TCpeI3 T3r9098 piajK03[94ZjH[96YjJ0B9 pjCjO26117]BDld0I[c6U075[95B03A]R2jX0E[a48je0DD]RXjV0{UC]Afm8[b63jM046 PiCiU0 T6rB01J pXuZ01C17 PW:I]O1rD05D[%4kT09823211D129 pkfv00413D4B]DTqG0541]U2G[64 Pk8rK]:0sGW54282 piOsSw30842A pjUwYaC7]i3 PigsTVs"/>
         <UsageCount Value="76"/>
       </Unit>
       <Unit>
@@ -92,7 +87,7 @@
       <Unit>
         <Filename Value="witch.pas"/>
         <UnitName Value="Witch"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="5"/>
         <TopLine Value="218"/>
         <CursorPos X="3" Y="243"/>
         <UsageCount Value="102"/>
@@ -119,7 +114,7 @@
       <Unit>
         <Filename Value="mpla/codepages.pp"/>
         <UnitName Value="Codepages"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="4"/>
         <TopLine Value="163"/>
         <CursorPos Y="289"/>
         <UsageCount Value="104"/>
@@ -146,11 +141,10 @@
       <Unit>
         <Filename Value="dictionary.pp"/>
         <UnitName Value="Dictionary"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="217"/>
         <CursorPos X="41" Y="244"/>
         <UsageCount Value="105"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/bintree.pp"/>
@@ -167,8 +161,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uDictEdit"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <CursorPos X="2" Y="5"/>
+        <TopLine Value="238"/>
+        <CursorPos X="31" Y="241"/>
         <UsageCount Value="102"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -189,8 +185,18 @@
         <CursorPos X="18" Y="882"/>
         <UsageCount Value="17"/>
       </Unit>
+      <Unit>
+        <Filename Value="mpla/logview.pp"/>
+        <UnitName Value="LogView"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="238"/>
+        <CursorPos X="32" Y="243"/>
+        <FoldState Value=" T3iT0A4 PdiA0P"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit>
     </Units>
-    <JumpHistory HistoryIndex="28">
+    <JumpHistory HistoryIndex="25">
       <Position>
         <Filename Value="udictedit.pas"/>
         <Caret Line="223" Column="75" TopLine="26"/>
@@ -228,22 +234,6 @@
         <Caret Line="1245" Column="3" TopLine="1142"/>
       </Position>
       <Position>
-        <Filename Value="dictionary.pp"/>
-        <Caret Line="63" TopLine="15"/>
-      </Position>
-      <Position>
-        <Filename Value="dictionary.pp"/>
-        <Caret Line="437" Column="10" TopLine="411"/>
-      </Position>
-      <Position>
-        <Filename Value="dictionary.pp"/>
-        <Caret Line="443" Column="48" TopLine="401"/>
-      </Position>
-      <Position>
-        <Filename Value="dictionary.pp"/>
-        <Caret Line="453" Column="52" TopLine="424"/>
-      </Position>
-      <Position>
         <Filename Value="witch.pas"/>
         <Caret Line="286" Column="12" TopLine="247"/>
       </Position>
@@ -272,14 +262,6 @@
         <Caret Line="1093" Column="19" TopLine="1065"/>
       </Position>
       <Position>
-        <Filename Value="uprefs.pas"/>
-        <Caret Line="49" TopLine="23"/>
-      </Position>
-      <Position>
-        <Filename Value="uprefs.pas"/>
-        <Caret Line="50" TopLine="23"/>
-      </Position>
-      <Position>
         <Filename Value="umain.pas"/>
         <Caret Line="101" Column="18" TopLine="84"/>
       </Position>
@@ -306,6 +288,18 @@
       <Position>
         <Filename Value="umain.pas"/>
         <Caret Line="350" Column="16" TopLine="176"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/logview.pp"/>
+        <Caret Line="146"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/logview.pp"/>
+        <Caret Line="165" Column="33" TopLine="140"/>
+      </Position>
+      <Position>
+        <Filename Value="udictedit.pas"/>
+        <Caret Line="269" Column="90" TopLine="244"/>
       </Position>
     </JumpHistory>
     <RunParams>

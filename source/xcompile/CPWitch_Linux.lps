@@ -29,7 +29,6 @@
         <CursorPos X="7" Y="21"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/doscrt.pp"/>
@@ -61,7 +60,6 @@
       <Unit>
         <Filename Value="../mpla/dosview.pp"/>
         <UnitName Value="DosView"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <TopLine Value="255"/>
         <CursorPos X="27" Y="281"/>
@@ -69,8 +67,17 @@
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit>
+      <Unit>
+        <Filename Value="witch.pas"/>
+        <UnitName Value="Witch"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="4"/>
+        <CursorPos X="62" Y="3"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
     </Units>
-    <JumpHistory HistoryIndex="4">
+    <JumpHistory HistoryIndex="5">
       <Position>
         <Filename Value="CPWitch_Linux.lpr"/>
         <Caret Line="21" Column="70"/>
@@ -90,6 +97,10 @@
       <Position>
         <Filename Value="../mpla/dosview.pp"/>
         <Caret Line="285" Column="10" TopLine="257"/>
+      </Position>
+      <Position>
+        <Filename Value="../mpla/dosview.pp"/>
+        <Caret Line="281" Column="27" TopLine="255"/>
       </Position>
     </JumpHistory>
     <RunParams>

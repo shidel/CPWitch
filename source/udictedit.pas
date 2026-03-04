@@ -139,7 +139,7 @@ begin
   LC:=Dictionaries.AddLocale(Trim(cbLocale.Text));
   SS:=[LC];
   for I := 0 to clWords.Count - 1 do
-    if clWords.Checked[I] then begin
+    if clWords.State[I] = cbChecked then begin
       S:=LowerCase(clWords.Items[I]);
       DN:=Dictionaries.Find(S);
       if not Assigned(DN) then
@@ -230,7 +230,7 @@ var
   LC : Int32;
   FN, DN : TBinaryTreeNode;
   SL : Array of String;
-  SC, EC, I : integer;
+  SC, I : integer;
 begin
   clWords.Clear;
   DoUpdateButtons;
@@ -263,10 +263,17 @@ begin
   SetLength(SL, SC);
   if SC > 0 then begin
     clWords.Items.AddStrings(SL);
-    EC:=Dictionaries.IndexOfLocale('en_US');
+    // EC:=Dictionaries.IndexOfLocale('en_US');
     for I := 0 to clWords.Count - 1 do begin
       DN:=Dictionaries.Find(Lowercase(clWords.Items[I]));
-      clWords.Checked[I]:=(LC <> -1) and ((Not Assigned(DN)) or (InArray(DN.Data32, EC) = -1));
+      if (LC <> -1) and (Not Assigned(DN)) then begin
+        if (Length(clWords.Items[I]) > 5) and (Uppercase(clWords.Items[I]) <> clWords.Items[I]) then
+          clWords.Checked[I]:=true
+        else if clWords.AllowGrayed then
+          clWords.State[I]:=cbGrayed;
+      end;
+
+      // or (InArray(DN.Data32, EC) = -1));
     end;
   end;
   DoUpdateButtons;
