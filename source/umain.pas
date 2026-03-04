@@ -491,6 +491,7 @@ procedure TfMain.lvCodepageListSelectItem(Sender: TObject; Item: TListItem;
 begin
   IgnoreParameter(Item);
   if Selected then SelectCodepage(Sender);
+  UpdateButtons;
 end;
 
 procedure TfMain.lvFileListSelectItem(Sender: TObject; Item: TListItem;
@@ -498,6 +499,7 @@ procedure TfMain.lvFileListSelectItem(Sender: TObject; Item: TListItem;
 begin
   IgnoreParameter(Item);
   if Selected then SelectFile(Sender);
+  UpdateButtons;
 end;
 
 procedure TfMain.ttAnimateTimer(Sender: TObject);

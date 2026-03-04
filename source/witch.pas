@@ -134,6 +134,7 @@ type
     FEndsWithBlank: boolean;
     FLineEndings: TLineEndings;
     FLocale: RawByteString;
+    FPreferred: integer;
     FResults: TCodepageResults;
     FText: RawByteString;
     FWitch: TWitch;
@@ -159,6 +160,7 @@ type
     property LineEndings : TLineEndings read FLineEndings;
     property EndsWithBlank : boolean read FEndsWithBlank;
     property Locale : RawByteString read FLocale;
+    property Preferred : integer read FPreferred;
   end;
 
 { TWitchAnalyzeThread }
@@ -185,6 +187,7 @@ procedure TWitchAnalyzeThread.Execute;
 var
   I : integer;
   V : TArrayOfInt32;
+  L : TLocale;
 begin
   If Not (Assigned(FWitch) and Assigned(FWitchItem)) then Exit;
 
@@ -196,6 +199,8 @@ begin
   FEndsWithBlank:=False;
   FEncoding:=weNone;
   FLocale:='';
+  FPreferred:=-1;
+
   // Test for characters above ASCII 127
   for I := 1 to Length(FText) do
     if Byte(FText[I]) = 0 then begin
@@ -232,6 +237,9 @@ begin
     weUnicode:AnalyzeUTF8;
   end;
 
+  if Codepages.Locale(FLocale, L) then
+    FPreferred:=L.Codepage;
+
   Synchronize(@Completed);
 end;
 
@@ -241,6 +249,7 @@ begin
   FWitchItem.FEndsWithBlank:=FEndsWithBlank;
   FWitchItem.FResults:=Results;
   FWitchItem.FLocale:=Flocale;
+  FWitchItem.FPreferred:=FPreferred;
   FWitch.ThreadComplete(Self);
 end;
 
@@ -292,8 +301,12 @@ begin
 end;
 
 procedure TWitchAnalyzeThread.AnalyzeASCII;
+var
+  S : RawByteString;
 begin
-
+  S:=NoComments;
+  if Assigned(Dictionaries) then
+  FLocale:=DetectLocale(S);
 end;
 
 procedure TWitchAnalyzeThread.AfterConstruction;
@@ -305,6 +318,8 @@ begin
   FWitch:=nil;
   FWitchItem:=nil;
   FResults:=[];
+  FLocale:='';
+  FPreferred:=-1;
 end;
 
 { TWitchItem }
