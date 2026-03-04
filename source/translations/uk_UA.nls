@@ -165,6 +165,14 @@
           </pViewCodepageLabel>
         </pCodepage>
       </pViewers>
+      <statBar>
+        <Processing Caption="Обробка"/>
+        <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
+        <Unicode Caption="Unicode"/>
+        <NoEncoding Caption="ASCII"/>
+        <Codepage Caption="Кодування"/>
+        <Binary Caption="Бінарний"/>
+      </statBar>
       <Locales>
         <ar_SA Text="Арабська (Саудівська Аравія)"/>
         <cs_CZ Text="Чеська (Чехія)"/>
@@ -214,20 +222,15 @@
         <th_TH Text="Тайська (Таїланд)"/>
         <vi_VN Text="В'єтнамська (В'єтнам)"/>
       </Locales>
-      <statBar>
-        <Processing Caption="Обробка"/>
-        <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
-        <Unicode Caption="Unicode"/>
-        <NoEncoding Caption="ASCII"/>
-        <Codepage Caption="Кодування"/>
-        <Binary Caption="Бінарний"/>
-      </statBar>
     </fMain>
     <fDictEditForm Caption="Оновлення словника">
       <pTop>
         <lbLocale Caption="Локаль:"/>
         <btnInvert Caption="Інвертувати"/>
         <btnNone Caption="Нічого"/>
+        <cbLocale>
+          <Items Index_0="ar_SA" Index_1="bg_BG" Index_2="cs_CZ" Index_3="da_DK" Index_4="de_CH" Index_5="de_DE" Index_6="el_GR" Index_7="en_US" Index_8="eo" Index_9="es_ES" Index_10="et_EE" Index_11="fil_PH" Index_12="fi_FI" Index_13="fr_FR" Index_14="haw_US" Index_15="he_IL" Index_16="hu_HU" Index_17="id_ID" Index_18="is_IS" Index_19="it_IT" Index_20="ja_JP" Index_21="ko_KR" Index_22="la" Index_23="lt_LT" Index_24="lv_LV" Index_25="nb_NO" Index_26="nl_NL" Index_27="no_NO" Index_28="pl_MAZ" Index_29="pl_PL" Index_30="pt_BR" Index_31="pt_PT" Index_32="ro_RO" Index_33="ru_RU" Index_34="sk_SK" Index_35="sl_SI" Index_36="sm_WS" Index_37="sr_RS" Index_38="sv_SE" Index_39="th_TH" Index_40="tr_TR" Index_41="uk_UA" Index_42="vi_VN" Index_43="zh_CN" Index_44="fr_CA" Index_45="tl_PH" Index_46="nn_NO"/>
+        </cbLocale>
       </pTop>
       <pButtons>
         <btnSave Caption="Зберегти"/>
@@ -235,6 +238,84 @@
         <btnAdd Caption="Додати до словника"/>
       </pButtons>
     </fDictEditForm>
+    <fOptionsDialog Caption="Налаштування Codepage Witch">
+      <pPages>
+        <tsAbout Hint="Про програму." Caption="Про програму">
+          <lbCopyright Caption="Copyright %s"/>
+          <lbVersion Caption="Версія %0:s (Збірка %1:s)"/>
+          <lbApplication Caption="Програма &quot;%s&quot;"/>
+        </tsAbout>
+        <tsGeneral Hint="Загальні налаштування програми." Caption="Загальні">
+          <gbUserLanguage Caption="Мова користувача">
+            <cxLanguageChoice Default="(за замовчуванням)"/>
+            <pLanguagePreferred>
+              <lbLanguagePreferred Caption="Бажана мова:"/>
+            </pLanguagePreferred>
+            <lbLanguageSystem Caption="Системна мова: %s"/>
+          </gbUserLanguage>
+          <gbMiscellaneous Caption="Різне">
+            <cbShowHints Caption="Показувати підказки при наведенні миші."/>
+            <cbColorButtons Caption="Кольорові кнопки на панелі інструментів."/>
+          </gbMiscellaneous>
+          <gbOnlineUpdate Caption="Онлайн-оновлення">
+            <cbAutoCheck Caption="Автоматично перевіряти оновлення"/>
+            <pUpdateButton>
+              <btnUpdateCheck Hint="Перевірити наявність оновлень на сервері." Caption="Перевірити зараз..."/>
+            </pUpdateButton>
+          </gbOnlineUpdate>
+        </tsGeneral>
+        <tsSession Hint="Параметри сеансів програми." Caption="Сеанс">
+          <gbSessionFiles Caption="Файли сеансу">
+            <cbReopenFiles Hint="Знову відкривати файли, що не були закриті в попередньому сеансі." Caption="Відкривати попередні файли."/>
+            <cbWarnMissing Hint="Попереджати, якщо файл із попереднього сеансу відсутній." Caption="Попереджати про відсутність."/>
+            <cbOpenExport Hint="Автоматично відкривати експортовані файли для перевірки." Caption="Відкривати експортовані файли."/>
+          </gbSessionFiles>
+          <gbCodepage Caption="Кодова сторінка">
+            <cbAutoSelectCP Hint="Автоматично вибирати бажану кодову сторінку для конвертації." Caption="Автоматично вибирати кодову сторінку"/>
+          </gbCodepage>
+        </tsSession>
+        <tsEncoding Hint="Параметри кодування вводу та виводу файлів." Caption="Кодування">
+          <rgFileEnding Hint="Вимагати, щоб файли закінчувалися порожнім рядком." Caption="Файли закінчуються новим рядком">
+            <rbFileEndWhatever Hint="Файли можуть закінчуватися текстом або порожнім рядком." Caption="Неважливо."/>
+            <rbFileEndExport Hint="Гарантувати, що експортовані файли закінчуються порожнім рядком." Caption="Тільки для експорту."/>
+            <rbFileEndAll Hint="Вимагати, щоб оригінальні файли закінчувалися порожнім рядком." Caption="Для всіх текстових файлів."/>
+          </rgFileEnding>
+        </tsEncoding>
+        <tsViewer Hint="Параметри для Unicode та DOS переглядачів." Caption="Переглядач">
+          <gbUnicodeView Caption="Unicode перегляд">
+            <lbUnicodeScale Caption="Масштаб шрифту %s%%"/>
+            <tbUnicodeScale Caption="10"/>
+          </gbUnicodeView>
+          <gbDOSView Caption="DOS перегляд">
+            <lbDOSScale Caption="Масштаб шрифту %s%%"/>
+            <tbDOSScale Caption="1"/>
+          </gbDOSView>
+        </tsViewer>
+      </pPages>
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnAccept Hint="Прийняти та застосувати зміни." Caption="ОК"/>
+          <btnCancel Hint="Скасувати всі зміни." Caption="Скасувати"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <fMiddlePanel>
+        <fBodyPanel>
+          <pSectionsPanel>
+            <pSectionLabel>
+              <lbSections Caption="Опції"/>
+            </pSectionLabel>
+          </pSectionsPanel>
+          <pPagesPanel>
+            <pPages>
+              <tsViewer>
+                <lbUnicodeScale Caption="Масштаб шрифту %s%%"/>
+                <lbDOSScale Caption="Масштаб шрифту %s%%"/>
+              </tsViewer>
+            </pPages>
+          </pPagesPanel>
+        </fBodyPanel>
+      </fMiddlePanel>
+    </fOptionsDialog>
     <fUpdateCheckDialog Caption="Перевірка оновлень">
       <fLowerPanel>
         <fButtonPanel>
@@ -286,81 +367,6 @@
         <Downloaded Text="Завантажено &quot;%s&quot; версії %s."/>
       </Message>
     </fUpdateSaveDialog>
-    <fOptionsDialog Caption="Налаштування Codepage Witch">
-      <pPages>
-        <tsAbout Hint="Про програму." Caption="Про програму">
-          <lbCopyright Caption="Copyright %s"/>
-          <lbVersion Caption="Версія %0:s (Збірка %1:s)"/>
-          <lbApplication Caption="Програма &quot;%s&quot;"/>
-        </tsAbout>
-        <tsGeneral Hint="Загальні налаштування програми." Caption="Загальні">
-          <gbUserLanguage Caption="Мова користувача">
-            <cxLanguageChoice Default="(за замовчуванням)"/>
-            <pLanguagePreferred>
-              <lbLanguagePreferred Caption="Бажана мова:"/>
-            </pLanguagePreferred>
-            <lbLanguageSystem Caption="Системна мова: %s"/>
-          </gbUserLanguage>
-          <gbMiscellaneous Caption="Різне">
-            <cbShowHints Caption="Показувати підказки при наведенні миші."/>
-            <cbColorButtons Caption="Кольорові кнопки на панелі інструментів."/>
-          </gbMiscellaneous>
-          <gbOnlineUpdate Caption="Онлайн-оновлення">
-            <cbAutoCheck Caption="Автоматично перевіряти оновлення"/>
-            <pUpdateButton>
-              <btnUpdateCheck Hint="Перевірити наявність оновлень на сервері." Caption="Перевірити зараз..."/>
-            </pUpdateButton>
-          </gbOnlineUpdate>
-        </tsGeneral>
-        <tsSession Hint="Параметри сеансів програми." Caption="Сеанс">
-          <gbSessionFiles Caption="Файли сеансу">
-            <cbReopenFiles Hint="Знову відкривати файли, що не були закриті в попередньому сеансі." Caption="Відкривати попередні файли."/>
-            <cbWarnMissing Hint="Попереджати, якщо файл із попереднього сеансу відсутній." Caption="Попереджати про відсутність."/>
-            <cbOpenExport Hint="Автоматично відкривати експортовані файли для перевірки." Caption="Відкривати експортовані файли."/>
-          </gbSessionFiles>
-        </tsSession>
-        <tsEncoding Hint="Параметри кодування вводу та виводу файлів." Caption="Кодування">
-          <rgFileEnding Hint="Вимагати, щоб файли закінчувалися порожнім рядком." Caption="Файли закінчуються новим рядком">
-            <rbFileEndWhatever Hint="Файли можуть закінчуватися текстом або порожнім рядком." Caption="Неважливо."/>
-            <rbFileEndExport Hint="Гарантувати, що експортовані файли закінчуються порожнім рядком." Caption="Тільки для експорту."/>
-            <rbFileEndAll Hint="Вимагати, щоб оригінальні файли закінчувалися порожнім рядком." Caption="Для всіх текстових файлів."/>
-          </rgFileEnding>
-        </tsEncoding>
-        <tsViewer Hint="Параметри для Unicode та DOS переглядачів." Caption="Переглядач">
-          <gbUnicodeView Caption="Unicode перегляд">
-            <lbUnicodeScale Caption="Масштаб шрифту %s%%"/>
-            <tbUnicodeScale Caption="10"/>
-          </gbUnicodeView>
-          <gbDOSView Caption="DOS перегляд">
-            <lbDOSScale Caption="Масштаб шрифту %s%%"/>
-            <tbDOSScale Caption="1"/>
-          </gbDOSView>
-        </tsViewer>
-      </pPages>
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnAccept Hint="Прийняти та застосувати зміни." Caption="ОК"/>
-          <btnCancel Hint="Скасувати всі зміни." Caption="Скасувати"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <fMiddlePanel>
-        <fBodyPanel>
-          <pSectionsPanel>
-            <pSectionLabel>
-              <lbSections Caption="Опції"/>
-            </pSectionLabel>
-          </pSectionsPanel>
-          <pPagesPanel>
-            <pPages>
-              <tsViewer>
-                <lbUnicodeScale Caption="Масштаб шрифту %s%%"/>
-                <lbDOSScale Caption="Масштаб шрифту %s%%"/>
-              </tsViewer>
-            </pPages>
-          </pPagesPanel>
-        </fBodyPanel>
-      </fMiddlePanel>
-    </fOptionsDialog>
     <fFileEditor Caption="Codepage Witch - %s">
       <btnCancel Caption="Скасувати"/>
       <btnSave Caption="Зберегти"/>

@@ -129,6 +129,7 @@ type
       fOpenExported : boolean;
       fWatchIndex : integer;
       fLocales : TLocaleItems;
+      fAutoSelectCP : boolean;
       procedure PopulateCodepageList(Item : TWitchItem);
       procedure SetCodepageFilter(AValue: TCodepageFilter);
       procedure SetUnicodeView( S : String );
@@ -346,6 +347,7 @@ begin
   fEndBlankOnInput:=True;
   fEndBlankOnExport:=True;
   fOpenExported:=False;
+  fAutoSelectCP:=True;
   fWatchIndex:=0;
   fLocales:=[];
 
@@ -498,7 +500,8 @@ procedure TfMain.lvFileListSelectItem(Sender: TObject; Item: TListItem;
   Selected: Boolean);
 begin
   IgnoreParameter(Item);
-  if Selected then SelectFile(Sender);
+  if Selected then
+    SelectFile(Sender);
   UpdateButtons;
 end;
 
@@ -711,6 +714,8 @@ begin
     'Preferences/tsSession/cbWarnMissing/State', 'Unchecked')) = cbChecked;
   fOpenExported:=StringToCheckBoxState(UserConfig.GetValue(
     'Preferences/tsSession/cbOpenExport/State', 'Unchecked')) = cbChecked;
+  fAutoSelectCP:=StringToCheckBoxState(UserConfig.GetValue(
+    'Preferences/tsSession/cbAutoSelectCP/State', 'Checked')) = cbChecked;
   B:=StrToBool(UserConfig.GetValue(
     'Preferences/tsEncoding/rbFileEndAll/Checked', ''), fEndBlankOnInput);
   fEndBlankOnExport:=B or StrToBool(UserConfig.GetValue(
@@ -837,11 +842,20 @@ var
   T : String;
   HCP, CP, E : integer;
   Item : TListItem;
+  W : TWitchItem;
 begin
   lvCodepageList.BeginUpdate;
   lvCodepageList.Clear;
   if Assigned(lvFileList.Selected) then begin
     PopulateCodepageList(TWitchItem(lvFileList.Selected.Data));
+    if fAutoSelectCP and Assigned(lvFileList.Selected) and
+    Assigned(lvFileList.Selected.Data) then begin
+      W:=TWitchItem(lvFileList.Selected.Data);
+      if W.Analyzed and (W.Preferred <> -1) then begin
+        FActiveCodePage:=W.Preferred;
+        LogMessage(vbVerbose, 'Selected Preferred ' + IntToStr(FActiveCodepage));
+      end;
+    end;
   end;
   HCP:=FActiveCodepage;
   // Reselect Active Codepage if Possible;
@@ -1171,6 +1185,7 @@ begin
   UpdateStatusBar;
   UpdateCodepageViewlabel;
   UpdateCodePageView;
+  UpdateButtons;
 end;
 
 procedure TfMain.SelectFile(Sender: TObject);
@@ -1180,6 +1195,7 @@ var
   S : String;
   W : TWitchItem;
 begin
+  IgnoreParameter(Sender);
   FViewedCodepage:=-2;
   {$IFDEF BUILD_SPECIAL}
   if Assigned(FDictEditForm) then begin
@@ -1204,7 +1220,6 @@ begin
   end else
     S:='(null)';
   LogMessage(vbVerbose, 'Select File: ' + S);
-  IgnoreParameter(Sender);
   UpdateMetaData;
   if SuspendCheck then Exit;
   if fEndBlankOnInput and Assigned(lvFileList.Selected) then begin

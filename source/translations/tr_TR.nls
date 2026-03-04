@@ -165,6 +165,14 @@
           </pViewCodepageLabel>
         </pCodepage>
       </pViewers>
+      <statBar>
+        <Processing Caption="İşleniyor"/>
+        <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
+        <Unicode Caption="Unicode"/>
+        <NoEncoding Caption="ASCII"/>
+        <Codepage Caption="Kod Sayfası"/>
+        <Binary Caption="İkili"/>
+      </statBar>
       <Locales>
         <ar_SA Text="Arapça (Suudi Arabistan)"/>
         <cs_CZ Text="Çekçe (Çekya)"/>
@@ -214,20 +222,15 @@
         <th_TH Text="Tayca (Tayland)"/>
         <vi_VN Text="Vietnamca (Vietnam)"/>
       </Locales>
-      <statBar>
-        <Processing Caption="İşleniyor"/>
-        <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
-        <Unicode Caption="Unicode"/>
-        <NoEncoding Caption="ASCII"/>
-        <Codepage Caption="Kod Sayfası"/>
-        <Binary Caption="İkili"/>
-      </statBar>
     </fMain>
     <fDictEditForm Caption="Sözlük Güncelleyici">
       <pTop>
         <lbLocale Caption="Yerel Ayar:"/>
         <btnInvert Caption="Tersine Çevir"/>
         <btnNone Caption="Hiçbiri"/>
+        <cbLocale>
+          <Items Index_0="ar_SA" Index_1="bg_BG" Index_2="cs_CZ" Index_3="da_DK" Index_4="de_CH" Index_5="de_DE" Index_6="el_GR" Index_7="en_US" Index_8="eo" Index_9="es_ES" Index_10="et_EE" Index_11="fil_PH" Index_12="fi_FI" Index_13="fr_FR" Index_14="haw_US" Index_15="he_IL" Index_16="hu_HU" Index_17="id_ID" Index_18="is_IS" Index_19="it_IT" Index_20="ja_JP" Index_21="ko_KR" Index_22="la" Index_23="lt_LT" Index_24="lv_LV" Index_25="nb_NO" Index_26="nl_NL" Index_27="no_NO" Index_28="pl_MAZ" Index_29="pl_PL" Index_30="pt_BR" Index_31="pt_PT" Index_32="ro_RO" Index_33="ru_RU" Index_34="sk_SK" Index_35="sl_SI" Index_36="sm_WS" Index_37="sr_RS" Index_38="sv_SE" Index_39="th_TH" Index_40="tr_TR" Index_41="uk_UA" Index_42="vi_VN" Index_43="zh_CN" Index_44="fr_CA" Index_45="tl_PH" Index_46="nn_NO"/>
+        </cbLocale>
       </pTop>
       <pButtons>
         <btnSave Caption="Kaydet"/>
@@ -235,6 +238,84 @@
         <btnAdd Caption="Sözlüğe Ekle"/>
       </pButtons>
     </fDictEditForm>
+    <fOptionsDialog Caption="Codepage Witch Ayarları">
+      <pPages>
+        <tsAbout Hint="Bu uygulama hakkında." Caption="Hakkında">
+          <lbCopyright Caption="Telif Hakkı %s"/>
+          <lbVersion Caption="Sürüm %0:s (Yapı %1:s)"/>
+          <lbApplication Caption="&quot;%s&quot;"/>
+        </tsAbout>
+        <tsGeneral Hint="Genel uygulama ayarları." Caption="Genel">
+          <gbUserLanguage Caption="Kullanıcı Dili">
+            <cxLanguageChoice Default="(varsayılan)"/>
+            <pLanguagePreferred>
+              <lbLanguagePreferred Caption="Tercih Edilen Dil:"/>
+            </pLanguagePreferred>
+            <lbLanguageSystem Caption="Sistem Dili: %s"/>
+          </gbUserLanguage>
+          <gbMiscellaneous Caption="Çeşitli">
+            <cbShowHints Caption="Fare üzerine geldiğinde ipuçlarını göster."/>
+            <cbColorButtons Caption="Renkli araç çubuğu simgelerini kullan."/>
+          </gbMiscellaneous>
+          <gbOnlineUpdate Caption="Çevrimiçi Güncelleme">
+            <cbAutoCheck Caption="Güncellemeleri otomatik kontrol et"/>
+            <pUpdateButton>
+              <btnUpdateCheck Hint="En son güncelleme için sunucuyu kontrol et." Caption="Şimdi Kontrol Et..."/>
+            </pUpdateButton>
+          </gbOnlineUpdate>
+        </tsGeneral>
+        <tsSession Hint="Uygulama oturumlarıyla ilgili seçenekler." Caption="Oturum">
+          <gbSessionFiles Caption="Oturum Dosyaları">
+            <cbReopenFiles Hint="Önceki oturumda kapatılmayan dosyaları yeniden aç." Caption="Önceki dosyaları yeniden aç."/>
+            <cbWarnMissing Hint="Önceki oturumdaki bir dosya mevcut değilse uyar." Caption="Eksikse uyar."/>
+            <cbOpenExport Hint="Dışa aktarılan dosyaları inceleme için otomatik olarak aç." Caption="Dışa aktarılan dosyaları aç."/>
+          </gbSessionFiles>
+          <gbCodepage Caption="Kod Sayfası">
+            <cbAutoSelectCP Hint="Dönüştürme için tercih edilen kod sayfasını otomatik olarak seç." Caption="Kod sayfasını otomatik seç"/>
+          </gbCodepage>
+        </tsSession>
+        <tsEncoding Hint="Dosya giriş ve çıkış kodlama seçenekleri." Caption="Kodlama">
+          <rgFileEnding Hint="Dosyaların boş bir satırla bitmesini zorunlu tut." Caption="Dosyalar Yeni Satırla Biter">
+            <rbFileEndWhatever Hint="Dosyalar metin veya boş satırla bitebilir." Caption="Fark etmez."/>
+            <rbFileEndExport Hint="Dışa aktarılan dosyaların boş satırla bitmesini sağla." Caption="Sadece dışa aktarma için sağla."/>
+            <rbFileEndAll Hint="Orijinal dosyaların boş satırla bitmesini zorunlu tut." Caption="Tüm metin dosyalarına uygula."/>
+          </rgFileEnding>
+        </tsEncoding>
+        <tsViewer Hint="Unicode ve DOS görüntüleyici seçenekleri." Caption="Görüntüleyici">
+          <gbUnicodeView Caption="Unicode Görünümü">
+            <lbUnicodeScale Caption="Yazı tipi ölçeği %%%s"/>
+            <tbUnicodeScale Caption="10"/>
+          </gbUnicodeView>
+          <gbDOSView Caption="DOS Görünümü">
+            <lbDOSScale Caption="Yazı tipi ölçeği %%%s"/>
+            <tbDOSScale Caption="1"/>
+          </gbDOSView>
+        </tsViewer>
+      </pPages>
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnAccept Hint="Değişiklikleri kabul et ve uygula." Caption="Kabul Et"/>
+          <btnCancel Hint="Tüm değişiklikleri yoksay." Caption="İptal"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <fMiddlePanel>
+        <fBodyPanel>
+          <pSectionsPanel>
+            <pSectionLabel>
+              <lbSections Caption="Seçenekler"/>
+            </pSectionLabel>
+          </pSectionsPanel>
+          <pPagesPanel>
+            <pPages>
+              <tsViewer>
+                <lbUnicodeScale Caption="Yazı tipi ölçeği %%%s"/>
+                <lbDOSScale Caption="Yazı tipi ölçeği %%%s"/>
+              </tsViewer>
+            </pPages>
+          </pPagesPanel>
+        </fBodyPanel>
+      </fMiddlePanel>
+    </fOptionsDialog>
     <fUpdateCheckDialog Caption="Güncelleme Kontrolü">
       <fLowerPanel>
         <fButtonPanel>
@@ -286,81 +367,6 @@
         <Downloaded Text="&quot;%s&quot; sürüm %s indirildi."/>
       </Message>
     </fUpdateSaveDialog>
-    <fOptionsDialog Caption="Codepage Witch Ayarları">
-      <pPages>
-        <tsAbout Hint="Bu uygulama hakkında." Caption="Hakkında">
-          <lbCopyright Caption="Telif Hakkı %s"/>
-          <lbVersion Caption="Sürüm %0:s (Yapı %1:s)"/>
-          <lbApplication Caption="&quot;%s&quot;"/>
-        </tsAbout>
-        <tsGeneral Hint="Genel uygulama ayarları." Caption="Genel">
-          <gbUserLanguage Caption="Kullanıcı Dili">
-            <cxLanguageChoice Default="(varsayılan)"/>
-            <pLanguagePreferred>
-              <lbLanguagePreferred Caption="Tercih Edilen Dil:"/>
-            </pLanguagePreferred>
-            <lbLanguageSystem Caption="Sistem Dili: %s"/>
-          </gbUserLanguage>
-          <gbMiscellaneous Caption="Çeşitli">
-            <cbShowHints Caption="Fare üzerine geldiğinde ipuçlarını göster."/>
-            <cbColorButtons Caption="Renkli araç çubuğu simgelerini kullan."/>
-          </gbMiscellaneous>
-          <gbOnlineUpdate Caption="Çevrimiçi Güncelleme">
-            <cbAutoCheck Caption="Güncellemeleri otomatik kontrol et"/>
-            <pUpdateButton>
-              <btnUpdateCheck Hint="En son güncelleme için sunucuyu kontrol et." Caption="Şimdi Kontrol Et..."/>
-            </pUpdateButton>
-          </gbOnlineUpdate>
-        </tsGeneral>
-        <tsSession Hint="Uygulama oturumlarıyla ilgili seçenekler." Caption="Oturum">
-          <gbSessionFiles Caption="Oturum Dosyaları">
-            <cbReopenFiles Hint="Önceki oturumda kapatılmayan dosyaları yeniden aç." Caption="Önceki dosyaları yeniden aç."/>
-            <cbWarnMissing Hint="Önceki oturumdaki bir dosya mevcut değilse uyar." Caption="Eksikse uyar."/>
-            <cbOpenExport Hint="Dışa aktarılan dosyaları inceleme için otomatik olarak aç." Caption="Dışa aktarılan dosyaları aç."/>
-          </gbSessionFiles>
-        </tsSession>
-        <tsEncoding Hint="Dosya giriş ve çıkış kodlama seçenekleri." Caption="Kodlama">
-          <rgFileEnding Hint="Dosyaların boş bir satırla bitmesini zorunlu tut." Caption="Dosyalar Yeni Satırla Biter">
-            <rbFileEndWhatever Hint="Dosyalar metin veya boş satırla bitebilir." Caption="Fark etmez."/>
-            <rbFileEndExport Hint="Dışa aktarılan dosyaların boş satırla bitmesini sağla." Caption="Sadece dışa aktarma için sağla."/>
-            <rbFileEndAll Hint="Orijinal dosyaların boş satırla bitmesini zorunlu tut." Caption="Tüm metin dosyalarına uygula."/>
-          </rgFileEnding>
-        </tsEncoding>
-        <tsViewer Hint="Unicode ve DOS görüntüleyici seçenekleri." Caption="Görüntüleyici">
-          <gbUnicodeView Caption="Unicode Görünümü">
-            <lbUnicodeScale Caption="Yazı tipi ölçeği %%%s"/>
-            <tbUnicodeScale Caption="10"/>
-          </gbUnicodeView>
-          <gbDOSView Caption="DOS Görünümü">
-            <lbDOSScale Caption="Yazı tipi ölçeği %%%s"/>
-            <tbDOSScale Caption="1"/>
-          </gbDOSView>
-        </tsViewer>
-      </pPages>
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnAccept Hint="Değişiklikleri kabul et ve uygula." Caption="Kabul Et"/>
-          <btnCancel Hint="Tüm değişiklikleri yoksay." Caption="İptal"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <fMiddlePanel>
-        <fBodyPanel>
-          <pSectionsPanel>
-            <pSectionLabel>
-              <lbSections Caption="Seçenekler"/>
-            </pSectionLabel>
-          </pSectionsPanel>
-          <pPagesPanel>
-            <pPages>
-              <tsViewer>
-                <lbUnicodeScale Caption="Yazı tipi ölçeği %%%s"/>
-                <lbDOSScale Caption="Yazı tipi ölçeği %%%s"/>
-              </tsViewer>
-            </pPages>
-          </pPagesPanel>
-        </fBodyPanel>
-      </fMiddlePanel>
-    </fOptionsDialog>
     <fFileEditor Caption="Codepage Witch - %s">
       <btnCancel Caption="İptal"/>
       <btnSave Caption="Kaydet"/>

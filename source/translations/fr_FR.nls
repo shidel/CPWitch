@@ -165,6 +165,14 @@
           </pViewCodepageLabel>
         </pCodepage>
       </pViewers>
+      <statBar>
+        <Processing Caption="Traitement"/>
+        <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
+        <Unicode Caption="Unicode"/>
+        <NoEncoding Caption="ASCII"/>
+        <Codepage Caption="Page de codes"/>
+        <Binary Caption="Binaire"/>
+      </statBar>
       <Locales>
         <ar_SA Text="Arabe (Arabie saoudite)"/>
         <cs_CZ Text="Tchèque (Tchéquie)"/>
@@ -214,20 +222,15 @@
         <th_TH Text="Thaï (Thaïlande)"/>
         <vi_VN Text="Vietnamien (Vietnam)"/>
       </Locales>
-      <statBar>
-        <Processing Caption="Traitement"/>
-        <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
-        <Unicode Caption="Unicode"/>
-        <NoEncoding Caption="ASCII"/>
-        <Codepage Caption="Page de codes"/>
-        <Binary Caption="Binaire"/>
-      </statBar>
     </fMain>
     <fDictEditForm Caption="Mise à jour du dictionnaire">
       <pTop>
         <lbLocale Caption="Paramètres régionaux :"/>
         <btnInvert Caption="Invertir"/>
         <btnNone Caption="Aucun"/>
+        <cbLocale>
+          <Items Index_0="ar_SA" Index_1="bg_BG" Index_2="cs_CZ" Index_3="da_DK" Index_4="de_CH" Index_5="de_DE" Index_6="el_GR" Index_7="en_US" Index_8="eo" Index_9="es_ES" Index_10="et_EE" Index_11="fil_PH" Index_12="fi_FI" Index_13="fr_FR" Index_14="haw_US" Index_15="he_IL" Index_16="hu_HU" Index_17="id_ID" Index_18="is_IS" Index_19="it_IT" Index_20="ja_JP" Index_21="ko_KR" Index_22="la" Index_23="lt_LT" Index_24="lv_LV" Index_25="nb_NO" Index_26="nl_NL" Index_27="no_NO" Index_28="pl_MAZ" Index_29="pl_PL" Index_30="pt_BR" Index_31="pt_PT" Index_32="ro_RO" Index_33="ru_RU" Index_34="sk_SK" Index_35="sl_SI" Index_36="sm_WS" Index_37="sr_RS" Index_38="sv_SE" Index_39="th_TH" Index_40="tr_TR" Index_41="uk_UA" Index_42="vi_VN" Index_43="zh_CN" Index_44="fr_CA" Index_45="tl_PH" Index_46="nn_NO"/>
+        </cbLocale>
       </pTop>
       <pButtons>
         <btnSave Caption="Enregistrer"/>
@@ -235,6 +238,84 @@
         <btnAdd Caption="Ajouter au dictionnaire"/>
       </pButtons>
     </fDictEditForm>
+    <fOptionsDialog Caption="Paramètres de Codepage Witch">
+      <pPages>
+        <tsAbout Hint="À propos de cette application." Caption="À propos">
+          <lbCopyright Caption="Copyright %s"/>
+          <lbVersion Caption="Version %0:s (Build %1:s)"/>
+          <lbApplication Caption="Le &quot;%s&quot;"/>
+        </tsAbout>
+        <tsGeneral Hint="Paramètres généraux de l'application." Caption="Général">
+          <gbUserLanguage Caption="Langue de l'utilisateur">
+            <cxLanguageChoice Default="(par défaut)"/>
+            <pLanguagePreferred>
+              <lbLanguagePreferred Caption="Langue préférée :"/>
+            </pLanguagePreferred>
+            <lbLanguageSystem Caption="Langue du système : %s"/>
+          </gbUserLanguage>
+          <gbMiscellaneous Caption="Divers">
+            <cbShowHints Caption="Afficher les info-bulles au survol de la souris."/>
+            <cbColorButtons Caption="Utiliser des icônes en couleur dans la barre d'outils."/>
+          </gbMiscellaneous>
+          <gbOnlineUpdate Caption="Mise à jour en ligne">
+            <cbAutoCheck Caption="Vérifier automatiquement les mises à jour"/>
+            <pUpdateButton>
+              <btnUpdateCheck Hint="Vérifier sur le serveur en ligne la dernière mise à jour." Caption="Vérifier maintenant..."/>
+            </pUpdateButton>
+          </gbOnlineUpdate>
+        </tsGeneral>
+        <tsSession Hint="Options relatives aux sessions de l'application." Caption="Session">
+          <gbSessionFiles Caption="Fichiers de session">
+            <cbReopenFiles Hint="Rouvrir les fichiers qui n'ont pas été fermés lors de la session précédente." Caption="Rouvrir les fichiers précédents."/>
+            <cbWarnMissing Hint="Avertir si un fichier de la session précédente est manquant." Caption="Avertir si absent."/>
+            <cbOpenExport Hint="Ouvrir automatiquement les fichiers exportés pour vérification." Caption="Ouvrir les fichiers exportés."/>
+          </gbSessionFiles>
+          <gbCodepage Caption="Page de code">
+            <cbAutoSelectCP Hint="Sélectionner automatiquement la page de code préférée pour la conversion." Caption="Sélection automatique de la page de code"/>
+          </gbCodepage>
+        </tsSession>
+        <tsEncoding Hint="Options d'encodage des fichiers en entrée et en sortie." Caption="Encodage">
+          <rgFileEnding Hint="Exiger que les fichiers se terminent par une ligne vide." Caption="Les fichiers se terminent par une nouvelle ligne">
+            <rbFileEndWhatever Hint="Tous les fichiers peuvent se terminer par du texte ou une ligne vide." Caption="Peu importe."/>
+            <rbFileEndExport Hint="S'assurer que les fichiers exportés se terminent par une ligne vide." Caption="Uniquement pour l'exportation."/>
+            <rbFileEndAll Hint="Exiger que les fichiers originaux se terminent par une ligne vide." Caption="Appliquer à tous les fichiers texte."/>
+          </rgFileEnding>
+        </tsEncoding>
+        <tsViewer Hint="Options pour les visionneuses Unicode et DOS." Caption="Visionneuse">
+          <gbUnicodeView Caption="Vue Unicode">
+            <lbUnicodeScale Caption="Échelle de la police %s%%"/>
+            <tbUnicodeScale Caption="10"/>
+          </gbUnicodeView>
+          <gbDOSView Caption="Vue DOS">
+            <lbDOSScale Caption="Échelle de la police %s%%"/>
+            <tbDOSScale Caption="1"/>
+          </gbDOSView>
+        </tsViewer>
+      </pPages>
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnAccept Hint="Accepter et appliquer tous les changements." Caption="Accepter"/>
+          <btnCancel Hint="Ignorer tous les changements." Caption="Annuler"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <fMiddlePanel>
+        <fBodyPanel>
+          <pSectionsPanel>
+            <pSectionLabel>
+              <lbSections Caption="Options"/>
+            </pSectionLabel>
+          </pSectionsPanel>
+          <pPagesPanel>
+            <pPages>
+              <tsViewer>
+                <lbUnicodeScale Caption="Échelle de la police %s%%"/>
+                <lbDOSScale Caption="Échelle de la police %s%%"/>
+              </tsViewer>
+            </pPages>
+          </pPagesPanel>
+        </fBodyPanel>
+      </fMiddlePanel>
+    </fOptionsDialog>
     <fUpdateCheckDialog Caption="Recherche de mise à jour">
       <fLowerPanel>
         <fButtonPanel>
@@ -286,81 +367,6 @@
         <Downloaded Text="Version %s de &quot;%s&quot; téléchargée."/>
       </Message>
     </fUpdateSaveDialog>
-    <fOptionsDialog Caption="Paramètres de Codepage Witch">
-      <pPages>
-        <tsAbout Hint="À propos de cette application." Caption="À propos">
-          <lbCopyright Caption="Copyright %s"/>
-          <lbVersion Caption="Version %0:s (Build %1:s)"/>
-          <lbApplication Caption="Le &quot;%s&quot;"/>
-        </tsAbout>
-        <tsGeneral Hint="Paramètres généraux de l'application." Caption="Général">
-          <gbUserLanguage Caption="Langue de l'utilisateur">
-            <cxLanguageChoice Default="(par défaut)"/>
-            <pLanguagePreferred>
-              <lbLanguagePreferred Caption="Langue préférée :"/>
-            </pLanguagePreferred>
-            <lbLanguageSystem Caption="Langue du système : %s"/>
-          </gbUserLanguage>
-          <gbMiscellaneous Caption="Divers">
-            <cbShowHints Caption="Afficher les info-bulles au survol de la souris."/>
-            <cbColorButtons Caption="Utiliser des icônes en couleur dans la barre d'outils."/>
-          </gbMiscellaneous>
-          <gbOnlineUpdate Caption="Mise à jour en ligne">
-            <cbAutoCheck Caption="Vérifier automatiquement les mises à jour"/>
-            <pUpdateButton>
-              <btnUpdateCheck Hint="Vérifier sur le serveur en ligne la dernière mise à jour." Caption="Vérifier maintenant..."/>
-            </pUpdateButton>
-          </gbOnlineUpdate>
-        </tsGeneral>
-        <tsSession Hint="Options relatives aux sessions de l'application." Caption="Session">
-          <gbSessionFiles Caption="Fichiers de session">
-            <cbReopenFiles Hint="Rouvrir les fichiers qui n'ont pas été fermés lors de la session précédente." Caption="Rouvrir les fichiers précédents."/>
-            <cbWarnMissing Hint="Avertir si un fichier de la session précédente est manquant." Caption="Avertir si absent."/>
-            <cbOpenExport Hint="Ouvrir automatiquement les fichiers exportés pour vérification." Caption="Ouvrir les fichiers exportés."/>
-          </gbSessionFiles>
-        </tsSession>
-        <tsEncoding Hint="Options d'encodage des fichiers en entrée et en sortie." Caption="Encodage">
-          <rgFileEnding Hint="Exiger que les fichiers se terminent par une ligne vide." Caption="Les fichiers se terminent par une nouvelle ligne">
-            <rbFileEndWhatever Hint="Tous les fichiers peuvent se terminer par du texte ou une ligne vide." Caption="Peu importe."/>
-            <rbFileEndExport Hint="S'assurer que les fichiers exportés se terminent par une ligne vide." Caption="Uniquement pour l'exportation."/>
-            <rbFileEndAll Hint="Exiger que les fichiers originaux se terminent par une ligne vide." Caption="Appliquer à tous les fichiers texte."/>
-          </rgFileEnding>
-        </tsEncoding>
-        <tsViewer Hint="Options pour les visionneuses Unicode et DOS." Caption="Visionneuse">
-          <gbUnicodeView Caption="Vue Unicode">
-            <lbUnicodeScale Caption="Échelle de la police %s%%"/>
-            <tbUnicodeScale Caption="10"/>
-          </gbUnicodeView>
-          <gbDOSView Caption="Vue DOS">
-            <lbDOSScale Caption="Échelle de la police %s%%"/>
-            <tbDOSScale Caption="1"/>
-          </gbDOSView>
-        </tsViewer>
-      </pPages>
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnAccept Hint="Accepter et appliquer tous les changements." Caption="Accepter"/>
-          <btnCancel Hint="Ignorer tous les changements." Caption="Annuler"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <fMiddlePanel>
-        <fBodyPanel>
-          <pSectionsPanel>
-            <pSectionLabel>
-              <lbSections Caption="Options"/>
-            </pSectionLabel>
-          </pSectionsPanel>
-          <pPagesPanel>
-            <pPages>
-              <tsViewer>
-                <lbUnicodeScale Caption="Échelle de la police %s%%"/>
-                <lbDOSScale Caption="Échelle de la police %s%%"/>
-              </tsViewer>
-            </pPages>
-          </pPagesPanel>
-        </fBodyPanel>
-      </fMiddlePanel>
-    </fOptionsDialog>
     <fFileEditor Caption="Codepage Witch - %s">
       <btnCancel Caption="Annuler"/>
       <btnSave Caption="Enregistrer"/>

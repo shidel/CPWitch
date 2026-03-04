@@ -165,6 +165,14 @@
           </pViewCodepageLabel>
         </pCodepage>
       </pViewers>
+      <statBar>
+        <Processing Caption="Verarbeitung"/>
+        <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
+        <Unicode Caption="Unicode"/>
+        <NoEncoding Caption="ASCII"/>
+        <Codepage Caption="Codepage"/>
+        <Binary Caption="Binär"/>
+      </statBar>
       <Locales>
         <ar_SA Text="Arabisch (Saudi-Arabien)"/>
         <cs_CZ Text="Tschechisch (Tschechien)"/>
@@ -214,20 +222,15 @@
         <th_TH Text="Thailändisch (Thailand)"/>
         <vi_VN Text="Vietnamesisch (Vietnam)"/>
       </Locales>
-      <statBar>
-        <Processing Caption="Verarbeitung"/>
-        <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
-        <Unicode Caption="Unicode"/>
-        <NoEncoding Caption="ASCII"/>
-        <Codepage Caption="Codepage"/>
-        <Binary Caption="Binär"/>
-      </statBar>
     </fMain>
     <fDictEditForm Caption="Wörterbuch-Aktualisierung">
       <pTop>
         <lbLocale Caption="Gebietsschema:"/>
         <btnInvert Caption="Invertieren"/>
         <btnNone Caption="Keine"/>
+        <cbLocale>
+          <Items Index_0="ar_SA" Index_1="bg_BG" Index_2="cs_CZ" Index_3="da_DK" Index_4="de_CH" Index_5="de_DE" Index_6="el_GR" Index_7="en_US" Index_8="eo" Index_9="es_ES" Index_10="et_EE" Index_11="fil_PH" Index_12="fi_FI" Index_13="fr_FR" Index_14="haw_US" Index_15="he_IL" Index_16="hu_HU" Index_17="id_ID" Index_18="is_IS" Index_19="it_IT" Index_20="ja_JP" Index_21="ko_KR" Index_22="la" Index_23="lt_LT" Index_24="lv_LV" Index_25="nb_NO" Index_26="nl_NL" Index_27="no_NO" Index_28="pl_MAZ" Index_29="pl_PL" Index_30="pt_BR" Index_31="pt_PT" Index_32="ro_RO" Index_33="ru_RU" Index_34="sk_SK" Index_35="sl_SI" Index_36="sm_WS" Index_37="sr_RS" Index_38="sv_SE" Index_39="th_TH" Index_40="tr_TR" Index_41="uk_UA" Index_42="vi_VN" Index_43="zh_CN" Index_44="fr_CA" Index_45="tl_PH" Index_46="nn_NO"/>
+        </cbLocale>
       </pTop>
       <pButtons>
         <btnSave Caption="Speichern"/>
@@ -235,6 +238,84 @@
         <btnAdd Caption="Zum Wörterbuch hinzufügen"/>
       </pButtons>
     </fDictEditForm>
+    <fOptionsDialog Caption="Codepage Witch Einstellungen">
+      <pPages>
+        <tsAbout Hint="Über diese Anwendung." Caption="Über">
+          <lbCopyright Caption="Copyright %s"/>
+          <lbVersion Caption="Version %0:s (Build %1:s)"/>
+          <lbApplication Caption="Die &quot;%s&quot;"/>
+        </tsAbout>
+        <tsGeneral Hint="Allgemeine Anwendungseinstellungen." Caption="Allgemein">
+          <gbUserLanguage Caption="Benutzersprache">
+            <cxLanguageChoice Default="(Standard)"/>
+            <pLanguagePreferred>
+              <lbLanguagePreferred Caption="Bevorzugte Sprache:"/>
+            </pLanguagePreferred>
+            <lbLanguageSystem Caption="Systemsprache: %s"/>
+          </gbUserLanguage>
+          <gbMiscellaneous Caption="Verschiedenes">
+            <cbShowHints Caption="Hinweise beim Überfahren mit der Maus anzeigen."/>
+            <cbColorButtons Caption="Farbige Symbole in der Symbolleiste verwenden."/>
+          </gbMiscellaneous>
+          <gbOnlineUpdate Caption="Online-Update">
+            <cbAutoCheck Caption="Automatisch nach Updates suchen"/>
+            <pUpdateButton>
+              <btnUpdateCheck Hint="Den Online-Server nach dem neuesten Update abfragen." Caption="Jetzt prüfen..."/>
+            </pUpdateButton>
+          </gbOnlineUpdate>
+        </tsGeneral>
+        <tsSession Hint="Optionen bezüglich der Anwendungssitzungen." Caption="Sitzung">
+          <gbSessionFiles Caption="Sitzungsdateien">
+            <cbReopenFiles Hint="Nicht geschlossene Dateien der vorherigen Sitzung erneut öffnen." Caption="Vorherige Dateien erneut öffnen."/>
+            <cbWarnMissing Hint="Warnen, wenn eine Datei aus der vorherigen Sitzung nicht existiert." Caption="Warnen, wenn fehlend."/>
+            <cbOpenExport Hint="Exportierte Dateien zur Überprüfung automatisch öffnen." Caption="Exportierte Dateien öffnen."/>
+          </gbSessionFiles>
+          <gbCodepage Caption="Codepage">
+            <cbAutoSelectCP Hint="Bevorzugte Codepage für die Konvertierung automatisch auswählen." Caption="Codepage automatisch auswählen"/>
+          </gbCodepage>
+        </tsSession>
+        <tsEncoding Hint="Optionen für Ein- und Ausgabekodierung von Dateien." Caption="Kodierung">
+          <rgFileEnding Hint="Erfordern, dass Dateien mit einer Leerzeile enden." Caption="Dateien enden mit Zeilenumbruch">
+            <rbFileEndWhatever Hint="Alle Dateien können mit Text oder einer Leerzeile enden." Caption="Egal."/>
+            <rbFileEndExport Hint="Sicherstellen, dass exportierte Dateien mit einer Leerzeile enden." Caption="Nur für Export sicherstellen."/>
+            <rbFileEndAll Hint="Erfordern, dass Originaldateien mit einer Leerzeile enden." Caption="Auf alle Textdateien anwenden."/>
+          </rgFileEnding>
+        </tsEncoding>
+        <tsViewer Hint="Optionen für Unicode- und DOS-Viewer." Caption="Viewer">
+          <gbUnicodeView Caption="Unicode-Ansicht">
+            <lbUnicodeScale Caption="Schriftgröße %s%%"/>
+            <tbUnicodeScale Caption="10"/>
+          </gbUnicodeView>
+          <gbDOSView Caption="DOS-Ansicht">
+            <lbDOSScale Caption="Schriftgröße %s%%"/>
+            <tbDOSScale Caption="1"/>
+          </gbDOSView>
+        </tsViewer>
+      </pPages>
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnAccept Hint="Alle Änderungen akzeptieren und anwenden." Caption="Übernehmen"/>
+          <btnCancel Hint="Alle Änderungen ignorieren." Caption="Abbrechen"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <fMiddlePanel>
+        <fBodyPanel>
+          <pSectionsPanel>
+            <pSectionLabel>
+              <lbSections Caption="Optionen"/>
+            </pSectionLabel>
+          </pSectionsPanel>
+          <pPagesPanel>
+            <pPages>
+              <tsViewer>
+                <lbUnicodeScale Caption="Schriftgröße %s%%"/>
+                <lbDOSScale Caption="Schriftgröße %s%%"/>
+              </tsViewer>
+            </pPages>
+          </pPagesPanel>
+        </fBodyPanel>
+      </fMiddlePanel>
+    </fOptionsDialog>
     <fUpdateCheckDialog Caption="Update-Check">
       <fLowerPanel>
         <fButtonPanel>
@@ -286,81 +367,6 @@
         <Downloaded Text="&quot;%s&quot; Version %s wurde heruntergeladen."/>
       </Message>
     </fUpdateSaveDialog>
-    <fOptionsDialog Caption="Codepage Witch Einstellungen">
-      <pPages>
-        <tsAbout Hint="Über diese Anwendung." Caption="Über">
-          <lbCopyright Caption="Copyright %s"/>
-          <lbVersion Caption="Version %0:s (Build %1:s)"/>
-          <lbApplication Caption="Die &quot;%s&quot;"/>
-        </tsAbout>
-        <tsGeneral Hint="Allgemeine Anwendungseinstellungen." Caption="Allgemein">
-          <gbUserLanguage Caption="Benutzersprache">
-            <cxLanguageChoice Default="(Standard)"/>
-            <pLanguagePreferred>
-              <lbLanguagePreferred Caption="Bevorzugte Sprache:"/>
-            </pLanguagePreferred>
-            <lbLanguageSystem Caption="Systemsprache: %s"/>
-          </gbUserLanguage>
-          <gbMiscellaneous Caption="Verschiedenes">
-            <cbShowHints Caption="Hinweise beim Überfahren mit der Maus anzeigen."/>
-            <cbColorButtons Caption="Farbige Symbole in der Symbolleiste verwenden."/>
-          </gbMiscellaneous>
-          <gbOnlineUpdate Caption="Online-Update">
-            <cbAutoCheck Caption="Automatisch nach Updates suchen"/>
-            <pUpdateButton>
-              <btnUpdateCheck Hint="Den Online-Server nach dem neuesten Update abfragen." Caption="Jetzt prüfen..."/>
-            </pUpdateButton>
-          </gbOnlineUpdate>
-        </tsGeneral>
-        <tsSession Hint="Optionen bezüglich der Anwendungssitzungen." Caption="Sitzung">
-          <gbSessionFiles Caption="Sitzungsdateien">
-            <cbReopenFiles Hint="Nicht geschlossene Dateien der vorherigen Sitzung erneut öffnen." Caption="Vorherige Dateien erneut öffnen."/>
-            <cbWarnMissing Hint="Warnen, wenn eine Datei aus der vorherigen Sitzung nicht existiert." Caption="Warnen, wenn fehlend."/>
-            <cbOpenExport Hint="Exportierte Dateien zur Überprüfung automatisch öffnen." Caption="Exportierte Dateien öffnen."/>
-          </gbSessionFiles>
-        </tsSession>
-        <tsEncoding Hint="Optionen für Ein- und Ausgabekodierung von Dateien." Caption="Kodierung">
-          <rgFileEnding Hint="Erfordern, dass Dateien mit einer Leerzeile enden." Caption="Dateien enden mit Zeilenumbruch">
-            <rbFileEndWhatever Hint="Alle Dateien können mit Text oder einer Leerzeile enden." Caption="Egal."/>
-            <rbFileEndExport Hint="Sicherstellen, dass exportierte Dateien mit einer Leerzeile enden." Caption="Nur für Export sicherstellen."/>
-            <rbFileEndAll Hint="Erfordern, dass Originaldateien mit einer Leerzeile enden." Caption="Auf alle Textdateien anwenden."/>
-          </rgFileEnding>
-        </tsEncoding>
-        <tsViewer Hint="Optionen für Unicode- und DOS-Viewer." Caption="Viewer">
-          <gbUnicodeView Caption="Unicode-Ansicht">
-            <lbUnicodeScale Caption="Schriftgröße %s%%"/>
-            <tbUnicodeScale Caption="10"/>
-          </gbUnicodeView>
-          <gbDOSView Caption="DOS-Ansicht">
-            <lbDOSScale Caption="Schriftgröße %s%%"/>
-            <tbDOSScale Caption="1"/>
-          </gbDOSView>
-        </tsViewer>
-      </pPages>
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnAccept Hint="Alle Änderungen akzeptieren und anwenden." Caption="Übernehmen"/>
-          <btnCancel Hint="Alle Änderungen ignorieren." Caption="Abbrechen"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <fMiddlePanel>
-        <fBodyPanel>
-          <pSectionsPanel>
-            <pSectionLabel>
-              <lbSections Caption="Optionen"/>
-            </pSectionLabel>
-          </pSectionsPanel>
-          <pPagesPanel>
-            <pPages>
-              <tsViewer>
-                <lbUnicodeScale Caption="Schriftgröße %s%%"/>
-                <lbDOSScale Caption="Schriftgröße %s%%"/>
-              </tsViewer>
-            </pPages>
-          </pPagesPanel>
-        </fBodyPanel>
-      </fMiddlePanel>
-    </fOptionsDialog>
     <fFileEditor Caption="Codepage Witch - %s">
       <btnCancel Caption="Abbrechen"/>
       <btnSave Caption="Speichern"/>

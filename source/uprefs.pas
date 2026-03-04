@@ -27,9 +27,11 @@ type
     cbReopenFiles: TCheckBox;
     cbWarnMissing: TCheckBox;
     cbOpenExport: TCheckBox;
+    cbAutoSelectCP: TCheckBox;
     gbSessionFiles: TGroupBox;
     gbUnicodeView: TGroupBox;
     gbDOSView: TGroupBox;
+    gbCodepage: TGroupBox;
     lbDOSScale: TLabel;
     lbUnicodeScale: TLabel;
     pPages: TPageControl;

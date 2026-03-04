@@ -71,6 +71,32 @@ object fOptionsDialog: TfOptionsDialog
           TabOrder = 2
         end
       end
+      object gbCodepage: TGroupBox
+        Left = 0
+        Height = 53
+        Top = 113
+        Width = 270
+        Align = alTop
+        AutoSize = True
+        BorderSpacing.Top = 8
+        Caption = 'Codepage'
+        ClientHeight = 34
+        ClientWidth = 260
+        TabOrder = 1
+        object cbAutoSelectCP: TCheckBox
+          Left = 8
+          Height = 18
+          Hint = 'Automatically select preferred codepage for conversion.'
+          Top = 8
+          Width = 244
+          Align = alTop
+          BorderSpacing.Around = 8
+          Caption = 'Auto select codepage'
+          Checked = True
+          State = cbChecked
+          TabOrder = 0
+        end
+      end
     end
     object tsEncoding: TTabSheet
       Hint = 'File input and output encoding options.'

@@ -165,6 +165,14 @@
           </pViewCodepageLabel>
         </pCodepage>
       </pViewers>
+      <statBar>
+        <Processing Caption="Processing"/>
+        <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
+        <Unicode Caption="Unicode"/>
+        <NoEncoding Caption="ASCII"/>
+        <Codepage Caption="Codepage"/>
+        <Binary Caption="Binary"/>
+      </statBar>
       <Locales>
         <ar_SA Text="Arabic (Saudi Arabia)"/>
         <cs_CZ Text="Czech (Czechia)"/>
@@ -214,20 +222,15 @@
         <th_TH Text="Thai (Thailand)"/>
         <vi_VN Text="Vietnamese (Vietnam)"/>
       </Locales>
-      <statBar>
-        <Processing Caption="Processing"/>
-        <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
-        <Unicode Caption="Unicode"/>
-        <NoEncoding Caption="ASCII"/>
-        <Codepage Caption="Codepage"/>
-        <Binary Caption="Binary"/>
-      </statBar>
     </fMain>
     <fDictEditForm Caption="Dictionary Updater">
       <pTop>
         <lbLocale Caption="Locale:"/>
         <btnInvert Caption="Invert"/>
         <btnNone Caption="None"/>
+        <cbLocale>
+          <Items Index_0="ar_SA" Index_1="bg_BG" Index_2="cs_CZ" Index_3="da_DK" Index_4="de_CH" Index_5="de_DE" Index_6="el_GR" Index_7="en_US" Index_8="eo" Index_9="es_ES" Index_10="et_EE" Index_11="fil_PH" Index_12="fi_FI" Index_13="fr_FR" Index_14="haw_US" Index_15="he_IL" Index_16="hu_HU" Index_17="id_ID" Index_18="is_IS" Index_19="it_IT" Index_20="ja_JP" Index_21="ko_KR" Index_22="la" Index_23="lt_LT" Index_24="lv_LV" Index_25="nb_NO" Index_26="nl_NL" Index_27="no_NO" Index_28="pl_MAZ" Index_29="pl_PL" Index_30="pt_BR" Index_31="pt_PT" Index_32="ro_RO" Index_33="ru_RU" Index_34="sk_SK" Index_35="sl_SI" Index_36="sm_WS" Index_37="sr_RS" Index_38="sv_SE" Index_39="th_TH" Index_40="tr_TR" Index_41="uk_UA" Index_42="vi_VN" Index_43="zh_CN" Index_44="fr_CA" Index_45="tl_PH" Index_46="nn_NO"/>
+        </cbLocale>
       </pTop>
       <pButtons>
         <btnSave Caption="Save"/>
@@ -235,6 +238,84 @@
         <btnAdd Caption="Add to Dictionary"/>
       </pButtons>
     </fDictEditForm>
+    <fOptionsDialog Caption="Codepage Witch Preferences">
+      <pPages>
+        <tsAbout Hint="About this application." Caption="About">
+          <lbCopyright Caption="Copyright %s"/>
+          <lbVersion Caption="Version %0:s (build %1:s)"/>
+          <lbApplication Caption="The &quot;%s&quot;"/>
+        </tsAbout>
+        <tsGeneral Hint="General application settings." Caption="General">
+          <gbUserLanguage Caption="User Language">
+            <cxLanguageChoice Default="(default)"/>
+            <pLanguagePreferred>
+              <lbLanguagePreferred Caption="Preferred Language:"/>
+            </pLanguagePreferred>
+            <lbLanguageSystem Caption="System Language:  %s"/>
+          </gbUserLanguage>
+          <gbMiscellaneous Caption="Miscellaneous">
+            <cbShowHints Caption="Show hints when mouse hovers."/>
+            <cbColorButtons Caption="Use color toolbar buttons."/>
+          </gbMiscellaneous>
+          <gbOnlineUpdate Caption="Online Update">
+            <cbAutoCheck Caption="Automatically check for updates"/>
+            <pUpdateButton>
+              <btnUpdateCheck Hint="Check the online server for the latest update." Caption="Check now..."/>
+            </pUpdateButton>
+          </gbOnlineUpdate>
+        </tsGeneral>
+        <tsSession Hint="Options regarding application sessions." Caption="Session">
+          <gbSessionFiles Caption="Session files">
+            <cbReopenFiles Hint="Reopen unclosed files from previous session." Caption="Reopen previous files."/>
+            <cbWarnMissing Hint="Warn when a file from the previous session does not exist." Caption="Warn when missing."/>
+            <cbOpenExport Hint="Automatically open export files for review." Caption="Open exported files."/>
+          </gbSessionFiles>
+          <gbCodepage Caption="Codepage">
+            <cbAutoSelectCP Hint="Automatically select preferred codepage for conversion." Caption="Auto select codepage"/>
+          </gbCodepage>
+        </tsSession>
+        <tsEncoding Hint="File input and output encoding options." Caption="Encoding">
+          <rgFileEnding Hint="Require that files must end on a blank line." Caption="Files end with New Line">
+            <rbFileEndWhatever Hint="All files can end wth text or blank line." Caption="Don't care."/>
+            <rbFileEndExport Hint="Make sure that exported files end with a blank line." Caption="Ensure only for Export."/>
+            <rbFileEndAll Hint="Require original files to end with a blank line." Caption="Enforce on all text files."/>
+          </rgFileEnding>
+        </tsEncoding>
+        <tsViewer Hint="Unicode and DOS viewer options." Caption="Viewer">
+          <gbUnicodeView Caption="Unicode View">
+            <lbUnicodeScale Caption="lbUnicodeScale"/>
+            <tbUnicodeScale Caption="10"/>
+          </gbUnicodeView>
+          <gbDOSView Caption="DOS View">
+            <lbDOSScale Caption="lbDOSScale"/>
+            <tbDOSScale Caption="1"/>
+          </gbDOSView>
+        </tsViewer>
+      </pPages>
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnAccept Hint="Accept and apply any changes." Caption="Accept"/>
+          <btnCancel Hint="Ignore all changes." Caption="Cancel"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <fMiddlePanel>
+        <fBodyPanel>
+          <pSectionsPanel>
+            <pSectionLabel>
+              <lbSections Caption="Options"/>
+            </pSectionLabel>
+          </pSectionsPanel>
+          <pPagesPanel>
+            <pPages>
+              <tsViewer>
+                <lbUnicodeScale Caption="Font scale %s%%"/>
+                <lbDOSScale Caption="Font scale %s%%"/>
+              </tsViewer>
+            </pPages>
+          </pPagesPanel>
+        </fBodyPanel>
+      </fMiddlePanel>
+    </fOptionsDialog>
     <fUpdateCheckDialog Caption="Update Check">
       <fLowerPanel>
         <fButtonPanel>
@@ -286,81 +367,6 @@
         <Downloaded Text="Downloaded &quot;%s&quot; version %s."/>
       </Message>
     </fUpdateSaveDialog>
-    <fOptionsDialog Caption="Codepage Witch Preferences">
-      <pPages>
-        <tsAbout Hint="About this application." Caption="About">
-          <lbCopyright Caption="Copyright %s"/>
-          <lbVersion Caption="Version %0:s (build %1:s)"/>
-          <lbApplication Caption="The &quot;%s&quot;"/>
-        </tsAbout>
-        <tsGeneral Hint="General application settings." Caption="General">
-          <gbUserLanguage Caption="User Language">
-            <cxLanguageChoice Default="(default)"/>
-            <pLanguagePreferred>
-              <lbLanguagePreferred Caption="Preferred Language:"/>
-            </pLanguagePreferred>
-            <lbLanguageSystem Caption="System Language:  %s"/>
-          </gbUserLanguage>
-          <gbMiscellaneous Caption="Miscellaneous">
-            <cbShowHints Caption="Show hints when mouse hovers."/>
-            <cbColorButtons Caption="Use color toolbar buttons."/>
-          </gbMiscellaneous>
-          <gbOnlineUpdate Caption="Online Update">
-            <cbAutoCheck Caption="Automatically check for updates"/>
-            <pUpdateButton>
-              <btnUpdateCheck Hint="Check the online server for the latest update." Caption="Check now..."/>
-            </pUpdateButton>
-          </gbOnlineUpdate>
-        </tsGeneral>
-        <tsSession Hint="Options regarding application sessions." Caption="Session">
-          <gbSessionFiles Caption="Session files">
-            <cbReopenFiles Hint="Reopen unclosed files from previous session." Caption="Reopen previous files."/>
-            <cbWarnMissing Hint="Warn when a file from the previous session does not exist." Caption="Warn when missing."/>
-            <cbOpenExport Hint="Automatically open export files for review." Caption="Open exported files."/>
-          </gbSessionFiles>
-        </tsSession>
-        <tsEncoding Hint="File input and output encoding options." Caption="Encoding">
-          <rgFileEnding Hint="Require that files must end on a blank line." Caption="Files end with New Line">
-            <rbFileEndWhatever Hint="All files can end wth text or blank line." Caption="Don't care."/>
-            <rbFileEndExport Hint="Make sure that exported files end with a blank line." Caption="Ensure only for Export."/>
-            <rbFileEndAll Hint="Require original files to end with a blank line." Caption="Enforce on all text files."/>
-          </rgFileEnding>
-        </tsEncoding>
-        <tsViewer Hint="Unicode and DOS viewer options." Caption="Viewer">
-          <gbUnicodeView Caption="Unicode View">
-            <lbUnicodeScale Caption="lbUnicodeScale"/>
-            <tbUnicodeScale Caption="10"/>
-          </gbUnicodeView>
-          <gbDOSView Caption="DOS View">
-            <lbDOSScale Caption="lbDOSScale"/>
-            <tbDOSScale Caption="1"/>
-          </gbDOSView>
-        </tsViewer>
-      </pPages>
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnAccept Hint="Accept and apply any changes." Caption="Accept"/>
-          <btnCancel Hint="Ignore all changes." Caption="Cancel"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <fMiddlePanel>
-        <fBodyPanel>
-          <pSectionsPanel>
-            <pSectionLabel>
-              <lbSections Caption="Options"/>
-            </pSectionLabel>
-          </pSectionsPanel>
-          <pPagesPanel>
-            <pPages>
-              <tsViewer>
-                <lbUnicodeScale Caption="Font scale %s%%"/>
-                <lbDOSScale Caption="Font scale %s%%"/>
-              </tsViewer>
-            </pPages>
-          </pPagesPanel>
-        </fBodyPanel>
-      </fMiddlePanel>
-    </fOptionsDialog>
     <fFileEditor Caption="Codepage Witch - %s">
       <btnCancel Caption="Cancel"/>
       <btnSave Caption="Save"/>

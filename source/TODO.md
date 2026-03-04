@@ -1,5 +1,6 @@
 # Major feature To-Do list
 
+* Options for Line Endings Style (CRLF, LF, CR)
 * Diacritical combining when possible.
 * Character Substitutions.
 * Remove intentional delays used to slow application for multi-thread testing.
