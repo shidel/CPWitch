@@ -16,7 +16,7 @@ interface
 uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  ExtCtrls, ComCtrls, ActnList, Menus, PairSplitter, IpHtml, XMLConf,
+  ExtCtrls, ComCtrls, ActnList, Menus, IpHtml, XMLConf,
   Version, PasExt, Icons, MultiApp, LogView, Updater, Preferences,
   DosView, DosFont, Codepages, Witch, uPrefs, uLostFile, uFixEnding,
   uEditor, uDictEdit, Dictionary;

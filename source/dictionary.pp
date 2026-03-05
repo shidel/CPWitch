@@ -413,7 +413,7 @@ end;
 function DetectDict(D : TDictionaries; S: RawByteString; out Stats: TArrayOfInt32
   ): Int32;
 var
-  I, J, P : integer;
+  I, J, P, L : integer;
   W : TStringList;
   N : TBinaryTreeNode;
 begin
@@ -429,8 +429,11 @@ begin
     for I := 0 to W.Count -1 do begin
       N:=D.Find(LowerCase(W[I]));
       if Assigned(N) then begin
-        // Unique words 2 points, common words 1 point
-        if Length(N.Data32) > 1 then P:=1 else P:=2;
+        L := Length(N.Data32);
+        if L > 12 then L:=11;
+        P:=High(N.Data32);
+        P:=L-(P*P);
+        if P < 1 then P:=1;
         for J := 0 to High(N.Data32) do
           Inc(Stats[N.Data32[J]], P);
       end;

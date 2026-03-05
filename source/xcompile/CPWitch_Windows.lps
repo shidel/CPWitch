@@ -36,7 +36,7 @@
         <UnitName Value="uMain"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="1356"/>
+        <TopLine Value="1357"/>
         <CursorPos X="66" Y="1362"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
@@ -130,14 +130,10 @@
         <Loaded Value="True"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="3">
+    <JumpHistory HistoryIndex="2">
       <Position>
         <Filename Value="CPWitch_Windows.lpr"/>
         <Caret Line="16" Column="74"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="21" Column="7" TopLine="128"/>
       </Position>
       <Position>
         <Filename Value="umain.pas"/>
