@@ -34,10 +34,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="7" Y="21"/>
+        <TopLine Value="1356"/>
+        <CursorPos X="66" Y="1362"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla\logview.pp"/>
@@ -120,7 +123,6 @@
       <Unit>
         <Filename Value="..\..\..\mpla\source\mpla\dosview.pp"/>
         <UnitName Value="DosView"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <TopLine Value="247"/>
         <CursorPos X="57" Y="284"/>
@@ -128,10 +130,22 @@
         <Loaded Value="True"/>
       </Unit>
     </Units>
-    <JumpHistory>
+    <JumpHistory HistoryIndex="3">
       <Position>
         <Filename Value="CPWitch_Windows.lpr"/>
         <Caret Line="16" Column="74"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="21" Column="7" TopLine="128"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="346" Column="15" TopLine="324"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="163" Column="25" TopLine="127"/>
       </Position>
     </JumpHistory>
     <RunParams>

@@ -16,7 +16,7 @@ interface
 uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  ExtCtrls, ComCtrls, ActnList, Menus, IpHtml, XMLConf,
+  ExtCtrls, ComCtrls, ActnList, Menus, PairSplitter, IpHtml, XMLConf,
   Version, PasExt, Icons, MultiApp, LogView, Updater, Preferences,
   DosView, DosFont, Codepages, Witch, uPrefs, uLostFile, uFixEnding,
   uEditor, uDictEdit, Dictionary;
@@ -54,6 +54,9 @@ type
       alMain: TActionList;
       ctrlBar: TControlBar;
       hpUnicodeText: TIpHtmlPanel;
+      pBody: TPanel;
+      spFileCP: TSplitter;
+      spCPViewers: TSplitter;
       tiFileWatch: TIdleTimer;
       lbUnicodeViewLabel: TLabel;
       lbCodepageLabel: TLabel;
@@ -76,8 +79,6 @@ type
       pFileListLabel: TPanel;
       pFileList: TPanel;
       dlgFileSave: TSaveDialog;
-      spFilesCPs: TSplitter;
-      spCPsViewers: TSplitter;
       spUnicodeCP: TSplitter;
       statBar: TStatusBar;
       tbMain: TToolBar;
@@ -101,6 +102,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
+    procedure FormWindowStateChange(Sender: TObject);
     procedure tiFileWatchTimer(Sender: TObject);
     procedure lvCodepageListSelectItem(Sender: TObject; Item: TListItem;
       Selected: Boolean);
@@ -157,6 +159,7 @@ type
       procedure SessionSave;
       procedure SessionLoad;
       procedure RefreshFileEndsOnBlank;
+      procedure EnforceLayout;
     public
       procedure ApplyUserLanguage; override;
       procedure OpenFile(FileName : String; Select : boolean = False); overload;
@@ -436,14 +439,14 @@ begin
   lbViewCodepageLabel.Parent:=pViewCodepageLabel;
   lbViewCodepageLabel.Align:=alLeft;
   lbViewCodepageLabel.AutoSize:=True;
-  lbViewCodepageLabel.BorderSpacing.Around:=8;
+  lbViewCodepageLabel.BorderSpacing.Around:=6;
 
   // Displays language/local in Codepage pane like "German (Germany)"
   lbCodepageLanguage :=TLabel.Create(Self);
   lbCodepageLanguage.Parent:=pViewCodepageLabel;
   lbCodepageLanguage.Align:=alRight;
   lbCodepageLanguage.AutoSize:=True;
-  lbCodepageLanguage.BorderSpacing.Around:=8;
+  lbCodepageLanguage.BorderSpacing.Around:=6;
   // lbCodepageLanguage.Caption:='Language';
 
   // Displays language/local in Unicode pane like "German (Germany)"
@@ -451,11 +454,13 @@ begin
   lbUnicodeLanguage.Parent:=pViewUnicodeLabel;
   lbUnicodeLanguage.Align:=alRight;
   lbUnicodeLanguage.AutoSize:=True;
-  lbUnicodeLanguage.BorderSpacing.Around:=8;
+  lbUnicodeLanguage.BorderSpacing.Around:=6;
   // lbUnicodeLanguage.Caption:='Language';
 
   SetUnicodeView('');
- end;
+
+  EnforceLayout;
+end;
 
 procedure TfMain.FormDestroy(Sender: TObject);
 begin
@@ -472,6 +477,17 @@ begin
     OpenFile(FileNames[I], I=0);
 end;
 
+procedure TfMain.FormWindowStateChange(Sender: TObject);
+begin
+  EnforceLayout;
+end;
+
+{
+procedure TfMain.psBodyLeftResize(Sender: TObject);
+begin
+  psBodyLeft.Constraints.MinWidth:=psFiles.Width + psCodepages.Constraints.MinWidth + 10;
+end;
+}
 procedure TfMain.tiFileWatchTimer(Sender: TObject);
 var
   I : integer;
@@ -1320,7 +1336,6 @@ begin
       ShowMissingFiles(MFL);
     FreeAndNil(MFL);
   end;
-
 end;
 
 procedure TfMain.RefreshFileEndsOnBlank;
@@ -1331,6 +1346,24 @@ begin
     if fWitch.Items[I].Analyzed then
       WitchOnAnalyzed(fWitch.Items[I]);
   SelectFile(Self);
+end;
+
+procedure TfMain.EnforceLayout;
+begin
+  {$IFNDEF darwin}
+  { TODO 0 -cLazarus_Bug In Lazarus 4.4, Minimizing and restoring a window on
+  Windows causes all but the pViewers panel (alClient) to move around and change
+  positions. This will force them back into the correcto order. }
+  if (pFileList.Left < spFileCP.Left) and
+  (spFileCP.Left < pCodepageList.Left) and
+  (pCodepageList.Left < spCPViewers.Left) and
+  (spCPViewers.Left < pViewers.Left) then exit;
+   pViewers.Left:=10000;
+   spCPViewers.Left:=9000;
+   pCodepageList.Left:=8000;
+   spFileCP.Left:=7000;
+   pFileList.Left:=0;
+   {$ENDIF}
 end;
 
 procedure TfMain.ApplyUserLanguage;

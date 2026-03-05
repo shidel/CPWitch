@@ -16,6 +16,7 @@ object fMain: TfMain
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnDropFiles = FormDropFiles
+  OnWindowStateChange = FormWindowStateChange
   object ctrlBar: TControlBar
     Left = 0
     Height = 66
@@ -72,228 +73,237 @@ object fMain: TfMain
       end>
     SimplePanel = False
   end
-  object pFileList: TPanel
-    Left = 4
-    Height = 234
-    Top = 66
-    Width = 132
-    Align = alLeft
-    BorderSpacing.Left = 4
-    BorderSpacing.Bottom = 2
-    ClientHeight = 234
-    ClientWidth = 132
-    Constraints.MinWidth = 120
-    TabOrder = 2
-    object pFileListLabel: TPanel
-      Left = 1
-      Height = 28
-      Top = 1
-      Width = 130
-      Align = alTop
-      AutoSize = True
-      BevelOuter = bvNone
-      ClientHeight = 28
-      ClientWidth = 130
-      TabOrder = 0
-      object lbFileList: TLabel
-        Left = 6
-        Height = 16
-        Top = 6
-        Width = 118
-        Align = alClient
-        BorderSpacing.Around = 6
-        Caption = 'Text Files'
-        FocusControl = pFileList
-      end
-    end
-    object lvFileList: TListView
-      Left = 1
-      Height = 204
-      Top = 29
-      Width = 130
-      Align = alClient
-      Columns = <      
-        item
-          AutoSize = True
-          Width = 96
-        end>
-      ReadOnly = True
-      RowSelect = True
-      ScrollBars = ssAutoBoth
-      ShowColumnHeaders = False
-      SmallImagesWidth = 24
-      SortColumn = 0
-      SortType = stText
-      TabOrder = 1
-      ViewStyle = vsReport
-      OnSelectItem = lvFileListSelectItem
-    end
-  end
-  object spFilesCPs: TSplitter
-    Left = 136
+  object pBody: TPanel
+    Left = 0
     Height = 236
     Top = 66
-    Width = 5
-  end
-  object pCodepageList: TPanel
-    Left = 141
-    Height = 234
-    Top = 66
-    Width = 100
-    Align = alLeft
-    BorderSpacing.Bottom = 2
-    ClientHeight = 234
-    ClientWidth = 100
-    Constraints.MinWidth = 90
-    TabOrder = 4
-    object pCodepageListLabel: TPanel
-      Left = 1
-      Height = 28
-      Top = 1
-      Width = 98
-      Align = alTop
-      AutoSize = True
-      BevelOuter = bvNone
-      ClientHeight = 28
-      ClientWidth = 98
-      TabOrder = 0
-      object lbCodepageLabel: TLabel
-        Left = 6
-        Height = 16
-        Top = 6
-        Width = 86
-        Align = alClient
-        BorderSpacing.Around = 6
-        Caption = 'Codepages'
-        FocusControl = pCodepageList
-      end
-    end
-    object lvCodepageList: TListView
-      Left = 1
-      Height = 204
-      Top = 29
-      Width = 98
-      Align = alClient
-      Columns = <      
-        item
-          AutoSize = True
-          Width = 64
-        end>
-      ReadOnly = True
-      RowSelect = True
-      ScrollBars = ssAutoBoth
-      ShowColumnHeaders = False
-      SmallImagesWidth = 20
-      TabOrder = 1
-      ViewStyle = vsReport
-      OnSelectItem = lvCodepageListSelectItem
-    end
-  end
-  object spCPsViewers: TSplitter
-    Left = 241
-    Height = 236
-    Top = 66
-    Width = 5
-  end
-  object pViewers: TPanel
-    Left = 246
-    Height = 234
-    Top = 66
-    Width = 230
+    Width = 480
     Align = alClient
-    BorderSpacing.Right = 4
-    BorderSpacing.Bottom = 2
     BevelOuter = bvNone
-    ClientHeight = 234
-    ClientWidth = 230
-    TabOrder = 6
-    object pViewUnicode: TPanel
-      Left = 0
-      Height = 100
+    ClientHeight = 236
+    ClientWidth = 480
+    TabOrder = 2
+    object pFileList: TPanel
+      Left = 4
+      Height = 234
       Top = 0
-      Width = 230
-      Align = alTop
+      Width = 132
+      Align = alLeft
+      BorderSpacing.Left = 4
       BorderSpacing.Bottom = 2
-      ClientHeight = 100
-      ClientWidth = 230
-      Constraints.MinHeight = 100
+      ClientHeight = 234
+      ClientWidth = 132
       TabOrder = 0
-      object pViewUnicodeLabel: TPanel
+      object pFileListLabel: TPanel
         Left = 1
-        Height = 32
+        Height = 28
         Top = 1
-        Width = 228
+        Width = 130
         Align = alTop
         AutoSize = True
         BevelOuter = bvNone
-        ClientHeight = 32
-        ClientWidth = 228
+        ClientHeight = 28
+        ClientWidth = 130
         TabOrder = 0
-        object lbUnicodeViewLabel: TLabel
-          Left = 8
+        object lbFileList: TLabel
+          Left = 6
           Height = 16
-          Top = 8
-          Width = 115
-          Align = alLeft
-          BorderSpacing.Around = 8
-          Caption = 'Viewed as Unicode'
+          Top = 6
+          Width = 118
+          Align = alClient
+          BorderSpacing.Around = 6
+          Caption = 'Text Files'
+          FocusControl = pFileList
         end
       end
-      object hpUnicodeText: TIpHtmlPanel
+      object lvFileList: TListView
         Left = 1
-        Height = 66
-        Top = 33
-        Width = 228
+        Height = 204
+        Top = 29
+        Width = 130
         Align = alClient
-        BgColor = clWindow
-        BorderWidth = 1
-        BorderStyle = bsSingle
-        FixedTypeface = 'Courier'
-        DefaultTypeFace = 'default'
-        DefaultFontSize = 12
-        FlagErrors = False
-        PrintSettings.MarginLeft = 0.5
-        PrintSettings.MarginTop = 0.5
-        PrintSettings.MarginRight = 0.5
-        PrintSettings.MarginBottom = 0.5
-        PrintSettings.Preview.Left = 640
-        PrintSettings.Preview.Top = 360
-        PrintSettings.Preview.Width = 1920
-        PrintSettings.Preview.Height = 1080
+        Columns = <        
+          item
+            AutoSize = True
+            Width = 96
+          end>
+        ReadOnly = True
+        RowSelect = True
+        ScrollBars = ssAutoBoth
+        ShowColumnHeaders = False
+        SmallImagesWidth = 24
+        SortColumn = 0
+        SortType = stText
         TabOrder = 1
-        TextColor = clWindowText
-        UsePaintBuffer = False
+        ViewStyle = vsReport
+        OnSelectItem = lvFileListSelectItem
       end
     end
-    object pCodepage: TPanel
-      Left = 0
-      Height = 127
-      Top = 107
-      Width = 230
-      Align = alClient
-      ClientHeight = 127
-      ClientWidth = 230
-      Constraints.MinHeight = 100
+    object spFileCP: TSplitter
+      Left = 136
+      Height = 236
+      Top = 0
+      Width = 5
+    end
+    object pCodepageList: TPanel
+      Left = 141
+      Height = 234
+      Top = 0
+      Width = 95
+      Align = alLeft
+      BorderSpacing.Bottom = 2
+      ClientHeight = 234
+      ClientWidth = 95
       TabOrder = 1
-      object pViewCodepageLabel: TPanel
+      object pCodepageListLabel: TPanel
         Left = 1
-        Height = 0
+        Height = 28
         Top = 1
-        Width = 228
+        Width = 93
         Align = alTop
         AutoSize = True
         BevelOuter = bvNone
+        ClientHeight = 28
+        ClientWidth = 93
         TabOrder = 0
+        object lbCodepageLabel: TLabel
+          Left = 6
+          Height = 16
+          Top = 6
+          Width = 81
+          Align = alClient
+          BorderSpacing.Around = 6
+          Caption = 'Codepages'
+          FocusControl = pCodepageList
+        end
+      end
+      object lvCodepageList: TListView
+        Left = 1
+        Height = 204
+        Top = 29
+        Width = 93
+        Align = alClient
+        Columns = <        
+          item
+            AutoSize = True
+            Width = 59
+          end>
+        ReadOnly = True
+        RowSelect = True
+        ScrollBars = ssAutoBoth
+        ShowColumnHeaders = False
+        SmallImagesWidth = 20
+        TabOrder = 1
+        ViewStyle = vsReport
+        OnSelectItem = lvCodepageListSelectItem
       end
     end
-    object spUnicodeCP: TSplitter
-      Cursor = crVSplit
-      Left = 0
-      Height = 5
-      Top = 102
-      Width = 230
-      Align = alTop
-      ResizeAnchor = akTop
+    object spCPViewers: TSplitter
+      Left = 236
+      Height = 236
+      Top = 0
+      Width = 5
+    end
+    object pViewers: TPanel
+      Left = 241
+      Height = 234
+      Top = 0
+      Width = 235
+      Align = alClient
+      BorderSpacing.Right = 4
+      BorderSpacing.Bottom = 2
+      BevelOuter = bvNone
+      ClientHeight = 234
+      ClientWidth = 235
+      TabOrder = 2
+      object pViewUnicode: TPanel
+        Left = 0
+        Height = 100
+        Top = 0
+        Width = 235
+        Align = alTop
+        BorderSpacing.Bottom = 2
+        ClientHeight = 100
+        ClientWidth = 235
+        Constraints.MinHeight = 100
+        TabOrder = 0
+        object pViewUnicodeLabel: TPanel
+          Left = 1
+          Height = 28
+          Top = 1
+          Width = 233
+          Align = alTop
+          AutoSize = True
+          BevelOuter = bvNone
+          ClientHeight = 28
+          ClientWidth = 233
+          TabOrder = 0
+          object lbUnicodeViewLabel: TLabel
+            Left = 6
+            Height = 16
+            Top = 6
+            Width = 115
+            Align = alLeft
+            BorderSpacing.Around = 6
+            Caption = 'Viewed as Unicode'
+          end
+        end
+        object hpUnicodeText: TIpHtmlPanel
+          Left = 1
+          Height = 70
+          Top = 29
+          Width = 233
+          Align = alClient
+          BgColor = clWindow
+          BorderWidth = 1
+          BorderStyle = bsSingle
+          FixedTypeface = 'Courier'
+          DefaultTypeFace = 'default'
+          DefaultFontSize = 12
+          FlagErrors = False
+          PrintSettings.MarginLeft = 0.5
+          PrintSettings.MarginTop = 0.5
+          PrintSettings.MarginRight = 0.5
+          PrintSettings.MarginBottom = 0.5
+          PrintSettings.Preview.Left = 640
+          PrintSettings.Preview.Top = 360
+          PrintSettings.Preview.Width = 1920
+          PrintSettings.Preview.Height = 1080
+          TabOrder = 1
+          TextColor = clWindowText
+          UsePaintBuffer = False
+        end
+      end
+      object pCodepage: TPanel
+        Left = 0
+        Height = 127
+        Top = 107
+        Width = 235
+        Align = alClient
+        ClientHeight = 127
+        ClientWidth = 235
+        Constraints.MinHeight = 100
+        TabOrder = 1
+        object pViewCodepageLabel: TPanel
+          Left = 1
+          Height = 0
+          Top = 1
+          Width = 233
+          Align = alTop
+          AutoSize = True
+          BevelOuter = bvNone
+          TabOrder = 0
+        end
+      end
+      object spUnicodeCP: TSplitter
+        Cursor = crVSplit
+        Left = 0
+        Height = 5
+        Top = 102
+        Width = 235
+        Align = alTop
+        ResizeAnchor = akTop
+      end
     end
   end
   object alMain: TActionList
