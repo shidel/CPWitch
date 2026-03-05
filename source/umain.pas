@@ -52,8 +52,8 @@ type
       actOnlineUpdate: TAction;
       actPreferences: TAction;
       alMain: TActionList;
-      ctrlBar: TControlBar;
       hpUnicodeText: TIpHtmlPanel;
+      pTop: TPanel;
       pBody: TPanel;
       spFileCP: TSplitter;
       spCPViewers: TSplitter;
@@ -422,13 +422,16 @@ begin
   FlattenControl(pCodepageList);
   FlattenControl(pViewUnicode);
   FlattenControl(pCodepage);
+  FlattenControl(pTop);
+  FlattenControl(pBody);
+
   // Disable HideSelection for Windows. Or, when selecting things like the
   // codepage, The current File Selected becomes no longer highlighted.
   lvFileList.HideSelection:=False;
   lvCodepageList.HideSelection:=False;
 
-  // Make toolbar the width of the visible buttons
-  AdjustToolBarWidth(tbMain);
+  // Make toolbar the width of the visible buttons, not needed without controlbar
+  // AdjustToolBarWidth(tbMain);
 
   // Controls that are Created at runtime, without a Name so they will not
   // save their Caption properties at runtime during their NLS generation

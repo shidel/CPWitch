@@ -17,24 +17,26 @@ object fMain: TfMain
   OnDestroy = FormDestroy
   OnDropFiles = FormDropFiles
   OnWindowStateChange = FormWindowStateChange
-  object ctrlBar: TControlBar
-    Left = 0
-    Height = 66
-    Top = 0
-    Width = 480
+  object pTop: TPanel
+    Left = 4
+    Height = 58
+    Top = 4
+    Width = 472
     Align = alTop
     AutoSize = True
-    BevelInner = bvNone
+    BorderSpacing.Around = 4
     BevelOuter = bvNone
-    BorderWidth = 4
-    RowSize = 20
-    TabOrder = 0
+    BorderStyle = bsSingle
+    ClientHeight = 56
+    ClientWidth = 470
+    TabOrder = 2
     object tbMain: TToolBar
-      Left = 13
+      Left = 4
       Height = 48
-      Top = 8
-      Width = 410
+      Top = 4
+      Width = 800
       Align = alNone
+      BorderSpacing.Around = 4
       ButtonHeight = 48
       ButtonWidth = 48
       Caption = 'tbMain'
@@ -82,7 +84,7 @@ object fMain: TfMain
     BevelOuter = bvNone
     ClientHeight = 236
     ClientWidth = 480
-    TabOrder = 2
+    TabOrder = 1
     object pFileList: TPanel
       Left = 4
       Height = 234
