@@ -425,12 +425,11 @@ begin
   W := TStringList.Create;
   try
     WordsOfString(S, W);
-    Result:=W.Count;
     for I := 0 to W.Count -1 do begin
       N:=D.Find(LowerCase(W[I]));
       if Assigned(N) then begin
-        L := Length(N.Data32);
-        if L > 12 then L:=11;
+        L := Length(W[I]);
+        if L > 11 then L:=10;
         P:=High(N.Data32);
         P:=L-(P*P);
         if P < 1 then P:=1;
@@ -438,9 +437,9 @@ begin
           Inc(Stats[N.Data32[J]], P);
       end;
     end;
+    Result:=W.Count;
   finally
     W.Free;
-    Result:=0;
   end;
 end;
 

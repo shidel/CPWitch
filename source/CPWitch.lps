@@ -19,11 +19,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="857"/>
         <CursorPos X="25" Y="426"/>
-        <FoldState Value=" TL004021 p5vM21074 TCQG3 T8jP4R[Q4T3l7039 pjFjc0951215 pk8o7064]MYk70C6 pifjO0l2]IAkK0p3]9EkU0b3]Rgk10k112 PiFie0 T1l8029]Qbje06[{35]mQo5054 pjNk9097]9Rke0v[$4XlN09[$4ZjT0f3[$4jJkP]$6lP02R PiL*L]F0lUc8B]o4p9F5A[o4mBH6E p]mQ9EC]9Lj4]R[(6g3F[95Zg59]=9kOH TMqe21011C261 PCrW2M"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -144,9 +142,10 @@
       <Unit>
         <Filename Value="dictionary.pp"/>
         <UnitName Value="Dictionary"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
         <TopLine Value="395"/>
-        <CursorPos X="12" Y="442"/>
+        <CursorPos X="29" Y="432"/>
         <UsageCount Value="103"/>
         <Loaded Value="True"/>
       </Unit>

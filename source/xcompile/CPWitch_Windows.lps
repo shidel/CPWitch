@@ -34,6 +34,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <CursorPos X="5" Y="20"/>
         <UsageCount Value="10"/>
@@ -75,12 +76,10 @@
       <Unit>
         <Filename Value="version.pp"/>
         <UnitName Value="Version"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="9"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="7"/>
         <CursorPos X="26" Y="28"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="version.def"/>
@@ -123,11 +122,10 @@
       <Unit>
         <Filename Value="..\..\..\mpla\source\mpla\dosview.pp"/>
         <UnitName Value="DosView"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="247"/>
         <CursorPos X="57" Y="284"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="2">
