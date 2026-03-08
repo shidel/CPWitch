@@ -128,6 +128,7 @@ object fDictEditForm: TfDictEditForm
       Width = 64
       Align = alRight
       AutoSize = True
+      BorderSpacing.Left = 8
       BorderSpacing.Top = 16
       BorderSpacing.Bottom = 16
       Caption = 'Reload'
@@ -147,6 +148,21 @@ object fDictEditForm: TfDictEditForm
       Enabled = False
       TabOrder = 2
       OnClick = btnAddClick
+    end
+    object btnMerge: TButton
+      Left = 111
+      Height = 20
+      Top = 16
+      Width = 61
+      Align = alRight
+      AutoSize = True
+      BorderSpacing.Top = 16
+      BorderSpacing.Bottom = 16
+      Caption = 'Merge'
+      Enabled = False
+      TabOrder = 3
+      Visible = False
+      OnClick = btnMergeClick
     end
   end
   object pBody: TPanel

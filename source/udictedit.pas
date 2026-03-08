@@ -29,6 +29,7 @@ type
     btnInvert: TButton;
     btnAdd: TButton;
     btnNone: TButton;
+    btnMerge: TButton;
     cbLocale: TComboBox;
     clWords: TCheckListBox;
     lbLocale: TLabel;
@@ -38,6 +39,7 @@ type
     pStatusBar: TStatusBar;
     procedure btnAddClick(Sender: TObject);
     procedure btnInvertClick(Sender: TObject);
+    procedure btnMergeClick(Sender: TObject);
     procedure btnNoneClick(Sender: TObject);
     procedure btnReloadClick(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
@@ -103,6 +105,12 @@ begin
     clWords.Checked[I]:= not clWords.Checked[I];
 end;
 
+procedure TfDictEditForm.btnMergeClick(Sender: TObject);
+begin
+  MergeDictionaries;
+  DoUpdateButtons;
+end;
+
 procedure TfDictEditForm.btnNoneClick(Sender: TObject);
 var
   I : Integer;
@@ -122,6 +130,8 @@ procedure TfDictEditForm.btnSaveClick(Sender: TObject);
 begin
   if not Assigned(UserDictionary) then Exit;
   UserDictionary.Save;
+  if Assigned(MasterDictionary) and (MasterDictionary.Modified) then
+    MasterDictionary.Save;
   DoUpdateWordList;
 end;
 
@@ -299,6 +309,14 @@ begin
   btnNone.Enabled:=btnAdd.Enabled;
   btnSave.Enabled:=Assigned(UserDictionary) and (UserDictionary.Modified);
   btnReload.Enabled:=btnSave.Enabled;
+  {$IFDEF BUILD_PRIVATE}
+    btnMerge.Visible:=True;
+    btnMerge.Enabled:=Assigned(MasterDictionary) and Assigned(UserDictionary) and
+      (UserDictionary.Count > 0);
+  {$ELSE}
+    btnMerge.Visible:=False;
+    btnMerge.Enabled:=False;
+  {$ENDIF}
 end;
 
 procedure TfDictEditForm.DoWitchReanalyze;

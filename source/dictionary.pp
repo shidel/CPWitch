@@ -259,6 +259,7 @@ procedure TCustomDictionary.ReadNodeData(Stream: TStream; Node: TBinaryTreeNode)
 var
   D : TArrayOfInt32;
   C, I : integer;
+  M : TBinaryTreeNode;
 begin
   // Other data types of TBinaryTreeNode are not used, no point in saving them
   // in Dinctionary file.
@@ -276,8 +277,22 @@ begin
         D[I] := FLocaleRemap[D[I]];
       // LogMessage(vbExcessive, 'Data Locales: ', D);
     end;
+    if Assigned(MasterDictionary) then begin
+      // Prune Locale from Users Dictionary if it was added to Master.
+      M := MasterDictionary.Find(Node.UniqueID);
+      if Assigned(M) then begin
+        for I := High(D) downto 0 do begin
+          if InArray(M.Data32, D[I]) <> -1 then begin
+            System.Delete(D, I, 1);
+          end;
+        end;
+      end;
+    end;
   end;
-  Node.Data32:=Copy(D, 0, C);
+  if Length(D) = 0 then
+    Delete(Node)
+  else
+    Node.Data32:=Copy(D, 0, Length(D));
 end;
 
 procedure TCustomDictionary.Load;
@@ -305,7 +320,7 @@ procedure TCustomDictionary.Save;
 begin
   Modified:=False;
   if FFileName = '' then Exit;
-  LogMessage(vbVerbose, 'Saving dictionary file: '+ ExtractRelativepath(AppBasePath, FileName));
+  LogMessage(vbVerbose, 'Saving dictionary file: '+ FriendlyPath(AppBasePath, FileName));
   try
     SaveToFile(FFileName);
     LogMessage(vbVerbose, 'saved dictionary file. ' + IntToStr(Count) +
@@ -433,6 +448,7 @@ begin
       LazyRemap[I]:=MasterDictionary.AddLocale(TempLocales[I]);
     AddEntry(UserDictionary.Root);
     UserDictionary.Clear;
+    UserDictionary.Modified:=True;
     MasterDictionary.Optimize;
   except
     ReloadDictionaries;
