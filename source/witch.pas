@@ -291,7 +291,6 @@ begin
   A:=TUTF8Analyze.Create(ToBytes(S));
   FResults:=A.Results;
   A.Free;
-  if Assigned(Dictionaries) then
   FLocale:=DetectLocale(S);
 end;
 
@@ -305,7 +304,6 @@ var
   S : RawByteString;
 begin
   S:=NoComments;
-  if Assigned(Dictionaries) then
   FLocale:=DetectLocale(S);
 end;
 

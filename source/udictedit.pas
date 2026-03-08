@@ -113,16 +113,15 @@ end;
 
 procedure TfDictEditForm.btnReloadClick(Sender: TObject);
 begin
-  if not Assigned(Dictionaries) then Exit;
-  Dictionaries.Reload;
+  ReloadDictionaries;
   DoUpdateWordList;
   DoWitchReanalyze;
 end;
 
 procedure TfDictEditForm.btnSaveClick(Sender: TObject);
 begin
-  if not Assigned(Dictionaries) then Exit;
-  Dictionaries.Save;
+  if not Assigned(UserDictionary) then Exit;
+  UserDictionary.Save;
   DoUpdateWordList;
 end;
 
@@ -134,23 +133,23 @@ var
   SS, TS : TArrayOfInt32;
   DN : TBinaryTreeNode;
 begin
-  if not Assigned(Dictionaries) then Exit;
+  if not Assigned(UserDictionary) then Exit;
   if Trim(cbLocale.Text) = '' then Exit;
-  LC:=Dictionaries.AddLocale(Trim(cbLocale.Text));
+  LC:=UserDictionary.AddLocale(Trim(cbLocale.Text));
   SS:=[LC];
   for I := 0 to clWords.Count - 1 do
     if clWords.State[I] = cbChecked then begin
       S:=LowerCase(clWords.Items[I]);
-      DN:=Dictionaries.Find(S);
+      DN:=UserDictionary.Find(S);
       if not Assigned(DN) then
-        DN:=Dictionaries.Add(S, SS)
+        DN:=UserDictionary.Add(S, SS)
       else if InArray(DN.Data32, LC) = -1 then begin
         TS:=DN.Data32;
         Cat(TS, LC);
         DN.Data32:=TS;
       end;
     end;
-  Dictionaries.Modified:=True;
+  UserDictionary.Modified:=True;
   DoUpdateWordList;
   DoWitchReanalyze;
 end;
@@ -176,8 +175,8 @@ var
   LA : TArrayOfString;
 begin
   cbLocale.Clear;
-  if not Assigned(Dictionaries) then Exit;
-  LL := Dictionaries.Locales;
+  if not Assigned(UserDictionary) then Exit;
+  LL := UserDictionary.Locales;
   LLL:='';
   while LL <> '' do begin
     L:=Trim(PopDelim(LL, COMMA));
@@ -217,7 +216,7 @@ begin
     W.Clear;
     WordsOfString(Line, W);
     for I := 0 to W.Count - 1 do begin
-      if (Length(W[I]) > 1) and (Not Assigned(FWords.Find(W[I], false))) then
+      if (Length(W[I]) > 1) and (Not Assigned(FWords.Find(LowerCase(W[I])))) then
         FWords.Add(W[I]);
     end;
   end;
@@ -228,52 +227,64 @@ end;
 procedure TfDictEditForm.DoUpdateWordList;
 var
   LC : Int32;
-  FN, DN : TBinaryTreeNode;
+  N, M, U : TBinaryTreeNode;
   SL : Array of String;
   SC, I : integer;
+  L : String;
 begin
   clWords.Clear;
   DoUpdateButtons;
   if FWords.Count = 0 then Exit;
-  if Not Assigned(Dictionaries) then Exit;
+  if Not Assigned(MasterDictionary) then Exit;
+  if Not Assigned(UserDictionary) then Exit;
   SL:=[];
   SC:=0;
   SetLength(SL, FWords.Count);
-  LC:=Dictionaries.IndexOfLocale(Trim(cbLocale.Text));
-  FN:=FWords.First;
+  LC:=UserDictionary.IndexOfLocale(Trim(cbLocale.Text));
+  N:=FWords.First;
   if LC = -1 then begin
-    while Assigned(FN) do begin
-      DN:=Dictionaries.Find(Lowercase(FN.UniqueID));
-      if not Assigned(DN) then begin
-        SL[SC]:=FN.UniqueID;
+    // Unknown (New) locale, only add words in neither dictionary.
+    // Once the user actually adds a word, then the locale will be known and
+    // more words will be presented.
+    while Assigned(N) do begin
+      L:=LowerCase(N.UniqueID);
+      if (not Assigned(MasterDictionary.Find(L)))
+      and (not Assigned(UserDictionary.Find(L))) then begin
+        SL[SC]:=N.UniqueID; // Added to selection list in actual case of word.
         Inc(SC);
       end;
-      FN:=FN.Next;
+      N:=N.Next;
     end;
   end else begin
-    while Assigned(FN) do begin
-      DN:=Dictionaries.Find(Lowercase(FN.UniqueID));
-      if (not Assigned(DN)) or (InArray(DN.Data32, LC) = -1) then begin
-        SL[SC]:=FN.UniqueID;
-        Inc(SC);
+    while Assigned(N) do begin
+      // Known locale, only add word if it is not already listed for this
+      // locale in either dictionary.
+      L:=LowerCase(N.UniqueID);
+      M:=MasterDictionary.Find(L);
+      if (not Assigned(M)) or (InArray(M.Data32, LC) = -1) then begin
+        U:=UserDictionary.Find(L);
+        if (not Assigned(U)) or (InArray(U.Data32, LC) = -1) then begin
+          SL[SC]:=N.UniqueID;
+          Inc(SC);
+        end;
       end;
-      FN:=FN.Next;
+      N:=N.Next;
     end;
   end;
   SetLength(SL, SC);
   if SC > 0 then begin
     clWords.Items.AddStrings(SL);
-    // EC:=Dictionaries.IndexOfLocale('en_US');
-    for I := 0 to clWords.Count - 1 do begin
-      DN:=Dictionaries.Find(Lowercase(clWords.Items[I]));
-      if (LC <> -1) and (Not Assigned(DN)) then begin
+    // Of the words added to the Selection List. Only preselect words,
+    // that are not in any other local, over 4 letters long, not all uppercase
+    // and only if it is a "known" locale.
+    for I := 0 to clWords.Items.Count - 1 do begin
+      L:=LowerCase(clWords.Items[I]);
+      M:=MasterDictionary.Find(L);
+      U:=UserDictionary.Find(L);
+      if (LC <> -1) and (Not Assigned(M)) and (Not Assigned(U)) then begin
         if (Length(clWords.Items[I]) > 5) and (Uppercase(clWords.Items[I]) <> clWords.Items[I]) then
-          clWords.Checked[I]:=true
-        else if clWords.AllowGrayed then
-          clWords.State[I]:=cbGrayed;
+          clWords.Checked[I]:=True
       end;
-
-      // or (InArray(DN.Data32, EC) = -1));
     end;
   end;
   DoUpdateButtons;
@@ -284,7 +295,7 @@ begin
   btnAdd.Enabled:=(clWords.Items.Count > 0) and (Trim(cbLocale.Text) <> '');
   btnInvert.Enabled:=btnAdd.Enabled;
   btnNone.Enabled:=btnAdd.Enabled;
-  btnSave.Enabled:=Assigned(Dictionaries) and (Dictionaries.Modified);
+  btnSave.Enabled:=Assigned(UserDictionary) and (UserDictionary.Modified);
   btnReload.Enabled:=btnSave.Enabled;
 end;
 

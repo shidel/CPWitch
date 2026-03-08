@@ -20,8 +20,9 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="857"/>
-        <CursorPos X="25" Y="426"/>
+        <TopLine Value="168"/>
+        <CursorPos X="29" Y="179"/>
+        <FoldState Value=" TL00404 p0vX21074 TCQG3 T8jR4R021 T3l903A pjPk7096 pkFkc047]IWk9064]9Y]RC]RifjO0l2]IAkK0p3]9EkU0Y11312 PkDlM0 T1lA0241B1215 plQrB05[*4N]&apos;97 pjRke0v[z4XlN0902[+7jXmZ]+6lR02I pg,P016 PEkT]M0lWc811A pj4pIF5]9iZmBH6E]IJkQ9EC]9Lj4F5823521C PkHpQH TMrE21011C261 PCrQ22"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -61,20 +62,20 @@
       <Unit>
         <Filename Value="mpla/pasext.pp"/>
         <UnitName Value="PasExt"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="3921"/>
-        <CursorPos Y="3943"/>
-        <FoldState Value=" TK0071B p3joC0U TL904122M1W13221112324Y4W2H piQt625C1917G24422465226E6639 pl0sd231316]s64912 pMu9680B p0ii601 T4S02]E=f[D43=J05C piYjb034 pj8jW0G5]90jS0E7 pkDlA0431[B4AmI03E[l5O04419[M4l6mW0841A]rPkU08[^4b]-7B[g5M07[^49]IM4 pj2jY0M7]RZjU07A[I5V0M9[s5a06[s4cjP0F8[{O7C[j4XjL0e[I4dkB042]9fJ29[Q4ekV0b[{&apos;67mM045[!5A032[t4ig0Q9]R3jc26]Ij6iI26[}w6T038 pigjM067]ILk00e T1=K04E[z4kT053[{i5J0ZA]9Zl20B4[}L5f0h01E[B4mV09C191C1H pn5tQ05J]Oal50I5 pj4kF[98C02[{86B0I9[y4k605[I4gkO0AD]aAl2058[}S5c0M6]9Y]s672B plMpX024[{;5M0LA pj5kX0[~95fk502A[u5g035[a5P0b T6*U01c]GJ=G01y[P4/M02C1S Pid\d0 TM?6411432 p5tW221 p2#N0]70+e]ET0/4HJE pk2qFTE[#J6aK8F2T]KN*NX3I[K4r8B5A piXm5a9F]9fnRJ964B]cFqQX3]Kj0mDR7[#lU6Zf1H PiVmUV%"/>
-        <UsageCount Value="95"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="1455"/>
+        <CursorPos Y="1494"/>
+        <FoldState Value=" TK0071B p3joT0U TL904122M1W13221112324Y4W2H piQt825C1917G24422465226E6639 pl0sd231316]s64912 pMuO680B p0ii601 T4S02]E*0[D43=L05C piYjb034 pj8jW0G5]90jS0D7]RcjY0$41]BkEo903E[l5O04419[M4l6mW0841A]rPkU08[^4b]-7B[g5M07[^49]IM4 pj2]^M]uiZjU07A[I5V0M9[s5a06B[{Z5P0F8[{O7C[j4XjL0e[I4dkB042]9fJ29[Q4ekV0b3[{&apos;57mM045[!5A032[t4ig0Q9]R3jc26]Ij6iI26[}w6T038 pigjM067]ILk00e T1=]*E[z4kT053[{i5J0Z328]\NnW0231E]lenE09C191C1H pn5tQ05J]kal50I5 pj4kF[98C02[{16B0I9 piZk605[I4gkO0AD]aAl2058[}L5c0M6]9Y]s672B plMpX024[{v5M0LA pj5kX0[~25fk502A[u5g035[a5P0b T6*W0172U]IH=V01y[R4/M02C1S Pid\d0 TM?8411432 p5u4221 p2#N0]70+e]ET0/6HJB23 pkDr9997[_,5FL3E2T]KK*MX3I piZr8B5A piXm5a9F]9fnRJ964B]cFqQX3]Kj0mDR7[#lR6Zf1H PiVmUVE"/>
+        <UsageCount Value="92"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/multiapp.pp"/>
         <UnitName Value="MultiApp"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="1372"/>
         <CursorPos Y="1529"/>
-        <UsageCount Value="92"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="86"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/preferences.pp"/>
@@ -83,14 +84,14 @@
         <TopLine Value="116"/>
         <CursorPos X="47" Y="277"/>
         <FoldState Value=" TL00403122 pGw222011 T7SP: T8T2h3 PHiJ2 TMvE4]Q3jV087 pk5kV053 pigj00{Y6[A4ke0N4 pjAi72C3]9MkK0,1 PS2],1jW077]MY]x44]nXjE282]I0jN248]9Z].3]wicjO0V T0jZI2D[h4vFRJ1 T6kJ02C PMvD0H"/>
-        <UsageCount Value="26"/>
+        <UsageCount Value="16"/>
       </Unit>
       <Unit>
         <Filename Value="witch.pas"/>
         <UnitName Value="Witch"/>
-        <EditorIndex Value="7"/>
-        <TopLine Value="218"/>
-        <CursorPos X="3" Y="243"/>
+        <EditorIndex Value="6"/>
+        <TopLine Value="270"/>
+        <CursorPos Y="307"/>
         <UsageCount Value="102"/>
         <Loaded Value="True"/>
       </Unit>
@@ -101,7 +102,7 @@
         <TopLine Value="40"/>
         <CursorPos X="42" Y="44"/>
         <FoldState Value=" T7i4Ne3 PfifH T3kc0A3 pjQk10Z0111E plcnP04321 POlQ0d"/>
-        <UsageCount Value="37"/>
+        <UsageCount Value="27"/>
       </Unit>
       <Unit>
         <Filename Value="doscrt.pp"/>
@@ -110,16 +111,15 @@
         <TopLine Value="8"/>
         <CursorPos X="63" Y="24"/>
         <FoldState Value=" T7jPCK1 PXMI T3lK0411A13 pkRlg0S4 piXjT0J6]9ZjP04226 PiAjI0+"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="1"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/codepages.pp"/>
         <UnitName Value="Codepages"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="163"/>
         <CursorPos Y="289"/>
-        <UsageCount Value="104"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="95"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/doscrt.pp"/>
@@ -128,7 +128,7 @@
         <TopLine Value="600"/>
         <CursorPos X="63" Y="635"/>
         <FoldState Value=" T3kA05G pifjb051113]52212 PmJob0a"/>
-        <UsageCount Value="36"/>
+        <UsageCount Value="26"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/dosview.pp"/>
@@ -137,26 +137,27 @@
         <TopLine Value="252"/>
         <CursorPos X="24" Y="279"/>
         <FoldState Value=" T3kJ05B151112 PlFm80V"/>
-        <UsageCount Value="26"/>
+        <UsageCount Value="16"/>
       </Unit>
       <Unit>
         <Filename Value="dictionary.pp"/>
         <UnitName Value="Dictionary"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="5"/>
-        <TopLine Value="395"/>
-        <CursorPos X="29" Y="432"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="353"/>
+        <CursorPos Y="27"/>
+        <FoldState Value=" T3jE06217 pjBkF0L611 PjMjd0R"/>
         <UsageCount Value="103"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/bintree.pp"/>
         <UnitName Value="BinTree"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="29"/>
-        <CursorPos Y="602"/>
-        <FoldState Value=" T3k7079 piZjR063]9bj80G936 plXmc034 pjOjd0=119 Pj6l30\"/>
-        <UsageCount Value="27"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="7"/>
+        <CursorPos X="67" Y="680"/>
+        <FoldState Value=" T3kR079 piejW06113 pj8jU0L41514 plMmd0J12436 pkNm6035]ZTk30=119 Pj6l30@"/>
+        <UsageCount Value="69"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="udictedit.pas"/>
@@ -164,8 +165,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uDictEdit"/>
-        <EditorIndex Value="4"/>
-        <CursorPos X="19" Y="20"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="127"/>
+        <CursorPos X="74" Y="219"/>
+        <FoldState Value=" T3iV0L8 PicjA0@"/>
         <UsageCount Value="102"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -176,7 +180,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="42"/>
         <CursorPos Y="59"/>
-        <UsageCount Value="28"/>
+        <UsageCount Value="18"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/dosfont.pp"/>
@@ -184,138 +188,137 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="840"/>
         <CursorPos X="18" Y="882"/>
-        <UsageCount Value="14"/>
+        <UsageCount Value="4"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/logview.pp"/>
         <UnitName Value="LogView"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="238"/>
         <CursorPos X="32" Y="243"/>
-        <UsageCount Value="27"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="21"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="133" TopLine="119"/>
+        <Filename Value="dictionary.pp"/>
+        <Caret Line="724" Column="80" TopLine="685"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="132" Column="15" TopLine="101"/>
+        <Filename Value="dictionary.pp"/>
+        <Caret Line="641" Column="16" TopLine="614"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="350" Column="16" TopLine="176"/>
+        <Filename Value="dictionary.pp"/>
+        <Caret Line="692" Column="45" TopLine="629"/>
       </Position>
       <Position>
-        <Filename Value="mpla/logview.pp"/>
-        <Caret Line="146"/>
+        <Filename Value="dictionary.pp"/>
+        <Caret Line="663" Column="63" TopLine="615"/>
       </Position>
       <Position>
-        <Filename Value="mpla/logview.pp"/>
-        <Caret Line="165" Column="33" TopLine="140"/>
+        <Filename Value="dictionary.pp"/>
+        <Caret Line="634" Column="48" TopLine="567"/>
+      </Position>
+      <Position>
+        <Filename Value="dictionary.pp"/>
+        <Caret Line="636" Column="22" TopLine="562"/>
+      </Position>
+      <Position>
+        <Filename Value="dictionary.pp"/>
+        <Caret Line="633" Column="39" TopLine="588"/>
+      </Position>
+      <Position>
+        <Filename Value="dictionary.pp"/>
+        <Caret Line="625" Column="28" TopLine="549"/>
+      </Position>
+      <Position>
+        <Filename Value="dictionary.pp"/>
+        <Caret Line="617" TopLine="550"/>
+      </Position>
+      <Position>
+        <Filename Value="dictionary.pp"/>
+        <Caret Line="645" Column="27" TopLine="618"/>
+      </Position>
+      <Position>
+        <Filename Value="dictionary.pp"/>
+        <Caret Line="626" Column="42" TopLine="620"/>
+      </Position>
+      <Position>
+        <Filename Value="dictionary.pp"/>
+        <Caret Line="645" Column="16" TopLine="621"/>
+      </Position>
+      <Position>
+        <Filename Value="dictionary.pp"/>
+        <Caret Line="646" TopLine="615"/>
+      </Position>
+      <Position>
+        <Filename Value="dictionary.pp"/>
+        <Caret Line="662" Column="26" TopLine="618"/>
+      </Position>
+      <Position>
+        <Filename Value="dictionary.pp"/>
+        <Caret Line="640" Column="51" TopLine="588"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/pasext.pp"/>
+        <Caret Line="32" Column="46"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/pasext.pp"/>
+        <Caret Line="34" Column="15"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/pasext.pp"/>
+        <Caret Line="36" Column="51"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/pasext.pp"/>
+        <Caret Line="198" Column="34" TopLine="156"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/pasext.pp"/>
+        <Caret Line="244" Column="19" TopLine="189"/>
       </Position>
       <Position>
         <Filename Value="udictedit.pas"/>
-        <Caret Line="269" Column="90" TopLine="244"/>
+        <Caret Line="46" TopLine="25"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="483" TopLine="475"/>
+        <Filename Value="udictedit.pas"/>
+        <Caret Line="49" TopLine="13"/>
       </Position>
       <Position>
-        <Filename Value="mpla/multiapp.pp"/>
-        <Caret Line="871" Column="33" TopLine="847"/>
+        <Filename Value="udictedit.pas"/>
+        <Caret Line="305" TopLine="222"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="109" TopLine="85"/>
+        <Filename Value="udictedit.pas"/>
+        <Caret Line="269" Column="25" TopLine="236"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="108" TopLine="84"/>
+        <Filename Value="udictedit.pas"/>
+        <Caret Line="288" Column="64" TopLine="264"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="107" TopLine="83"/>
+        <Filename Value="dictionary.pp"/>
+        <Caret Line="28" Column="11" TopLine="14"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="106" TopLine="82"/>
+        <Filename Value="udictedit.pas"/>
+        <Caret Line="250" Column="29" TopLine="170"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="105" TopLine="81"/>
+        <Filename Value="udictedit.pas"/>
+        <Caret Line="253" Column="46" TopLine="194"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="104" TopLine="80"/>
+        <Filename Value="udictedit.pas"/>
+        <Caret Line="271" Column="7" TopLine="226"/>
       </Position>
       <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="103" TopLine="79"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="100" Column="23" TopLine="85"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="443" Column="67" TopLine="419"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="444" Column="67" TopLine="420"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="459" Column="22" TopLine="422"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="162" Column="32" TopLine="131"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="462" Column="5" TopLine="432"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="163" Column="24" TopLine="102"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="468" Column="16" TopLine="443"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="488" Column="16" TopLine="463"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="102" TopLine="82"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="26" Column="72"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="102" Column="20" TopLine="77"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="403" Column="12" TopLine="395"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/multiapp.pp"/>
-        <Caret Line="230" Column="23" TopLine="207"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/multiapp.pp"/>
-        <Caret Line="241" Column="25" TopLine="208"/>
+        <Filename Value="udictedit.pas"/>
+        <Caret Line="259" Column="20" TopLine="236"/>
       </Position>
     </JumpHistory>
     <RunParams>

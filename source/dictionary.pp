@@ -23,104 +23,117 @@ uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
   Classes, SysUtils, PasExt, BinTree;
 
+{$UNDEF CaseSpecific}
+
 type
 
-  { TDictionaries }
+  { TCustomDictionary }
 
-  TDictionaries = class(TBinaryTree)
-    FLocales : TArrayOfRawByteString;
-
+  TCustomDictionary = class(TBinaryTree)
     FLoaded : boolean;
-    FModified : boolean;
+    FLocaleRemap : TArrayOfInt32;
   private
     FFileName: String;
-    function GetLocalCount: integer;
-    function GetLocale(Index : integer): RawByteString;
-    function GetLocales: RawByteString;
+    function GetLocaleCount: integer; virtual;
+    function GetLocale(Index : integer): RawByteString; virtual;
+    function GetLocalesList(AllLocales : boolean = True): RawByteString; virtual;
+    function GetLocales: RawByteString; virtual;
     procedure SetFileName(AValue: String);
-    procedure Load;
-    procedure SetModified(AValue: boolean);
+  protected
+    function  StreamID : String; override;
+    procedure WriteHead(Stream : TStream); override;
+    procedure ReadHead(Stream: TStream; out ExpectedCount : integer); override;
+    procedure WriteNodeData(Stream : TStream; Node : TBinaryTreeNode); override;
+    procedure ReadNodeData(Stream : TStream; Node : TBinaryTreeNode); override;
+    procedure Load; virtual;
   public
     constructor Create; override;
     procedure Clear; override;
     property FileName : String read FFileName write SetFileName;
-    procedure Reload;
-    procedure Save;
+    procedure Save; virtual;
     property Locales : RawByteString read GetLocales;
-    property LocaleCount : integer read GetLocalCount;
+    property LocaleCount : integer read GetLocaleCount;
     property Locale[Index : integer] : RawByteString read GetLocale;
-    property Modified : boolean read FModified write SetModified;
     function AddLocale(LocaleID : String) : integer;
     function IndexOfLocale(LocaleID : String) : integer;
   end;
 
-var
-  Dictionaries : TDictionaries;
-  UserDictionary : TDictionaries;
+  { TMasterDictionary }
 
+  TMasterDictionary = class(TCustomDictionary)
+  protected
+  public
+  end;
+
+  { TUserDictionary }
+
+  TUserDictionary = class(TCustomDictionary)
+  protected
+  public
+  end;
+
+var
+  MasterDictionary : TMasterDictionary;
+  UserDictionary : TUserDictionary;
+
+  procedure ReloadDictionaries;
+  procedure MergeDictionaries;
   function DetectLocale(S : RawByteString; out Stats : TArrayOfInt32) : Int32; overload;
   function DetectLocale(S : RawByteString) : String; overload;
 
 implementation
 
-{$UNDEF CaseSpecific}
-{$UNDEF StressTest}
+const
+  MasterDictFile='master.cpw';
+  UserDictFile='user.cpw';
+  LocaleOffset=5000; // Should be good unless we join "The Federation" or a
+                     // Galactic Empire and all of the Aliens want to use DOS
+                     // programs in their own native language. But, that would
+                     // not be supported by the current UTF-8 encoding or the
+                     // present Unicode specification anyway. So, SMH.
 
-procedure Initialize;
-begin
-  Dictionaries:=TDictionaries.Create;
-  try
-    Dictionaries.FileName:=AppDataPath+'dictionary.cpw';
-  except
-    FreeAndNil(Dictionaries);
-  end;
-  UserDictionary:=TDictionaries.Create;
-  try
-    UserDictionary.FileName:=UserDataPath+'user_words.cpw';
-  except
-    FreeAndNil(UserDictionary);
-  end;
-end;
+var
+  MasterLocales,
+  UserLocales : TArrayOfRawByteString;
 
-procedure Finalize;
-begin
-  if Assigned(Dictionaries) then begin
-    // if Dictionaries.FModified then
-    //  Dictionaries.Save;
-    FreeAndNil(Dictionaries);
-  end;
-end;
+{ TCustomDictionary }
 
-{ TDictionaries }
-
-procedure TDictionaries.SetFileName(AValue: String);
+procedure TCustomDictionary.SetFileName(AValue: String);
 begin
   if FFileName=AValue then Exit;
   FFileName:=AValue;
   if not FLoaded then
-    Reload;
+    Load;
 end;
 
-function TDictionaries.GetLocalCount: integer;
+function TCustomDictionary.GetLocaleCount: integer;
 begin
-  Result:=Length(FLocales);
+  Result:=Length(MasterLocales) + Length(UserLocales);
 end;
 
-function TDictionaries.GetLocale(Index : integer): RawByteString;
+function TCustomDictionary.GetLocale(Index : integer): RawByteString;
 begin
-  if (Index < 0) or (Index > High(FLocales)) then Exit('');
-  Result:=FLocales[Index];
+  Result:='';
+  if Index < 0 then Exit;
+  if (Index < Length(MasterLocales)) then
+    Result:=MasterLocales[Index]
+  else if (Index >= LocaleOffset) and (Index < LocaleOffset+Length(UserLocales)) then
+    Result:=UserLocales[Index - LocaleOffset];
 end;
 
-function TDictionaries.GetLocales: RawByteString;
+function TCustomDictionary.GetLocalesList(AllLocales: boolean): RawByteString;
 var
   SL : TStringList;
   I : Integer;
 begin
   SL := TStringList.Create;
   try
-    for I := 0 to High(FLocales) do
-      SL.Add(FLocales[I]);
+    for I := 0 to High(MasterLocales) do
+      SL.Add(MasterLocales[I]);
+    if AllLocales then
+      for I := 0 to High(UserLocales) do
+        if SL.IndexOf(UserLocales[I]) < 0 then
+          SL.Add(UserLocales[I]);
     SL.Sort;
     Result:=Implode(SL, COMMA + SPACE);
   except
@@ -129,299 +142,293 @@ begin
   SL.Free;
 end;
 
-{$IFDEF StressTest}
-procedure StressTest;
-var
-  N, T : TBinaryTreeNode;
-  C, I : Integer;
-  B : Boolean;
+function TCustomDictionary.GetLocales: RawByteString;
 begin
+  Result:=GetLocalesList(True);
+end;
 
-  N:=Dictionaries.First;
-  C:=Dictionaries.Count;
-  B:=True;
-  try
-    While C > 0 do begin
-      T:=N;
-      for I := 0 to Random(100) do begin
-        While (T=N) and (C>1) do begin
-          if B then T:=T.Next else T:=T.Previous;
-          if not Assigned(T) then begin
-            if not Dictionaries.CheckIntegrity then
-              raise Exception.Create('failed integrity');
-            if B then
-              T:=Dictionaries.Last
-            else
-              T:=Dictionaries.First;
-            B:=Not B;
-            LogMessage(vbVerbose, 'Direction Change');
-          end;
-        end;
-      end;
-      if not assigned(N) then
-        raise Exception.Create('Current Node is nil');
-      if not assigned(T) then
-        raise Exception.Create('Next Node is nil');
-      Dictionaries.Delete(N);
-      Dec(C);
-      if N <> T then
-        N:=T
-      else
-        N:=Dictionaries.Root;
-    end;
-    LogMessage(vbVerbose,'Tree Should be empty');
-    if C <> 0 then
-      raise Exception.Create ('Did not remove all items');
-    if Dictionaries.Count <> 0 then
-      raise Exception.Create ('Item count is off');
-    if Dictionaries.First <> nil then
-      raise Exception.Create ('Tree not empty');
-  except
-    on E : Exception do begin
-      LogMessage(vbCritical, 'Stress test failed at ' +  IntToStr(C) +
-      '. ' + E.Message);
-      raise Exception.Create(E.Message);
-    end;
+function TCustomDictionary.AddLocale(LocaleID: String) : integer;
+begin
+  Result:=IndexOfLocale(LocaleID);
+  if Result <> -1 then Exit;
+  if Self is TMasterDictionary then begin
+    SetLength(MasterLocales, Length(MasterLocales) + 1);
+    MasterLocales[High(MasterLocales)]:=LocaleID;
+    Result:=High(MasterLocales);
+  end else begin
+    SetLength(UserLocales, Length(UserLocales) + 1);
+    UserLocales[High(UserLocales)]:=LocaleID;
+    Result:=High(UserLocales) + LocaleOffset;
   end;
 end;
 
-procedure StressTest2;
+function TCustomDictionary.IndexOfLocale(LocaleID: String): integer;
 var
-  C : Integer;
-  N : TBinaryTreeNode;
+  I : Integer;
 begin
-  C:=Dictionaries.Count;
-  try
-    While C > 0 do begin
-      N:=Dictionaries.Root;
-      Dictionaries.Delete(N);
-      Dec(C);
-    end;
-    LogMessage(vbVerbose,'Tree Should be empty');
-    if C <> 0 then
-      raise Exception.Create ('Did not remove all items');
-    if Dictionaries.Count <> 0 then
-      raise Exception.Create ('Item count is off');
-    if Dictionaries.First <> nil then
-      raise Exception.Create ('Tree not empty');
-  except
-    on E : Exception do begin
-      LogMessage(vbCritical, 'Stress test failed at ' +  IntToStr(C) +
-      '. ' + E.Message);
-      raise Exception.Create(E.Message);
-    end;
-  end;
+  for I := 0 to Length(MasterLocales) -1 do
+    if UpperCase(LocaleID) = UpperCase(MasterLocales[I]) then Exit(I);
+  for I := 0 to Length(UserLocales) -1 do
+    if UpperCase(LocaleID) = UpperCase(UserLocales[I]) then Exit(I + LocaleOffset);
+  Result:=-1;
 end;
 
-{$ENDIF}
+function TCustomDictionary.StreamID: String;
+begin
+  Result:='CPWD1';
+end;
 
-procedure TDictionaries.Load;
+procedure TCustomDictionary.WriteHead(Stream: TStream);
 var
-  Sect, E, J : integer;
-  ST : TArrayOfInt32;
-  FileText : RawByteString;
-  Line : RawByteString;
-  U : UnicodeString;
-  N : TBinaryTreeNode;
+  I, C : integer;
+  M : TArrayOfRawByteString;
+begin
+  inherited WriteHead(Stream);
+  M:=Copy(MasterLocales, 0, Length(MasterLocales));
+  if Self is TUserDictionary then
+    Cat(M, UserLocales);
+  C:=Length(M);
+  Stream.Write(C, Sizeof(C));
+  FLocaleRemap:=[];
+  SetLength(FLocaleRemap, C);
+  for I:= 0 to High(M) do begin
+    C:=Length(M[I]);
+    Stream.Write(C, Sizeof(C));
+    Stream.Write(Pointer(M[I])^, C);
+    FLocaleRemap[I]:=IndexOfLocale(M[I]);
+  end;
+  if Self is TMasterDictionary then FLocaleRemap:=[];
+end;
+
+procedure TCustomDictionary.ReadHead(Stream: TStream; out ExpectedCount: integer
+  );
+var
+  I, C : integer;
   S : String;
-  WC:Integer;
 begin
-  WC:=0;
+  inherited ReadHead(Stream, ExpectedCount);
+  C:=0;
+  S:='';
+  Stream.Read(C, Sizeof(C));
+  FLocaleRemap:=[];
+  SetLength(FLocaleRemap, C);
+  for I := 0 to High(FLocaleRemap) do begin
+    Stream.Read(C, Sizeof(C));
+    SetLength(S, C);
+    Stream.Read(Pointer(S)^, C);
+    FLocaleRemap[I]:=AddLocale(S);
+  end;
+  if Self is TMasterDictionary then FLocaleRemap:=[];
+end;
+
+procedure TCustomDictionary.WriteNodeData(Stream: TStream; Node: TBinaryTreeNode);
+var
+  C, I : integer;
+  V : Int32;
+begin
+  // Only Data32 is used from the TBinaryTreeNode data in Dictionary file.
+  C:=Length(Node.Data32);
+  Stream.Write(C, Sizeof(C));
+  if Length(FLocaleRemap) = 0 then begin
+    for I := 0 to C - 1 do
+      Stream.Write(Node.Data32[I], Sizeof(Int32));
+  end else begin
+    for I := 0 to C - 1 do begin
+      V:=Node.Data32[I];
+      if V >= LocaleOffset then
+        V:=InArray(FLocaleRemap, V);
+      Stream.Write(V, Sizeof(V));
+    end;
+  end;
+end;
+
+procedure TCustomDictionary.ReadNodeData(Stream: TStream; Node: TBinaryTreeNode);
+var
+  D : TArrayOfInt32;
+  C, I : integer;
+begin
+  // Other data types of TBinaryTreeNode are not used, no point in saving them
+  // in Dinctionary file.
+  C:=0;
+  D:=[];
+  Stream.Read(C, Sizeof(C));
+  SetLength(D, C);
+  for I := 0 to C - 1 do
+    Stream.Read(D[I], Sizeof(Int32));
+  if Length(FLocaleRemap) <> 0 then begin
+    for I := 0 to C - 1 do begin
+      Stream.Read(D[I], Sizeof(Int32));
+      if D[I] >= Length(MasterLocales) then
+        D[I]:=InArray(FLocaleRemap, D[I]);
+    end;
+  end;
+  Node.Data32:=Copy(D, 0, C);
+end;
+
+procedure TCustomDictionary.Load;
+begin
   if not FileExists(FileName) then begin
     LogMessage(vbMinimal, 'Cannot find dictionary file: ' + FriendlyPath(AppBasePath, FileName));
     Exit;
   end;
-
-  E :=FileLoad(FileName, FileText);
-  if E <> 0 then
-    raise Exception.Create('reading file: ' + FriendlyPath(AppBasePath, FileName));
   try
-    LogMessage(vbVerbose, 'Processing dictionary file: '+ FriendlyPath(AppBasePath, FileName));
-    Sect:=-1;
-    FileText:=StringReplace(FileText, CR, LF, [rfReplaceAll]);
-    while Length(FileText) > 0 do begin
-      Line:=Trim(PopDelim(FileText, LF));
-      if Length(Line) = 0 then Continue;
-      if HasEnds(Line, '[', ']') then begin
-        Line:=StringReplace(Trim(ExcludeEnds(Line, '[', ']')), '-', '_', [rfReplaceAll]);
-        if Line = '' then
-          raise Exception.Create('null section name');
-        if IndexOfLocale(Line) <> -1 then
-          raise Exception.Create('duplicate section name: ' + Line);
-        Sect:=AddLocale(Line);
-        LogMessage(vbExcessive, TAB + 'Language: ' + Locale[Sect]);
-        Continue;
-      end;
-      if HasLeading(Line, ';') then Continue;
-      if HasLeading(Line, '#') then Continue;
-      while Length(Line) > 0 do begin
-        U:=UnicodeString(Trim(PopDelim(Line, COMMA)));
-        if Length(U) = 0 then Continue;
-        {$IFNDEF CaseSpecific}
-        U:=Lowercase(U);
-        {$ENDIF}
-        N:=Find(U);
-        if not Assigned(N) then begin
-          N:=Add(U, [Sect]);
-          Inc(WC);
-        end else begin
-          if InArray(N.Data32, Sect) <> -1 then begin
-            S:='';
-            for J:= 0 to Length(N.Data32) - 1 do
-              S:=S+Locale[J] + SPACE;
-            LogMessage(vbVerbose, WhenTrue(VerboseLevel=vbExcessive,
-              TAB + 'duplicate word: ', 'duplicate dictionary word: ') +
-              RawByteString(U) + ' [' + Locale[Sect] + '] ' + S + IntToStr(InArray(N.Data32, Sect)));
-            Continue;
-          end;
-          ST:=N.Data32;
-          Cat(ST, Sect);
-          N.Data32:=ST;
-        end;
-      end;
-    end;
-    LogMessage(vbExcessive, 'Balancing dictionary');
-    Optimize;
-    LogMessage(vbExcessive, 'Verifying tree integrity');
-    CheckIntegrity;
-  finally
-    LogMessage(vbNormal, 'Dictionary contains ' + IntToStr(WC) + ' unique words and ' +
-      IntToStr(Length(FLocales)) + ' locales.' + LF + TAB+Locales);
-  end;
-  fModified:=False;
-
-end;
-
-procedure TDictionaries.SetModified(AValue: boolean);
-begin
-  if FModified=AValue then Exit;
-  FModified:=AValue;
-end;
-
-procedure TDictionaries.Reload;
-begin
-  FModified:=False;
-  try
-    {$IFDEF StressTest}
-    Clear;
-    Load;
-    LogMessage(vbVerbose, 'Stress Test #1');
-    StressTest;
-    FLocales:=[];
-    FLoaded:=False;
-    Load;
-    LogMessage(vbVerbose, 'Stress Test #2');
-    StressTest;
-    {$ENDIF}
-    Clear;
-    Load;
-    FLoaded:=True;
+    LoadFromFile(FFileName);
+    if not CheckIntegrity then
+      raise Exception.Create('dictionary failed integrity check.');
+    LogMessage(vbNormal, 'Dictionary contains ' + IntToStr(Count) + ' unique words');
   except
     on E : Exception do begin
-      LogMessage(vbCritical, 'Exception opening dictionary. ' + E.Message);
       Clear;
+      LogMessage(vbCritical, 'Exception saving dictionary. ' + E.Message);
      end;
   end;
 end;
 
-procedure TDictionaries.Save;
-var
-  I : Integer;
-  SS : TStringStream;
-  N : TBinaryTreeNode;
-  LW : integer;
+procedure TCustomDictionary.Save;
 begin
-  FModified:=False;
+  Modified:=False;
   if FFileName = '' then Exit;
   LogMessage(vbVerbose, 'Saving dictionary file: '+ ExtractRelativepath(AppBasePath, FileName));
-  SS:=TStringStream.Create('');
   try
-    SS.Position:=0;
-    for I := 0 to High(FLocales) do begin
-      SS.WriteString('[' + FLocales[I] + ']' + LF + LF);
-      N:=First;
-      LW:=0;
-      While Assigned(N) do begin
-        if InArray(N.Data32, I) <> -1 then begin
-          if (LW > 0) then begin
-            if (LW + Length(N.UniqueID) + 2 > 79) then begin
-              LW:=0;
-              SS.WriteString(LF)
-            end else begin
-              Inc(LW, 2);
-              SS.WriteString(COMMA + SPACE)
-            end;
-          end;
-          Inc(LW, Length(N.UniqueID));
-          SS.WriteString(N.UniqueID);
-        end;
-        N:=N.Next;
-      end;
-      if LW <> 0 then
-        SS.WriteString(LF);
-      if I < High(FLocales) then
-        SS.WriteString(LF);
-    end;
-    SS.SaveToFile(FFileName);
-    LogMessage(vbVerbose, 'saved dictionary file. ' + IntToStr(Dictionaries.Count) +
+    SaveToFile(FFileName);
+    LogMessage(vbVerbose, 'saved dictionary file. ' + IntToStr(Count) +
      ' unique words.');
   except
     on E : Exception do begin
       LogMessage(vbCritical, 'Exception saving dictionary. ' + E.Message);
      end;
   end;
-  SS.Free;
 end;
 
-function TDictionaries.AddLocale(LocaleID: String) : integer;
-begin
-  Result:=IndexOfLocale(LocaleID);
-  if Result <> -1 then Exit;
-  SetLength(FLocales, Length(FLocales) + 1);
-  FLocales[High(FLocales)]:=LocaleID;
-  FModified:=True;
-  Result:=High(FLocales);
-end;
-
-function TDictionaries.IndexOfLocale(LocaleID: String): integer;
-var
-  I : Integer;
-begin
-  for I := 0 to Length(FLocales) -1 do
-    if UpperCase(LocaleID) = UpperCase(FLocales[I]) then Exit(I);
-  Result:=-1;
-end;
-
-constructor TDictionaries.Create;
+constructor TCustomDictionary.Create;
 begin
   inherited Create;
   FLoaded:=False;
-  FLocales:=[];
-  FModified:=False;
 end;
 
-procedure TDictionaries.Clear;
+procedure TCustomDictionary.Clear;
 begin
   inherited Clear;
-  FLocales:=[];
   FLoaded:=False;
-  FModified:=False;
 end;
+
+{ TUserDictionary }
 
 { Unit functions }
 
-function DetectDict(D : TDictionaries; S: RawByteString; out Stats: TArrayOfInt32
+procedure Initialize;
+begin
+  MasterDictionary:=nil;
+  UserDictionary:=nil;
+  ReloadDictionaries;
+end;
+
+procedure Finalize;
+begin
+  if Assigned(MasterDictionary) then begin
+    if MasterDictionary.Modified then
+      MasterDictionary.Save;
+    FreeAndNil(MasterDictionary);
+  end;
+  if Assigned(UserDictionary) then begin
+    if UserDictionary.Modified then
+      UserDictionary.Save;
+    FreeAndNil(UserDictionary);
+  end;
+end;
+
+procedure ReloadDictionaries;
+begin
+  if Assigned(MasterDictionary) then FreeAndNil(MasterDictionary);
+  if Assigned(UserDictionary) then FreeAndNil(UserDictionary);
+  MasterLocales:=[];
+  UserLocales:=[];
+  MasterDictionary:=TMasterDictionary.Create;
+  try
+    MasterDictionary.FileName:=AppDataPath+MasterDictFile;
+    //MasterLocales:=Length(SharedLocales);
+  except
+    //MasterLocales:=0;
+    FreeAndNil(MasterDictionary);
+  end;
+  UserDictionary:=TUserDictionary.Create;
+  try
+    UserDictionary.FileName:=UserDataPath+UserDictFile;
+  except
+    FreeAndNil(UserDictionary);
+  end;
+  if Assigned(MasterDictionary) then begin
+    LogMessage(vbVerbose, IntToStr(MasterDictionary.LocaleCount) +
+    ' total locales.' + WhenTrue(MasterDictionary.LocaleCount > 0,
+    LF + TAB+ MasterDictionary.Locales));
+  end;
+end;
+
+type
+  TNode=class(TBinaryTreeNode);
+
+procedure MergeDictionaries;
+var
+  LazyRemap : TArrayOfInt32;
+
+  procedure AddEntry(Node:TBinaryTreeNode);
+  var
+    N : TBinaryTreeNode;
+    D, T : TArrayOfInt32;
+    I : Integer;
+  begin
+    if Not Assigned(Node) then Exit;
+    D:=Copy(Node.Data32, 0, Length(Node.Data32));
+    for I := 0 to High(D) do
+      if D[I] >= LocaleOffset then
+        D[I]:=LazyRemap[D[I] - LocaleOffset];
+    N:=MasterDictionary.Find(Node.UniqueID);
+    if Not Assigned(N) then
+      N:=MasterDictionary.Add(Node.UniqueID, D)
+    else begin
+      T:=N.Data32;
+      for I := 0 to High(D) do
+        if InArray(T, D[I]) < 0 then Cat(T, D[I]);
+      N.Data32:=Copy(T, 0, Length(T));
+    end;
+
+    if Assigned(TNode(Node).Lesser) then
+      AddEntry(TNode(Node).Lesser);
+    if Assigned(TNode(Node).Greater) then
+      AddEntry(TNode(Node).Greater);
+  end;
+
+var
+  TempLocales: TArrayOfString;
+  I : Integer;
+
+begin
+  if Not Assigned(MasterDictionary) then Exit;
+  if Not Assigned(UserDictionary) then Exit;
+  try
+    TempLocales:=Copy(UserLocales,0,Length(UserLocales));
+    UserLocales:=[];
+    LazyRemap:=[];
+    SetLength(LazyRemap, Length(TempLocales));
+    for I := 0 to High(LazyRemap) do
+      LazyRemap[I]:=MasterDictionary.AddLocale(TempLocales[I]);
+    AddEntry(UserDictionary.Root);
+    UserDictionary.Clear;
+    MasterDictionary.Optimize;
+  except
+    ReloadDictionaries;
+  end;
+
+end;
+
+function DetectDict(D : TCustomDictionary; S: RawByteString; var Stats: TArrayOfInt32
   ): Int32;
 var
-  I, J, P, L : integer;
+  I, J, P, L, X : integer;
   W : TStringList;
   N : TBinaryTreeNode;
 begin
   Result:=0;
-  Stats:=[];
-  SetLength(Stats, Length(D.FLocales));
-  for I := 0 to High(Stats) do
-    Stats[I]:=0;
   W := TStringList.Create;
   try
     WordsOfString(S, W);
@@ -433,8 +440,12 @@ begin
         P:=High(N.Data32);
         P:=L-(P*P);
         if P < 1 then P:=1;
-        for J := 0 to High(N.Data32) do
-          Inc(Stats[N.Data32[J]], P);
+        for J := 0 to High(N.Data32) do begin
+          X:=N.Data32[J];
+          if X >= LocaleOffset then
+            X:=X - LocaleOffset + Length(MasterLocales);
+          Inc(Stats[X], P);
+        end;
       end;
     end;
     Result:=W.Count;
@@ -445,15 +456,43 @@ end;
 
 function DetectLocale(S: RawByteString; out Stats: TArrayOfInt32
   ): Int32;
+var
+  I : integer;
+  HoldStats : TArrayOfInt32;
+  HoldCount : integer;
 begin
   Stats:=[];
-  if Not Assigned(Dictionaries) then Exit(0);
-  try
-    Result:=DetectDict(Dictionaries, S, Stats);
-  except
-    Stats:=[];
-    Result:=0;
+  SetLength(Stats, Length(MasterLocales) + Length(UserLocales));
+  HoldStats:=[];
+  SetLength(HoldStats, Length(Stats));
+  for I := 0 to High(Stats) do
+    Stats[I]:=0;
+  HoldStats:=Copy(Stats,0,Length(Stats));
+
+  if Assigned(MasterDictionary) then begin
+    try
+      Result:=DetectDict(MasterDictionary, S, Stats);
+      HoldStats:=Copy(Stats,0,Length(Stats));
+    except
+      Stats:=Copy(HoldStats,0,Length(HoldStats));;
+      Result:=0;
+    end;
   end;
+
+  if Assigned(UserDictionary) then begin
+    try
+      HoldCount:=Result;
+      Result:=DetectDict(UserDictionary, S, Stats);
+      HoldStats:=Copy(Stats,0,Length(Stats));
+    except
+      Stats:=Copy(HoldStats,0,Length(HoldStats));;
+      Result:=HoldCount;
+    end;
+  end;
+
+  if Result = 0 then
+    Stats:=[];
+
 end;
 
 function DetectLocale(S: RawByteString): String;
@@ -461,16 +500,18 @@ var
   I, P : integer;
   Stats:TArrayOfInt32;
 begin
-  if Not Assigned(Dictionaries) then Exit('');
   Result:='';
+  if Not Assigned(MasterDictionary) then Exit;
   DetectLocale(S, Stats);
   P:=-1;
   for I := 0 to High(Stats) do
-    if (P<0) or (Stats[I]>Stats[P]) then P:=I;
+    if (Stats[I]>0) then
+      if (P<0) or (Stats[I]>Stats[P]) then P:=I;
   if P<0 then Exit;
-  Result:=Dictionaries.FLocales[P];
+  if P >= Length(MasterLocales) then
+    P:=P- Length(MasterLocales) + LocaleOffset;
+  Result:=MasterDictionary.Locale[P];
 end;
-
 
 initialization
 

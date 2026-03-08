@@ -41,6 +41,7 @@ type
       actEditUnicode: TAction;
       actExportNone: TAction;
       actEditNone: TAction;
+      actDictionary: TAction;
       actOpen: TAction;
       actExportCodepage: TAction;
       actDebugLog: TAction;
@@ -88,6 +89,7 @@ type
     procedure actCodepageFilterExecute(Sender: TObject);
     procedure actDebugLogExecute(Sender: TObject);
     procedure actCloseExecute(Sender: TObject);
+    procedure actDictionaryExecute(Sender: TObject);
     procedure actEditASCIIExecute(Sender: TObject);
     procedure actEditCodepageExecute(Sender: TObject);
     procedure actEditUnicodeExecute(Sender: TObject);
@@ -226,6 +228,18 @@ begin
   if N >= 0 then
     lvFileList.Items[N].Selected:=True;
   UpdateMetaData;
+end;
+
+procedure TfMain.actDictionaryExecute(Sender: TObject);
+begin
+  if Assigned(FDictEditForm)  then begin
+    fDictEditForm.Show;
+    fDictEditForm.BringToFront;
+    fDictEditForm.SetFocus;
+    FDictEditForm.WitchItem:=nil;
+    FDictEditForm.WitchList:=FWitch;
+    SelectFile(Self);
+  end;
 end;
 
 procedure TfMain.actEditASCIIExecute(Sender: TObject);
@@ -398,6 +412,7 @@ begin
   actListPartial.ImageIndex:=idxButtonListViewPartial;
   actListAll.ImageIndex:=idxButtonListViewEmpty;
   actCodepageFilter.ImageIndex:=idxButtonListView;
+  actDictionary.ImageIndex:=idxButtonDictionary;
 
   // Add Main ToolBar Buttons
   CreateToolButton(tbMain, actOpen);
@@ -412,6 +427,8 @@ begin
   btnCodepageFilter.Style:=tbsButtonDrop;
   btnCodepageFilter.DropdownMenu:=pmListMode;
   CreateToolButton(tbMain, tbsDivider, 'btnDivider3');
+  CreateToolButton(tbMain, actDictionary);
+  CreateToolButton(tbMain, tbsDivider, 'btnDivider4');
   CreateToolButton(tbMain, actPreferences);
   CreateToolButton(tbMain, actOnlineUpdate);
   CreateToolButton(tbMain, actDebugLog);
@@ -485,12 +502,6 @@ begin
   EnforceLayout;
 end;
 
-{
-procedure TfMain.psBodyLeftResize(Sender: TObject);
-begin
-  psBodyLeft.Constraints.MinWidth:=psFiles.Width + psCodepages.Constraints.MinWidth + 10;
-end;
-}
 procedure TfMain.tiFileWatchTimer(Sender: TObject);
 var
   I : integer;
@@ -1173,10 +1184,7 @@ begin
   FLocales:=[];
   L:=LocaleList;
   S:='';
-  if Assigned(Dictionaries) then Cat(S, Dictionaries.Locales);
-  Cat(S, SPACE);
-  if Assigned(UserDictionary) then Cat(S, UserDictionary.Locales);
-  S:=Trim(S);
+  if Assigned(MasterDictionary) then Cat(S, MasterDictionary.Locales);
   while S <> '' do begin
     T:=Trim(PopDelim(S, COMMA));
     if T = '' then Continue;
@@ -1230,22 +1238,6 @@ var
 begin
   IgnoreParameter(Sender);
   FViewedCodepage:=-2;
-  {$IFDEF BUILD_SPECIAL}
-  if Assigned(FDictEditForm) then begin
-    FDictEditForm.WitchItem:=nil;
-    FDictEditForm.WitchList:=FWitch;
-    if fDictEditForm.Visible = False then begin
-      fDictEditForm.Show;
-      fDictEditForm.BringToFront;
-    end;
-
-  end;
-  {$ELSE}
-  if Assigned(FDictEditForm)  then begin
-    FDictEditForm.WitchItem:=nil;
-    FDictEditForm.WitchList:=FWitch;
-  end;
-  {$ENDIF}
   if Assigned(lvFileList.Selected) then begin
     S:=lvFileList.Selected.Caption;
     if Assigned(FDictEditForm) and (fDictEditForm.Visible = True) then

@@ -84,7 +84,7 @@ object fMain: TfMain
     BevelOuter = bvNone
     ClientHeight = 236
     ClientWidth = 480
-    TabOrder = 1
+    TabOrder = 0
     object pFileList: TPanel
       Left = 4
       Height = 234
@@ -424,6 +424,12 @@ object fMain: TfMain
       Caption = 'No Editor'
       Enabled = False
       Hint = 'Can not edit this type of file.'
+    end
+    object actDictionary: TAction
+      Category = 'Dictionary'
+      Caption = 'actDictionary'
+      Hint = 'Open user dictionary editor.'
+      OnExecute = actDictionaryExecute
     end
   end
   object mmMain: TMainMenu
