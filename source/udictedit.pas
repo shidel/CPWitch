@@ -282,7 +282,9 @@ begin
       M:=MasterDictionary.Find(L);
       U:=UserDictionary.Find(L);
       if (LC <> -1) and (Not Assigned(M)) and (Not Assigned(U)) then begin
-        if (Length(clWords.Items[I]) > 5) and (Uppercase(clWords.Items[I]) <> clWords.Items[I]) then
+        if (Length(clWords.Items[I]) > 5) and
+        ((Uppercase(clWords.Items[I]) <> clWords.Items[I]) or
+        (Uppercase(clWords.Items[I]) = LowerCase(clWords.Items[I]))) then
           clWords.Checked[I]:=True
       end;
     end;

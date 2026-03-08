@@ -417,7 +417,7 @@ begin
   if FileAge(FFileName, DT) then
     Result:=DT <> FDateTime;
   if not Result then Exit;
-  LogMessage(vbVerbose, 'Open file modified: ' + Filename);
+  LogMessage(vbVerbose, 'Open file modified: ' + FriendlyPath(AppBasePath, FileName));
   LoadFile(FFileName);
   if Assigned(FListItem) then begin
     ListItem.ImageIndex:=idxFileTypeFilePlainOrange;

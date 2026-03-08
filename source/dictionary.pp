@@ -205,20 +205,33 @@ procedure TCustomDictionary.ReadHead(Stream: TStream; out ExpectedCount: integer
 var
   I, C : integer;
   S : String;
+  DL : TArrayOfString;
 begin
   inherited ReadHead(Stream, ExpectedCount);
+  LogMessage(vbExcessive, 'Expected Count: ' + IntToStr(ExpectedCount));
   C:=0;
   S:='';
   Stream.Read(C, Sizeof(C));
   FLocaleRemap:=[];
+  DL:=[];
   SetLength(FLocaleRemap, C);
   for I := 0 to High(FLocaleRemap) do begin
     Stream.Read(C, Sizeof(C));
     SetLength(S, C);
     Stream.Read(Pointer(S)^, C);
-    FLocaleRemap[I]:=AddLocale(S);
+    Cat(DL, S);
+    FLocaleRemap[I] := IndexOfLocale(S);
+    if FLocaleRemap[I] = -1 then
+      FLocaleRemap[I] := AddLocale(S);
   end;
-  if Self is TMasterDictionary then FLocaleRemap:=[];
+  if Self is TMasterDictionary then begin
+    FLocaleRemap:=[];
+    LogMessage(vbExcessive, 'Dictionary Locales: ' + Implode(DL, COMMA + SPACE));
+    LogMessage(vbExcessive, 'No locale remapping.');
+  end else begin
+    LogMessage(vbExcessive, 'Dictionary Locales: ' + Implode(DL, COMMA + SPACE));
+    LogMessage(vbExcessive, 'Remap table: ', FLocaleRemap);
+  end;
 end;
 
 procedure TCustomDictionary.WriteNodeData(Stream: TStream; Node: TBinaryTreeNode);
@@ -257,9 +270,11 @@ begin
     Stream.Read(D[I], Sizeof(Int32));
   if Length(FLocaleRemap) <> 0 then begin
     for I := 0 to C - 1 do begin
-      Stream.Read(D[I], Sizeof(Int32));
-      if D[I] >= Length(MasterLocales) then
-        D[I]:=InArray(FLocaleRemap, D[I]);
+      // LogMessage(vbExcessive, 'Word: ' + Node.UniqueID);
+      // LogMessage(vbExcessive, 'File Locales: ', D);
+      if (D[I] >= 0) and (D[I] < Length(FLocaleRemap)) then
+        D[I] := FLocaleRemap[D[I]];
+      // LogMessage(vbExcessive, 'Data Locales: ', D);
     end;
   end;
   Node.Data32:=Copy(D, 0, C);
@@ -275,7 +290,9 @@ begin
     LoadFromFile(FFileName);
     if not CheckIntegrity then
       raise Exception.Create('dictionary failed integrity check.');
-    LogMessage(vbNormal, 'Dictionary contains ' + IntToStr(Count) + ' unique words');
+    LogMessage(vbNormal, ExtractFileName(FileName) +
+    ' dictionary contains ' + IntToStr(Count) + ' unique words');
+    FLoaded:=True;
   except
     on E : Exception do begin
       Clear;
@@ -345,15 +362,17 @@ begin
   UserLocales:=[];
   MasterDictionary:=TMasterDictionary.Create;
   try
+    LogMessage(vbExcessive, 'Load Master dictionary.');
     MasterDictionary.FileName:=AppDataPath+MasterDictFile;
-    //MasterLocales:=Length(SharedLocales);
+    LogMessage(vbVerbose, 'Master dictionary is ready.');
   except
-    //MasterLocales:=0;
     FreeAndNil(MasterDictionary);
   end;
   UserDictionary:=TUserDictionary.Create;
   try
+    LogMessage(vbExcessive, 'Load User dictionary.');
     UserDictionary.FileName:=UserDataPath+UserDictFile;
+    LogMessage(vbVerbose, 'User dictionary is ready.');
   except
     FreeAndNil(UserDictionary);
   end;
