@@ -133,46 +133,41 @@
         <actClose Hint="Fermer le fichier texte actuel." Caption="Fermer le fichier"/>
         <actCloseAll Hint="Fermer tous les fichiers texte ouverts." Caption="Tout fermer"/>
         <actEditNone Hint="Ce type de fichier n'a pas d'éditeur." Caption="Pas d'éditeur"/>
+        <actDictionary Hint="Open user dictionary editor." Caption="actDictionary"/>
       </alMain>
-      <pFileList>
-        <pFileListLabel>
-          <lbFileList Caption="Fichiers texte"/>
-        </pFileListLabel>
-      </pFileList>
-      <pCodepageList>
-        <pCodepageListLabel>
-          <lbCodepageLabel Caption="Pages de codes"/>
-        </pCodepageListLabel>
-        <lvCodepageList>
-          <Analyzing Caption="Analyse en cours"/>
-          <Any_Codepage Caption="N'importe quelle page de codes"/>
-          <Not_implemented Caption="Non implémenté"/>
-          <Binary_data Caption="Données binaires"/>
-        </lvCodepageList>
-      </pCodepageList>
-      <pViewers>
-        <pViewUnicode>
-          <pViewUnicodeLabel>
-            <lbUnicodeViewLabel Caption="Affiché en Unicode"/>
-          </pViewUnicodeLabel>
-          <Unsupported_file>
-            <Binary Text="Les fichiers de données binaires ne sont pas pris en charge."/>
-          </Unsupported_file>
-        </pViewUnicode>
-        <pCodepage>
-          <pViewCodepageLabel>
-            <lbViewCodepageLabel Value="Affiché en page de codes %s"/>
-          </pViewCodepageLabel>
-        </pCodepage>
-      </pViewers>
-      <statBar>
-        <Processing Caption="Traitement"/>
-        <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
-        <Unicode Caption="Unicode"/>
-        <NoEncoding Caption="ASCII"/>
-        <Codepage Caption="Page de codes"/>
-        <Binary Caption="Binaire"/>
-      </statBar>
+      <pBody>
+        <pFileList>
+          <pFileListLabel>
+            <lbFileList Caption="Text Files"/>
+          </pFileListLabel>
+        </pFileList>
+        <pCodepageList>
+          <pCodepageListLabel>
+            <lbCodepageLabel Caption="Codepages"/>
+          </pCodepageListLabel>
+          <lvCodepageList>
+            <Analyzing Caption="Analyzing"/>
+            <Any_Codepage Caption="Any Codepage"/>
+            <Not_implemented Caption="Not implemented"/>
+            <Binary_data Caption="Binary File"/>
+          </lvCodepageList>
+        </pCodepageList>
+        <pViewers>
+          <pViewUnicode>
+            <pViewUnicodeLabel>
+              <lbUnicodeViewLabel Caption="Viewed as Unicode"/>
+            </pViewUnicodeLabel>
+            <Unsupported_file>
+              <Binary Text="Binary data files are not supported."/>
+            </Unsupported_file>
+          </pViewUnicode>
+          <pCodepage>
+            <pViewCodepageLabel>
+              <lbViewCodepageLabel Value="Viewed as Codepage %s"/>
+            </pViewCodepageLabel>
+          </pCodepage>
+        </pViewers>
+      </pBody>
       <Locales>
         <ar_SA Text="Arabe (Arabie saoudite)"/>
         <cs_CZ Text="Tchèque (Tchéquie)"/>
@@ -222,22 +217,163 @@
         <th_TH Text="Thaï (Thaïlande)"/>
         <vi_VN Text="Vietnamien (Vietnam)"/>
       </Locales>
+      <statBar>
+        <Processing Caption="Traitement"/>
+        <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
+        <Unicode Caption="Unicode"/>
+        <NoEncoding Caption="ASCII"/>
+        <Codepage Caption="Page de codes"/>
+        <Binary Caption="Binaire"/>
+      </statBar>
+      <OpenFilesDialog>
+        <Title Caption="Open existing file(s)"/>
+        <File Filters="All Files (*.*)|*.*|Unicode Files (*.UTF-8)|*.UTF-8"/>
+      </OpenFilesDialog>
+      <ExportCodepageDialog>
+        <Title Caption="Export file as Codepage %s"/>
+        <File Filters="All Files (*.*)|*.*"/>
+      </ExportCodepageDialog>
+      <ExportASCIIDialog>
+        <Title Caption="Save file as simple 7-bit ASCII"/>
+        <File Filters="All Files (*.*)|*.*"/>
+      </ExportASCIIDialog>
+      <OpenFiles>
+        <Title Caption="Open existing file(s)"/>
+        <File Filters="All Files|*;*.*"/>
+      </OpenFiles>
+      <pFileList>
+        <pFileListLabel>
+          <lbFileList Caption="Fichiers texte"/>
+        </pFileListLabel>
+      </pFileList>
+      <pCodepageList>
+        <pCodepageListLabel>
+          <lbCodepageLabel Caption="Pages de codes"/>
+        </pCodepageListLabel>
+        <lvCodepageList>
+          <Analyzing Caption="Analyse en cours"/>
+          <Any_Codepage Caption="N'importe quelle page de codes"/>
+          <Not_implemented Caption="Non implémenté"/>
+          <Binary_data Caption="Données binaires"/>
+        </lvCodepageList>
+      </pCodepageList>
+      <pViewers>
+        <pViewUnicode>
+          <pViewUnicodeLabel>
+            <lbUnicodeViewLabel Caption="Affiché en Unicode"/>
+          </pViewUnicodeLabel>
+          <Unsupported_file>
+            <Binary Text="Les fichiers de données binaires ne sont pas pris en charge."/>
+          </Unsupported_file>
+        </pViewUnicode>
+        <pCodepage>
+          <pViewCodepageLabel>
+            <lbViewCodepageLabel Value="Affiché en page de codes %s"/>
+          </pViewCodepageLabel>
+        </pCodepage>
+      </pViewers>
     </fMain>
     <fDictEditForm Caption="Mise à jour du dictionnaire">
       <pTop>
-        <lbLocale Caption="Paramètres régionaux :"/>
-        <btnInvert Caption="Invertir"/>
-        <btnNone Caption="Aucun"/>
-        <cbLocale>
+        <cbLocale Hint="Locale for the words to add to the dictionary.">
           <Items Index_0="ar_SA" Index_1="bg_BG" Index_2="cs_CZ" Index_3="da_DK" Index_4="de_CH" Index_5="de_DE" Index_6="el_GR" Index_7="en_US" Index_8="eo" Index_9="es_ES" Index_10="et_EE" Index_11="fil_PH" Index_12="fi_FI" Index_13="fr_FR" Index_14="haw_US" Index_15="he_IL" Index_16="hu_HU" Index_17="id_ID" Index_18="is_IS" Index_19="it_IT" Index_20="ja_JP" Index_21="ko_KR" Index_22="la" Index_23="lt_LT" Index_24="lv_LV" Index_25="nb_NO" Index_26="nl_NL" Index_27="no_NO" Index_28="pl_MAZ" Index_29="pl_PL" Index_30="pt_BR" Index_31="pt_PT" Index_32="ro_RO" Index_33="ru_RU" Index_34="sk_SK" Index_35="sl_SI" Index_36="sm_WS" Index_37="sr_RS" Index_38="sv_SE" Index_39="th_TH" Index_40="tr_TR" Index_41="uk_UA" Index_42="vi_VN" Index_43="zh_CN" Index_44="fr_CA" Index_45="tl_PH" Index_46="nn_NO"/>
         </cbLocale>
+        <lbLocale Hint="Select the Locale for the words to add to the dictionary." Caption="Paramètres régionaux :"/>
+        <btnInvert Hint="Toggle all slecetions." Caption="Invertir"/>
+        <btnNone Hint="Unselect all words." Caption="Aucun"/>
       </pTop>
       <pButtons>
-        <btnSave Caption="Enregistrer"/>
-        <btnReload Caption="Recharger"/>
-        <btnAdd Caption="Ajouter au dictionnaire"/>
+        <btnSave Hint="Save the changes to the dictionary." Caption="Enregistrer"/>
+        <btnReload Hint="Reload the dinctionary and forget any unsaved changes." Caption="Recharger"/>
+        <btnAdd Hint="Add the selected words to the dictionary for the selected locale." Caption="Ajouter au dictionnaire"/>
+        <btnMerge Hint="Merge the User dictionary words into the Master dictionary." Caption="Merge"/>
       </pButtons>
     </fDictEditForm>
+    <fUpdateCheckDialog Caption="Recherche de mise à jour">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Annuler"/>
+          <btnRetry Caption="Réessayer"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Check Text="Recherche de mises à jour disponibles pour &quot;%s&quot;, version %s."/>
+        <Error Text="Impossible de déterminer si des mises à jour sont disponibles pour &quot;%s&quot; pour le moment. Veuillez réessayer plus tard."/>
+        <None Text="Aucune mise à jour n'est disponible pour &quot;%s&quot; pour le moment. Veuillez vérifier plus tard."/>
+      </Message>
+    </fUpdateCheckDialog>
+    <fUpdateFoundDialog Caption="Mise à jour disponible">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Annuler"/>
+          <btnDownload Caption="Télécharger"/>
+          <btnSkip Caption="Ignorer"/>
+        </fButtonPanel>
+        <fAuxPanel>
+          <cbSkipVersion Caption="Ignorer cette version"/>
+        </fAuxPanel>
+      </fLowerPanel>
+      <Message>
+        <Note Text="Aucune note de version n'a été fournie pour la version %1:s de &quot;%0:s&quot;."/>
+      </Message>
+    </fUpdateFoundDialog>
+    <fUpdateDownloadDialog Caption="Téléchargement de la mise à jour">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Annuler"/>
+          <btnRetry Caption="Réessayer"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Fetch Text="Téléchargement de la mise à jour pour &quot;%s&quot;."/>
+        <Error Text="Erreur lors du téléchargement de la mise à jour de &quot;%s&quot;. Veuillez réessayer plus tard."/>
+      </Message>
+    </fUpdateDownloadDialog>
+    <fUpdateSaveDialog Caption="Mise à jour téléchargée">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Annuler"/>
+          <btnSaveAs Caption="Enregistrer sous..."/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Downloaded Text="Version %s de &quot;%s&quot; téléchargée."/>
+      </Message>
+      <SaveAsDialog>
+        <Title Caption="Save update as"/>
+        <File Filters="Archive Files (*.zip)|*.log|All Files (*.*)|*.*"/>
+      </SaveAsDialog>
+    </fUpdateSaveDialog>
+    <fLoggerViewForm Title="Save debug log as" Filter="Log Files (*.log)|All Files (*.*)" Caption="Journal de débogage">
+      <LineCount Plural="%.0n entrées de journal" Singular="%.0n entrée de journal"/>
+      <pControls>
+        <pButtons>
+          <btnClear Hint="Clear the current debug log." Caption="Effacer"/>
+          <btnSaveAs Hint="Save the debug log to a file." Caption="Enregistrer sous..."/>
+        </pButtons>
+        <pVerbose>
+          <cbVerbosity Hint="Select the verbosity and amount of debug logging messages. Please note this can consume a lot of memory and slow the program drastically.">
+            <Items Index_0="Critique" Index_1="Minimal" Index_2="Normal" Index_3="Détaillé" Index_4="Excessif"/>
+          </cbVerbosity>
+          <lbVerbosity Caption="Verbosité :"/>
+        </pVerbose>
+      </pControls>
+      <SaveDialog>
+        <Title Caption="Save debug log as"/>
+        <File Filters="Log Files (*.log)|*.log|All Files (*.*)|*.*"/>
+      </SaveDialog>
+      <Title SaveDialog="Save debug log as"/>
+      <Filter SaveDialog="Log Files (*.log)|*.log|All Files (*.*)|*.*"/>
+    </fLoggerViewForm>
+    <fCorrectFileEndingDialog Caption="Saut de ligne final manquant">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCorrect Caption="Corriger"/>
+          <btnIgnore Caption="Ignorer"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message Text="Le fichier &quot;%s&quot; ne se termine pas par une ligne vide.&#xA;&#xA;Voulez-vous corriger cela en ajoutant un saut de ligne à la fin du fichier ?"/>
+    </fCorrectFileEndingDialog>
     <fOptionsDialog Caption="Paramètres de Codepage Witch">
       <pPages>
         <tsAbout Hint="À propos de cette application." Caption="À propos">
@@ -316,86 +452,11 @@
         </fBodyPanel>
       </fMiddlePanel>
     </fOptionsDialog>
-    <fUpdateCheckDialog Caption="Recherche de mise à jour">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Annuler"/>
-          <btnRetry Caption="Réessayer"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Check Text="Recherche de mises à jour disponibles pour &quot;%s&quot;, version %s."/>
-        <Error Text="Impossible de déterminer si des mises à jour sont disponibles pour &quot;%s&quot; pour le moment. Veuillez réessayer plus tard."/>
-        <None Text="Aucune mise à jour n'est disponible pour &quot;%s&quot; pour le moment. Veuillez vérifier plus tard."/>
-      </Message>
-    </fUpdateCheckDialog>
-    <fUpdateFoundDialog Caption="Mise à jour disponible">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Annuler"/>
-          <btnDownload Caption="Télécharger"/>
-          <btnSkip Caption="Ignorer"/>
-        </fButtonPanel>
-        <fAuxPanel>
-          <cbSkipVersion Caption="Ignorer cette version"/>
-        </fAuxPanel>
-      </fLowerPanel>
-      <Message>
-        <Note Text="Aucune note de version n'a été fournie pour la version %1:s de &quot;%0:s&quot;."/>
-      </Message>
-    </fUpdateFoundDialog>
-    <fUpdateDownloadDialog Caption="Téléchargement de la mise à jour">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Annuler"/>
-          <btnRetry Caption="Réessayer"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Fetch Text="Téléchargement de la mise à jour pour &quot;%s&quot;."/>
-        <Error Text="Erreur lors du téléchargement de la mise à jour de &quot;%s&quot;. Veuillez réessayer plus tard."/>
-      </Message>
-    </fUpdateDownloadDialog>
-    <fUpdateSaveDialog Caption="Mise à jour téléchargée">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Annuler"/>
-          <btnSaveAs Caption="Enregistrer sous..."/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Downloaded Text="Version %s de &quot;%s&quot; téléchargée."/>
-      </Message>
-    </fUpdateSaveDialog>
     <fFileEditor Caption="Codepage Witch - %s">
       <btnCancel Caption="Annuler"/>
       <btnSave Caption="Enregistrer"/>
       <dlgSaveAs Title="Erreur d'enregistrement, enregistrer le fichier sous"/>
     </fFileEditor>
-    <fCorrectFileEndingDialog Caption="Saut de ligne final manquant">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCorrect Caption="Corriger"/>
-          <btnIgnore Caption="Ignorer"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message Text="Le fichier &quot;%s&quot; ne se termine pas par une ligne vide.&#xA;&#xA;Voulez-vous corriger cela en ajoutant un saut de ligne à la fin du fichier ?"/>
-    </fCorrectFileEndingDialog>
-    <fLoggerViewForm Caption="Journal de débogage">
-      <LineCount Plural="%.0n entrées de journal" Singular="%.0n entrée de journal"/>
-      <pControls>
-        <pButtons>
-          <btnClear Caption="Effacer"/>
-          <btnSaveAs Caption="Enregistrer sous..."/>
-        </pButtons>
-        <pVerbose>
-          <cbVerbosity>
-            <Items Index_0="Critique" Index_1="Minimal" Index_2="Normal" Index_3="Détaillé" Index_4="Excessif"/>
-          </cbVerbosity>
-          <lbVerbosity Caption="Verbosité :"/>
-        </pVerbose>
-      </pControls>
-    </fLoggerViewForm>
     <fMissingFiles Caption="Fichiers de documents manquants">
       <fLowerPanel>
         <fButtonPanel>

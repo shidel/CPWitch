@@ -25,6 +25,7 @@ object fDictEditForm: TfDictEditForm
     object cbLocale: TComboBox
       Left = 59
       Height = 20
+      Hint = 'Locale for the words to add to the dictionary.'
       Top = 8
       Width = 100
       Align = alLeft
@@ -37,6 +38,7 @@ object fDictEditForm: TfDictEditForm
     object lbLocale: TLabel
       Left = 8
       Height = 17
+      Hint = 'Select the Locale for the words to add to the dictionary.'
       Top = 11
       Width = 43
       Align = alLeft
@@ -47,6 +49,7 @@ object fDictEditForm: TfDictEditForm
     object btnInvert: TButton
       Left = 239
       Height = 20
+      Hint = 'Toggle all slecetions.'
       Top = 8
       Width = 57
       Align = alRight
@@ -60,6 +63,7 @@ object fDictEditForm: TfDictEditForm
     object btnNone: TButton
       Left = 176
       Height = 20
+      Hint = 'Unselect all words.'
       Top = 8
       Width = 55
       Align = alRight
@@ -108,6 +112,7 @@ object fDictEditForm: TfDictEditForm
     object btnSave: TButton
       Left = 252
       Height = 20
+      Hint = 'Save the changes to the dictionary.'
       Top = 16
       Width = 52
       Align = alRight
@@ -124,6 +129,7 @@ object fDictEditForm: TfDictEditForm
     object btnReload: TButton
       Left = 180
       Height = 20
+      Hint = 'Reload the dinctionary and forget any unsaved changes.'
       Top = 16
       Width = 64
       Align = alRight
@@ -139,6 +145,7 @@ object fDictEditForm: TfDictEditForm
     object btnAdd: TButton
       Left = 16
       Height = 20
+      Hint = 'Add the selected words to the dictionary for the selected locale.'
       Top = 16
       Width = 128
       Align = alLeft
@@ -152,6 +159,7 @@ object fDictEditForm: TfDictEditForm
     object btnMerge: TButton
       Left = 111
       Height = 20
+      Hint = 'Merge the User dictionary words into the Master dictionary.'
       Top = 16
       Width = 61
       Align = alRight

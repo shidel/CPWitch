@@ -133,46 +133,41 @@
         <actClose Hint="Close the current text file." Caption="Close File"/>
         <actCloseAll Hint="Close all open text files." Caption="Close All"/>
         <actEditNone Hint="Can not edit this type of file." Caption="No Editor"/>
+        <actDictionary Hint="Open user dictionary editor." Caption="actDictionary"/>
       </alMain>
-      <pFileList>
-        <pFileListLabel>
-          <lbFileList Caption="Text Files"/>
-        </pFileListLabel>
-      </pFileList>
-      <pCodepageList>
-        <pCodepageListLabel>
-          <lbCodepageLabel Caption="Codepages"/>
-        </pCodepageListLabel>
-        <lvCodepageList>
-          <Analyzing Caption="Analyzing"/>
-          <Any_Codepage Caption="Any Codepage"/>
-          <Not_implemented Caption="Not implemented"/>
-          <Binary_data Caption="Binary File"/>
-        </lvCodepageList>
-      </pCodepageList>
-      <pViewers>
-        <pViewUnicode>
-          <pViewUnicodeLabel>
-            <lbUnicodeViewLabel Caption="Viewed as Unicode"/>
-          </pViewUnicodeLabel>
-          <Unsupported_file>
-            <Binary Text="Binary data files are not supported."/>
-          </Unsupported_file>
-        </pViewUnicode>
-        <pCodepage>
-          <pViewCodepageLabel>
-            <lbViewCodepageLabel Value="Viewed as Codepage %s"/>
-          </pViewCodepageLabel>
-        </pCodepage>
-      </pViewers>
-      <statBar>
-        <Processing Caption="Processing"/>
-        <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
-        <Unicode Caption="Unicode"/>
-        <NoEncoding Caption="ASCII"/>
-        <Codepage Caption="Codepage"/>
-        <Binary Caption="Binary"/>
-      </statBar>
+      <pBody>
+        <pFileList>
+          <pFileListLabel>
+            <lbFileList Caption="Text Files"/>
+          </pFileListLabel>
+        </pFileList>
+        <pCodepageList>
+          <pCodepageListLabel>
+            <lbCodepageLabel Caption="Codepages"/>
+          </pCodepageListLabel>
+          <lvCodepageList>
+            <Analyzing Caption="Analyzing"/>
+            <Any_Codepage Caption="Any Codepage"/>
+            <Not_implemented Caption="Not implemented"/>
+            <Binary_data Caption="Binary File"/>
+          </lvCodepageList>
+        </pCodepageList>
+        <pViewers>
+          <pViewUnicode>
+            <pViewUnicodeLabel>
+              <lbUnicodeViewLabel Caption="Viewed as Unicode"/>
+            </pViewUnicodeLabel>
+            <Unsupported_file>
+              <Binary Text="Binary data files are not supported."/>
+            </Unsupported_file>
+          </pViewUnicode>
+          <pCodepage>
+            <pViewCodepageLabel>
+              <lbViewCodepageLabel Value="Viewed as Codepage %s"/>
+            </pViewCodepageLabel>
+          </pCodepage>
+        </pViewers>
+      </pBody>
       <Locales>
         <ar_SA Text="Arabic (Saudi Arabia)"/>
         <cs_CZ Text="Czech (Czechia)"/>
@@ -222,22 +217,139 @@
         <th_TH Text="Thai (Thailand)"/>
         <vi_VN Text="Vietnamese (Vietnam)"/>
       </Locales>
+      <statBar>
+        <Processing Caption="Processing"/>
+        <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
+        <Unicode Caption="Unicode"/>
+        <NoEncoding Caption="ASCII"/>
+        <Codepage Caption="Codepage"/>
+        <Binary Caption="Binary"/>
+      </statBar>
+      <OpenFilesDialog>
+        <Title Caption="Open existing file(s)"/>
+        <File Filters="All Files (*.*)|*.*|Unicode Files (*.UTF-8)|*.UTF-8"/>
+      </OpenFilesDialog>
+      <ExportCodepageDialog>
+        <Title Caption="Export file as Codepage %s"/>
+        <File Filters="All Files (*.*)|*.*"/>
+      </ExportCodepageDialog>
+      <ExportASCIIDialog>
+        <Title Caption="Save file as simple 7-bit ASCII"/>
+        <File Filters="All Files (*.*)|*.*"/>
+      </ExportASCIIDialog>
+      <pViewers>
+        <pViewUnicode>
+          <pViewUnicodeLabel>
+            <lbUnicodeViewLabel Caption="Viewed as Unicode"/>
+          </pViewUnicodeLabel>
+          <Unsupported_file>
+            <Binary Text="Binary data files are not supported."/>
+          </Unsupported_file>
+        </pViewUnicode>
+        <pCodepage>
+          <pViewCodepageLabel>
+            <lbViewCodepageLabel Value="Viewed as Codepage %s"/>
+          </pViewCodepageLabel>
+        </pCodepage>
+      </pViewers>
     </fMain>
     <fDictEditForm Caption="Dictionary Updater">
       <pTop>
-        <lbLocale Caption="Locale:"/>
-        <btnInvert Caption="Invert"/>
-        <btnNone Caption="None"/>
-        <cbLocale>
-          <Items Index_0="ar_SA" Index_1="bg_BG" Index_2="cs_CZ" Index_3="da_DK" Index_4="de_CH" Index_5="de_DE" Index_6="el_GR" Index_7="en_US" Index_8="eo" Index_9="es_ES" Index_10="et_EE" Index_11="fil_PH" Index_12="fi_FI" Index_13="fr_FR" Index_14="haw_US" Index_15="he_IL" Index_16="hu_HU" Index_17="id_ID" Index_18="is_IS" Index_19="it_IT" Index_20="ja_JP" Index_21="ko_KR" Index_22="la" Index_23="lt_LT" Index_24="lv_LV" Index_25="nb_NO" Index_26="nl_NL" Index_27="no_NO" Index_28="pl_MAZ" Index_29="pl_PL" Index_30="pt_BR" Index_31="pt_PT" Index_32="ro_RO" Index_33="ru_RU" Index_34="sk_SK" Index_35="sl_SI" Index_36="sm_WS" Index_37="sr_RS" Index_38="sv_SE" Index_39="th_TH" Index_40="tr_TR" Index_41="uk_UA" Index_42="vi_VN" Index_43="zh_CN" Index_44="fr_CA" Index_45="tl_PH" Index_46="nn_NO"/>
-        </cbLocale>
+        <cbLocale Hint="Locale for the words to add to the dictionary."/>
+        <lbLocale Hint="Select the Locale for the words to add to the dictionary." Caption="Locale:"/>
+        <btnInvert Hint="Toggle all slecetions." Caption="Invert"/>
+        <btnNone Hint="Unselect all words." Caption="None"/>
       </pTop>
       <pButtons>
-        <btnSave Caption="Save"/>
-        <btnReload Caption="Reload"/>
-        <btnAdd Caption="Add to Dictionary"/>
+        <btnSave Hint="Save the changes to the dictionary." Caption="Save"/>
+        <btnReload Hint="Reload the dinctionary and forget any unsaved changes." Caption="Reload"/>
+        <btnAdd Hint="Add the selected words to the dictionary for the selected locale." Caption="Add to Dictionary"/>
+        <btnMerge Hint="Merge the User dictionary words into the Master dictionary." Caption="Merge"/>
       </pButtons>
     </fDictEditForm>
+    <fUpdateCheckDialog Caption="Update Check">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancel"/>
+          <btnRetry Caption="Retry"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Check Text="Checking for available updates for &quot;%s&quot;, version %s."/>
+        <Error Text="Unable to determine if there are any updates for &quot;%s&quot; at this time. Please try again later."/>
+        <None Text="There are no available updates for &quot;%s&quot; at this time. Please try again later."/>
+      </Message>
+    </fUpdateCheckDialog>
+    <fUpdateFoundDialog Caption="Update Available">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancel"/>
+          <btnDownload Caption="Download"/>
+          <btnSkip Caption="Skip"/>
+        </fButtonPanel>
+        <fAuxPanel>
+          <cbSkipVersion Caption="Skip this version"/>
+        </fAuxPanel>
+      </fLowerPanel>
+      <Message>
+        <Note Text="There are no release notes provided for version %1:s of &quot;%0:s&quot;"/>
+      </Message>
+    </fUpdateFoundDialog>
+    <fUpdateDownloadDialog Caption="Update Download">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancel"/>
+          <btnRetry Caption="Retry"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Fetch Text="Downloading update for &quot;%s&quot;."/>
+        <Error Text="Error downloading &quot;%s&quot; update. Please try again later."/>
+      </Message>
+    </fUpdateDownloadDialog>
+    <fUpdateSaveDialog Caption="Update Downloaded">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancel"/>
+          <btnSaveAs Caption="Save as..."/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Downloaded Text="Downloaded &quot;%s&quot; version %s."/>
+      </Message>
+      <SaveAsDialog>
+        <Title Caption="Save update as"/>
+        <File Filters="Archive Files (*.zip)|*.log|All Files (*.*)|*.*"/>
+      </SaveAsDialog>
+    </fUpdateSaveDialog>
+    <fLoggerViewForm Caption="Debug log">
+      <LineCount Plural="%.0n log entries" Singular="%.0n log entry"/>
+      <pControls>
+        <pButtons>
+          <btnClear Hint="Clear the current debug log." Caption="Clear"/>
+          <btnSaveAs Hint="Save the debug log to a file." Caption="Save As..."/>
+        </pButtons>
+        <pVerbose>
+          <cbVerbosity Hint="Select the verbosity and amount of debug logging messages. Please note this can consume a lot of memory and slow the program drastically.">
+            <Items Index_0="Critical" Index_1="Minimal" Index_2="Normal" Index_3="Verbose" Index_4="Excessive"/>
+          </cbVerbosity>
+          <lbVerbosity Caption="Verbosity:"/>
+        </pVerbose>
+      </pControls>
+      <SaveAsDialog>
+        <Title Caption="Save debug log as"/>
+        <File Filters="Log Files (*.log)|*.log|All Files (*.*)|*.*"/>
+      </SaveAsDialog>
+    </fLoggerViewForm>
+    <fCorrectFileEndingDialog Caption="No final line ending">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCorrect Caption="Correct"/>
+          <btnIgnore Caption="Ignore"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message Text="The file &quot;%s&quot; does not end on a blank line.&#xA;&#xA;Do you wish to correct this by adding a final new line to the end of the file?"/>
+    </fCorrectFileEndingDialog>
     <fOptionsDialog Caption="Codepage Witch Preferences">
       <pPages>
         <tsAbout Hint="About this application." Caption="About">
@@ -316,86 +428,11 @@
         </fBodyPanel>
       </fMiddlePanel>
     </fOptionsDialog>
-    <fUpdateCheckDialog Caption="Update Check">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancel"/>
-          <btnRetry Caption="Retry"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Check Text="Checking for available updates for &quot;%s&quot;, version %s."/>
-        <Error Text="Unable to determine if there are any updates for &quot;%s&quot; at this time. Please try again later."/>
-        <None Text="There are no available updates for &quot;%s&quot; at this time. Please try again later."/>
-      </Message>
-    </fUpdateCheckDialog>
-    <fUpdateFoundDialog Caption="Update Available">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancel"/>
-          <btnDownload Caption="Download"/>
-          <btnSkip Caption="Skip"/>
-        </fButtonPanel>
-        <fAuxPanel>
-          <cbSkipVersion Caption="Skip this version"/>
-        </fAuxPanel>
-      </fLowerPanel>
-      <Message>
-        <Note Text="There are no release notes provided for version %1:s of &quot;%0:s&quot;"/>
-      </Message>
-    </fUpdateFoundDialog>
-    <fUpdateDownloadDialog Caption="Update Download">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancel"/>
-          <btnRetry Caption="Retry"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Fetch Text="Downloading update for &quot;%s&quot;."/>
-        <Error Text="Error downloading &quot;%s&quot; update. Please try again later."/>
-      </Message>
-    </fUpdateDownloadDialog>
-    <fUpdateSaveDialog Caption="Update Downloaded">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancel"/>
-          <btnSaveAs Caption="Save as..."/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Downloaded Text="Downloaded &quot;%s&quot; version %s."/>
-      </Message>
-    </fUpdateSaveDialog>
     <fFileEditor Caption="Codepage Witch - %s">
       <btnCancel Caption="Cancel"/>
       <btnSave Caption="Save"/>
       <dlgSaveAs Title="File save error, Save file as"/>
     </fFileEditor>
-    <fCorrectFileEndingDialog Caption="No final line ending">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCorrect Caption="Correct"/>
-          <btnIgnore Caption="Ignore"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message Text="The file &quot;%s&quot; does not end on a blank line.&#xA;&#xA;Do you wish to correct this by adding a final new line to the end of the file?"/>
-    </fCorrectFileEndingDialog>
-    <fLoggerViewForm Caption="Debug log">
-      <LineCount Plural="%.0n log entries" Singular="%.0n log entry"/>
-      <pControls>
-        <pButtons>
-          <btnClear Caption="Clear"/>
-          <btnSaveAs Caption="Save As..."/>
-        </pButtons>
-        <pVerbose>
-          <cbVerbosity>
-            <Items Index_0="Critical" Index_1="Minimal" Index_2="Normal" Index_3="Verbose" Index_4="Excessive"/>
-          </cbVerbosity>
-          <lbVerbosity Caption="Verbosity:"/>
-        </pVerbose>
-      </pControls>
-    </fLoggerViewForm>
     <fMissingFiles Caption="Missing document files">
       <fLowerPanel>
         <fButtonPanel>

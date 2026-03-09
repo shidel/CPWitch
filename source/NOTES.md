@@ -1,3 +1,6 @@
 # Upcoming release notes
 
-* Improved Locale heuristics.
+* Added missing translation strings.
+* Added User dictionary updater.
+* Added Master and User dictionaries.
+* Improved Locale detection heuristics.

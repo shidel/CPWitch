@@ -133,46 +133,41 @@
         <actClose Hint="Geçerli metin dosyasını kapat." Caption="Dosyayı Kapat"/>
         <actCloseAll Hint="Tüm açık metin dosyalarını kapat." Caption="Tümünü Kapat"/>
         <actEditNone Hint="Bu dosya türü için düzenleyici yok." Caption="Düzenleyici Yok"/>
+        <actDictionary Hint="Open user dictionary editor." Caption="actDictionary"/>
       </alMain>
-      <pFileList>
-        <pFileListLabel>
-          <lbFileList Caption="Metin Dosyaları"/>
-        </pFileListLabel>
-      </pFileList>
-      <pCodepageList>
-        <pCodepageListLabel>
-          <lbCodepageLabel Caption="Kod Sayfaları"/>
-        </pCodepageListLabel>
-        <lvCodepageList>
-          <Analyzing Caption="Analiz Ediliyor"/>
-          <Any_Codepage Caption="Herhangi Bir Kod Sayfası"/>
-          <Not_implemented Caption="Uygulanmadı"/>
-          <Binary_data Caption="İkili Veri"/>
-        </lvCodepageList>
-      </pCodepageList>
-      <pViewers>
-        <pViewUnicode>
-          <pViewUnicodeLabel>
-            <lbUnicodeViewLabel Caption="Unicode Olarak Görüntüleniyor"/>
-          </pViewUnicodeLabel>
-          <Unsupported_file>
-            <Binary Text="İkili veri dosyaları desteklenmiyor."/>
-          </Unsupported_file>
-        </pViewUnicode>
-        <pCodepage>
-          <pViewCodepageLabel>
-            <lbViewCodepageLabel Value="%s Kod Sayfası Olarak Görüntüleniyor"/>
-          </pViewCodepageLabel>
-        </pCodepage>
-      </pViewers>
-      <statBar>
-        <Processing Caption="İşleniyor"/>
-        <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
-        <Unicode Caption="Unicode"/>
-        <NoEncoding Caption="ASCII"/>
-        <Codepage Caption="Kod Sayfası"/>
-        <Binary Caption="İkili"/>
-      </statBar>
+      <pBody>
+        <pFileList>
+          <pFileListLabel>
+            <lbFileList Caption="Text Files"/>
+          </pFileListLabel>
+        </pFileList>
+        <pCodepageList>
+          <pCodepageListLabel>
+            <lbCodepageLabel Caption="Codepages"/>
+          </pCodepageListLabel>
+          <lvCodepageList>
+            <Analyzing Caption="Analyzing"/>
+            <Any_Codepage Caption="Any Codepage"/>
+            <Not_implemented Caption="Not implemented"/>
+            <Binary_data Caption="Binary File"/>
+          </lvCodepageList>
+        </pCodepageList>
+        <pViewers>
+          <pViewUnicode>
+            <pViewUnicodeLabel>
+              <lbUnicodeViewLabel Caption="Viewed as Unicode"/>
+            </pViewUnicodeLabel>
+            <Unsupported_file>
+              <Binary Text="Binary data files are not supported."/>
+            </Unsupported_file>
+          </pViewUnicode>
+          <pCodepage>
+            <pViewCodepageLabel>
+              <lbViewCodepageLabel Value="Viewed as Codepage %s"/>
+            </pViewCodepageLabel>
+          </pCodepage>
+        </pViewers>
+      </pBody>
       <Locales>
         <ar_SA Text="Arapça (Suudi Arabistan)"/>
         <cs_CZ Text="Çekçe (Çekya)"/>
@@ -222,22 +217,163 @@
         <th_TH Text="Tayca (Tayland)"/>
         <vi_VN Text="Vietnamca (Vietnam)"/>
       </Locales>
+      <statBar>
+        <Processing Caption="İşleniyor"/>
+        <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
+        <Unicode Caption="Unicode"/>
+        <NoEncoding Caption="ASCII"/>
+        <Codepage Caption="Kod Sayfası"/>
+        <Binary Caption="İkili"/>
+      </statBar>
+      <OpenFilesDialog>
+        <Title Caption="Open existing file(s)"/>
+        <File Filters="All Files (*.*)|*.*|Unicode Files (*.UTF-8)|*.UTF-8"/>
+      </OpenFilesDialog>
+      <ExportCodepageDialog>
+        <Title Caption="Export file as Codepage %s"/>
+        <File Filters="All Files (*.*)|*.*"/>
+      </ExportCodepageDialog>
+      <ExportASCIIDialog>
+        <Title Caption="Save file as simple 7-bit ASCII"/>
+        <File Filters="All Files (*.*)|*.*"/>
+      </ExportASCIIDialog>
+      <OpenFiles>
+        <Title Caption="Open existing file(s)"/>
+        <File Filters="All Files|*;*.*"/>
+      </OpenFiles>
+      <pFileList>
+        <pFileListLabel>
+          <lbFileList Caption="Metin Dosyaları"/>
+        </pFileListLabel>
+      </pFileList>
+      <pCodepageList>
+        <pCodepageListLabel>
+          <lbCodepageLabel Caption="Kod Sayfaları"/>
+        </pCodepageListLabel>
+        <lvCodepageList>
+          <Analyzing Caption="Analiz Ediliyor"/>
+          <Any_Codepage Caption="Herhangi Bir Kod Sayfası"/>
+          <Not_implemented Caption="Uygulanmadı"/>
+          <Binary_data Caption="İkili Veri"/>
+        </lvCodepageList>
+      </pCodepageList>
+      <pViewers>
+        <pViewUnicode>
+          <pViewUnicodeLabel>
+            <lbUnicodeViewLabel Caption="Unicode Olarak Görüntüleniyor"/>
+          </pViewUnicodeLabel>
+          <Unsupported_file>
+            <Binary Text="İkili veri dosyaları desteklenmiyor."/>
+          </Unsupported_file>
+        </pViewUnicode>
+        <pCodepage>
+          <pViewCodepageLabel>
+            <lbViewCodepageLabel Value="%s Kod Sayfası Olarak Görüntüleniyor"/>
+          </pViewCodepageLabel>
+        </pCodepage>
+      </pViewers>
     </fMain>
     <fDictEditForm Caption="Sözlük Güncelleyici">
       <pTop>
-        <lbLocale Caption="Yerel Ayar:"/>
-        <btnInvert Caption="Tersine Çevir"/>
-        <btnNone Caption="Hiçbiri"/>
-        <cbLocale>
+        <cbLocale Hint="Locale for the words to add to the dictionary.">
           <Items Index_0="ar_SA" Index_1="bg_BG" Index_2="cs_CZ" Index_3="da_DK" Index_4="de_CH" Index_5="de_DE" Index_6="el_GR" Index_7="en_US" Index_8="eo" Index_9="es_ES" Index_10="et_EE" Index_11="fil_PH" Index_12="fi_FI" Index_13="fr_FR" Index_14="haw_US" Index_15="he_IL" Index_16="hu_HU" Index_17="id_ID" Index_18="is_IS" Index_19="it_IT" Index_20="ja_JP" Index_21="ko_KR" Index_22="la" Index_23="lt_LT" Index_24="lv_LV" Index_25="nb_NO" Index_26="nl_NL" Index_27="no_NO" Index_28="pl_MAZ" Index_29="pl_PL" Index_30="pt_BR" Index_31="pt_PT" Index_32="ro_RO" Index_33="ru_RU" Index_34="sk_SK" Index_35="sl_SI" Index_36="sm_WS" Index_37="sr_RS" Index_38="sv_SE" Index_39="th_TH" Index_40="tr_TR" Index_41="uk_UA" Index_42="vi_VN" Index_43="zh_CN" Index_44="fr_CA" Index_45="tl_PH" Index_46="nn_NO"/>
         </cbLocale>
+        <lbLocale Hint="Select the Locale for the words to add to the dictionary." Caption="Yerel Ayar:"/>
+        <btnInvert Hint="Toggle all slecetions." Caption="Tersine Çevir"/>
+        <btnNone Hint="Unselect all words." Caption="Hiçbiri"/>
       </pTop>
       <pButtons>
-        <btnSave Caption="Kaydet"/>
-        <btnReload Caption="Yeniden Yükle"/>
-        <btnAdd Caption="Sözlüğe Ekle"/>
+        <btnSave Hint="Save the changes to the dictionary." Caption="Kaydet"/>
+        <btnReload Hint="Reload the dinctionary and forget any unsaved changes." Caption="Yeniden Yükle"/>
+        <btnAdd Hint="Add the selected words to the dictionary for the selected locale." Caption="Sözlüğe Ekle"/>
+        <btnMerge Hint="Merge the User dictionary words into the Master dictionary." Caption="Merge"/>
       </pButtons>
     </fDictEditForm>
+    <fUpdateCheckDialog Caption="Güncelleme Kontrolü">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="İptal"/>
+          <btnRetry Caption="Yeniden Dene"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Check Text="&quot;%s&quot; (sürüm %s) için mevcut güncellemeler aranıyor."/>
+        <Error Text="Şu anda &quot;%s&quot; için güncelleme olup olmadığı belirlenemiyor. Lütfen daha sonra tekrar deneyin."/>
+        <None Text="Şu anda &quot;%s&quot; için yeni bir güncelleme yok. Lütfen daha sonra kontrol edin."/>
+      </Message>
+    </fUpdateCheckDialog>
+    <fUpdateFoundDialog Caption="Güncelleme Mevcut">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="İptal"/>
+          <btnDownload Caption="İndir"/>
+          <btnSkip Caption="Atla"/>
+        </fButtonPanel>
+        <fAuxPanel>
+          <cbSkipVersion Caption="Bu sürümü atla"/>
+        </fAuxPanel>
+      </fLowerPanel>
+      <Message>
+        <Note Text="&quot;%0:s&quot; uygulamasının %1:s sürümü için sürüm notu sağlanmadı."/>
+      </Message>
+    </fUpdateFoundDialog>
+    <fUpdateDownloadDialog Caption="Güncelleme İndiriliyor">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="İptal"/>
+          <btnRetry Caption="Yeniden Dene"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Fetch Text="&quot;%s&quot; için güncelleme indiriliyor."/>
+        <Error Text="&quot;%s&quot; güncellemesi indirilirken hata oluştu. Lütfen daha sonra tekrar deneyin."/>
+      </Message>
+    </fUpdateDownloadDialog>
+    <fUpdateSaveDialog Caption="Güncelleme İndirildi">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="İptal"/>
+          <btnSaveAs Caption="Farklı Kaydet..."/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Downloaded Text="&quot;%s&quot; sürüm %s indirildi."/>
+      </Message>
+      <SaveAsDialog>
+        <Title Caption="Save update as"/>
+        <File Filters="Archive Files (*.zip)|*.log|All Files (*.*)|*.*"/>
+      </SaveAsDialog>
+    </fUpdateSaveDialog>
+    <fLoggerViewForm Title="Save debug log as" Filter="Log Files (*.log)|All Files (*.*)" Caption="Hata Ayıklama Günlüğü">
+      <LineCount Plural="%.0n günlük girişi" Singular="%.0n günlük girişi"/>
+      <pControls>
+        <pButtons>
+          <btnClear Hint="Clear the current debug log." Caption="Temizle"/>
+          <btnSaveAs Hint="Save the debug log to a file." Caption="Farklı Kaydet..."/>
+        </pButtons>
+        <pVerbose>
+          <cbVerbosity Hint="Select the verbosity and amount of debug logging messages. Please note this can consume a lot of memory and slow the program drastically.">
+            <Items Index_0="Kritik" Index_1="Minimal" Index_2="Normal" Index_3="Ayrıntılı" Index_4="Aşırı"/>
+          </cbVerbosity>
+          <lbVerbosity Caption="Ayrıntı Düzeyi:"/>
+        </pVerbose>
+      </pControls>
+      <SaveDialog>
+        <Title Caption="Save debug log as"/>
+        <File Filters="Log Files (*.log)|*.log|All Files (*.*)|*.*"/>
+      </SaveDialog>
+      <Title SaveDialog="Save debug log as"/>
+      <Filter SaveDialog="Log Files (*.log)|*.log|All Files (*.*)|*.*"/>
+    </fLoggerViewForm>
+    <fCorrectFileEndingDialog Caption="Eksik Satır Sonu">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCorrect Caption="Düzelt"/>
+          <btnIgnore Caption="Yoksay"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message Text="&quot;%s&quot; dosyası boş bir satırla bitmiyor.&#xA;&#xA;Dosyanın sonuna bir satır sonu ekleyerek bunu düzeltmek ister misiniz?"/>
+    </fCorrectFileEndingDialog>
     <fOptionsDialog Caption="Codepage Witch Ayarları">
       <pPages>
         <tsAbout Hint="Bu uygulama hakkında." Caption="Hakkında">
@@ -316,86 +452,11 @@
         </fBodyPanel>
       </fMiddlePanel>
     </fOptionsDialog>
-    <fUpdateCheckDialog Caption="Güncelleme Kontrolü">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="İptal"/>
-          <btnRetry Caption="Yeniden Dene"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Check Text="&quot;%s&quot; (sürüm %s) için mevcut güncellemeler aranıyor."/>
-        <Error Text="Şu anda &quot;%s&quot; için güncelleme olup olmadığı belirlenemiyor. Lütfen daha sonra tekrar deneyin."/>
-        <None Text="Şu anda &quot;%s&quot; için yeni bir güncelleme yok. Lütfen daha sonra kontrol edin."/>
-      </Message>
-    </fUpdateCheckDialog>
-    <fUpdateFoundDialog Caption="Güncelleme Mevcut">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="İptal"/>
-          <btnDownload Caption="İndir"/>
-          <btnSkip Caption="Atla"/>
-        </fButtonPanel>
-        <fAuxPanel>
-          <cbSkipVersion Caption="Bu sürümü atla"/>
-        </fAuxPanel>
-      </fLowerPanel>
-      <Message>
-        <Note Text="&quot;%0:s&quot; uygulamasının %1:s sürümü için sürüm notu sağlanmadı."/>
-      </Message>
-    </fUpdateFoundDialog>
-    <fUpdateDownloadDialog Caption="Güncelleme İndiriliyor">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="İptal"/>
-          <btnRetry Caption="Yeniden Dene"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Fetch Text="&quot;%s&quot; için güncelleme indiriliyor."/>
-        <Error Text="&quot;%s&quot; güncellemesi indirilirken hata oluştu. Lütfen daha sonra tekrar deneyin."/>
-      </Message>
-    </fUpdateDownloadDialog>
-    <fUpdateSaveDialog Caption="Güncelleme İndirildi">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="İptal"/>
-          <btnSaveAs Caption="Farklı Kaydet..."/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Downloaded Text="&quot;%s&quot; sürüm %s indirildi."/>
-      </Message>
-    </fUpdateSaveDialog>
     <fFileEditor Caption="Codepage Witch - %s">
       <btnCancel Caption="İptal"/>
       <btnSave Caption="Kaydet"/>
       <dlgSaveAs Title="Dosya kaydetme hatası, dosyayı farklı kaydet"/>
     </fFileEditor>
-    <fCorrectFileEndingDialog Caption="Eksik Satır Sonu">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCorrect Caption="Düzelt"/>
-          <btnIgnore Caption="Yoksay"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message Text="&quot;%s&quot; dosyası boş bir satırla bitmiyor.&#xA;&#xA;Dosyanın sonuna bir satır sonu ekleyerek bunu düzeltmek ister misiniz?"/>
-    </fCorrectFileEndingDialog>
-    <fLoggerViewForm Caption="Hata Ayıklama Günlüğü">
-      <LineCount Plural="%.0n günlük girişi" Singular="%.0n günlük girişi"/>
-      <pControls>
-        <pButtons>
-          <btnClear Caption="Temizle"/>
-          <btnSaveAs Caption="Farklı Kaydet..."/>
-        </pButtons>
-        <pVerbose>
-          <cbVerbosity>
-            <Items Index_0="Kritik" Index_1="Minimal" Index_2="Normal" Index_3="Ayrıntılı" Index_4="Aşırı"/>
-          </cbVerbosity>
-          <lbVerbosity Caption="Ayrıntı Düzeyi:"/>
-        </pVerbose>
-      </pControls>
-    </fLoggerViewForm>
     <fMissingFiles Caption="Eksik Belge Dosyaları">
       <fLowerPanel>
         <fButtonPanel>

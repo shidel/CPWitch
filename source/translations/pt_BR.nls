@@ -133,46 +133,41 @@
         <actClose Hint="Fechar o arquivo de texto atual." Caption="Fechar arquivo"/>
         <actCloseAll Hint="Fechar todos os arquivos de texto abertos." Caption="Fechar tudo"/>
         <actEditNone Hint="Este tipo de arquivo não possui editor." Caption="Sem editor"/>
+        <actDictionary Hint="Open user dictionary editor." Caption="actDictionary"/>
       </alMain>
-      <pFileList>
-        <pFileListLabel>
-          <lbFileList Caption="Arquivos de Texto"/>
-        </pFileListLabel>
-      </pFileList>
-      <pCodepageList>
-        <pCodepageListLabel>
-          <lbCodepageLabel Caption="Codificações"/>
-        </pCodepageListLabel>
-        <lvCodepageList>
-          <Analyzing Caption="Analisando"/>
-          <Any_Codepage Caption="Qualquer codificação"/>
-          <Not_implemented Caption="Não implementado"/>
-          <Binary_data Caption="Dados binários"/>
-        </lvCodepageList>
-      </pCodepageList>
-      <pViewers>
-        <pViewUnicode>
-          <pViewUnicodeLabel>
-            <lbUnicodeViewLabel Caption="Exibido como Unicode"/>
-          </pViewUnicodeLabel>
-          <Unsupported_file>
-            <Binary Text="Arquivos de dados binários não são suportados."/>
-          </Unsupported_file>
-        </pViewUnicode>
-        <pCodepage>
-          <pViewCodepageLabel>
-            <lbViewCodepageLabel Value="Exibido como codificação %s"/>
-          </pViewCodepageLabel>
-        </pCodepage>
-      </pViewers>
-      <statBar>
-        <Processing Caption="Processando"/>
-        <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
-        <Unicode Caption="Unicode"/>
-        <NoEncoding Caption="ASCII"/>
-        <Codepage Caption="Codificação"/>
-        <Binary Caption="Binário"/>
-      </statBar>
+      <pBody>
+        <pFileList>
+          <pFileListLabel>
+            <lbFileList Caption="Text Files"/>
+          </pFileListLabel>
+        </pFileList>
+        <pCodepageList>
+          <pCodepageListLabel>
+            <lbCodepageLabel Caption="Codepages"/>
+          </pCodepageListLabel>
+          <lvCodepageList>
+            <Analyzing Caption="Analyzing"/>
+            <Any_Codepage Caption="Any Codepage"/>
+            <Not_implemented Caption="Not implemented"/>
+            <Binary_data Caption="Binary File"/>
+          </lvCodepageList>
+        </pCodepageList>
+        <pViewers>
+          <pViewUnicode>
+            <pViewUnicodeLabel>
+              <lbUnicodeViewLabel Caption="Viewed as Unicode"/>
+            </pViewUnicodeLabel>
+            <Unsupported_file>
+              <Binary Text="Binary data files are not supported."/>
+            </Unsupported_file>
+          </pViewUnicode>
+          <pCodepage>
+            <pViewCodepageLabel>
+              <lbViewCodepageLabel Value="Viewed as Codepage %s"/>
+            </pViewCodepageLabel>
+          </pCodepage>
+        </pViewers>
+      </pBody>
       <Locales>
         <ar_SA Text="Árabe (Arábia Saudita)"/>
         <cs_CZ Text="Tcheco (Tchéquia)"/>
@@ -222,22 +217,163 @@
         <th_TH Text="Tailandês (Tailândia)"/>
         <vi_VN Text="Vietnamita (Vietnã)"/>
       </Locales>
+      <statBar>
+        <Processing Caption="Processando"/>
+        <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
+        <Unicode Caption="Unicode"/>
+        <NoEncoding Caption="ASCII"/>
+        <Codepage Caption="Codificação"/>
+        <Binary Caption="Binário"/>
+      </statBar>
+      <OpenFilesDialog>
+        <Title Caption="Open existing file(s)"/>
+        <File Filters="All Files (*.*)|*.*|Unicode Files (*.UTF-8)|*.UTF-8"/>
+      </OpenFilesDialog>
+      <ExportCodepageDialog>
+        <Title Caption="Export file as Codepage %s"/>
+        <File Filters="All Files (*.*)|*.*"/>
+      </ExportCodepageDialog>
+      <ExportASCIIDialog>
+        <Title Caption="Save file as simple 7-bit ASCII"/>
+        <File Filters="All Files (*.*)|*.*"/>
+      </ExportASCIIDialog>
+      <OpenFiles>
+        <Title Caption="Open existing file(s)"/>
+        <File Filters="All Files|*;*.*"/>
+      </OpenFiles>
+      <pFileList>
+        <pFileListLabel>
+          <lbFileList Caption="Arquivos de Texto"/>
+        </pFileListLabel>
+      </pFileList>
+      <pCodepageList>
+        <pCodepageListLabel>
+          <lbCodepageLabel Caption="Codificações"/>
+        </pCodepageListLabel>
+        <lvCodepageList>
+          <Analyzing Caption="Analisando"/>
+          <Any_Codepage Caption="Qualquer codificação"/>
+          <Not_implemented Caption="Não implementado"/>
+          <Binary_data Caption="Dados binários"/>
+        </lvCodepageList>
+      </pCodepageList>
+      <pViewers>
+        <pViewUnicode>
+          <pViewUnicodeLabel>
+            <lbUnicodeViewLabel Caption="Exibido como Unicode"/>
+          </pViewUnicodeLabel>
+          <Unsupported_file>
+            <Binary Text="Arquivos de dados binários não são suportados."/>
+          </Unsupported_file>
+        </pViewUnicode>
+        <pCodepage>
+          <pViewCodepageLabel>
+            <lbViewCodepageLabel Value="Exibido como codificação %s"/>
+          </pViewCodepageLabel>
+        </pCodepage>
+      </pViewers>
     </fMain>
     <fDictEditForm Caption="Atualizador de Dicionário">
       <pTop>
-        <lbLocale Caption="Localidade:"/>
-        <btnInvert Caption="Inverter"/>
-        <btnNone Caption="Nenhum"/>
-        <cbLocale>
+        <cbLocale Hint="Locale for the words to add to the dictionary.">
           <Items Index_0="ar_SA" Index_1="bg_BG" Index_2="cs_CZ" Index_3="da_DK" Index_4="de_CH" Index_5="de_DE" Index_6="el_GR" Index_7="en_US" Index_8="eo" Index_9="es_ES" Index_10="et_EE" Index_11="fil_PH" Index_12="fi_FI" Index_13="fr_FR" Index_14="haw_US" Index_15="he_IL" Index_16="hu_HU" Index_17="id_ID" Index_18="is_IS" Index_19="it_IT" Index_20="ja_JP" Index_21="ko_KR" Index_22="la" Index_23="lt_LT" Index_24="lv_LV" Index_25="nb_NO" Index_26="nl_NL" Index_27="no_NO" Index_28="pl_MAZ" Index_29="pl_PL" Index_30="pt_BR" Index_31="pt_PT" Index_32="ro_RO" Index_33="ru_RU" Index_34="sk_SK" Index_35="sl_SI" Index_36="sm_WS" Index_37="sr_RS" Index_38="sv_SE" Index_39="th_TH" Index_40="tr_TR" Index_41="uk_UA" Index_42="vi_VN" Index_43="zh_CN" Index_44="fr_CA" Index_45="tl_PH" Index_46="nn_NO"/>
         </cbLocale>
+        <lbLocale Hint="Select the Locale for the words to add to the dictionary." Caption="Localidade:"/>
+        <btnInvert Hint="Toggle all slecetions." Caption="Inverter"/>
+        <btnNone Hint="Unselect all words." Caption="Nenhum"/>
       </pTop>
       <pButtons>
-        <btnSave Caption="Salvar"/>
-        <btnReload Caption="Recarregar"/>
-        <btnAdd Caption="Adicionar ao Dicionário"/>
+        <btnSave Hint="Save the changes to the dictionary." Caption="Salvar"/>
+        <btnReload Hint="Reload the dinctionary and forget any unsaved changes." Caption="Recarregar"/>
+        <btnAdd Hint="Add the selected words to the dictionary for the selected locale." Caption="Adicionar ao Dicionário"/>
+        <btnMerge Hint="Merge the User dictionary words into the Master dictionary." Caption="Merge"/>
       </pButtons>
     </fDictEditForm>
+    <fUpdateCheckDialog Caption="Procurar Atualização">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnRetry Caption="Repetir"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Check Text="Procurando atualizações para &quot;%s&quot;, versão %s."/>
+        <Error Text="No momento não é possível determinar se existem atualizações para &quot;%s&quot;. Tente novamente mais tarde."/>
+        <None Text="Não existem atualizações para &quot;%s&quot; no momento. Verifique mais tarde."/>
+      </Message>
+    </fUpdateCheckDialog>
+    <fUpdateFoundDialog Caption="Atualização Disponível">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnDownload Caption="Baixar"/>
+          <btnSkip Caption="Pular"/>
+        </fButtonPanel>
+        <fAuxPanel>
+          <cbSkipVersion Caption="Pular esta versão"/>
+        </fAuxPanel>
+      </fLowerPanel>
+      <Message>
+        <Note Text="Não foram fornecidas notas de lançamento para a versão %1:s de &quot;%0:s&quot;."/>
+      </Message>
+    </fUpdateFoundDialog>
+    <fUpdateDownloadDialog Caption="Baixar Atualização">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnRetry Caption="Repetir"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Fetch Text="Baixando atualização para &quot;%s&quot;."/>
+        <Error Text="Erro ao baixar a atualização de &quot;%s&quot;. Tente novamente mais tarde."/>
+      </Message>
+    </fUpdateDownloadDialog>
+    <fUpdateSaveDialog Caption="Atualização Baixada">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnSaveAs Caption="Salvar como..."/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Downloaded Text="Baixada a versão %s de &quot;%s&quot;."/>
+      </Message>
+      <SaveAsDialog>
+        <Title Caption="Save update as"/>
+        <File Filters="Archive Files (*.zip)|*.log|All Files (*.*)|*.*"/>
+      </SaveAsDialog>
+    </fUpdateSaveDialog>
+    <fLoggerViewForm Title="Save debug log as" Filter="Log Files (*.log)|All Files (*.*)" Caption="Log de Depuração">
+      <LineCount Plural="%.0n entradas de log" Singular="%.0n entrada de log"/>
+      <pControls>
+        <pButtons>
+          <btnClear Hint="Clear the current debug log." Caption="Limpar"/>
+          <btnSaveAs Hint="Save the debug log to a file." Caption="Salvar como..."/>
+        </pButtons>
+        <pVerbose>
+          <cbVerbosity Hint="Select the verbosity and amount of debug logging messages. Please note this can consume a lot of memory and slow the program drastically.">
+            <Items Index_0="Crítico" Index_1="Mínimo" Index_2="Normal" Index_3="Detalhado" Index_4="Excessivo"/>
+          </cbVerbosity>
+          <lbVerbosity Caption="Detalhamento:"/>
+        </pVerbose>
+      </pControls>
+      <SaveDialog>
+        <Title Caption="Save debug log as"/>
+        <File Filters="Log Files (*.log)|*.log|All Files (*.*)|*.*"/>
+      </SaveDialog>
+      <Title SaveDialog="Save debug log as"/>
+      <Filter SaveDialog="Log Files (*.log)|*.log|All Files (*.*)|*.*"/>
+    </fLoggerViewForm>
+    <fCorrectFileEndingDialog Caption="Falta quebra de linha final">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCorrect Caption="Corrigir"/>
+          <btnIgnore Caption="Ignorar"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message Text="O arquivo &quot;%s&quot; não termina com uma linha em branco.&#xA;&#xA;Deseja corrigir adicionando uma quebra de linha ao fim do arquivo?"/>
+    </fCorrectFileEndingDialog>
     <fOptionsDialog Caption="Configurações do Codepage Witch">
       <pPages>
         <tsAbout Hint="Sobre este aplicativo." Caption="Sobre">
@@ -316,86 +452,11 @@
         </fBodyPanel>
       </fMiddlePanel>
     </fOptionsDialog>
-    <fUpdateCheckDialog Caption="Procurar Atualização">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-          <btnRetry Caption="Repetir"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Check Text="Procurando atualizações para &quot;%s&quot;, versão %s."/>
-        <Error Text="No momento não é possível determinar se existem atualizações para &quot;%s&quot;. Tente novamente mais tarde."/>
-        <None Text="Não existem atualizações para &quot;%s&quot; no momento. Verifique mais tarde."/>
-      </Message>
-    </fUpdateCheckDialog>
-    <fUpdateFoundDialog Caption="Atualização Disponível">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-          <btnDownload Caption="Baixar"/>
-          <btnSkip Caption="Pular"/>
-        </fButtonPanel>
-        <fAuxPanel>
-          <cbSkipVersion Caption="Pular esta versão"/>
-        </fAuxPanel>
-      </fLowerPanel>
-      <Message>
-        <Note Text="Não foram fornecidas notas de lançamento para a versão %1:s de &quot;%0:s&quot;."/>
-      </Message>
-    </fUpdateFoundDialog>
-    <fUpdateDownloadDialog Caption="Baixar Atualização">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-          <btnRetry Caption="Repetir"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Fetch Text="Baixando atualização para &quot;%s&quot;."/>
-        <Error Text="Erro ao baixar a atualização de &quot;%s&quot;. Tente novamente mais tarde."/>
-      </Message>
-    </fUpdateDownloadDialog>
-    <fUpdateSaveDialog Caption="Atualização Baixada">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-          <btnSaveAs Caption="Salvar como..."/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Downloaded Text="Baixada a versão %s de &quot;%s&quot;."/>
-      </Message>
-    </fUpdateSaveDialog>
     <fFileEditor Caption="Codepage Witch - %s">
       <btnCancel Caption="Cancelar"/>
       <btnSave Caption="Salvar"/>
       <dlgSaveAs Title="Erro ao salvar arquivo, salvar como"/>
     </fFileEditor>
-    <fCorrectFileEndingDialog Caption="Falta quebra de linha final">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCorrect Caption="Corrigir"/>
-          <btnIgnore Caption="Ignorar"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message Text="O arquivo &quot;%s&quot; não termina com uma linha em branco.&#xA;&#xA;Deseja corrigir adicionando uma quebra de linha ao fim do arquivo?"/>
-    </fCorrectFileEndingDialog>
-    <fLoggerViewForm Caption="Log de Depuração">
-      <LineCount Plural="%.0n entradas de log" Singular="%.0n entrada de log"/>
-      <pControls>
-        <pButtons>
-          <btnClear Caption="Limpar"/>
-          <btnSaveAs Caption="Salvar como..."/>
-        </pButtons>
-        <pVerbose>
-          <cbVerbosity>
-            <Items Index_0="Crítico" Index_1="Mínimo" Index_2="Normal" Index_3="Detalhado" Index_4="Excessivo"/>
-          </cbVerbosity>
-          <lbVerbosity Caption="Detalhamento:"/>
-        </pVerbose>
-      </pControls>
-    </fLoggerViewForm>
     <fMissingFiles Caption="Arquivos de Documentos Ausentes">
       <fLowerPanel>
         <fButtonPanel>

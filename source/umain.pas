@@ -162,6 +162,7 @@ type
       procedure SessionLoad;
       procedure RefreshFileEndsOnBlank;
       procedure EnforceLayout;
+      procedure SetSaveDialogText(Encoding : TWitchEncoding);
     public
       procedure ApplyUserLanguage; override;
       procedure OpenFile(FileName : String; Select : boolean = False); overload;
@@ -282,6 +283,7 @@ begin
   dlgFileSave.InitialDir:=UserWorkPath;
   N := ExcludeTrailing(W.DisplayName, '.UTF-8', false);
   dlgFileSave.FileName:=FileIterative(UserWorkPath + N);
+  SetSaveDialogText(W.Encoding);
   if fEndBlankOnExport then begin
     D:=NormalizeLineEndings(TCP.Converted, W.LineEndings);
     case W.LineEndings of
@@ -320,6 +322,9 @@ var
   I : integer;
 begin
   dlgOpenFile.InitialDir:=UserWorkPath;
+  { TODO 0 -cLazarus_Bug Setting Title or Filter for TOpenDialog does nothing on macOS }
+  dlgOpenFile.Title:=GetTranslation('OpenFilesDialog/Title/Caption', 'Open existing file(s)');
+  dlgOpenFile.Filter:=GetTranslation('OpenFilesDialog/File/Filters', 'All Files (*.*)|*.*|Unicode Files (*.UTF-8)|*.UTF-8');
   if dlgOpenFile.Execute then begin
     for I := dlgOpenFile.Files.Count - 1 downto 0 do
       OpenFile(dlgOpenFile.Files[I], I=0);
@@ -1191,7 +1196,7 @@ begin
     if InArray(L, T, 0, False) = -1 then
       Cat(L, T);
   end;
-  LogMessage(vbVerbose, 'Locales: ' + Implode(L, COMMA + SPACE));
+  LogMessage(vbVerbose, IntToStr(Length(L)) + ' known locales: ' + Implode(L, COMMA + SPACE));
   SetLength(FLocales, Length(L));
   for I:=0 to High(L) do begin
     if Locale(L[I], X) then begin
@@ -1359,6 +1364,31 @@ begin
    spFileCP.Left:=7000;
    pFileList.Left:=0;
    {$ENDIF}
+end;
+
+procedure TfMain.SetSaveDialogText(Encoding : TWitchEncoding);
+begin
+  case Encoding of
+    weNone: begin
+      dlgFileSave.Title:=GetTranslation('ExportASCIIDialog/Title/Caption',
+       'Save file as simple 7-bit ASCII');
+      dlgFileSave.Filter:=GetTranslation('ExportASCIIDialog/File/Filters', 'All Files (*.*)|*.*');
+    end;
+    weUnicode: begin
+      dlgFileSave.Title:=GetFormat('ExportCodepageDialog/Title/Caption',
+       [IntToStr(FActiveCodepage)], 'Export file as Codepage %s');
+      dlgFileSave.Filter:=GetTranslation('ExportCodepageDialog/File/Filters', 'All Files (*.*)|*.*');
+    end;
+    weCodepage: begin
+      dlgFileSave.Title:=GetFormat('ExportUnicodeDialog/Title/Caption',
+       [IntToStr(FActiveCodepage)], 'Export file as UTF-8');
+      dlgFileSave.Filter:=GetTranslation('ExportUnicodeDialog/File/Filters', 'All Files (*.*)|*.*|Unicode Files (*.UTF-8)|*.UTF-8');
+    end;
+  else
+    dlgFileSave.Title:=GetTranslation('ExportFileDialog/Title/Caption',
+    'Save file as');
+    dlgFileSave.Filter:=GetTranslation('ExportFileDialog/File/Filters', 'All Files (*.*)|*.*');
+  end;
 end;
 
 procedure TfMain.ApplyUserLanguage;

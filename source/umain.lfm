@@ -437,6 +437,7 @@ object fMain: TfMain
     Top = 104
   end
   object dlgOpenFile: TOpenDialog
+    Filter = 'All FIles|*.*|Unicode Files|*.UTF-8'
     Options = [ofAllowMultiSelect, ofFileMustExist, ofEnableSizing, ofViewDetail]
     Left = 380
     Top = 219
