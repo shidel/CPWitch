@@ -566,14 +566,14 @@ begin
   if Item.Analyzed then begin
     // Processing complete
     ttAnimate.Enabled:=False;
-    lvCodepageList.SmallImages:=ilCompatibleColor;
     K:=ComponentNamePath(lvCodepageList, Self, True);
     case Item.Encoding of
       weNone : begin
+        lvCodepageList.SmallImages:=ilCompatGreenColor;
         // Only Liwer 7-Bit ASCII characters, compatible with any Codepage
         L:=lvCodepageList.Items.Add;
         L.Caption:=GetTranslation(K+'Any_Codepage/Caption', 'Any Codepage');
-        L.ImageIndex:=High(iconCompatibleNames);
+        L.ImageIndex:=High(iconCompatGreenNames);
       end;
       weBinary : begin
          // Binary Data FIle , not supported
@@ -583,19 +583,26 @@ begin
          L.ImageIndex:=idxGeneralError;
        end;
       weUnicode, weCodepage : begin
+        if Item.Encoding = weUnicode then
+          lvCodepageList.SmallImages:=ilCompatGreenColor
+        else
+          lvCodepageList.SmallImages:=ilCompatBlueColor;
         // UTF-8/Unicode encoded file
         for I := 0 to High(Item.Results) do begin
-          P := High(iconCompatibleNames) * Item.Results[I].Compatible div 100;
+          P := High(iconCompatGreenNames) * Item.Results[I].Compatible div 100;
           if (P = 0) and (Item.Results[I].Compatible <> 0) then
             P := 1
-          else if (P = High(iconCompatibleNames)) and (Item.Results[I].Compatible <> 100) then
-            P := High(iconCompatibleNames) - 1;
+          else if (P = High(iconCompatGreenNames)) and (Item.Results[I].Compatible <> 100) then
+            P := High(iconCompatGreenNames) - 1;
 
-          if (Item.Results[I].Compatible<>100) and (CodepageFilter=cpfComplete) then
-            Continue
-          else
-          if (Item.Results[I].Compatible = 0) and (CodepageFilter=cpfPartial) then
-            Continue;
+          // Always ensure Preferred Codepage are in list regardless of filter
+          if (Item.Results[I].Codepage <> Item.Preferred) then begin
+            if (Item.Results[I].Compatible<>100) and (CodepageFilter=cpfComplete) then
+              Continue
+            else
+            if (Item.Results[I].Compatible = 0) and (CodepageFilter=cpfPartial) then
+              Continue;
+          end;
           { permit incompatible Codepages }
 
           L:=lvCodepageList.Items.Add;
@@ -604,13 +611,6 @@ begin
           L.ImageIndex:=P;
           end;
       end;
-(*      weCodepage : begin
-       // File is not UTF-8 so must be Codepage encoded
-        { TODO 9 -cDevel Implement Codepage List for Codepage encoded files. }
-        L:=lvCodepageList.Items.Add;
-        L.ImageIndex:=0;
-        L.Caption:=GetTranslation(K+'Not_implemented/Caption', 'Not implemented');
-      end;     *)
     end;
     lvCodepageList.Enabled:=True;
   end else begin
@@ -850,7 +850,7 @@ begin
   pmListMode.Images:=IconTheme.ButtonEnabled;
 
   lvFileList.SmallImages:=ilFileTypeColor;
-  lvCodepageList.SmallImages:=ilCompatibleColor;
+  lvCodepageList.SmallImages:=ilCompatGreenColor;
 end;
 
 procedure TfMain.UpdateCodepageViewLabel;
