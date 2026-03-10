@@ -126,6 +126,17 @@ implementation
 
 uses TaskMngr;
 
+
+procedure dlg(Message : String); overload;
+begin
+  LogMessage(vbCritical, Message);
+end;
+
+procedure dlg(Message : String; I : Int64); overload;
+begin
+  LogMessage(vbCritical, Message, I);
+end;
+
 type
 
   { TWitchAnalyzeThread }
@@ -240,13 +251,29 @@ begin
 end;
 
 procedure TWitchAnalyzeThread.Completed;
+var
+  I : Integer;
+  S : String;
 begin
   FWitchItem.FLineEndings:=LineEndings;
   FWitchItem.FEndsWithBlank:=FEndsWithBlank;
-  FWitchItem.FResults:=FResults;
+  FWitchItem.FResults:=Copy(FResults);
   FWitchItem.FLocale:=Flocale;
   FWitchItem.FPreferred:=FPreferred;
   FWitchItem.FDetected:=FDetected;
+  if FEncoding = weCodePage then
+  if VerboseLevel > vbVerbose then begin
+    S:=TAB+'[Locale: ' + FLocale + ', Preferred: ' + IntToStr(FPreferred) + ', Detected: '+IntToStr(FDetected) + ']' + LF;
+    for I := 0 to High(FResults) do begin
+        Cat(S, Tab+'Codepage: ' + IntToStr(FResults[I].Codepage) + LF);
+        Cat(S, Tab2+'Characters: ' + IntToStr(FResults[I].Characters) + LF);
+        Cat(S, Tab2+'ASCII: ' + IntToStr(FResults[I].ASCII) + LF);
+        Cat(S, Tab2+'Unicode: ' + IntToStr(FResults[I].Unicode) + LF);
+        Cat(S, Tab2+'Converted: ' + IntToStr(FResults[I].Converted) + LF);
+        Cat(S, Tab2+'Compatible: ' + IntToStr(FResults[I].Compatible) + LF);
+      end;
+    LogMessage(vbNormal,'Analysis Results for: ' + FWitchItem.FileName+  LF + S);
+  end;
   FWitch.ThreadComplete(Self);
 end;
 
@@ -334,31 +361,29 @@ begin
 
     try
       A :=TCodepageToUTF8.Create;
-      for I := 0 to High(CPL) do begin
-       A.Clear;
-       A.Codepage:=CPL[I];
-       A.ControlCodes:=False; // Don't worry about ASCII control codes
-       A.Expanded:=False;     // Don't bother expanding TABS
-       A.Source:=S;
-       A.Codepage:=CPL[I];
-       A.Source:=S;
-       A.Convert;
-       // Just setting it, going to repurpose a couple fields.
-       // Going to use Unicode for Word Count, Converted for Most Words found.
-       // Then later, adjust compatibility for how compatible we think this one is.
-       FResults[I]:=A.Results;
-       FResults[I].Unicode:=DetectLocale(RawByteString(A.Converted), Stats); // total probable words
-       if FResults[I].Unicode > 0 then begin
-         FResults[I].Converted:=PasExt.Maximum(Stats); // Highest value in array
-         if FResults[I].Converted>BestScore then begin
-           BestCP:=CPL[I];
-           BestScore:=FResults[I].Converted;
-           BestLocale:=PasExt.Maximum(Stats, True); // Index of Highest value in array.
-         end;
-       end else begin
-         FResults[I].Converted:=0;
-         FResults[I].Compatible:=0;
-       end;
+      for I := 0 to  High(CPL) do begin
+        A.Clear;
+        A.Codepage:=CPL[I];
+        A.ControlCodes:=False; // Don't worry about ASCII control codes
+        A.Expanded:=False;     // Don't bother expanding TABS
+        A.Source:=S;
+        A.Convert;
+        // Just setting it, going to repurpose a couple fields.
+        // Going to use Unicode for Word Count, Converted for Most Words found.
+        // Then later, adjust compatibility for how compatible we think this one is.
+        FResults[I]:=A.Results;
+        FResults[I].Unicode:=DetectLocale(RawByteString(A.Converted), Stats); // total probable words
+        if FResults[I].Unicode > 0 then begin
+          FResults[I].Converted:=PasExt.Maximum(Stats); // Highest value in array
+          if FResults[I].Converted>BestScore then begin
+            BestCP:=CPL[I];
+            BestScore:=FResults[I].Converted;
+            BestLocale:=PasExt.Maximum(Stats, True); // Index of Highest value in array.
+          end;
+        end else begin
+          FResults[I].Converted:=0;
+          FResults[I].Compatible:=0;
+        end;
       end;
       if BestLocale < 0 then begin
         FDetected:=-1;

@@ -582,7 +582,7 @@ begin
          L.Caption:=GetTranslation(K+'Binary_data/Caption', 'Binary File');
          L.ImageIndex:=idxGeneralError;
        end;
-      weUnicode : begin
+      weUnicode, weCodepage : begin
         // UTF-8/Unicode encoded file
         for I := 0 to High(Item.Results) do begin
           P := High(iconCompatibleNames) * Item.Results[I].Compatible div 100;
@@ -604,13 +604,13 @@ begin
           L.ImageIndex:=P;
           end;
       end;
-      weCodepage : begin
+(*      weCodepage : begin
        // File is not UTF-8 so must be Codepage encoded
         { TODO 9 -cDevel Implement Codepage List for Codepage encoded files. }
         L:=lvCodepageList.Items.Add;
         L.ImageIndex:=0;
         L.Caption:=GetTranslation(K+'Not_implemented/Caption', 'Not implemented');
-      end;
+      end;     *)
     end;
     lvCodepageList.Enabled:=True;
   end else begin
