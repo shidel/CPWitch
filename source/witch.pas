@@ -408,6 +408,7 @@ procedure TWitchAnalyzeThread.AnalyzeASCII;
 var
   S : RawByteString;
 begin
+  AnalyzeLineEndings;
   S:=NoComments;
   FLocale:=DetectLocale(S);
 end;

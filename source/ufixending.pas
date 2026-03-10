@@ -113,7 +113,7 @@ var
 begin
   Result:=True;
   if FileLoad(FileName, Data) <> 0 then begin
-    // User delete file or something
+    LogMessage(vbMinimal, 'Could not locate file "' + FileName + '" to correct endings');
     Exit;
   end;
   case DetectLineEndings(Data, leCRLF) of
@@ -130,6 +130,7 @@ begin
       end;
     end;
   until R=0;
+  LogMessage(vbVerbose, 'Corrected line endings for: ' + FriendlyPath(AppBasePath, FileName));
 end;
 
 initialization
