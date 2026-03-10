@@ -80,6 +80,8 @@ var
   procedure MergeDictionaries;
   function DetectLocale(S : RawByteString; out Stats : TArrayOfInt32) : Int32; overload;
   function DetectLocale(S : RawByteString) : String; overload;
+  function MasterLocaleCount : integer;
+  function UserLocaleOffset : integer;
 
 implementation
 
@@ -546,6 +548,16 @@ begin
   if P >= Length(MasterLocales) then
     P:=P- Length(MasterLocales) + LocaleOffset;
   Result:=MasterDictionary.Locale[P];
+end;
+
+function MasterLocaleCount: integer;
+begin
+  Result:=Length(MasterLocales);
+end;
+
+function UserLocaleOffset: integer;
+begin
+  Result:=LocaleOffset;
 end;
 
 initialization

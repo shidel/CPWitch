@@ -36,6 +36,7 @@ type
   private
     FAnalyzed: boolean;
     FAnalyzing: boolean;
+    FDetected: integer;
     FLocale: String;
     FEncoding: TWitchEncoding;
     FEndsWithBlank: boolean;
@@ -73,6 +74,7 @@ type
     property Results : TCodepageResults read FResults;
     property Locale : String read FLocale; // Detected Language
     property Preferred : integer read FPreferred; // Preferred Codepage
+    property Detected: integer read FDetected; // Detected probable Codepage
     property EndsWithBlank : boolean read FEndsWithBlank;
     function AsCodePage(Codepage : integer; Convert : boolean = true) : TUTF8ToCodepage;
     function AsUnicode(Codepage : integer; Convert : boolean = true) : TCodepageToUTF8;
@@ -130,6 +132,7 @@ type
 
   TWitchAnalyzeThread=class(TThread)
   private
+    FDetected: integer;
     FEncoding: TWitchEncoding;
     FEndsWithBlank: boolean;
     FLineEndings: TLineEndings;
@@ -146,6 +149,7 @@ type
     procedure Execute; override;
     procedure Completed;
     function NoComments : RawByteString;
+    procedure AnalyzeLineEndings;
     procedure AnalyzeUTF8;
     procedure AnalyzeCP;
     procedure AnalyzeASCII;
@@ -161,6 +165,7 @@ type
     property EndsWithBlank : boolean read FEndsWithBlank;
     property Locale : RawByteString read FLocale;
     property Preferred : integer read FPreferred;
+    property Detected: integer read FDetected;
   end;
 
 { TWitchAnalyzeThread }
@@ -195,11 +200,14 @@ begin
     Sleep(100);
   {$ENDIF}
 
+  // Initial "Unknown" state
   FLineEndings:=leCRLF;
   FEndsWithBlank:=False;
   FEncoding:=weNone;
   FLocale:='';
   FPreferred:=-1;
+  FDetected:=-1;
+  FResults:=[];
 
   // Test for characters above ASCII 127
   for I := 1 to Length(FText) do
@@ -209,18 +217,6 @@ begin
     end else if Byte(FText[I]) > 127 then begin
       FEncoding:=weCodepage;
     end;
-
-  if (FEncoding <> weBinary) then begin
-    FLineEndings:=DetectLineEndings(FText, FLineEndings);
-    case FLineEndings of
-      leCRLF : if (Length(FText) > 1) then
-        FEndsWithBlank:=Copy(FText, Length(FText) -1, 2) = CRLF;
-      leLF : if Length(FText) > 0 then
-        FEndsWithBlank:=Copy(FText, Length(FText), 1) = LF;
-      leCR : if Length(FText) > 0 then
-        FEndsWithBlank:=Copy(FText, Length(FText), 1) = CR;
-    end;
-  end;
 
   // Now if there are, see if it is Codepage or UTF-8.
   if (FEncoding = weCodepage) then begin
@@ -247,9 +243,10 @@ procedure TWitchAnalyzeThread.Completed;
 begin
   FWitchItem.FLineEndings:=LineEndings;
   FWitchItem.FEndsWithBlank:=FEndsWithBlank;
-  FWitchItem.FResults:=Results;
+  FWitchItem.FResults:=FResults;
   FWitchItem.FLocale:=Flocale;
   FWitchItem.FPreferred:=FPreferred;
+  FWitchItem.FDetected:=FDetected;
   FWitch.ThreadComplete(Self);
 end;
 
@@ -282,11 +279,27 @@ begin
   end;
 end;
 
+procedure TWitchAnalyzeThread.AnalyzeLineEndings;
+begin
+  FLineEndings:=leCRLF;
+  if (FEncoding = weBinary) then Exit;
+  FLineEndings:=DetectLineEndings(FText, FLineEndings);
+  case FLineEndings of
+    leCRLF : if (Length(FText) > 1) then
+      FEndsWithBlank:=Copy(FText, Length(FText) -1, 2) = CRLF;
+    leLF : if Length(FText) > 0 then
+      FEndsWithBlank:=Copy(FText, Length(FText), 1) = LF;
+    leCR : if Length(FText) > 0 then
+      FEndsWithBlank:=Copy(FText, Length(FText), 1) = CR;
+  end;
+end;
+
 procedure TWitchAnalyzeThread.AnalyzeUTF8;
 var
   A : TUTF8Analyze;
   S : RawByteString;
 begin
+  AnalyzeLineEndings;
   S:=NoComments;
   A:=TUTF8Analyze.Create(ToBytes(S));
   FResults:=A.Results;
@@ -295,8 +308,100 @@ begin
 end;
 
 procedure TWitchAnalyzeThread.AnalyzeCP;
+var
+  I : Integer;
+  A : TCodepageToUTF8;
+  S : RawByteString;
+  CPL : TArrayOfInteger;
+  LC : TLocale;
+  BestCP,
+  BestLocale,
+  BestScore : Integer;
+  Stats: TArrayOfInt32;
 begin
-  { TODO 9 -cDevel Witch analyze Codepage. Requires Language Dictionaries. }
+  try
+    AnalyzeLineEndings;
+    S:=NoComments;
+    if Length(S) > 8192 then // Cap size to process for detection. It will likely
+      SetLength(S, 8192);    // cut a word. But, that should not skew results.
+    CPL:=CodepageList;
+
+    SetLength(FResults, Length(CPL));
+    BestLocale:=-1;
+    BestScore:=-1;
+    BestCP:=-1;
+    FLocale:='';
+
+    try
+      A :=TCodepageToUTF8.Create;
+      for I := 0 to High(CPL) do begin
+       A.Clear;
+       A.Codepage:=CPL[I];
+       A.ControlCodes:=False; // Don't worry about ASCII control codes
+       A.Expanded:=False;     // Don't bother expanding TABS
+       A.Source:=S;
+       A.Codepage:=CPL[I];
+       A.Source:=S;
+       A.Convert;
+       // Just setting it, going to repurpose a couple fields.
+       // Going to use Unicode for Word Count, Converted for Most Words found.
+       // Then later, adjust compatibility for how compatible we think this one is.
+       FResults[I]:=A.Results;
+       FResults[I].Unicode:=DetectLocale(RawByteString(A.Converted), Stats); // total probable words
+       if FResults[I].Unicode > 0 then begin
+         FResults[I].Converted:=PasExt.Maximum(Stats); // Highest value in array
+         if FResults[I].Converted>BestScore then begin
+           BestCP:=CPL[I];
+           BestScore:=FResults[I].Converted;
+           BestLocale:=PasExt.Maximum(Stats, True); // Index of Highest value in array.
+         end;
+       end else begin
+         FResults[I].Converted:=0;
+         FResults[I].Compatible:=0;
+       end;
+      end;
+      if BestLocale < 0 then begin
+        FDetected:=-1;
+        FPreferred:=-1;
+      end else begin
+       FDetected:=BestCP;
+       // convert BestLocale Index into Locale String
+        if BestLocale >= MasterLocaleCount then
+          BestLocale:=BestLocale-MasterLocaleCount+UserLocaleOffset;
+        if Assigned(MasterDictionary) then
+          FLocale:=MasterDictionary.Locale[BestLocale];
+        // Lookup the appropriate codepage for that locale
+        if Codepages.Locale(FLocale, LC) then
+          FPreferred:=LC.Codepage;
+      end;
+      for I := 0 to High(FResults) do
+        if FResults[I].Unicode > 0 then begin
+          // With math rounding errors and such only show 100 for perfect match
+          if BestScore = FResults[I].Converted then
+            FResults[I].Compatible:=100
+          else begin
+            FResults[I].Compatible := (FResults[I].Converted * 100) div BestScore;
+            // Cap unperfect match at 99%
+            if FResults[I].Compatible > 99 then
+              FResults[I].Compatible:=99
+            else
+            // Minimum umperfect match of 1%
+            if FResults[I].Compatible < 1 then
+              FResults[I].Compatible:=1;
+          end;
+        end;
+    finally
+      A.Free;
+    end;
+  except
+    FEncoding:=weBinary; // Not supported, error, etc.
+    FLocale:='';
+    FDetected:=-1;
+    FPreferred:=-1;
+    FLineEndings:=leCRLF;
+    FResults:=[];
+  end;
+
 end;
 
 procedure TWitchAnalyzeThread.AnalyzeASCII;
