@@ -20,8 +20,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="262"/>
-        <CursorPos X="25" Y="275"/>
+        <CursorPos X="21" Y="275"/>
         <FoldState Value=" TL00405 p0vc21074 TCQG3 T8jR4R021 T3lA03746 plSo6047 pjWk9064]9Yk70C]RifjO0l2]IAkK0p31113]zPlPpY0 T1lB02412451215 pkIrF05[:4N]?97 pjRke0v3]9XlN0902[:7ian6]:6lS[J4G pa,T016 PElB]O0lXc81141[.4CpZILD piYnfeAA]I3j8k9B[R4iMF58235218 PjWocG TMrJ21011C261 PCrQ2~"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
@@ -90,9 +89,9 @@
         <Filename Value="witch.pas"/>
         <UnitName Value="Witch"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="369"/>
-        <CursorPos X="61" Y="383"/>
-        <FoldState Value=" T3l00422376 pkEpU06d"/>
+        <TopLine Value="104"/>
+        <CursorPos X="11" Y="127"/>
+        <FoldState Value=" T3l004224 pkPmJ06236 pjDkB06p"/>
         <UsageCount Value="102"/>
         <Loaded Value="True"/>
       </Unit>
@@ -137,8 +136,8 @@
         <UnitName Value="Dictionary"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="374"/>
-        <CursorPos Y="562"/>
+        <TopLine Value="79"/>
+        <CursorPos X="61" Y="102"/>
         <FoldState Value=" T3jG068 piZ]9W3]9XjU0E02412 Pkcl10@"/>
         <UsageCount Value="101"/>
         <Loaded Value="True"/>
@@ -150,7 +149,7 @@
         <TopLine Value="553"/>
         <CursorPos X="14" Y="584"/>
         <FoldState Value=" T3kR079 piejW06113 pj8jU0L4152]F2436 poPs7035]STk30=119 Pj6l30#"/>
-        <UsageCount Value="83"/>
+        <UsageCount Value="82"/>
       </Unit>
       <Unit>
         <Filename Value="udictedit.pas"/>
@@ -168,7 +167,7 @@
         <Filename Value="mpla/taskmngr.pp"/>
         <UnitName Value="TaskMngr"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="42"/>
+        <TopLine Value="162"/>
         <CursorPos Y="59"/>
         <UsageCount Value="10"/>
       </Unit>
