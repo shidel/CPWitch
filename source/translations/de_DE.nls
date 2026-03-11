@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CONFIG Name="Deutsch" Language="de_DE">
+<CONFIG Language="de_DE">
   <Translation>
-    <Revision_0 Date="2026-02-17" Contributor="Google Gemini"/>
+    <Revision_0 Date="2026-03-11" Contributor="Google Gemini"/>
   </Translation>
   <Application>
     <ModalButtons>
-      <Ok Value="Ok"/>
+      <Ok Value="OK"/>
       <Cancel Value="Abbrechen"/>
       <Yes Value="Ja"/>
       <No Value="Nein"/>
@@ -21,11 +21,11 @@
       <File>
         <Read>
           <Caption Value="Dateilesefehler"/>
-          <Message Value="Fehler #%1:s (%2:s) trat beim Lesen der Datei &quot;%0:s&quot; auf."/>
+          <Message Value="Fehler #%1:s (%2:s) ist beim Lesen der Datei &quot;%0:s&quot; aufgetreten."/>
         </Read>
         <Write>
           <Caption Value="Dateischreibfehler"/>
-          <Message Value="Fehler #%1:s (%2:s) trat beim Schreiben in die Datei &quot;%0:s&quot; auf."/>
+          <Message Value="Fehler #%1:s (%2:s) ist beim Schreiben in die Datei &quot;%0:s&quot; aufgetreten."/>
         </Write>
       </File>
       <Codes>
@@ -33,15 +33,15 @@
         <ec0 Value="Kein Fehler"/>
         <ec2 Value="Datei nicht gefunden"/>
         <ec3 Value="Pfad nicht gefunden"/>
-        <ec4 Value="Zu viele offene Dateien"/>
+        <ec4 Value="Zu viele Dateien offen"/>
         <ec5 Value="Zugriff verweigert"/>
         <ec6 Value="Ungültiges Dateihandle"/>
         <ec12 Value="Ungültiger Zugriffsmodus"/>
         <ec17 Value="Umbenennen über Gerätegrenzen hinweg nicht möglich"/>
-        <ec100 Value="Disk-Lesefehler"/>
-        <ec101 Value="Disk-Schreibfehler"/>
+        <ec100 Value="Lesefehler auf dem Datenträger"/>
+        <ec101 Value="Schreibfehler auf dem Datenträger"/>
         <ec102 Value="Datei nicht zugewiesen"/>
-        <ec103 Value="Datei nicht geöffnet"/>
+        <ec103 Value="Datei nicht offen"/>
         <ec104 Value="Datei nicht zum Lesen geöffnet"/>
         <ec105 Value="Datei nicht zum Schreiben geöffnet"/>
         <ec106 Value="Ungültiges numerisches Format"/>
@@ -61,8 +61,8 @@
       <LongDateFormat Value="d. mmmm yyyy"/>
       <TimeAMString Value=""/>
       <TimePMString Value=""/>
-      <ShortTimeFormat Value="HH:mm"/>
-      <LongTimeFormat Value="HH:mm:ss"/>
+      <ShortTimeFormat Value="hh:nn"/>
+      <LongTimeFormat Value="hh:nn:ss"/>
       <ShortMonthNames>
         <Index_1 Value="Jan"/>
         <Index_2 Value="Feb"/>
@@ -118,27 +118,27 @@
         <actOpen Hint="Textdatei öffnen." Caption="Datei öffnen..."/>
         <actPreferences Hint="Codepage Witch Einstellungen anzeigen oder ändern." Caption="Einstellungen..."/>
         <actOnlineUpdate Hint="Nach Updates für Codepage Witch suchen." Caption="Update-Check..."/>
-        <actDebugLog Hint="Das Debugging-Log anzeigen." Caption="Debug-Log..."/>
+        <actDebugLog Hint="Debugging-Protokoll anzeigen." Caption="Fehlerprotokoll..."/>
         <actListAll Hint="Alle bekannten Codepages auflisten." Caption="Alle bekannten"/>
-        <actListPartial Hint="Teilweise kompatible Codepages auflisten." Caption="Alle möglichen"/>
+        <actListPartial Hint="Teilweise kompatible Codepages auflisten." Caption="Jede mögliche"/>
         <actListCompatible Hint="Nur vollständig kompatible Codepages auflisten." Caption="Nur kompatible"/>
-        <actCodepageFilter Hint="Die Codepage-Liste filtern." Caption="Codepage-Filter"/>
-        <actExportASCII Hint="Textdatei als 7-BIT ASCII exportieren, die keine spezifische Codepage oder Unicode-Zeichen erfordert." Caption="ASCII exportieren..."/>
-        <actExportCodepage Hint="Textdatei im Codepage-Format exportieren." Caption="Codepage exportieren..."/>
-        <actExportUnicode Hint="Textdatei im UTF-8-Format exportieren." Caption="UTF-8 exportieren..."/>
-        <actEditASCII Hint="Einfache 7-BIT ASCII-Datei bearbeiten." Caption="ASCII bearbeiten..."/>
+        <actCodepageFilter Hint="Codepage-Liste filtern." Caption="Codepage-Filter"/>
+        <actExportASCII Hint="Textdatei als 7-BIT-ASCII exportieren, die keine spezifische Codepage oder Unicode-Zeichen erfordert." Caption="ASCII exportieren..."/>
+        <actExportCodepage Hint="In Codepage-Format kodierte Textdatei exportieren." Caption="Codepage exportieren..."/>
+        <actExportUnicode Hint="In UTF-8-Format kodierte Textdatei exportieren." Caption="UTF-8 exportieren..."/>
+        <actEditASCII Hint="Einfache 7-BIT-ASCII-Datei bearbeiten." Caption="ASCII bearbeiten..."/>
         <actEditCodepage Hint="Codepage-Datei bearbeiten." Caption="Codepage bearbeiten..."/>
         <actEditUnicode Hint="Unicode-Textdatei bearbeiten." Caption="Unicode bearbeiten..."/>
         <actExportNone Hint="Dieser Dateityp kann nicht exportiert werden." Caption="Kein Export"/>
-        <actClose Hint="Die aktuelle Textdatei schließen." Caption="Datei schließen"/>
+        <actClose Hint="Aktuelle Textdatei schließen." Caption="Datei schließen"/>
         <actCloseAll Hint="Alle offenen Textdateien schließen." Caption="Alle schließen"/>
-        <actEditNone Hint="Dieser Dateityp kann nicht bearbeitet werden." Caption="Kein Editor"/>
-        <actDictionary Hint="Open user dictionary editor." Caption="actDictionary"/>
+        <actEditNone Hint="Kein Editor für diesen Dateityp vorhanden." Caption="Kein Editor"/>
+        <actDictionary Hint="Benutzerwörterbuch-Editor öffnen." Caption="Wörterbuch"/>
       </alMain>
       <pBody>
         <pFileList>
           <pFileListLabel>
-            <lbFileList Caption="Text Files"/>
+            <lbFileList Caption="Textdateien"/>
           </pFileListLabel>
         </pFileList>
         <pCodepageList>
@@ -146,24 +146,24 @@
             <lbCodepageLabel Caption="Codepages"/>
           </pCodepageListLabel>
           <lvCodepageList>
-            <Analyzing Caption="Analyzing"/>
-            <Not_implemented Caption="Not implemented"/>
-            <Any_Codepage Caption="Any Codepage"/>
-            <Binary_data Caption="Binary File"/>
+            <Analyzing Caption="Analysieren"/>
+            <Not_implemented Caption="Nicht implementiert"/>
+            <Any_Codepage Caption="Jede Codepage"/>
+            <Binary_data Caption="Binärdatei"/>
           </lvCodepageList>
         </pCodepageList>
         <pViewers>
           <pViewUnicode>
             <pViewUnicodeLabel>
-              <lbUnicodeViewLabel Caption="Viewed as Unicode"/>
+              <lbUnicodeViewLabel Caption="Als Unicode angezeigt"/>
             </pViewUnicodeLabel>
             <Unsupported_file>
-              <Binary Text="Binary data files are not supported."/>
+              <Binary Text="Binäre Datendateien werden nicht unterstützt."/>
             </Unsupported_file>
           </pViewUnicode>
           <pCodepage>
             <pViewCodepageLabel>
-              <lbViewCodepageLabel Value="Viewed as Codepage %s"/>
+              <lbViewCodepageLabel Value="Als Codepage %s angezeigt"/>
             </pViewCodepageLabel>
           </pCodepage>
         </pViewers>
@@ -192,7 +192,7 @@
         <nl_NL Text="Niederländisch (Niederlande)"/>
         <no_NO Text="Norwegisch (Norwegen)"/>
         <pl_PL Text="Polnisch (Polen)"/>
-        <pl_MAZ Text="Polnisch (Masowien)"/>
+        <pl_MAZ Text="Polnisch (Masowisch)"/>
         <pt_BR Text="Portugiesisch (Brasilien)"/>
         <pt_PT Text="Portugiesisch (Portugal)"/>
         <ru_RU Text="Russisch (Russland)"/>
@@ -226,41 +226,21 @@
         <Binary Caption="Binär"/>
       </statBar>
       <ExportUnicodeDialog>
-        <Title Caption="Export file as UTF-8"/>
-        <File Filters="All Files (*.*)|*.*|Unicode Files (*.UTF-8)|*.UTF-8"/>
+        <Title Caption="Datei als UTF-8 exportieren"/>
+        <File Filters="Alle Dateien (*.*)|*.*|Unicode-Dateien (*.UTF-8)|*.UTF-8"/>
       </ExportUnicodeDialog>
       <OpenFilesDialog>
-        <Title Caption="Open existing file(s)"/>
-        <File Filters="All Files (*.*)|*.*|Unicode Files (*.UTF-8)|*.UTF-8"/>
+        <Title Caption="Vorhandene Datei(en) öffnen"/>
+        <File Filters="Alle Dateien (*.*)|*.*|Unicode-Dateien (*.UTF-8)|*.UTF-8"/>
       </OpenFilesDialog>
       <ExportCodepageDialog>
-        <Title Caption="Export file as Codepage %s"/>
-        <File Filters="All Files (*.*)|*.*"/>
+        <Title Caption="Datei als Codepage %s exportieren"/>
+        <File Filters="Alle Dateien (*.*)|*.*"/>
       </ExportCodepageDialog>
       <ExportASCIIDialog>
-        <Title Caption="Save file as simple 7-bit ASCII"/>
-        <File Filters="All Files (*.*)|*.*"/>
+        <Title Caption="Datei als einfaches 7-Bit ASCII speichern"/>
+        <File Filters="Alle Dateien (*.*)|*.*"/>
       </ExportASCIIDialog>
-      <OpenFiles>
-        <Title Caption="Open existing file(s)"/>
-        <File Filters="All Files|*;*.*"/>
-      </OpenFiles>
-      <pFileList>
-        <pFileListLabel>
-          <lbFileList Caption="Textdateien"/>
-        </pFileListLabel>
-      </pFileList>
-      <pCodepageList>
-        <pCodepageListLabel>
-          <lbCodepageLabel Caption="Codepages"/>
-        </pCodepageListLabel>
-        <lvCodepageList>
-          <Analyzing Caption="Analysiere"/>
-          <Any_Codepage Caption="Beliebige Codepage"/>
-          <Not_implemented Caption="Nicht implementiert"/>
-          <Binary_data Caption="Binärdatei"/>
-        </lvCodepageList>
-      </pCodepageList>
       <pViewers>
         <pViewUnicode>
           <pViewUnicodeLabel>
@@ -279,28 +259,26 @@
     </fMain>
     <fDictEditForm Caption="Wörterbuch-Aktualisierung">
       <pTop>
-        <cbLocale Hint="Locale for the words to add to the dictionary.">
-          <Items Index_0="ar_SA" Index_1="bg_BG" Index_2="cs_CZ" Index_3="da_DK" Index_4="de_CH" Index_5="de_DE" Index_6="el_GR" Index_7="en_US" Index_8="eo" Index_9="es_ES" Index_10="et_EE" Index_11="fil_PH" Index_12="fi_FI" Index_13="fr_FR" Index_14="haw_US" Index_15="he_IL" Index_16="hu_HU" Index_17="id_ID" Index_18="is_IS" Index_19="it_IT" Index_20="ja_JP" Index_21="ko_KR" Index_22="la" Index_23="lt_LT" Index_24="lv_LV" Index_25="nb_NO" Index_26="nl_NL" Index_27="no_NO" Index_28="pl_MAZ" Index_29="pl_PL" Index_30="pt_BR" Index_31="pt_PT" Index_32="ro_RO" Index_33="ru_RU" Index_34="sk_SK" Index_35="sl_SI" Index_36="sm_WS" Index_37="sr_RS" Index_38="sv_SE" Index_39="th_TH" Index_40="tr_TR" Index_41="uk_UA" Index_42="vi_VN" Index_43="zh_CN" Index_44="fr_CA" Index_45="tl_PH" Index_46="nn_NO"/>
-        </cbLocale>
-        <lbLocale Hint="Select the Locale for the words to add to the dictionary." Caption="Gebietsschema:"/>
-        <btnInvert Hint="Toggle all slecetions." Caption="Invertieren"/>
-        <btnNone Hint="Unselect all words." Caption="Keine"/>
+        <cbLocale Hint="Gebietsschema für die Wörter, die zum Wörterbuch hinzugefügt werden sollen."/>
+        <lbLocale Hint="Wählen Sie das Gebietsschema für die Wörter aus, die zum Wörterbuch hinzugefügt werden sollen." Caption="Gebietsschema:"/>
+        <btnInvert Hint="Alle Auswahlen umkehren." Caption="Invertieren"/>
+        <btnNone Hint="Alle Wörter abwählen." Caption="Keine"/>
       </pTop>
       <pButtons>
-        <btnSave Hint="Save the changes to the dictionary." Caption="Speichern"/>
-        <btnReload Hint="Reload the dinctionary and forget any unsaved changes." Caption="Neu laden"/>
-        <btnAdd Hint="Add the selected words to the dictionary for the selected locale." Caption="Zum Wörterbuch hinzufügen"/>
-        <btnMerge Hint="Merge the User dictionary words into the Master dictionary." Caption="Merge"/>
+        <btnSave Hint="Änderungen im Wörterbuch speichern." Caption="Speichern"/>
+        <btnReload Hint="Wörterbuch neu laden und alle ungespeicherten Änderungen verwerfen." Caption="Neu laden"/>
+        <btnAdd Hint="Die ausgewählten Wörter für das gewählte Gebietsschema zum Wörterbuch hinzufügen." Caption="Zum Wörterbuch hinzufügen"/>
+        <btnMerge Hint="Benutzerwörterbuch-Wörter in das Hauptwörterbuch zusammenführen." Caption="Zusammenführen"/>
       </pButtons>
     </fDictEditForm>
     <fOptionsDialog Caption="Codepage Witch Einstellungen">
       <pPages>
         <tsAbout Hint="Über diese Anwendung." Caption="Über">
-          <lbCopyright Caption="Copyright %s"/>
+          <lbCopyright Caption="Urheberrecht %s"/>
           <lbVersion Caption="Version %0:s (Build %1:s)"/>
-          <lbApplication Caption="Die &quot;%s&quot;"/>
+          <lbApplication Caption="Das &quot;%s&quot;"/>
         </tsAbout>
-        <tsGeneral Hint="Allgemeine Anwendungseinstellungen." Caption="Allgemein">
+        <tsGeneral Hint="Allgemeine Anwendungseinstellungen." Caption="Generell">
           <gbUserLanguage Caption="Benutzersprache">
             <cxLanguageChoice Default="(Standard)"/>
             <pLanguagePreferred>
@@ -309,53 +287,52 @@
             <lbLanguageSystem Caption="Systemsprache: %s"/>
           </gbUserLanguage>
           <gbMiscellaneous Caption="Verschiedenes">
-            <cbShowHints Caption="Hinweise beim Überfahren mit der Maus anzeigen."/>
-            <cbColorButtons Caption="Farbige Symbole in der Symbolleiste verwenden."/>
+            <cbShowHints Caption="Hinweise beim Mouseover anzeigen."/>
+            <cbColorButtons Caption="Farbige Schaltflächen in der Symbolleiste verwenden."/>
           </gbMiscellaneous>
           <gbOnlineUpdate Caption="Online-Update">
             <cbAutoCheck Caption="Automatisch nach Updates suchen"/>
             <pUpdateButton>
-              <btnUpdateCheck Hint="Den Online-Server nach dem neuesten Update abfragen." Caption="Jetzt prüfen..."/>
+              <btnUpdateCheck Hint="Online-Server auf das neueste Update überprüfen." Caption="Jetzt prüfen..."/>
             </pUpdateButton>
           </gbOnlineUpdate>
         </tsGeneral>
-        <tsSession Hint="Optionen bezüglich der Anwendungssitzungen." Caption="Sitzung">
+        <tsSession Hint="Optionen bezüglich Anwendungssitzungen." Caption="Sitzung">
           <gbSessionFiles Caption="Sitzungsdateien">
-            <cbReopenFiles Hint="Nicht geschlossene Dateien der vorherigen Sitzung erneut öffnen." Caption="Vorherige Dateien erneut öffnen."/>
+            <cbReopenFiles Hint="Nicht geschlossene Dateien aus der vorherigen Sitzung erneut öffnen." Caption="Vorherige Dateien erneut öffnen."/>
             <cbWarnMissing Hint="Warnen, wenn eine Datei aus der vorherigen Sitzung nicht existiert." Caption="Warnen, wenn fehlend."/>
-            <cbOpenExport Hint="Exportierte Dateien zur Überprüfung automatisch öffnen." Caption="Exportierte Dateien öffnen."/>
+            <cbOpenExport Hint="Exportdateien automatisch zur Überprüfung öffnen." Caption="Exportierte Dateien öffnen."/>
           </gbSessionFiles>
           <gbCodepage Caption="Codepage">
             <cbAutoSelectCP Hint="Bevorzugte Codepage für die Konvertierung automatisch auswählen." Caption="Codepage automatisch auswählen"/>
           </gbCodepage>
         </tsSession>
-        <tsEncoding Hint="Optionen für Ein- und Ausgabekodierung von Dateien." Caption="Kodierung">
-          <rgFileEnding Hint="Erfordern, dass Dateien mit einer Leerzeile enden." Caption="Dateien enden mit Zeilenumbruch">
-            <rbFileEndWhatever Hint="Alle Dateien können mit Text oder einer Leerzeile enden." Caption="Egal."/>
+        <tsEncoding Hint="Dateieingabe- und Ausgabe-Kodierungsoptionen." Caption="Kodierung">
+          <rgFileEnding Hint="Voraussetzen, dass Dateien auf einer Leerzeile enden müssen." Caption="Dateien enden mit neuer Zeile">
+            <rbFileEndWhatever Hint="Alle Dateien können mit Text oder einer Leerzeile enden." Caption="Nicht wichtig."/>
             <rbFileEndExport Hint="Sicherstellen, dass exportierte Dateien mit einer Leerzeile enden." Caption="Nur für Export sicherstellen."/>
-            <rbFileEndAll Hint="Erfordern, dass Originaldateien mit einer Leerzeile enden." Caption="Auf alle Textdateien anwenden."/>
+            <rbFileEndAll Hint="Voraussetzen, dass Originaldateien mit einer Leerzeile enden." Caption="Bei allen Textdateien erzwingen."/>
           </rgFileEnding>
         </tsEncoding>
-        <tsViewer Hint="Optionen für Unicode- und DOS-Viewer." Caption="Viewer">
+        <tsViewer Hint="Unicode- und DOS-Viewer-Optionen." Caption="Betrachter">
           <gbUnicodeView Caption="Unicode-Ansicht">
-            <lbUnicodeScale Caption="Schriftgröße %s%%"/>
+            <lbUnicodeScale Caption="lbUnicodeScale"/>
             <tbUnicodeScale Caption="10"/>
-            <lbScaleOfUnicode Caption="Font scale %s%%"/>
-            <lbUnicodeScaling Caption="Font scale %s%%"/>
+            <lbScaleOfUnicode Caption="Schriftgröße %s%%"/>
           </gbUnicodeView>
           <gbDOSView Caption="DOS-Ansicht">
-            <lbDOSScale Caption="Schriftgröße %s%%"/>
+            <lbDOSScale Caption="lbDOSScale"/>
             <tbDOSScale Caption="1"/>
-            <lbScaleOfDOS Caption="Font scale %s%%"/>
+            <lbScaleOfDOS Caption="Schriftgröße %s%%"/>
           </gbDOSView>
-          <gbViewers Caption="Viewers">
-            <cbSingleViewer Hint="Only show a single file view pane in the main window." Caption="Single file viewer mode"/>
+          <gbViewers Caption="Betrachter">
+            <cbSingleViewer Hint="Nur ein Dateiansichtspanel im Hauptfenster anzeigen." Caption="Einzelner Betrachter-Modus"/>
           </gbViewers>
         </tsViewer>
       </pPages>
       <fLowerPanel>
         <fButtonPanel>
-          <btnAccept Hint="Alle Änderungen akzeptieren und anwenden." Caption="Übernehmen"/>
+          <btnAccept Hint="Änderungen akzeptieren und anwenden." Caption="Übernehmen"/>
           <btnCancel Hint="Alle Änderungen ignorieren." Caption="Abbrechen"/>
         </fButtonPanel>
       </fLowerPanel>
@@ -366,51 +343,36 @@
               <lbSections Caption="Optionen"/>
             </pSectionLabel>
           </pSectionsPanel>
-          <pPagesPanel>
-            <pPages>
-              <tsViewer>
-                <lbDOSScale Caption="Schriftgröße %s%%"/>
-                <lbUnicodeScale Caption="Schriftgröße %s%%"/>
-              </tsViewer>
-            </pPages>
-          </pPagesPanel>
         </fBodyPanel>
       </fMiddlePanel>
-      <tsViewer>
-        <gbUnicodeView>
-          <lbUnicodeScaling Caption="Font scale %s%%"/>
-        </gbUnicodeView>
-      </tsViewer>
     </fOptionsDialog>
-    <fLoggerViewForm Title="Save debug log as" Filter="Log Files (*.log)|All Files (*.*)" Caption="Debug-Log">
-      <LineCount Plural="%.0n Log-Einträge" Singular="%.0n Log-Eintrag"/>
+    <fLoggerViewForm Caption="Fehlerprotokoll">
+      <LineCount Plural="%.0n Protokolleinträge" Singular="%.0n Protokolleintrag"/>
       <pControls>
         <pButtons>
-          <btnClear Hint="Clear the current debug log." Caption="Löschen"/>
-          <btnSaveAs Hint="Save the debug log to a file." Caption="Speichern unter..."/>
+          <btnClear Hint="Aktuelles Fehlerprotokoll löschen." Caption="Löschen"/>
+          <btnSaveAs Hint="Fehlerprotokoll in einer Datei speichern." Caption="Speichern unter..."/>
         </pButtons>
         <pVerbose>
-          <cbVerbosity Hint="Select the verbosity and amount of debug logging messages. Please note this can consume a lot of memory and slow the program drastically.">
-            <Items Index_0="Kritisch" Index_1="Minimal" Index_2="Normal" Index_3="Detailliert" Index_4="Exzessiv"/>
+          <cbVerbosity Hint="Ausführlichkeit und Menge der Debug-Protokollmeldungen auswählen. Bitte beachten Sie, dass dies viel Speicher verbrauchen und das Programm drastisch verlangsamen kann.">
+            <Items Index_0="Kritisch" Index_1="Minimal" Index_2="Normal" Index_3="Ausführlich" Index_4="Übermäßig"/>
           </cbVerbosity>
           <lbVerbosity Caption="Ausführlichkeit:"/>
         </pVerbose>
       </pControls>
-      <SaveDialog>
-        <Title Caption="Save debug log as"/>
-        <File Filters="Log Files (*.log)|*.log|All Files (*.*)|*.*"/>
-      </SaveDialog>
-      <Title SaveDialog="Save debug log as"/>
-      <Filter SaveDialog="Log Files (*.log)|*.log|All Files (*.*)|*.*"/>
+      <SaveAsDialog>
+        <Title Caption="Fehlerprotokoll speichern unter"/>
+        <File Filters="Protokolldateien (*.log)|*.log|Alle Dateien (*.*)|*.*"/>
+      </SaveAsDialog>
     </fLoggerViewForm>
-    <fDiffLocaleDialog Caption="Conflicting Locale">
+    <fDiffLocaleDialog Caption="Gebietsschema-Konflikt">
       <fLowerPanel>
         <fButtonPanel>
-          <btnProceed Caption="Proceed"/>
-          <btnCancel Caption="Cancel"/>
+          <btnProceed Caption="Fortfahren"/>
+          <btnCancel Caption="Abbrechen"/>
         </fButtonPanel>
       </fLowerPanel>
-      <Message Text="The locale for this file is expected to be %s.&#xA;&#xA;Are you certian you wish to add to the dictionary under the %s locale?"/>
+      <Message Text="Das Gebietsschema für diese Datei wird als %s erwartet.&#xA;&#xA;Sind Sie sicher, dass Sie sie zum Wörterbuch unter dem Gebietsschema %s hinzufügen möchten?"/>
     </fDiffLocaleDialog>
     <fUpdateCheckDialog Caption="Update-Check">
       <fLowerPanel>
@@ -421,7 +383,7 @@
       </fLowerPanel>
       <Message>
         <Check Text="Suche nach verfügbaren Updates für &quot;%s&quot;, Version %s."/>
-        <Error Text="Es kann derzeit nicht festgestellt werden, ob Updates für &quot;%s&quot; verfügbar sind. Bitte versuchen Sie es später erneut."/>
+        <Error Text="Derzeit kann nicht festgestellt werden, ob Updates für &quot;%s&quot; verfügbar sind. Bitte versuchen Sie es später erneut."/>
         <None Text="Derzeit sind keine Updates für &quot;%s&quot; verfügbar. Bitte versuchen Sie es später erneut."/>
       </Message>
     </fUpdateCheckDialog>
@@ -437,7 +399,7 @@
         </fAuxPanel>
       </fLowerPanel>
       <Message>
-        <Note Text="Für die Version %1:s von &quot;%0:s&quot; wurden keine Versionshinweise bereitgestellt."/>
+        <Note Text="Für Version %1:s von &quot;%0:s&quot; sind keine Versionshinweise verfügbar."/>
       </Message>
     </fUpdateFoundDialog>
     <fUpdateDownloadDialog Caption="Update-Download">
@@ -460,21 +422,21 @@
         </fButtonPanel>
       </fLowerPanel>
       <Message>
-        <Downloaded Text="&quot;%s&quot; Version %s wurde heruntergeladen."/>
+        <Downloaded Text="&quot;%s&quot; Version %s heruntergeladen."/>
       </Message>
       <SaveAsDialog>
-        <Title Caption="Save update as"/>
-        <File Filters="Archive Files (*.zip)|*.log|All Files (*.*)|*.*"/>
+        <Title Caption="Update speichern unter"/>
+        <File Filters="Archivdateien (*.zip)|*.log|Alle Dateien (*.*)|*.*"/>
       </SaveAsDialog>
     </fUpdateSaveDialog>
-    <fCorrectFileEndingDialog Caption="Kein abschließender Zeilenumbruch">
+    <fCorrectFileEndingDialog Caption="Kein finales Zeilenende">
       <fLowerPanel>
         <fButtonPanel>
           <btnCorrect Caption="Korrigieren"/>
           <btnIgnore Caption="Ignorieren"/>
         </fButtonPanel>
       </fLowerPanel>
-      <Message Text="Die Datei &quot;%s&quot; endet nicht mit einer Leerzeile.&#xA;&#xA;Möchten Sie dies korrigieren, indem Sie einen abschließenden Zeilenumbruch am Ende der Datei hinzufügen?"/>
+      <Message Text="Die Datei &quot;%s&quot; endet nicht auf einer Leerzeile.&#xA;&#xA;Möchten Sie dies korrigieren, indem Sie ein finales Zeilenende am Dateiende hinzufügen?"/>
     </fCorrectFileEndingDialog>
     <fFileEditor Caption="Codepage Witch - %s">
       <btnCancel Caption="Abbrechen"/>

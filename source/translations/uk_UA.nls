@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CONFIG Name="Українська" Language="uk_UA">
+<CONFIG Language="uk_UA">
   <Translation>
-    <Revision_0 Date="2026-02-24" Contributor="Google Gemini"/>
+    <Revision_0 Date="2026-03-11" Contributor="Google Gemini"/>
   </Translation>
   <Application>
     <ModalButtons>
@@ -25,7 +25,7 @@
         </Read>
         <Write>
           <Caption Value="Помилка запису файлу"/>
-          <Message Value="Помилка #%1:s (%2:s) виникла під час запису у файл &quot;%0:s&quot;."/>
+          <Message Value="Помилка #%1:s (%2:s) виникла під час запису до файлу &quot;%0:s&quot;."/>
         </Write>
       </File>
       <Codes>
@@ -35,21 +35,21 @@
         <ec3 Value="Шлях не знайдено"/>
         <ec4 Value="Забагато відкритих файлів"/>
         <ec5 Value="Доступ заборонено"/>
-        <ec6 Value="Неправильний дескриптор файлу"/>
-        <ec12 Value="Неправильний режим доступу"/>
+        <ec6 Value="Недійсний дескриптор файлу"/>
+        <ec12 Value="Недійсний режим доступу"/>
         <ec17 Value="Неможливо перейменувати між пристроями"/>
         <ec100 Value="Помилка читання диска"/>
         <ec101 Value="Помилка запису диска"/>
         <ec102 Value="Файл не призначено"/>
         <ec103 Value="Файл не відкрито"/>
-        <ec104 Value="Файл не відкрито для читання"/>
-        <ec105 Value="Файл не відкрито для запису"/>
-        <ec106 Value="Неправильний числовий формат"/>
+        <ec104 Value="Файл не відкрито для введення"/>
+        <ec105 Value="Файл не відкрито для виведення"/>
+        <ec106 Value="Недійсний числовий формат"/>
         <ec150 Value="Диск захищено від запису"/>
       </Codes>
     </Error>
     <FormatSettings>
-      <CurrencyFormat Value="1"/>
+      <CurrencyFormat Value="3"/>
       <NegCurrFormat Value="8"/>
       <DecimalSeparator Value=","/>
       <CurrencyDecimals Value="2"/>
@@ -61,44 +61,44 @@
       <LongDateFormat Value="d mmmm yyyy 'р.'"/>
       <TimeAMString Value=""/>
       <TimePMString Value=""/>
-      <ShortTimeFormat Value="HH:mm"/>
-      <LongTimeFormat Value="HH:mm:ss"/>
+      <ShortTimeFormat Value="hh:nn"/>
+      <LongTimeFormat Value="hh:nn:ss"/>
       <ShortMonthNames>
         <Index_1 Value="січ"/>
         <Index_2 Value="лют"/>
         <Index_3 Value="бер"/>
-        <Index_4 Value="кві"/>
-        <Index_5 Value="тра"/>
-        <Index_6 Value="чер"/>
+        <Index_4 Value="квіт"/>
+        <Index_5 Value="трав"/>
+        <Index_6 Value="черв"/>
         <Index_7 Value="лип"/>
-        <Index_8 Value="сер"/>
+        <Index_8 Value="серп"/>
         <Index_9 Value="вер"/>
         <Index_10 Value="жов"/>
-        <Index_11 Value="лис"/>
-        <Index_12 Value="гру"/>
+        <Index_11 Value="лист"/>
+        <Index_12 Value="груд"/>
       </ShortMonthNames>
       <LongMonthNames>
-        <Index_1 Value="січень"/>
-        <Index_2 Value="лютий"/>
-        <Index_3 Value="березень"/>
-        <Index_4 Value="квітень"/>
-        <Index_5 Value="травень"/>
-        <Index_6 Value="червень"/>
-        <Index_7 Value="липень"/>
-        <Index_8 Value="серпень"/>
-        <Index_9 Value="вересень"/>
-        <Index_10 Value="жовтень"/>
-        <Index_11 Value="листопад"/>
-        <Index_12 Value="грудень"/>
+        <Index_1 Value="січня"/>
+        <Index_2 Value="лютого"/>
+        <Index_3 Value="березня"/>
+        <Index_4 Value="квітня"/>
+        <Index_5 Value="травня"/>
+        <Index_6 Value="червня"/>
+        <Index_7 Value="липня"/>
+        <Index_8 Value="серпня"/>
+        <Index_9 Value="вересня"/>
+        <Index_10 Value="жовтня"/>
+        <Index_11 Value="листопада"/>
+        <Index_12 Value="грудня"/>
       </LongMonthNames>
       <ShortDayNames>
-        <Index_1 Value="нд"/>
-        <Index_2 Value="пн"/>
-        <Index_3 Value="вт"/>
-        <Index_4 Value="ср"/>
-        <Index_5 Value="чт"/>
-        <Index_6 Value="пт"/>
-        <Index_7 Value="сб"/>
+        <Index_1 Value="Нд"/>
+        <Index_2 Value="Пн"/>
+        <Index_3 Value="Вт"/>
+        <Index_4 Value="Ср"/>
+        <Index_5 Value="Чт"/>
+        <Index_6 Value="Пт"/>
+        <Index_7 Value="Сб"/>
       </ShortDayNames>
       <LongDayNames>
         <Index_1 Value="неділя"/>
@@ -117,53 +117,53 @@
       <alMain>
         <actOpen Hint="Відкрити текстовий файл." Caption="Відкрити файл..."/>
         <actPreferences Hint="Переглянути або змінити налаштування Codepage Witch." Caption="Налаштування..."/>
-        <actOnlineUpdate Hint="Перевірити наявність оновлень для Codepage Witch." Caption="Оновлення..."/>
+        <actOnlineUpdate Hint="Перевірити наявність оновлень Codepage Witch." Caption="Перевірка оновлень..."/>
         <actDebugLog Hint="Переглянути журнал налагодження." Caption="Журнал налагодження..."/>
-        <actListAll Hint="Показати всі відомі кодування." Caption="Всі відомі"/>
-        <actListPartial Hint="Показати всі можливі кодування." Caption="Всі можливі"/>
-        <actListCompatible Hint="Показати лише повністю сумісні кодування." Caption="Лише сумісні"/>
+        <actListAll Hint="Показати всі відомі кодування." Caption="Усі відомі"/>
+        <actListPartial Hint="Показати частково сумісні кодування." Caption="Будь-які можливі"/>
+        <actListCompatible Hint="Показати лише повністю сумісні кодування." Caption="Тільки сумісні"/>
         <actCodepageFilter Hint="Фільтрувати список кодувань." Caption="Фільтр кодувань"/>
-        <actExportASCII Hint="Експортувати файл як 7-бітний ASCII (не потребує специфічних кодувань або символів Unicode)." Caption="Експорт в ASCII..."/>
-        <actExportCodepage Hint="Експортувати файл у форматі кодування." Caption="Експорт кодування..."/>
-        <actExportUnicode Hint="Експортувати файл у форматі UTF-8." Caption="Експорт в UTF-8..."/>
-        <actEditASCII Hint="Редагувати простий 7-бітний ASCII файл." Caption="Редагувати ASCII..."/>
-        <actEditCodepage Hint="Редагувати файл кодування." Caption="Редагувати кодування..."/>
+        <actExportASCII Hint="Експортувати текстовий файл як 7-бітний ASCII, який не потребує специфічних кодувань або символів Unicode." Caption="Експорт ASCII..."/>
+        <actExportCodepage Hint="Експортувати текстовий файл, закодований у форматі кодової сторінки." Caption="Експорт кодування..."/>
+        <actExportUnicode Hint="Експортувати текстовий файл, закодований у форматі UTF-8." Caption="Експорт UTF-8..."/>
+        <actEditASCII Hint="Редагувати простий 7-бітний файл ASCII." Caption="Редагувати ASCII..."/>
+        <actEditCodepage Hint="Редагувати файл із кодовою сторінкою." Caption="Редагувати кодування..."/>
         <actEditUnicode Hint="Редагувати текстовий файл Unicode." Caption="Редагувати Unicode..."/>
-        <actExportNone Hint="Цей тип файлу неможливо експортувати." Caption="Без експорту"/>
+        <actExportNone Hint="Неможливо експортувати цей тип файлу." Caption="Без експорту"/>
         <actClose Hint="Закрити поточний текстовий файл." Caption="Закрити файл"/>
         <actCloseAll Hint="Закрити всі відкриті текстові файли." Caption="Закрити все"/>
-        <actEditNone Hint="Цей тип файлу не має редактора." Caption="Без редактора"/>
-        <actDictionary Hint="Open user dictionary editor." Caption="actDictionary"/>
+        <actEditNone Hint="Для цього типу файлу немає редактора." Caption="Без редактора"/>
+        <actDictionary Hint="Відкрити редактор словника користувача." Caption="Словник"/>
       </alMain>
       <pBody>
         <pFileList>
           <pFileListLabel>
-            <lbFileList Caption="Text Files"/>
+            <lbFileList Caption="Текстові файли"/>
           </pFileListLabel>
         </pFileList>
         <pCodepageList>
           <pCodepageListLabel>
-            <lbCodepageLabel Caption="Codepages"/>
+            <lbCodepageLabel Caption="Кодування"/>
           </pCodepageListLabel>
           <lvCodepageList>
-            <Analyzing Caption="Analyzing"/>
-            <Not_implemented Caption="Not implemented"/>
-            <Any_Codepage Caption="Any Codepage"/>
-            <Binary_data Caption="Binary File"/>
+            <Analyzing Caption="Аналіз"/>
+            <Not_implemented Caption="Не реалізовано"/>
+            <Any_Codepage Caption="Будь-яке кодування"/>
+            <Binary_data Caption="Бінарний файл"/>
           </lvCodepageList>
         </pCodepageList>
         <pViewers>
           <pViewUnicode>
             <pViewUnicodeLabel>
-              <lbUnicodeViewLabel Caption="Viewed as Unicode"/>
+              <lbUnicodeViewLabel Caption="Перегляд як Unicode"/>
             </pViewUnicodeLabel>
             <Unsupported_file>
-              <Binary Text="Binary data files are not supported."/>
+              <Binary Text="Файли бінарних даних не підтримуються."/>
             </Unsupported_file>
           </pViewUnicode>
           <pCodepage>
             <pViewCodepageLabel>
-              <lbViewCodepageLabel Value="Viewed as Codepage %s"/>
+              <lbViewCodepageLabel Value="Перегляд як кодування %s"/>
             </pViewCodepageLabel>
           </pCodepage>
         </pViewers>
@@ -174,7 +174,7 @@
         <da_DK Text="Данська (Данія)"/>
         <de_CH Text="Німецька (Швейцарія)"/>
         <de_DE Text="Німецька (Німеччина)"/>
-        <en_US Text="Англійська (Сполучені Штати)"/>
+        <en_US Text="Англійська (США)"/>
         <eo Text="Есперанто"/>
         <es_ES Text="Іспанська (Іспанія)"/>
         <et_EE Text="Естонська (Естонія)"/>
@@ -188,7 +188,7 @@
         <ja_JP Text="Японська (Японія)"/>
         <lt_LT Text="Литовська (Литва)"/>
         <la Text="Латина"/>
-        <lv_LV Text="Латиська (Латвія)"/>
+        <lv_LV Text="Латвійська (Латвія)"/>
         <nl_NL Text="Нідерландська (Нідерланди)"/>
         <no_NO Text="Норвезька (Норвегія)"/>
         <pl_PL Text="Польська (Польща)"/>
@@ -199,7 +199,7 @@
         <sk_SK Text="Словацька (Словаччина)"/>
         <sl_SI Text="Словенська (Словенія)"/>
         <sr_RS Text="Сербська (Сербія)"/>
-        <zh_CN Text="Китайська (Спрощена)"/>
+        <zh_CN Text="Китайська (спрощена)"/>
         <sv_SE Text="Шведська (Швеція)"/>
         <tr_TR Text="Турецька (Туреччина)"/>
         <uk_UA Text="Українська (Україна)"/>
@@ -207,7 +207,7 @@
         <el_GR Text="Грецька (Греція)"/>
         <fil_PH Text="Філіппінська (Філіппіни)"/>
         <tl_PH Text="Тагальська (Філіппіни)"/>
-        <haw_US Text="Гавайська (Сполучені Штати)"/>
+        <haw_US Text="Гавайська (США)"/>
         <id_ID Text="Індонезійська (Індонезія)"/>
         <ko_KR Text="Корейська (Південна Корея)"/>
         <nb_NO Text="Норвезька букмол (Норвегія)"/>
@@ -226,41 +226,21 @@
         <Binary Caption="Бінарний"/>
       </statBar>
       <ExportUnicodeDialog>
-        <Title Caption="Export file as UTF-8"/>
-        <File Filters="All Files (*.*)|*.*|Unicode Files (*.UTF-8)|*.UTF-8"/>
+        <Title Caption="Експортувати файл як UTF-8"/>
+        <File Filters="Усі файли (*.*)|*.*|Файли Unicode (*.UTF-8)|*.UTF-8"/>
       </ExportUnicodeDialog>
       <OpenFilesDialog>
-        <Title Caption="Open existing file(s)"/>
-        <File Filters="All Files (*.*)|*.*|Unicode Files (*.UTF-8)|*.UTF-8"/>
+        <Title Caption="Відкрити існуючі файли"/>
+        <File Filters="Усі файли (*.*)|*.*|Файли Unicode (*.UTF-8)|*.UTF-8"/>
       </OpenFilesDialog>
       <ExportCodepageDialog>
-        <Title Caption="Export file as Codepage %s"/>
-        <File Filters="All Files (*.*)|*.*"/>
+        <Title Caption="Експортувати файл у кодуванні %s"/>
+        <File Filters="Усі файли (*.*)|*.*"/>
       </ExportCodepageDialog>
       <ExportASCIIDialog>
-        <Title Caption="Save file as simple 7-bit ASCII"/>
-        <File Filters="All Files (*.*)|*.*"/>
+        <Title Caption="Зберегти файл як простий 7-бітний ASCII"/>
+        <File Filters="Усі файли (*.*)|*.*"/>
       </ExportASCIIDialog>
-      <OpenFiles>
-        <Title Caption="Open existing file(s)"/>
-        <File Filters="All Files|*;*.*"/>
-      </OpenFiles>
-      <pFileList>
-        <pFileListLabel>
-          <lbFileList Caption="Текстові файли"/>
-        </pFileListLabel>
-      </pFileList>
-      <pCodepageList>
-        <pCodepageListLabel>
-          <lbCodepageLabel Caption="Кодування"/>
-        </pCodepageListLabel>
-        <lvCodepageList>
-          <Analyzing Caption="Аналіз"/>
-          <Any_Codepage Caption="Будь-яке кодування"/>
-          <Not_implemented Caption="Не реалізовано"/>
-          <Binary_data Caption="Бінарні дані"/>
-        </lvCodepageList>
-      </pCodepageList>
       <pViewers>
         <pViewUnicode>
           <pViewUnicodeLabel>
@@ -279,25 +259,23 @@
     </fMain>
     <fDictEditForm Caption="Оновлення словника">
       <pTop>
-        <cbLocale Hint="Locale for the words to add to the dictionary.">
-          <Items Index_0="ar_SA" Index_1="bg_BG" Index_2="cs_CZ" Index_3="da_DK" Index_4="de_CH" Index_5="de_DE" Index_6="el_GR" Index_7="en_US" Index_8="eo" Index_9="es_ES" Index_10="et_EE" Index_11="fil_PH" Index_12="fi_FI" Index_13="fr_FR" Index_14="haw_US" Index_15="he_IL" Index_16="hu_HU" Index_17="id_ID" Index_18="is_IS" Index_19="it_IT" Index_20="ja_JP" Index_21="ko_KR" Index_22="la" Index_23="lt_LT" Index_24="lv_LV" Index_25="nb_NO" Index_26="nl_NL" Index_27="no_NO" Index_28="pl_MAZ" Index_29="pl_PL" Index_30="pt_BR" Index_31="pt_PT" Index_32="ro_RO" Index_33="ru_RU" Index_34="sk_SK" Index_35="sl_SI" Index_36="sm_WS" Index_37="sr_RS" Index_38="sv_SE" Index_39="th_TH" Index_40="tr_TR" Index_41="uk_UA" Index_42="vi_VN" Index_43="zh_CN" Index_44="fr_CA" Index_45="tl_PH" Index_46="nn_NO"/>
-        </cbLocale>
-        <lbLocale Hint="Select the Locale for the words to add to the dictionary." Caption="Локаль:"/>
-        <btnInvert Hint="Toggle all slecetions." Caption="Інвертувати"/>
-        <btnNone Hint="Unselect all words." Caption="Нічого"/>
+        <cbLocale Hint="Мова для слів, які потрібно додати до словника."/>
+        <lbLocale Hint="Виберіть мову для слів, які потрібно додати до словника." Caption="Мова:"/>
+        <btnInvert Hint="Інвертувати всі виділення." Caption="Інвертувати"/>
+        <btnNone Hint="Зняти виділення з усіх слів." Caption="Нічого"/>
       </pTop>
       <pButtons>
-        <btnSave Hint="Save the changes to the dictionary." Caption="Зберегти"/>
-        <btnReload Hint="Reload the dinctionary and forget any unsaved changes." Caption="Перезавантажити"/>
-        <btnAdd Hint="Add the selected words to the dictionary for the selected locale." Caption="Додати до словника"/>
-        <btnMerge Hint="Merge the User dictionary words into the Master dictionary." Caption="Merge"/>
+        <btnSave Hint="Зберегти зміни у словнику." Caption="Зберегти"/>
+        <btnReload Hint="Перезавантажити словник і скасувати всі незбережені зміни." Caption="Перезавантажити"/>
+        <btnAdd Hint="Додати виділені слова до словника для вибраної мови." Caption="Додати до словника"/>
+        <btnMerge Hint="Об'єднати словник користувача з основним словником." Caption="Об'єднати"/>
       </pButtons>
     </fDictEditForm>
     <fOptionsDialog Caption="Налаштування Codepage Witch">
       <pPages>
-        <tsAbout Hint="Про програму." Caption="Про програму">
-          <lbCopyright Caption="Copyright %s"/>
-          <lbVersion Caption="Версія %0:s (Збірка %1:s)"/>
+        <tsAbout Hint="Про цю програму." Caption="Про програму">
+          <lbCopyright Caption="Авторське право %s"/>
+          <lbVersion Caption="Версія %0:s (збірка %1:s)"/>
           <lbApplication Caption="Програма &quot;%s&quot;"/>
         </tsAbout>
         <tsGeneral Hint="Загальні налаштування програми." Caption="Загальні">
@@ -310,107 +288,91 @@
           </gbUserLanguage>
           <gbMiscellaneous Caption="Різне">
             <cbShowHints Caption="Показувати підказки при наведенні миші."/>
-            <cbColorButtons Caption="Кольорові кнопки на панелі інструментів."/>
+            <cbColorButtons Caption="Використовувати кольорові кнопки панелі інструментів."/>
           </gbMiscellaneous>
-          <gbOnlineUpdate Caption="Онлайн-оновлення">
-            <cbAutoCheck Caption="Автоматично перевіряти оновлення"/>
+          <gbOnlineUpdate Caption="Онлайн оновлення">
+            <cbAutoCheck Caption="Автоматично перевіряти наявність оновлень"/>
             <pUpdateButton>
-              <btnUpdateCheck Hint="Перевірити наявність оновлень на сервері." Caption="Перевірити зараз..."/>
+              <btnUpdateCheck Hint="Перевірити наявність останнього оновлення на сервері." Caption="Перевірити зараз..."/>
             </pUpdateButton>
           </gbOnlineUpdate>
         </tsGeneral>
         <tsSession Hint="Параметри сеансів програми." Caption="Сеанс">
           <gbSessionFiles Caption="Файли сеансу">
-            <cbReopenFiles Hint="Знову відкривати файли, що не були закриті в попередньому сеансі." Caption="Відкривати попередні файли."/>
-            <cbWarnMissing Hint="Попереджати, якщо файл із попереднього сеансу відсутній." Caption="Попереджати про відсутність."/>
-            <cbOpenExport Hint="Автоматично відкривати експортовані файли для перевірки." Caption="Відкривати експортовані файли."/>
+            <cbReopenFiles Hint="Знову відкрити незакриті файли з попереднього сеансу." Caption="Відкрити попередні файли."/>
+            <cbWarnMissing Hint="Попереджати, якщо файл із попереднього сеансу не існує." Caption="Попереджати про відсутність."/>
+            <cbOpenExport Hint="Автоматично відкривати експортовані файли для перегляду." Caption="Відкривати експортовані файли."/>
           </gbSessionFiles>
-          <gbCodepage Caption="Кодова сторінка">
-            <cbAutoSelectCP Hint="Автоматично вибирати бажану кодову сторінку для конвертації." Caption="Автоматично вибирати кодову сторінку"/>
+          <gbCodepage Caption="Кодування">
+            <cbAutoSelectCP Hint="Автоматично вибирати бажане кодування для конвертації." Caption="Автовибір кодування"/>
           </gbCodepage>
         </tsSession>
         <tsEncoding Hint="Параметри кодування вводу та виводу файлів." Caption="Кодування">
           <rgFileEnding Hint="Вимагати, щоб файли закінчувалися порожнім рядком." Caption="Файли закінчуються новим рядком">
-            <rbFileEndWhatever Hint="Файли можуть закінчуватися текстом або порожнім рядком." Caption="Неважливо."/>
-            <rbFileEndExport Hint="Гарантувати, що експортовані файли закінчуються порожнім рядком." Caption="Тільки для експорту."/>
-            <rbFileEndAll Hint="Вимагати, щоб оригінальні файли закінчувалися порожнім рядком." Caption="Для всіх текстових файлів."/>
+            <rbFileEndWhatever Hint="Усі файли можуть закінчуватися текстом або порожнім рядком." Caption="Неважливо."/>
+            <rbFileEndExport Hint="Переконатися, що експортовані файли закінчуються порожнім рядком." Caption="Тільки для експорту."/>
+            <rbFileEndAll Hint="Вимагати, щоб оригінальні файли закінчувалися порожнім рядком." Caption="Застосовувати до всіх текстових файлів."/>
           </rgFileEnding>
         </tsEncoding>
-        <tsViewer Hint="Параметри для Unicode та DOS переглядачів." Caption="Переглядач">
-          <gbUnicodeView Caption="Unicode перегляд">
-            <lbUnicodeScale Caption="Масштаб шрифту %s%%"/>
+        <tsViewer Hint="Параметри перегляду Unicode та DOS." Caption="Перегляд">
+          <gbUnicodeView Caption="Перегляд Unicode">
+            <lbUnicodeScale Caption="lbUnicodeScale"/>
             <tbUnicodeScale Caption="10"/>
-            <lbScaleOfUnicode Caption="Font scale %s%%"/>
-            <lbUnicodeScaling Caption="Font scale %s%%"/>
+            <lbScaleOfUnicode Caption="Масштаб шрифту %s%%"/>
           </gbUnicodeView>
-          <gbDOSView Caption="DOS перегляд">
-            <lbDOSScale Caption="Масштаб шрифту %s%%"/>
+          <gbDOSView Caption="Перегляд DOS">
+            <lbDOSScale Caption="lbDOSScale"/>
             <tbDOSScale Caption="1"/>
-            <lbScaleOfDOS Caption="Font scale %s%%"/>
+            <lbScaleOfDOS Caption="Масштаб шрифту %s%%"/>
           </gbDOSView>
-          <gbViewers Caption="Viewers">
-            <cbSingleViewer Hint="Only show a single file view pane in the main window." Caption="Single file viewer mode"/>
+          <gbViewers Caption="Панелі перегляду">
+            <cbSingleViewer Hint="Показувати лише одну панель перегляду файлів у головному вікні." Caption="Режим одного вікна перегляду"/>
           </gbViewers>
         </tsViewer>
       </pPages>
       <fLowerPanel>
         <fButtonPanel>
-          <btnAccept Hint="Прийняти та застосувати зміни." Caption="ОК"/>
-          <btnCancel Hint="Скасувати всі зміни." Caption="Скасувати"/>
+          <btnAccept Hint="Прийняти та застосувати зміни." Caption="Прийняти"/>
+          <btnCancel Hint="Ігнорувати всі зміни." Caption="Скасувати"/>
         </fButtonPanel>
       </fLowerPanel>
       <fMiddlePanel>
         <fBodyPanel>
           <pSectionsPanel>
             <pSectionLabel>
-              <lbSections Caption="Опції"/>
+              <lbSections Caption="Параметри"/>
             </pSectionLabel>
           </pSectionsPanel>
-          <pPagesPanel>
-            <pPages>
-              <tsViewer>
-                <lbDOSScale Caption="Масштаб шрифту %s%%"/>
-                <lbUnicodeScale Caption="Масштаб шрифту %s%%"/>
-              </tsViewer>
-            </pPages>
-          </pPagesPanel>
         </fBodyPanel>
       </fMiddlePanel>
-      <tsViewer>
-        <gbUnicodeView>
-          <lbUnicodeScaling Caption="Font scale %s%%"/>
-        </gbUnicodeView>
-      </tsViewer>
     </fOptionsDialog>
-    <fLoggerViewForm Title="Save debug log as" Filter="Log Files (*.log)|All Files (*.*)" Caption="Журнал налагодження">
-      <LineCount Plural="%.0n записів" Singular="%.0n запис"/>
+    <fLoggerViewForm Caption="Журнал налагодження">
+      <LineCount Plural="%.0n записів журналу" Singular="%.0n запис журналу"/>
       <pControls>
         <pButtons>
-          <btnClear Hint="Clear the current debug log." Caption="Очистити"/>
-          <btnSaveAs Hint="Save the debug log to a file." Caption="Зберегти як..."/>
+          <btnClear Hint="Очистити поточний журнал налагодження." Caption="Очистити"/>
+          <btnSaveAs Hint="Зберегти журнал налагодження у файл." Caption="Зберегти як..."/>
         </pButtons>
         <pVerbose>
-          <cbVerbosity Hint="Select the verbosity and amount of debug logging messages. Please note this can consume a lot of memory and slow the program drastically.">
-            <Items Index_0="Критично" Index_1="Мінімально" Index_2="Нормально" Index_3="Детально" Index_4="Надмірно"/>
+          <cbVerbosity Hint="Виберіть рівень деталізації та кількість повідомлень журналу налагодження. Зверніть увагу, що це може споживати багато пам'яті та значно сповільнити роботу програми.">
+            <Items Index_0="Критичний" Index_1="Мінімальний" Index_2="Нормальний" Index_3="Детальний" Index_4="Надмірний"/>
           </cbVerbosity>
           <lbVerbosity Caption="Деталізація:"/>
         </pVerbose>
       </pControls>
-      <SaveDialog>
-        <Title Caption="Save debug log as"/>
-        <File Filters="Log Files (*.log)|*.log|All Files (*.*)|*.*"/>
-      </SaveDialog>
-      <Title SaveDialog="Save debug log as"/>
-      <Filter SaveDialog="Log Files (*.log)|*.log|All Files (*.*)|*.*"/>
+      <SaveAsDialog>
+        <Title Caption="Зберегти журнал як"/>
+        <File Filters="Файли журналів (*.log)|*.log|Усі файли (*.*)|*.*"/>
+      </SaveAsDialog>
     </fLoggerViewForm>
-    <fDiffLocaleDialog Caption="Conflicting Locale">
+    <fDiffLocaleDialog Caption="Конфлікт мовних налаштувань">
       <fLowerPanel>
         <fButtonPanel>
-          <btnProceed Caption="Proceed"/>
-          <btnCancel Caption="Cancel"/>
+          <btnProceed Caption="Продовжити"/>
+          <btnCancel Caption="Скасувати"/>
         </fButtonPanel>
       </fLowerPanel>
-      <Message Text="The locale for this file is expected to be %s.&#xA;&#xA;Are you certian you wish to add to the dictionary under the %s locale?"/>
+      <Message Text="Для цього файлу очікується мова %s.&#xA;&#xA;Ви впевнені, що хочете додати до словника під мовою %s?"/>
     </fDiffLocaleDialog>
     <fUpdateCheckDialog Caption="Перевірка оновлень">
       <fLowerPanel>
@@ -420,9 +382,9 @@
         </fButtonPanel>
       </fLowerPanel>
       <Message>
-        <Check Text="Пошук доступних оновлень для &quot;%s&quot;, версія %s."/>
+        <Check Text="Перевірка наявності оновлень для &quot;%s&quot;, версія %s."/>
         <Error Text="Наразі неможливо визначити наявність оновлень для &quot;%s&quot;. Будь ласка, спробуйте пізніше."/>
-        <None Text="На даний момент оновлень для &quot;%s&quot; немає. Будь ласка, перевірте пізніше."/>
+        <None Text="Наразі немає доступних оновлень для &quot;%s&quot;. Будь ласка, спробуйте пізніше."/>
       </Message>
     </fUpdateCheckDialog>
     <fUpdateFoundDialog Caption="Доступне оновлення">
@@ -449,7 +411,7 @@
       </fLowerPanel>
       <Message>
         <Fetch Text="Завантаження оновлення для &quot;%s&quot;."/>
-        <Error Text="Помилка завантаження оновлення &quot;%s&quot;. Будь ласка, спробуйте пізніше."/>
+        <Error Text="Помилка під час завантаження оновлення &quot;%s&quot;. Будь ласка, спробуйте пізніше."/>
       </Message>
     </fUpdateDownloadDialog>
     <fUpdateSaveDialog Caption="Оновлення завантажено">
@@ -463,18 +425,18 @@
         <Downloaded Text="Завантажено &quot;%s&quot; версії %s."/>
       </Message>
       <SaveAsDialog>
-        <Title Caption="Save update as"/>
-        <File Filters="Archive Files (*.zip)|*.log|All Files (*.*)|*.*"/>
+        <Title Caption="Зберегти оновлення як"/>
+        <File Filters="Архівні файли (*.zip)|*.log|Усі файли (*.*)|*.*"/>
       </SaveAsDialog>
     </fUpdateSaveDialog>
-    <fCorrectFileEndingDialog Caption="Відсутній кінцевий перехід рядка">
+    <fCorrectFileEndingDialog Caption="Відсутній кінець рядка">
       <fLowerPanel>
         <fButtonPanel>
           <btnCorrect Caption="Виправити"/>
           <btnIgnore Caption="Ігнорувати"/>
         </fButtonPanel>
       </fLowerPanel>
-      <Message Text="Файл &quot;%s&quot; не закінчується порожнім рядком.&#xA;&#xA;Бажаєте виправити це, додавши перехід рядка в кінець файлу?"/>
+      <Message Text="Файл &quot;%s&quot; не закінчується порожнім рядком.&#xA;&#xA;Ви хочете виправити це, додавши новий рядок у кінець файлу?"/>
     </fCorrectFileEndingDialog>
     <fFileEditor Caption="Codepage Witch - %s">
       <btnCancel Caption="Скасувати"/>

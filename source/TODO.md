@@ -5,8 +5,8 @@
 * Options for Line Endings Style (CRLF, LF, CR)
 * Diacritical combining when possible.
 * Character Substitutions.
-* Support characters not in Unicode (like in CP777, CP778)
-* Additional Codepages
-* User Settings for Un-mappable character color
+* Support characters not in Unicode (like in CP777, CP778).
+* Additional Codepages and Locales.
+* User Settings for Un-mappable character color.
 * Some other fine tuning stuff and general improvements.
 
