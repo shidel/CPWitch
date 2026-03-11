@@ -1056,8 +1056,15 @@ begin
       weCodepage : begin
         LogMessage(vbVerbose, 'Codepage Item: ' + W.DisplayName + ' (Codepage ' +
           IntToStr(FActiveCodepage) + ')');
+        // This is a tough choice. If using the active codepage, all characters
+        // are displayed, Although some can be wrong because the codepage may
+        // be wrong. However, using the Preferred Codepage, any characters
+        // outside that codepage are  represented as an upside-down wuation
+        // mark. This may be best as a toggle on the toolbar.
         fCodepageText.Codepage:=FActiveCodepage;
+        // fCodepageText.Codepage:=W.Preferred;
         C:=W.AsUnicode(FActiveCodepage, True);
+        { TODO 6 -cDevel Decide on of codepage view of codepage files should be restricted to the preferred codepage. }
         fCodepageText.AddText(RawByteString(C.Converted));
         C.Free;
       end;
