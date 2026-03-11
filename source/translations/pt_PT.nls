@@ -220,11 +220,15 @@
       <statBar>
         <Processing Caption="A processar"/>
         <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
-        <Codepage Caption="Codificação"/>
         <Unicode Caption="Unicode"/>
+        <Codepage Caption="Codificação"/>
         <NoEncoding Caption="ASCII"/>
         <Binary Caption="Binário"/>
       </statBar>
+      <ExportUnicodeDialog>
+        <Title Caption="Export file as UTF-8"/>
+        <File Filters="All Files (*.*)|*.*|Unicode Files (*.UTF-8)|*.UTF-8"/>
+      </ExportUnicodeDialog>
       <OpenFilesDialog>
         <Title Caption="Open existing file(s)"/>
         <File Filters="All Files (*.*)|*.*|Unicode Files (*.UTF-8)|*.UTF-8"/>

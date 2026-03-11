@@ -1,7 +1,7 @@
 # Major feature To-Do list
 
 * Warning dialog, when attempting to exit with unsaved stuff.
-* Warning dialogs when attempting to use 'improper' codepage for text.
+* Warning dialog, when attempting to use 'improper' codepage for text.
 * Options for Line Endings Style (CRLF, LF, CR)
 * Diacritical combining when possible.
 * Character Substitutions.

@@ -79,8 +79,22 @@ implementation
 procedure TfDictEditForm.cbLocaleChange(Sender: TObject);
 var
   LC : TLocale;
+  S, L, R: String;
+  N, X : Integer;
 begin
-  if Locale(Trim(cbLocale.Text), LC) then begin
+  S:=Trim(cbLocale.Text);
+  R :=UpperCase(S);
+  N:=Pos(UNDERSCORE, R);
+  L:=LowerCase(PopDelim(R, UNDERSCORE));
+  if N <> 0 then Cat(L, UNDERSCORE);
+  if R <> '' then Cat(L, R);
+  if S <> L then begin
+    X := cbLocale.SelStart;
+    cbLocale.Text:=L;
+    cbLocale.SelStart:=X;
+    S:=L;
+  end;
+  if Locale(L, LC) then begin
     pStatusBar.Panels[0].Text:=LC.Identifier;
     pStatusBar.Panels[1].Text:=LC.LetterCode;
     if LC.Codepage = -1 then
@@ -213,6 +227,9 @@ var
 begin
   FWords.Clear;
   if not Assigned(FWitchItem) then Exit;
+  if not FWitchItem.Analyzed then Exit;
+  if FWitchItem.Encoding = weBinary then Exit;
+  if FWitchItem.Encoding = weCodepage then Exit;
   LogMessage(vbVerbose, 'Detecting words in file data...');
   W:=TStringList.Create;
   S:=NormalizeLineEndings(PasExt.ToString(FWitchItem.FileData), LF) + LF;
@@ -305,8 +322,16 @@ begin
 end;
 
 procedure TfDictEditForm.DoUpdateButtons;
+var
+  X : Boolean;
+  L, R : String;
 begin
-  btnAdd.Enabled:=(clWords.Items.Count > 0) and (Trim(cbLocale.Text) <> '');
+  R:=Trim(cbLocale.Text);
+  L:=PopDelim(R, UNDERSCORE);
+  X:=((Length(L)=2) and ((Length(R) = 0) or (Length(R) = 2) or (Length(R) = 3)))
+  or ((Length(L)=3) and ((Length(R) = 0) or (Length(R) = 2)))
+
+  btnAdd.Enabled:=X and (clWords.Items.Count > 0) and (Trim(cbLocale.Text) <> '');
   btnInvert.Enabled:=btnAdd.Enabled;
   btnNone.Enabled:=btnAdd.Enabled;
   btnSave.Enabled:=Assigned(UserDictionary) and (UserDictionary.Modified);

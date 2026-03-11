@@ -95,6 +95,7 @@ type
     procedure actEditUnicodeExecute(Sender: TObject);
     procedure actExportASCIIExecute(Sender: TObject);
     procedure actExportCodepageExecute(Sender: TObject);
+    procedure actExportUnicodeExecute(Sender: TObject);
     procedure actOpenExecute(Sender: TObject);
     procedure actListAllExecute(Sender: TObject);
     procedure actListCompatibleExecute(Sender: TObject);
@@ -104,7 +105,6 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
-    procedure FormWindowStateChange(Sender: TObject);
     procedure tiFileWatchTimer(Sender: TObject);
     procedure lvCodepageListSelectItem(Sender: TObject; Item: TListItem;
       Selected: Boolean);
@@ -162,7 +162,7 @@ type
       procedure SessionSave;
       procedure SessionLoad;
       procedure RefreshFileEndsOnBlank;
-      procedure EnforceLayout;
+      procedure EnforceLayout; override;
       procedure SetSaveDialogText(Encoding : TWitchEncoding);
     public
       procedure ApplyUserLanguage; override;
@@ -310,6 +310,57 @@ begin
       R:=0;
   until R=0;
   FreeAndNil(TCP);
+  if CM then
+    FWitch.FileModified(dlgFileSave.FileName);
+  if AO and fOpenExported then begin
+    OpenFile(dlgFileSave.FileName, false);
+    lvFileList.Sort;
+  end;
+end;
+
+procedure TfMain.actExportUnicodeExecute(Sender: TObject);
+var
+  W : TWitchItem;
+  TUC : TCodepageToUTF8;
+  R : integer;
+  N : String;
+  D : RawByteString;
+  CM, AO : Boolean;
+begin
+  if Not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then
+    Exit;
+  W:=TWitchItem(lvFileList.Selected.Data);
+  TUC:=W.AsUnicode(FActiveCodepage);
+  if not Assigned(TUC) then Exit;
+  dlgFileSave.InitialDir:=UserWorkPath;
+  N := IncludeTrailing(W.DisplayName, '.UTF-8', false);
+  dlgFileSave.FileName:=FileIterative(UserWorkPath + N);
+  SetSaveDialogText(W.Encoding);
+  if fEndBlankOnExport then begin
+    D:=NormalizeLineEndings(RawByteString(TUC.Converted), W.LineEndings);
+    case W.LineEndings of
+      leCRLF : D:=IncludeTrailing(D, CRLF);
+      leLF   : D:=IncludeTrailing(D, LF);
+      leCR   : D:=IncludeTrailing(D, CR);
+    end;
+    D:=NormalizeLineEndings(D, W.LineEndings);
+  end else begin
+    D:=RawByteString(TUC.Converted);
+  end;
+  CM:=False;
+  AO:=False;
+  repeat
+    if dlgFileSave.Execute then begin
+      R:=FileSave(dlgFileSave.FileName, D);
+      CM:=True;
+      AO:=R=0;
+      if R <> 0 then
+        if FileErrorDialog(dlgFileSave.FileName, R, True) <> mrRetry then
+          R:=0;
+    end else
+      R:=0;
+  until R=0;
+  FreeAndNil(TUC);
   if CM then
     FWitch.FileModified(dlgFileSave.FileName);
   if AO and fOpenExported then begin
@@ -504,11 +555,6 @@ begin
     OpenFile(FileNames[I], I=0);
 end;
 
-procedure TfMain.FormWindowStateChange(Sender: TObject);
-begin
-  EnforceLayout;
-end;
-
 procedure TfMain.tiFileWatchTimer(Sender: TObject);
 var
   I : integer;
@@ -690,7 +736,7 @@ begin
   case TWitchItem(lvFileList.Selected.Data).Encoding of
     weBinary : Exit;
     weNone : Result:=True;
-    weCodepage : Result:=False;
+    weCodepage : Result:=Assigned(lvCodepageList.Selected);
     weUnicode : Result:=Assigned(lvCodepageList.Selected);
   end;
 end;
@@ -707,7 +753,6 @@ begin
     weCodepage : Result:=False;
     weUnicode : Result:=True;
   end;
-
 end;
 
 procedure TfMain.FormSettingsLoad(Sender: TObject);
@@ -1114,7 +1159,7 @@ begin
       simply switching from one Action to another will not cause the
       button to re-enable. It seems to get stuck for a little while as disabled
       until another Codepage list item is selected. }
-      btnExportFile.Enabled:=CanEdit;
+      btnExportFile.Enabled:=CanExport;
       actEditASCII.Enabled:=CanEdit;
       btnEditFile.Action:=actEditASCII;
     end;
@@ -1124,7 +1169,7 @@ begin
       btnExportFile.Action:=actExportUnicode;
       { TODO 0 -cLazarus_Bug Without forcing it to Enable, the Button
       state can get "stuck" as disabled for a while. }
-      btnExportFile.Enabled:=CanEdit;
+      btnExportFile.Enabled:=CanExport;
       actEditCodepage.Enabled:=CanEdit;
       btnEditFile.Action:=actEditCodepage;
     end;
@@ -1134,7 +1179,7 @@ begin
       btnExportFile.Action:=actExportCodepage;
       { TODO 0 -cLazarus_Bug Without forcing it to Enable, the Button
       state can get "stuck" as disabled for a while. }
-      btnExportFile.Enabled:=CanEdit;
+      btnExportFile.Enabled:=CanExport;
       actEditUnicode.Enabled:=CanEdit;
       btnEditFile.Action:=actEditUnicode;
     end;
@@ -1386,6 +1431,7 @@ end;
 
 procedure TfMain.EnforceLayout;
 begin
+  inherited EnforceLayout;
   {$IFNDEF darwin}
   { TODO 0 -cLazarus_Bug In Lazarus 4.4, Minimizing and restoring a window on
   Windows causes all but the pViewers panel (alClient) to move around and change

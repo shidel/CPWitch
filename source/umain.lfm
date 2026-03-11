@@ -16,7 +16,6 @@ object fMain: TfMain
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnDropFiles = FormDropFiles
-  OnWindowStateChange = FormWindowStateChange
   object pTop: TPanel
     Left = 4
     Height = 58
@@ -378,6 +377,7 @@ object fMain: TfMain
       Caption = 'Export UTF-8...'
       Enabled = False
       Hint = 'Export a text file encoded in UTF-8 format.'
+      OnExecute = actExportUnicodeExecute
     end
     object actEditASCII: TAction
       Category = 'Edit'
