@@ -134,6 +134,7 @@ type
       fWatchIndex : integer;
       fLocales : TLocaleItems;
       fAutoSelectCP : boolean;
+      fSingleViewer : boolean;
       procedure PopulateCodepageList(Item : TWitchItem);
       procedure SetCodepageFilter(AValue: TCodepageFilter);
       procedure SetUnicodeView( S : String );
@@ -372,6 +373,7 @@ begin
   fAutoSelectCP:=True;
   fWatchIndex:=0;
   fLocales:=[];
+  fSingleViewer:=False;
 
   fWitch := TWitch.Create;
   fWitch.OnAnalyzed:=@WitchOnAnalyzed;
@@ -759,6 +761,15 @@ begin
     fEndBlankOnInput:=B;
     RefreshFileEndsOnBlank;
   end;
+
+  if fSingleViewer then begin
+     pViewUnicode.Visible:=False;
+     spUnicodeCP.Visible:=False;
+  end else begin
+    pViewUnicode.Visible:=True;
+    spUnicodeCP.Visible:=True;
+  end;
+  EnforceLayout;
 end;
 
 procedure TfMain.FormSettingsSave(Sender: TObject);
@@ -995,8 +1006,10 @@ end;
 procedure TfMain.UpdateUnicodeView;
 var
   W : TWitchItem;
+  C : TCodepageToUTF8;
   H : String;
 begin
+  if fSingleViewer then Exit;
   if (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then begin
     W:=TWitchItem(lvFileList.Selected.Data);
     if W.Analyzed then begin
@@ -1009,9 +1022,9 @@ begin
           +'Unsupported_file/Binary/Text', 'Binary data files are not supported.');
         end;
         weCodepage : begin
-{ TODO 9 -cDevel Implement Unicode View for Codepage encoded files. }
-          H:= GetTranslation(ComponentNamePath(lvCodepageList, Self, True)
-          +'Not_implemented/Caption', 'Not implemented');
+           C:=W.AsUnicode(FActiveCodepage, True);
+           H:=EscapeHTML(RawByteString(C.Converted));
+           C.Free;
         end;
       end;
 
@@ -1166,19 +1179,30 @@ begin
         Break;
       end;
     if L='' then L:=S;
-    case W.Encoding of
-     weNone, weUnicode : begin
-       lbCodepageLanguage.Caption:='';
-       lbUnicodeLanguage.Caption:=L;
-     end;
-     weCodepage : begin
-       lbCodepageLanguage.Caption:=L;
-       lbUnicodeLanguage.Caption:='';
-     end;
-     else
-       lbCodepageLanguage.Caption:='';
-       lbUnicodeLanguage.Caption:='';
-     end;
+    if fSingleViewer then
+      case W.Encoding of
+       weNone, weUnicode, weCodepage : begin
+         lbCodepageLanguage.Caption:=L;
+         lbUnicodeLanguage.Caption:='';
+       end;
+       else
+         lbCodepageLanguage.Caption:='';
+         lbUnicodeLanguage.Caption:='';
+       end
+    else
+      case W.Encoding of
+       weNone, weUnicode : begin
+         lbCodepageLanguage.Caption:='';
+         lbUnicodeLanguage.Caption:=L;
+       end;
+       weCodepage : begin
+         lbCodepageLanguage.Caption:=L;
+         lbUnicodeLanguage.Caption:='';
+       end;
+       else
+         lbCodepageLanguage.Caption:='';
+         lbUnicodeLanguage.Caption:='';
+       end;
   end else begin
     lbCodepageLanguage.Caption:='';
     lbUnicodeLanguage.Caption:='';
@@ -1237,6 +1261,10 @@ begin
   UpdateStatusBar;
   UpdateCodepageViewlabel;
   UpdateCodePageView;
+  if Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data) then begin
+     if TWitchItem(lvFileList.Selected.Data).Encoding = weCodepage then
+       UpdateUnicodeView;
+  end;
   UpdateButtons;
 end;
 
