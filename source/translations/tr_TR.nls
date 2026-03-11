@@ -382,6 +382,36 @@
         </gbUnicodeView>
       </tsViewer>
     </fOptionsDialog>
+    <fLoggerViewForm Title="Save debug log as" Filter="Log Files (*.log)|All Files (*.*)" Caption="Hata Ayıklama Günlüğü">
+      <LineCount Plural="%.0n günlük girişi" Singular="%.0n günlük girişi"/>
+      <pControls>
+        <pButtons>
+          <btnClear Hint="Clear the current debug log." Caption="Temizle"/>
+          <btnSaveAs Hint="Save the debug log to a file." Caption="Farklı Kaydet..."/>
+        </pButtons>
+        <pVerbose>
+          <cbVerbosity Hint="Select the verbosity and amount of debug logging messages. Please note this can consume a lot of memory and slow the program drastically.">
+            <Items Index_0="Kritik" Index_1="Minimal" Index_2="Normal" Index_3="Ayrıntılı" Index_4="Aşırı"/>
+          </cbVerbosity>
+          <lbVerbosity Caption="Ayrıntı Düzeyi:"/>
+        </pVerbose>
+      </pControls>
+      <SaveDialog>
+        <Title Caption="Save debug log as"/>
+        <File Filters="Log Files (*.log)|*.log|All Files (*.*)|*.*"/>
+      </SaveDialog>
+      <Title SaveDialog="Save debug log as"/>
+      <Filter SaveDialog="Log Files (*.log)|*.log|All Files (*.*)|*.*"/>
+    </fLoggerViewForm>
+    <fDiffLocaleDialog Caption="Conflicting Locale">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnProceed Caption="Proceed"/>
+          <btnCancel Caption="Cancel"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message Text="The locale for this file is expected to be %s.&#xA;&#xA;Are you certian you wish to add to the dictionary under the %s locale?"/>
+    </fDiffLocaleDialog>
     <fUpdateCheckDialog Caption="Güncelleme Kontrolü">
       <fLowerPanel>
         <fButtonPanel>
@@ -437,27 +467,6 @@
         <File Filters="Archive Files (*.zip)|*.log|All Files (*.*)|*.*"/>
       </SaveAsDialog>
     </fUpdateSaveDialog>
-    <fLoggerViewForm Title="Save debug log as" Filter="Log Files (*.log)|All Files (*.*)" Caption="Hata Ayıklama Günlüğü">
-      <LineCount Plural="%.0n günlük girişi" Singular="%.0n günlük girişi"/>
-      <pControls>
-        <pButtons>
-          <btnClear Hint="Clear the current debug log." Caption="Temizle"/>
-          <btnSaveAs Hint="Save the debug log to a file." Caption="Farklı Kaydet..."/>
-        </pButtons>
-        <pVerbose>
-          <cbVerbosity Hint="Select the verbosity and amount of debug logging messages. Please note this can consume a lot of memory and slow the program drastically.">
-            <Items Index_0="Kritik" Index_1="Minimal" Index_2="Normal" Index_3="Ayrıntılı" Index_4="Aşırı"/>
-          </cbVerbosity>
-          <lbVerbosity Caption="Ayrıntı Düzeyi:"/>
-        </pVerbose>
-      </pControls>
-      <SaveDialog>
-        <Title Caption="Save debug log as"/>
-        <File Filters="Log Files (*.log)|*.log|All Files (*.*)|*.*"/>
-      </SaveDialog>
-      <Title SaveDialog="Save debug log as"/>
-      <Filter SaveDialog="Log Files (*.log)|*.log|All Files (*.*)|*.*"/>
-    </fLoggerViewForm>
     <fCorrectFileEndingDialog Caption="Eksik Satır Sonu">
       <fLowerPanel>
         <fButtonPanel>

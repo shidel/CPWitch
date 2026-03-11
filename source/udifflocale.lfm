@@ -1,0 +1,8 @@
+object fDiffLocaleDialog: TfDiffLocaleDialog
+  Left = 375
+  Height = 240
+  Top = 791
+  Width = 320
+  Caption = 'Conflicting Locale'
+  LCLVersion = '4.0.0.4'
+end

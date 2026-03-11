@@ -21,7 +21,6 @@
       <UseVersionInfo Value="True"/>
       <MinorVersionNr Value="7"/>
       <BuildNr Value="109"/>
-      <Attributes pvaPreRelease="True"/>
       <StringTable Comments="UTF-8 and Codepage Utility" CompanyName="Jerome Shidel" FileDescription="CPWitch" InternalName="CPWitch" LegalCopyright="2026 (c) Jerome Shidel" OriginalFilename="CPWitch" ProductName="Codepage Witch" ProductVersion="0.7"/>
     </VersionInfo>
     <BuildModes>
@@ -77,6 +76,13 @@
         <ComponentName Value="Form1"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uDictEdit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="udifflocale.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fDiffLocaleDialog"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uDiffLocale"/>
       </Unit>
     </Units>
   </ProjectOptions>

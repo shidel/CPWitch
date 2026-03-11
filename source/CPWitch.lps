@@ -20,7 +20,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="17" Y="22"/>
+        <CursorPos X="68" Y="21"/>
         <FoldState Value=" TL00404 p0x021064 T3lB03A pjQk80n7 pkSm7046]ITk4]Z]I1kH0C]IifjO0l2]RCkM0v3]9Pl40Y114]BglZ0N2 Pi7W0 T1lC02412551611]V4vc093413[j5WtE0H01121 T6lT0213318 pS=W023 T0lYc81A47 pJu9@304786 pjQnDB2051222251F4 Pgr3G TMsT21]^C2 PB:33("/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
@@ -45,8 +45,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFixEnding"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="56"/>
-        <CursorPos X="63" Y="99"/>
+        <TopLine Value="4"/>
+        <CursorPos Y="29"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -101,7 +101,7 @@
         <TopLine Value="40"/>
         <CursorPos X="42" Y="44"/>
         <FoldState Value=" T7i4Ne3 PfifH T3kc0A3 pjQk10Z0111E plcnP04321 POlQ0d"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="12"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/codepages.pp"/>
@@ -118,7 +118,7 @@
         <TopLine Value="600"/>
         <CursorPos X="63" Y="635"/>
         <FoldState Value=" T3kA05G pifjb051113]52212 PmJob0a"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="11"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/dosview.pp"/>
@@ -127,7 +127,7 @@
         <TopLine Value="252"/>
         <CursorPos X="24" Y="279"/>
         <FoldState Value=" T3kJ05B151112 PlFm80V"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit>
       <Unit>
         <Filename Value="dictionary.pp"/>
@@ -154,11 +154,11 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uDictEdit"/>
         <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <TopLine Value="154"/>
-        <CursorPos X="25" Y="334"/>
-        <FoldState Value=" T3jT06523 PkfkB0p"/>
-        <UsageCount Value="96"/>
+        <CursorPos X="67" Y="184"/>
+        <FoldState Value=" T3iZ0Z515 pkUme0N4 POi50!"/>
+        <UsageCount Value="97"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -178,12 +178,21 @@
         <CursorPos X="40" Y="224"/>
         <UsageCount Value="8"/>
       </Unit>
+      <Unit>
+        <Filename Value="udifflocale.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fDiffLocaleDialog"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uDiffLocale"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="70"/>
+        <CursorPos X="29" Y="81"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit>
     </Units>
-    <JumpHistory HistoryIndex="23">
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="137" Column="23" TopLine="110"/>
-      </Position>
+    <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="umain.pas"/>
         <Caret Line="609" Column="56" TopLine="572"/>
@@ -275,6 +284,34 @@
       <Position>
         <Filename Value="udictedit.pas"/>
         <Caret Line="85" Column="7" TopLine="65"/>
+      </Position>
+      <Position>
+        <Filename Value="udictedit.pas"/>
+        <Caret Line="167" Column="36" TopLine="76"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="24" Column="27"/>
+      </Position>
+      <Position>
+        <Filename Value="udictedit.pas"/>
+        <Caret Line="173" Column="48" TopLine="7"/>
+      </Position>
+      <Position>
+        <Filename Value="udifflocale.pas"/>
+        <Caret Line="36" Column="17" TopLine="10"/>
+      </Position>
+      <Position>
+        <Filename Value="udifflocale.pas"/>
+        <Caret Line="83" Column="31" TopLine="67"/>
+      </Position>
+      <Position>
+        <Filename Value="udifflocale.pas"/>
+        <Caret Line="29" TopLine="7"/>
+      </Position>
+      <Position>
+        <Filename Value="udifflocale.pas"/>
+        <Caret Line="100" Column="6" TopLine="62"/>
       </Position>
     </JumpHistory>
     <RunParams>

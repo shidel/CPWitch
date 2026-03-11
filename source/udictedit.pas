@@ -19,7 +19,7 @@ uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
   ComCtrls, CheckLst, Version, PasExt, Icons, MultiApp, Witch, Codepages,
-  BinTree, Dictionary;
+  BinTree, Dictionary, uDiffLocale;
 
 type
 
@@ -155,13 +155,23 @@ procedure TfDictEditForm.btnAddClick(Sender: TObject);
 var
   LC : Int32;
   I : Integer;
+  L : String;
   S : String;
   SS, TS : TArrayOfInt32;
   DN : TBinaryTreeNode;
 begin
   if not Assigned(UserDictionary) then Exit;
-  if Trim(cbLocale.Text) = '' then Exit;
-  LC:=UserDictionary.AddLocale(Trim(cbLocale.Text));
+  if not Assigned(WitchItem) then Exit;
+  L:=Trim(cbLocale.Text);
+  if L = '' then Exit;
+  // Test for new Locale
+  // LC:=UserDictionary.IndexOfLocale(L);
+  if WitchItem.Locale <> L then begin
+    if DifferentLocale(WitchItem.Locale, L) <> mrOK then Exit;
+    LogMessage(vbNormal, 'Add to Dictionary using ' + L + ' instead of ' + WitchItem.Locale + ' locale.');
+  end else
+    LogMessage(vbNormal, 'Add to Dictionary for ' + L + ' locale.');
+  LC:=UserDictionary.AddLocale(L);
   SS:=[LC];
   for I := 0 to clWords.Count - 1 do
     if clWords.State[I] = cbChecked then begin
@@ -329,7 +339,7 @@ begin
   R:=Trim(cbLocale.Text);
   L:=PopDelim(R, UNDERSCORE);
   X:=((Length(L)=2) and ((Length(R) = 0) or (Length(R) = 2) or (Length(R) = 3)))
-  or ((Length(L)=3) and ((Length(R) = 0) or (Length(R) = 2)))
+  or ((Length(L)=3) and ((Length(R) = 0) or (Length(R) = 2)));
 
   btnAdd.Enabled:=X and (clWords.Items.Count > 0) and (Trim(cbLocale.Text) <> '');
   btnInvert.Enabled:=btnAdd.Enabled;
