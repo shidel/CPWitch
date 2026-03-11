@@ -105,6 +105,7 @@ begin
   inherited ApplyUserLanguage;
   UpdateUnicodeScale;
   UpdateDOSScale;
+  cbReopenFilesChange(Self);
 end;
 
 initialization

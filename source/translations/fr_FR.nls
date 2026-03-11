@@ -147,8 +147,8 @@
           </pCodepageListLabel>
           <lvCodepageList>
             <Analyzing Caption="Analyzing"/>
-            <Any_Codepage Caption="Any Codepage"/>
             <Not_implemented Caption="Not implemented"/>
+            <Any_Codepage Caption="Any Codepage"/>
             <Binary_data Caption="Binary File"/>
           </lvCodepageList>
         </pCodepageList>
@@ -220,9 +220,9 @@
       <statBar>
         <Processing Caption="Traitement"/>
         <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
+        <Codepage Caption="Page de codes"/>
         <Unicode Caption="Unicode"/>
         <NoEncoding Caption="ASCII"/>
-        <Codepage Caption="Page de codes"/>
         <Binary Caption="Binaire"/>
       </statBar>
       <OpenFilesDialog>
@@ -289,6 +289,84 @@
         <btnMerge Hint="Merge the User dictionary words into the Master dictionary." Caption="Merge"/>
       </pButtons>
     </fDictEditForm>
+    <fOptionsDialog Caption="Paramètres de Codepage Witch">
+      <pPages>
+        <tsAbout Hint="À propos de cette application." Caption="À propos">
+          <lbCopyright Caption="Copyright %s"/>
+          <lbVersion Caption="Version %0:s (Build %1:s)"/>
+          <lbApplication Caption="Le &quot;%s&quot;"/>
+        </tsAbout>
+        <tsGeneral Hint="Paramètres généraux de l'application." Caption="Général">
+          <gbUserLanguage Caption="Langue de l'utilisateur">
+            <cxLanguageChoice Default="(par défaut)"/>
+            <pLanguagePreferred>
+              <lbLanguagePreferred Caption="Langue préférée :"/>
+            </pLanguagePreferred>
+            <lbLanguageSystem Caption="Langue du système : %s"/>
+          </gbUserLanguage>
+          <gbMiscellaneous Caption="Divers">
+            <cbShowHints Caption="Afficher les info-bulles au survol de la souris."/>
+            <cbColorButtons Caption="Utiliser des icônes en couleur dans la barre d'outils."/>
+          </gbMiscellaneous>
+          <gbOnlineUpdate Caption="Mise à jour en ligne">
+            <cbAutoCheck Caption="Vérifier automatiquement les mises à jour"/>
+            <pUpdateButton>
+              <btnUpdateCheck Hint="Vérifier sur le serveur en ligne la dernière mise à jour." Caption="Vérifier maintenant..."/>
+            </pUpdateButton>
+          </gbOnlineUpdate>
+        </tsGeneral>
+        <tsSession Hint="Options relatives aux sessions de l'application." Caption="Session">
+          <gbSessionFiles Caption="Fichiers de session">
+            <cbReopenFiles Hint="Rouvrir les fichiers qui n'ont pas été fermés lors de la session précédente." Caption="Rouvrir les fichiers précédents."/>
+            <cbWarnMissing Hint="Avertir si un fichier de la session précédente est manquant." Caption="Avertir si absent."/>
+            <cbOpenExport Hint="Ouvrir automatiquement les fichiers exportés pour vérification." Caption="Ouvrir les fichiers exportés."/>
+          </gbSessionFiles>
+          <gbCodepage Caption="Page de code">
+            <cbAutoSelectCP Hint="Sélectionner automatiquement la page de code préférée pour la conversion." Caption="Sélection automatique de la page de code"/>
+          </gbCodepage>
+        </tsSession>
+        <tsEncoding Hint="Options d'encodage des fichiers en entrée et en sortie." Caption="Encodage">
+          <rgFileEnding Hint="Exiger que les fichiers se terminent par une ligne vide." Caption="Les fichiers se terminent par une nouvelle ligne">
+            <rbFileEndWhatever Hint="Tous les fichiers peuvent se terminer par du texte ou une ligne vide." Caption="Peu importe."/>
+            <rbFileEndExport Hint="S'assurer que les fichiers exportés se terminent par une ligne vide." Caption="Uniquement pour l'exportation."/>
+            <rbFileEndAll Hint="Exiger que les fichiers originaux se terminent par une ligne vide." Caption="Appliquer à tous les fichiers texte."/>
+          </rgFileEnding>
+        </tsEncoding>
+        <tsViewer Hint="Options pour les visionneuses Unicode et DOS." Caption="Visionneuse">
+          <gbUnicodeView Caption="Vue Unicode">
+            <lbUnicodeScale Caption="Échelle de la police %s%%"/>
+            <tbUnicodeScale Caption="10"/>
+          </gbUnicodeView>
+          <gbDOSView Caption="Vue DOS">
+            <lbDOSScale Caption="Échelle de la police %s%%"/>
+            <tbDOSScale Caption="1"/>
+          </gbDOSView>
+        </tsViewer>
+      </pPages>
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnAccept Hint="Accepter et appliquer tous les changements." Caption="Accepter"/>
+          <btnCancel Hint="Ignorer tous les changements." Caption="Annuler"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <fMiddlePanel>
+        <fBodyPanel>
+          <pSectionsPanel>
+            <pSectionLabel>
+              <lbSections Caption="Options"/>
+            </pSectionLabel>
+          </pSectionsPanel>
+          <pPagesPanel>
+            <pPages>
+              <tsViewer>
+                <lbUnicodeScale Caption="Échelle de la police %s%%"/>
+                <lbDOSScale Caption="Échelle de la police %s%%"/>
+              </tsViewer>
+            </pPages>
+          </pPagesPanel>
+        </fBodyPanel>
+      </fMiddlePanel>
+    </fOptionsDialog>
     <fUpdateCheckDialog Caption="Recherche de mise à jour">
       <fLowerPanel>
         <fButtonPanel>
@@ -374,84 +452,6 @@
       </fLowerPanel>
       <Message Text="Le fichier &quot;%s&quot; ne se termine pas par une ligne vide.&#xA;&#xA;Voulez-vous corriger cela en ajoutant un saut de ligne à la fin du fichier ?"/>
     </fCorrectFileEndingDialog>
-    <fOptionsDialog Caption="Paramètres de Codepage Witch">
-      <pPages>
-        <tsAbout Hint="À propos de cette application." Caption="À propos">
-          <lbCopyright Caption="Copyright %s"/>
-          <lbVersion Caption="Version %0:s (Build %1:s)"/>
-          <lbApplication Caption="Le &quot;%s&quot;"/>
-        </tsAbout>
-        <tsGeneral Hint="Paramètres généraux de l'application." Caption="Général">
-          <gbUserLanguage Caption="Langue de l'utilisateur">
-            <cxLanguageChoice Default="(par défaut)"/>
-            <pLanguagePreferred>
-              <lbLanguagePreferred Caption="Langue préférée :"/>
-            </pLanguagePreferred>
-            <lbLanguageSystem Caption="Langue du système : %s"/>
-          </gbUserLanguage>
-          <gbMiscellaneous Caption="Divers">
-            <cbShowHints Caption="Afficher les info-bulles au survol de la souris."/>
-            <cbColorButtons Caption="Utiliser des icônes en couleur dans la barre d'outils."/>
-          </gbMiscellaneous>
-          <gbOnlineUpdate Caption="Mise à jour en ligne">
-            <cbAutoCheck Caption="Vérifier automatiquement les mises à jour"/>
-            <pUpdateButton>
-              <btnUpdateCheck Hint="Vérifier sur le serveur en ligne la dernière mise à jour." Caption="Vérifier maintenant..."/>
-            </pUpdateButton>
-          </gbOnlineUpdate>
-        </tsGeneral>
-        <tsSession Hint="Options relatives aux sessions de l'application." Caption="Session">
-          <gbSessionFiles Caption="Fichiers de session">
-            <cbReopenFiles Hint="Rouvrir les fichiers qui n'ont pas été fermés lors de la session précédente." Caption="Rouvrir les fichiers précédents."/>
-            <cbWarnMissing Hint="Avertir si un fichier de la session précédente est manquant." Caption="Avertir si absent."/>
-            <cbOpenExport Hint="Ouvrir automatiquement les fichiers exportés pour vérification." Caption="Ouvrir les fichiers exportés."/>
-          </gbSessionFiles>
-          <gbCodepage Caption="Page de code">
-            <cbAutoSelectCP Hint="Sélectionner automatiquement la page de code préférée pour la conversion." Caption="Sélection automatique de la page de code"/>
-          </gbCodepage>
-        </tsSession>
-        <tsEncoding Hint="Options d'encodage des fichiers en entrée et en sortie." Caption="Encodage">
-          <rgFileEnding Hint="Exiger que les fichiers se terminent par une ligne vide." Caption="Les fichiers se terminent par une nouvelle ligne">
-            <rbFileEndWhatever Hint="Tous les fichiers peuvent se terminer par du texte ou une ligne vide." Caption="Peu importe."/>
-            <rbFileEndExport Hint="S'assurer que les fichiers exportés se terminent par une ligne vide." Caption="Uniquement pour l'exportation."/>
-            <rbFileEndAll Hint="Exiger que les fichiers originaux se terminent par une ligne vide." Caption="Appliquer à tous les fichiers texte."/>
-          </rgFileEnding>
-        </tsEncoding>
-        <tsViewer Hint="Options pour les visionneuses Unicode et DOS." Caption="Visionneuse">
-          <gbUnicodeView Caption="Vue Unicode">
-            <lbUnicodeScale Caption="Échelle de la police %s%%"/>
-            <tbUnicodeScale Caption="10"/>
-          </gbUnicodeView>
-          <gbDOSView Caption="Vue DOS">
-            <lbDOSScale Caption="Échelle de la police %s%%"/>
-            <tbDOSScale Caption="1"/>
-          </gbDOSView>
-        </tsViewer>
-      </pPages>
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnAccept Hint="Accepter et appliquer tous les changements." Caption="Accepter"/>
-          <btnCancel Hint="Ignorer tous les changements." Caption="Annuler"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <fMiddlePanel>
-        <fBodyPanel>
-          <pSectionsPanel>
-            <pSectionLabel>
-              <lbSections Caption="Options"/>
-            </pSectionLabel>
-          </pSectionsPanel>
-          <pPagesPanel>
-            <pPages>
-              <tsViewer>
-                <lbUnicodeScale Caption="Échelle de la police %s%%"/>
-                <lbDOSScale Caption="Échelle de la police %s%%"/>
-              </tsViewer>
-            </pPages>
-          </pPagesPanel>
-        </fBodyPanel>
-      </fMiddlePanel>
-    </fOptionsDialog>
     <fFileEditor Caption="Codepage Witch - %s">
       <btnCancel Caption="Annuler"/>
       <btnSave Caption="Enregistrer"/>

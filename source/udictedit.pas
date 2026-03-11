@@ -13,6 +13,8 @@ unit uDictEdit;
 
 interface
 
+{ TODO 8 -cDevel Add Dictionary Locking for when threads are analyzing data. }
+
 uses
   {$IFDEF USES_CWString} cwstring, {$ENDIF}
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,

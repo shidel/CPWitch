@@ -86,7 +86,7 @@ object fOptionsDialog: TfOptionsDialog
         object cbAutoSelectCP: TCheckBox
           Left = 8
           Height = 18
-          Hint = 'Automatically select preferred codepage for conversion.'
+          Hint = 'Automatically select the preferred codepage for conversion.'
           Top = 8
           Width = 244
           Align = alTop
