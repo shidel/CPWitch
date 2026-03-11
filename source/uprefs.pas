@@ -28,10 +28,12 @@ type
     cbWarnMissing: TCheckBox;
     cbOpenExport: TCheckBox;
     cbAutoSelectCP: TCheckBox;
+    cbSingleViewer: TCheckBox;
     gbSessionFiles: TGroupBox;
     gbUnicodeView: TGroupBox;
     gbDOSView: TGroupBox;
     gbCodepage: TGroupBox;
+    gbViewers: TGroupBox;
     lbDOSScale: TLabel;
     lbUnicodeScale: TLabel;
     pPages: TPageControl;
@@ -87,8 +89,10 @@ var
   S : String;
 begin
   S:=IntToStr(tbUnicodeScale.Position * 10);
-  lbUnicodeScale.Caption:=GetFormat(ComponentNamePath(tsViewer, Self, True) +
-    'lbUnicodeScale/Caption', [S], 'Font scale %s%%');
+//  lbUnicodeScale.Caption:=GetFormat(ComponentNamePath(tsViewer, Self, True) +
+//    'lbUnicodeScale/Caption', [S], 'Font scale %s%%');
+  lbUnicodeScale.Caption:=GetFormat(
+    'pPages/tsViewer/gbUnicodeView/lbScaleOfUnicode/Caption', [S], 'Font scale %s%%');
 end;
 
 procedure TfOptionsDialog.UpdateDOSScale;
@@ -96,8 +100,10 @@ var
   S : String;
 begin
   S:=IntToStr(tbDOSScale.Position * 100);
-  lbDOSScale.Caption:=GetFormat(ComponentNamePath(tsViewer, Self, True) +
-    'lbDOSScale/Caption', [S], 'Font scale %s%%');
+//  lbDOSScale.Caption:=GetFormat(ComponentNamePath(tsViewer, Self, True) +
+//    'lbDOSScale/Caption', [S], 'Font scale %s%%');
+  lbUnicodeScale.Caption:=GetFormat(
+    'pPages/tsViewer/gbDOSView/lbScaleOfDOS/Caption', [S], 'Font scale %s%%');
 end;
 
 procedure TfOptionsDialog.ApplyUserLanguage;

@@ -1,5 +1,6 @@
 # Upcoming release notes
 
+* Option for single file viewer mode.
 * Dialog translations and file filters.
 * Removed intentional development analyzation delays.
 * Different color compatibility icons for codepage files.

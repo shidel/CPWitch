@@ -336,11 +336,17 @@
           <gbUnicodeView Caption="Unicode Görünümü">
             <lbUnicodeScale Caption="Yazı tipi ölçeği %%%s"/>
             <tbUnicodeScale Caption="10"/>
+            <lbScaleOfUnicode Caption="Font scale %s%%"/>
+            <lbUnicodeScaling Caption="Font scale %s%%"/>
           </gbUnicodeView>
           <gbDOSView Caption="DOS Görünümü">
             <lbDOSScale Caption="Yazı tipi ölçeği %%%s"/>
             <tbDOSScale Caption="1"/>
+            <lbScaleOfDOS Caption="Font scale %s%%"/>
           </gbDOSView>
+          <gbViewers Caption="Viewers">
+            <cbSingleViewer Hint="Only show a single file view pane in the main window." Caption="Single file viewer mode"/>
+          </gbViewers>
         </tsViewer>
       </pPages>
       <fLowerPanel>
@@ -359,13 +365,18 @@
           <pPagesPanel>
             <pPages>
               <tsViewer>
-                <lbUnicodeScale Caption="Yazı tipi ölçeği %%%s"/>
                 <lbDOSScale Caption="Yazı tipi ölçeği %%%s"/>
+                <lbUnicodeScale Caption="Yazı tipi ölçeği %%%s"/>
               </tsViewer>
             </pPages>
           </pPagesPanel>
         </fBodyPanel>
       </fMiddlePanel>
+      <tsViewer>
+        <gbUnicodeView>
+          <lbUnicodeScaling Caption="Font scale %s%%"/>
+        </gbUnicodeView>
+      </tsViewer>
     </fOptionsDialog>
     <fUpdateCheckDialog Caption="Güncelleme Kontrolü">
       <fLowerPanel>

@@ -336,11 +336,17 @@
           <gbUnicodeView Caption="Vista Unicode">
             <lbUnicodeScale Caption="Escala de fuente %s%%"/>
             <tbUnicodeScale Caption="10"/>
+            <lbScaleOfUnicode Caption="Font scale %s%%"/>
+            <lbUnicodeScaling Caption="Font scale %s%%"/>
           </gbUnicodeView>
           <gbDOSView Caption="Vista DOS">
             <lbDOSScale Caption="Escala de fuente %s%%"/>
             <tbDOSScale Caption="1"/>
+            <lbScaleOfDOS Caption="Font scale %s%%"/>
           </gbDOSView>
+          <gbViewers Caption="Viewers">
+            <cbSingleViewer Hint="Only show a single file view pane in the main window." Caption="Single file viewer mode"/>
+          </gbViewers>
         </tsViewer>
       </pPages>
       <fLowerPanel>
@@ -359,13 +365,18 @@
           <pPagesPanel>
             <pPages>
               <tsViewer>
-                <lbUnicodeScale Caption="Escala de fuente %s%%"/>
                 <lbDOSScale Caption="Escala de fuente %s%%"/>
+                <lbUnicodeScale Caption="Escala de fuente %s%%"/>
               </tsViewer>
             </pPages>
           </pPagesPanel>
         </fBodyPanel>
       </fMiddlePanel>
+      <tsViewer>
+        <gbUnicodeView>
+          <lbUnicodeScaling Caption="Font scale %s%%"/>
+        </gbUnicodeView>
+      </tsViewer>
     </fOptionsDialog>
     <fUpdateCheckDialog Caption="Comprobar actualización">
       <fLowerPanel>

@@ -13,8 +13,8 @@ object fOptionsDialog: TfOptionsDialog
     Height = 267
     Top = 37
     Width = 276
-    ActivePage = tsSession
-    TabIndex = 0
+    ActivePage = tsViewer
+    TabIndex = 2
     TabOrder = 0
     object tsSession: TTabSheet
       Hint = 'Application session options.'
@@ -236,6 +236,30 @@ object fOptionsDialog: TfOptionsDialog
           OnChange = tbDOSScaleChange
           Align = alTop
           BorderSpacing.Around = 8
+          TabOrder = 0
+        end
+      end
+      object gbViewers: TGroupBox
+        Left = 0
+        Height = 53
+        Top = 184
+        Width = 270
+        Align = alTop
+        AutoSize = True
+        BorderSpacing.Top = 8
+        Caption = 'Viewers'
+        ClientHeight = 34
+        ClientWidth = 260
+        TabOrder = 2
+        object cbSingleViewer: TCheckBox
+          Left = 8
+          Height = 18
+          Hint = 'Only show a single file view pane in the main window.'
+          Top = 8
+          Width = 244
+          Align = alTop
+          BorderSpacing.Around = 8
+          Caption = 'Single file viewer mode'
           TabOrder = 0
         end
       end

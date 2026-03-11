@@ -314,11 +314,16 @@
           <gbUnicodeView Caption="Unicode View">
             <lbUnicodeScale Caption="lbUnicodeScale"/>
             <tbUnicodeScale Caption="10"/>
+            <lbScaleOfUnicode Caption="Font scale %s%%"/>
           </gbUnicodeView>
           <gbDOSView Caption="DOS View">
             <lbDOSScale Caption="lbDOSScale"/>
             <tbDOSScale Caption="1"/>
+            <lbScaleOfDOS Caption="Font scale %s%%"/>
           </gbDOSView>
+          <gbViewers Caption="Viewers">
+            <cbSingleViewer Hint="Only show a single file view pane in the main window." Caption="Single file viewer mode"/>
+          </gbViewers>
         </tsViewer>
       </pPages>
       <fLowerPanel>
@@ -334,14 +339,6 @@
               <lbSections Caption="Options"/>
             </pSectionLabel>
           </pSectionsPanel>
-          <pPagesPanel>
-            <pPages>
-              <tsViewer>
-                <lbUnicodeScale Caption="Font scale %s%%"/>
-                <lbDOSScale Caption="Font scale %s%%"/>
-              </tsViewer>
-            </pPages>
-          </pPagesPanel>
         </fBodyPanel>
       </fMiddlePanel>
     </fOptionsDialog>

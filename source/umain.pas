@@ -739,6 +739,8 @@ begin
     FDOSScale:=V;
     fCodepageText.Scale:=Point(V,V);
   end;
+  fSingleViewer:=StringToCheckBoxState(UserConfig.GetValue(
+    'Preferences/tsViewer/cbSingleViewer/State', 'Unchecked')) = cbChecked;
 
   UpdateFilterCheck;
   SetApplicationIcons;
