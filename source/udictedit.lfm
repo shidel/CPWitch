@@ -9,6 +9,7 @@ object fDictEditForm: TfDictEditForm
   ClientWidth = 320
   Constraints.MinHeight = 240
   Constraints.MinWidth = 320
+  Position = poScreenCenter
   LCLVersion = '4.0.0.4'
   object pTop: TPanel
     Left = 8

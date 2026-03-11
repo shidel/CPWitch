@@ -19,10 +19,10 @@
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
-      <MinorVersionNr Value="6"/>
-      <RevisionNr Value="1"/>
-      <BuildNr Value="106"/>
-      <StringTable Comments="UTF-8 and Codepage Utility" CompanyName="Jerome Shidel" FileDescription="CPWitch" InternalName="CPWitch" LegalCopyright="2026 (c) Jerome Shidel" OriginalFilename="CPWitch" ProductName="Codepage Witch" ProductVersion="0.6"/>
+      <MinorVersionNr Value="7"/>
+      <BuildNr Value="109"/>
+      <Attributes pvaPreRelease="True"/>
+      <StringTable Comments="UTF-8 and Codepage Utility" CompanyName="Jerome Shidel" FileDescription="CPWitch" InternalName="CPWitch" LegalCopyright="2026 (c) Jerome Shidel" OriginalFilename="CPWitch" ProductName="Codepage Witch" ProductVersion="0.7"/>
     </VersionInfo>
     <BuildModes>
       <Item Name="Default" Default="True"/>

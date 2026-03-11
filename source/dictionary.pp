@@ -372,6 +372,8 @@ begin
 end;
 
 procedure ReloadDictionaries;
+var
+  UDP : String;
 begin
   if Assigned(MasterDictionary) then FreeAndNil(MasterDictionary);
   if Assigned(UserDictionary) then FreeAndNil(UserDictionary);
@@ -388,7 +390,15 @@ begin
   UserDictionary:=TUserDictionary.Create;
   try
     LogMessage(vbExcessive, 'Load User dictionary.');
-    UserDictionary.FileName:=UserDataPath+UserDictFile;
+    // Since UserDataPath is something like blah/blah/CPWitch/0.1/, and the
+    // dictionary format is not going to likely change. We will strip of the
+    // major.minor version for the path. That way the user does not need to
+    // copy or recreate their dictionary between versions. Nor, do we need
+    // to search for a previous one under an earlier version and copy it
+    // to the latest version. This will also allow all versions even if
+    // regressing to a older one to use thesame dictionary.
+    UDP:=IncludeTrailingPathDelimiter(ExtractFilePath(ExcludeTrailing(UserDataPath, PathDelimiter)));
+    UserDictionary.FileName:=UDP+UserDictFile;
     LogMessage(vbVerbose, 'User dictionary is ready.');
   except
     FreeAndNil(UserDictionary);
