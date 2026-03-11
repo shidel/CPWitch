@@ -1,5 +1,6 @@
 # Major feature To-Do list
 
+* Warning dialogs when attempting to use 'improper' codepage for text.
 * Options for Line Endings Style (CRLF, LF, CR)
 * Diacritical combining when possible.
 * Character Substitutions.

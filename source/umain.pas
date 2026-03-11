@@ -1388,16 +1388,31 @@ begin
   { TODO 0 -cLazarus_Bug In Lazarus 4.4, Minimizing and restoring a window on
   Windows causes all but the pViewers panel (alClient) to move around and change
   positions. This will force them back into the correcto order. }
-  if (pFileList.Left < spFileCP.Left) and
+  if not (
+  (pFileList.Left < spFileCP.Left) and
   (spFileCP.Left < pCodepageList.Left) and
   (pCodepageList.Left < spCPViewers.Left) and
-  (spCPViewers.Left < pViewers.Left) then exit;
-   pViewers.Left:=10000;
-   spCPViewers.Left:=9000;
-   pCodepageList.Left:=8000;
-   spFileCP.Left:=7000;
-   pFileList.Left:=0;
+  (spCPViewers.Left < pViewers.Left)
+  ) then begin
+     pViewers.Left:=10000;
+     spCPViewers.Left:=9000;
+     pCodepageList.Left:=8000;
+     spFileCP.Left:=7000;
+     pFileList.Left:=0;
+   end;
    {$ENDIF}
+   // Since we chan hide/unhide the viewer for unicode, We might as well
+   // check on the Viewer Panels on all platforms. With how the Left + Left
+   // panels behave, who knows what order these will be in when restoring their
+   // properties of minimizing the app.
+   if (Not fSingleViewer) and (not (
+   (pViewUnicode.Top < spUnicodeCP.Top) and
+   (spUnicodeCP.Top < pCodepage.Top)
+   )) then begin
+     pCodepage.Top:=10000;
+     spUnicodeCP.Top := 9000;
+     pViewUnicode.Top:=0;
+   end;
 end;
 
 procedure TfMain.SetSaveDialogText(Encoding : TWitchEncoding);
