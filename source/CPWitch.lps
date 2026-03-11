@@ -19,9 +19,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="42" Y="21"/>
-        <FoldState Value=" TL00404 p0vc21074 TCQG3 T8ke41 T3lA03746 plSo604615]B5nG0C314]BJmG0Q2 pjHk60A22]KkYmO0N2 Pi7W0 T1lB02412451214[;5RuO093]F2]kEn10m24321 PjbpP]p6lS021]jB pX,T01]: PBlB]S0lXc8[S447 pct6@3986 pjWn2B28]91iCF5823B5]^0ocG TMrJ21011C2]*rQ24"/>
+        <TopLine Value="1037"/>
+        <CursorPos X="23" Y="1060"/>
+        <FoldState Value=" TL00404 p0vc21064 T8ke41 T3lA03737 pleo604]9jWk9]Z]9Yk70C6 pifjO0l213]cO]cY02[V45lF0N2 Pi7W0 T1lB]N12451214111]Zkdud0c2]H2]P]+m9vA04 T6lS0]J319 pU+F01054 PBoO]!0lXc81]T47 pSt6@3986 pjWn2B26222523B5 Pjdq6G TMrJ21011C2]:rQ2&apos;"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -33,13 +35,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uPrefs"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="68"/>
         <CursorPos X="22" Y="108"/>
         <UsageCount Value="200"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="ufixending.pas"/>
@@ -91,9 +90,9 @@
       <Unit>
         <Filename Value="witch.pas"/>
         <UnitName Value="Witch"/>
-        <EditorIndex Value="4"/>
-        <TopLine Value="235"/>
-        <CursorPos Y="387"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="572"/>
+        <CursorPos X="28" Y="595"/>
         <FoldState Value=" T3lB042223236 pkIq2064"/>
         <UsageCount Value="102"/>
         <Loaded Value="True"/>
@@ -157,12 +156,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uDictEdit"/>
-        <EditorIndex Value="3"/>
-        <CursorPos X="54" Y="21"/>
-        <FoldState Value=" T3iX0L11215 pjKkV0,M"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="40" Y="16"/>
+        <FoldState Value=" T3iZ0L11215 pjKkV0,M"/>
         <UsageCount Value="94"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/taskmngr.pp"/>
@@ -196,7 +193,7 @@
         <UsageCount Value="2"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="19">
+    <JumpHistory HistoryIndex="20">
       <Position>
         <Filename Value="witch.pas"/>
         <Caret Line="373" Column="59" TopLine="329"/>
@@ -274,8 +271,12 @@
         <Caret Line="596" Column="43" TopLine="543"/>
       </Position>
       <Position>
-        <Filename Value="uprefs.pas"/>
-        <Caret Line="108" Column="23" TopLine="68"/>
+        <Filename Value="witch.pas"/>
+        <Caret Line="80" Column="20" TopLine="64"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="1062" Column="16" TopLine="873"/>
       </Position>
     </JumpHistory>
     <RunParams>

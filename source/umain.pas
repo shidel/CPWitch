@@ -1023,6 +1023,7 @@ end;
 procedure TfMain.UpdateCodepageView;
 var
   W : TWitchItem;
+  C : TCodepageToUTF8;
 begin
   if Not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then begin
     FViewedCodepage:=-2;
@@ -1053,14 +1054,12 @@ begin
           +'Unsupported_file/Binary/Text', 'Binary data files are not supported.'));
        end;
       weCodepage : begin
-        fCodepageText.Codepage:=-1;
         LogMessage(vbVerbose, 'Codepage Item: ' + W.DisplayName + ' (Codepage ' +
           IntToStr(FActiveCodepage) + ')');
-  { TODO 9 -cDevel Implement Codepage View for Codepage encoded files. }
-
-        fCodepageText.AddError(
-        GetTranslation(ComponentNamePath(lvCodepageList, Self, True)
-          +'Not_implemented/Caption', 'Not implemented'));
+        fCodepageText.Codepage:=FActiveCodepage;
+        C:=W.AsUnicode(FActiveCodepage, True);
+        fCodepageText.AddText(RawByteString(C.Converted));
+        C.Free;
       end;
       weUnicode : begin
         LogMessage(vbVerbose, 'Unicode Item: ' + W.DisplayName + ' (Codepage ' +
