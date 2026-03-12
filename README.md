@@ -1,6 +1,6 @@
 # The Codepage Witch
-Utility to help determine the appropriate codepage for a UTF-8 encoded Unicode
-text file and help convert it to codepage text for DOS. Oh, and of course to
+A utility to help determine the appropriate codepage for a UTF-8 encoded Unicode
+text file and perform a conversion to codepage text for DOS. Oh, and of course to
 go the opposite direction as well.
 ![Preview Version 0.7.0.109](screenshots/macOS-0.7.0.109.png)
 Pre-compiled versions of the Codepage Witch are available for
