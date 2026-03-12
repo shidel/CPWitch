@@ -19,10 +19,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="59" Y="27"/>
-        <FoldState Value=" TL00404 p0x021064 T3lB03A pjQk80n7 pkSm7046]ITk4]Z]I1kH0C]IifjO0l2]RCkM0v3]9Pl40Y114]BglZ0N2 Pi7W0 T1lC02412551611]V4vc093413[j5WtE0H01121 T6lT0213318 pS=W023 T0lYc81A47 pJu9@304786 pjQnDB2051222251F4 Pgr3G TMsT21]^C2 PB:33("/>
+        <CursorPos X="33" Y="20"/>
+        <FoldState Value=" TL00404 p0x021 T3lB03A pjQk80n617 pkKpB061 Pi180 T1lC0241255161]Mj4sJ]N6lT]:331]=0lYc81A4 PJrRB TMsT21011C2 PBlb2H"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -60,6 +59,17 @@
         <UsageCount Value="206"/>
       </Unit>
       <Unit>
+        <Filename Value="udifflocale.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fDiffLocaleDialog"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uDiffLocale"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="70"/>
+        <CursorPos X="29" Y="81"/>
+        <UsageCount Value="24"/>
+      </Unit>
+      <Unit>
         <Filename Value="mpla/pasext.pp"/>
         <UnitName Value="PasExt"/>
         <EditorIndex Value="-1"/>
@@ -71,11 +81,13 @@
       <Unit>
         <Filename Value="mpla/multiapp.pp"/>
         <UnitName Value="MultiApp"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="1957"/>
-        <CursorPos X="77" Y="1937"/>
-        <FoldState Value=" TL0041267A411121D pg;0050318 p2zQ21011 TMa]I34 pFil92]H4i605 T7l3I%013 Pi7mCN T8l42B329 PjQmG2 TCq2I3 T3rE098 piajK03[94ZjH[96YjJ0B9 pjTjO2A2 pkCiA286]I1l30I1111716]OTmY0QA]pdk50B51D1]DmCqf03B[M4ig247]9XjS091 PaB0 T6rG01b]MT(A013 T1rI05D pj8kT09C]QYkQ08B]I5kY256 pj2k80X211111337 pkCoH0AE]ifke0R01D132H]ONrK0G9 PjLja0 T0sLW5D]dZsFn66[94i5n3818 pjfw1W39]Kejf73016 PNr2VR"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="1274"/>
+        <CursorPos X="37" Y="1343"/>
+        <FoldState Value=" TL0041267A411121D pg;0050318 p2zT21011 TMa]I34 pFilC2]H4i605 T7oIPZ2 PFieN T8l42B[\49 PjGmG2 TCq2I3 T3rE098 piajK03[94ZjH[96YjJ0B9 pjTjO2A2 pkCiA286]I1l30I]^17151]ZmJpC0E71D1A]DZrS03B],dig247]9XjS091 PaB0 T6rG01b]MT(D013 T1rI05D pj8kT09C]QYkQ08B]I5kY256 pj2k80X2111113351D plbrS0831D132H]FKs90G9 PjLja0 T0sLW5D]%ZsFn66[94i5n381314]^cw4W39]Mejf73016 PNr2Va"/>
         <UsageCount Value="73"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/preferences.pp"/>
@@ -176,19 +188,8 @@
         <CursorPos X="40" Y="224"/>
         <UsageCount Value="7"/>
       </Unit>
-      <Unit>
-        <Filename Value="udifflocale.pas"/>
-        <IsPartOfProject Value="True"/>
-        <ComponentName Value="fDiffLocaleDialog"/>
-        <ResourceBaseClass Value="Form"/>
-        <UnitName Value="uDiffLocale"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="70"/>
-        <CursorPos X="29" Y="81"/>
-        <UsageCount Value="24"/>
-      </Unit>
     </Units>
-    <JumpHistory HistoryIndex="21">
+    <JumpHistory HistoryIndex="22">
       <Position>
         <Filename Value="umain.pas"/>
         <Caret Line="609" Column="56" TopLine="572"/>
@@ -235,10 +236,6 @@
       </Position>
       <Position>
         <Filename Value="umain.pas"/>
-        <Caret Line="21" Column="44" TopLine="253"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
         <Caret Line="364" Column="17" TopLine="335"/>
       </Position>
       <Position>
@@ -276,6 +273,14 @@
       <Position>
         <Filename Value="umain.pas"/>
         <Caret Line="24" Column="27"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="105" Column="21" TopLine="94"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/multiapp.pp"/>
+        <Caret Line="243" Column="74" TopLine="159"/>
       </Position>
     </JumpHistory>
     <RunParams>

@@ -498,7 +498,7 @@ begin
   FlattenControl(pViewUnicode);
   FlattenControl(pCodepage);
   FlattenControl(pTop);
-  FlattenControl(pBody);
+  FlattenControl(pBody, false);
 
   // Disable HideSelection for Windows. Or, when selecting things like the
   // codepage, The current File Selected becomes no longer highlighted.
