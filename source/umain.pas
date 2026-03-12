@@ -157,6 +157,7 @@ type
       procedure UpdateFilterCheck;
       procedure UpdateLocale;
       procedure UpdateLocaleList;
+      procedure UpdateDictionary;
       procedure SelectCodepage(Sender : TObject);
       procedure SelectFile(Sender : TObject);
       procedure SessionSave;
@@ -240,7 +241,7 @@ begin
     fDictEditForm.SetFocus;
     FDictEditForm.WitchItem:=nil;
     FDictEditForm.WitchList:=FWitch;
-    SelectFile(Self);
+    UpdateDictionary;
   end;
 end;
 
@@ -927,6 +928,7 @@ begin
   UpdateCodepageViewLabel;
   UpdateLocale;
   UpdateButtons;
+  UpdateDictionary;
 end;
 
 procedure TfMain.UpdateCodepageList;
@@ -1292,6 +1294,16 @@ begin
   end;
 end;
 
+procedure TfMain.UpdateDictionary;
+begin
+  if Assigned(FDictEditForm) and (fDictEditForm.Visible = True) then begin
+    if Assigned(lvFileList.Selected) then
+      FDictEditForm.WitchItem:=TWitchItem(lvFileList.Selected.Data)
+    else
+      FDictEditForm.WitchItem:=nil;
+  end;
+end;
+
 procedure TfMain.SelectCodepage(Sender: TObject);
 var
   E: Integer;
@@ -1326,8 +1338,6 @@ begin
   FViewedCodepage:=-2;
   if Assigned(lvFileList.Selected) then begin
     S:=lvFileList.Selected.Caption;
-    if Assigned(FDictEditForm) and (fDictEditForm.Visible = True) then
-      FDictEditForm.WitchItem:=TWitchItem(lvFileList.Selected.Data);
   end else
     S:='(null)';
   LogMessage(vbVerbose, 'Select File: ' + S);
@@ -1346,6 +1356,7 @@ begin
       end;
     end;
   end;
+
 end;
 
 procedure TfMain.SessionSave;
