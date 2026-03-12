@@ -874,7 +874,9 @@ begin
 
   if W.ListItem = lvFileList.Selected then begin
     UpdateMetaData;
+    FDictEditForm.WitchItem:=nil;
     SelectFile(Self);
+
   end;
 end;
 
