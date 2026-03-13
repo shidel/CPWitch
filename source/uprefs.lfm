@@ -13,8 +13,8 @@ object fOptionsDialog: TfOptionsDialog
     Height = 267
     Top = 37
     Width = 276
-    ActivePage = tsViewer
-    TabIndex = 2
+    ActivePage = tsTextEditor
+    TabIndex = 1
     TabOrder = 0
     object tsSession: TTabSheet
       Hint = 'Application session options.'
@@ -95,6 +95,70 @@ object fOptionsDialog: TfOptionsDialog
           Checked = True
           State = cbChecked
           TabOrder = 0
+        end
+      end
+    end
+    object tsTextEditor: TTabSheet
+      Hint = 'Text editor options.'
+      Caption = 'Text Editor'
+      ClientHeight = 231
+      ClientWidth = 270
+      object gbExternalEditor: TGroupBox
+        Left = 0
+        Height = 85
+        Top = 0
+        Width = 270
+        Align = alTop
+        AutoSize = True
+        Caption = 'External Editor'
+        ClientHeight = 66
+        ClientWidth = 260
+        TabOrder = 0
+        object cbUseExternalEditor: TCheckBox
+          Left = 8
+          Height = 18
+          Hint = 'Use an external text editor instead of the simple built-in editor .'
+          Top = 8
+          Width = 244
+          Align = alTop
+          BorderSpacing.Around = 8
+          Caption = 'Use an external text editor'
+          TabOrder = 0
+          OnChange = cbUseExternalEditorChange
+        end
+        object pEditor: TPanel
+          Left = 8
+          Height = 24
+          Top = 34
+          Width = 244
+          Align = alTop
+          AutoSize = True
+          BorderSpacing.Around = 8
+          ClientHeight = 24
+          ClientWidth = 244
+          TabOrder = 1
+          object edExternalEditor: TEdit
+            Left = 1
+            Height = 22
+            Top = 1
+            Width = 167
+            Align = alClient
+            TabOrder = 0
+            OnEditingDone = edExternalEditorEditingDone
+          end
+          object btnBrowseEditor: TButton
+            Left = 176
+            Height = 22
+            Hint = 'Browse for external text editor.'
+            Top = 1
+            Width = 67
+            Align = alRight
+            AutoSize = True
+            BorderSpacing.Left = 8
+            Caption = 'Browse'
+            TabOrder = 1
+            OnClick = btnBrowseEditorClick
+          end
         end
       end
     end
@@ -264,5 +328,10 @@ object fOptionsDialog: TfOptionsDialog
         end
       end
     end
+  end
+  object DlgBrowseEditor: TOpenDialog
+    Options = [ofReadOnly, ofPathMustExist, ofEnableSizing, ofDontAddToRecent, ofViewDetail]
+    Left = 304
+    Top = 272
   end
 end

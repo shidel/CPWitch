@@ -307,6 +307,21 @@
             <cbAutoSelectCP Hint="Automatically select preferred codepage for conversion." Caption="Auto select codepage"/>
           </gbCodepage>
         </tsSession>
+        <tsTextEditor Hint="Text editor options." Caption="Text Editor">
+          <gbExternalEditor Caption="External Editor">
+            <cbUseExternalEditor Hint="Use an external text editor instead of the simple built-in editor ." Caption="Use an external text editor"/>
+            <pEditor>
+              <btnBrowseEditor Hint="Browse for external text editor." Caption="Browse"/>
+            </pEditor>
+            <BrowseDialog Caption="Browser for external text editor">
+              <Title Caption="Browser for external text editor"/>
+              <File>
+                <Unix Exec="All files|*"/>
+                <Windows Exec="Executable files|*.EXE|All files|*.*"/>
+              </File>
+            </BrowseDialog>
+          </gbExternalEditor>
+        </tsTextEditor>
         <tsEncoding Hint="File input and output encoding options." Caption="Encoding">
           <rgFileEnding Hint="Require that files must end on a blank line." Caption="Files end with New Line">
             <rbFileEndWhatever Hint="All files can end wth text or blank line." Caption="Don't care."/>

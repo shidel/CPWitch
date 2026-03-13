@@ -307,6 +307,37 @@
             <cbAutoSelectCP Hint="Selecionar automaticamente a codepage preferida para conversão." Caption="Selecionar codepage automaticamente"/>
           </gbCodepage>
         </tsSession>
+		<tsTextEditor Hint="Opções do editor de texto." Caption="Editor de Texto">
+          <gbExternalEditor Caption="Editor Externo">
+            <cbUseExternalEditor Hint="Utilizar um editor de texto externo em vez do editor incorporado simples." Caption="Utilizar um editor de texto externo"/>
+            <pEditor>
+              <btnBrowseEditor Hint="Procurar um editor de texto externo." Caption="Procurar"/>
+            </pEditor>
+            <BrowseDialog Caption="Procurar um editor de texto externo">
+              <Title Caption="Procurar um editor de texto externo"/>
+              <File>
+                <Unix Exec="Todos os ficheiros|*"/>
+                <Windows Exec="Ficheiros executáveis|*.EXE|Todos os ficheiros|*.*"/>
+              </File>
+            </BrowseDialog>
+          </gbExternalEditor>
+        </tsTextEditor>
+        <tsTextEditor Hint="Text editor options." Caption="Text Editor">
+          <gbExternalEditor Caption="External Editor">
+            <cbUseExternalEditor Hint="Use an external text editor instead of the simple built-in editor ." Caption="Use an external text editor"/>
+            <pEditor>
+              <btnBrowseEditor Hint="Browse for external text editor." Caption="Browse"/>
+              <edExternalEditor Caption="bbedit"/>
+            </pEditor>
+            <BrowseDialog Caption="Browser for external text editor">
+              <Title Caption="Browser for external text editor"/>
+              <File>
+                <Unix Exec="All files|*"/>
+                <Windows Exec="Executable files|*.EXE|All files|*.*"/>
+              </File>
+            </BrowseDialog>
+          </gbExternalEditor>
+        </tsTextEditor>
         <tsEncoding Hint="Opções de codificação de entrada e saída de ficheiro." Caption="Codificação">
           <rgFileEnding Hint="Exigir que os ficheiros terminem com uma linha em branco." Caption="Ficheiros terminam com nova linha">
             <rbFileEndWhatever Hint="Todos os ficheiros podem terminar com texto ou linha em branco." Caption="Tanto faz."/>

@@ -16,6 +16,7 @@ object fMain: TfMain
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnDropFiles = FormDropFiles
+  OnResize = FormResize
   object pTop: TPanel
     Left = 4
     Height = 58

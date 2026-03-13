@@ -307,6 +307,37 @@
             <cbAutoSelectCP Hint="Bevorzugte Codepage für die Konvertierung automatisch auswählen." Caption="Codepage automatisch auswählen"/>
           </gbCodepage>
         </tsSession>
+	    <tsTextEditor Hint="Texteditor-Optionen." Caption="Texteditor">
+          <gbExternalEditor Caption="Externer Editor">
+            <cbUseExternalEditor Hint="Verwenden Sie einen externen Texteditor anstelle des einfachen integrierten Editors." Caption="Externen Texteditor verwenden"/>
+            <pEditor>
+              <btnBrowseEditor Hint="Nach externem Texteditor suchen." Caption="Durchsuchen"/>
+            </pEditor>
+            <BrowseDialog Caption="Suche nach externem Texteditor">
+              <Title Caption="Suche nach externem Texteditor"/>
+              <File>
+                <Unix Exec="Alle Dateien|*"/>
+                <Windows Exec="Ausführbare Dateien|*.EXE|Alle Dateien|*.*"/>
+              </File>
+            </BrowseDialog>
+          </gbExternalEditor>
+        </tsTextEditor>
+        <tsTextEditor Hint="Text editor options." Caption="Text Editor">
+          <gbExternalEditor Caption="External Editor">
+            <cbUseExternalEditor Hint="Use an external text editor instead of the simple built-in editor ." Caption="Use an external text editor"/>
+            <pEditor>
+              <btnBrowseEditor Hint="Browse for external text editor." Caption="Browse"/>
+              <edExternalEditor Caption="bbedit"/>
+            </pEditor>
+            <BrowseDialog Caption="Browser for external text editor">
+              <Title Caption="Browser for external text editor"/>
+              <File>
+                <Unix Exec="All files|*"/>
+                <Windows Exec="Executable files|*.EXE|All files|*.*"/>
+              </File>
+            </BrowseDialog>
+          </gbExternalEditor>
+        </tsTextEditor>
         <tsEncoding Hint="Dateieingabe- und Ausgabe-Kodierungsoptionen." Caption="Kodierung">
           <rgFileEnding Hint="Voraussetzen, dass Dateien auf einer Leerzeile enden müssen." Caption="Dateien enden mit neuer Zeile">
             <rbFileEndWhatever Hint="Alle Dateien können mit Text oder einer Leerzeile enden." Caption="Nicht wichtig."/>

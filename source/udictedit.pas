@@ -61,6 +61,7 @@ type
     procedure DoCreate; override;
     procedure DoDestroy; override;
     procedure DoShow; override;
+    procedure EnforceLayout; override;
   public
     property WitchItem : TWitchItem read FWitchItem write SetWitchItem;
     property WitchList : TWitch read FWitchList write SetWitchList;
@@ -386,6 +387,17 @@ begin
   DoUpdateWords;
   DoUpdateWordList;
   DoUpdateButtons;
+end;
+
+procedure TfDictEditForm.EnforceLayout;
+begin
+  inherited EnforceLayout;
+  if Not Assigned(PButtons) then exit;
+  if Not Assigned(pStatusBar) then exit;
+  if pButtons.Top > pStatusBar.Top then begin
+    pStatusBar.Top:=10000;
+    pButtons.Top:=9000;
+  end;
 end;
 
 initialization

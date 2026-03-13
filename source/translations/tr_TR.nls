@@ -307,6 +307,37 @@
             <cbAutoSelectCP Hint="Dönüştürme için tercih edilen kod sayfasını otomatik olarak seç." Caption="Kod sayfasını otomatik seç"/>
           </gbCodepage>
         </tsSession>
+		<tsTextEditor Hint="Metin düzenleyici seçenekleri." Caption="Metin Düzenleyici">
+          <gbExternalEditor Caption="Harici Düzenleyici">
+            <cbUseExternalEditor Hint="Basit yerleşik düzenleyici yerine harici bir metin düzenleyici kullanın." Caption="Harici bir metin düzenleyici kullan"/>
+            <pEditor>
+              <btnBrowseEditor Hint="Harici metin düzenleyiciye göz atın." Caption="Gözat"/>
+            </pEditor>
+            <BrowseDialog Caption="Harici metin düzenleyici tarayıcısı">
+              <Title Caption="Harici metin düzenleyici tarayıcısı"/>
+              <File>
+                <Unix Exec="Tüm dosyalar|*"/>
+                <Windows Exec="Yürütülebilir dosyalar|*.EXE|Tüm dosyalar|*.*"/>
+              </File>
+            </BrowseDialog>
+          </gbExternalEditor>
+        </tsTextEditor>
+        <tsTextEditor Hint="Text editor options." Caption="Text Editor">
+          <gbExternalEditor Caption="External Editor">
+            <cbUseExternalEditor Hint="Use an external text editor instead of the simple built-in editor ." Caption="Use an external text editor"/>
+            <pEditor>
+              <btnBrowseEditor Hint="Browse for external text editor." Caption="Browse"/>
+              <edExternalEditor Caption="bbedit"/>
+            </pEditor>
+            <BrowseDialog Caption="Browser for external text editor">
+              <Title Caption="Browser for external text editor"/>
+              <File>
+                <Unix Exec="All files|*"/>
+                <Windows Exec="Executable files|*.EXE|All files|*.*"/>
+              </File>
+            </BrowseDialog>
+          </gbExternalEditor>
+        </tsTextEditor>
         <tsEncoding Hint="Dosya girişi ve çıkışı kodlama seçenekleri." Caption="Kodlama">
           <rgFileEnding Hint="Dosyaların boş bir satırla bitmesini zorunlu tut." Caption="Dosyalar Yeni Satırla Biter">
             <rbFileEndWhatever Hint="Tüm dosyalar metin veya boş satırla bitebilir." Caption="Önemli değil."/>

@@ -105,6 +105,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
+    procedure FormResize(Sender: TObject);
     procedure tiFileWatchTimer(Sender: TObject);
     procedure lvCodepageListSelectItem(Sender: TObject; Item: TListItem;
       Selected: Boolean);
@@ -135,6 +136,8 @@ type
       fLocales : TLocaleItems;
       fAutoSelectCP : boolean;
       fSingleViewer : boolean;
+      fUseExternalEditor : boolean;
+      fExternalEditor : String;
       procedure PopulateCodepageList(Item : TWitchItem);
       procedure SetCodepageFilter(AValue: TCodepageFilter);
       procedure SetUnicodeView( S : String );
@@ -144,12 +147,14 @@ type
       procedure FormSettingsLoad(Sender: TObject);
       procedure FormSettingsSave(Sender: TObject);
       procedure WitchOnAnalyzed(Sender : TObject);
+      procedure EditFile(Sender : TObject);
       procedure FileWasEdited(Sender : TObject);
       procedure FirstShow(Sender : TObject);
       procedure SetApplicationIcons;
       procedure UpdateCodepageViewLabel;
       procedure UpdateMetaData;
       procedure UpdateCodepageList;
+      procedure UpdateStatusBarFile;
       procedure UpdateStatusBar;
       procedure UpdateUnicodeView;
       procedure UpdateCodepageView;
@@ -177,6 +182,10 @@ var
   fMain: TfMain;
 
 implementation
+
+{$IFDEF Darwin}
+uses Process;
+{$ENDIF}
 
 {$R *.lfm}
 
@@ -247,20 +256,17 @@ end;
 
 procedure TfMain.actEditASCIIExecute(Sender: TObject);
 begin
-  if CanEdit then
-    FileEditor(TWitchItem(lvFileList.Selected.Data).FileName, @FileWasEdited);
+  EditFile(Sender);
 end;
 
 procedure TfMain.actEditCodepageExecute(Sender: TObject);
 begin
-  if CanEdit then
-    FileEditor(TWitchItem(lvFileList.Selected.Data).FileName, @FileWasEdited);
+  EditFile(Sender);
 end;
 
 procedure TfMain.actEditUnicodeExecute(Sender: TObject);
 begin
-  if CanEdit then
-    FileEditor(TWitchItem(lvFileList.Selected.Data).FileName, @FileWasEdited);
+  EditFile(Sender);
 end;
 
 procedure TfMain.actExportASCIIExecute(Sender: TObject);
@@ -426,6 +432,8 @@ begin
   fWatchIndex:=0;
   fLocales:=[];
   fSingleViewer:=False;
+  fUseExternalEditor:=False;
+  fExternalEditor:='';
 
   fWitch := TWitch.Create;
   fWitch.OnAnalyzed:=@WitchOnAnalyzed;
@@ -554,6 +562,11 @@ var
 begin
   for I := High(FileNames) downto 0 do
     OpenFile(FileNames[I], I=0);
+end;
+
+procedure TfMain.FormResize(Sender: TObject);
+begin
+  UpdateStatusBarFile;
 end;
 
 procedure TfMain.tiFileWatchTimer(Sender: TObject);
@@ -756,6 +769,32 @@ begin
   end;
 end;
 
+{$IFDEF Darwin}
+function GetAppBundleExec(S : String) : String;
+var
+  R : String;
+begin
+  Result:='';
+  try
+    S:=IncludeTrailingPathDelimiter(S);
+    if not RunCommand('/usr/bin/defaults', ['read', S + 'Contents/Info.plist',
+    'CFBundleExecutable'],R) then
+      raise Exception.Create('could not execute');
+    R:=Trim(R);
+    S:=S+ 'Contents/MacOS/' + R;
+    if FileExists(S) then
+      Result:=S
+    else
+      raise Exception.Create('invalid result: ' + R);
+  except
+    on E : Exception do begin
+      LogMessage(vbMinimal, 'Unable to determine executable for Application Bundle:'
+      + LF + S + LF + E.Message);
+    end;
+  end;
+end;
+{$ENDIF}
+
 procedure TfMain.FormSettingsLoad(Sender: TObject);
 var
   S : String;
@@ -793,6 +832,17 @@ begin
   { TODO 5 -cDevel Add load color settings for Good/Bad mappings }
 
   // Values set and managed through OptionsDialog preferences.
+  fUseExternalEditor:=StringToCheckBoxState(UserConfig.GetValue(
+    'Preferences/tsTextEditor/cbUseExternalEditor/State', 'Unchecked')) = cbChecked;
+  fExternalEditor:=RawByteString(UserConfig.GetValue(
+    'Preferences/tsTextEditor/edExternalEditor/Value', ''));
+  {$IFDEF Darwin}
+  // if DirectoryExists(fExternalEditor) and HasTrailing(fExternalEditor, '.app', false) then
+  //  fExternalEditor:=GetAppBundleExec(fExternalEditor);
+  {$ENDIF}
+  if fUseExternalEditor and (fExternalEditor <> '') then
+    LogMessage(vbNormal, 'External editor: ' + fExternalEditor);
+
   fFileReopen:=StringToCheckBoxState(UserConfig.GetValue(
     'Preferences/tsSession/cbReopenFiles/State', 'Unchecked')) = cbChecked;
   fFileWarn:=StringToCheckBoxState(UserConfig.GetValue(
@@ -877,6 +927,32 @@ begin
     FDictEditForm.WitchItem:=nil;
     SelectFile(Self);
 
+  end;
+end;
+
+procedure TfMain.EditFile(Sender: TObject);
+begin
+  if CanEdit then begin
+    if fUseExternalEditor and (fExternalEditor<>'') then begin // and FileExists(fExternalEditor) then begin
+      try
+        {$if defined(Darwin)}
+          RunAsync('open', ['-a', fExternalEditor, TWitchItem(lvFileList.Selected.Data).FileName]);
+        {$elseif defined(Windows)}
+          RunAsync('cmd', ['/c', 'start', '""', fExternalEditor, TWitchItem(lvFileList.Selected.Data).FileName]);
+        {$elseif defined(Linux)}
+        { maybe xdg-open }
+          RunAsync(fExternalEditor, [TWitchItem(lvFileList.Selected.Data).FileName]);
+        {$else}
+          raise Exception.Create('unknown host OS');
+        {$endif}
+
+        LogMessage(vbNormal, 'Open external editor with: ' + TWitchItem(lvFileList.Selected.Data).FileName);
+        Exit;
+      except
+        LogMessage(vbMinimal, 'Failed to launch external editor: ' + fExternalEditor);
+      end;
+    end;
+    FileEditor(TWitchItem(lvFileList.Selected.Data).FileName, @FileWasEdited);
   end;
 end;
 
@@ -982,6 +1058,40 @@ begin
   lvCodepageList.EndUpdate;
 end;
 
+procedure TfMain.UpdateStatusBarFile;
+var
+  W : TWitchItem;
+  I, P, PW, M, Gutter : integer;
+  S : String;
+begin
+  PW := statBar.Canvas.Handle; // Make sure Canvas is ready for textwidth.
+  P := statBar.Panels.Count - 1;
+  if not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then begin
+     statBar.Panels[P].Text:='';
+    Exit;
+  end;
+  W:=TWitchItem(lvFileList.Selected.Data);
+  PW := 0;
+  for I := 0 to P - 1 do
+    Inc(PW, statBar.Panels[I].Width + 1);
+  {$if defined(darwin)}
+    Gutter := -25;
+  {$elseif defined(windows)}
+    Gutter := 10;
+  {$else}
+    Gutter := (15 * Screen.PixelsPerInch) div 96;
+  {$endif}
+  PW := statBar.ClientWidth - PW - Gutter;
+  statBar.Canvas.Font := statBar.Font;
+  M:=100;
+  repeat
+    S:=SPACE2+FriendlyPath(AppBasePath, W.FileName, 1, M);
+    if (statBar.Canvas.TextWidth(S) < PW) then Break;
+    Dec(M,2);
+  until (M < 10);
+  statBar.Panels[P].Text:=S;
+end;
+
 procedure TfMain.UpdateStatusBar;
 const
   spiEncoding = 0;               // displayed when file is selected
@@ -996,7 +1106,7 @@ var
   I, V, E : integer;
   Compat : String;
 begin
-  if not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data))then begin
+  if not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then begin
     statBar.Panels[spiEncoding].Text:='';
     statBar.Panels[spiLineEndings].Text:='';
     statBar.Panels[spiCompatiblity].Text:='';
@@ -1007,7 +1117,7 @@ begin
   end;
   Compat:='';
   W:=TWitchItem(lvFileList.Selected.Data);
-  statBar.Panels[spiFileName].Text:=SPACE2+W.FileName;
+  UpdateStatusBarFile;
   K:=ComponentNamePath(statBar, Self, True);
   if W.Analyzed then begin
     if W.Encoding = weBinary then
@@ -1529,8 +1639,8 @@ begin
 
   I:=fWitch.Find(FileName);
   if I <> -1 then begin
-    LogMessage(vbVerbose, 'Open file "' + FriendlyPath(AppBasePath, FileName) +
-      '" already open.');
+    LogMessage(vbVerbose, 'File "' + FriendlyPath(AppBasePath, FileName) +
+      '" is already open.');
     fWitch.Modified[I];
   end else begin
     try
