@@ -1,5 +1,6 @@
 # Upcoming release notes
 
+* Additional master dictionary entries.
 * Option to use external editor.
 * Improved display of filename in status bar.
 * Enforced layout for Windows wonkiness of Dictionary Status bar.
