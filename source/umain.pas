@@ -770,6 +770,8 @@ begin
 end;
 
 {$IFDEF Darwin}
+// Switched to using macOS's open command, so do not acutally need this
+(*
 function GetAppBundleExec(S : String) : String;
 var
   R : String;
@@ -792,7 +794,7 @@ begin
       + LF + S + LF + E.Message);
     end;
   end;
-end;
+end; *)
 {$ENDIF}
 
 procedure TfMain.FormSettingsLoad(Sender: TObject);
@@ -940,7 +942,7 @@ begin
         {$elseif defined(Windows)}
           RunAsync('cmd', ['/c', 'start', '""', fExternalEditor, TWitchItem(lvFileList.Selected.Data).FileName]);
         {$elseif defined(Linux)}
-        { maybe xdg-open }
+        { maybe xdg-open, gnome-open, kfmclient, etc }
           RunAsync(fExternalEditor, [TWitchItem(lvFileList.Selected.Data).FileName]);
         {$else}
           raise Exception.Create('unknown host OS');
