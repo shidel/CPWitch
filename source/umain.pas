@@ -85,7 +85,6 @@ type
       tbMain: TToolBar;
       ttAnimate: TTimer;
     procedure actCloseAllExecute(Sender: TObject);
-    procedure actCloseAllUpdate(Sender: TObject);
     procedure actCodepageFilterExecute(Sender: TObject);
     procedure actDebugLogExecute(Sender: TObject);
     procedure actCloseExecute(Sender: TObject);
@@ -113,18 +112,22 @@ type
       Selected: Boolean);
     procedure ttAnimateTimer(Sender: TObject);
     private
-      FActiveCodepage: integer;
-      FViewedCodepage : integer;
-      fCodepageFilter: TCodepageFilter;
+      { Witch and codepage related variables }
+      fWitch : TWitch;
+      fWitchItem : TWitchItem;
+      fLastWitch : TWitchItem;
+      fCodepage : integer;
+      { User interface Controls }
       lbViewCodepageLabel : TLabel;
       lbUnicodeLanguage : TLabel;
       lbCodepageLanguage : TLabel;
       btnEditFile : TToolButton;
       btnExportFile : TToolButton;
       btnCodepageFilter : TToolButton;
-      fWitch : TWitch;
       fCodePageText:TDosView;
       fUFF : TUnicodeDosFont;
+      { User Application Settings }
+      fCodepageFilter: TCodepageFilter;
       fFileReopen:boolean;
       fFileWarn:boolean;
       fUnicodeScale : integer;
@@ -138,7 +141,6 @@ type
       fSingleViewer : boolean;
       fUseExternalEditor : boolean;
       fExternalEditor : String;
-      procedure PopulateCodepageList(Item : TWitchItem);
       procedure SetCodepageFilter(AValue: TCodepageFilter);
       procedure SetUnicodeView( S : String );
       function CanExport:boolean;
@@ -151,10 +153,10 @@ type
       procedure FileWasEdited(Sender : TObject);
       procedure FirstShow(Sender : TObject);
       procedure SetApplicationIcons;
+      procedure UpdateCodepageList;
       procedure UpdateCodepageViewLabel;
       procedure UpdateMetaData;
-      procedure UpdateCodepageList;
-      procedure UpdateStatusBarFile;
+      procedure UpdateStatusBarFileName;
       procedure UpdateStatusBar;
       procedure UpdateUnicodeView;
       procedure UpdateCodepageView;
@@ -163,17 +165,19 @@ type
       procedure UpdateLocale;
       procedure UpdateLocaleList;
       procedure UpdateDictionary;
-      procedure SelectCodepage(Sender : TObject);
-      procedure SelectFile(Sender : TObject);
+      procedure SelectCodepageListItem;
+      procedure SelectCodepage(Value : Integer);
+      procedure SelectFile(Item : TWitchItem);
       procedure SessionSave;
       procedure SessionLoad;
-      procedure RefreshFileEndsOnBlank;
+      procedure RefreshFileStatus;
       procedure EnforceLayout; override;
       procedure SetSaveDialogText(Encoding : TWitchEncoding);
     public
       procedure ApplyUserLanguage; override;
+      procedure CloseAllFiles;
+      procedure CloseFile;
       procedure OpenFile(FileName : String; Select : boolean = False); overload;
-      property ActiveCodepage : integer read FActiveCodepage;
     published
      property CodepageFilter : TCodepageFilter read FCodepageFilter write SetCodepageFilter;
   end;
@@ -202,44 +206,14 @@ begin
     btnCodepageFilter.CheckMenuDropdown;
 end;
 
-procedure TfMain.actCloseAllUpdate(Sender: TObject);
-begin
-  UpdateButtons;
-  actCloseAll.Enabled := lvFileList.Items.Count > 0;
-end;
-
 procedure TfMain.actCloseAllExecute(Sender: TObject);
-var
-  I : Integer;
-  L : TListItem;
 begin
-  I := 0;
-  while I < lvFileList.Items.Count do begin
-    L := lvFileList.Items[I];
-    if not (Assigned(L) and Assigned(L.Data) and TWitchItem(L.Data).Analyzed) then begin
-      Inc(I);
-      Continue;
-    end;
-    fWitch.Delete(TWitchItem(L.Data));
-    lvFileList.Items[I].Delete;
-  end;
-  UpdateMetaData;
+  CloseAllFiles;
 end;
 
 procedure TfMain.actCloseExecute(Sender: TObject);
-var
-  N : Integer;
 begin
-  if not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)
-  and TWitchItem(lvFileList.Selected.Data).Analyzed) then Exit;
-  N:=lvFileList.Selected.Index;
-  if N>=lvFileList.Items.Count - 1 then
-    N:=lvFileList.Items.Count - 2;
-  fWitch.Delete(TWitchItem(lvFileList.Selected.Data));
-  lvFileList.Selected.Delete;
-  if N >= 0 then
-    lvFileList.Items[N].Selected:=True;
-  UpdateMetaData;
+  CloseFile;
 end;
 
 procedure TfMain.actDictionaryExecute(Sender: TObject);
@@ -276,30 +250,28 @@ end;
 
 procedure TfMain.actExportCodepageExecute(Sender: TObject);
 var
-  W : TWitchItem;
   TCP : TUTF8ToCodepage;
   R : integer;
   N : String;
   D : RawByteString;
   CM, AO : Boolean;
 begin
-  if Not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then
-    Exit;
-  W:=TWitchItem(lvFileList.Selected.Data);
-  TCP:=W.AsCodePage(FActiveCodepage);
+  if Not Assigned(fWitchItem) then Exit;
+  if fCodepage < 0 then Exit;
+  TCP:=fWitchItem.AsCodePage(fCodepage);
   if not Assigned(TCP) then Exit;
   dlgFileSave.InitialDir:=UserWorkPath;
-  N := ExcludeTrailing(W.DisplayName, '.UTF-8', false);
+  N := ExcludeTrailing(fWitchItem.DisplayName, '.UTF-8', false);
   dlgFileSave.FileName:=FileIterative(UserWorkPath + N);
-  SetSaveDialogText(W.Encoding);
+  SetSaveDialogText(fWitchItem.Encoding);
   if fEndBlankOnExport then begin
-    D:=NormalizeLineEndings(TCP.Converted, W.LineEndings);
-    case W.LineEndings of
+    D:=NormalizeLineEndings(TCP.Converted, fWitchItem.LineEndings);
+    case fWitchItem.LineEndings of
       leCRLF : D:=IncludeTrailing(D, CRLF);
       leLF   : D:=IncludeTrailing(D, LF);
       leCR   : D:=IncludeTrailing(D, CR);
     end;
-    D:=NormalizeLineEndings(D, W.LineEndings);
+    D:=NormalizeLineEndings(D, fWitchItem.LineEndings);
   end else begin
     D:=TCP.Converted;
   end;
@@ -318,39 +290,35 @@ begin
   until R=0;
   FreeAndNil(TCP);
   if CM then
-    FWitch.FileModified(dlgFileSave.FileName);
-  if AO and fOpenExported then begin
+    fWitch.FileModified(dlgFileSave.FileName);
+  if AO and fOpenExported then
     OpenFile(dlgFileSave.FileName, false);
-    lvFileList.Sort;
-  end;
 end;
 
 procedure TfMain.actExportUnicodeExecute(Sender: TObject);
 var
-  W : TWitchItem;
   TUC : TCodepageToUTF8;
   R : integer;
   N : String;
   D : RawByteString;
   CM, AO : Boolean;
 begin
-  if Not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then
-    Exit;
-  W:=TWitchItem(lvFileList.Selected.Data);
-  TUC:=W.AsUnicode(FActiveCodepage);
+  if Not Assigned(fWitchItem) then Exit;
+  if fCodepage < 0 then Exit;
+  TUC:=fWitchItem.AsUnicode(fCodepage);
   if not Assigned(TUC) then Exit;
   dlgFileSave.InitialDir:=UserWorkPath;
-  N := IncludeTrailing(W.DisplayName, '.UTF-8', false);
+  N := IncludeTrailing(fWitchItem.DisplayName, '.UTF-8', false);
   dlgFileSave.FileName:=FileIterative(UserWorkPath + N);
-  SetSaveDialogText(W.Encoding);
+  SetSaveDialogText(fWitchItem.Encoding);
   if fEndBlankOnExport then begin
-    D:=NormalizeLineEndings(RawByteString(TUC.Converted), W.LineEndings);
-    case W.LineEndings of
+    D:=NormalizeLineEndings(RawByteString(TUC.Converted), fWitchItem.LineEndings);
+    case fWitchItem.LineEndings of
       leCRLF : D:=IncludeTrailing(D, CRLF);
       leLF   : D:=IncludeTrailing(D, LF);
       leCR   : D:=IncludeTrailing(D, CR);
     end;
-    D:=NormalizeLineEndings(D, W.LineEndings);
+    D:=NormalizeLineEndings(D, fWitchItem.LineEndings);
   end else begin
     D:=RawByteString(TUC.Converted);
   end;
@@ -370,10 +338,8 @@ begin
   FreeAndNil(TUC);
   if CM then
     FWitch.FileModified(dlgFileSave.FileName);
-  if AO and fOpenExported then begin
+  if AO and fOpenExported then
     OpenFile(dlgFileSave.FileName, false);
-    lvFileList.Sort;
-  end;
 end;
 
 procedure TfMain.actOpenExecute(Sender: TObject);
@@ -407,12 +373,11 @@ end;
 
 procedure TfMain.actOnlineUpdateExecute(Sender: TObject);
 begin
-  UpdateCheck(True);
+  UpdateCheck(True); // True means not a background check and show dialog.
 end;
 
 procedure TfMain.actPreferencesExecute(Sender: TObject);
 begin
-  // PreferencesShow;
   if not Assigned(fOptionsDialog) then
     Application.CreateForm(TfOptionsDialog, fOptionsDialog);
   fOptionsDialog.Show;
@@ -420,11 +385,12 @@ end;
 
 procedure TfMain.FormCreate(Sender: TObject);
 begin
+  fWitchItem:=nil;
+  fLastWitch:=nil;
+  fCodepage:=-1;
   OnFirstShow:=@FirstShow;
-  FActiveCodepage := 437;
-  FViewedCodePage :=-2;
-  FUnicodeScale:=100;
-  FDOSScale:=1;
+  fUnicodeScale:=100;
+  fDOSScale:=1;
   fEndBlankOnInput:=True;
   fEndBlankOnExport:=True;
   fOpenExported:=False;
@@ -566,7 +532,7 @@ end;
 
 procedure TfMain.FormResize(Sender: TObject);
 begin
-  UpdateStatusBarFile;
+  UpdateStatusBarFileName;
 end;
 
 procedure TfMain.tiFileWatchTimer(Sender: TObject);
@@ -587,19 +553,53 @@ end;
 
 procedure TfMain.lvCodepageListSelectItem(Sender: TObject; Item: TListItem;
   Selected: Boolean);
+const
+  Locked : Boolean = false;
+var
+  V, E : integer;
 begin
-  IgnoreParameter(Item);
-  if Selected then SelectCodepage(Sender);
-  UpdateButtons;
+  if Locked then Exit;
+  Locked:=True;
+  try
+    IgnoreParameter(Sender);
+    if Selected then begin
+      if Assigned(Item) then begin
+        Val(Item.Caption, V, E);
+        if E <> 0 then begin
+          if fCodepage<>437 then SelectCodepage(-1);
+        end else
+        if fCodepage <> V then
+          SelectCodepage(V);
+      end;
+    end else
+    if not Assigned(lvCodepageList.Selected) then
+      SelectCodepageListItem;
+  finally
+    Locked:=False;
+  end;
 end;
 
 procedure TfMain.lvFileListSelectItem(Sender: TObject; Item: TListItem;
   Selected: Boolean);
+const
+  Locked : Boolean = false;
 begin
-  IgnoreParameter(Item);
-  if Selected then
-    SelectFile(Sender);
-  UpdateButtons;
+  if Locked then Exit;
+  Locked:=True;
+  try
+    IgnoreParameter(Sender);
+    if Selected then begin
+      if Assigned(Item) and Assigned(Item.Data) then
+        SelectFile(TWitchItem(Item.Data));
+    end else
+    if not Assigned(lvFileList.Selected) then
+      if Assigned(fWitchItem) and Assigned(fWitchItem.ListItem) then begin
+        fWitchItem.ListItem.Selected := True;
+        fWitchItem.ListItem.Focused := True;
+      end;
+  finally
+    Locked:=False;
+  end;
 end;
 
 procedure TfMain.ttAnimateTimer(Sender: TObject);
@@ -618,72 +618,93 @@ begin
   lvCodepageList.Items[0].ImageIndex:=I;
 end;
 
-procedure TfMain.PopulateCodepageList(Item: TWitchItem);
+procedure TfMain.UpdateCodepageList;
+const
+  Locked : boolean = false;
 var
   L : TListItem;
   K : String;
   I, P : integer;
 begin
-  if not Assigned(Item) then Exit;
-  if Item.Analyzed then begin
-    // Processing complete
-    ttAnimate.Enabled:=False;
-    K:=ComponentNamePath(lvCodepageList, Self, True);
-    case Item.Encoding of
-      weNone : begin
-        lvCodepageList.SmallImages:=ilCompatGreenColor;
-        // Only Liwer 7-Bit ASCII characters, compatible with any Codepage
-        L:=lvCodepageList.Items.Add;
-        L.Caption:=GetTranslation(K+'Any_Codepage/Caption', 'Any Codepage');
-        L.ImageIndex:=High(iconCompatGreenNames);
-      end;
-      weBinary : begin
-         // Binary Data FIle , not supported
-         lvCodepageList.SmallImages:=ilGeneralColor;
-         L:=lvCodepageList.Items.Add;
-         L.Caption:=GetTranslation(K+'Binary_data/Caption', 'Binary File');
-         L.ImageIndex:=idxGeneralError;
-       end;
-      weUnicode, weCodepage : begin
-        if Item.Encoding = weUnicode then
-          lvCodepageList.SmallImages:=ilCompatGreenColor
-        else
-          lvCodepageList.SmallImages:=ilCompatBlueColor;
-        // UTF-8/Unicode encoded file
-        for I := 0 to High(Item.Results) do begin
-          P := High(iconCompatGreenNames) * Item.Results[I].Compatible div 100;
-          if (P = 0) and (Item.Results[I].Compatible <> 0) then
-            P := 1
-          else if (P = High(iconCompatGreenNames)) and (Item.Results[I].Compatible <> 100) then
-            P := High(iconCompatGreenNames) - 1;
-
-          // Always ensure Preferred Codepage are in list regardless of filter
-          if (Item.Results[I].Codepage <> Item.Preferred) then begin
-            if (Item.Results[I].Compatible<>100) and (CodepageFilter=cpfComplete) then
-              Continue
-            else
-            if (Item.Results[I].Compatible = 0) and (CodepageFilter=cpfPartial) then
-              Continue;
-          end;
-          { permit incompatible Codepages }
-
-          L:=lvCodepageList.Items.Add;
-          L.Caption:=IntToStr(Item.Results[I].Codepage);
-          // L.Caption:=GetTranslation(K+'Analyzed/Caption', 'Analyzed');
-          L.ImageIndex:=P;
-          end;
+  if Locked then Exit;
+  Locked:=True;
+  try
+    if Assigned(fWitchItem) then begin
+      if (fWitchItem = fLastWitch) and (lvCodepageList.Items.Count > 0) then begin
+        SelectCodepageListItem;
+        Locked:=False;
+        Exit;
       end;
     end;
-    lvCodepageList.Enabled:=True;
-  end else begin
-    // Still srocessing text file in background thread
-    lvCodepageList.Enabled:=False;
-    lvCodepageList.SmallImages:=ilWorkingColor;
-    L:=lvCodepageList.Items.Add;
-    K:=ComponentNamePath(lvCodepageList, Self, True);
-    L.Caption:=GetTranslation(K+'Analyzing/Caption', 'Analyzing');
-    L.ImageIndex:=0;
-    ttAnimate.Enabled:=True;
+
+    lvCodepageList.BeginUpdate;
+    lvCodepageList.Clear;
+    if Assigned(fWitchItem) then begin
+      if fWitchItem.Analyzed then begin
+        // Processing complete
+        ttAnimate.Enabled:=False;
+        K:=ComponentNamePath(lvCodepageList, Self, True);
+        case fWitchItem.Encoding of
+          weNone : begin
+            lvCodepageList.SmallImages:=ilCompatGreenColor;
+            // Only Liwer 7-Bit ASCII characters, compatible with any Codepage
+            L:=lvCodepageList.Items.Add;
+            L.Caption:=GetTranslation(K+'Any_Codepage/Caption', 'Any Codepage');
+            L.ImageIndex:=High(iconCompatGreenNames);
+          end;
+          weBinary : begin
+             // Binary Data FIle , not supported
+             lvCodepageList.SmallImages:=ilGeneralColor;
+             L:=lvCodepageList.Items.Add;
+             L.Caption:=GetTranslation(K+'Binary_data/Caption', 'Binary File');
+             L.ImageIndex:=idxGeneralError;
+           end;
+          weUnicode, weCodepage : begin
+            if fWitchItem.Encoding = weUnicode then
+              lvCodepageList.SmallImages:=ilCompatGreenColor
+            else
+              lvCodepageList.SmallImages:=ilCompatBlueColor;
+            // UTF-8/Unicode encoded file
+            for I := 0 to High(fWitchItem.Results) do begin
+              P := High(iconCompatGreenNames) * fWitchItem.Results[I].Compatible div 100;
+              if (P = 0) and (fWitchItem.Results[I].Compatible <> 0) then
+                P := 1
+              else if (P = High(iconCompatGreenNames)) and (fWitchItem.Results[I].Compatible <> 100) then
+                P := High(iconCompatGreenNames) - 1;
+
+              // Always ensure Preferred Codepage are in list regardless of filter
+              if (fWitchItem.Results[I].Codepage <> fWitchItem.Preferred) then begin
+                if (fWitchItem.Results[I].Compatible<>100) and (CodepageFilter=cpfComplete) then
+                  Continue
+                else
+                if (fWitchItem.Results[I].Compatible = 0) and (CodepageFilter=cpfPartial) then
+                  Continue;
+              end;
+              { permit incompatible Codepages }
+
+              L:=lvCodepageList.Items.Add;
+              L.Caption:=IntToStr(fWitchItem.Results[I].Codepage);
+              // L.Caption:=GetTranslation(K+'Analyzed/Caption', 'Analyzed');
+              L.ImageIndex:=P;
+              end;
+          end;
+        end;
+        SelectCodepageListItem;
+        lvCodepageList.Enabled:=True;
+      end else begin
+        // Still srocessing text file in background thread
+        lvCodepageList.Enabled:=False;
+        lvCodepageList.SmallImages:=ilWorkingColor;
+        L:=lvCodepageList.Items.Add;
+        K:=ComponentNamePath(lvCodepageList, Self, True);
+        L.Caption:=GetTranslation(K+'Analyzing/Caption', 'Analyzing');
+        L.ImageIndex:=0;
+        ttAnimate.Enabled:=True;
+      end;
+    end;
+  finally
+    lvCodePageList.EndUpdate;
+    Locked:=False;
   end;
 end;
 
@@ -744,58 +765,34 @@ end;
 function TfMain.CanExport: boolean;
 begin
   Result:=False;
-  if Not Assigned(lvFileList.Selected) then Exit;
-  if Not Assigned(lvFileList.Selected.Data) then Exit;
-  if Not TWitchItem(lvFileList.Selected.Data).Analyzed then Exit;
-  case TWitchItem(lvFileList.Selected.Data).Encoding of
-    weBinary : Exit;
-    weNone : Result:=True;
-    weCodepage : Result:=Assigned(lvCodepageList.Selected);
-    weUnicode : Result:=Assigned(lvCodepageList.Selected);
+  if not Assigned(fWitchItem) then Exit;
+  if not fWitchItem.Analyzed then Exit;
+  if not fCodepage >= 0 then Exit;
+  case FWitchItem.Encoding of
+    weNone,
+    weCodepage,
+    weUnicode : Result:=True;
+  else
+    { weBinary or maybe something like a future weError }
+    Exit;
   end;
 end;
 
 function TfMain.CanEdit: boolean;
 begin
   Result:=False;
-  if Not Assigned(lvFileList.Selected) then Exit;
-  if Not Assigned(lvFileList.Selected.Data) then Exit;
-  if Not TWitchItem(lvFileList.Selected.Data).Analyzed then Exit;
-  case TWitchItem(lvFileList.Selected.Data).Encoding of
-    weBinary : Exit;
-    weNone : Result:=True;
-    weCodepage : Result:=False;
+  if not Assigned(fWitchItem) then Exit;
+  if not fWitchItem.Analyzed then Exit;
+  if not fCodepage >= 0 then Exit;
+  case FWitchItem.Encoding of
+    weCodepage : Result := False; // Have not decided on this one yet.
+    weNone,
     weUnicode : Result:=True;
+  else
+    { weBinary or maybe something like a future weError }
+    Exit;
   end;
 end;
-
-{$IFDEF Darwin}
-// Switched to using macOS's open command, so do not acutally need this
-(*
-function GetAppBundleExec(S : String) : String;
-var
-  R : String;
-begin
-  Result:='';
-  try
-    S:=IncludeTrailingPathDelimiter(S);
-    if not RunCommand('/usr/bin/defaults', ['read', S + 'Contents/Info.plist',
-    'CFBundleExecutable'],R) then
-      raise Exception.Create('could not execute');
-    R:=Trim(R);
-    S:=S+ 'Contents/MacOS/' + R;
-    if FileExists(S) then
-      Result:=S
-    else
-      raise Exception.Create('invalid result: ' + R);
-  except
-    on E : Exception do begin
-      LogMessage(vbMinimal, 'Unable to determine executable for Application Bundle:'
-      + LF + S + LF + E.Message);
-    end;
-  end;
-end; *)
-{$ENDIF}
 
 procedure TfMain.FormSettingsLoad(Sender: TObject);
 var
@@ -857,9 +854,10 @@ begin
     'Preferences/tsEncoding/rbFileEndAll/Checked', ''), fEndBlankOnInput);
   fEndBlankOnExport:=B or StrToBool(UserConfig.GetValue(
     'Preferences/tsEncoding/rbFileEndExport/Checked', ''), fEndBlankOnExport);
+
   if B <> fEndBlankOnInput then begin
     fEndBlankOnInput:=B;
-    RefreshFileEndsOnBlank;
+    RefreshFileStatus;
   end;
 
   if fSingleViewer then begin
@@ -891,7 +889,9 @@ var
   W : TWitchItem;
   M : String;
 begin
+  if not Assigned(Sender) then Exit;
   if not (Sender is TWitchItem) then Exit;
+  if fWitch.Count = 0 then Exit;
   W:=Sender as TWitchItem;
   M:='Analyzed ';
   case W.Encoding of
@@ -924,11 +924,10 @@ begin
   Cat(M, ' file "'+W.DisplayName+'"');
   LogMessage(vbVerbose, M);
 
-  if W.ListItem = lvFileList.Selected then begin
-    UpdateMetaData;
+  if W = fWitchItem then begin
+    fWitchItem:=nil;
     FDictEditForm.WitchItem:=nil;
-    SelectFile(Self);
-
+    SelectFile(W);
   end;
 end;
 
@@ -938,23 +937,23 @@ begin
     if fUseExternalEditor and (fExternalEditor<>'') then begin // and FileExists(fExternalEditor) then begin
       try
         {$if defined(Darwin)}
-          RunAsync('open', ['-a', fExternalEditor, TWitchItem(lvFileList.Selected.Data).FileName]);
+          RunAsync('open', ['-a', fExternalEditor, fWitchItem.FileName]);
         {$elseif defined(Windows)}
-          RunAsync('cmd', ['/c', 'start', '""', fExternalEditor, TWitchItem(lvFileList.Selected.Data).FileName]);
+          RunAsync('cmd', ['/c', 'start', '""', fExternalEditor, [fWitchItem.FileName]);
         {$elseif defined(Linux)}
         { maybe xdg-open, gnome-open, kfmclient, etc }
-          RunAsync(fExternalEditor, [TWitchItem(lvFileList.Selected.Data).FileName]);
+          RunAsync(fExternalEditor, [fWitchItem.FileName]);
         {$else}
           raise Exception.Create('unknown host OS');
         {$endif}
 
-        LogMessage(vbNormal, 'Open external editor with: ' + TWitchItem(lvFileList.Selected.Data).FileName);
+        LogMessage(vbNormal, 'Open external editor with: ' + fWitchItem.FileName);
         Exit;
       except
         LogMessage(vbMinimal, 'Failed to launch external editor: ' + fExternalEditor);
       end;
     end;
-    FileEditor(TWitchItem(lvFileList.Selected.Data).FileName, @FileWasEdited);
+    FileEditor(fWitchItem.FileName, @FileWasEdited);
   end;
 end;
 
@@ -969,7 +968,6 @@ begin
       fWitch.Modified[I]:=True
     else if fOpenExported then begin
       OpenFile(TEditorForm(Sender).FileName,false);
-      lvFileList.Sort;
     end;
   end;
 end;
@@ -994,85 +992,45 @@ end;
 
 procedure TfMain.UpdateCodepageViewLabel;
 begin
-  lbViewCodepageLabel.Caption:=GetFormat(ComponentNamePath(pViewCodepageLabel,
-    Self, True) + 'lbViewCodepageLabel/Value' , [IntToStr(ActiveCodepage)],
-    'Viewed as Codepage %s');
+  if fCodepage < 0 then
+    lbViewCodepageLabel.Caption:=''
+  else
+    lbViewCodepageLabel.Caption:=GetFormat(ComponentNamePath(pViewCodepageLabel,
+      Self, True) + 'lbViewCodepageLabel/Value' , [IntToStr(fCodepage)],
+      'Viewed as Codepage %s');
 end;
 
 procedure TfMain.UpdateMetaData;
+const
+  Locked : boolean = false;
 begin
-  UpdateCodepagelist;
-  UpdateStatusBar;
-  UpdateUnicodeView;
-  UpdateCodepageView;
-  UpdateCodepageViewLabel;
-  UpdateLocale;
-  UpdateButtons;
-  UpdateDictionary;
+  if Locked then Exit;
+  Locked:=True;
+  try
+    UpdateCodepagelist;
+    UpdateStatusBar;
+    UpdateUnicodeView;
+    UpdateCodepageView;
+    UpdateCodepageViewLabel;
+    UpdateLocale;
+    UpdateButtons;
+    UpdateDictionary;
+  finally
+    Locked :=False;
+  end;
 end;
 
-procedure TfMain.UpdateCodepageList;
+procedure TfMain.UpdateStatusBarFileName;
 var
-  I : integer;
-  T : String;
-  HCP, CP, E : integer;
-  Item : TListItem;
-  W : TWitchItem;
-begin
-  lvCodepageList.BeginUpdate;
-  lvCodepageList.Clear;
-  if Assigned(lvFileList.Selected) then begin
-    PopulateCodepageList(TWitchItem(lvFileList.Selected.Data));
-    if fAutoSelectCP and Assigned(lvFileList.Selected) and
-    Assigned(lvFileList.Selected.Data) then begin
-      W:=TWitchItem(lvFileList.Selected.Data);
-      if W.Analyzed and (W.Preferred <> -1) then begin
-        FActiveCodePage:=W.Preferred;
-        LogMessage(vbVerbose, 'Selected Preferred ' + IntToStr(FActiveCodepage));
-      end;
-    end;
-  end;
-  HCP:=FActiveCodepage;
-  // Reselect Active Codepage if Possible;
-  Item:=nil;
-  for I := 0 to lvCodePageList.Items.Count -1 do begin
-    T:=CutDelim(lvCodepageList.Items[I].Caption, SPACE, 1,1);
-    Val(T, CP, E);
-    if (E=0) and (CP=FActiveCodepage) then begin
-      Item:=lvCodepageList.Items[I];
-      Break;
-    end;
-  end;
-  // If Active Codepage is not in list and If first item is not a Codepage
-  // Number then select it instead.
-  if (Not Assigned(Item)) and (lvCodePageList.Items.Count > 0) then begin
-    T:=CutDelim(lvCodepageList.Items[0].Caption, SPACE, 1,1);
-    Val(T, CP, E);
-    if (E=1) then begin
-      Item:=lvCodepageList.Items[0];
-    end;
-  end;
-  if Assigned(Item) then begin
-    Item.Selected:=True;
-    Item.MakeVisible(False);
-  end;
-  fActiveCodepage:=HCP;
-  lvCodepageList.EndUpdate;
-end;
-
-procedure TfMain.UpdateStatusBarFile;
-var
-  W : TWitchItem;
   I, P, PW, M, Gutter : integer;
   S : String;
 begin
   PW := statBar.Canvas.Handle; // Make sure Canvas is ready for textwidth.
   P := statBar.Panels.Count - 1;
-  if not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then begin
-     statBar.Panels[P].Text:='';
+  if not Assigned(fWitchItem) then begin
+    statBar.Panels[P].Text:='';
     Exit;
   end;
-  W:=TWitchItem(lvFileList.Selected.Data);
   PW := 0;
   for I := 0 to P - 1 do
     Inc(PW, statBar.Panels[I].Width + 1);
@@ -1087,7 +1045,7 @@ begin
   statBar.Canvas.Font := statBar.Font;
   M:=100;
   repeat
-    S:=SPACE2+FriendlyPath(AppBasePath, W.FileName, 1, M);
+    S:=SPACE2+FriendlyPath(AppBasePath, fWitchItem.FileName, 1, M);
     if (statBar.Canvas.TextWidth(S) < PW) then Break;
     Dec(M,2);
   until (M < 10);
@@ -1103,12 +1061,11 @@ const
   spiCompatiblity = 4;           // displayed when Codepage is selected
   spiFileName = 5;               // displayed when file is selected
 var
-  W : TWitchItem;
   K : String;
-  I, V, E : integer;
+  I : integer;
   Compat : String;
 begin
-  if not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then begin
+  if not Assigned(fWitchItem) then begin
     statBar.Panels[spiEncoding].Text:='';
     statBar.Panels[spiLineEndings].Text:='';
     statBar.Panels[spiCompatiblity].Text:='';
@@ -1118,14 +1075,13 @@ begin
     Exit;
   end;
   Compat:='';
-  W:=TWitchItem(lvFileList.Selected.Data);
-  UpdateStatusBarFile;
+  UpdateStatusBarFileName;
   K:=ComponentNamePath(statBar, Self, True);
-  if W.Analyzed then begin
-    if W.Encoding = weBinary then
+  if fWitchItem.Analyzed then begin
+    if fWitchItem.Encoding = weBinary then
       statBar.Panels[spiLineEndings].Text:=''
     else begin
-      case W.LineEndings of
+      case fWitchItem.LineEndings of
       leCRLF : statBar.Panels[spiLineEndings].Text:=
         GetTranslation(K+'LineEnding/CRLF', 'CRLF');
       leLF : statBar.Panels[spiLineEndings].Text:=
@@ -1133,13 +1089,13 @@ begin
       leCR : statBar.Panels[spiLineEndings].Text:=
         GetTranslation(K+'LineEnding/CR', 'CR');
       end;
-      statBar.Panels[spiLanguage].Text:=W.Locale;
-      if W.Preferred <> -1 then
-        statBar.Panels[spiPrefered].Text:=IntToStr(W.Preferred)
+      statBar.Panels[spiLanguage].Text:=fWitchItem.Locale;
+      if fWitchItem.Preferred <> -1 then
+        statBar.Panels[spiPrefered].Text:=IntToStr(fWitchItem.Preferred)
       else
         statBar.Panels[spiPrefered].Text:='';
     end;
-    case W.Encoding of
+    case fWitchItem.Encoding of
       weNone : statBar.Panels[spiEncoding].Text:=
         GetTranslation(K+'NoEncoding/Caption', 'ASCII');
       weBinary : statBar.Panels[spiEncoding].Text:=
@@ -1149,15 +1105,12 @@ begin
       weUnicode : statBar.Panels[spiEncoding].Text:=
         GetTranslation(K+'Unicode/Caption', 'Unicode');
     end;
-    if Assigned(lvCodepageList.Selected) then begin
-      Val(lvCodepageList.Selected.Caption, V, E);
-      if E = 0 then begin
-        for I := 0 to High(W.Results) do
-          if W.Results[I].Codepage = V then begin
-            Compat:=IntToStr(W.Results[I].Compatible);
-            Break;
-          end;
-      end;
+    if Assigned(fWitch) then begin
+      for I := 0 to High(fWitchItem.Results) do
+        if fWitchItem.Results[I].Codepage = fCodepage then begin
+          Compat:=IntToStr(fWitchItem.Results[I].Compatible);
+          Break;
+        end;
     end;
   end else begin
     statBar.Panels[spiEncoding].Text:=GetTranslation(K+'Processing/Caption', 'Processing');
@@ -1168,24 +1121,22 @@ end;
 
 procedure TfMain.UpdateUnicodeView;
 var
-  W : TWitchItem;
   C : TCodepageToUTF8;
   H : String;
 begin
   if fSingleViewer then Exit;
-  if (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then begin
-    W:=TWitchItem(lvFileList.Selected.Data);
-    if W.Analyzed then begin
-      case W.Encoding of
+  if Assigned(fWitchItem) then begin
+    if fWitchItem.Analyzed then begin
+      case fWitchItem.Encoding of
         weNone, weUnicode : begin
-          H:=EscapeHTML(PasExt.ToString(W.FileData));
+          H:=EscapeHTML(PasExt.ToString(fWitchItem.FileData));
         end;
         weBinary : begin
          H:= GetTranslation(ComponentNamePath(pViewUnicode, Self, True)
           +'Unsupported_file/Binary/Text', 'Binary data files are not supported.');
         end;
         weCodepage : begin
-           C:=W.AsUnicode(FActiveCodepage, True);
+           C:=fWitchItem.AsUnicode(fCodepage, True);
            H:=EscapeHTML(RawByteString(C.Converted));
            C.Free;
         end;
@@ -1198,57 +1149,55 @@ end;
 
 procedure TfMain.UpdateCodepageView;
 var
-  W : TWitchItem;
   C : TCodepageToUTF8;
 begin
-  if Not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then begin
-    FViewedCodepage:=-2;
+  if Not Assigned(fWitchItem) then begin
+    fCodepage:=-2;
     fCodepageText.Clear;
     Exit;
   end;
-  W:=TWitchItem(lvFileList.Selected.Data);
-  if not W.Analyzed then begin
-    FViewedCodepage:=-2;
+  if not fWitchItem.Analyzed then begin
+    fCodepage:=-2;
     fCodepageText.Clear;
     Exit;
   end else begin
-    if FViewedCodePage=FActiveCodePage then Exit;
-    FViewedCodePage:=FActiveCodepage;
     fCodepageText.BeginUpdate;
     fCodePageText.Clear;
-    case W.Encoding of
-      weNone : begin
-        LogMessage(vbVerbose, 'ASCII Item: ' + W.DisplayName + ' (Any Codepage, using ' +
-         IntToStr(FActiveCodepage) + ')');
-        fCodepageText.Codepage:=FActiveCodepage;
-        fCodepageText.AddText(PasExt.ToString(W.FileData));
-      end;
-      weBinary : begin
-        fCodepageText.Codepage:=-1;
-        LogMessage(vbVerbose, 'Binary Item: ' + W.DisplayName + ' (Not supported)');
-        fCodepageText.AddError(GetTranslation(ComponentNamePath(pViewUnicode, Self, True)
-          +'Unsupported_file/Binary/Text', 'Binary data files are not supported.'));
-       end;
-      weCodepage : begin
-        LogMessage(vbVerbose, 'Codepage Item: ' + W.DisplayName + ' (Codepage ' +
-          IntToStr(FActiveCodepage) + ')');
-        // This is a tough choice. If using the active codepage, all characters
-        // are displayed, Although some can be wrong because the codepage may
-        // be wrong. However, using the Preferred Codepage, any characters
-        // outside that codepage are  represented as an upside-down wuation
-        // mark. This may be best as a toggle on the toolbar.
-        fCodepageText.Codepage:=FActiveCodepage;
-        // fCodepageText.Codepage:=W.Preferred;
-        C:=W.AsUnicode(FActiveCodepage, True);
-        { TODO 6 -cDevel Decide on of codepage view of codepage files should be restricted to the preferred codepage. }
-        fCodepageText.AddText(RawByteString(C.Converted));
-        C.Free;
-      end;
-      weUnicode : begin
-        LogMessage(vbVerbose, 'Unicode Item: ' + W.DisplayName + ' (Codepage ' +
-          IntToStr(FActiveCodepage) + ')');
-        fCodepageText.Codepage:=FActiveCodepage;
-        fCodepageText.AddText(PasExt.ToString(W.FileData));
+    if fCodepage <> -1 then begin
+      case fWitchItem.Encoding of
+        weNone : begin
+          LogMessage(vbVerbose, 'ASCII Item: ' + fWitchItem.DisplayName + ' (Any Codepage, using ' +
+           IntToStr(fCodepage) + ')');
+          fCodepageText.Codepage:=fCodepage;
+          fCodepageText.AddText(PasExt.ToString(fWitchItem.FileData));
+        end;
+        weBinary : begin
+          fCodepageText.Codepage:=-1;
+          LogMessage(vbVerbose, 'Binary Item: ' + fWitchItem.DisplayName + ' (Not supported)');
+          fCodepageText.AddError(GetTranslation(ComponentNamePath(pViewUnicode, Self, True)
+            +'Unsupported_file/Binary/Text', 'Binary data files are not supported.'));
+         end;
+        weCodepage : begin
+          LogMessage(vbVerbose, 'Codepage Item: ' + fWitchItem.DisplayName + ' (Codepage ' +
+            IntToStr(fCodepage) + ')');
+          // This is a tough choice. If using the active codepage, all characters
+          // are displayed, Although some can be wrong because the codepage may
+          // be wrong. However, using the Preferred Codepage, any characters
+          // outside that codepage are  represented as an upside-down wuation
+          // mark. This may be best as a toggle on the toolbar.
+          fCodepageText.Codepage:=fCodepage;
+          // fCodepageText.Codepage:=W.Preferred;
+          C:=fWitchItem.AsUnicode(fCodepage, True);
+          { TODO 6 -cDevel Decide on of codepage view of codepage files should be restricted to the preferred codepage. }
+          fCodepageText.AddText(RawByteString(C.Converted));
+          C.Free;
+        end;
+        weUnicode : begin
+          LogMessage(vbVerbose, 'Unicode Item: ' + fWitchItem.DisplayName + ' (Codepage ' +
+            IntToStr(fCodepage) + ')');
+          fCodepageText.Codepage:=fCodepage;
+          fCodepageText.AddText(PasExt.ToString(fWitchItem.FileData));
+        end;
       end;
     end;
     fCodepageText.EndUpdate;
@@ -1259,9 +1208,10 @@ procedure TfMain.UpdateButtons;
 var
   E : TWitchEncoding;
 begin
-  if Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data) then begin
-    actClose.Enabled:=TWitchItem(lvFileList.Selected.Data).Analyzed;
-    E:=TWitchItem(lvFileList.Selected.Data).Encoding;
+  actCloseAll.Enabled := fWitch.Count > 0;
+  if Assigned(fWitchItem) then begin
+    actClose.Enabled:=fWitchItem.Analyzed;
+    E:=fWitchItem.Encoding;
   end else begin
     actClose.Enabled:=False;
     E:=weBinary;
@@ -1325,25 +1275,23 @@ procedure TfMain.UpdateLocale;
 var
   S, L : String;
   I : Integer;
-  W : TWitchItem;
 begin
-  if not (Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data)) then begin
+  if not Assigned(fWitchItem) then begin
     lbCodepageLanguage.Caption:='';
     lbUnicodeLanguage.Caption:='';
     Exit;
   end;
-  W:=TWitchItem(lvFileList.Selected.Data);
-  if W.Analyzed then begin
+  if fWitchItem.Analyzed then begin
     L:='';
-    S:=LowerCase(W.Locale);
-    for I := 0 to High(FLocales) do
-      if S=LowerCase(FLocales[I].ID) then begin
-        L:=FLocales[I].Name;
+    S:=LowerCase(fWitchItem.Locale);
+    for I := 0 to High(fLocales) do
+      if S=LowerCase(fLocales[I].ID) then begin
+        L:=fLocales[I].Name;
         Break;
       end;
     if L='' then L:=S;
     if fSingleViewer then
-      case W.Encoding of
+      case fWitchItem.Encoding of
        weNone, weUnicode, weCodepage : begin
          lbCodepageLanguage.Caption:=L;
          lbUnicodeLanguage.Caption:='';
@@ -1353,7 +1301,7 @@ begin
          lbUnicodeLanguage.Caption:='';
        end
     else
-      case W.Encoding of
+      case fWitchItem.Encoding of
        weNone, weUnicode : begin
          lbCodepageLanguage.Caption:='';
          lbUnicodeLanguage.Caption:=L;
@@ -1411,66 +1359,102 @@ end;
 procedure TfMain.UpdateDictionary;
 begin
   if Assigned(FDictEditForm) and (fDictEditForm.Visible = True) then begin
-    if Assigned(lvFileList.Selected) then
-      FDictEditForm.WitchItem:=TWitchItem(lvFileList.Selected.Data)
+    if Assigned(fWitchItem) then
+      FDictEditForm.WitchItem:=fWitchItem
     else
       FDictEditForm.WitchItem:=nil;
   end;
 end;
 
-procedure TfMain.SelectCodepage(Sender: TObject);
+procedure TfMain.SelectCodepageListItem;
 var
-  E: Integer;
+  I : Integer;
+  L : TListItem;
 begin
-  IgnoreParameter(Sender);
-  FActiveCodepage:= 437;
-  if Assigned(lvCodepageList.Selected) then begin
-    Val(CutDelim(lvCodepageList.Selected.Caption,SPACE,1,1),FActiveCodepage, E);
-    if E <> 0 then begin
-      FActiveCodepage:=437;
+  try
+    L:=nil;
+    if lvCodepageList.Items.Count = 1 then
+      L:=lvCodepageList.Items[0]
+    else
+    for I := 0 to lvCodepageList.Items.Count - 1 do
+      if lvCodepageList.Items[I].Caption = IntToStr(fCodepage) then begin
+        L:=lvCodepageList.Items[I];
+        Break;
+      end;
+
+    if (not Assigned(L)) and Assigned(fWitchItem) then begin
+      if (lvCodepageList.Items.Count > 0) and (fWitchItem.Preferred <> -1)
+      and (fCodepage <> fWitchItem.Preferred) then begin
+        SelectCodePage(fWitchItem.Preferred);
+        SelectCodepageListItem;
+        Exit;
+      end;
     end;
+
+    if Assigned(L) then begin
+      L.Selected := True;
+      L.Focused := True;
+      L.MakeVisible(False);
+    end;
+
+  finally
   end;
-  LogMessage(vbVerbose, 'Selected Codepage ' + IntToStr(FActiveCodepage));
-  UpdateStatusBar;
-  UpdateCodepageViewlabel;
-  UpdateCodePageView;
-  if Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data) then begin
-     if TWitchItem(lvFileList.Selected.Data).Encoding = weCodepage then
-       UpdateUnicodeView;
-  end;
-  UpdateButtons;
 end;
 
-procedure TfMain.SelectFile(Sender: TObject);
+procedure TfMain.SelectCodepage(Value : Integer);
+begin
+  if (Value = -1) then Value:=437;
+  if Value = fCodepage then Exit;
+  fCodepage:=Value;
+  LogMessage(vbVerbose, 'Selected Codepage ' + IntToStr(fCodePage));
+  // Commented out items should never change when simply switching codepages.
+  // UpdateCodepagelist;
+  UpdateStatusBar;
+  // UpdateUnicodeView;
+  UpdateCodepageView;
+  UpdateCodepageViewLabel;
+  // UpdateLocale;
+  UpdateButtons;
+  // UpdateDictionary;
+end;
+
+procedure TfMain.SelectFile(Item:TWitchItem);
 const
   SuspendCheck : boolean = false;
 var
   S : String;
-  W : TWitchItem;
+  LI : TListItem;
 begin
-  IgnoreParameter(Sender);
-  FViewedCodepage:=-2;
-  if Assigned(lvFileList.Selected) then begin
-    S:=lvFileList.Selected.Caption;
+  fWitchItem:=Item;
+  fCodepage:=-1;
+  if Assigned(fWitchItem) then begin
+    S:=fWitchItem.FileName;
+    fCodepage:=fWitchItem.Preferred;
+    LI:=fWitchItem.ListItem;
+    if Assigned(LI) and (lvFileList.Selected <> LI) then begin
+      lvFileList.Selected:=LI;
+      LI.MakeVisible(False);
+    end;
+
   end else
     S:='(null)';
   LogMessage(vbVerbose, 'Select File: ' + S);
   UpdateMetaData;
+
+  if not Assigned(fWitchItem) then Exit;
   if SuspendCheck then Exit;
-  if fEndBlankOnInput and Assigned(lvFileList.Selected) then begin
-    W:=TWitchItem(lvFileList.Selected.Data);
-    if W.Encoding = weBinary then Exit;
-    if Assigned(W) and (W.Analyzed) and (W.EndsWithBlank = false) then begin
-      S:=W.FileName;
-      if FixFileLineEnding(S) = mrOK then begin
-        SuspendCheck:=True;
-        actCloseExecute(Self);
-        SuspendCheck:=False;
-        OpenFile(S, True);
-      end;
+  if not fWitchItem.Analyzed then Exit;
+  if fWitchItem.Encoding = weBinary then Exit;
+
+  if fEndBlankOnInput and (fWitchItem.EndsWithBlank = false) then begin
+    S:=fWitchItem.FileName;
+    if FixFileLineEnding(S) = mrOK then begin
+      SuspendCheck:=True;
+      actCloseExecute(Self);
+      SuspendCheck:=False;
+      OpenFile(S, True);
     end;
   end;
-
 end;
 
 procedure TfMain.SessionSave;
@@ -1483,8 +1467,8 @@ begin
   try
     XML.SetValue('Files/Count', UnicodeString(IntToStr(fWitch.Count)));
     X:=-1;
-    if Assigned(lvFileList.Selected) and Assigned(lvFileList.Selected.Data) then begin
-      X:=TWitchItem(lvFileList.Selected.Data).Index;
+    if Assigned(fWitchItem) then begin
+      X:=fWitchItem.Index;
     end;
     XML.SetValue('Files/Selected', UnicodeString(IntToStr(X)));
     for I := 0 to fWitch.Count - 1 do
@@ -1544,14 +1528,13 @@ begin
   end;
 end;
 
-procedure TfMain.RefreshFileEndsOnBlank;
+procedure TfMain.RefreshFileStatus;
 var
   I : Integer;
 begin
   for I := 0 to fWitch.Count - 1 do
     if fWitch.Items[I].Analyzed then
       WitchOnAnalyzed(fWitch.Items[I]);
-  SelectFile(Self);
 end;
 
 procedure TfMain.EnforceLayout;
@@ -1598,12 +1581,12 @@ begin
     end;
     weUnicode: begin
       dlgFileSave.Title:=GetFormat('ExportCodepageDialog/Title/Caption',
-       [IntToStr(FActiveCodepage)], 'Export file as Codepage %s');
+       [IntToStr(fCodepage)], 'Export file as Codepage %s');
       dlgFileSave.Filter:=GetTranslation('ExportCodepageDialog/File/Filters', 'All Files (*.*)|*.*');
     end;
     weCodepage: begin
       dlgFileSave.Title:=GetFormat('ExportUnicodeDialog/Title/Caption',
-       [IntToStr(FActiveCodepage)], 'Export file as UTF-8');
+       [IntToStr(fCodepage)], 'Export file as UTF-8');
       dlgFileSave.Filter:=GetTranslation('ExportUnicodeDialog/File/Filters', 'All Files (*.*)|*.*|Unicode Files (*.UTF-8)|*.UTF-8');
     end;
   else
@@ -1618,6 +1601,64 @@ begin
   inherited ApplyUserLanguage;
   UpdateLocaleList;
   UpdateMetaData;
+end;
+
+procedure TfMain.CloseAllFiles;
+var
+  I : Integer;
+begin
+  fWitchItem:=nil;
+  fCodepage:=-1;
+  lvFileList.Items.BeginUpdate;
+  try
+    for I := 0 to fWitch.Count - 1 do begin
+      fWitch.Abort(I);
+      fWitch.Items[I].ListItem:=nil;
+    end;
+    lvFileList.Items.Clear;
+    for I := fWitch.Count -1 downto 0 do
+      fWitch.Delete(I);
+  finally
+    lvFIleList.Items.EndUpdate;
+  end;
+  UpdateMetaData;
+end;
+
+procedure TfMain.CloseFile;
+var
+  LIDX : Integer;
+begin
+  { TODO 1 -cLazarus_Bug Removing a list item leaves a clickable null item at
+  the end of the list. This creates a phantom null TListItem at the end. While
+  it does not seem to hurt anything, it does cause a flicker to that phatom
+  item and back to the current selection. Clearing and rebuilding the list,
+  along with preserving the TopItem should fix it. But for now, I'll just let
+  the LCL bug stand. }
+  if not Assigned(fWitchItem) then Exit;
+  fWitchItem.Abort;
+  lvFileList.Items.BeginUpdate;
+  try
+    lvFileList.ItemIndex := -1;
+    if Assigned(fWitchItem.ListItem) then begin
+      LIDX:=fWitchItem.ListItem.Index;
+      fWitchItem.ListItem:=nil;
+      lvFileList.Items.Delete(LIDX);
+      lvFileList.Invalidate;
+    end else
+      LIDX:=-1;
+    fWitch.Delete(fWitchItem);
+    fWitchItem:=nil;
+    fCodepage:=-1;
+    if (fWitch.Count = 0) or (LIDX <0) then
+      UpdateMetadata
+    else begin
+      if LIDX >= lvFileList.Items.Count then
+        LIDX:=lvFileList.Items.Count - 1;
+      SelectFile(TWitchItem(lvFileList.Items[LIDX].Data));
+    end;
+  finally
+    lvFileList.Items.EndUpdate;
+  end;
 end;
 
 procedure TfMain.OpenFile(FileName: String; Select: boolean);
@@ -1648,6 +1689,7 @@ begin
     try
       LI:=lvFileList.Items.Add;
       I := fWitch.Add(FileName, LI);
+      lvFileList.Sort;
     except
       LI.Delete;
       LogMessage(vbVerbose, 'Open file "' + FriendlyPath(AppBasePath, FileName) +
@@ -1658,7 +1700,6 @@ begin
   end;
 
   if Select then begin
-    lvFileList.Sort;
     fWitch.Select(I);
     fWitch.Items[I].ListItem.MakeVisible(False);
     lvFileList.SetFocus;

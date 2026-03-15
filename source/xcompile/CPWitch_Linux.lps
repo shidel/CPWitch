@@ -7,8 +7,8 @@
       <Unit>
         <Filename Value="CPWitch_Linux.lpr"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="6" Y="22"/>
-        <UsageCount Value="23"/>
+        <CursorPos X="6" Y="18"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -27,9 +27,9 @@
         <UnitName Value="uMain"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="999"/>
-        <CursorPos X="46" Y="1024"/>
-        <FoldState Value=" TCQG3#"/>
+        <TopLine Value="1011"/>
+        <CursorPos X="19" Y="1410"/>
+        <FoldState Value=" TL004 T4F06 TCQG3 T3+Q0j512 pkPmK0Q]9jMkB0A]9icjB081 PXA0P"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -77,18 +77,38 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="1">
+    <JumpHistory HistoryIndex="7">
       <Position>
         <Filename Value="CPWitch_Linux.lpr"/>
         <Caret Line="21" Column="70"/>
       </Position>
       <Position>
         <Filename Value="umain.pas"/>
-        <Caret Line="1081" TopLine="960"/>
+        <Caret Line="1119" Column="52" TopLine="1005"/>
       </Position>
       <Position>
         <Filename Value="umain.pas"/>
-        <Caret Line="1069" Column="51" TopLine="876"/>
+        <Caret Line="1459" Column="15" TopLine="1303"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="1461" Column="3" TopLine="1312"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="1459" Column="10" TopLine="1442"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="1462" Column="5" TopLine="1436"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="1463" Column="4" TopLine="1446"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="1459" TopLine="1423"/>
       </Position>
     </JumpHistory>
     <RunParams>

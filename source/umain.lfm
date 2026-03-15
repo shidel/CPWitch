@@ -52,7 +52,7 @@ object fMain: TfMain
     Panels = <    
       item
         Alignment = taCenter
-        Width = 100
+        Width = 120
       end    
       item
         Alignment = taCenter
@@ -418,7 +418,6 @@ object fMain: TfMain
       Caption = 'Close All'
       Hint = 'Close all open text files.'
       OnExecute = actCloseAllExecute
-      OnUpdate = actCloseAllUpdate
     end
     object actEditNone: TAction
       Category = 'Edit'

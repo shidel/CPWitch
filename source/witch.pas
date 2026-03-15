@@ -62,8 +62,9 @@ type
   public
     constructor Create(AOwner: TWitch);
     destructor Destroy; override;
+    procedure Abort;
     property Owner : TWitch read FOwner;
-    property ListItem : TListItem read FListItem;
+    property ListItem : TListItem read FListItem write FListItem;
     property FileName : String read FFileName write SetFileName;
     property LineEndings : TLineEndings read FLineEndings;
     property FileData: TArrayOfByte read FData;
@@ -110,6 +111,8 @@ type
     function IndexOf(Item : TWitchItem) : integer;
     function Find(FileName : String; CaseSensitive : boolean = true) : integer;
     function Add(FileName : String; ListItem : TListItem = nil) : integer; overload;
+    procedure Abort(Index : Integer); overload;
+    procedure Abort(Item : TWitchItem); overload;
     procedure Delete(Index : Integer); overload;
     procedure Delete(Item : TWitchItem); overload;
     procedure Select(Index : Integer); overload;
@@ -126,6 +129,7 @@ implementation
 
 uses TaskMngr;
 
+{$DEFINE Slow_Analyze}
 
 procedure dlg(Message : String); overload;
 begin
@@ -208,7 +212,7 @@ begin
   If Not (Assigned(FWitch) and Assigned(FWitchItem)) then Exit;
 
   {$IFDEF Slow_Analyze}
-    Sleep(100);
+    Sleep(200);
   {$ENDIF}
 
   // Initial "Unknown" state
@@ -578,6 +582,12 @@ begin
   inherited Destroy;
 end;
 
+procedure TWitchItem.Abort;
+begin
+  if Assigned(FOwner) then
+    FOwner.Abort(FOwner.IndexOf(Self));
+end;
+
 function TWitchItem.AsCodePage(Codepage: integer; Convert : boolean): TUTF8ToCodepage;
 begin
   Result := TUTF8ToCodepage.Create;
@@ -661,6 +671,7 @@ var
   I : integer;
 begin
   ValidIndex(Index);
+  Abort(Index);
   FItems[Index].FOwner:=nil;
   FItems[Index].SetIndex(-1);
   for I := Index to High(FItems) - 1 do  begin
@@ -755,6 +766,20 @@ begin
   if Assigned(FOnAnalyzed) then
     W.AnalyzeStart;
 
+end;
+
+procedure TWitch.Abort(Index: Integer);
+begin
+  { TODO 2 -cDevel Implement an abort process for the Analyze Threads.
+  At present, they just keep running in the background until completed. }
+  if Items[Index].Analyzed then Exit;
+
+end;
+
+procedure TWitch.Abort(Item: TWitchItem);
+begin
+  if not Assigned(Item) then Exit;
+  Abort(IndexOf(Item));
 end;
 
 procedure TWitch.Delete(Index: Integer);
