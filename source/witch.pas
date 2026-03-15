@@ -34,6 +34,7 @@ type
 
   TWitchItem = class
   private
+    FThread: TThread;
     FAnalyzed: boolean;
     FAnalyzing: boolean;
     FDetected: integer;
@@ -106,11 +107,13 @@ type
   public
     constructor Create;
     destructor Destroy; override;
+    procedure Clear; virtual;
     property Items : TWitchItems read FItems write SetItems;
     property Count : integer read GetCount;
     function IndexOf(Item : TWitchItem) : integer;
     function Find(FileName : String; CaseSensitive : boolean = true) : integer;
     function Add(FileName : String; ListItem : TListItem = nil) : integer; overload;
+    procedure AbortAll;
     procedure Abort(Index : Integer); overload;
     procedure Abort(Item : TWitchItem); overload;
     procedure Delete(Index : Integer); overload;
@@ -129,7 +132,7 @@ implementation
 
 uses TaskMngr;
 
-{$DEFINE Slow_Analyze}
+{ DEFINE Slow_Analyze}
 
 procedure dlg(Message : String); overload;
 begin
@@ -211,8 +214,9 @@ var
 begin
   If Not (Assigned(FWitch) and Assigned(FWitchItem)) then Exit;
 
+  if Terminated then Exit;
   {$IFDEF Slow_Analyze}
-    Sleep(200);
+    Sleep(100);
   {$ENDIF}
 
   // Initial "Unknown" state
@@ -233,6 +237,8 @@ begin
       FEncoding:=weCodepage;
     end;
 
+  if Terminated then Exit;
+
   // Now if there are, see if it is Codepage or UTF-8.
   if (FEncoding = weCodepage) then begin
     if UTF8ToValues(FText, V) then begin
@@ -241,12 +247,16 @@ begin
     end;
   end;
 
+  if Terminated then Exit;
+
   case FEncoding of
     weBinary:begin end;
     weNone : AnalyzeASCII;
     weCodepage:AnalyzeCP;
     weUnicode:AnalyzeUTF8;
   end;
+
+  if Terminated then Exit;
 
   if Codepages.Locale(FLocale, L) then
     FPreferred:=L.Codepage;
@@ -259,6 +269,7 @@ var
   I : Integer;
   S : String;
 begin
+  if Terminated then Exit;
   FWitchItem.FLineEndings:=LineEndings;
   FWitchItem.FEndsWithBlank:=FEndsWithBlank;
   FWitchItem.FResults:=Copy(FResults);
@@ -331,10 +342,13 @@ var
   S : RawByteString;
 begin
   AnalyzeLineEndings;
+  if Terminated then Exit;
   S:=NoComments;
+  if Terminated then Exit;
   A:=TUTF8Analyze.Create(ToBytes(S));
   FResults:=A.Results;
   A.Free;
+  if Terminated then Exit;
   FLocale:=DetectLocale(S);
 end;
 
@@ -352,7 +366,9 @@ var
 begin
   try
     AnalyzeLineEndings;
+    if Terminated then Exit;
     S:=NoComments;
+    if Terminated then Exit;
     if Length(S) > 8192 then // Cap size to process for detection. It will likely
       SetLength(S, 8192);    // cut a word. But, that should not skew results.
     CPL:=CodepageList;
@@ -366,6 +382,10 @@ begin
     try
       A :=TCodepageToUTF8.Create;
       for I := 0 to  High(CPL) do begin
+        if Terminated then begin
+          A.Free;
+          Exit;
+        end;
         A.Clear;
         A.Codepage:=CPL[I];
         A.ControlCodes:=False; // Don't worry about ASCII control codes
@@ -388,6 +408,10 @@ begin
           FResults[I].Converted:=0;
           FResults[I].Compatible:=0;
         end;
+      end;
+      if Terminated then begin
+        A.Free;
+        Exit;
       end;
       if BestLocale < 0 then begin
         FDetected:=-1;
@@ -438,7 +462,9 @@ var
   S : RawByteString;
 begin
   AnalyzeLineEndings;
+  if Terminated then Exit;
   S:=NoComments;
+  if Terminated then Exit;
   FLocale:=DetectLocale(S);
 end;
 
@@ -494,8 +520,6 @@ begin
 end;
 
 procedure TWitchItem.AnalyzeStart;
-var
-  T : TWitchAnalyzeThread;
 begin
   if not (Assigned(FOwner) and Assigned(FOwner.FOnAnalyzed)) then Exit;
   if FAnalyzed then begin
@@ -504,11 +528,11 @@ begin
   end else
   if not FAnalyzing then begin
     FAnalyzing:=True;
-    T := TWitchAnalyzeThread.Create(True);
-    T.Witch:=FOwner;
-    T.WitchItem:=Self;
-    T.Text:=PasExt.ToString(FData);
-    QueueTask(T);
+    FThread := TWitchAnalyzeThread.Create(True);
+    TWitchAnalyzeThread(FThread).Witch:=FOwner;
+    TWitchAnalyzeThread(FThread).WitchItem:=Self;
+    TWitchAnalyzeThread(FThread).Text:=PasExt.ToString(FData);
+    QueueTask(FThread);
   end;
 end;
 
@@ -568,6 +592,7 @@ begin
   inherited Create;
   FOwner:=AOwner;
   FListItem:=nil;
+  FThread:=nil;
   FIndex:=-1;
   FResults:=[];
   FData:=[];
@@ -576,6 +601,7 @@ end;
 
 destructor TWitchItem.Destroy;
 begin
+  Abort;
   FListItem:=nil;
   if Assigned(FOwner) then
     FOwner.Remove(FOwner.IndexOf(Self));
@@ -686,9 +712,12 @@ var
   I : Integer;
 begin
   if not (Sender is TWitchAnalyzeThread) then Exit;
+  if not Assigned(TWitchAnalyzeThread(Sender).Witch) then Exit;
+  if not Assigned(TWitchAnalyzeThread(Sender).WitchItem) then Exit;
   I := IndexOf(TWitchAnalyzeThread(Sender).WitchItem);
   // Item no longer exists.
   if I = -1 then Exit;
+  FItems[I].FThread:=nil;
   FItems[I].AnalyzeDone(Sender);
 end;
 
@@ -701,15 +730,23 @@ begin
 end;
 
 destructor TWitch.Destroy;
+begin
+  Clear;
+  inherited Destroy;
+end;
+
+procedure TWitch.Clear;
 var
   I : Integer;
 begin
+  AbortAll;
   for I := Low(FItems) to High(FItems) do begin
     FItems[I].FOwner:=nil;
     FItems[I].FListItem:=nil;
+    FItems[I].FThread:=nil;
     FreeAndNil(FItems[I]);
   end;
-  inherited Destroy;
+  FItems:=[];
 end;
 
 function TWitch.Find(FileName: String; CaseSensitive : boolean): integer;
@@ -768,18 +805,41 @@ begin
 
 end;
 
+procedure TWitch.AbortAll;
+var
+  I : Integer;
+begin
+  LogMessage(vbVerbose, 'Abort all tasks');
+  for I := Low(FItems) to High(FItems) do
+     FItems[I].FThread:=nil;
+  CancelAllTasks;
+end;
+
 procedure TWitch.Abort(Index: Integer);
 begin
-  { TODO 2 -cDevel Implement an abort process for the Analyze Threads.
-  At present, they just keep running in the background until completed. }
-  if Items[Index].Analyzed then Exit;
-
+  ValidIndex(Index);
+  Abort(Items[Index]);
 end;
 
 procedure TWitch.Abort(Item: TWitchItem);
 begin
-  if not Assigned(Item) then Exit;
-  Abort(IndexOf(Item));
+  if (not Assigned(Item)) or (Item.Analyzed) then Exit;
+  Item.ListItem:=nil;
+  //LogMessage(vbVerbose, 'Item: ' + Item.FileName);
+  if Assigned(Item.FThread) then begin
+    //LogMessage(vbVerbose, 'Thread is Assigned');
+    if Item.FThread is TWitchAnalyzeThread then begin
+      LogMessage(vbVerbose, 'Abort task for ' + Item.DisplayName);
+      TWitchAnalyzeThread(Item.FThread).Witch := nil;
+      TWitchAnalyzeThread(Item.FThread).WitchItem := nil;
+      //LogMessage(vbVerbose, 'Thread callback nullified');
+    end;
+    CancelTask(Item.FThread);
+    // LogMessage(vbVerbose, 'Aborted Thread');
+    Item.FThread:=nil;
+  end;
+  // LogMessage(vbVerbose, 'Abort Thread Completed');
+  Item.FAnalyzing:=False;
 end;
 
 procedure TWitch.Delete(Index: Integer);

@@ -1604,22 +1604,18 @@ begin
 end;
 
 procedure TfMain.CloseAllFiles;
-var
-  I : Integer;
 begin
   fWitchItem:=nil;
   fCodepage:=-1;
   lvFileList.Items.BeginUpdate;
   try
-    for I := 0 to fWitch.Count - 1 do begin
-      fWitch.Abort(I);
-      fWitch.Items[I].ListItem:=nil;
-    end;
+    LogMessage(vbVerbose, 'Clear All Files');
+    fWitch.AbortAll;
     lvFileList.Items.Clear;
-    for I := fWitch.Count -1 downto 0 do
-      fWitch.Delete(I);
+    fWitch.Clear;
   finally
     lvFIleList.Items.EndUpdate;
+    fWitchItem:=nil;
   end;
   UpdateMetaData;
 end;
