@@ -11,6 +11,9 @@ unit uMain;
 {$I patches.pp}  // Various compiler directives to "fix" things.
 {$I version.def} // Include directives for project option build flags.
 
+
+{$DEFINE STICKYLISTITEMS}
+
 interface
 
 uses
@@ -141,6 +144,11 @@ type
       fSingleViewer : boolean;
       fUseExternalEditor : boolean;
       fExternalEditor : String;
+      { More Lazarus UI Glitch fixing!! }
+      {$IFDEF STICKYLISTITEMS}
+        fLastFileItem : TListItem;
+        fLastCodeItem : TListItem;
+      {$ENDIF}
       procedure SetCodepageFilter(AValue: TCodepageFilter);
       procedure SetUnicodeView( S : String );
       function CanExport:boolean;
@@ -385,6 +393,10 @@ end;
 
 procedure TfMain.FormCreate(Sender: TObject);
 begin
+  {$IFDEF STICKYLISTITEMS}
+  fLastFileItem:=nil;
+  fLastCodeItem:=nil;
+  {$ENDIF}
   fWitchItem:=nil;
   fLastWitch:=nil;
   fCodepage:=-1;
@@ -563,6 +575,16 @@ begin
   try
     IgnoreParameter(Sender);
     if Selected then begin
+      {$IFDEF STICKYLISTITEMS}
+      {$if defined(windows)}
+      if Assigned(fLastCodeItem) and (fLastCodeItem <> Item) then begin
+        fLastCodeItem.Selected := False;
+        fLastCodeItem.Focused := False;
+      end;
+      {$endif}
+
+      fLastCodeItem := Item;
+      {$ENDIF}
       if Assigned(Item) then begin
         Val(Item.Caption, V, E);
         if E <> 0 then begin
@@ -572,8 +594,13 @@ begin
           SelectCodepage(V);
       end;
     end else
-    if not Assigned(lvCodepageList.Selected) then
+    if not Assigned(lvCodepageList.Selected) then begin
       SelectCodepageListItem;
+      {$IFDEF STICKYLISTITEMS}
+      fLastCodeItem:=lvCodepageList.Selected;
+      {$ENDIF}
+
+    end;
   finally
     Locked:=False;
   end;
@@ -589,6 +616,16 @@ begin
   try
     IgnoreParameter(Sender);
     if Selected then begin
+      {$IFDEF STICKYLISTITEMS}
+      {$if defined(windows)}
+      if Assigned(fLastFileItem) and (fLastFileItem <> Item) then begin
+        fLastFileItem.Selected := False;
+        fLastFileItem.Focused := False;
+      end;
+      {$endif}
+
+      fLastFileItem := Item;
+      {$ENDIF}
       if Assigned(Item) and Assigned(Item.Data) then
         SelectFile(TWitchItem(Item.Data));
     end else
@@ -596,6 +633,9 @@ begin
       if Assigned(fWitchItem) and Assigned(fWitchItem.ListItem) then begin
         fWitchItem.ListItem.Selected := True;
         fWitchItem.ListItem.Focused := True;
+        {$IFDEF STICKYLISTITEMS}
+        fLastFileItem:=fWitchItem.ListItem;
+        {$ENDIF}
       end;
   finally
     Locked:=False;
@@ -636,6 +676,10 @@ begin
         Exit;
       end;
     end;
+
+    {$IFDEF STICKYLISTITEMS}
+    fLastCodeItem:=nil;
+    {$ENDIF}
 
     lvCodepageList.BeginUpdate;
     lvCodepageList.Clear;
@@ -939,7 +983,7 @@ begin
         {$if defined(Darwin)}
           RunAsync('open', ['-a', fExternalEditor, fWitchItem.FileName]);
         {$elseif defined(Windows)}
-          RunAsync('cmd', ['/c', 'start', '""', fExternalEditor, [fWitchItem.FileName]);
+          RunAsync('cmd', ['/c', 'start', '""', fExternalEditor, fWitchItem.FileName]);
         {$elseif defined(Linux)}
         { maybe xdg-open, gnome-open, kfmclient, etc }
           RunAsync(fExternalEditor, [fWitchItem.FileName]);
@@ -993,7 +1037,7 @@ end;
 procedure TfMain.UpdateCodepageViewLabel;
 begin
   if fCodepage < 0 then
-    lbViewCodepageLabel.Caption:=''
+    lbViewCodepageLabel.Caption:=' '
   else
     lbViewCodepageLabel.Caption:=GetFormat(ComponentNamePath(pViewCodepageLabel,
       Self, True) + 'lbViewCodepageLabel/Value' , [IntToStr(fCodepage)],
@@ -1163,7 +1207,7 @@ begin
   end else begin
     fCodepageText.BeginUpdate;
     fCodePageText.Clear;
-    if fCodepage <> -1 then begin
+    if (fCodepage <> -1) or (fWitchItem.Encoding=weBinary) then begin
       case fWitchItem.Encoding of
         weNone : begin
           LogMessage(vbVerbose, 'ASCII Item: ' + fWitchItem.DisplayName + ' (Any Codepage, using ' +
@@ -1438,7 +1482,7 @@ begin
 
   end else
     S:='(null)';
-  LogMessage(vbVerbose, 'Select File: ' + S);
+  LogMessage(vbVerbose, 'Select File: ' + FriendlyPath(AppBasePath, S));
   UpdateMetaData;
 
   if not Assigned(fWitchItem) then Exit;
@@ -1604,17 +1648,35 @@ begin
 end;
 
 procedure TfMain.CloseAllFiles;
+var
+  I, LIDX : Integer;
 begin
+  {$IFDEF STICKYLISTITEMS}
+  fLastFileItem:=nil;
+  fLastCodeItem:=nil;
+  {$ENDIF}
   fWitchItem:=nil;
   fCodepage:=-1;
   lvFileList.Items.BeginUpdate;
   try
+    for I := fWitch.Count - 1 downto 0 do begin
+      fWitchItem:=fWitch.Items[I];
+      if fWitchItem.Analyzed then begin
+        LIDX:=fWitchItem.ListItem.Index;
+        fWitchItem.ListItem:=nil;
+        lvFileList.Items.Delete(LIDX);
+        lvFileList.Invalidate;
+        fWitch.Delete(fWitchItem);
+      end;
+    end;
+
+    { Still has problems on Linux, probably on Windows as well
     LogMessage(vbVerbose, 'Clear All Files');
     fWitch.AbortAll;
     lvFileList.Items.Clear;
-    fWitch.Clear;
+    fWitch.Clear;}
   finally
-    lvFIleList.Items.EndUpdate;
+    lvFileList.Items.EndUpdate;
     fWitchItem:=nil;
   end;
   UpdateMetaData;
@@ -1624,6 +1686,10 @@ procedure TfMain.CloseFile;
 var
   LIDX : Integer;
 begin
+  {$IFDEF STICKYLISTITEMS}
+  fLastFileItem:=nil;
+  fLastCodeItem:=nil;
+  {$ENDIF}
   { TODO 1 -cLazarus_Bug Removing a list item leaves a clickable null item at
   the end of the list. This creates a phantom null TListItem at the end. While
   it does not seem to hurt anything, it does cause a flicker to that phatom
@@ -1642,7 +1708,11 @@ begin
       lvFileList.Invalidate;
     end else
       LIDX:=-1;
-    fWitch.Delete(fWitchItem);
+   {$IFDEF STICKYLISTITEMS}
+   fLastFileItem:=nil;
+   fLastCodeItem:=nil;
+   {$ENDIF}
+   fWitch.Delete(fWitchItem);
     fWitchItem:=nil;
     fCodepage:=-1;
     if (fWitch.Count = 0) or (LIDX <0) then

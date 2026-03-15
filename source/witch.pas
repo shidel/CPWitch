@@ -543,7 +543,11 @@ begin
   FAnalyzed:=True;
   if Sender is TWitchAnalyzeThread then begin
     FEncoding:=TWitchAnalyzeThread(Sender).Encoding;
-    LogMessage(vbVerbose, Self.DisplayName + ' is ' + FLocale);
+    case FEncoding of
+      weBinary : LogMessage(vbVerbose, Self.DisplayName + ' is a binary');
+    else
+      LogMessage(vbVerbose, Self.DisplayName + ' has locale ' + FLocale);
+    end;
   end;
   if Assigned(FListItem) and Assigned(FOwner) and Assigned(FOwner.FOnAnalyzed) then
     FOwner.FOnAnalyzed(Self);
@@ -810,8 +814,10 @@ var
   I : Integer;
 begin
   LogMessage(vbVerbose, 'Abort all tasks');
-  for I := Low(FItems) to High(FItems) do
+  for I := Low(FItems) to High(FItems) do begin
      FItems[I].FThread:=nil;
+     FItems[I].ListItem:=nil;;
+  end;
   CancelAllTasks;
 end;
 

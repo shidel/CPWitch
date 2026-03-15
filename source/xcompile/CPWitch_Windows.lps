@@ -9,7 +9,7 @@
         <Filename Value="CPWitch_Windows.lpr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="5" Y="18"/>
-        <UsageCount Value="80"/>
+        <UsageCount Value="81"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -36,8 +36,8 @@
         <UnitName Value="uMain"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="164"/>
-        <CursorPos X="55" Y="34"/>
+        <TopLine Value="291"/>
+        <CursorPos X="93" Y="1416"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit>
