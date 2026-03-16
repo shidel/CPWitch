@@ -19,10 +19,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="1583"/>
-        <CursorPos X="7" Y="1611"/>
-        <FoldState Value=" T3lX039 piYjE0j7 pkZmA04014 pj6ja0E1]9DjV0612126 plNoH0U043]O5p608325]MEnS0h@"/>
+        <TopLine Value="1448"/>
+        <CursorPos X="20" Y="1492"/>
+        <FoldState Value=" T3lX039 piYjE0j7 pkZmA045 pjKja0E1]9DjV064]RHkX0C3]I2jM]a]I4kK0U2]IUkN0A2]\cjB08113]TCl5074]T7jO0hb"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -101,9 +102,8 @@
       <Unit>
         <Filename Value="witch.pas"/>
         <UnitName Value="Witch"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="35"/>
+        <TopLine Value="146"/>
         <CursorPos X="21" Y="35"/>
         <FoldState Value=" T3lN0411124 pkao009118 pjAkF07A31]RA PkXnW0Y"/>
         <UsageCount Value="100"/>
@@ -193,10 +193,6 @@
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="150" Column="35" TopLine="116"/>
-      </Position>
       <Position>
         <Filename Value="umain.pas"/>
         <Caret Line="606" Column="10" TopLine="581"/>
@@ -312,6 +308,10 @@
       <Position>
         <Filename Value="witch.pas"/>
         <Caret Line="309" Column="26" TopLine="182"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="1483" TopLine="1039"/>
       </Position>
     </JumpHistory>
     <RunParams>

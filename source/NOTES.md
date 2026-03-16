@@ -1,4 +1,5 @@
 # Upcoming release notes
 
-* Background loading of text files.
+* Unicode viewer now reflects conversion from Codepage.
+* Background loading of files.
 * Prevent Codepage Filter change when Options are modified.

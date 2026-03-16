@@ -27,8 +27,8 @@
         <UnitName Value="uMain"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="555"/>
-        <CursorPos X="81" Y="38"/>
+        <TopLine Value="38"/>
+        <CursorPos X="32" Y="38"/>
         <FoldState Value=" TL004F"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>

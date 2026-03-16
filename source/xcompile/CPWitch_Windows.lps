@@ -36,10 +36,11 @@
         <UnitName Value="uMain"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="291"/>
-        <CursorPos X="93" Y="1416"/>
+        <TopLine Value="1380"/>
+        <CursorPos X="41" Y="1416"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla\logview.pp"/>

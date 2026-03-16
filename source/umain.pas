@@ -1489,7 +1489,8 @@ begin
   // Commented out items should never change when simply switching codepages.
   // UpdateCodepagelist;
   UpdateStatusBar;
-  // UpdateUnicodeView;
+  if Assigned(fWitchItem) and (fWitchItem.Encoding = weCodepage) then
+    UpdateUnicodeView;
   UpdateCodepageView;
   UpdateCodepageViewLabel;
   // UpdateLocale;
