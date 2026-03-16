@@ -539,8 +539,15 @@ procedure TfMain.FormDropFiles(Sender: TObject; const FileNames: array of string
 var
   I : Integer;
 begin
+  lvFileList.Items.BeginUpdate;
+  try
   for I := High(FileNames) downto 0 do
     OpenFile(FileNames[I], I=0);
+
+  finally
+    lvFileList.Items.EndUpdate;
+    lvFileList.Sort;
+  end;
 end;
 
 procedure TfMain.FormResize(Sender: TObject);
@@ -955,7 +962,9 @@ begin
         W.ListItem.ImageIndex:=idxFileTypeFilePlainGray;
     end;
     weError : begin
-      Cat(M, 'Error');
+      Cat(M, 'Error' + SPACE + '#');
+      Cat(M, IntToStr(W.ErrorCode));
+      Cat(M, SPACE+'with');
       W.ListItem.ImageIndex:=idxFileTypeFilePlainRed;
     end;
     weBinary : begin
@@ -1569,6 +1578,7 @@ begin
   F:='';
   XML:=TXMLConfig.Create(nil);
   try
+    lvFileList.Items.BeginUpdate;
     XML.LoadFromFile(UserDataPath + 'session.xml');
     C:=StrToInt(RawByteString(XML.GetValue('Files/Count','0')));
     X:=StrToInt(RawByteString(XML.GetValue('Files/Selected', '-1')));
@@ -1588,6 +1598,8 @@ begin
   except
     FreeAndNil(XML);
   end;
+  lvFileList.Items.EndUpdate;
+  lvFileList.Sort;
   if F <> '' then
     OpenFile(F, True);
   if Assigned(XML) then

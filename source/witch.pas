@@ -34,6 +34,7 @@ type
 
   TWitchItem = class
   private
+    FErrorCode: integer;
     FThread: TThread;
     FAnalyzed: boolean;
     FAnalyzing: boolean;
@@ -58,7 +59,6 @@ type
     procedure ClearData;
     procedure AnalyzeStart;
     procedure AnalyzeDone(Sender : TObject);
-    procedure LoadFile(AFileName : String);
     function FileChanged : boolean;
   public
     constructor Create(AOwner: TWitch);
@@ -78,6 +78,7 @@ type
     property Preferred : integer read FPreferred; // Preferred Codepage
     property Detected: integer read FDetected; // Detected probable Codepage
     property EndsWithBlank : boolean read FEndsWithBlank;
+    property ErrorCode : integer read FErrorCode;
     function AsCodePage(Codepage : integer; Convert : boolean = true) : TUTF8ToCodepage;
     function AsUnicode(Codepage : integer; Convert : boolean = true) : TCodepageToUTF8;
   published
@@ -150,9 +151,11 @@ type
 
   TWitchAnalyzeThread=class(TThread)
   private
+    FErrorCode : integer;
     FDetected: integer;
     FEncoding: TWitchEncoding;
     FEndsWithBlank: boolean;
+    FFileName: String;
     FLineEndings: TLineEndings;
     FLocale: RawByteString;
     FPreferred: integer;
@@ -160,6 +163,7 @@ type
     FText: RawByteString;
     FWitch: TWitch;
     FWitchItem: TWitchItem;
+    procedure SetFileName(AValue: String);
     procedure SetText(AValue: RawByteString);
     procedure SetWitch(AValue: TWitch);
     procedure SetWitchItem(AValue: TWitchItem);
@@ -176,6 +180,7 @@ type
     // constructor Create(CreateSuspended:Boolean); override;
     property Witch : TWitch read FWitch write SetWitch;
     property WitchItem : TWitchItem read FWitchItem write SetWitchItem;
+    property FileName : String read FFileName write SetFileName;
     property Text : RawByteString read FText write SetText;
     property Encoding : TWitchEncoding read FEncoding;
     property Results : TCodepageResults read FResults;
@@ -200,6 +205,12 @@ begin
   FText:=AValue;
 end;
 
+procedure TWitchAnalyzeThread.SetFileName(AValue: String);
+begin
+  if FFileName=AValue then Exit;
+  FFileName:=AValue;
+end;
+
 procedure TWitchAnalyzeThread.SetWitch(AValue: TWitch);
 begin
   if FWitch=AValue then Exit;
@@ -214,11 +225,6 @@ var
 begin
   If Not (Assigned(FWitch) and Assigned(FWitchItem)) then Exit;
 
-  if Terminated then Exit;
-  {$IFDEF Slow_Analyze}
-    Sleep(100);
-  {$ENDIF}
-
   // Initial "Unknown" state
   FLineEndings:=leCRLF;
   FEndsWithBlank:=False;
@@ -227,6 +233,23 @@ begin
   FPreferred:=-1;
   FDetected:=-1;
   FResults:=[];
+  FErrorCode:=0;
+
+  if Terminated then Exit;
+  {$IFDEF Slow_Analyze}
+    Sleep(200);
+  {$ENDIF}
+
+  try
+    FErrorCode:=FileLoad(FFileName, FText);
+    if FErrorCode <> 0 then
+      raise Exception.Create('error loading file');
+  except
+    FText:='';
+    FEncoding:=weError;
+    Synchronize(@Completed);
+    Exit;
+  end;
 
   // Test for characters above ASCII 127
   for I := 1 to Length(FText) do
@@ -270,7 +293,18 @@ var
   S : String;
 begin
   if Terminated then Exit;
-  FWitchItem.FLineEndings:=LineEndings;
+  If Not (Assigned(FWitch) and Assigned(FWitchItem)) then Exit;
+  FWitchItem.FEncoding:=FEncoding;
+  FWitchItem.FErrorCode:=FErrorCode;
+  try
+    if (FEncoding = weError) or (FEncoding = weBinary) then
+      FWitchItem.FData:=[]
+    else
+      FWitchItem.FData:=PasExt.ToBytes(FText);
+  except
+    FWitchItem.FData:=[];
+  end;
+  FWitchItem.FLineEndings:=FLineEndings;
   FWitchItem.FEndsWithBlank:=FEndsWithBlank;
   FWitchItem.FResults:=Copy(FResults);
   FWitchItem.FLocale:=Flocale;
@@ -278,7 +312,8 @@ begin
   FWitchItem.FDetected:=FDetected;
   if FEncoding = weCodePage then
   if VerboseLevel > vbVerbose then begin
-    S:=TAB+'[Locale: ' + FLocale + ', Preferred: ' + IntToStr(FPreferred) + ', Detected: '+IntToStr(FDetected) + ']' + LF;
+    S:=TAB+'[Locale: ' + FLocale + ', Preferred: ' + IntToStr(FPreferred) +
+    ', Detected: '+IntToStr(FDetected) + ']' + LF;
     for I := 0 to High(FResults) do begin
         Cat(S, Tab+'Codepage: ' + IntToStr(FResults[I].Codepage) + LF);
         Cat(S, Tab2+'Characters: ' + IntToStr(FResults[I].Characters) + LF);
@@ -287,8 +322,10 @@ begin
         Cat(S, Tab2+'Converted: ' + IntToStr(FResults[I].Converted) + LF);
         Cat(S, Tab2+'Compatible: ' + IntToStr(FResults[I].Compatible) + LF);
       end;
-    LogMessage(vbNormal,'Analysis Results for: ' + FWitchItem.FileName+  LF + S);
-  end;
+    LogMessage(vbNormal,'Analysis Results for: ' + FriendlyPath(AppBasePath, FFileName) +  LF + S);
+  end else
+    LogMessage(vbVerbose, 'Analyzed: ' + FriendlyPath(AppBasePath, FFileName));
+
   FWitch.ThreadComplete(Self);
 end;
 
@@ -486,7 +523,18 @@ end;
 procedure TWitchItem.SetFileName(AValue: String);
 begin
   if FFileName=AValue then Exit;
-  LoadFile(AValue);
+  ClearData;
+  if AValue = '' then Exit;
+  FFileName:=AValue;
+  if not FileAge(FFileName, FDateTime) then
+    FDateTime:=-1;
+//   E:=FileLoad(AFileName, FData);
+//    if E <> 0 then begin
+//      ClearData;
+//      if FileErrorDialog(AFileName, E, false) <> mrRetry then
+//        raise Exception.Create('file read error');
+//    end;
+//  until E=0;
 end;
 
 function TWitchItem.GetIndex: integer;
@@ -514,7 +562,9 @@ begin
   FAnalyzing:=False;
   FLocale:='';
   FPreferred:=-1;
+  FDetected:=-1;
   FDateTime:=-1;
+  FErrorCode:=0;
   SetLength(FResults, 0);
   SetLength(FData, 0);
 end;
@@ -527,11 +577,19 @@ begin
       FOwner.FOnAnalyzed(Self);
   end else
   if not FAnalyzing then begin
+    if FFileName = '' then begin
+      FAnalyzed:=True;
+      FEncoding:=weError;
+      FErrorCode:=2;
+      AnalyzeDOne(Self);
+      Exit;
+    end;
     FAnalyzing:=True;
     FThread := TWitchAnalyzeThread.Create(True);
     TWitchAnalyzeThread(FThread).Witch:=FOwner;
     TWitchAnalyzeThread(FThread).WitchItem:=Self;
-    TWitchAnalyzeThread(FThread).Text:=PasExt.ToString(FData);
+    TWitchAnalyzeThread(FThread).FileName:=FFileName;
+    // PasExt.ToString(FData);
     QueueTask(FThread);
   end;
 end;
@@ -541,47 +599,24 @@ begin
   if FileChanged then Exit;
   FAnalyzing:=False;
   FAnalyzed:=True;
-  if Sender is TWitchAnalyzeThread then begin
-    FEncoding:=TWitchAnalyzeThread(Sender).Encoding;
-    case FEncoding of
-      weBinary : LogMessage(vbVerbose, Self.DisplayName + ' is a binary');
-    else
-      LogMessage(vbVerbose, Self.DisplayName + ' has locale ' + FLocale);
-    end;
-  end;
   if Assigned(FListItem) and Assigned(FOwner) and Assigned(FOwner.FOnAnalyzed) then
     FOwner.FOnAnalyzed(Self);
-end;
-
-procedure TWitchItem.LoadFile(AFileName : String);
-var
-  E : integer;
-begin
-  ClearData;
-  if AFileName = '' then Exit;
-  repeat
-    if not FileAge(AFileName, FDateTime) then
-      FDateTime:=-1;
-    E:=FileLoad(AFileName, FData);
-    if E <> 0 then begin
-      ClearData;
-      if FileErrorDialog(AFileName, E, false) <> mrRetry then
-        raise Exception.Create('file read error');
-    end;
-  until E=0;
-  FFileName:=AFileName;
 end;
 
 function TWitchItem.FileChanged: boolean;
 var
   DT : TDateTime;
+  FN : String;
 begin
   Result:=False;
   if FileAge(FFileName, DT) then
     Result:=DT <> FDateTime;
   if not Result then Exit;
-  LogMessage(vbVerbose, 'Open file modified: ' + FriendlyPath(AppBasePath, FileName));
-  LoadFile(FFileName);
+  LogMessage(vbVerbose, 'File modified: ' + FriendlyPath(AppBasePath, FileName));
+  FN:=FFileName;
+  FFileName:='';
+  FileName:=FN;
+  // LoadFile(FFileName);
   if Assigned(FListItem) then begin
     ListItem.ImageIndex:=idxFileTypeFilePlainOrange;
     if Assigned(FOwner) and Assigned(FOwner.FOnModified) then
