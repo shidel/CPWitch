@@ -697,6 +697,13 @@ begin
             L.Caption:=GetTranslation(K+'Any_Codepage/Caption', 'Any Codepage');
             L.ImageIndex:=High(iconCompatGreenNames);
           end;
+          weError : begin
+              // Binary Data FIle , not supported
+              lvCodepageList.SmallImages:=ilGeneralColor;
+              L:=lvCodepageList.Items.Add;
+              L.Caption:=GetTranslation(K+'Error/Caption', 'Error');
+              L.ImageIndex:=idxGeneralError;
+            end;
           weBinary : begin
              // Binary Data FIle , not supported
              lvCodepageList.SmallImages:=ilGeneralColor;
@@ -818,7 +825,7 @@ begin
     weCodepage,
     weUnicode : Result:=True;
   else
-    { weBinary or maybe something like a future weError }
+    { weBinary, weError or maybe some future type not deffined }
     Exit;
   end;
 end;
@@ -834,7 +841,7 @@ begin
     weNone,
     weUnicode : Result:=True;
   else
-    { weBinary or maybe something like a future weError }
+    { weBinary, weError or maybe some future type not deffined }
     Exit;
   end;
 end;
@@ -946,6 +953,10 @@ begin
         W.ListItem.ImageIndex:=idxFileTypeFilePlainYellow
       else
         W.ListItem.ImageIndex:=idxFileTypeFilePlainGray;
+    end;
+    weError : begin
+      Cat(M, 'Error');
+      W.ListItem.ImageIndex:=idxFileTypeFilePlainRed;
     end;
     weBinary : begin
       Cat(M, 'Binary');
@@ -1123,7 +1134,7 @@ begin
   UpdateStatusBarFileName;
   K:=ComponentNamePath(statBar, Self, True);
   if fWitchItem.Analyzed then begin
-    if fWitchItem.Encoding = weBinary then
+    if (fWitchItem.Encoding = weBinary) or (fWitchItem.Encoding = weError) then
       statBar.Panels[spiLineEndings].Text:=''
     else begin
       case fWitchItem.LineEndings of
@@ -1143,6 +1154,8 @@ begin
     case fWitchItem.Encoding of
       weNone : statBar.Panels[spiEncoding].Text:=
         GetTranslation(K+'NoEncoding/Caption', 'ASCII');
+      weError : statBar.Panels[spiEncoding].Text:=
+        GetTranslation(K+'Error/Caption', 'Error');
       weBinary : statBar.Panels[spiEncoding].Text:=
         GetTranslation(K+'Binary/Caption', 'Binary');
       weCodepage : statBar.Panels[spiEncoding].Text:=
@@ -1180,6 +1193,10 @@ begin
          H:= GetTranslation(ComponentNamePath(pViewUnicode, Self, True)
           +'Unsupported_file/Binary/Text', 'Binary data files are not supported.');
         end;
+        weError : begin
+         H:= GetTranslation(ComponentNamePath(pViewUnicode, Self, True)
+          +'File_Error/Error/Text', 'Files or processing error occured.');
+        end;
         weCodepage : begin
            C:=fWitchItem.AsUnicode(fCodepage, True);
            H:=EscapeHTML(RawByteString(C.Converted));
@@ -1208,7 +1225,8 @@ begin
   end else begin
     fCodepageText.BeginUpdate;
     fCodePageText.Clear;
-    if (fCodepage <> -1) or (fWitchItem.Encoding=weBinary) then begin
+    if (fCodepage <> -1) or (fWitchItem.Encoding=weBinary) or
+    (fWitchItem.Encoding=weError) then begin
       case fWitchItem.Encoding of
         weNone : begin
           LogMessage(vbVerbose, 'ASCII Item: ' + fWitchItem.DisplayName + ' (Any Codepage, using ' +
@@ -1216,6 +1234,12 @@ begin
           fCodepageText.Codepage:=fCodepage;
           fCodepageText.AddText(PasExt.ToString(fWitchItem.FileData));
         end;
+        weError : begin
+          fCodepageText.Codepage:=-1;
+          LogMessage(vbVerbose, 'Error Item: ' + fWitchItem.DisplayName + ' (Error)');
+          fCodepageText.AddError(GetTranslation(ComponentNamePath(pViewUnicode, Self, True)
+           +'File_Error/Error/Text', 'Files or processing error occured.'));
+         end;
         weBinary : begin
           fCodepageText.Codepage:=-1;
           LogMessage(vbVerbose, 'Binary Item: ' + fWitchItem.DisplayName + ' (Not supported)');
@@ -1295,6 +1319,7 @@ begin
       btnEditFile.Action:=actEditUnicode;
     end;
   else
+    { weBinary or weError }
     actClose.ImageIndex:=idxButtonFileCloseRed;
     btnExportFile.Action:=actExportNone;
     { TODO 0 -cLazarus_Bug Without forcing it to Enable, the Button
@@ -1489,6 +1514,7 @@ begin
   if not Assigned(fWitchItem) then Exit;
   if SuspendCheck then Exit;
   if not fWitchItem.Analyzed then Exit;
+  if fWitchItem.Encoding = weError then Exit;
   if fWitchItem.Encoding = weBinary then Exit;
 
   if fEndBlankOnInput and (fWitchItem.EndsWithBlank = false) then begin

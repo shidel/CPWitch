@@ -26,7 +26,7 @@ uses
 
 type
 
-  TWitchEncoding = (weNone, weCodepage, weUnicode, weBinary);
+  TWitchEncoding = (weNone, weCodepage, weUnicode, weBinary, weError);
 
   TWitch = class;
 
@@ -779,6 +779,7 @@ function TWitch.Add(FileName: String; ListItem : TListItem): integer;
 var
   W : TWitchItem;
 begin
+  // Create WitchItem for File
   W := TWitchItem.Create(Self);
   try
     W.FileName := FileName;
