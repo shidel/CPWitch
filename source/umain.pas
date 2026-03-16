@@ -386,6 +386,7 @@ end;
 
 procedure TfMain.actPreferencesExecute(Sender: TObject);
 begin
+  FormSettingsSave(Self);
   if not Assigned(fOptionsDialog) then
     Application.CreateForm(TfOptionsDialog, fOptionsDialog);
   fOptionsDialog.Show;
