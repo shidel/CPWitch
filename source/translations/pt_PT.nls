@@ -147,6 +147,7 @@
           </pCodepageListLabel>
           <lvCodepageList>
             <Analyzing Caption="A analisar"/>
+            <Error Caption="Erro"/>
             <Not_implemented Caption="Não implementado"/>
             <Any_Codepage Caption="Qualquer Codepage"/>
             <Binary_data Caption="Ficheiro Binário"/>
@@ -157,6 +158,9 @@
             <pViewUnicodeLabel>
               <lbUnicodeViewLabel Caption="Visualizado como Unicode"/>
             </pViewUnicodeLabel>
+            <File_Error>
+              <Error Text="Ocorreu um erro de ficheiro ou de processamento."/>
+            </File_Error>
             <Unsupported_file>
               <Binary Text="Ficheiros de dados binários não são suportados."/>
             </Unsupported_file>
@@ -219,6 +223,7 @@
       </Locales>
       <statBar>
         <Processing Caption="A processar"/>
+        <Error Caption="Erro"/>
         <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
         <Unicode Caption="Unicode"/>
         <Codepage Caption="Codepage"/>
@@ -241,21 +246,6 @@
         <Title Caption="Guardar ficheiro como ASCII simples de 7 bits"/>
         <File Filters="Todos os Ficheiros (*.*)|*.*"/>
       </ExportASCIIDialog>
-      <pViewers>
-        <pViewUnicode>
-          <pViewUnicodeLabel>
-            <lbUnicodeViewLabel Caption="Visualizado como Unicode"/>
-          </pViewUnicodeLabel>
-          <Unsupported_file>
-            <Binary Text="Ficheiros de dados binários não são suportados."/>
-          </Unsupported_file>
-        </pViewUnicode>
-        <pCodepage>
-          <pViewCodepageLabel>
-            <lbViewCodepageLabel Value="Visualizado como Codepage %s"/>
-          </pViewCodepageLabel>
-        </pCodepage>
-      </pViewers>
     </fMain>
     <fDictEditForm Caption="Atualizador de Dicionário">
       <pTop>
@@ -271,6 +261,61 @@
         <btnMerge Hint="Intercalar as palavras do dicionário do Utilizador no dicionário Mestre." Caption="Intercalar"/>
       </pButtons>
     </fDictEditForm>
+    <fUpdateCheckDialog Caption="Verificação de Atualização">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnRetry Caption="Repetir"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Check Text="A verificar atualizações disponíveis para &quot;%s&quot;, versão %s."/>
+        <Error Text="Não foi possível determinar se existem atualizações para &quot;%s&quot; no momento. Tente novamente mais tarde."/>
+        <None Text="Não existem atualizações disponíveis para &quot;%s&quot; no momento. Tente novamente mais tarde."/>
+      </Message>
+    </fUpdateCheckDialog>
+    <fUpdateFoundDialog Caption="Atualização Disponível">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnDownload Caption="Transferir"/>
+          <btnSkip Caption="Ignorar"/>
+        </fButtonPanel>
+        <fAuxPanel>
+          <cbSkipVersion Caption="Ignorar esta versão"/>
+        </fAuxPanel>
+      </fLowerPanel>
+      <Message>
+        <Note Text="Não existem notas de lançamento fornecidas para a versão %1:s de &quot;%0:s&quot;"/>
+      </Message>
+    </fUpdateFoundDialog>
+    <fUpdateDownloadDialog Caption="Transferência de Atualização">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnRetry Caption="Repetir"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Fetch Text="A transferir atualização para &quot;%s&quot;."/>
+        <Error Text="Erro ao transferir a atualização de &quot;%s&quot;. Tente novamente mais tarde."/>
+      </Message>
+    </fUpdateDownloadDialog>
+    <fUpdateSaveDialog Caption="Atualização Transferida">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+          <btnSaveAs Caption="Guardar como..."/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Downloaded Text="Transferido &quot;%s&quot; versão %s."/>
+      </Message>
+      <SaveAsDialog>
+        <Title Caption="Guardar atualização como"/>
+        <File Filters="Ficheiros de Arquivo (*.zip)|*.log|Todos os Ficheiros (*.*)|*.*"/>
+      </SaveAsDialog>
+    </fUpdateSaveDialog>
     <fOptionsDialog Caption="Preferências do Codepage Witch">
       <pPages>
         <tsAbout Hint="Sobre esta aplicação." Caption="Sobre">
@@ -307,7 +352,7 @@
             <cbAutoSelectCP Hint="Selecionar automaticamente a codepage preferida para conversão." Caption="Selecionar codepage automaticamente"/>
           </gbCodepage>
         </tsSession>
-		<tsTextEditor Hint="Opções do editor de texto." Caption="Editor de Texto">
+        <tsTextEditor Hint="Opções do editor de texto." Caption="Editor de Texto">
           <gbExternalEditor Caption="Editor Externo">
             <cbUseExternalEditor Hint="Utilizar um editor de texto externo em vez do editor incorporado simples." Caption="Utilizar um editor de texto externo"/>
             <pEditor>
@@ -405,61 +450,6 @@
       </fLowerPanel>
       <Message Text="A localidade para este ficheiro deve ser %s.&#xA;&#xA;Tem a certeza de que deseja adicionar ao dicionário sob a localidade %s?"/>
     </fDiffLocaleDialog>
-    <fUpdateCheckDialog Caption="Verificação de Atualização">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-          <btnRetry Caption="Repetir"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Check Text="A verificar atualizações disponíveis para &quot;%s&quot;, versão %s."/>
-        <Error Text="Não foi possível determinar se existem atualizações para &quot;%s&quot; no momento. Tente novamente mais tarde."/>
-        <None Text="Não existem atualizações disponíveis para &quot;%s&quot; no momento. Tente novamente mais tarde."/>
-      </Message>
-    </fUpdateCheckDialog>
-    <fUpdateFoundDialog Caption="Atualização Disponível">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-          <btnDownload Caption="Transferir"/>
-          <btnSkip Caption="Ignorar"/>
-        </fButtonPanel>
-        <fAuxPanel>
-          <cbSkipVersion Caption="Ignorar esta versão"/>
-        </fAuxPanel>
-      </fLowerPanel>
-      <Message>
-        <Note Text="Não existem notas de lançamento fornecidas para a versão %1:s de &quot;%0:s&quot;"/>
-      </Message>
-    </fUpdateFoundDialog>
-    <fUpdateDownloadDialog Caption="Transferência de Atualização">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-          <btnRetry Caption="Repetir"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Fetch Text="A transferir atualização para &quot;%s&quot;."/>
-        <Error Text="Erro ao transferir a atualização de &quot;%s&quot;. Tente novamente mais tarde."/>
-      </Message>
-    </fUpdateDownloadDialog>
-    <fUpdateSaveDialog Caption="Atualização Transferida">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-          <btnSaveAs Caption="Guardar como..."/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Downloaded Text="Transferido &quot;%s&quot; versão %s."/>
-      </Message>
-      <SaveAsDialog>
-        <Title Caption="Guardar atualização como"/>
-        <File Filters="Ficheiros de Arquivo (*.zip)|*.log|Todos os Ficheiros (*.*)|*.*"/>
-      </SaveAsDialog>
-    </fUpdateSaveDialog>
     <fCorrectFileEndingDialog Caption="Sem final de linha final">
       <fLowerPanel>
         <fButtonPanel>

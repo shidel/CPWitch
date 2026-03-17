@@ -147,6 +147,7 @@
           </pCodepageListLabel>
           <lvCodepageList>
             <Analyzing Caption="Analyzing"/>
+            <Error Caption="Error"/>
             <Not_implemented Caption="Not implemented"/>
             <Any_Codepage Caption="Any Codepage"/>
             <Binary_data Caption="Binary File"/>
@@ -157,6 +158,9 @@
             <pViewUnicodeLabel>
               <lbUnicodeViewLabel Caption="Viewed as Unicode"/>
             </pViewUnicodeLabel>
+            <File_Error>
+              <Error Text="A file or processing error occured."/>
+            </File_Error>
             <Unsupported_file>
               <Binary Text="Binary data files are not supported."/>
             </Unsupported_file>
@@ -219,6 +223,7 @@
       </Locales>
       <statBar>
         <Processing Caption="Processing"/>
+        <Error Caption="Error"/>
         <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
         <Unicode Caption="Unicode"/>
         <Codepage Caption="Codepage"/>
@@ -241,22 +246,7 @@
         <Title Caption="Save file as simple 7-bit ASCII"/>
         <File Filters="All Files (*.*)|*.*"/>
       </ExportASCIIDialog>
-      <pViewers>
-        <pViewUnicode>
-          <pViewUnicodeLabel>
-            <lbUnicodeViewLabel Caption="Viewed as Unicode"/>
-          </pViewUnicodeLabel>
-          <Unsupported_file>
-            <Binary Text="Binary data files are not supported."/>
-          </Unsupported_file>
-        </pViewUnicode>
-        <pCodepage>
-          <pViewCodepageLabel>
-            <lbViewCodepageLabel Value="Viewed as Codepage %s"/>
-          </pViewCodepageLabel>
-        </pCodepage>
-      </pViewers>
-    </fMain>
+     </fMain>
     <fDictEditForm Caption="Dictionary Updater">
       <pTop>
         <cbLocale Hint="Locale for the words to add to the dictionary."/>
@@ -271,6 +261,61 @@
         <btnMerge Hint="Merge the User dictionary words into the Master dictionary." Caption="Merge"/>
       </pButtons>
     </fDictEditForm>
+    <fUpdateCheckDialog Caption="Update Check">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancel"/>
+          <btnRetry Caption="Retry"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Check Text="Checking for available updates for &quot;%s&quot;, version %s."/>
+        <Error Text="Unable to determine if there are any updates for &quot;%s&quot; at this time. Please try again later."/>
+        <None Text="There are no available updates for &quot;%s&quot; at this time. Please try again later."/>
+      </Message>
+    </fUpdateCheckDialog>
+    <fUpdateFoundDialog Caption="Update Available">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancel"/>
+          <btnDownload Caption="Download"/>
+          <btnSkip Caption="Skip"/>
+        </fButtonPanel>
+        <fAuxPanel>
+          <cbSkipVersion Caption="Skip this version"/>
+        </fAuxPanel>
+      </fLowerPanel>
+      <Message>
+        <Note Text="There are no release notes provided for version %1:s of &quot;%0:s&quot;"/>
+      </Message>
+    </fUpdateFoundDialog>
+    <fUpdateDownloadDialog Caption="Update Download">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancel"/>
+          <btnRetry Caption="Retry"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Fetch Text="Downloading update for &quot;%s&quot;."/>
+        <Error Text="Error downloading &quot;%s&quot; update. Please try again later."/>
+      </Message>
+    </fUpdateDownloadDialog>
+    <fUpdateSaveDialog Caption="Update Downloaded">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancel"/>
+          <btnSaveAs Caption="Save as..."/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Downloaded Text="Downloaded &quot;%s&quot; version %s."/>
+      </Message>
+      <SaveAsDialog>
+        <Title Caption="Save update as"/>
+        <File Filters="Archive Files (*.zip)|*.log|All Files (*.*)|*.*"/>
+      </SaveAsDialog>
+    </fUpdateSaveDialog>
     <fOptionsDialog Caption="Codepage Witch Preferences">
       <pPages>
         <tsAbout Hint="About this application." Caption="About">
@@ -389,61 +434,6 @@
       </fLowerPanel>
       <Message Text="The locale for this file is expected to be %s.&#xA;&#xA;Are you certian you wish to add to the dictionary under the %s locale?"/>
     </fDiffLocaleDialog>
-    <fUpdateCheckDialog Caption="Update Check">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancel"/>
-          <btnRetry Caption="Retry"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Check Text="Checking for available updates for &quot;%s&quot;, version %s."/>
-        <Error Text="Unable to determine if there are any updates for &quot;%s&quot; at this time. Please try again later."/>
-        <None Text="There are no available updates for &quot;%s&quot; at this time. Please try again later."/>
-      </Message>
-    </fUpdateCheckDialog>
-    <fUpdateFoundDialog Caption="Update Available">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancel"/>
-          <btnDownload Caption="Download"/>
-          <btnSkip Caption="Skip"/>
-        </fButtonPanel>
-        <fAuxPanel>
-          <cbSkipVersion Caption="Skip this version"/>
-        </fAuxPanel>
-      </fLowerPanel>
-      <Message>
-        <Note Text="There are no release notes provided for version %1:s of &quot;%0:s&quot;"/>
-      </Message>
-    </fUpdateFoundDialog>
-    <fUpdateDownloadDialog Caption="Update Download">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancel"/>
-          <btnRetry Caption="Retry"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Fetch Text="Downloading update for &quot;%s&quot;."/>
-        <Error Text="Error downloading &quot;%s&quot; update. Please try again later."/>
-      </Message>
-    </fUpdateDownloadDialog>
-    <fUpdateSaveDialog Caption="Update Downloaded">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancel"/>
-          <btnSaveAs Caption="Save as..."/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Downloaded Text="Downloaded &quot;%s&quot; version %s."/>
-      </Message>
-      <SaveAsDialog>
-        <Title Caption="Save update as"/>
-        <File Filters="Archive Files (*.zip)|*.log|All Files (*.*)|*.*"/>
-      </SaveAsDialog>
-    </fUpdateSaveDialog>
     <fCorrectFileEndingDialog Caption="No final line ending">
       <fLowerPanel>
         <fButtonPanel>

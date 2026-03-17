@@ -1,5 +1,5 @@
 # Upcoming release notes
 
-* Unicode viewer now reflects conversion from Codepage.
-* Background loading of files.
-* Prevent Codepage Filter change when Options are modified.
+* Error message, if open file was deleted.
+* Display possible file errors in viewers.
+

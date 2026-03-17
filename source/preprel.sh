@@ -24,6 +24,9 @@ if [[ "${plist}" == '' ]] ; then
   exit 1
 fi
 
+echo "Update working bundle with latest translations"
+cp -f translations/*.nls CPWitch.app/Contents/Resources/
+
 # cross compile file update
 echo "Update Cross-compile source files"
 cp -f *.lfm *.pas version.* icons.* dictionary.pp xcompile/

@@ -153,6 +153,7 @@ type
       procedure SetUnicodeView( S : String );
       function CanExport:boolean;
       function CanEdit:boolean;
+      function GetWitchErrorMessage : String;
     protected
       procedure FormSettingsLoad(Sender: TObject);
       procedure FormSettingsSave(Sender: TObject);
@@ -853,6 +854,28 @@ begin
   end;
 end;
 
+function TfMain.GetWitchErrorMessage: String;
+var
+  Key : UnicodeString;
+  Msg : UnicodeString;
+  Err : UnicodeString;
+begin
+  if not Assigned(fWitchItem) then Exit('');
+  Msg:=Translations.GetValue('Application/Error/File/Read/Message/Value',
+  'Error #%1:s (%2:s) occured while reading from file "%0:s".');
+  Key := '/Application/Error/Codes/';
+  Err:=Translations.GetValue(Key + 'ec' +
+  UnicodeString(IntToStr(fWitchItem.ErrorCode) + '/Value'), '');
+  if Err='' then
+    Err:=Translations.GetValue(Key + 'ecUnknown/Value', 'Unknown error');
+  try
+    Result:=Format(AnsiString(Msg), [fWitchItem.DisplayName,
+    IntToStr(fWitchItem.ErrorCode), AnsiString(Err)]);
+  except
+    Result:=RawByteString(Translations.GetValue('/Application/Error/File/Read/Caption', 'File read error'));
+  end;
+end;
+
 procedure TfMain.FormSettingsLoad(Sender: TObject);
 var
   S : String;
@@ -1204,7 +1227,8 @@ begin
         end;
         weError : begin
          H:= GetTranslation(ComponentNamePath(pViewUnicode, Self, True)
-          +'File_Error/Error/Text', 'Files or processing error occured.');
+          +'File_Error/Error/Text', 'A file or processing error occured.') + LF + LF +
+          GetWitchErrorMessage;
         end;
         weCodepage : begin
            C:=fWitchItem.AsUnicode(fCodepage, True);
@@ -1212,7 +1236,6 @@ begin
            C.Free;
         end;
       end;
-
     end;
   end;
   SetUnicodeView(H);
@@ -1247,7 +1270,8 @@ begin
           fCodepageText.Codepage:=-1;
           LogMessage(vbVerbose, 'Error Item: ' + fWitchItem.DisplayName + ' (Error)');
           fCodepageText.AddError(GetTranslation(ComponentNamePath(pViewUnicode, Self, True)
-           +'File_Error/Error/Text', 'Files or processing error occured.'));
+           +'File_Error/Error/Text', 'A file or processing error occured.') + LF + LF +
+           GetWitchErrorMessage);
          end;
         weBinary : begin
           fCodepageText.Codepage:=-1;

@@ -246,6 +246,7 @@ begin
       raise Exception.Create('error loading file');
   except
     FText:='';
+    FErrorCode:=5;
     FEncoding:=weError;
     Synchronize(@Completed);
     Exit;
@@ -609,21 +610,38 @@ var
   FN : String;
 begin
   Result:=False;
-  if FileAge(FFileName, DT) then
-    Result:=DT <> FDateTime;
-  if not Result then Exit;
-  LogMessage(vbVerbose, 'File modified: ' + FriendlyPath(AppBasePath, FileName));
-  FN:=FFileName;
-  FFileName:='';
-  FileName:=FN;
-  // LoadFile(FFileName);
-  if Assigned(FListItem) then begin
-    ListItem.ImageIndex:=idxFileTypeFilePlainOrange;
-    if Assigned(FOwner) and Assigned(FOwner.FOnModified) then
-    FOwner.FOnModified(Self);
+  if FileExists(FileName) then begin
+    if FileAge(FFileName, DT) then
+       if DT = FDateTime then Exit;
+    LogMessage(vbVerbose, 'File modified: ' + FriendlyPath(AppBasePath, FileName));
+    FN:=FFileName;
+    FFileName:='';
+    FileName:=FN;
+    Result:=True;
+    if Assigned(FListItem) then begin
+      ListItem.ImageIndex:=idxFileTypeFilePlainOrange;
+      if Assigned(FOwner) and Assigned(FOwner.FOnModified) then
+        FOwner.FOnModified(Self);
+    end;
+    if Assigned(FListItem) and Assigned(FOwner) and Assigned(FOwner.FOnAnalyzed) then
+      AnalyzeStart;
+  end else begin
+    if FDateTime = -1 then Exit;
+    FDateTime:=-1;
+    LogMessage(vbVerbose, 'File deleted: ' + FriendlyPath(AppBasePath, FileName));
+    FAnalyzed:=True;
+    FEncoding:=weError;
+    FErrorCode:=2;
+    if Assigned(FListItem) then begin
+      ListItem.ImageIndex:=idxFileTypeFilePlainRed;
+      if Assigned(FOwner) then begin
+        if Assigned(FOwner.FOnModified) then
+          FOwner.FOnModified(Self);
+        if Assigned(FOwner.FOnAnalyzed) then
+          FOwner.FOnAnalyzed(Self);
+      end;
+    end;
   end;
-  if Assigned(FListItem) and Assigned(FOwner) and Assigned(FOwner.FOnAnalyzed) then
-    AnalyzeStart;
 end;
 
 constructor TWitchItem.Create(AOwner: TWitch);

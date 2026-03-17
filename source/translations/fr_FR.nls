@@ -147,6 +147,7 @@
           </pCodepageListLabel>
           <lvCodepageList>
             <Analyzing Caption="Analyse en cours"/>
+            <Error Caption="Erreur"/>
             <Not_implemented Caption="Non implémenté"/>
             <Any_Codepage Caption="N'importe quelle page de codes"/>
             <Binary_data Caption="Fichier binaire"/>
@@ -157,6 +158,9 @@
             <pViewUnicodeLabel>
               <lbUnicodeViewLabel Caption="Affiché en Unicode"/>
             </pViewUnicodeLabel>
+            <File_Error>
+              <Error Text="Une erreur de fichier ou de traitement est survenue."/>
+            </File_Error>
             <Unsupported_file>
               <Binary Text="Les fichiers de données binaires ne sont pas pris en charge."/>
             </Unsupported_file>
@@ -219,6 +223,7 @@
       </Locales>
       <statBar>
         <Processing Caption="Traitement en cours"/>
+        <Error Caption="Erreur"/>
         <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
         <Unicode Caption="Unicode"/>
         <Codepage Caption="Page de codes"/>
@@ -241,21 +246,6 @@
         <Title Caption="Enregistrer le fichier en ASCII 7 bits simple"/>
         <File Filters="Tous les fichiers (*.*)|*.*"/>
       </ExportASCIIDialog>
-      <pViewers>
-        <pViewUnicode>
-          <pViewUnicodeLabel>
-            <lbUnicodeViewLabel Caption="Affiché en Unicode"/>
-          </pViewUnicodeLabel>
-          <Unsupported_file>
-            <Binary Text="Les fichiers de données binaires ne sont pas pris en charge."/>
-          </Unsupported_file>
-        </pViewUnicode>
-        <pCodepage>
-          <pViewCodepageLabel>
-            <lbViewCodepageLabel Value="Affiché en page de codes %s"/>
-          </pViewCodepageLabel>
-        </pCodepage>
-      </pViewers>
     </fMain>
     <fDictEditForm Caption="Mise à jour du dictionnaire">
       <pTop>
@@ -271,6 +261,61 @@
         <btnMerge Hint="Fusionner les mots du dictionnaire utilisateur dans le dictionnaire maître." Caption="Fusionner"/>
       </pButtons>
     </fDictEditForm>
+    <fUpdateCheckDialog Caption="Vérification de mise à jour">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Annuler"/>
+          <btnRetry Caption="Réessayer"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Check Text="Vérification des mises à jour disponibles pour &quot;%s&quot;, version %s."/>
+        <Error Text="Impossible de déterminer s'il existe des mises à jour pour &quot;%s&quot; pour le moment. Veuillez réessayer plus tard."/>
+        <None Text="Il n'y a pas de mise à jour disponible pour &quot;%s&quot; pour le moment. Veuillez réessayer plus tard."/>
+      </Message>
+    </fUpdateCheckDialog>
+    <fUpdateFoundDialog Caption="Mise à jour disponible">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Annuler"/>
+          <btnDownload Caption="Télécharger"/>
+          <btnSkip Caption="Ignorer"/>
+        </fButtonPanel>
+        <fAuxPanel>
+          <cbSkipVersion Caption="Ignorer cette version"/>
+        </fAuxPanel>
+      </fLowerPanel>
+      <Message>
+        <Note Text="Aucune note de version fournie pour la version %1:s de &quot;%0:s&quot;"/>
+      </Message>
+    </fUpdateFoundDialog>
+    <fUpdateDownloadDialog Caption="Téléchargement de la mise à jour">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Annuler"/>
+          <btnRetry Caption="Réessayer"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Fetch Text="Téléchargement de la mise à jour pour &quot;%s&quot;."/>
+        <Error Text="Erreur lors du téléchargement de la mise à jour &quot;%s&quot;. Veuillez réessayer plus tard."/>
+      </Message>
+    </fUpdateDownloadDialog>
+    <fUpdateSaveDialog Caption="Mise à jour téléchargée">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Annuler"/>
+          <btnSaveAs Caption="Enregistrer sous..."/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Downloaded Text="Téléchargement de &quot;%s&quot; version %s réussi."/>
+      </Message>
+      <SaveAsDialog>
+        <Title Caption="Enregistrer la mise à jour sous"/>
+        <File Filters="Fichiers d'archive (*.zip)|*.log|Tous les fichiers (*.*)|*.*"/>
+      </SaveAsDialog>
+    </fUpdateSaveDialog>
     <fOptionsDialog Caption="Préférences de Codepage Witch">
       <pPages>
         <tsAbout Hint="À propos de cette application." Caption="À propos">
@@ -307,7 +352,7 @@
             <cbAutoSelectCP Hint="Sélectionner automatiquement la page de codes préférée pour la conversion." Caption="Auto-sélection de la page de codes"/>
           </gbCodepage>
         </tsSession>
-		<tsTextEditor Hint="Options de l'éditeur de texte." Caption="Éditeur de texte">
+        <tsTextEditor Hint="Options de l'éditeur de texte." Caption="Éditeur de texte">
           <gbExternalEditor Caption="Éditeur externe">
             <cbUseExternalEditor Hint="Utiliser un éditeur de texte externe au lieu de l'éditeur intégré simple." Caption="Utiliser un éditeur de texte externe"/>
             <pEditor>
@@ -405,61 +450,6 @@
       </fLowerPanel>
       <Message Text="Les paramètres régionaux attendus pour ce fichier sont %s.&#xA;&#xA;Êtes-vous sûr de vouloir l'ajouter au dictionnaire sous les paramètres régionaux %s ?"/>
     </fDiffLocaleDialog>
-    <fUpdateCheckDialog Caption="Vérification de mise à jour">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Annuler"/>
-          <btnRetry Caption="Réessayer"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Check Text="Vérification des mises à jour disponibles pour &quot;%s&quot;, version %s."/>
-        <Error Text="Impossible de déterminer s'il existe des mises à jour pour &quot;%s&quot; pour le moment. Veuillez réessayer plus tard."/>
-        <None Text="Il n'y a pas de mise à jour disponible pour &quot;%s&quot; pour le moment. Veuillez réessayer plus tard."/>
-      </Message>
-    </fUpdateCheckDialog>
-    <fUpdateFoundDialog Caption="Mise à jour disponible">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Annuler"/>
-          <btnDownload Caption="Télécharger"/>
-          <btnSkip Caption="Ignorer"/>
-        </fButtonPanel>
-        <fAuxPanel>
-          <cbSkipVersion Caption="Ignorer cette version"/>
-        </fAuxPanel>
-      </fLowerPanel>
-      <Message>
-        <Note Text="Aucune note de version fournie pour la version %1:s de &quot;%0:s&quot;"/>
-      </Message>
-    </fUpdateFoundDialog>
-    <fUpdateDownloadDialog Caption="Téléchargement de la mise à jour">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Annuler"/>
-          <btnRetry Caption="Réessayer"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Fetch Text="Téléchargement de la mise à jour pour &quot;%s&quot;."/>
-        <Error Text="Erreur lors du téléchargement de la mise à jour &quot;%s&quot;. Veuillez réessayer plus tard."/>
-      </Message>
-    </fUpdateDownloadDialog>
-    <fUpdateSaveDialog Caption="Mise à jour téléchargée">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Annuler"/>
-          <btnSaveAs Caption="Enregistrer sous..."/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Downloaded Text="Téléchargement de &quot;%s&quot; version %s réussi."/>
-      </Message>
-      <SaveAsDialog>
-        <Title Caption="Enregistrer la mise à jour sous"/>
-        <File Filters="Fichiers d'archive (*.zip)|*.log|Tous les fichiers (*.*)|*.*"/>
-      </SaveAsDialog>
-    </fUpdateSaveDialog>
     <fCorrectFileEndingDialog Caption="Fin de ligne finale manquante">
       <fLowerPanel>
         <fButtonPanel>
