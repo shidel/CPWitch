@@ -30,6 +30,7 @@ type
     cbAutoSelectCP: TCheckBox;
     cbSingleViewer: TCheckBox;
     cbUseExternalEditor: TCheckBox;
+    cbUseFileExt: TCheckBox;
     edExternalEditor: TEdit;
     gbSessionFiles: TGroupBox;
     gbUnicodeView: TGroupBox;
@@ -37,6 +38,7 @@ type
     gbCodepage: TGroupBox;
     gbViewers: TGroupBox;
     gbExternalEditor: TGroupBox;
+    gbLocaleDetection: TGroupBox;
     lbDOSScale: TLabel;
     lbUnicodeScale: TLabel;
     DlgBrowseEditor: TOpenDialog;

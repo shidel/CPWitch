@@ -261,61 +261,13 @@
         <btnMerge Hint="Об'єднати словник користувача з основним словником." Caption="Об'єднати"/>
       </pButtons>
     </fDictEditForm>
-    <fUpdateCheckDialog Caption="Перевірка оновлень">
+    <fMissingFiles Caption="Відсутні файли документів">
       <fLowerPanel>
         <fButtonPanel>
           <btnCancel Caption="Скасувати"/>
-          <btnRetry Caption="Повторити"/>
         </fButtonPanel>
       </fLowerPanel>
-      <Message>
-        <Check Text="Перевірка наявності оновлень для &quot;%s&quot;, версія %s."/>
-        <Error Text="Наразі неможливо визначити наявність оновлень для &quot;%s&quot;. Будь ласка, спробуйте пізніше."/>
-        <None Text="Наразі немає доступних оновлень для &quot;%s&quot;. Будь ласка, спробуйте пізніше."/>
-      </Message>
-    </fUpdateCheckDialog>
-    <fUpdateFoundDialog Caption="Доступне оновлення">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Скасувати"/>
-          <btnDownload Caption="Завантажити"/>
-          <btnSkip Caption="Пропустити"/>
-        </fButtonPanel>
-        <fAuxPanel>
-          <cbSkipVersion Caption="Пропустити цю версію"/>
-        </fAuxPanel>
-      </fLowerPanel>
-      <Message>
-        <Note Text="Примітки до випуску для версії %1:s програми &quot;%0:s&quot; відсутні."/>
-      </Message>
-    </fUpdateFoundDialog>
-    <fUpdateDownloadDialog Caption="Завантаження оновлення">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Скасувати"/>
-          <btnRetry Caption="Повторити"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Fetch Text="Завантаження оновлення для &quot;%s&quot;."/>
-        <Error Text="Помилка під час завантаження оновлення &quot;%s&quot;. Будь ласка, спробуйте пізніше."/>
-      </Message>
-    </fUpdateDownloadDialog>
-    <fUpdateSaveDialog Caption="Оновлення завантажено">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Скасувати"/>
-          <btnSaveAs Caption="Зберегти як..."/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Downloaded Text="Завантажено &quot;%s&quot; версії %s."/>
-      </Message>
-      <SaveAsDialog>
-        <Title Caption="Зберегти оновлення як"/>
-        <File Filters="Архівні файли (*.zip)|*.log|Усі файли (*.*)|*.*"/>
-      </SaveAsDialog>
-    </fUpdateSaveDialog>
+    </fMissingFiles>
     <fOptionsDialog Caption="Налаштування Codepage Witch">
       <pPages>
         <tsAbout Hint="Про цю програму." Caption="Про програму">
@@ -348,25 +300,13 @@
             <cbWarnMissing Hint="Попереджати, якщо файл із попереднього сеансу не існує." Caption="Попереджати про відсутність."/>
             <cbOpenExport Hint="Автоматично відкривати експортовані файли для перегляду." Caption="Відкривати експортовані файли."/>
           </gbSessionFiles>
+          <gbLocaleDetection Caption="Визначення локалі">
+            <cbUseFileExt Hint="Надавати перевагу розширенню файлу перед мовною евристикою, коли це можливо." Caption="Перевага розширенню файлу"/>
+          </gbLocaleDetection>
           <gbCodepage Caption="Кодування">
             <cbAutoSelectCP Hint="Автоматично вибирати бажане кодування для конвертації." Caption="Автовибір кодування"/>
           </gbCodepage>
         </tsSession>
-        <tsTextEditor Hint="Опції текстового редактора." Caption="Текстовий редактор">
-          <gbExternalEditor Caption="Зовнішній редактор">
-            <cbUseExternalEditor Hint="Використовувати зовнішній текстовий редактор замість простого вбудованого редактора." Caption="Використовувати зовнішній текстовий редактор"/>
-            <pEditor>
-              <btnBrowseEditor Hint="Огляд для пошуку зовнішнього текстового редактора." Caption="Огляд"/>
-            </pEditor>
-            <BrowseDialog Caption="Огляд для пошуку зовнішнього текстового редактора">
-              <Title Caption="Огляд для пошуку зовнішнього текстового редактора"/>
-              <File>
-                <Unix Exec="Усі файли|*"/>
-                <Windows Exec="Виконувані файли|*.EXE|Усі файли|*.*"/>
-              </File>
-            </BrowseDialog>
-          </gbExternalEditor>
-        </tsTextEditor>
         <tsTextEditor Hint="Text editor options." Caption="Text Editor">
           <gbExternalEditor Caption="External Editor">
             <cbUseExternalEditor Hint="Use an external text editor instead of the simple built-in editor ." Caption="Use an external text editor"/>
@@ -422,6 +362,61 @@
         </fBodyPanel>
       </fMiddlePanel>
     </fOptionsDialog>
+    <fUpdateCheckDialog Caption="Перевірка оновлень">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Скасувати"/>
+          <btnRetry Caption="Повторити"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Check Text="Перевірка наявності оновлень для &quot;%s&quot;, версія %s."/>
+        <Error Text="Наразі неможливо визначити наявність оновлень для &quot;%s&quot;. Будь ласка, спробуйте пізніше."/>
+        <None Text="Наразі немає доступних оновлень для &quot;%s&quot;. Будь ласка, спробуйте пізніше."/>
+      </Message>
+    </fUpdateCheckDialog>
+    <fUpdateFoundDialog Caption="Доступне оновлення">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Скасувати"/>
+          <btnDownload Caption="Завантажити"/>
+          <btnSkip Caption="Пропустити"/>
+        </fButtonPanel>
+        <fAuxPanel>
+          <cbSkipVersion Caption="Пропустити цю версію"/>
+        </fAuxPanel>
+      </fLowerPanel>
+      <Message>
+        <Note Text="Примітки до випуску для версії %1:s програми &quot;%0:s&quot; відсутні."/>
+      </Message>
+    </fUpdateFoundDialog>
+    <fUpdateDownloadDialog Caption="Завантаження оновлення">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Скасувати"/>
+          <btnRetry Caption="Повторити"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Fetch Text="Завантаження оновлення для &quot;%s&quot;."/>
+        <Error Text="Помилка під час завантаження оновлення &quot;%s&quot;. Будь ласка, спробуйте пізніше."/>
+      </Message>
+    </fUpdateDownloadDialog>
+    <fUpdateSaveDialog Caption="Оновлення завантажено">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Скасувати"/>
+          <btnSaveAs Caption="Зберегти як..."/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Downloaded Text="Завантажено &quot;%s&quot; версії %s."/>
+      </Message>
+      <SaveAsDialog>
+        <Title Caption="Зберегти оновлення як"/>
+        <File Filters="Архівні файли (*.zip)|*.log|Усі файли (*.*)|*.*"/>
+      </SaveAsDialog>
+    </fUpdateSaveDialog>
     <fLoggerViewForm Caption="Журнал налагодження">
       <LineCount Plural="%.0n записів журналу" Singular="%.0n запис журналу"/>
       <pControls>
@@ -464,12 +459,5 @@
       <btnSave Caption="Зберегти"/>
       <dlgSaveAs Title="Помилка збереження файлу, зберегти файл як"/>
     </fFileEditor>
-    <fMissingFiles Caption="Відсутні файли документів">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Скасувати"/>
-        </fButtonPanel>
-      </fLowerPanel>
-    </fMissingFiles>
   </Controls>
 </CONFIG>

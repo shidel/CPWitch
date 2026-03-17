@@ -147,7 +147,7 @@
           </pCodepageListLabel>
           <lvCodepageList>
             <Analyzing Caption="Analysieren"/>
-		    <Error Caption="Fehler"/>
+            <Error Caption="Fehler"/>
             <Not_implemented Caption="Nicht implementiert"/>
             <Any_Codepage Caption="Jede Codepage"/>
             <Binary_data Caption="Binärdatei"/>
@@ -261,61 +261,13 @@
         <btnMerge Hint="Benutzerwörterbuch-Wörter in das Hauptwörterbuch zusammenführen." Caption="Zusammenführen"/>
       </pButtons>
     </fDictEditForm>
-    <fUpdateCheckDialog Caption="Update-Check">
+    <fMissingFiles Caption="Fehlende Dokumentdateien">
       <fLowerPanel>
         <fButtonPanel>
           <btnCancel Caption="Abbrechen"/>
-          <btnRetry Caption="Wiederholen"/>
         </fButtonPanel>
       </fLowerPanel>
-      <Message>
-        <Check Text="Suche nach verfügbaren Updates für &quot;%s&quot;, Version %s."/>
-        <Error Text="Derzeit kann nicht festgestellt werden, ob Updates für &quot;%s&quot; verfügbar sind. Bitte versuchen Sie es später erneut."/>
-        <None Text="Derzeit sind keine Updates für &quot;%s&quot; verfügbar. Bitte versuchen Sie es später erneut."/>
-      </Message>
-    </fUpdateCheckDialog>
-    <fUpdateFoundDialog Caption="Update verfügbar">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Abbrechen"/>
-          <btnDownload Caption="Herunterladen"/>
-          <btnSkip Caption="Überspringen"/>
-        </fButtonPanel>
-        <fAuxPanel>
-          <cbSkipVersion Caption="Diese Version überspringen"/>
-        </fAuxPanel>
-      </fLowerPanel>
-      <Message>
-        <Note Text="Für Version %1:s von &quot;%0:s&quot; sind keine Versionshinweise verfügbar."/>
-      </Message>
-    </fUpdateFoundDialog>
-    <fUpdateDownloadDialog Caption="Update-Download">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Abbrechen"/>
-          <btnRetry Caption="Wiederholen"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Fetch Text="Update für &quot;%s&quot; wird heruntergeladen."/>
-        <Error Text="Fehler beim Herunterladen des Updates für &quot;%s&quot;. Bitte versuchen Sie es später erneut."/>
-      </Message>
-    </fUpdateDownloadDialog>
-    <fUpdateSaveDialog Caption="Update heruntergeladen">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Abbrechen"/>
-          <btnSaveAs Caption="Speichern unter..."/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Downloaded Text="&quot;%s&quot; Version %s heruntergeladen."/>
-      </Message>
-      <SaveAsDialog>
-        <Title Caption="Update speichern unter"/>
-        <File Filters="Archivdateien (*.zip)|*.log|Alle Dateien (*.*)|*.*"/>
-      </SaveAsDialog>
-    </fUpdateSaveDialog>
+    </fMissingFiles>
     <fOptionsDialog Caption="Codepage Witch Einstellungen">
       <pPages>
         <tsAbout Hint="Über diese Anwendung." Caption="Über">
@@ -348,25 +300,13 @@
             <cbWarnMissing Hint="Warnen, wenn eine Datei aus der vorherigen Sitzung nicht existiert." Caption="Warnen, wenn fehlend."/>
             <cbOpenExport Hint="Exportdateien automatisch zur Überprüfung öffnen." Caption="Exportierte Dateien öffnen."/>
           </gbSessionFiles>
+          <gbLocaleDetection Caption="Gebietsschema-Erkennung">
+            <cbUseFileExt Hint="Dateiendung gegenüber Sprachheuristik bevorzugen, wenn möglich." Caption="Dateiendung bevorzugen"/>
+          </gbLocaleDetection>
           <gbCodepage Caption="Codepage">
             <cbAutoSelectCP Hint="Bevorzugte Codepage für die Konvertierung automatisch auswählen." Caption="Codepage automatisch auswählen"/>
           </gbCodepage>
         </tsSession>
-        <tsTextEditor Hint="Texteditor-Optionen." Caption="Texteditor">
-          <gbExternalEditor Caption="Externer Editor">
-            <cbUseExternalEditor Hint="Verwenden Sie einen externen Texteditor anstelle des einfachen integrierten Editors." Caption="Externen Texteditor verwenden"/>
-            <pEditor>
-              <btnBrowseEditor Hint="Nach externem Texteditor suchen." Caption="Durchsuchen"/>
-            </pEditor>
-            <BrowseDialog Caption="Suche nach externem Texteditor">
-              <Title Caption="Suche nach externem Texteditor"/>
-              <File>
-                <Unix Exec="Alle Dateien|*"/>
-                <Windows Exec="Ausführbare Dateien|*.EXE|Alle Dateien|*.*"/>
-              </File>
-            </BrowseDialog>
-          </gbExternalEditor>
-        </tsTextEditor>
         <tsTextEditor Hint="Text editor options." Caption="Text Editor">
           <gbExternalEditor Caption="External Editor">
             <cbUseExternalEditor Hint="Use an external text editor instead of the simple built-in editor ." Caption="Use an external text editor"/>
@@ -422,6 +362,61 @@
         </fBodyPanel>
       </fMiddlePanel>
     </fOptionsDialog>
+    <fUpdateCheckDialog Caption="Update-Check">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Abbrechen"/>
+          <btnRetry Caption="Wiederholen"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Check Text="Suche nach verfügbaren Updates für &quot;%s&quot;, Version %s."/>
+        <Error Text="Derzeit kann nicht festgestellt werden, ob Updates für &quot;%s&quot; verfügbar sind. Bitte versuchen Sie es später erneut."/>
+        <None Text="Derzeit sind keine Updates für &quot;%s&quot; verfügbar. Bitte versuchen Sie es später erneut."/>
+      </Message>
+    </fUpdateCheckDialog>
+    <fUpdateFoundDialog Caption="Update verfügbar">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Abbrechen"/>
+          <btnDownload Caption="Herunterladen"/>
+          <btnSkip Caption="Überspringen"/>
+        </fButtonPanel>
+        <fAuxPanel>
+          <cbSkipVersion Caption="Diese Version überspringen"/>
+        </fAuxPanel>
+      </fLowerPanel>
+      <Message>
+        <Note Text="Für Version %1:s von &quot;%0:s&quot; sind keine Versionshinweise verfügbar."/>
+      </Message>
+    </fUpdateFoundDialog>
+    <fUpdateDownloadDialog Caption="Update-Download">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Abbrechen"/>
+          <btnRetry Caption="Wiederholen"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Fetch Text="Update für &quot;%s&quot; wird heruntergeladen."/>
+        <Error Text="Fehler beim Herunterladen des Updates für &quot;%s&quot;. Bitte versuchen Sie es später erneut."/>
+      </Message>
+    </fUpdateDownloadDialog>
+    <fUpdateSaveDialog Caption="Update heruntergeladen">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Abbrechen"/>
+          <btnSaveAs Caption="Speichern unter..."/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Downloaded Text="&quot;%s&quot; Version %s heruntergeladen."/>
+      </Message>
+      <SaveAsDialog>
+        <Title Caption="Update speichern unter"/>
+        <File Filters="Archivdateien (*.zip)|*.log|Alle Dateien (*.*)|*.*"/>
+      </SaveAsDialog>
+    </fUpdateSaveDialog>
     <fLoggerViewForm Caption="Fehlerprotokoll">
       <LineCount Plural="%.0n Protokolleinträge" Singular="%.0n Protokolleintrag"/>
       <pControls>
@@ -464,12 +459,5 @@
       <btnSave Caption="Speichern"/>
       <dlgSaveAs Title="Dateispeicherfehler, Datei speichern unter"/>
     </fFileEditor>
-    <fMissingFiles Caption="Fehlende Dokumentdateien">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Abbrechen"/>
-        </fButtonPanel>
-      </fLowerPanel>
-    </fMissingFiles>
   </Controls>
 </CONFIG>

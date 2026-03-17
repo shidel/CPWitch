@@ -95,12 +95,14 @@ type
     FItems: TWitchItems;
     FOnAnalyzed: TNotifyEvent;
     FOnModified: TNotifyEvent;
+    FUseFileExt: Boolean;
     function GetCount: integer;
     function GetModified(Index : integer): boolean;
     procedure SetItems(AValue: TWitchItems);
     procedure SetModified(Index : integer; AValue: boolean);
     procedure SetOnAnalyzed(AValue: TNotifyEvent);
     procedure SetOnModified(AValue: TNotifyEvent);
+    procedure SetUseFileExt(AValue: Boolean);
   protected
     procedure ValidIndex(Index : integer);
     procedure Remove(Index:integer);
@@ -124,6 +126,7 @@ type
     function FileModified(Index : integer) : boolean; overload;
     function FileModified(FileName : String) : boolean; overload;
     property Modified[Index : integer] : boolean read GetModified write SetModified;
+    property UseFileExt : Boolean read FUseFileExt write SetUseFileExt;
   published
     property OnAnalyzed : TNotifyEvent read FOnAnalyzed write SetOnAnalyzed;
     property OnModified : TNotifyEvent read FOnModified write SetOnModified;
@@ -131,19 +134,9 @@ type
 
 implementation
 
-uses TaskMngr;
+uses TaskMngr, StdCtrls;
 
 { DEFINE Slow_Analyze}
-
-procedure dlg(Message : String); overload;
-begin
-  LogMessage(vbCritical, Message);
-end;
-
-procedure dlg(Message : String; I : Int64); overload;
-begin
-  LogMessage(vbCritical, Message, I);
-end;
 
 type
 
@@ -161,10 +154,12 @@ type
     FPreferred: integer;
     FResults: TCodepageResults;
     FText: RawByteString;
+    FUseFileExt: boolean;
     FWitch: TWitch;
     FWitchItem: TWitchItem;
     procedure SetFileName(AValue: String);
     procedure SetText(AValue: RawByteString);
+    procedure SetUseFileExt(AValue: boolean);
     procedure SetWitch(AValue: TWitch);
     procedure SetWitchItem(AValue: TWitchItem);
   protected
@@ -175,6 +170,7 @@ type
     procedure AnalyzeUTF8;
     procedure AnalyzeCP;
     procedure AnalyzeASCII;
+    procedure SetLocalByExtension;
   public
     procedure AfterConstruction; override;
     // constructor Create(CreateSuspended:Boolean); override;
@@ -189,6 +185,7 @@ type
     property Locale : RawByteString read FLocale;
     property Preferred : integer read FPreferred;
     property Detected: integer read FDetected;
+    property UseFileExt : boolean read FUseFileExt write SetUseFileExt;
   end;
 
 { TWitchAnalyzeThread }
@@ -203,6 +200,12 @@ procedure TWitchAnalyzeThread.SetText(AValue: RawByteString);
 begin
   if FText=AValue then Exit;
   FText:=AValue;
+end;
+
+procedure TWitchAnalyzeThread.SetUseFileExt(AValue: boolean);
+begin
+  if FUseFileExt=AValue then Exit;
+  FUseFileExt:=AValue;
 end;
 
 procedure TWitchAnalyzeThread.SetFileName(AValue: String);
@@ -281,6 +284,9 @@ begin
   end;
 
   if Terminated then Exit;
+
+  if FUseFileExt then
+    SetLocalByExtension;
 
   if Codepages.Locale(FLocale, L) then
     FPreferred:=L.Codepage;
@@ -506,6 +512,28 @@ begin
   FLocale:=DetectLocale(S);
 end;
 
+procedure TWitchAnalyzeThread.SetLocalByExtension;
+var
+  S, E : String;
+  L : TLocaleList;
+  I : Integer;
+begin
+  S:=ExcludeTrailing(Filename, '.UTF-8', false);
+  S:=ExcludeTrailing(S, '.UTF8', false);
+  S:=ExcludeTrailing(S, '-UTF-8', false);
+  S:=ExcludeTrailing(S, '-UTF8', false);
+  S:=ExcludeTrailing(S, '_UTF-8', false);
+  S:=ExcludeTrailing(S, '_UTF8', false);
+  S:=ExtractFileExt(S);
+  While S <> '' do E:=LowerCase(Trim(PopDelim(S,'.')));
+  L:=AllLocales;
+  for I := 0 to High(L) do
+    if (LowerCase(L[I].LetterCode) = E) or (LowerCase(L[I].Identifier) = E) then begin
+      FLocale:=L[I].Identifier;
+      Exit;
+    end;
+end;
+
 procedure TWitchAnalyzeThread.AfterConstruction;
 begin
   inherited AfterConstruction;
@@ -517,6 +545,7 @@ begin
   FResults:=[];
   FLocale:='';
   FPreferred:=-1;
+  FUseFileExt:=False;
 end;
 
 { TWitchItem }
@@ -590,6 +619,8 @@ begin
     TWitchAnalyzeThread(FThread).Witch:=FOwner;
     TWitchAnalyzeThread(FThread).WitchItem:=Self;
     TWitchAnalyzeThread(FThread).FileName:=FFileName;
+    TWitchAnalyzeThread(FThread).UseFileExt:=FOwner.UseFileExt;
+
     // PasExt.ToString(FData);
     QueueTask(FThread);
   end;
@@ -741,6 +772,12 @@ begin
   FOnModified:=AValue;
 end;
 
+procedure TWitch.SetUseFileExt(AValue: Boolean);
+begin
+  if FUseFileExt=AValue then Exit;
+  FUseFileExt:=AValue;
+end;
+
 procedure TWitch.ValidIndex(Index: integer);
 begin
   if (Index < Low(FItems)) or (Index > High(FItems)) then begin
@@ -784,6 +821,12 @@ begin
   FItems:=[];
   FOnAnalyzed:=nil;
   FOnModified:=nil;
+  try
+    FUseFileExt:=StringToCheckBoxState(UserConfig.GetValue(
+        'Preferences/tsSession/cbUseFileExt/State', 'Checked')) = cbChecked;
+  except
+    FUseFileExt:=False;
+  end;
 end;
 
 destructor TWitch.Destroy;

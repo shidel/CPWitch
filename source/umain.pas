@@ -182,6 +182,7 @@ type
       procedure RefreshFileStatus;
       procedure EnforceLayout; override;
       procedure SetSaveDialogText(Encoding : TWitchEncoding);
+      procedure ReAnalyzeFiles;
     public
       procedure ApplyUserLanguage; override;
       procedure CloseAllFiles;
@@ -1704,11 +1705,32 @@ begin
   end;
 end;
 
+procedure TfMain.ReAnalyzeFiles;
+var
+  I : Integer;
+begin
+  if Not Assigned(FWitch) then Exit;
+  for I := 0 to FWitch.Count - 1 do
+    FWitch.Modified[I]:=True;
+end;
+
 procedure TfMain.ApplyUserLanguage;
+var
+  X:Boolean;
 begin
   inherited ApplyUserLanguage;
   UpdateLocaleList;
   UpdateMetaData;
+  if Assigned(fWitch) then begin
+    X:=StringToCheckBoxState(UserConfig.GetValue(
+    'Preferences/tsSession/cbUseFileExt/State', 'Checked')) = cbChecked;
+    if X <> fWitch.UseFileExt then begin
+      fWitch.UseFileExt:=X;
+      ReAnalyzeFiles;
+
+    end;
+  end;
+
 end;
 
 procedure TfMain.CloseAllFiles;

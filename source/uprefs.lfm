@@ -13,8 +13,8 @@ object fOptionsDialog: TfOptionsDialog
     Height = 267
     Top = 37
     Width = 276
-    ActivePage = tsTextEditor
-    TabIndex = 1
+    ActivePage = tsSession
+    TabIndex = 0
     TabOrder = 0
     object tsSession: TTabSheet
       Hint = 'Application session options.'
@@ -71,10 +71,36 @@ object fOptionsDialog: TfOptionsDialog
           TabOrder = 2
         end
       end
-      object gbCodepage: TGroupBox
+      object gbLocaleDetection: TGroupBox
         Left = 0
         Height = 53
         Top = 113
+        Width = 270
+        Align = alTop
+        AutoSize = True
+        BorderSpacing.Top = 8
+        Caption = 'Locale Detection'
+        ClientHeight = 34
+        ClientWidth = 260
+        TabOrder = 2
+        object cbUseFileExt: TCheckBox
+          Left = 8
+          Height = 18
+          Hint = 'Prefer file extension over language heuristics when possible.'
+          Top = 8
+          Width = 244
+          Align = alTop
+          BorderSpacing.Around = 8
+          Caption = 'Prefer file extension'
+          Checked = True
+          State = cbChecked
+          TabOrder = 0
+        end
+      end
+      object gbCodepage: TGroupBox
+        Left = 0
+        Height = 53
+        Top = 174
         Width = 270
         Align = alTop
         AutoSize = True

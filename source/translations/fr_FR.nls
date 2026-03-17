@@ -261,61 +261,13 @@
         <btnMerge Hint="Fusionner les mots du dictionnaire utilisateur dans le dictionnaire maître." Caption="Fusionner"/>
       </pButtons>
     </fDictEditForm>
-    <fUpdateCheckDialog Caption="Vérification de mise à jour">
+    <fMissingFiles Caption="Fichiers de documents manquants">
       <fLowerPanel>
         <fButtonPanel>
           <btnCancel Caption="Annuler"/>
-          <btnRetry Caption="Réessayer"/>
         </fButtonPanel>
       </fLowerPanel>
-      <Message>
-        <Check Text="Vérification des mises à jour disponibles pour &quot;%s&quot;, version %s."/>
-        <Error Text="Impossible de déterminer s'il existe des mises à jour pour &quot;%s&quot; pour le moment. Veuillez réessayer plus tard."/>
-        <None Text="Il n'y a pas de mise à jour disponible pour &quot;%s&quot; pour le moment. Veuillez réessayer plus tard."/>
-      </Message>
-    </fUpdateCheckDialog>
-    <fUpdateFoundDialog Caption="Mise à jour disponible">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Annuler"/>
-          <btnDownload Caption="Télécharger"/>
-          <btnSkip Caption="Ignorer"/>
-        </fButtonPanel>
-        <fAuxPanel>
-          <cbSkipVersion Caption="Ignorer cette version"/>
-        </fAuxPanel>
-      </fLowerPanel>
-      <Message>
-        <Note Text="Aucune note de version fournie pour la version %1:s de &quot;%0:s&quot;"/>
-      </Message>
-    </fUpdateFoundDialog>
-    <fUpdateDownloadDialog Caption="Téléchargement de la mise à jour">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Annuler"/>
-          <btnRetry Caption="Réessayer"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Fetch Text="Téléchargement de la mise à jour pour &quot;%s&quot;."/>
-        <Error Text="Erreur lors du téléchargement de la mise à jour &quot;%s&quot;. Veuillez réessayer plus tard."/>
-      </Message>
-    </fUpdateDownloadDialog>
-    <fUpdateSaveDialog Caption="Mise à jour téléchargée">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Annuler"/>
-          <btnSaveAs Caption="Enregistrer sous..."/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Downloaded Text="Téléchargement de &quot;%s&quot; version %s réussi."/>
-      </Message>
-      <SaveAsDialog>
-        <Title Caption="Enregistrer la mise à jour sous"/>
-        <File Filters="Fichiers d'archive (*.zip)|*.log|Tous les fichiers (*.*)|*.*"/>
-      </SaveAsDialog>
-    </fUpdateSaveDialog>
+    </fMissingFiles>
     <fOptionsDialog Caption="Préférences de Codepage Witch">
       <pPages>
         <tsAbout Hint="À propos de cette application." Caption="À propos">
@@ -348,25 +300,13 @@
             <cbWarnMissing Hint="Avertir lorsqu'un fichier de la session précédente n'existe pas." Caption="Avertir s'il manque."/>
             <cbOpenExport Hint="Ouvrir automatiquement les fichiers d'exportation pour révision." Caption="Ouvrir les fichiers exportés."/>
           </gbSessionFiles>
+          <gbLocaleDetection Caption="Détection des paramètres régionaux">
+            <cbUseFileExt Hint="Préférer l'extension du fichier à l'heuristique de la langue si possible." Caption="Préférer l'extension du fichier"/>
+          </gbLocaleDetection>
           <gbCodepage Caption="Page de codes">
             <cbAutoSelectCP Hint="Sélectionner automatiquement la page de codes préférée pour la conversion." Caption="Auto-sélection de la page de codes"/>
           </gbCodepage>
         </tsSession>
-        <tsTextEditor Hint="Options de l'éditeur de texte." Caption="Éditeur de texte">
-          <gbExternalEditor Caption="Éditeur externe">
-            <cbUseExternalEditor Hint="Utiliser un éditeur de texte externe au lieu de l'éditeur intégré simple." Caption="Utiliser un éditeur de texte externe"/>
-            <pEditor>
-              <btnBrowseEditor Hint="Rechercher un éditeur de texte externe." Caption="Parcourir"/>
-            </pEditor>
-            <BrowseDialog Caption="Rechercher un éditeur de texte externe">
-              <Title Caption="Rechercher un éditeur de texte externe"/>
-              <File>
-                <Unix Exec="Tous les fichiers|*"/>
-                <Windows Exec="Fichiers exécutables|*.EXE|Tous les fichiers|*.*"/>
-              </File>
-            </BrowseDialog>
-          </gbExternalEditor>
-        </tsTextEditor>
         <tsTextEditor Hint="Text editor options." Caption="Text Editor">
           <gbExternalEditor Caption="External Editor">
             <cbUseExternalEditor Hint="Use an external text editor instead of the simple built-in editor ." Caption="Use an external text editor"/>
@@ -422,6 +362,61 @@
         </fBodyPanel>
       </fMiddlePanel>
     </fOptionsDialog>
+    <fUpdateCheckDialog Caption="Vérification de mise à jour">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Annuler"/>
+          <btnRetry Caption="Réessayer"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Check Text="Vérification des mises à jour disponibles pour &quot;%s&quot;, version %s."/>
+        <Error Text="Impossible de déterminer s'il existe des mises à jour pour &quot;%s&quot; pour le moment. Veuillez réessayer plus tard."/>
+        <None Text="Il n'y a pas de mise à jour disponible pour &quot;%s&quot; pour le moment. Veuillez réessayer plus tard."/>
+      </Message>
+    </fUpdateCheckDialog>
+    <fUpdateFoundDialog Caption="Mise à jour disponible">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Annuler"/>
+          <btnDownload Caption="Télécharger"/>
+          <btnSkip Caption="Ignorer"/>
+        </fButtonPanel>
+        <fAuxPanel>
+          <cbSkipVersion Caption="Ignorer cette version"/>
+        </fAuxPanel>
+      </fLowerPanel>
+      <Message>
+        <Note Text="Aucune note de version fournie pour la version %1:s de &quot;%0:s&quot;"/>
+      </Message>
+    </fUpdateFoundDialog>
+    <fUpdateDownloadDialog Caption="Téléchargement de la mise à jour">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Annuler"/>
+          <btnRetry Caption="Réessayer"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Fetch Text="Téléchargement de la mise à jour pour &quot;%s&quot;."/>
+        <Error Text="Erreur lors du téléchargement de la mise à jour &quot;%s&quot;. Veuillez réessayer plus tard."/>
+      </Message>
+    </fUpdateDownloadDialog>
+    <fUpdateSaveDialog Caption="Mise à jour téléchargée">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Annuler"/>
+          <btnSaveAs Caption="Enregistrer sous..."/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Downloaded Text="Téléchargement de &quot;%s&quot; version %s réussi."/>
+      </Message>
+      <SaveAsDialog>
+        <Title Caption="Enregistrer la mise à jour sous"/>
+        <File Filters="Fichiers d'archive (*.zip)|*.log|Tous les fichiers (*.*)|*.*"/>
+      </SaveAsDialog>
+    </fUpdateSaveDialog>
     <fLoggerViewForm Caption="Journal de débogage">
       <LineCount Plural="%.0n entrées de journal" Singular="%.0n entrée de journal"/>
       <pControls>
@@ -464,12 +459,5 @@
       <btnSave Caption="Enregistrer"/>
       <dlgSaveAs Title="Erreur d'enregistrement, enregistrer le fichier sous"/>
     </fFileEditor>
-    <fMissingFiles Caption="Fichiers de documents manquants">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Annuler"/>
-        </fButtonPanel>
-      </fLowerPanel>
-    </fMissingFiles>
   </Controls>
 </CONFIG>

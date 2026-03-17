@@ -261,61 +261,13 @@
         <btnMerge Hint="Kullanıcı sözlüğü kelimelerini Ana sözlükle birleştir." Caption="Birleştir"/>
       </pButtons>
     </fDictEditForm>
-    <fUpdateCheckDialog Caption="Güncelleme Kontrolü">
+    <fMissingFiles Caption="Eksik belge dosyaları">
       <fLowerPanel>
         <fButtonPanel>
           <btnCancel Caption="İptal"/>
-          <btnRetry Caption="Yeniden Dene"/>
         </fButtonPanel>
       </fLowerPanel>
-      <Message>
-        <Check Text="&quot;%s&quot; (sürüm %s) için mevcut güncellemeler kontrol ediliyor."/>
-        <Error Text="Şu anda &quot;%s&quot; için herhangi bir güncelleme olup olmadığı belirlenemiyor. Lütfen daha sonra tekrar deneyin."/>
-        <None Text="Şu anda &quot;%s&quot; için mevcut bir güncelleme yok. Lütfen daha sonra tekrar deneyin."/>
-      </Message>
-    </fUpdateCheckDialog>
-    <fUpdateFoundDialog Caption="Güncelleme Mevcut">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="İptal"/>
-          <btnDownload Caption="İndir"/>
-          <btnSkip Caption="Atla"/>
-        </fButtonPanel>
-        <fAuxPanel>
-          <cbSkipVersion Caption="Bu sürümü atla"/>
-        </fAuxPanel>
-      </fLowerPanel>
-      <Message>
-        <Note Text="&quot;%0:s&quot; uygulamasının %1:s sürümü için yayın notu sağlanmadı."/>
-      </Message>
-    </fUpdateFoundDialog>
-    <fUpdateDownloadDialog Caption="Güncelleme İndirme">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="İptal"/>
-          <btnRetry Caption="Yeniden Dene"/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Fetch Text="&quot;%s&quot; güncellemesi indiriliyor."/>
-        <Error Text="&quot;%s&quot; güncellemesi indirilirken hata oluştu. Lütfen daha sonra tekrar deneyin."/>
-      </Message>
-    </fUpdateDownloadDialog>
-    <fUpdateSaveDialog Caption="Güncelleme İndirildi">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="İptal"/>
-          <btnSaveAs Caption="Farklı kaydet..."/>
-        </fButtonPanel>
-      </fLowerPanel>
-      <Message>
-        <Downloaded Text="&quot;%s&quot; sürüm %s indirildi."/>
-      </Message>
-      <SaveAsDialog>
-        <Title Caption="Güncellemeyi farklı kaydet"/>
-        <File Filters="Arşiv Dosyaları (*.zip)|*.log|Tüm Dosyalar (*.*)|*.*"/>
-      </SaveAsDialog>
-    </fUpdateSaveDialog>
+    </fMissingFiles>
     <fOptionsDialog Caption="Codepage Witch Tercihleri">
       <pPages>
         <tsAbout Hint="Bu uygulama hakkında." Caption="Hakkında">
@@ -348,25 +300,13 @@
             <cbWarnMissing Hint="Önceki oturumdan bir dosya mevcut olmadığında uyar." Caption="Eksik olduğunda uyar."/>
             <cbOpenExport Hint="Dışa aktarma dosyalarını inceleme için otomatik olarak aç." Caption="Dışa aktarılan dosyaları aç."/>
           </gbSessionFiles>
+          <gbLocaleDetection Caption="Yerel Ayar Algılama">
+            <cbUseFileExt Hint="Mümkün olduğunda dosya uzantısını dil sezgiselliğine tercih edin." Caption="Dosya uzantısını tercih et"/>
+          </gbLocaleDetection>
           <gbCodepage Caption="Kod Sayfası">
             <cbAutoSelectCP Hint="Dönüştürme için tercih edilen kod sayfasını otomatik olarak seç." Caption="Kod sayfasını otomatik seç"/>
           </gbCodepage>
         </tsSession>
-        <tsTextEditor Hint="Metin düzenleyici seçenekleri." Caption="Metin Düzenleyici">
-          <gbExternalEditor Caption="Harici Düzenleyici">
-            <cbUseExternalEditor Hint="Basit yerleşik düzenleyici yerine harici bir metin düzenleyici kullanın." Caption="Harici bir metin düzenleyici kullan"/>
-            <pEditor>
-              <btnBrowseEditor Hint="Harici metin düzenleyiciye göz atın." Caption="Gözat"/>
-            </pEditor>
-            <BrowseDialog Caption="Harici metin düzenleyici tarayıcısı">
-              <Title Caption="Harici metin düzenleyici tarayıcısı"/>
-              <File>
-                <Unix Exec="Tüm dosyalar|*"/>
-                <Windows Exec="Yürütülebilir dosyalar|*.EXE|Tüm dosyalar|*.*"/>
-              </File>
-            </BrowseDialog>
-          </gbExternalEditor>
-        </tsTextEditor>
         <tsTextEditor Hint="Text editor options." Caption="Text Editor">
           <gbExternalEditor Caption="External Editor">
             <cbUseExternalEditor Hint="Use an external text editor instead of the simple built-in editor ." Caption="Use an external text editor"/>
@@ -422,6 +362,61 @@
         </fBodyPanel>
       </fMiddlePanel>
     </fOptionsDialog>
+    <fUpdateCheckDialog Caption="Güncelleme Kontrolü">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="İptal"/>
+          <btnRetry Caption="Yeniden Dene"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Check Text="&quot;%s&quot; (sürüm %s) için mevcut güncellemeler kontrol ediliyor."/>
+        <Error Text="Şu anda &quot;%s&quot; için herhangi bir güncelleme olup olmadığı belirlenemiyor. Lütfen daha sonra tekrar deneyin."/>
+        <None Text="Şu anda &quot;%s&quot; için mevcut bir güncelleme yok. Lütfen daha sonra tekrar deneyin."/>
+      </Message>
+    </fUpdateCheckDialog>
+    <fUpdateFoundDialog Caption="Güncelleme Mevcut">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="İptal"/>
+          <btnDownload Caption="İndir"/>
+          <btnSkip Caption="Atla"/>
+        </fButtonPanel>
+        <fAuxPanel>
+          <cbSkipVersion Caption="Bu sürümü atla"/>
+        </fAuxPanel>
+      </fLowerPanel>
+      <Message>
+        <Note Text="&quot;%0:s&quot; uygulamasının %1:s sürümü için yayın notu sağlanmadı."/>
+      </Message>
+    </fUpdateFoundDialog>
+    <fUpdateDownloadDialog Caption="Güncelleme İndirme">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="İptal"/>
+          <btnRetry Caption="Yeniden Dene"/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Fetch Text="&quot;%s&quot; güncellemesi indiriliyor."/>
+        <Error Text="&quot;%s&quot; güncellemesi indirilirken hata oluştu. Lütfen daha sonra tekrar deneyin."/>
+      </Message>
+    </fUpdateDownloadDialog>
+    <fUpdateSaveDialog Caption="Güncelleme İndirildi">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="İptal"/>
+          <btnSaveAs Caption="Farklı kaydet..."/>
+        </fButtonPanel>
+      </fLowerPanel>
+      <Message>
+        <Downloaded Text="&quot;%s&quot; sürüm %s indirildi."/>
+      </Message>
+      <SaveAsDialog>
+        <Title Caption="Güncellemeyi farklı kaydet"/>
+        <File Filters="Arşiv Dosyaları (*.zip)|*.log|Tüm Dosyalar (*.*)|*.*"/>
+      </SaveAsDialog>
+    </fUpdateSaveDialog>
     <fLoggerViewForm Caption="Hata ayıklama günlüğü">
       <LineCount Plural="%.0n günlük girişi" Singular="%.0n günlük girişi"/>
       <pControls>
@@ -464,12 +459,5 @@
       <btnSave Caption="Kaydet"/>
       <dlgSaveAs Title="Dosya kaydetme hatası, Dosyayı farklı kaydet"/>
     </fFileEditor>
-    <fMissingFiles Caption="Eksik belge dosyaları">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="İptal"/>
-        </fButtonPanel>
-      </fLowerPanel>
-    </fMissingFiles>
   </Controls>
 </CONFIG>
