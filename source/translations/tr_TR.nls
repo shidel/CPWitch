@@ -220,7 +220,21 @@
         <sm_WS Text="Samoaca (Samoa)"/>
         <th_TH Text="Tayca (Tayland)"/>
         <vi_VN Text="Vietnamca (Vietnam)"/>
-      </Locales>
+        <ar_EG Text="Arapça (Mısır)"/>
+        <ca_ES Text="Katalanca (İspanya)"/>
+        <en_GB Text="İngilizce (Birleşik Krallık)"/>
+        <es_MX Text="İspanyolca (Meksika)"/>
+        <hi_IN Text="Hintçe (Hindistan)"/>
+        <hr_HR Text="Hırvatça (Hırvatistan)"/>
+        <ur_PK Text="Urduca (Pakistan)"/>
+        <zh_TW Text="Çince (Geleneksel)"/>
+        <be_BY Text="Belarusça (Belarus)"/>
+        <en_IN Text="İngilizce (Hindistan)"/>
+        <mk_MK Text="Makedonca (Kuzey Makedonya)"/>
+        <sq_AL Text="Arnavutça (Arnavutluk)"/>
+        <sr_ME Text="Sırpça (Karadağ)"/>
+        <bn_BD Text="Bengalce (Bangladeş)"/>
+       </Locales>
       <statBar>
         <Processing Caption="İşleniyor"/>
         <Error Caption="Hata"/>

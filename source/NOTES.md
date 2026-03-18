@@ -1,6 +1,6 @@
 # Upcoming release notes
 
-* Option to prefer file extension over heuristics for locale detection.
-* Error message, if open file was deleted.
-* Display possible file errors in viewers.
+
+* Added about 10 more Locales
+* Added support for Codepage 620 (Mazovia)
 

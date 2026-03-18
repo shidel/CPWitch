@@ -220,6 +220,20 @@
         <sm_WS Text="Samoan (Samoa)"/>
         <th_TH Text="Thai (Thailand)"/>
         <vi_VN Text="Vietnamese (Vietnam)"/>
+		<ar_EG Text="Arabic (Egypt)">
+		<ca_ES Text="Catalan (Spain)">
+		<en_GB Text="English (United Kingdom)">
+		<es_MX Text="Spanish (Mexico)"/>
+		<hi_IN Text="Hindi (India)">
+		<hr_HR Text="Croatian (Croatia)">
+		<ur_PK Text="Urdu (Pakistan)">
+		<zh_TW Text="Chinese (Traditional)">
+        <be_BY Text="Belarusian (Belarus)"/>
+        <en_IN Text="English (India)"/>
+        <mk_MK Text="Macedonian (North Macedonia)"/>
+        <sq_AL Text="Albanian (Albania)"/>
+        <sr_ME Text="Serbian (Montenegro)"/>
+        <bn_BD Text="Bengali (Bangladesh)"/>
       </Locales>
       <statBar>
         <Processing Caption="Processing"/>
