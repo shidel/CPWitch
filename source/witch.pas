@@ -166,6 +166,7 @@ type
     procedure Execute; override;
     procedure Completed;
     function NoComments : RawByteString;
+    function NoKeys(S : RawByteString) : RawByteString;
     procedure AnalyzeLineEndings;
     procedure AnalyzeUTF8;
     procedure AnalyzeCP;
@@ -365,6 +366,26 @@ begin
   end;
 end;
 
+function TWitchAnalyzeThread.NoKeys(S: RawByteString): RawByteString;
+var
+  SL : TArrayOfRawByteString;
+  I : Integer;
+  K: RawByteString;
+begin
+  SL:=Explode(S, LF);
+  for I := 0 to High(SL) do begin
+    S:=Trim(StringReplace(SL[I], TAB, SPACE, [rfReplaceAll]));
+    if HasEnds(SL[I], '[', ']') then begin
+      SL[I]:='';
+      Continue;
+    end;
+    K:=PopDelim(S, EQUAL);
+    if Pos(SPACE, K) > 0 then Continue;
+    SL[I]:=S;
+  end;
+  Result:=Implode(SL, LF);
+end;
+
 procedure TWitchAnalyzeThread.AnalyzeLineEndings;
 begin
   FLineEndings:=leCRLF;
@@ -389,6 +410,8 @@ begin
   if Terminated then Exit;
   S:=NoComments;
   if Terminated then Exit;
+  S:=NoKeys(S);
+  if Terminated then Exit;
   A:=TUTF8Analyze.Create(ToBytes(S));
   FResults:=A.Results;
   A.Free;
@@ -412,6 +435,8 @@ begin
     AnalyzeLineEndings;
     if Terminated then Exit;
     S:=NoComments;
+    if Terminated then Exit;
+    S:=NoKeys(S);
     if Terminated then Exit;
     if Length(S) > 8192 then // Cap size to process for detection. It will likely
       SetLength(S, 8192);    // cut a word. But, that should not skew results.
@@ -508,6 +533,8 @@ begin
   AnalyzeLineEndings;
   if Terminated then Exit;
   S:=NoComments;
+  if Terminated then Exit;
+  S:=NoKeys(S);
   if Terminated then Exit;
   FLocale:=DetectLocale(S);
 end;
