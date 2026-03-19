@@ -46,6 +46,10 @@ type
     procedure btnReloadClick(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
     procedure cbLocaleChange(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure FormChangeBounds(Sender: TObject);
+    procedure FormResize(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     FWitchItem: TWitchItem;
     FWitchList: TWitch;
@@ -64,6 +68,7 @@ type
     procedure DoShow; override;
     procedure EnforceLayout; override;
   public
+    procedure ApplyUserLanguage; override;
     property WitchItem : TWitchItem read FWitchItem write SetWitchItem;
     property WitchList : TWitch read FWitchList write SetWitchList;
 
@@ -98,6 +103,26 @@ begin
     DoUpdateWords;
   DoUpdateWordList;
   DoUpdateStatusBar;
+end;
+
+procedure TfDictEditForm.FormActivate(Sender: TObject);
+begin
+  EnforceLayout;
+end;
+
+procedure TfDictEditForm.FormChangeBounds(Sender: TObject);
+begin
+  EnforceLayout;
+end;
+
+procedure TfDictEditForm.FormResize(Sender: TObject);
+begin
+  EnforceLayout;
+end;
+
+procedure TfDictEditForm.FormShow(Sender: TObject);
+begin
+  EnforceLayout;
 end;
 
 procedure TfDictEditForm.btnInvertClick(Sender: TObject);
@@ -422,6 +447,12 @@ begin
     pStatusBar.Top:=10000;
     pButtons.Top:=9000;
   end;
+end;
+
+procedure TfDictEditForm.ApplyUserLanguage;
+begin
+  inherited ApplyUserLanguage;
+  DoUpdateStatusBar;
 end;
 
 initialization

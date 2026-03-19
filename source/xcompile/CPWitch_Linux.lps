@@ -7,7 +7,7 @@
       <Unit>
         <Filename Value="CPWitch_Linux.lpr"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="6" Y="18"/>
+        <CursorPos X="35" Y="18"/>
         <UsageCount Value="25"/>
         <Loaded Value="True"/>
       </Unit>
@@ -25,14 +25,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="42"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="46"/>
         <CursorPos X="32" Y="38"/>
         <FoldState Value=" TL004F"/>
         <UsageCount Value="12"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/doscrt.pp"/>
@@ -77,43 +74,25 @@
         <CursorPos X="45" Y="6"/>
         <UsageCount Value="10"/>
       </Unit>
+      <Unit>
+        <Filename Value="udictedit.pas"/>
+        <ComponentName Value="fDictEditForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uDictEdit"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="13"/>
+        <CursorPos X="31" Y="396"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit>
     </Units>
-    <JumpHistory HistoryIndex="8">
+    <JumpHistory>
       <Position>
         <Filename Value="CPWitch_Linux.lpr"/>
         <Caret Line="21" Column="70"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="1119" Column="52" TopLine="1005"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="1459" Column="15" TopLine="1303"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="1461" Column="3" TopLine="1312"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="1459" Column="10" TopLine="1442"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="1462" Column="5" TopLine="1436"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="1463" Column="4" TopLine="1446"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="1459" TopLine="1423"/>
-      </Position>
-      <Position>
-        <Filename Value="umain.pas"/>
-        <Caret Line="178" Column="22" TopLine="138"/>
       </Position>
     </JumpHistory>
     <RunParams>

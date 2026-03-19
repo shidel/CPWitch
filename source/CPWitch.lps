@@ -19,11 +19,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="1155"/>
-        <CursorPos X="9" Y="1174"/>
-        <FoldState Value=" T3lb039 piYjE0j615 pjKoA0Y2]9RkO064]96jM0?3]91ke0D51]TkgnG0s[K45]c8[94AjQ0L[942jV0N[u4Ek40jg"/>
+        <TopLine Value="169"/>
+        <CursorPos Y="190"/>
+        <FoldState Value=" T3lb039 piYjE0j615 pjKoA0Y2]9RkO064]96jM0?3]91ke0D512 PkglT0g"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -132,11 +131,14 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uDictEdit"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="96"/>
-        <CursorPos X="63" Y="392"/>
-        <FoldState Value=" T3jG068 pj5jT0X2]93jg0Z5 PYiR0N"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="126"/>
+        <CursorPos X="21" Y="455"/>
+        <FoldState Value=" T3ig0K049 pjBkS0X2]93jg0Z5 PYiR0?"/>
         <UsageCount Value="84"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/taskmngr.pp"/>
@@ -153,7 +155,7 @@
         <TopLine Value="142"/>
         <CursorPos X="14" Y="161"/>
         <FoldState Value=" T3@I034 piaj60A1R"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/dosfont.pp"/>
@@ -164,7 +166,7 @@
         <UsageCount Value="5"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="22">
+    <JumpHistory HistoryIndex="27">
       <Position>
         <Filename Value="umain.pas"/>
         <Caret Line="1243" Column="17" TopLine="1207"/>
@@ -256,6 +258,26 @@
       <Position>
         <Filename Value="umain.pas"/>
         <Caret Line="1403" Column="16" TopLine="1025"/>
+      </Position>
+      <Position>
+        <Filename Value="udictedit.pas"/>
+        <Caret Line="398" Column="63" TopLine="69"/>
+      </Position>
+      <Position>
+        <Filename Value="udictedit.pas"/>
+        <Caret Line="112" Column="17" TopLine="70"/>
+      </Position>
+      <Position>
+        <Filename Value="udictedit.pas"/>
+        <Caret Line="108" Column="17" TopLine="71"/>
+      </Position>
+      <Position>
+        <Filename Value="udictedit.pas"/>
+        <Caret Line="124" Column="17" TopLine="72"/>
+      </Position>
+      <Position>
+        <Filename Value="udictedit.pas"/>
+        <Caret Line="71" Column="5" TopLine="32"/>
       </Position>
     </JumpHistory>
     <RunParams>
