@@ -220,27 +220,30 @@
         <sm_WS Text="Samoan (Samoa)"/>
         <th_TH Text="Thai (Thailand)"/>
         <vi_VN Text="Vietnamese (Vietnam)"/>
-		<ar_EG Text="Arabic (Egypt)">
-		<ca_ES Text="Catalan (Spain)">
-		<en_GB Text="English (United Kingdom)">
-		<es_MX Text="Spanish (Mexico)"/>
-		<hi_IN Text="Hindi (India)">
-		<hr_HR Text="Croatian (Croatia)">
-		<ur_PK Text="Urdu (Pakistan)">
-		<zh_TW Text="Chinese (Traditional)">
+        <en_GB Text="English (United Kingdom)"/>
+        <ar_EG Text="Arabic (Egypt)"/>
+        <hi_IN Text="Hindi (India)"/>
+        <ur_PK Text="Urdu (Pakistan)"/>
+        <zh_TW Text="Chinese (Traditional)"/>
+        <hr_HR Text="Croatian (Croatia)"/>
+        <ca_ES Text="Catalan (Spain)"/>
+        <es_MX Text="Spanish (Mexico)"/>
+        <es_AR Text="Spanish (Argentina)"/>
         <be_BY Text="Belarusian (Belarus)"/>
-        <en_IN Text="English (India)"/>
         <mk_MK Text="Macedonian (North Macedonia)"/>
-        <sq_AL Text="Albanian (Albania)"/>
         <sr_ME Text="Serbian (Montenegro)"/>
+        <sq_AL Text="Albanian (Albania)"/>
+        <en_IN Text="English (India)"/>
         <bn_BD Text="Bengali (Bangladesh)"/>
+        <en_AU Text="English (Australia)"/>
+        <en_CA Text="English (Canada)"/>
       </Locales>
       <statBar>
         <Processing Caption="Processing"/>
-        <Error Caption="Error"/>
         <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
-        <Unicode Caption="Unicode"/>
         <Codepage Caption="Codepage"/>
+        <Error Caption="Error"/>
+        <Unicode Caption="Unicode"/>
         <NoEncoding Caption="ASCII"/>
         <Binary Caption="Binary"/>
       </statBar>
@@ -274,14 +277,10 @@
         <btnAdd Hint="Add the selected words to the dictionary for the selected locale." Caption="Add to Dictionary"/>
         <btnMerge Hint="Merge the User dictionary words into the Master dictionary." Caption="Merge"/>
       </pButtons>
+      <Not_Avail Text="n/a"/>
+      <Any_Locale Text="(any locale)"/>
+      <Unknown_Locale Text="(unknown locale)"/>
     </fDictEditForm>
-    <fMissingFiles Caption="Missing document files">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancel"/>
-        </fButtonPanel>
-      </fLowerPanel>
-    </fMissingFiles>
     <fOptionsDialog Caption="Codepage Witch Preferences">
       <pPages>
         <tsAbout Hint="About this application." Caption="About">
@@ -375,6 +374,13 @@
         </fBodyPanel>
       </fMiddlePanel>
     </fOptionsDialog>
+    <fMissingFiles Caption="Missing document files">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancel"/>
+        </fButtonPanel>
+      </fLowerPanel>
+    </fMissingFiles>
     <fUpdateCheckDialog Caption="Update Check">
       <fLowerPanel>
         <fButtonPanel>

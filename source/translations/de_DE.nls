@@ -220,27 +220,30 @@
         <sm_WS Text="Samoanisch (Samoa)"/>
         <th_TH Text="Thailändisch (Thailand)"/>
         <vi_VN Text="Vietnamesisch (Vietnam)"/>
-        <ar_EG Text="Arabisch (Ägypten)"/>
-        <ca_ES Text="Katalanisch (Spanien)"/>
         <en_GB Text="Englisch (Vereinigtes Königreich)"/>
-        <es_MX Text="Spanisch (Mexiko)"/>
+        <ar_EG Text="Arabisch (Ägypten)"/>
         <hi_IN Text="Hindi (Indien)"/>
-        <hr_HR Text="Kroatisch (Kroatien)"/>
         <ur_PK Text="Urdu (Pakistan)"/>
         <zh_TW Text="Chinesisch (Traditionell)"/>
+        <hr_HR Text="Kroatisch (Kroatien)"/>
+        <ca_ES Text="Katalanisch (Spanien)"/>
+        <es_MX Text="Spanisch (Mexiko)"/>
+        <es_AR Text="Spanish (Argentina)"/>
         <be_BY Text="Belarussisch (Belarus)"/>
-        <en_IN Text="Englisch (Indien)"/>
         <mk_MK Text="Mazedonisch (Nordmazedonien)"/>
-        <sq_AL Text="Albanisch (Albanien)"/>
         <sr_ME Text="Serbisch (Montenegro)"/>
+        <sq_AL Text="Albanisch (Albanien)"/>
+        <en_IN Text="Englisch (Indien)"/>
         <bn_BD Text="Bengalisch (Bangladesch)"/>
+        <en_AU Text="English (Australia)"/>
+        <en_CA Text="English (Canada)"/>
       </Locales>
       <statBar>
         <Processing Caption="Verarbeitung"/>
-        <Error Caption="Fehler"/>
         <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
-        <Unicode Caption="Unicode"/>
         <Codepage Caption="Codepage"/>
+        <Error Caption="Fehler"/>
+        <Unicode Caption="Unicode"/>
         <NoEncoding Caption="ASCII"/>
         <Binary Caption="Binär"/>
       </statBar>
@@ -274,14 +277,10 @@
         <btnAdd Hint="Die ausgewählten Wörter für das gewählte Gebietsschema zum Wörterbuch hinzufügen." Caption="Zum Wörterbuch hinzufügen"/>
         <btnMerge Hint="Benutzerwörterbuch-Wörter in das Hauptwörterbuch zusammenführen." Caption="Zusammenführen"/>
       </pButtons>
+      <Not_Avail Text="n. v."/>
+      <Any_Locale Text="(beliebiges Gebietsschema)"/>
+      <Unknown_Locale Text="(unbekanntes Gebietsschema)"/>
     </fDictEditForm>
-    <fMissingFiles Caption="Fehlende Dokumentdateien">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Abbrechen"/>
-        </fButtonPanel>
-      </fLowerPanel>
-    </fMissingFiles>
     <fOptionsDialog Caption="Codepage Witch Einstellungen">
       <pPages>
         <tsAbout Hint="Über diese Anwendung." Caption="Über">
@@ -431,6 +430,13 @@
         <File Filters="Archivdateien (*.zip)|*.log|Alle Dateien (*.*)|*.*"/>
       </SaveAsDialog>
     </fUpdateSaveDialog>
+    <fMissingFiles Caption="Fehlende Dokumentdateien">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Abbrechen"/>
+        </fButtonPanel>
+      </fLowerPanel>
+    </fMissingFiles>
     <fLoggerViewForm Caption="Fehlerprotokoll">
       <LineCount Plural="%.0n Protokolleinträge" Singular="%.0n Protokolleintrag"/>
       <pControls>

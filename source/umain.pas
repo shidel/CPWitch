@@ -120,6 +120,8 @@ type
       fWitchItem : TWitchItem;
       fLastWitch : TWitchItem;
       fCodepage : integer;
+      { Some stuff to make the UI more friendly }
+      fLastTopCP : integer;
       { User interface Controls }
       lbViewCodepageLabel : TLabel;
       lbUnicodeLanguage : TLabel;
@@ -1216,6 +1218,7 @@ var
   H : String;
 begin
   if fSingleViewer then Exit;
+  H:='';
   if Assigned(fWitchItem) then begin
     if fWitchItem.Analyzed then begin
       case fWitchItem.Encoding of
@@ -1248,14 +1251,18 @@ var
 begin
   if Not Assigned(fWitchItem) then begin
     fCodepage:=-2;
+    fLastTopCP:=-1;
     fCodepageText.Clear;
     Exit;
   end;
   if not fWitchItem.Analyzed then begin
     fCodepage:=-2;
+    fLastTopCP:=-1;
     fCodepageText.Clear;
     Exit;
   end else begin
+    if fLastTopCP >=0 then
+      fLastTopCP:=fCodepageText.VertScrollBar.Position;
     fCodepageText.BeginUpdate;
     fCodePageText.Clear;
     if (fCodepage <> -1) or (fWitchItem.Encoding=weBinary) or
@@ -1305,6 +1312,9 @@ begin
     end;
     fCodepageText.EndUpdate;
   end;
+  if (fLastTopCP >=0) and (fLastTopCP <> fCodepageText.VertScrollBar.Position) then
+    fCodepageText.VertScrollBar.Position:=fLastTopCP;
+  fLastTopCP:=fCodepageText.VertScrollBar.Position;
 end;
 
 procedure TfMain.UpdateButtons;
@@ -1514,8 +1524,16 @@ begin
   // Commented out items should never change when simply switching codepages.
   // UpdateCodepagelist;
   UpdateStatusBar;
-  if Assigned(fWitchItem) and (fWitchItem.Encoding = weCodepage) then
+  if Assigned(fWitchItem) and (fWitchItem.Encoding = weCodepage) then begin
+    // Sadly, There is no way to get the TIpHtmlPanel to scroll reliably
+    // without invalidating it and them processin application message. Then,
+    // finally setting the previous position. But, there is a lot of lag in
+    // doing that. You can see it redraw to position 0, then eventually jump
+    // to the scroll position. Better, to just let it reset. Eventually, I
+    // am going to need to Replace it with another control to view the
+    // Unicode text. Possible another custom control.
     UpdateUnicodeView;
+  end;
   UpdateCodepageView;
   UpdateCodepageViewLabel;
   // UpdateLocale;
@@ -1532,6 +1550,7 @@ var
 begin
   fWitchItem:=Item;
   fCodepage:=-1;
+  fLastTopCP:=-1;
   if Assigned(fWitchItem) then begin
     S:=fWitchItem.FileName;
     fCodepage:=fWitchItem.Preferred;

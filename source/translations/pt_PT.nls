@@ -220,27 +220,30 @@
         <sm_WS Text="Samoano (Samoa)"/>
         <th_TH Text="Tailandês (Tailândia)"/>
         <vi_VN Text="Vietnamita (Vietname)"/>
-        <ar_EG Text="Árabe (Egito)"/>
-        <ca_ES Text="Catalão (Espanha)"/>
         <en_GB Text="Inglês (Reino Unido)"/>
-        <es_MX Text="Espanhol (México)"/>
+        <ar_EG Text="Árabe (Egito)"/>
         <hi_IN Text="Hindi (Índia)"/>
-        <hr_HR Text="Croata (Croácia)"/>
         <ur_PK Text="Urdu (Paquistão)"/>
         <zh_TW Text="Chinês (Tradicional)"/>
+        <hr_HR Text="Croata (Croácia)"/>
+        <ca_ES Text="Catalão (Espanha)"/>
+        <es_MX Text="Espanhol (México)"/>
+        <es_AR Text="Spanish (Argentina)"/>
         <be_BY Text="Bielorrusso (Bielorrússia)"/>
-        <en_IN Text="Inglês (Índia)"/>
         <mk_MK Text="Macedónio (Macedónia do Norte)"/>
-        <sq_AL Text="Albanês (Albânia)"/>
         <sr_ME Text="Sérvio (Montenegro)"/>
+        <sq_AL Text="Albanês (Albânia)"/>
+        <en_IN Text="Inglês (Índia)"/>
         <bn_BD Text="Bengali (Bangladesh)"/>
+        <en_AU Text="English (Australia)"/>
+        <en_CA Text="English (Canada)"/>
       </Locales>
       <statBar>
         <Processing Caption="A processar"/>
-        <Error Caption="Erro"/>
         <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
-        <Unicode Caption="Unicode"/>
         <Codepage Caption="Codepage"/>
+        <Error Caption="Erro"/>
+        <Unicode Caption="Unicode"/>
         <NoEncoding Caption="ASCII"/>
         <Binary Caption="Binário"/>
       </statBar>
@@ -274,14 +277,10 @@
         <btnAdd Hint="Adicionar as palavras selecionadas ao dicionário para a localidade selecionada." Caption="Adicionar ao Dicionário"/>
         <btnMerge Hint="Intercalar as palavras do dicionário do Utilizador no dicionário Mestre." Caption="Intercalar"/>
       </pButtons>
+      <Not_Avail Text="n/d"/>
+      <Any_Locale Text="(qualquer localidade)"/>
+      <Unknown_Locale Text="(localidade desconhecida)"/>
     </fDictEditForm>
-    <fMissingFiles Caption="Ficheiros de documento em falta">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Cancelar"/>
-        </fButtonPanel>
-      </fLowerPanel>
-    </fMissingFiles>
     <fOptionsDialog Caption="Preferências do Codepage Witch">
       <pPages>
         <tsAbout Hint="Sobre esta aplicação." Caption="Sobre">
@@ -376,6 +375,13 @@
         </fBodyPanel>
       </fMiddlePanel>
     </fOptionsDialog>
+    <fMissingFiles Caption="Ficheiros de documento em falta">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Cancelar"/>
+        </fButtonPanel>
+      </fLowerPanel>
+    </fMissingFiles>
     <fUpdateCheckDialog Caption="Verificação de Atualização">
       <fLowerPanel>
         <fButtonPanel>

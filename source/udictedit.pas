@@ -57,6 +57,7 @@ type
     procedure DoUpdateWords;
     procedure DoUpdateWordList;
     procedure DoUpdateButtons;
+    procedure DoUpdateStatusBar;
     procedure DoWitchReanalyze;
     procedure DoCreate; override;
     procedure DoDestroy; override;
@@ -79,12 +80,11 @@ implementation
 
 procedure TfDictEditForm.cbLocaleChange(Sender: TObject);
 var
-  LC : TLocale;
   S, L, R: String;
   N, X : Integer;
 begin
-  S:=Trim(cbLocale.Text);
-  R :=UpperCase(S);
+  S:=cbLocale.Text;
+  R :=Trim(UpperCase(S));
   N:=Pos(UNDERSCORE, R);
   L:=LowerCase(PopDelim(R, UNDERSCORE));
   if N <> 0 then Cat(L, UNDERSCORE);
@@ -93,25 +93,11 @@ begin
     X := cbLocale.SelStart;
     cbLocale.Text:=L;
     cbLocale.SelStart:=X;
-    S:=L;
-  end;
-  if Locale(L, LC) then begin
-    pStatusBar.Panels[0].Text:=LC.Identifier;
-    pStatusBar.Panels[1].Text:=LC.LetterCode;
-    if LC.Codepage = -1 then
-      pStatusBar.Panels[2].Text:='n/a'
-    else
-      pStatusBar.Panels[2].Text:=IntToStr(LC.Codepage);
-    pStatusBar.Panels[3].Text:=SPACE2+RawByteString(LC.Language);
-  end else begin
-    pStatusBar.Panels[0].Text:=Trim(cbLocale.Text);
-    pStatusBar.Panels[1].Text:='n/a';
-    pStatusBar.Panels[2].Text:='n/a';
-    pStatusBar.Panels[3].Text:=SPACE2+'(unknown locale)';
   end;
   if FWords.Count < 10 then
     DoUpdateWords;
   DoUpdateWordList;
+  DoUpdateStatusBar;
 end;
 
 procedure TfDictEditForm.btnInvertClick(Sender: TObject);
@@ -357,6 +343,43 @@ begin
   {$ENDIF}
 end;
 
+procedure TfDictEditForm.DoUpdateStatusBar;
+var
+  NA : String;
+  LN : String;
+  LC : TLocale;
+begin
+  NA:=GetTranslation('Not_Avail/Text', 'n/a');
+
+  if Locale(cbLocale.Text, LC) then begin
+    pStatusBar.Panels[0].Text:=LC.Identifier;
+    LN:=''; // RawByteString(LC.Language);
+    LN:=RawByteString(Translations.GetValue('Controls/fMain/Locales/' +
+      UnicodeString(LC.Identifier) + '/Text', UnicodeString(LN)));
+
+    pStatusBar.Panels[1].Text:=LC.LetterCode;
+    if LC.Codepage = -1 then
+      pStatusBar.Panels[2].Text:=NA
+    else
+      pStatusBar.Panels[2].Text:=IntToStr(LC.Codepage);
+    pStatusBar.Panels[3].Text:=SPACE2+LN;
+  end else begin
+    if Trim(cbLocale.Text) <> '' then
+      pStatusBar.Panels[0].Text:=cbLocale.Text
+    else
+      pStatusBar.Panels[0].Text:=NA;
+    pStatusBar.Panels[1].Text:=NA;
+    pStatusBar.Panels[2].Text:=NA;
+    if Trim(cbLocale.Text) <> '' then
+      pStatusBar.Panels[3].Text:=SPACE2+
+      GetTranslation('Unknown_Locale/Text', '(unknown locale)')
+    else
+      pStatusBar.Panels[3].Text:=SPACE2+
+      GetTranslation('Any_Locale/Text', '(any locale)');
+  end;
+
+end;
+
 procedure TfDictEditForm.DoWitchReanalyze;
 var
   I : Integer;
@@ -387,6 +410,7 @@ begin
   DoUpdateWords;
   DoUpdateWordList;
   DoUpdateButtons;
+  DoUpdateStatusBar;
 end;
 
 procedure TfDictEditForm.EnforceLayout;

@@ -220,27 +220,30 @@
         <sm_WS Text="Samoaca (Samoa)"/>
         <th_TH Text="Tayca (Tayland)"/>
         <vi_VN Text="Vietnamca (Vietnam)"/>
-        <ar_EG Text="Arapça (Mısır)"/>
-        <ca_ES Text="Katalanca (İspanya)"/>
         <en_GB Text="İngilizce (Birleşik Krallık)"/>
-        <es_MX Text="İspanyolca (Meksika)"/>
+        <ar_EG Text="Arapça (Mısır)"/>
         <hi_IN Text="Hintçe (Hindistan)"/>
-        <hr_HR Text="Hırvatça (Hırvatistan)"/>
         <ur_PK Text="Urduca (Pakistan)"/>
         <zh_TW Text="Çince (Geleneksel)"/>
+        <hr_HR Text="Hırvatça (Hırvatistan)"/>
+        <ca_ES Text="Katalanca (İspanya)"/>
+        <es_MX Text="İspanyolca (Meksika)"/>
+        <es_AR Text="Spanish (Argentina)"/>
         <be_BY Text="Belarusça (Belarus)"/>
-        <en_IN Text="İngilizce (Hindistan)"/>
         <mk_MK Text="Makedonca (Kuzey Makedonya)"/>
-        <sq_AL Text="Arnavutça (Arnavutluk)"/>
         <sr_ME Text="Sırpça (Karadağ)"/>
+        <sq_AL Text="Arnavutça (Arnavutluk)"/>
+        <en_IN Text="İngilizce (Hindistan)"/>
         <bn_BD Text="Bengalce (Bangladeş)"/>
-       </Locales>
+        <en_AU Text="English (Australia)"/>
+        <en_CA Text="English (Canada)"/>
+      </Locales>
       <statBar>
         <Processing Caption="İşleniyor"/>
-        <Error Caption="Hata"/>
         <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
-        <Unicode Caption="Unicode"/>
         <Codepage Caption="Kod Sayfası"/>
+        <Error Caption="Hata"/>
+        <Unicode Caption="Unicode"/>
         <NoEncoding Caption="ASCII"/>
         <Binary Caption="İkili"/>
       </statBar>
@@ -274,14 +277,10 @@
         <btnAdd Hint="Seçili kelimeleri seçili yerel ayar için sözlüğe ekle." Caption="Sözlüğe Ekle"/>
         <btnMerge Hint="Kullanıcı sözlüğü kelimelerini Ana sözlükle birleştir." Caption="Birleştir"/>
       </pButtons>
+      <Not_Avail Text="yok"/>
+      <Any_Locale Text="(herhangi bir yerel ayar)"/>
+      <Unknown_Locale Text="(bilinmeyen yerel ayar)"/>
     </fDictEditForm>
-    <fMissingFiles Caption="Eksik belge dosyaları">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="İptal"/>
-        </fButtonPanel>
-      </fLowerPanel>
-    </fMissingFiles>
     <fOptionsDialog Caption="Codepage Witch Tercihleri">
       <pPages>
         <tsAbout Hint="Bu uygulama hakkında." Caption="Hakkında">
@@ -376,6 +375,13 @@
         </fBodyPanel>
       </fMiddlePanel>
     </fOptionsDialog>
+    <fMissingFiles Caption="Eksik belge dosyaları">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="İptal"/>
+        </fButtonPanel>
+      </fLowerPanel>
+    </fMissingFiles>
     <fUpdateCheckDialog Caption="Güncelleme Kontrolü">
       <fLowerPanel>
         <fButtonPanel>

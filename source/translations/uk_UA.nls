@@ -220,27 +220,30 @@
         <sm_WS Text="Самоанська (Самоа)"/>
         <th_TH Text="Тайська (Таїланд)"/>
         <vi_VN Text="В'єтнамська (В'єтнам)"/>
-        <ar_EG Text="Арабська (Єгипет)"/>
-        <ca_ES Text="Каталонська (Іспанія)"/>
         <en_GB Text="Англійська (Сполучене Королівство)"/>
-        <es_MX Text="Іспанська (Мексика)"/>
+        <ar_EG Text="Арабська (Єгипет)"/>
         <hi_IN Text="Гінді (Індія)"/>
-        <hr_HR Text="Хорватська (Хорватія)"/>
         <ur_PK Text="Урду (Пакистан)"/>
         <zh_TW Text="Китайська (традиційна)"/>
+        <hr_HR Text="Хорватська (Хорватія)"/>
+        <ca_ES Text="Каталонська (Іспанія)"/>
+        <es_MX Text="Іспанська (Мексика)"/>
+        <es_AR Text="Spanish (Argentina)"/>
         <be_BY Text="Білоруська (Білорусь)"/>
-        <en_IN Text="Англійська (Індія)"/>
         <mk_MK Text="Македонська (Північна Македонія)"/>
-        <sq_AL Text="Албанська (Албанія)"/>
         <sr_ME Text="Сербська (Чорногорія)"/>
+        <sq_AL Text="Албанська (Албанія)"/>
+        <en_IN Text="Англійська (Індія)"/>
         <bn_BD Text="Бенгальська (Бангладеш)"/>
+        <en_AU Text="English (Australia)"/>
+        <en_CA Text="English (Canada)"/>
       </Locales>
       <statBar>
         <Processing Caption="Обробка"/>
-        <Error Caption="Помилка"/>
         <LineEnding CR="CR" LF="LF" CRLF="CRLF"/>
-        <Unicode Caption="Unicode"/>
         <Codepage Caption="Кодування"/>
+        <Error Caption="Помилка"/>
+        <Unicode Caption="Unicode"/>
         <NoEncoding Caption="ASCII"/>
         <Binary Caption="Бінарний"/>
       </statBar>
@@ -274,14 +277,10 @@
         <btnAdd Hint="Додати виділені слова до словника для вибраної мови." Caption="Додати до словника"/>
         <btnMerge Hint="Об'єднати словник користувача з основним словником." Caption="Об'єднати"/>
       </pButtons>
+      <Not_Avail Text="н/д"/>
+      <Any_Locale Text="(будь-яка локаль)"/>
+      <Unknown_Locale Text="(невідома локаль)"/>
     </fDictEditForm>
-    <fMissingFiles Caption="Відсутні файли документів">
-      <fLowerPanel>
-        <fButtonPanel>
-          <btnCancel Caption="Скасувати"/>
-        </fButtonPanel>
-      </fLowerPanel>
-    </fMissingFiles>
     <fOptionsDialog Caption="Налаштування Codepage Witch">
       <pPages>
         <tsAbout Hint="Про цю програму." Caption="Про програму">
@@ -376,6 +375,13 @@
         </fBodyPanel>
       </fMiddlePanel>
     </fOptionsDialog>
+    <fMissingFiles Caption="Відсутні файли документів">
+      <fLowerPanel>
+        <fButtonPanel>
+          <btnCancel Caption="Скасувати"/>
+        </fButtonPanel>
+      </fLowerPanel>
+    </fMissingFiles>
     <fUpdateCheckDialog Caption="Перевірка оновлень">
       <fLowerPanel>
         <fButtonPanel>
