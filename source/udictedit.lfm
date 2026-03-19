@@ -15,6 +15,29 @@ object fDictEditForm: TfDictEditForm
   OnChangeBounds = FormChangeBounds
   OnResize = FormResize
   OnShow = FormShow
+  object pStatusBar: TStatusBar
+    Left = 0
+    Height = 18
+    Top = 302
+    Width = 320
+    Panels = <    
+      item
+        Alignment = taCenter
+        Width = 75
+      end    
+      item
+        Alignment = taCenter
+        Width = 50
+      end    
+      item
+        Alignment = taCenter
+        Width = 50
+      end    
+      item
+        Width = 50
+      end>
+    SimplePanel = False
+  end
   object pTop: TPanel
     Left = 8
     Height = 36
@@ -175,28 +198,5 @@ object fDictEditForm: TfDictEditForm
       ItemHeight = 0
       TabOrder = 0
     end
-  end
-  object pStatusBar: TStatusBar
-    Left = 0
-    Height = 18
-    Top = 302
-    Width = 320
-    Panels = <    
-      item
-        Alignment = taCenter
-        Width = 75
-      end    
-      item
-        Alignment = taCenter
-        Width = 50
-      end    
-      item
-        Alignment = taCenter
-        Width = 50
-      end    
-      item
-        Width = 50
-      end>
-    SimplePanel = False
   end
 end
