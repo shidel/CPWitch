@@ -19,9 +19,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="35" Y="24"/>
-        <FoldState Value=" T3lb039 piYjE0j615 pjKoA0Y2]9RkO064]96jM0?3]91ke0D6 pk8kZ0V[a4ckW0A02[c4I]%L[c42jV0N[I4Ek40jC"/>
+        <TopLine Value="1155"/>
+        <CursorPos X="9" Y="1174"/>
+        <FoldState Value=" T3lb039 piYjE0j615 pjKoA0Y2]9RkO064]96jM0?3]91ke0D51]TkgnG0s[K45]c8[94AjQ0L[942jV0N[u4Ek40jg"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -68,17 +70,16 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="70"/>
         <CursorPos X="29" Y="81"/>
-        <UsageCount Value="172"/>
+        <UsageCount Value="173"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/pasext.pp"/>
         <UnitName Value="PasExt"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="1870"/>
         <CursorPos X="3" Y="1899"/>
         <FoldState Value=" TK0071B p3jpb0U TL904122M1W13221112324Y4W2H piQt925C1917G24422465226E662A pkZsd23131819212C pFvL680B p0ii401 T3=d05]Pj3k7034[i4 plIo8073]MKk1042211E]DOnd0CA1917]ZUnX0841A]OPkU08]@ibjS07B]9YjM075]R9]IM4]92jY0M7]RZjU07A[I5V0M9[s5a06[s4cjP0F8[+5O0C[j4XjL0e[I4dkB042]9fJ29[Q4ekV0b5[H4k604]/k5lJ033[{85D0381]BlBlC0x6]K6ja0371236]MGnd0e T1*505A15131228 pnNu9022211I]oCoR036191C1H pmIsB05J pial50I5 pj4kF[98C02E]RXkB0I9 piZk605[I4gkO0AD]aAl2058[}*5c0M6]9Y]s672B plMq2024[}\5M0L715 pjZm9098]92k8023[}J6jJmK0b T6/701111142]MKwa04M1z]WI}c02C1J piU*H01037 TM$14]h32 p5u7221 p2#N0]70;A]ET0/OHJB23 pkDrW9938B piXtON2T]9YyWO2H[I4qUB5A[94m5a9F]9fnRJ966B]wFqcX3]Kj0mER7C[#T5Zf156C PiVo4Vh"/>
         <UsageCount Value="96"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/multiapp.pp"/>
@@ -92,13 +93,11 @@
       <Unit>
         <Filename Value="witch.pas"/>
         <UnitName Value="Witch"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="188"/>
-        <CursorPos X="61" Y="371"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="180"/>
+        <CursorPos X="45" Y="380"/>
         <FoldState Value=" T3lL045 pj2jI0e113 pkWmG0B8]KAjf076 piajG03A]9XjF]l[I590J7 Pi0iM0n"/>
         <UsageCount Value="100"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/codepages.pp"/>
@@ -112,12 +111,11 @@
       <Unit>
         <Filename Value="dictionary.pp"/>
         <UnitName Value="Dictionary"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="259"/>
         <CursorPos Y="359"/>
         <FoldState Value=" T3jG068 piZ]9W3]9XjU0E024 PjLj90*"/>
         <UsageCount Value="86"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/bintree.pp"/>
@@ -143,11 +141,10 @@
       <Unit>
         <Filename Value="mpla/taskmngr.pp"/>
         <UnitName Value="TaskMngr"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="15"/>
         <FoldState Value=" T3kK0C+"/>
         <UsageCount Value="15"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/updater.pp"/>
@@ -167,7 +164,7 @@
         <UsageCount Value="5"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="27">
+    <JumpHistory HistoryIndex="22">
       <Position>
         <Filename Value="umain.pas"/>
         <Caret Line="1243" Column="17" TopLine="1207"/>
@@ -259,26 +256,6 @@
       <Position>
         <Filename Value="umain.pas"/>
         <Caret Line="1403" Column="16" TopLine="1025"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/pasext.pp"/>
-        <Caret Line="187" Column="63" TopLine="165"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/pasext.pp"/>
-        <Caret Line="307" Column="20" TopLine="245"/>
-      </Position>
-      <Position>
-        <Filename Value="witch.pas"/>
-        <Caret Line="168" Column="22" TopLine="143"/>
-      </Position>
-      <Position>
-        <Filename Value="witch.pas"/>
-        <Caret Line="169" Column="56" TopLine="153"/>
-      </Position>
-      <Position>
-        <Filename Value="witch.pas"/>
-        <Caret Line="378" Column="17" TopLine="368"/>
       </Position>
     </JumpHistory>
     <RunParams>

@@ -1169,8 +1169,12 @@ begin
   UpdateStatusBarFileName;
   K:=ComponentNamePath(statBar, Self, True);
   if fWitchItem.Analyzed then begin
-    if (fWitchItem.Encoding = weBinary) or (fWitchItem.Encoding = weError) then
-      statBar.Panels[spiLineEndings].Text:=''
+    if (fWitchItem.Encoding = weBinary) or (fWitchItem.Encoding = weError) then begin
+      statBar.Panels[spiLineEndings].Text:='';
+      // if (fWitchItem.Encoding = weBinary) then Compat:='0';
+      statBar.Panels[spiLanguage].Text:='';
+      statBar.Panels[spiPrefered].Text:='';
+    end
     else begin
       case fWitchItem.LineEndings of
       leCRLF : statBar.Panels[spiLineEndings].Text:=
