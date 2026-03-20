@@ -19,9 +19,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="169"/>
-        <CursorPos Y="190"/>
+        <TopLine Value="1177"/>
+        <CursorPos X="18" Y="1197"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -130,14 +131,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uDictEdit"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="127"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="16"/>
         <CursorPos X="21" Y="455"/>
         <FoldState Value=" T3ig0K049 pjBkS0X2]93jg0Z5 PYiR0?"/>
         <UsageCount Value="84"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mpla/taskmngr.pp"/>
@@ -165,7 +163,7 @@
         <UsageCount Value="5"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="27">
+    <JumpHistory HistoryIndex="23">
       <Position>
         <Filename Value="umain.pas"/>
         <Caret Line="1243" Column="17" TopLine="1207"/>
@@ -259,24 +257,8 @@
         <Caret Line="1403" Column="16" TopLine="1025"/>
       </Position>
       <Position>
-        <Filename Value="udictedit.pas"/>
-        <Caret Line="398" Column="63" TopLine="69"/>
-      </Position>
-      <Position>
-        <Filename Value="udictedit.pas"/>
-        <Caret Line="112" Column="17" TopLine="70"/>
-      </Position>
-      <Position>
-        <Filename Value="udictedit.pas"/>
-        <Caret Line="108" Column="17" TopLine="71"/>
-      </Position>
-      <Position>
-        <Filename Value="udictedit.pas"/>
-        <Caret Line="124" Column="17" TopLine="72"/>
-      </Position>
-      <Position>
-        <Filename Value="udictedit.pas"/>
-        <Caret Line="71" Column="5" TopLine="32"/>
+        <Filename Value="umain.pas"/>
+        <Caret Line="171" Column="27" TopLine="149"/>
       </Position>
     </JumpHistory>
     <RunParams>

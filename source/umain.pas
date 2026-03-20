@@ -1191,8 +1191,11 @@ begin
         statBar.Panels[spiPrefered].Text:='';
     end;
     case fWitchItem.Encoding of
-      weNone : statBar.Panels[spiEncoding].Text:=
+      weNone : begin
+        statBar.Panels[spiEncoding].Text:=
         GetTranslation(K+'NoEncoding/Caption', 'ASCII');
+        Compat:='100';
+      end;
       weError : statBar.Panels[spiEncoding].Text:=
         GetTranslation(K+'Error/Caption', 'Error');
       weBinary : statBar.Panels[spiEncoding].Text:=
