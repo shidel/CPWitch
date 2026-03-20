@@ -320,18 +320,17 @@
             <cbAutoSelectCP Hint="Selecionar automaticamente a codepage preferida para conversão." Caption="Selecionar codepage automaticamente"/>
           </gbCodepage>
         </tsSession>
-        <tsTextEditor Hint="Text editor options." Caption="Text Editor">
-          <gbExternalEditor Caption="External Editor">
-            <cbUseExternalEditor Hint="Use an external text editor instead of the simple built-in editor ." Caption="Use an external text editor"/>
+        <tsTextEditor Hint="Opções do editor de texto." Caption="Editor de texto">
+          <gbExternalEditor Caption="Editor externo">
+            <cbUseExternalEditor Hint="Utilizar um editor de texto externo em vez do editor integrado simples." Caption="Utilizar um editor de texto externo"/>
             <pEditor>
-              <btnBrowseEditor Hint="Browse for external text editor." Caption="Browse"/>
-              <edExternalEditor Caption="bbedit"/>
+              <btnBrowseEditor Hint="Procurar editor de texto externo." Caption="Procurar"/>
             </pEditor>
-            <BrowseDialog Caption="Browser for external text editor">
-              <Title Caption="Browser for external text editor"/>
+            <BrowseDialog Caption="Procurar editor de texto externo">
+              <Title Caption="Procurar editor de texto externo"/>
               <File>
-                <Unix Exec="All files|*"/>
-                <Windows Exec="Executable files|*.EXE|All files|*.*"/>
+                <Unix Exec="Todos os ficheiros|*"/>
+                <Windows Exec="Ficheiros executáveis|*.EXE|Todos os ficheiros|*.*"/>
               </File>
             </BrowseDialog>
           </gbExternalEditor>
