@@ -344,12 +344,10 @@
         </tsEncoding>
         <tsViewer Hint="Параметри перегляду Unicode та DOS." Caption="Перегляд">
           <gbUnicodeView Caption="Перегляд Unicode">
-            <lbUnicodeScale Caption="lbUnicodeScale"/>
             <tbUnicodeScale Caption="10"/>
             <lbScaleOfUnicode Caption="Масштаб шрифту %s%%"/>
           </gbUnicodeView>
           <gbDOSView Caption="Перегляд DOS">
-            <lbDOSScale Caption="lbDOSScale"/>
             <tbDOSScale Caption="1"/>
             <lbScaleOfDOS Caption="Масштаб шрифту %s%%"/>
           </gbDOSView>

@@ -344,12 +344,10 @@
         </tsEncoding>
         <tsViewer Hint="Opções de visualizador Unicode e DOS." Caption="Visualizador">
           <gbUnicodeView Caption="Visualização Unicode">
-            <lbUnicodeScale Caption="lbUnicodeScale"/>
             <tbUnicodeScale Caption="10"/>
             <lbScaleOfUnicode Caption="Escala da fonte %s%%"/>
           </gbUnicodeView>
           <gbDOSView Caption="Visualização DOS">
-            <lbDOSScale Caption="lbDOSScale"/>
             <tbDOSScale Caption="1"/>
             <lbScaleOfDOS Caption="Escala da fonte %s%%"/>
           </gbDOSView>

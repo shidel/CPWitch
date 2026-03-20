@@ -186,7 +186,7 @@ begin
   S:=IntToStr(tbDOSScale.Position * 100);
 //  lbDOSScale.Caption:=GetFormat(ComponentNamePath(tsViewer, Self, True) +
 //    'lbDOSScale/Caption', [S], 'Font scale %s%%');
-  lbUnicodeScale.Caption:=GetFormat(
+  lbDOSScale.Caption:=GetFormat(
     'pPages/tsViewer/gbDOSView/lbScaleOfDOS/Caption', [S], 'Font scale %s%%');
 end;
 

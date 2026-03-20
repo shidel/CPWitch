@@ -344,12 +344,10 @@
         </tsEncoding>
         <tsViewer Hint="Unicode ve DOS görüntüleyici seçenekleri." Caption="Görüntüleyici">
           <gbUnicodeView Caption="Unicode Görünümü">
-            <lbUnicodeScale Caption="lbUnicodeScale"/>
             <tbUnicodeScale Caption="10"/>
             <lbScaleOfUnicode Caption="Yazı tipi ölçeği %%%s"/>
           </gbUnicodeView>
           <gbDOSView Caption="DOS Görünümü">
-            <lbDOSScale Caption="lbDOSScale"/>
             <tbDOSScale Caption="1"/>
             <lbScaleOfDOS Caption="Yazı tipi ölçeği %%%s"/>
           </gbDOSView>
