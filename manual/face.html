@@ -31,6 +31,11 @@
 	  display: block;
 	  margin: 0 auto 2em auto;
   	}
+  	img.file-icon {
+	  width: 3em;
+	  height: auto;
+	  display: block;
+  	}
 	div.headspace { margin-top:5em; }
 	div.pagetext, div.chapters, div.languages  {
 	  margin: 0 auto;
@@ -47,9 +52,12 @@
 	a {
 	  color:#8d8;
 	}
-	span.subtitle {
+	span.subheading, span.subtitle {
 	  font-style:italic;
 	  font-size: 0.90em;
+	}
+	span.subtitle {
+	  color: #898;
 	}
 	span.aka {
 	  font-style:italic;
@@ -67,33 +75,66 @@
   <img class="banner" src="graphics/banner.png" alt="the Codepage Witch banner image">
   <div class="headspace"></div>
   <div class="pagetext">
-    <h1>The Grimoire: <span class="subtitle">A Conjuring Guide</span></h1>
-    <p>For quite a while, I have been managing the <a href="https://github.com/shidel/fd-nls">FreeDOS Translation Project</a> <span class="aka">(aka. FD-NLS)</span> over on GitHub.
-    That is where the translations for the packages provided for <a href="https://freedos.org">FreeDOS&trade;</a> are managed.
-    When the individual projects receive new translations or updates to existing ones, we will try to include them in the packages that are in the FreeDOS releases and in the
-    <a href="https://www.ibiblio.org/pub/micro/pc-stuff/freedos/files/repositories/">Online Download and Update Repositories</a>.
-    Often, we will notify the active developers of the related projects that translations are available. However, many of those developers will simply check for new translations on their own.</p>
-    <p>The translation contributors over at  <a href="https://github.com/shidel/fd-nls">FD-NLS</a> are a great bunch of people. They put a lot of time and effort into their work in order to provide the community with spectacular translations. But for a number of reasons,
-    they sometimes only submit translations as Unicode <span class="aka">(UTF-8 encoded)</span> text files. Nearly all, DOS programs use Codepage encoded ASCII text files. For many languages, this is no problem. I can simply open it in my preferred text
-    editor, select the appropriate DOS codepage and save it. Unfortunately for some languages, it is truly a nightmare converting them to codepage. Sometimes, it is because the text editor does not provide the number for the codepage and only a "helpful"
-    description like <i>"Western (ISO Latin 9)"</i>. Even worse, there are times where the modern desktop editors just do not support the required codepage.</p>
-    <p>After many years of suffering through such conversion headaches, I finally just had to do something about the problem. And as such, the <i><b>Codepage Witch</b></i> was born. She is not a DOS program.
-    She is a modern desktop application for macOS, Linux and Windows that is intended to solve those problems and much more.</p>
-	<p>While the <i><b>Codepage Witch</b></i> <span class="aka">(aka. CPWitch or CPW for short)</span> has the primary function of converting text files to and from Unicode and Codepage, she performs a lot of magic behind the scenes in order to
-	try and make the process of transcoding easier. From deciphering the text and determine its language and locale, to recommending the proper codepage to use in conversion. Plus, a lot of other features.</p>
-	<p>Although the <i><b>Codepage Witch</b></i> is not very difficult to use, she is a little different and can be a little confusing at first. She also has a few personality quirks which can mystify those who have known her a long time.
-	This is her Grimoire which aims to help her friends understand her better.</p>
+    <h1>Face of the Witch: <span class="subtitle">The main window</span></h1>
+  <p>The main interface is designed to provide a real-time "Mirror" between your source files and their intended destination. While the layout is straightforward, the Witch uses a color-coded system to communicate the status and health of your files at a glance.</p>
+
+  <img src="graphics/main-form.png" class="banner" alt="The Main Interface">
+
+  <h2>The File Scroll: <span class="subtitle">The Status Icons</span></h2>
+  <p>As files are added, the Witch begins scrying their contents. The color of the file icon indicates her findings:</p>
+
+  <table>
+    <tr>
+      <td><img class="file-icon" src="graphics/icon-orange.png" alt="Orange"></td>
+      <td><b>The Analysis:</b> The file is currently being processed in the background.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="graphics/icon-green.png" alt="Green"></td>
+      <td><b>Unicode Source:</b> A UTF-8 encoded file. The Witch has mapped its best-fit codepages.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="graphics/icon-blue.png" alt="Blue"></td>
+      <td><b>Legacy Source:</b> A codepage-encoded file. The Witch is using statistical analysis to determine its origin.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="graphics/icon-gray.png" alt="Gray"></td>
+      <td><b>Plain ASCII:</b> Simple 7-bit text containing no special characters. Safe for any conversion.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="graphics/icon-yellow.png" alt="Yellow"></td>
+      <td><b>The Omen:</b> A formatting violation (like a missing trailing newline) has been detected. Select the file to fix it.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="graphics/icon-red.png" alt="Red"></td>
+      <td><b>The Void:</b> A binary file or a read error occurred. Select the file or view the log for details.</td>
+    </tr>
+  </table>
+
+  <h2>The Enchantments: <span class="subtitle">Codepage selection</span></h2>
+  <p>
+    <!-- Next to the file list. Shows text compatibility with various codepages. Shows percentage of compatibility. Can be filtered
+    to only 100% compatible, at least partly compatible or all know codepages regardless of compatiblity
+    using the filter button on the toolbar. Preselects the "preferred/correct" codepage regardless of
+    compatibility. -->
+  </p>
+
+  <h2>The Dual Mirrors: <span class="subtitle">Original vs. Transmuted</span></h2>
+  <p>The right side panes allow you to compare the file's current state with its proposed conversion.</p>
+  <ul>
+    <li><b>Unicode Viewer (Upper):</b> Displays the file as standard UTF-8 text.</li>
+    <li><b>Codepage Viewer (Lower):</b> Renders the text using the selected codepage. Any unsupported characters will appear as <span style="background: #000; color: #f00; font-weight: bold;">&iquest;</span> (Red on Black) to warn of potential data loss.</li>
+  </ul>
   </div>
   <div class="chapters">
 	<h2>Spells and Incantations</h2>
 	<ul>
-	  <li><a href="face.html">The Grimoire: <span class="subtitle">A Conjuring Guide</span></a></li>
-	  <li>Face of the Witch: <span class="aka">Getting to know the main window</span></li>
-	  <li><a href="u2cp.html"><span class="later">Unicode to Codepage</span></a></li>
-	  <li><a href="cp2u.html"><span class="later">Codepage to Unicode</span></a></li>
-	  <li><a href="options.html"><span class="later">Options and Settings</span></a></li>
-	  <li><a href="dictionary.html"><span class="later">Master and User Dictionaries</span></a></li>
-	  <li><a href="binaries.html"><span class="later">Downloading and Compiling</span></a></li>
+	  <li><a href="index.html">The Grimoire: <span class="subtitle">A Conjuring Guide</span></a></li>
+	  <li><a href="face.html">Face of the Witch: <span class="subtitle">The main window</span></a></li>
+	  <li><a href="u2cp.html"><span class="subtitle">Unicode to Codepage</span></a></li>
+	  <li><a href="cp2u.html"><span class="subtitle">Codepage to Unicode</span></a></li>
+	  <li><a href="options.html"><span class="subtitle">Options and Settings</span></a></li>
+	  <li><a href="dictionary.html"><span class="subtitle">Master and User Dictionaries</span></a></li>
+	  <li><a href="binaries.html"><span class="subtitle">Downloading and Compiling</span></a></li>
 	</ul>
   </div>
   <div class="languages">Documentation languages:
