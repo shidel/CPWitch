@@ -1,97 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Codepage Witch</title>
-  <style>
-/*
-	font-family: "Open Sans", "DejaVu Sans", Verdana, sans-serif;
-	font-family: Montserrat, "Liberation Sans", Tahoma, sans-serif;
-	font-family: Arial, Helvetica, sans-serif;
-	font-family: "Arial Black", Gadget, sans-serif;
-	font-family: "Trebuchet MS", Helvetica, sans-serif;
-	font-family: Tahoma, Geneva, sans-serif;
-*/
-
-    body {
-      padding:1em;
-      background: #112;
-      color: #ddd;
-      margin-left: 2%;
-      margin-right: 2%;
-	  font-family: "Trebuchet MS", Helvetica, sans-serif;
-    }
-	table, td, th { border: 1px solid #bbb; padding:0.5em; }
-	table { border-collapse: collapse; }
-	th { background-color: #ddd; }
-	td { vertical-align: top; }
-	img.banner {
-  	  max-width: 850px;
-	  width: 100%;
-	  height: auto;
-	  display: block;
-	  margin: 0 auto 2em auto;
-  	}
-	div.headspace { margin-top:5em; }
-	div.pagetext, div.chapters, div.languages  {
-	  margin: 0 auto;
-      max-width: 850px;
-      line-height: 1.7;
-    }
-    div.languages  {
-      margin-bottom:2em;
-    }
-	h1, h2, h3 {
-	  color:#ddb;
-	  font-family: "Open Sans", "DejaVu Sans", Verdana, sans-serif;
-	}
-	a {
-	  color:#8d8;
-	}
-	span.subheading, span.subtitle {
-	  font-style:italic;
-	  font-size: 0.90em;
-	}
-	span.subtitle {
-	  color: #898;
-	}
-	span.aka {
-	  font-style:italic;
-	  color: #898;
-	  font-size: 0.90em;
-	  /* margin-left: 0.4em; */
-	}
-	span.later {
-	  font-style:italic;
-	  color: #444;
-	}
-  </style>
+  <title>Tuning the Cauldron - the Codepage Witch</title>
+  <link href="manual.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-  <img class="banner" src="graphics/banner.png" alt="the Codepage Witch banner image">
+   <img class="banner" src="graphics/banner.png" alt="the Codepage Witch banner image">
   <div class="headspace"></div>
   <div class="pagetext">
-  </div>
+  <h1>Options and Settings: <span class="subtitle">Tuning the Cauldron</span></h1>
+  <p>The Witch has several personal preferences regarding how she handles files and displays her magic. The <b>Options</b> <img class="inline-icon" src="graphics/btn-options.png"> menu allows you to adjust these behaviors to suit your workflow.</p>
+
+  <h2>The Omen: <span class="subtitle">File Validation</span></h2>
+  <p>The Witch can be configured to spot minor formatting violations that might cause trouble for legacy DOS programs. Under the <b>Encoding</b> tab, you can set her strictness:</p>
+  <ul>
+    <li><b>Require Trailing Newline:</b> When enabled, files missing a final blank line appear with a <b>Yellow</b> <img class="inline-icon" src="graphics/icon-yellow.png"> icon. Selecting the file allows the Witch to "fix" it instantly.</li>
+    <li><b>Line Ending Policies:</b> While the Witch currently preserves original line endings, future versions will allow you to enforce specific types (like CRLF) across all exports.</li>
+  </ul>
+
+  <h2>Session and Discovery</h2>
+  <p>The <b>Session</b> settings control how the Witch remembers your work and how she scries new files:</p>
+  <ul>
+    <li><b>Memory:</b> You can choose to have the Witch automatically reopen your previous files or exported results upon her return.</li>
+    <li><b>Detection:</b> Toggle whether the Witch should prioritize the file extension (like <code>.de</code> or <code>.tr</code>) when guessing the correct locale.</li>
+  </ul>
+
+  <h2>The Dual Mirrors: <span class="subtitle">Viewer Preferences</span></h2>
+  <p>Through the <b>Viewer</b> tab, you can adjust the visual clarity of the cauldron's mirrors. This includes scaling the font size independently for the <b>Unicode</b> and <b>DOS</b> viewers to ensure maximum readability on high-resolution displays.</p>
+
+  <h2>Automated Scrying</h2>
+  <p>The <b>General</b> settings house the Witch's basic upkeep, such as toggling the <b>Automatic Update</b> check to ensure you are always using her most recent descendants.</p>
+</div>
   <div class="chapters">
 	<h2>Spells and Incantations</h2>
 	<ul>
 	  <li><a href="index.html">The Grimoire: <span class="subtitle">A Conjuring Guide</span></a></li>
-	  <li><a href="face.html">Face of the Witch: <span class="subtitle">Getting to know the main window</span></a></li>
-	  <li><a href="u2cp.html"><span class="subtitle">Unicode to Codepage</span></a></li>
-	  <li><a href="cp2u.html"><span class="subtitle">Codepage to Unicode</span></a></li>
-	  <li><a href="options.html"><span class="subtitle">Options and Settings</span></a></li>
-	  <li><a href="dictionary.html"><span class="subtitle">Master and User Dictionaries</span></a></li>
-	  <li><a href="binaries.html"><span class="subtitle">Downloading and Compiling</span></a></li>
+	  <li><a href="face.html">Face of the Witch: <span class="subtitle">The main window</span></a></li>
+	  <li><a href="u2cp.html">Art of Transmutation: <span class="subtitle">Unicode to Codepage</span></a></li>
+	  <li><a href="cp2u.html">Precognition: <span class="subtitle">Codepage to Unicode</span></a></li>
+	  <li><a href="options.html">Tuning the Cauldron: <span class="subtitle">Options and Settings</span></a></li>
+	  <li><a href="dictionary.html">?: <span class="subtitle">Master and User Dictionaries</span></a></li>
+	  <li><a href="binaries.html">?: <span class="subtitle">Downloading and Compiling</span></a></li>
 	</ul>
   </div>
   <div class="languages">Documentation languages:
 	English<span class="later">,
-	<a href="de_DE/face.html">German</a>,
-	<a href="es_ES/face.html">Spanish</a>,
-	<a href="fr_FR/face.html">French</a>,
-	<a href="pt_PT/face.html">Portuguese</a>,
-	<a href="tr_TR/face.html">Turkish</a> and
-	<a href="uk_UA/face.html">Ukrainian</a>.
+	<a href="de_DE/index.html">German</a>,
+	<a href="es_ES/index.html">Spanish</a>,
+	<a href="fr_FR/index.html">French</a>,
+	<a href="pt_PT/index.html">Portuguese</a>,
+	<a href="tr_TR/index.html">Turkish</a> and
+	<a href="uk_UA/index.html">Ukrainian</a>.
 	</span>
   </div>
+  <div class="credit">
+  <p>
+    This user manual was created with the assistance of <a href="https://gemini.google.com">Google Gemini</a>.
+  </p>
+  </div>
+
 </body>
 </html>

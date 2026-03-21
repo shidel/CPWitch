@@ -1,97 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Codepage Witch</title>
-  <style>
-/*
-	font-family: "Open Sans", "DejaVu Sans", Verdana, sans-serif;
-	font-family: Montserrat, "Liberation Sans", Tahoma, sans-serif;
-	font-family: Arial, Helvetica, sans-serif;
-	font-family: "Arial Black", Gadget, sans-serif;
-	font-family: "Trebuchet MS", Helvetica, sans-serif;
-	font-family: Tahoma, Geneva, sans-serif;
-*/
-
-    body {
-      padding:1em;
-      background: #112;
-      color: #ddd;
-      margin-left: 2%;
-      margin-right: 2%;
-	  font-family: "Trebuchet MS", Helvetica, sans-serif;
-    }
-	table, td, th { border: 1px solid #bbb; padding:0.5em; }
-	table { border-collapse: collapse; }
-	th { background-color: #ddd; }
-	td { vertical-align: top; }
-	img.banner {
-  	  max-width: 850px;
-	  width: 100%;
-	  height: auto;
-	  display: block;
-	  margin: 0 auto 2em auto;
-  	}
-	div.headspace { margin-top:5em; }
-	div.pagetext, div.chapters, div.languages  {
-	  margin: 0 auto;
-      max-width: 850px;
-      line-height: 1.7;
-    }
-    div.languages  {
-      margin-bottom:2em;
-    }
-	h1, h2, h3 {
-	  color:#ddb;
-	  font-family: "Open Sans", "DejaVu Sans", Verdana, sans-serif;
-	}
-	a {
-	  color:#8d8;
-	}
-	span.subheading, span.subtitle {
-	  font-style:italic;
-	  font-size: 0.90em;
-	}
-	span.subtitle {
-	  color: #898;
-	}
-	span.aka {
-	  font-style:italic;
-	  color: #898;
-	  font-size: 0.90em;
-	  /* margin-left: 0.4em; */
-	}
-	span.later {
-	  font-style:italic;
-	  color: #444;
-	}
-  </style>
+  <title>Precognition - the Codepage Witch</title>
+  <link href="manual.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
   <img class="banner" src="graphics/banner.png" alt="the Codepage Witch banner image">
   <div class="headspace"></div>
-  <div class="pagetext">
-  </div>
-  <div class="chapters">
+<div class="pagetext">
+  <h1>Codepage to Unicode: <span class="subtitle">Precognition</span></h1>
+  <p>While the Witch is often used to create legacy files, she is equally
+  skilled at rescuing them. This ritual involves taking old Codepage-encoded
+  text and "promoting" it to modern Unicode (UTF-8), making it compatible
+  with today's desktop editors and web standards.</p>
+
+  <h2>1. Statistical Scrying</h2>
+  <p>When a legacy file is cast into the cauldron, it typically emerges
+  with a <b>Blue</b> <img class="inline-icon" src="graphics/icon-blue.png"> icon.
+  Unlike Unicode files which contain clear encoding signatures, legacy files
+  are often just raw bytes. To identify them, the Witch performs a statistical
+  analysis of the text to "guess" its likely language and locale.</p>
+
+  <h2>2. The Probability Pie Graphs</h2>
+  <p>Because the Witch is making an educated guess, the <b>Enchantments</b> pane
+  looks a little different for Blue files. You will notice <b>Blue/Red Pie Graphs</b>
+  <img class="inline-icon" src="graphics/graph-blue.png">:</p>
+  <ul>
+    <li><b>The Blue Slice:</b> Indicates the statistical probability that the file belongs to that specific codepage based on known linguistic patterns.</li>
+    <li><b>The Red Slice:</b> Indicates the likelihood that the selection is a mismatch.</li>
+    <li><b>The Choice:</b> If the Witch is highly confident, she will pre-select the most likely candidate, but you should always consult the mirrors to verify.</li>
+  </ul>
+
+  <h2>3. The Mirror of Promotion</h2>
+  <p>The <b>Unicode Viewer</b> (the upper mirror) is your most important tool during this ritual. It shows you exactly what the text will look like once it has been promoted to UTF-8.
+  <ul>
+    <li>If you see garbled text or incorrect symbols in the upper mirror, the Witch may have selected the wrong starting codepage.</li>
+    <li>Try selecting different enchantments in the list until the <b>Unicode Viewer</b> reflects the text as it was originally intended to be read.</li>
+  </ul></p>
+
+  <h2>4. Finalizing the Promotion</h2>
+  <p>Once the text appears correctly in the upper mirror, click the <b>Export</b> <img class="inline-icon" src="graphics/btn-export.png"> icon. The Witch will wrap the text in a modern UTF-8 seal, ensuring it can be read by any modern application while preserving the original line endings.</p>
+
+  <p><i><b>Note:</b> If the text contains only standard 7-bit characters, the icon will turn <b>Gray</b> <img class="inline-icon" src="graphics/icon-gray.png">. These files are universal and require no complex scrying to promote.</i></p>
+</div>  <div class="chapters">
 	<h2>Spells and Incantations</h2>
 	<ul>
 	  <li><a href="index.html">The Grimoire: <span class="subtitle">A Conjuring Guide</span></a></li>
-	  <li><a href="face.html">Face of the Witch: <span class="subtitle">Getting to know the main window</span></a></li>
-	  <li><a href="u2cp.html"><span class="subtitle">Unicode to Codepage</span></a></li>
-	  <li><a href="cp2u.html"><span class="subtitle">Codepage to Unicode</span></a></li>
-	  <li><a href="options.html"><span class="subtitle">Options and Settings</span></a></li>
-	  <li><a href="dictionary.html"><span class="subtitle">Master and User Dictionaries</span></a></li>
-	  <li><a href="binaries.html"><span class="subtitle">Downloading and Compiling</span></a></li>
+	  <li><a href="face.html">Face of the Witch: <span class="subtitle">The main window</span></a></li>
+	  <li><a href="u2cp.html">Art of Transmutation: <span class="subtitle">Unicode to Codepage</span></a></li>
+	  <li><a href="cp2u.html">Precognition: <span class="subtitle">Codepage to Unicode</span></a></li>
+	  <li><a href="options.html">Tuning the Cauldron: <span class="subtitle">Options and Settings</span></a></li>
+	  <li><a href="dictionary.html">?: <span class="subtitle">Master and User Dictionaries</span></a></li>
+	  <li><a href="binaries.html">?: <span class="subtitle">Downloading and Compiling</span></a></li>
 	</ul>
   </div>
   <div class="languages">Documentation languages:
 	English<span class="later">,
-	<a href="de_DE/face.html">German</a>,
-	<a href="es_ES/face.html">Spanish</a>,
-	<a href="fr_FR/face.html">French</a>,
-	<a href="pt_PT/face.html">Portuguese</a>,
-	<a href="tr_TR/face.html">Turkish</a> and
-	<a href="uk_UA/face.html">Ukrainian</a>.
+	<a href="de_DE/index.html">German</a>,
+	<a href="es_ES/index.html">Spanish</a>,
+	<a href="fr_FR/index.html">French</a>,
+	<a href="pt_PT/index.html">Portuguese</a>,
+	<a href="tr_TR/index.html">Turkish</a> and
+	<a href="uk_UA/index.html">Ukrainian</a>.
 	</span>
   </div>
+  <div class="credit">
+  <p>
+    This user manual was created with the assistance of <a href="https://gemini.google.com">Google Gemini</a>.
+  </p>
+  </div>
+
 </body>
 </html>

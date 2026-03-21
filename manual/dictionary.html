@@ -1,97 +1,81 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Codepage Witch</title>
-  <style>
-/*
-	font-family: "Open Sans", "DejaVu Sans", Verdana, sans-serif;
-	font-family: Montserrat, "Liberation Sans", Tahoma, sans-serif;
-	font-family: Arial, Helvetica, sans-serif;
-	font-family: "Arial Black", Gadget, sans-serif;
-	font-family: "Trebuchet MS", Helvetica, sans-serif;
-	font-family: Tahoma, Geneva, sans-serif;
-*/
-
-    body {
-      padding:1em;
-      background: #112;
-      color: #ddd;
-      margin-left: 2%;
-      margin-right: 2%;
-	  font-family: "Trebuchet MS", Helvetica, sans-serif;
-    }
-	table, td, th { border: 1px solid #bbb; padding:0.5em; }
-	table { border-collapse: collapse; }
-	th { background-color: #ddd; }
-	td { vertical-align: top; }
-	img.banner {
-  	  max-width: 850px;
-	  width: 100%;
-	  height: auto;
-	  display: block;
-	  margin: 0 auto 2em auto;
-  	}
-	div.headspace { margin-top:5em; }
-	div.pagetext, div.chapters, div.languages  {
-	  margin: 0 auto;
-      max-width: 850px;
-      line-height: 1.7;
-    }
-    div.languages  {
-      margin-bottom:2em;
-    }
-	h1, h2, h3 {
-	  color:#ddb;
-	  font-family: "Open Sans", "DejaVu Sans", Verdana, sans-serif;
-	}
-	a {
-	  color:#8d8;
-	}
-	span.subheading, span.subtitle {
-	  font-style:italic;
-	  font-size: 0.90em;
-	}
-	span.subtitle {
-	  color: #898;
-	}
-	span.aka {
-	  font-style:italic;
-	  color: #898;
-	  font-size: 0.90em;
-	  /* margin-left: 0.4em; */
-	}
-	span.later {
-	  font-style:italic;
-	  color: #444;
-	}
-  </style>
+  <title>Master and User Dictionaries - the Codepage Witch</title>
+  <link href="manual.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
   <img class="banner" src="graphics/banner.png" alt="the Codepage Witch banner image">
   <div class="headspace"></div>
+
   <div class="pagetext">
+    <h1>Dictionaries: <span class="subtitle">Expanding the Witch's Vocabulary</span></h1>
+    <p>The Witch doesn't just guess a file's language; she consults her internal lexicons to recognize linguistic patterns. When she recognizes words she knows, she can confidently suggest the correct Locale and its associated Codepages.</p>
+
+    <h2>1. Two Volumes of Knowledge</h2>
+    <p>The Witch maintains two distinct ledgers of words:</p>
+    <ul>
+      <li><b>The Master Dictionary:</b> A pre-written, multi-language tome provided with the program. This is read-only and cannot be altered by the user.</li>
+      <li><b>The User Dictionary:</b> Your personal collection of words. This is where you add new terms to help the Witch recognize unique dialects, technical jargon, or project-specific terminology.</li>
+    </ul>
+
+    <h2>2. Teaching the Witch (Adding Words)</h2>
+    <p>To expand the dictionary, you must use a <b>Unicode</b> <img class="inline-icon" src="graphics/icon-green.png"> or <b>7-Bit ASCII</b> <img class="inline-icon" src="graphics/icon-gray.png"> file as your source.
+    <span class="aka">(Note: Adding words from Codepage files is currently disabled to ensure only clean, valid text is added to the lexicons.)</span></p>
+
+    <p><b>The Ritual:</b></p>
+    <ol>
+      <li>Select a file in the cauldron and click the <b>Dictionary</b> <img class="inline-icon" src="graphics/btn-dictionary.png"> icon.</li>
+      <li>The Witch will present a list of words found in the file that she does not yet recognize.</li>
+      <li><b>Choose a Locale:</b> Select the intended language from the dropdown menu.</li>
+      <li><b>Auto-Selection:</b> For known locales, the Witch will pre-check candidates that are at least 6 letters long, are not all-caps, and don't already exist in another language.</li>
+      <li><b>Sanctity of the Lexicon:</b> Before clicking <b>Add</b>, manually scan the list. You must ensure that no "errant" words from other languages or non-linguistic strings (like code variables or hex strings) have sneaked into the selection.</li>
+      <li><b>Click Add:</b> The checked words are added to the memory of the User Dictionary.</li>
+    </ol>
+
+    <div style="background: #223; border-left: 5px solid #898; padding: 1em; margin: 2em 0;">
+      <h3 style="margin-top: 0; color: #efa;">Pro-Tip: <span class="subtitle">The Power of Five</span></h3>
+      <p>You don't need to add an entire language's vocabulary! Usually, adding just <b>5 to 10 unique, common words</b> for a specific locale is enough to "tip the scales." Once the Witch recognizes a few signature words, her statistical confidence will surge, allowing her to identify that locale instantly in future scryings.</p>
+    </div>
+
+    <h2>3. Re-Scrying and Refinement</h2>
+    <p>When you add words, the Witch immediately re-analyzes all files currently in the cauldron. You may see a file's icon color or detected locale change as she applies her new knowledge in real-time.</p>
+
+    <h2>4. Finalizing the Knowledge (Save vs. Reload)</h2>
+    <p>Changes made in the Dictionary window are held in a "semi-temporary" state until the session is finalized:</p>
+    <ul>
+      <li><b>Save:</b> Click the <b>Save</b> button to commit your new words to the disk permanently.</li>
+      <li><b>Reload:</b> If you made a mistake or the results caused confusion, click <b>Reload</b> to dump the current changes and revert to the last saved state.</li>
+      <li><b>Auto-Save:</b> If you close the program without explicitly clicking Reload, the Witch will assume you approved the changes and automatically save them to your User Dictionary.</li>
+    </ul>
   </div>
+
   <div class="chapters">
-	<h2>Spells and Incantations</h2>
-	<ul>
+    <h2>Spells and Incantations</h2>
+    <ul>
 	  <li><a href="index.html">The Grimoire: <span class="subtitle">A Conjuring Guide</span></a></li>
-	  <li><a href="face.html">Face of the Witch: <span class="subtitle">Getting to know the main window</span></a></li>
-	  <li><a href="u2cp.html"><span class="subtitle">Unicode to Codepage</span></a></li>
-	  <li><a href="cp2u.html"><span class="subtitle">Codepage to Unicode</span></a></li>
-	  <li><a href="options.html"><span class="subtitle">Options and Settings</span></a></li>
-	  <li><a href="dictionary.html"><span class="subtitle">Master and User Dictionaries</span></a></li>
-	  <li><a href="binaries.html"><span class="subtitle">Downloading and Compiling</span></a></li>
-	</ul>
+	  <li><a href="face.html">Face of the Witch: <span class="subtitle">The main window</span></a></li>
+	  <li><a href="u2cp.html">Art of Transmutation: <span class="subtitle">Unicode to Codepage</span></a></li>
+	  <li><a href="cp2u.html">Precognition: <span class="subtitle">Codepage to Unicode</span></a></li>
+	  <li><a href="options.html">Tuning the Cauldron: <span class="subtitle">Options and Settings</span></a></li>
+      <li><a href="dictionary.html">Master and User Dictionaries: <span class="subtitle">Expanding Vocabulary</span></a></li>
+      <li><a href="binaries.html"><span class="subtitle">Downloading and Compiling</span></a></li>
+    </ul>
   </div>
+
   <div class="languages">Documentation languages:
-	English<span class="later">,
-	<a href="de_DE/face.html">German</a>,
-	<a href="es_ES/face.html">Spanish</a>,
-	<a href="fr_FR/face.html">French</a>,
-	<a href="pt_PT/face.html">Portuguese</a>,
-	<a href="tr_TR/face.html">Turkish</a> and
-	<a href="uk_UA/face.html">Ukrainian</a>.
-	</span>
+    English<span class="later">,
+    <a href="de_DE/dictionary.html">German</a>,
+    <a href="es_ES/dictionary.html">Spanish</a>,
+    <a href="fr_FR/dictionary.html">French</a>,
+    <a href="pt_PT/dictionary.html">Portuguese</a>,
+    <a href="tr_TR/dictionary.html">Turkish</a> and
+    <a href="uk_UA/dictionary.html">Ukrainian</a>.</span>
+  </div>
+  <div class="credit">
+  <p>
+    This user manual was created with the assistance of <a href="https://gemini.google.com">Google Gemini</a>.
+  </p>
   </div>
 </body>
 </html>
