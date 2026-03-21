@@ -27,6 +27,14 @@ fi
 echo "Update working bundle with latest translations"
 cp -f translations/*.nls CPWitch.app/Contents/Resources/
 
+echo "Update user manual for all platforms"
+rm -rf ../bin/macOS/manual 2>&1 >/dev/null
+rm -rf ../bin/Linux/Manual 2>&1 >/dev/null
+rm -rf ../bin/Windows/manual 2>&1 >/dev/null
+cp -Rf ../manual ../bin/Linux/manual
+cp -Rf ../manual ../bin/macOS/manual
+cp -Rf ../manual ../bin/Windows/manual
+
 # cross compile file update
 echo "Update Cross-compile source files"
 cp -f *.lfm *.pas version.* icons.* dictionary.pp xcompile/
@@ -58,6 +66,7 @@ cp -f translations/*.nls ../bin/Windows/
 cp -f 0816norm.uff ../bin/Windows/
 cp -f master.cpw ../bin/Windows/
 cp -f TODO.md ../bin/Windows/
+cp -Rf ../manual ../bin/Windows/manual
 
 build_flag DEBUG
 build_flag PRERELEASE
