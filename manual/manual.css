@@ -86,6 +86,18 @@ h1, h2, h3 {
   font-family: "Open Sans", "DejaVu Sans", Verdana, sans-serif;
 }
 
+h3.pro-tip {
+  margin-top: 0;
+  color: #efa;
+}
+
+div.pro-tip {
+  background: #223;
+  border-left: 5px solid #898;
+  padding: 1em;
+  margin: 2em 0;
+}
+
 a {
   color:#8d8;
 }
