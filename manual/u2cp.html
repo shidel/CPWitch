@@ -1,97 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Codepage Witch</title>
-  <style>
-/*
-	font-family: "Open Sans", "DejaVu Sans", Verdana, sans-serif;
-	font-family: Montserrat, "Liberation Sans", Tahoma, sans-serif;
-	font-family: Arial, Helvetica, sans-serif;
-	font-family: "Arial Black", Gadget, sans-serif;
-	font-family: "Trebuchet MS", Helvetica, sans-serif;
-	font-family: Tahoma, Geneva, sans-serif;
-*/
-
-    body {
-      padding:1em;
-      background: #112;
-      color: #ddd;
-      margin-left: 2%;
-      margin-right: 2%;
-	  font-family: "Trebuchet MS", Helvetica, sans-serif;
-    }
-	table, td, th { border: 1px solid #bbb; padding:0.5em; }
-	table { border-collapse: collapse; }
-	th { background-color: #ddd; }
-	td { vertical-align: top; }
-	img.banner {
-  	  max-width: 850px;
-	  width: 100%;
-	  height: auto;
-	  display: block;
-	  margin: 0 auto 2em auto;
-  	}
-	div.headspace { margin-top:5em; }
-	div.pagetext, div.chapters, div.languages  {
-	  margin: 0 auto;
-      max-width: 850px;
-      line-height: 1.7;
-    }
-    div.languages  {
-      margin-bottom:2em;
-    }
-	h1, h2, h3 {
-	  color:#ddb;
-	  font-family: "Open Sans", "DejaVu Sans", Verdana, sans-serif;
-	}
-	a {
-	  color:#8d8;
-	}
-	span.subheading, span.subtitle {
-	  font-style:italic;
-	  font-size: 0.90em;
-	}
-	span.subtitle {
-	  color: #898;
-	}
-	span.aka {
-	  font-style:italic;
-	  color: #898;
-	  font-size: 0.90em;
-	  /* margin-left: 0.4em; */
-	}
-	span.later {
-	  font-style:italic;
-	  color: #444;
-	}
-  </style>
+  <title>Tansmutation - the Codepage Witch</title>
+  <link href="manual.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
   <img class="banner" src="graphics/banner.png" alt="the Codepage Witch banner image">
   <div class="headspace"></div>
-  <div class="pagetext">
-  </div>
-  <div class="chapters">
-	<h2>Spells and Incantations</h2>
-	<ul>
-	  <li><a href="index.html">The Grimoire: <span class="subtitle">A Conjuring Guide</span></a></li>
-	  <li><a href="face.html">Face of the Witch: <span class="subtitle">Getting to know the main window</span></a></li>
-	  <li><a href="u2cp.html"><span class="subtitle">Unicode to Codepage</span></a></li>
-	  <li><a href="cp2u.html"><span class="subtitle">Codepage to Unicode</span></a></li>
-	  <li><a href="options.html"><span class="subtitle">Options and Settings</span></a></li>
-	  <li><a href="dictionary.html"><span class="subtitle">Master and User Dictionaries</span></a></li>
-	  <li><a href="binaries.html"><span class="subtitle">Downloading and Compiling</span></a></li>
-	</ul>
+<div class="pagetext">
+  <h1>Unicode to Codepage: <span class="subtitle">The Art of Transmutation</span></h1>
+  <p>This is the most common ritual performed by the Witch: taking modern,
+  Unicode-encoded text (UTF-8) and transmuting it into a specific DOS Codepage.
+  This process ensures your translations and documents appear correctly on
+  vintage hardware and DOS emulators.</p>
+
+  <h2>1. The Initial Scrying</h2>
+  <p>When you first cast a file into the cauldron, it appears with an <b>Orange</b> <img class="inline-icon" src="graphics/icon-orange.png"> icon. This indicates the Witch is currently analyzing its contents. Once she confirms the file is Unicode, the icon will transform into <b>Green</b> <img class="inline-icon" src="graphics/icon-green.png">.</p>
+
+  <p><i><b>Note:</b> If the file does not turn Green, the Witch has detected a complication:</i></p>
+  <ul>
+    <li><b>Yellow</b> <img class="inline-icon" src="graphics/icon-yellow.png"> indicates a formatting <b>Omen</b> (such as a missing trailing newline) that should be fixed before proceeding.</li>
+    <li><b>Blue</b> <img class="inline-icon" src="graphics/icon-blue.png"> or <b>Gray</b> <img class="inline-icon" src="graphics/icon-gray.png"> indicates the file is already a Codepage or ASCII file. See <a href="cp2u.html">Codepage to Unicode</a> for these rituals.</li>
+    <li><b>Red</b> <img class="inline-icon" src="graphics/icon-red.png"> indicates a <b>Void</b> or error. Refer to the <a href="face.html#status-icons">Status Icons</a> for more details.</li>
+  </ul>
+
+  <h2>2. Choosing the Incantation</h2>
+  <p>The <b>Enchantments</b> pane will populate with a list of potential codepages.
+  The Witch ranks these using <b>Compatibility Pie Graphs</b> for a quick visual
+  reference:</p>
+  <ul>
+    <li><b>The Green Slice:</b> Represents the portion of your text that
+    can be successfully converted to that codepage.</li>
+    <li><b>The Red Slice:</b> Represents characters that do not exist in that
+    codepage and will be lost.</li>
+    <li><b>The Perfect Seal:</b> When a codepage offers 100% compatibility,
+    the pie graph is replaced by a <b>Green Checkmark</b>.</li>
+  </ul>
+
+  <h2>3. Identifying the Unseen</h2>
+  <p>If you select a codepage with less than 100% compatibility, look closely
+  at the <b>Codepage Viewer</b> (the lower mirror). Any character that the
+  selected codepage cannot understand will be rendered as
+  <span class="error-text">&iquest;</span>.
+  This allows you to hunt down problematic characters before the seal is finalized.</p>
+
+  <h2>4. Finalizing the Seal</h2>
+  <p>Once you are satisfied with the preview, click the <b>Export</b> <img class="inline-icon" src="graphics/btn-export.png"> icon. The Witch will preserve the line endings found in the original file and prompt you for a destination. The transmutation is then performed, leaving your original Unicode source untouched.</p>
   </div>
   <div class="languages">Documentation languages:
 	English<span class="later">,
-	<a href="de_DE/face.html">German</a>,
-	<a href="es_ES/face.html">Spanish</a>,
-	<a href="fr_FR/face.html">French</a>,
-	<a href="pt_PT/face.html">Portuguese</a>,
-	<a href="tr_TR/face.html">Turkish</a> and
-	<a href="uk_UA/face.html">Ukrainian</a>.
+	<a href="de_DE/index.html">German</a>,
+	<a href="es_ES/index.html">Spanish</a>,
+	<a href="fr_FR/index.html">French</a>,
+	<a href="pt_PT/index.html">Portuguese</a>,
+	<a href="tr_TR/index.html">Turkish</a> and
+	<a href="uk_UA/index.html">Ukrainian</a>.
 	</span>
   </div>
+  <div class="credit">
+  <p>
+    This user manual was created with the assistance of <a href="https://gemini.google.com">Google Gemini</a>.
+  </p>
+  </div>
+
 </body>
 </html>
