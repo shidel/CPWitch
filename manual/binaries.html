@@ -1,97 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Codepage Witch</title>
-  <style>
-/*
-	font-family: "Open Sans", "DejaVu Sans", Verdana, sans-serif;
-	font-family: Montserrat, "Liberation Sans", Tahoma, sans-serif;
-	font-family: Arial, Helvetica, sans-serif;
-	font-family: "Arial Black", Gadget, sans-serif;
-	font-family: "Trebuchet MS", Helvetica, sans-serif;
-	font-family: Tahoma, Geneva, sans-serif;
-*/
-
-    body {
-      padding:1em;
-      background: #112;
-      color: #ddd;
-      margin-left: 2%;
-      margin-right: 2%;
-	  font-family: "Trebuchet MS", Helvetica, sans-serif;
-    }
-	table, td, th { border: 1px solid #bbb; padding:0.5em; }
-	table { border-collapse: collapse; }
-	th { background-color: #ddd; }
-	td { vertical-align: top; }
-	img.banner {
-  	  max-width: 850px;
-	  width: 100%;
-	  height: auto;
-	  display: block;
-	  margin: 0 auto 2em auto;
-  	}
-	div.headspace { margin-top:5em; }
-	div.pagetext, div.chapters, div.languages  {
-	  margin: 0 auto;
-      max-width: 850px;
-      line-height: 1.7;
-    }
-    div.languages  {
-      margin-bottom:2em;
-    }
-	h1, h2, h3 {
-	  color:#ddb;
-	  font-family: "Open Sans", "DejaVu Sans", Verdana, sans-serif;
-	}
-	a {
-	  color:#8d8;
-	}
-	span.subheading, span.subtitle {
-	  font-style:italic;
-	  font-size: 0.90em;
-	}
-	span.subtitle {
-	  color: #898;
-	}
-	span.aka {
-	  font-style:italic;
-	  color: #898;
-	  font-size: 0.90em;
-	  /* margin-left: 0.4em; */
-	}
-	span.later {
-	  font-style:italic;
-	  color: #444;
-	}
-  </style>
+  <title>The Forge - the Codepage Witch</title>
+  <link href="manual.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
   <img class="banner" src="graphics/banner.png" alt="the Codepage Witch banner image">
   <div class="headspace"></div>
+
   <div class="pagetext">
+    <h1>The Forge: <span class="subtitle">Downloading and Compiling</span></h1>
+    <p>For most users, the pre-built "Spirits" (binaries) are the easiest way to summon the Witch. However, for those who wish to go into the forge and build the program from source, a few rituals must be observed.</p>
+
+    <h2>1. The Pre-compiled Spirits</h2>
+    <p>Official binaries for the "Big 3" operating systems (Windows, macOS, and Linux) can be found at the following location:</p>
+    <ul>
+      <li><b>Download:</b> <a href="https://up.lod.bz/CPWitch">https://up.lod.bz/CPWitch</a></li>
+    </ul>
+
+    <h2>2. The Alchemist's Tools</h2>
+    <p>To compile the source code yourself, you will need the <b>Lazarus IDE</b> (Version 4.0 or higher) and the <b>Free Pascal (FPC)</b> compiler. Information regarding necessary frameworks (such as the <b>MPLA Framework</b>) and other dependencies can be found in the project's README.</p>
+
+    <h2>3. The Primary Forge (macOS)</h2>
+    <p>Currently, the "Master" version of the source is forged on <b>macOS</b>. This environment utilizes automated scripts that handle the project's complex resource needs and dynamically create essential build files:</p>
+    <ul>
+      <li><b>Image Transmutation:</b> The project contains approximately 500 images. On macOS, these are automatically processed, scaled, and optimized for the UI.</li>
+      <li><b>Dynamic Unit Generation:</b> The build scripts automatically generate internal Pascal units and definition files required for compilation, such as <code>icons.pp</code>, <code>version.pp</code>, and <code>version.def</code>.</li>
+      <li><b>The Great Resource:</b> These images and versioning data are compiled into a massive Lazarus Resource file (<code>.lrs</code>).</li>
+      <li><b>Automated Versioning:</b> Internal scripts handle build number increments and the generation of localized documentation.</li>
+    </ul>
+
+    <h2>4. The Universal Forge (Windows & Linux)</h2>
+    <p>While initial resource generation requires the macOS environment, the resulting source code is truly cross-platform. Once those dynamic units and resource files are generated, the project can be opened in Lazarus on <b>Windows</b> or <b>Linux</b> and compiled immediately.</p>
+    <p><i>Note: For stable Alpha and Beta releases, these generated files are typically included in the repository to allow for immediate compilation on any platform without needing the macOS-specific scripts.</i></p>
+
+    <h2>5. Acquiring the Source</h2>
+    <p>The Witch's source code is hosted on GitHub. You can clone the repository or browse the code at the following link:</p>
+    <ul>
+      <li><b>Source:</b> <a href="https://github.com/shidel/CPWitch">https://github.com/shidel/CPWitch</a></li>
+    </ul>
+    <code>git clone https://github.com/shidel/CPWitch.git</code>
   </div>
+
   <div class="chapters">
-	<h2>Spells and Incantations</h2>
-	<ul>
-	  <li><a href="index.html">The Grimoire: <span class="subtitle">A Conjuring Guide</span></a></li>
-	  <li><a href="face.html">Face of the Witch: <span class="subtitle">Getting to know the main window</span></a></li>
-	  <li><a href="u2cp.html"><span class="subtitle">Unicode to Codepage</span></a></li>
-	  <li><a href="cp2u.html"><span class="subtitle">Codepage to Unicode</span></a></li>
-	  <li><a href="options.html"><span class="subtitle">Options and Settings</span></a></li>
-	  <li><a href="dictionary.html"><span class="subtitle">Master and User Dictionaries</span></a></li>
-	  <li><a href="binaries.html"><span class="subtitle">Downloading and Compiling</span></a></li>
-	</ul>
+    <h2>Spells and Incantations</h2>
+    <ul>
+      <li><a href="index.html">The Grimoire: <span class="subtitle">A Conjuring Guide</span></a></li>
+      <li><a href="face.html">Face of the Witch: <span class="subtitle">The main window</span></a></li>
+      <li><a href="u2cp.html">Art of Transmutation: <span class="subtitle">Unicode to Codepage</span></a></li>
+      <li><a href="cp2u.html">Precognition: <span class="subtitle">Codepage to Unicode</span></a></li>
+      <li><a href="options.html">Tuning the Cauldron: <span class="subtitle">Options and Settings</span></a></li>
+      <li><a href="dictionary.html">Expanding the Vocabulary: <span class="subtitle">Master and User Dictionaries</span></a></li>
+      <li><a href="binaries.html">The Forge: <span class="subtitle">Downloading and Compiling</span></a></li>
+    </ul>
   </div>
+
   <div class="languages">Documentation languages:
-	English<span class="later">,
-	<a href="de_DE/face.html">German</a>,
-	<a href="es_ES/face.html">Spanish</a>,
-	<a href="fr_FR/face.html">French</a>,
-	<a href="pt_PT/face.html">Portuguese</a>,
-	<a href="tr_TR/face.html">Turkish</a> and
-	<a href="uk_UA/face.html">Ukrainian</a>.
-	</span>
+    English<span class="later">,
+    <a href="de_DE/binaries.html">German</a>,
+    <a href="es_ES/binaries.html">Spanish</a>,
+    <a href="fr_FR/binaries.html">French</a>,
+    <a href="pt_PT/binaries.html">Portuguese</a>,
+    <a href="tr_TR/binaries.html">Turkish</a> and
+    <a href="uk_UA/binaries.html">Ukrainian</a>.</span>
   </div>
 </body>
 </html>
