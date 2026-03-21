@@ -36,6 +36,11 @@
 	  height: auto;
 	  display: block;
   	}
+  	img.btn-icon {
+	  width: 3em;
+	  height: auto;
+	  display: block;
+  	}
 	div.headspace { margin-top:5em; }
 	div.pagetext, div.chapters, div.languages  {
 	  margin: 0 auto;
@@ -46,7 +51,7 @@
       margin-bottom:2em;
     }
 	h1, h2, h3 {
-	  color:#ddb;
+	  color:#dba;
 	  font-family: "Open Sans", "DejaVu Sans", Verdana, sans-serif;
 	}
 	a {
@@ -76,11 +81,75 @@
   <div class="headspace"></div>
   <div class="pagetext">
     <h1>Face of the Witch: <span class="subtitle">The main window</span></h1>
-  <p>The main interface is designed to provide a real-time "Mirror" between your source files and their intended destination. While the layout is straightforward, the Witch uses a color-coded system to communicate the status and health of your files at a glance.</p>
+  <p>The main interface is designed to provide a real-time "Mirror" between
+  your source files and their intended destination. While the layout is
+  straightforward, the Witch uses a color-coded system to communicate the
+  status and health of your files at a glance.</p>
 
   <img src="graphics/main-form.png" class="banner" alt="The Main Interface">
 
-  <h2>The File Scroll: <span class="subtitle">The Status Icons</span></h2>
+  <h2>The Incantations: <span class="subtitle">The Tool Bar</span></h2>
+  <p>The Tool Bar is your primary source of magic. It houses the spells for
+   opening files, exporting your transmutations, and accessing the deeper
+   settings of the Witch.</p>
+
+ <table>
+    <tr>
+      <td><img class="btn-icon" src="graphics/btn-open.png" alt="Open"></td>
+      <td><b>Open:</b> Peruse the file system to select one or more files
+      from a directory. <b>Drag-and-Drop</b> may also be used to cast files or
+      entire directories into the file cauldron.</td>
+    </tr>
+    <tr>
+	  <td><img class="btn-icon" src="graphics/btn-edit.png" alt="Edit"></td>
+      <td><b>Edit:</b> Cast the selected file into your preferred external
+      text editor. This allows for manual refinements without leaving the
+      Witch's presence.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="graphics/btn-export.png" alt="Export"></td>
+      <td><b>Export:</b> Seal your transmutations. This saves the currently
+      selected file using the chosen codepage and line-ending settings.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="graphics/btn-close.png" alt="Close"></td>
+      <td><b>Close:</b> Banish the currently selected file from the cauldron.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="graphics/btn-close-all.png" alt="Close All"></td>
+      <td><b>Close All:</b> Wash the cauldron clean, removing all files
+      from the current session.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="graphics/btn-cp-filter.png" alt="Codepage Filter"></td>
+      <td><b>Filter:</b> Narrow the list of Enchantments. Cycle through views
+      to show only 100% matches, potential matches, or every
+      codepage known to the Witch.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="graphics/btn-dictionary.png" alt="Dictionary"></td>
+      <td><b>Dictionary:</b> Consult the Master and User Dictionaries. Here
+      you can help the Witch by checking her vocabulary and adding words to
+      her multi-lingual knowledge.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="graphics/btn-options.png" alt="Options"></td>
+      <td><b>Options:</b> Peer into the deeper mechanics of the Witch. Adjust
+     her appearance, behavior, and automatic file-checking rules.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="graphics/btn-update-check.png" alt="Online Update"></td>
+      <td><b>Updater:</b> Scry the digital horizon for newer versions of
+      the Codepage Witch and lure her descendants into your clutches.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="graphics/btn-debug-log.png" alt="Debug Log"></td>
+      <td><b>Debug Log:</b> Open the Witch's internal ledger to view detailed
+      analysis reports or investigate errors encountered during scrying.</td>
+    </tr>
+   </table>
+
+  <h2>The File Cauldron: <span class="subtitle">The Status Icons</span></h2>
   <p>As files are added, the Witch begins scrying their contents. The color of the file icon indicates her findings:</p>
 
   <table>
@@ -110,13 +179,20 @@
     </tr>
   </table>
 
-  <h2>The Enchantments: <span class="subtitle">Codepage selection</span></h2>
-  <p>
-    <!-- Next to the file list. Shows text compatibility with various codepages. Shows percentage of compatibility. Can be filtered
-    to only 100% compatible, at least partly compatible or all know codepages regardless of compatiblity
-    using the filter button on the toolbar. Preselects the "preferred/correct" codepage regardless of
-    compatibility. -->
-  </p>
+  <h2>The Enchantments: <span class="subtitle">Codepage Selection</span></h2>
+  <p>Located beside the file list, this pane shows how compatible your text is with various codepages.</p>
+  <ul>
+    <li><b>The Compatibility Graph:</b> Green/Red graphs appear for <b>Unicode</b>
+     files, showing exactly how much of the text can be safely converted.
+     Blue/Red graphs appear for legacy <b>Codepage</b> files, indicating the
+     statistical likelihood of a language match that codepage.</li>
+     <li><b>The Any-Codepage Blessing:</b> For <b>Plain ASCII</b> files, a
+     single entry appears, as these files are universal and require no actual
+     codepage.</li>
+     <li><b>Filtering the List:</b> Use the <b>Filter</b> icon in the Tool Bar
+     to toggle between showing only 100% matches, partial matches, or every codepage
+     the Witch knows.</li>
+  </ul>
 
   <h2>The Dual Mirrors: <span class="subtitle">Original vs. Transmuted</span></h2>
   <p>The right side panes allow you to compare the file's current state with its proposed conversion.</p>
@@ -124,6 +200,15 @@
     <li><b>Unicode Viewer (Upper):</b> Displays the file as standard UTF-8 text.</li>
     <li><b>Codepage Viewer (Lower):</b> Renders the text using the selected codepage. Any unsupported characters will appear as <span style="background: #000; color: #f00; font-weight: bold;">&iquest;</span> (Red on Black) to warn of potential data loss.</li>
   </ul>
+
+  <h2>The Witch's Ledger: <span class="subtitle">The Status Bar</span></h2>
+  <p>At the very bottom of the window lies the Ledger, providing the technical
+  details of the currently selected file:<p>
+  <ul>
+    <li><b>Encoding Status:</b> Identifies the file as ASCII, Codepage, Unicode, Binary, or Error.</li>
+    <li><b>Detected Locale & Preferred Code:</b> Shows the scryed locale (e.g., <code>tr_TR</code>) and the recommended 'proper' codepage for that region.</li>
+    <li><b>Technical Specs:</b> Displays the line-ending type (CRLF, LF, or CR) and the exact compatibility percentage of your current selection.</li>
+  <ul>
   </div>
   <div class="chapters">
 	<h2>Spells and Incantations</h2>
