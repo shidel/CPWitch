@@ -19,8 +19,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="41" Y="24"/>
+        <TopLine Value="1072"/>
+        <CursorPos Y="1158"/>
+        <FoldState Value=" TL00409 p0zC21[95u063214 PErV2 T4I06 TCTG3 T7bB{% T8jU4f3 PXiX4 T3lb03]viYjE0j7 pkZmA045 pjKja0E1]9DjV064]96jM0?3]91ke0D512]lgnK0s[K45kO08[94AjQ0L[942]uN[u4Ek40j T1lc02A[G5K096]zHl4035[h5c0B1[{I5T05]qic]*=3]9akc0A[{R6PnK0p[K4bkM07[94g]lH3[}O5S0M4[?4k80e T0mHZ7D[P4pPN28]POjBYv7]IdlS@3C[*5SW77[{I5NT6129]cWiRdhC]9Jk4g3F[:4kRv3F[l4ldY66 PbjIH T6n505I pV:F02F PSvI0 TMsC213D231 pEzgA401221&apos;"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -32,12 +35,12 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uPrefs"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <TopLine Value="152"/>
-        <CursorPos X="5" Y="189"/>
+        <CursorPos X="49" Y="183"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="ufixending.pas"/>
@@ -163,7 +166,7 @@
         <UsageCount Value="5"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="23">
+    <JumpHistory HistoryIndex="25">
       <Position>
         <Filename Value="umain.pas"/>
         <Caret Line="1243" Column="17" TopLine="1207"/>
@@ -259,6 +262,14 @@
       <Position>
         <Filename Value="umain.pas"/>
         <Caret Line="171" Column="27" TopLine="149"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="24" Column="41" TopLine="21"/>
+      </Position>
+      <Position>
+        <Filename Value="umain.pas"/>
+        <Caret Line="820" Column="33" TopLine="779"/>
       </Position>
     </JumpHistory>
     <RunParams>

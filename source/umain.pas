@@ -1215,7 +1215,9 @@ begin
   end else begin
     statBar.Panels[spiEncoding].Text:=GetTranslation(K+'Processing/Caption', 'Processing');
   end;
-  if Compat <> '' then Compat:=Compat+'%';
+  if Compat <> '' then begin
+    Compat:=GetFormat(K + 'Percentage/Format', [Compat], '%s%%');
+  end;
   statBar.Panels[spiCompatiblity].Text:=Compat;
 end;
 

@@ -246,6 +246,7 @@
         <Unicode Caption="Unicode"/>
         <NoEncoding Caption="ASCII"/>
         <Binary Caption="Binary"/>
+        <Percentage Format="%s%%" />
       </statBar>
       <ExportUnicodeDialog>
         <Title Caption="Export file as UTF-8"/>
