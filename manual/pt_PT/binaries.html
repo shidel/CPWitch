@@ -10,29 +10,34 @@
 
   <div class="pagetext">
     <h1>A Forja: <span class="subtitle">Download e Compilação</span></h1>
-    <p>A Codepage Witch é um artefacto de código aberto. Pode descarregar uma versão já forjada ou usar as matérias-primas (código-fonte) para a criar você mesmo.</p>
+    <p>Para a maioria dos utilizadores, os "Espíritos" (binários) pré-compilados são a forma mais fácil de invocar a Bruxa. No entanto, para aqueles que desejam entrar na forja e construir o programa a partir do código-fonte, alguns rituais devem ser observados.</p>
 
-    <h2>1. Artefactos terminados (Binários)</h2>
-    <p>Para aqueles que desejam começar a magia imediatamente, as versões pré-compiladas estão disponíveis na <a href="https://github.com/shidel/codepagewitch/releases">página de lançamentos do GitHub</a>. Oferecemos pacotes para:</p>
+    <h2>1. Os Espíritos Pré-compilados</h2>
+    <p>Binários oficiais para os "3 Grandes" sistemas operativos (Windows, macOS e Linux) podem ser encontrados no seguinte local:</p>
     <ul>
-      <li><b>Windows:</b> Um ficheiro .exe independente (64 bits).</li>
-      <li><b>macOS:</b> Um pacote de aplicação para sistemas Intel e Apple Silicon.</li>
-      <li><b>Linux:</b> Binários compilados para as distribuições mais comuns.</li>
+      <li><b>Download:</b> <a href="https://up.lod.bz/CPWitch">https://up.lod.bz/CPWitch</a></li>
     </ul>
 
-    <h2>2. Conjurar a Bruxa (Compilação)</h2>
-    <p>Se desejar modificar o código ou construí-lo para uma plataforma diferente, precisará das seguintes ferramentas:</p>
+    <h2>2. As Ferramentas do Alquimista</h2>
+    <p>Para compilar o código-fonte, precisará do <b>Lazarus IDE</b> (Versão 4.0 ou superior) e do compilador <b>Free Pascal (FPC)</b>. Informações sobre os frameworks necessários (como o <b>MPLA Framework</b>) e outras dependências podem ser encontradas no README do projeto.</p>
+
+    <h2>3. A Forja Primária (macOS)</h2>
+    <p>Atualmente, a versão "Mestre" do código é forjada em <b>macOS</b>. Este ambiente utiliza scripts automatizados que gerem as necessidades complexas de recursos do projeto e criam ficheiros de construção essenciais:</p>
     <ul>
-      <li><b>Lazarus IDE:</b> Recomenda-se a versão 4.0 ou superior.</li>
-      <li><b>Free Pascal Compiler (FPC):</b> A espinha dorsal da lógica da bruxa.</li>
+      <li><b>Transmutação de Imagens:</b> O projeto contém aproximadamente 500 imagens. No macOS, estas são processadas, escaladas e otimizadas automaticamente para a interface.</li>
+      <li><b>Geração Dinâmica de Unidades:</b> Os scripts de construção geram automaticamente unidades Pascal internas necessárias para a compilação, como <code>icons.pp</code>, <code>version.pp</code> e <code>version.def</code>.</li>
+      <li><b>O Grande Recurso:</b> Estas imagens e dados de versão são compilados num ficheiro de Recursos do Lazarus (<code>.lrs</code>) massivo.</li>
     </ul>
-    <p><b>O Processo:</b></p>
-    <ol>
-      <li>Clone o repositório do GitHub.</li>
-      <li>Abra o ficheiro de projeto (<code>cpwitch.lpi</code>) no Lazarus.</li>
-      <li>Selecione o seu sistema operativo e a arquitetura do CPU nas definições do projeto.</li>
-      <li>Pressione <b>Compilar</b> (F9) para forjar o binário.</li>
-    </ol>
+
+    <h2>4. A Forja Universal (Windows & Linux)</h2>
+    <p>Embora a geração inicial de recursos exija o ambiente macOS, o código-fonte resultante é verdadeiramente multiplataforma. Uma vez geradas essas unidades dinâmicas e ficheiros de recursos, o projeto pode ser aberto no Lazarus em <b>Windows</b> ou <b>Linux</b> e compilado imediatamente.</p>
+
+    <h2>5. Adquirindo a Fonte</h2>
+    <p>O código-fonte da Bruxa está alojado no GitHub:</p>
+    <ul>
+      <li><b>Fonte:</b> <a href="https://github.com/shidel/CPWitch">https://github.com/shidel/CPWitch</a></li>
+    </ul>
+    <code>git clone https://github.com/shidel/CPWitch.git</code>
   </div>
 
   <div class="chapters">
@@ -45,7 +50,7 @@
 	  <li><a href="options.html">Afinando o Caldeirão: <span class="subtitle">Opções e Definições</span></a></li>
       <li><a href="dictionary.html">Expandindo o Vocabulário: <span class="subtitle">Dicionários Mestre e do Utilizador</span></a></li>
 	  <li><span class="this-page">A Forja: <span class="subtitle">Download e Compilação</span></span></li>
-	  <li><a href="glossary.html">Glossário: <span class="subtitle">A Referência de Bolsillo</span></a></li>
+	  <li><a href="glossary.html">Glossário: <span class="subtitle">A Referência de Bolso</span></a></li>
     </ul>
   </div>
 

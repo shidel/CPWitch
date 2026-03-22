@@ -10,29 +10,34 @@
 
   <div class="pagetext">
     <h1>Die Schmiede: <span class="subtitle">Herunterladen und Kompilieren</span></h1>
-    <p>Die Codepage Witch ist ein Open-Source-Artefakt. Sie können entweder eine fertig geschmiedete Version herunterladen oder die Rohstoffe (Quellcode) nutzen, um sie selbst zu erschaffen.</p>
+    <p>Für die meisten Benutzer sind die vorerstellten „Geister“ (Binärdateien) der einfachste Weg, die Hexe zu beschwören. Wer jedoch selbst in die Schmiede gehen möchte, muss einige Rituale beachten.</p>
 
-    <h2>1. Fertige Artefakte (Binärdateien)</h2>
-    <p>Für diejenigen, die sofort mit der Magie beginnen möchten, stehen vorkompilierte Versionen auf der <a href="https://github.com/shidel/codepagewitch/releases">GitHub Releases-Seite</a> zur Verfügung. Wir bieten Pakete für:</p>
+    <h2>1. Die vorerstellten Geister</h2>
+    <p>Offizielle Binärdateien für die „Großen Drei“ (Windows, macOS und Linux) finden Sie unter folgendem Link:</p>
     <ul>
-      <li><b>Windows:</b> Eine eigenständige .exe-Datei (64-Bit).</li>
-      <li><b>macOS:</b> Ein App-Bundle für Intel- und Apple Silicon-Systeme.</li>
-      <li><b>Linux:</b> Binärdateien, die für gängige Distributionen kompiliert wurden.</li>
+      <li><b>Download:</b> <a href="https://up.lod.bz/CPWitch">https://up.lod.bz/CPWitch</a></li>
     </ul>
 
-    <h2>2. Die Hexe selbst beschwören (Kompilieren)</h2>
-    <p>Wenn Sie den Quellcode modifizieren oder für eine andere Plattform bauen möchten, benötigen Sie die folgenden Werkzeuge:</p>
+    <h2>2. Das Werkzeug des Alchemisten</h2>
+    <p>Um den Quellcode selbst zu kompilieren, benötigen Sie die <b>Lazarus IDE</b> (Version 4.0 oder höher) und den <b>Free Pascal (FPC)</b>-Compiler. Informationen zu erforderlichen Frameworks (wie das <b>MPLA Framework</b>) finden Sie in der README des Projekts.</p>
+
+    <h2>3. Die Hauptschmiede (macOS)</h2>
+    <p>Derzeit wird die „Master“-Version des Quellcodes auf <b>macOS</b> geschmiedet. Diese Umgebung nutzt automatisierte Skripte für Ressourcen und Build-Dateien:</p>
     <ul>
-      <li><b>Lazarus IDE:</b> Version 4.0 oder neuer wird empfohlen.</li>
-      <li><b>Free Pascal Compiler (FPC):</b> Das Rückgrat der hexischen Logik.</li>
+      <li><b>Bild-Transmutation:</b> Über 500 Bilder werden automatisch verarbeitet und optimiert.</li>
+      <li><b>Dynamische Unit-Generierung:</b> Skripte erstellen notwendige Pascal-Units wie <code>icons.pp</code> und <code>version.pp</code>.</li>
+      <li><b>Die Große Ressource:</b> Bilder und Daten werden in eine massive Lazarus-Ressourcendatei (<code>.lrs</code>) kompiliert.</li>
     </ul>
-    <p><b>Der Prozess:</b></p>
-    <ol>
-      <li>Klonen Sie das Repository von GitHub.</li>
-      <li>Öffnen Sie die Projektdatei (<code>cpwitch.lpi</code>) in Lazarus.</li>
-      <li>Wählen Sie Ihr Ziel-Betriebssystem und Ihre CPU-Architektur in den Projekteinstellungen.</li>
-      <li>Drücken Sie <b>Kompilieren</b> (F9), um die Binärdatei zu schmieden.</li>
-    </ol>
+
+    <h2>4. Die universelle Schmiede (Windows & Linux)</h2>
+    <p>Sobald die dynamischen Units generiert wurden, ist der Quellcode plattformübergreifend. Das Projekt kann dann in Lazarus auf <b>Windows</b> oder <b>Linux</b> geöffnet und sofort kompiliert werden.</p>
+
+    <h2>5. Erwerb der Quelle</h2>
+    <p>Der Quellcode der Hexe wird auf GitHub gehostet:</p>
+    <ul>
+      <li><b>Quelle:</b> <a href="https://github.com/shidel/CPWitch">https://github.com/shidel/CPWitch</a></li>
+    </ul>
+    <code>git clone https://github.com/shidel/CPWitch.git</code>
   </div>
 
   <div class="chapters">

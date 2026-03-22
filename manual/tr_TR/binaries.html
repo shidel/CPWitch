@@ -10,29 +10,34 @@
 
   <div class="pagetext">
     <h1>Dövme Ocağı: <span class="subtitle">İndirme ve Derleme</span></h1>
-    <p>Codepage Witch, açık kaynaklı bir yapıttır. İster önceden dövülmüş (hazır) bir sürümü indirebilir, isterseniz de ham maddeleri (kaynak kod) kullanarak onu kendiniz oluşturabilirsiniz.</p>
+    <p>Çoğu kullanıcı için, önceden oluşturulmuş "Ruhlar" (ikili dosyalar) Cadı'yı çağırmanın en kolay yoludur. Ancak, ocağa girip programı kaynak kodundan oluşturmak isteyenler için bazı rituellerin yerine getirilmesi gerekir.</p>
 
-    <h2>1. Hazır Yapıtlar (İkilik Dosyalar)</h2>
-    <p>Sihre hemen başlamak isteyenler için önceden derlenmiş sürümler <a href="https://github.com/shidel/codepagewitch/releases">GitHub sürümler sayfasında</a> mevcuttur. Şu sistemler için paketler sunuyoruz:</p>
+    <h2>1. Önceden Derlenmiş Ruhlar</h2>
+    <p>"Üç Büyük" işletim sistemi (Windows, macOS ve Linux) için resmi ikili dosyalar aşağıdaki konumda bulunabilir:</p>
     <ul>
-      <li><b>Windows:</b> Bağımsız bir .exe dosyası (64-bit).</li>
-      <li><b>macOS:</b> Intel ve Apple Silicon sistemleri için bir uygulama paketi (App Bundle).</li>
-      <li><b>Linux:</b> Yaygın dağıtımlar için derlenmiş ikilik dosyalar.</li>
+      <li><b>İndir:</b> <a href="https://up.lod.bz/CPWitch">https://up.lod.bz/CPWitch</a></li>
     </ul>
 
-    <h2>2. Cadıyı Çağırmak (Derleme)</h2>
-    <p>Kodda değişiklik yapmak veya farklı bir platform için derlemek isterseniz aşağıdaki araçlara ihtiyacınız olacak:</p>
+    <h2>2. Simyacı Aletleri</h2>
+    <p>Kaynak kodunu kendiniz derlemek için <b>Lazarus IDE</b> (Sürüm 4.0 veya üzeri) ve <b>Free Pascal (FPC)</b> derleyicisine ihtiyacınız olacaktır. Gerekli çerçeveler (örneğin <b>MPLA Framework</b>) ve diğer bağımlılıklar hakkındaki bilgiler projenin README dosyasında bulunabilir.</p>
+
+    <h2>3. Birincil Ocak (macOS)</h2>
+    <p>Şu anda, kaynak kodun "Ana" versiyonu <b>macOS</b> üzerinde dövülmektedir. Bu ortam, projenin karmaşık kaynak ihtiyaçlarını yöneten ve temel derleme dosyalarını oluşturan otomatik betikler kullanır:</p>
     <ul>
-      <li><b>Lazarus IDE:</b> Sürüm 4.0 veya daha yenisi önerilir.</li>
-      <li><b>Free Pascal Compiler (FPC):</b> Cadı mantığının bel kemiği.</li>
+      <li><b>Görüntü Dönüşümü:</b> Proje yaklaşık 500 görüntü içerir. macOS üzerinde bunlar otomatik olarak işlenir, ölçeklendirilir ve arayüz için optimize edilir.</li>
+      <li><b>Dinamik Unit Oluşturma:</b> Derleme betikleri, derleme için gerekli olan <code>icons.pp</code>, <code>version.pp</code> ve <code>version.def</code> gibi dahili Pascal unit'lerini otomatik olarak oluşturur.</li>
+      <li><b>Büyük Kaynak:</b> Bu görüntüler ve sürüm verileri devasa bir Lazarus Kaynak dosyasına (<code>.lrs</code>) derlenir.</li>
     </ul>
-    <p><b>Süreç:</b></p>
-    <ol>
-      <li>Depoyu GitHub'dan kopyalayın (clone).</li>
-      <li>Proje dosyasını (<code>cpwitch.lpi</code>) Lazarus'ta açın.</li>
-      <li>Proje ayarlarından hedef işletim sisteminizi ve CPU mimarinizi seçin.</li>
-      <li>İkilik dosyayı dövmek için <b>Derle</b> (F9) tuşuna basın.</li>
-    </ol>
+
+    <h2>4. Evrensel Ocak (Windows & Linux)</h2>
+    <p>İlk kaynak üretimi macOS ortamı gerektirse de, sonuçta ortaya çıkan kaynak kod gerçek anlamda platformlar arasıdır. Bu dinamik unit'ler ve kaynak dosyaları oluşturulduktan sonra, proje <b>Windows</b> veya <b>Linux</b> üzerinde Lazarus'ta açılabilir ve hemen derlenebilir.</p>
+
+    <h2>5. Kaynağı Edinme</h2>
+    <p>Cadı'nın kaynak kodu GitHub'da barındırılmaktadır:</p>
+    <ul>
+      <li><b>Kaynak:</b> <a href="https://github.com/shidel/CPWitch">https://github.com/shidel/CPWitch</a></li>
+    </ul>
+    <code>git clone https://github.com/shidel/CPWitch.git</code>
   </div>
 
   <div class="chapters">
