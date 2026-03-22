@@ -238,6 +238,10 @@ begin
     cbLocale.Items.Add(LA[I]);
     Cat(LLL, ';' + UpperCase(LA[I]) + ';');
   end;
+  {$IFDEF Linux}
+  EnforceLayout;
+  {$ENDIF}
+
 end;
 
 procedure TfDictEditForm.DoUpdateWords;
@@ -273,6 +277,10 @@ begin
   end;
   W.Free;
   LogMessage(vbVerbose, 'File contains ' + IntToStr(FWords.Count) + ' unique usable words.');
+  {$IFDEF Linux}
+  EnforceLayout;
+  {$ENDIF}
+
 end;
 
 procedure TfDictEditForm.DoUpdateWordList;
