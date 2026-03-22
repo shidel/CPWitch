@@ -483,7 +483,7 @@ begin
       N:=D.Find(LowerCase(W[I]));
       if Assigned(N) then begin
         L := Length(W[I]);
-        if L > 11 then L:=10;
+        if L > 10 then L:=10;
         P:=High(N.Data32);
         P:=L-(P*P);
         if P < 1 then P:=1;
