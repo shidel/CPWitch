@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Трансмутація - Codepage Witch</title>
+  <link href="../manual.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <img class="banner" src="../graphics/banner.png" alt="the Codepage Witch banner image">
+  <div class="headspace"></div>
+<div class="pagetext">
+  <h1>Unicode в Codepage: <span class="subtitle">Мистецтво трансмутації</span></h1>
+  <p>Це найпоширеніший ритуал, який виконує Відьма: перетворення сучасного тексту в кодуванні Unicode (UTF-8) на специфічну кодову сторінку DOS. Цей процес гарантує, що ваші переклади та документи відображатимуться коректно на стародавньому обладнанні та в емуляторах DOS.</p>
+
+  <h2>1. Початкове спостереження</h2>
+  <p>Коли ви вперше кидаєте файл у казан, він з'являється з <b>помаранчевою</b> <img class="inline-icon" src="../graphics/icon-orange.png"> іконкою. Це вказує на те, що Відьма аналізує його вміст. Як тільки вона підтвердить, що файл є Unicode, іконка перетвориться на <b>зелену</b> <img class="inline-icon" src="../graphics/icon-green.png">.</p>
+
+  <p><i><b>Примітка:</b> Якщо файл не стає зеленим, Відьма виявила ускладнення:</i></p>
+  <ul>
+    <li><b>Жовтий</b> <img class="inline-icon" src="../graphics/icon-yellow.png"> вказує на <b>Знамення</b> форматування (наприклад, відсутність порожнього рядка в кінці), яке слід виправити перед продовженням.</li>
+    <li><b>Синій</b> <img class="inline-icon" src="../graphics/icon-blue.png"> або <b>Сірий</b> <img class="inline-icon" src="../graphics/icon-gray.png"> вказує на те, що файл вже є кодовою сторінкою або ASCII-файлом. Дивіться <a href="cp2u.html">Codepage в Unicode</a> для цих ритуалів.</li>
+    <li><b>Червоний</b> <img class="inline-icon" src="../graphics/icon-red.png"> вказує на <b>Порожнечу</b> або помилку. Зверніться до розділу <a href="face.html#status-icons">Іконки стану</a> для отримання детальної інформації.</li>
+  </ul>
+
+  <h2>2. Вибір заклинання</h2>
+  <p>Панель <b>Чарів</b> заповниться списком потенційних кодових сторінок. Відьма оцінює їх за допомогою <b>кругових діаграм сумісності</b> <img class="inline-icon" src="../graphics/graph-green.png"> для швидкої візуальної довідки:</p>
+  <ul>
+    <li><b>Зелений сектор:</b> представляє частину вашого тексту, яку можна успішно перетворити на цю кодову сторінку.</li>
+    <li><b>Червоний сектор:</b> представляє символи, яких немає в цій кодовій сторінці, і вони будуть втрачені.</li>
+    <li><b>Ідеальна печатка:</b> коли кодова сторінка пропонує 100% сумісність, діаграма замінюється <b>галочкою</b> <img class="inline-icon" src="../graphics/check-green.png">.</li>
+  </ul>
+
+  <h2>3. Ідентифікація невидимого</h2>
+  <p>Якщо ви виберете кодову сторінку з сумісністю менше 100%, уважно подивіться на <b>Переглядач кодових сторінок</b> (нижнє дзеркало). Будь-який символ, який обрана кодова сторінка не може зрозуміти, буде відображений як <span class="error-text">&iquest;</span>. Це дозволяє вам виявити проблемні символи до того, як печатка буде остаточно накладена.</p>
+
+  <h2>4. Накладання печатки</h2>
+  <p>Коли ви будете задоволені попереднім переглядом, натисніть іконку <b>Експорт</b> <img class="inline-icon" src="../graphics/btn-export-green.png">. Відьма збереже закінчення рядків, знайдені в оригінальному файлі, і запитає шлях збереження. Трансмутація буде виконана, залишаючи ваше оригінальне джерело Unicode недоторканим.</p>
+  </div>
+  <div class="chapters">
+	<h2>Заклинання та чари</h2>
+	<ul>
+	  <li><a href="index.html">Гримуар: <span class="subtitle">Посібник із заклинань</span></a></li>
+	  <li><a href="face.html">Обличчя Відьми: <span class="subtitle">Головне вікно</span></a></li>
+	  <li><span class="this-page">Мистецтво трансмутації: <span class="subtitle">Unicode в Codepage</span></span></li>
+	  <li><a href="cp2u.html">Прозорливість: <span class="subtitle">Codepage в Unicode</span></a></li>
+	  <li><a href="options.html">Налаштування казана: <span class="subtitle">Опції та параметри</span></a></li>
+      <li><a href="dictionary.html">Розширення словникового запасу: <span class="subtitle">Головний та користувацький словники</span></a></li>
+	  <li><a href="binaries.html">Кузня: <span class="subtitle">Завантаження та компіляція</span></a></li>
+	  <li><a href="glossary.html">Глосарій: <span class="subtitle">Кишеньковий довідник</span></a></li>
+	</ul>
+  </div>
+  <div class="languages">Мови документації:
+	<a href="../u2cp.html">Англійська</a>,
+	<a href="../de_DE/u2cp.html">Алеманська</a>,
+	<a href="../es_ES/u2cp.html">Іспанська</a>,
+	<a href="../fr_FR/u2cp.html">Французька</a>,
+	<a href="../pt_PT/u2cp.html">Португальська</a>,
+	<a href="../tr_TR/u2cp.html">Турецька</a> та
+	<span class="this-lang">Українська</span>.
+  </div>
+</body>
+</html>

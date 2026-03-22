@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Обличчя Відьми - Codepage Witch</title>
+  <link href="../manual.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <img class="banner" src="../graphics/banner.png" alt="the Codepage Witch banner image">
+  <div class="headspace"></div>
+  <div class="pagetext">
+    <h1>Обличчя Відьми: <span class="subtitle">Головне вікно</span></h1>
+  <p>Головний інтерфейс розроблений як "Дзеркало" в реальному часі між вашими вихідними файлами та їхнім призначенням. Відьма використовує систему колірних кодів для миттєвого відображення стану ваших файлів.</p>
+
+  <img src="../graphics/main-form-uk.png" class="banner" alt="Головний Інтерфейс">
+
+  <h2>Заклинання: <span class="subtitle">Панель інструментів</span></h2>
+  <p>Панель інструментів — ваше головне джерело магії. Тут містяться заклинання для відкриття файлів, експорту та доступу до глибоких налаштувань Відьми.</p>
+
+ <table>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-open.png" alt="Відкрити"></td>
+      <td><b>Відкрити:</b> Перегляньте файлову систему, щоб вибрати файли. Також можна використовувати <b>Drag-and-Drop</b>, щоб кинути файли в казан.</td>
+    </tr>
+    <tr>
+	  <td><img class="btn-icon" src="../graphics/btn-edit.png" alt="Редагувати"></td>
+      <td><b>Редагувати:</b> Перемістіть файл у ваш улюблений зовнішній текстовий редактор для ручних правок.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-export.png" alt="Експорт"></td>
+      <td><b>Експорт:</b> Запечатайте ваші трансмутації. Це зберігає файл з обраною кодовою сторінкою та типом закінчення рядків.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-close.png" alt="Закрити"></td>
+      <td><b>Закрити:</b> Вигнати вибраний файл із казана.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-close-all.png" alt="Закрити все"></td>
+      <td><b>Закрити все:</b> Повністю очистити казан, видаливши всі файли поточної сесії.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-cp-filter.png" alt="Фільтр"></td>
+      <td><b>Фільтр:</b> Звузьте список Чарів, щоб показати лише повні збіги, потенційні або всі відомі Відьмі кодові сторінки.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-dictionary.png" alt="Словник"></td>
+      <td><b>Словник:</b> Зверніться до Головного та Користувацького словників, щоб допомогти Відьмі розширити її багатомовні знання.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-options.png" alt="Опції"></td>
+      <td><b>Опції:</b> Зазирніть у глибинні механізми Відьми. Налаштуйте її вигляд, поведінку та автоматичні правила перевірки.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-update-check.png" alt="Оновлення"></td>
+      <td><b>Оновлення:</b> Слідкуйте за цифровим горизонтом у пошуках нових версій Codepage Witch.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-debug-log.png" alt="Журнал"></td>
+      <td><b>Журнал:</b> Відкрийте внутрішню книгу Відьми для перегляду детальних звітів або дослідження помилок.</td>
+    </tr>
+   </table>
+
+  <h2 id="status-icons">Казан файлів: <span class="subtitle">Іконки стану</span></h2>
+  <p>Колір іконки вказує на результати сканування Відьмою:</p>
+
+  <table>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-orange.png" alt="Помаранчевий"></td>
+      <td><b>Аналіз:</b> Файл обробляється у фоновому режимі.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-green.png" alt="Зелений"></td>
+      <td><b>Джерело Unicode:</b> Файл UTF-8. Відьма підібрала найкращі кодові сторінки.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-blue.png" alt="Синій"></td>
+      <td><b>Застаріле джерело:</b> Файл у кодуванні Codepage. Відьма використовує статистичний аналіз.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-gray.png" alt="Сірий"></td>
+      <td><b>Простий ASCII:</b> 7-бітний текст без спеціальних символів. Безпечний для будь-якої конвертації.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-yellow.png" alt="Жовтий"></td>
+      <td><b>Знамення:</b> Виявлено помилку форматування (наприклад, відсутність останнього порожнього рядка).</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-red.png" alt="Червоний"></td>
+      <td><b>Порожнеча:</b> Сталася помилка читання або це бінарний файл.</td>
+    </tr>
+  </table>
+
+  <h2>Подвійні Дзеркала: <span class="subtitle">Оригінал vs. Трансмутований</span></h2>
+  <ul>
+    <li><b>Переглядач Unicode (Верхній):</b> Показує файл як стандартний текст UTF-8.</li>
+    <li><b>Переглядач Codepage (Нижній):</b> Відображає текст за допомогою обраної кодової сторінки.</li>
+  </ul>
+  </div>
+  <div class="chapters">
+	<h2>Заклинання та чари</h2>
+	<ul>
+	  <li><a href="index.html">Гримуар: <span class="subtitle">Посібник із заклинань</span></a></li>
+	  <li><span class="this-page">Обличчя Відьми: <span class="subtitle">Головне вікно</span></span></li>
+	  <li><a href="u2cp.html">Мистецтво трансмутації: <span class="subtitle">Unicode в Codepage</span></a></li>
+	  <li><a href="cp2u.html">Прозорливість: <span class="subtitle">Codepage в Unicode</span></a></li>
+	  <li><a href="options.html">Налаштування казана: <span class="subtitle">Опції та параметри</span></a></li>
+      <li><a href="dictionary.html">Розширення словникового запасу: <span class="subtitle">Головний та користувацький словники</span></a></li>
+	  <li><a href="binaries.html">Кузня: <span class="subtitle">Завантаження та компіляція</span></a></li>
+	  <li><a href="glossary.html">Глосарій: <span class="subtitle">Кишеньковий довідник</span></a></li>
+	</ul>
+  </div>
+  <div class="languages">Мови документації:
+	<a href="../face.html">Англійська</a>,
+	<a href="../de_DE/face.html">Алеманська</a>,
+	<a href="../es_ES/face.html">Іспанська</a>,
+	<a href="../fr_FR/face.html">Французька</a>,
+	<a href="../pt_PT/face.html">Португальська</a>,
+	<a href="../tr_TR/face.html">Турецька</a> та
+	<span class="this-lang">Українська</span>.
+  </div>
+</body>
+</html>

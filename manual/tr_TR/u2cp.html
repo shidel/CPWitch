@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dönüşüm - Codepage Witch</title>
+  <link href="../manual.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <img class="banner" src="../graphics/banner.png" alt="the Codepage Witch banner image">
+  <div class="headspace"></div>
+<div class="pagetext">
+  <h1>Unicode'dan Codepage'e: <span class="subtitle">Dönüşüm Sanatı</span></h1>
+  <p>Bu, Cadı tarafından gerçekleştirilen en yaygın ritüeldir: modern, Unicode kodlu metni (UTF-8) alıp belirli bir DOS Kod Sayfasına (Codepage) dönüştürmek. Bu işlem, çevirilerinizin ve belgelerinizin eski donanımlarda ve DOS emülatörlerinde doğru şekilde görünmesini sağlar.</p>
+
+  <h2>1. İlk Kehanet</h2>
+  <p>Bir dosyayı kazana ilk attığınızda, <b>Turuncu</b> <img class="inline-icon" src="../graphics/icon-orange.png"> bir simgeyle görünür. Bu, Cadı'nın şu anda içeriği analiz ettiğini gösterir. Dosyanın Unicode olduğunu onayladığında, simge <b>Yeşil</b> <img class="inline-icon" src="../graphics/icon-green.png"> bir simgeye dönüşecektir.</p>
+
+  <p><i><b>Not:</b> Dosya yeşile dönmezse, Cadı bir komplikasyon tespit etmiştir:</i></p>
+  <ul>
+    <li><b>Sarı</b> <img class="inline-icon" src="../graphics/icon-yellow.png"> devam etmeden önce düzeltilmesi gereken bir biçimlendirme <b>Kehanetini</b> (eksik satır sonu gibi) gösterir.</li>
+    <li><b>Mavi</b> <img class="inline-icon" src="../graphics/icon-blue.png"> veya <b>Gri</b> <img class="inline-icon" src="../graphics/icon-gray.png"> dosyanın zaten bir Kod Sayfası veya ASCII dosyası olduğunu gösterir. Bu ritüeller için <a href="cp2u.html">Codepage'den Unicode'a</a> bölümüne bakın.</li>
+    <li><b>Kırmızı</b> <img class="inline-icon" src="../graphics/icon-red.png"> bir <b>Boşluk</b> veya hatayı gösterir. Daha fazla ayrıntı için <a href="face.html#status-icons">Durum Simgeleri</a>'ne bakın.</li>
+  </ul>
+
+  <h2>2. Tılsımı Seçmek</h2>
+  <p><b>Tılsımlar</b> bölmesi potansiyel kod sayfalarının bir listesiyle dolacaktır. Cadı, hızlı bir görsel referans için bunları <b>Uyumluluk Pasta Grafikleri</b> <img class="inline-icon" src="../graphics/graph-green.png"> kullanarak sıralar:</p>
+  <ul>
+    <li><b>Yeşil Dilim:</b> Metninizin bu kod sayfasına başarıyla dönüştürülebilen kısmını temsil eder.</li>
+    <li><b>Kırmızı Dilim:</b> O kod sayfasında bulunmayan ve kaybolacak olan karakterleri temsil eder.</li>
+    <li><b>Mükemmel Mühür:</b> Bir kod sayfası %100 uyumluluk sunduğunda, pasta grafiğinin yerini bir <b>Onay İşareti</b> <img class="inline-icon" src="../graphics/check-green.png"> alır.</li>
+  </ul>
+
+  <h2>3. Görünmeyeni Tanımlamak</h2>
+  <p>%100'den az uyumluluğa sahip bir kod sayfası seçerseniz, <b>Codepage Görüntüleyiciye</b> (alt ayna) yakından bakın. Seçilen kod sayfasının anlayamadığı her karakter <span class="error-text">&iquest;</span> olarak işlenecektir. Bu, mühür sonlandırılmadan önce sorunlu karakterleri avlamanıza olanak tanır.</p>
+
+  <h2>4. Mührü Tamamlamak</h2>
+  <p>Önizlemeden memnun kaldığınızda, <b>Dışa Aktar</b> <img class="inline-icon" src="../graphics/btn-export-green.png"> simgesine tıklayın. Cadı orijinal dosyada bulunan satır sonlarını koruyacak ve sizden bir hedef isteyecektir. Dönüşüm gerçekleştirilir ve orijinal Unicode kaynağınız olduğu gibi kalır.</p>
+  </div>
+  <div class="chapters">
+	<h2>Büyüler ve Tılsımlar</h2>
+	<ul>
+	  <li><a href="index.html">Grimoire: <span class="subtitle">Bir Büyüleme Kılavuzu</span></a></li>
+	  <li><a href="face.html">Cadı'nın Yüzü: <span class="subtitle">Ana pencere</span></a></li>
+	  <li><span class="this-page">Dönüşüm Sanatı: <span class="subtitle">Unicode'dan Codepage'e</span></span></li>
+	  <li><a href="cp2u.html">Önsezi: <span class="subtitle">Codepage'den Unicode'a</span></a></li>
+	  <li><a href="options.html">Kazanı Ayarlamak: <span class="subtitle">Seçenekler ve Ayarlar</span></a></li>
+      <li><a href="dictionary.html">Kelime Dağarcığını Genişletmek: <span class="subtitle">Ana ve Kullanıcı Sözlükleri</span></a></li>
+	  <li><a href="binaries.html">Dövme Ocağı: <span class="subtitle">İndirme ve Derleme</span></a></li>
+	  <li><a href="glossary.html">Sözlük: <span class="subtitle">Cep Referansı</span></a></li>
+	</ul>
+  </div>
+  <div class="languages">Dokümantasyon dilleri:
+	<a href="../u2cp.html">İngilizce</a>,
+	<a href="../de_DE/u2cp.html">Almanca</a>,
+	<a href="../es_ES/u2cp.html">İspanyolca</a>,
+	<a href="../fr_FR/u2cp.html">Fransızca</a>,
+	<a href="../pt_PT/u2cp.html">Portekizce</a>,
+	<span class="this-lang">Türkçe</span> ve
+	<a href="../uk_UA/u2cp.html">Ukraynaca</a>.
+  </div>
+</body>
+</html>

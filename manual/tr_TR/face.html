@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cadı'nın Yüzü - Codepage Witch</title>
+  <link href="../manual.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <img class="banner" src="../graphics/banner.png" alt="the Codepage Witch banner image">
+  <div class="headspace"></div>
+  <div class="pagetext">
+    <h1>Cadı'nın Yüzü: <span class="subtitle">Ana pencere</span></h1>
+  <p>Ana arayüz, kaynak dosyalarınız ile hedeflenen sonuç arasında gerçek zamanlı bir "Ayna" sağlamak üzere tasarlanmıştır. Cadı, dosyalarınızın durumunu bir bakışta iletmek için renk kodlu bir sistem kullanır.</p>
+
+  <img src="../graphics/main-form-tr.png" class="banner" alt="Ana Arayüz">
+
+  <h2>Tılsımlar: <span class="subtitle">Araç Çubuğu</span></h2>
+  <p>Araç Çubuğu, büyünüzün ana kaynağıdır. Dosya açma, dönüşümleri dışa aktarma ve Cadı'nın derin ayarlarına erişme büyülerini barındırır.</p>
+
+ <table>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-open.png" alt="Aç"></td>
+      <td><b>Aç:</b> Bir veya daha fazla dosya seçmek için dosya sistemine göz atın. Dosyaları veya tüm dizinleri dosya kazanına atmak için <b>Sürükle-Bırak</b> da kullanılabilir.</td>
+    </tr>
+    <tr>
+	  <td><img class="btn-icon" src="../graphics/btn-edit.png" alt="Düzenle"></td>
+      <td><b>Düzenle:</b> Seçilen dosyayı tercih ettiğiniz harici metin düzenleyicisine göndererek manuel düzeltmeler yapın.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-export.png" alt="Dışa Aktar"></td>
+      <td><b>Dışa Aktar:</b> Dönüşümlerinizi mühürleyin. Bu, dosyayı seçilen kod sayfası ve satır sonu ayarlarıyla kaydeder.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-close.png" alt="Kapat"></td>
+      <td><b>Kapat:</b> Seçilen dosyayı kazandan uzaklaştırın.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-close-all.png" alt="Hepsini Kapat"></td>
+      <td><b>Hepsini Kapat:</b> Kazanı tertemiz yıkayın, mevcut oturumdaki tüm dosyaları kaldırın.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-cp-filter.png" alt="Filtre"></td>
+      <td><b>Filtre:</b> Yalnızca tam eşleşmeleri, potansiyel eşleşmeleri veya bilinen tüm kod sayfalarını gösterecek şekilde listeyi daraltın.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-dictionary.png" alt="Sözlük"></td>
+      <td><b>Sözlük:</b> Cadı'nın çok dilli kelime dağarcığını genişletmek için Ana ve Kullanıcı Sözlüklerine danışın.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-options.png" alt="Seçenekler"></td>
+      <td><b>Seçenekler:</b> Cadı'nın derin mekaniklerine göz atın. Görünümünü, davranışını ve otomatik dosya kontrol kurallarını ayarlayın.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-update-check.png" alt="Güncelleme"></td>
+      <td><b>Güncelleyici:</b> Codepage Witch'in yeni sürümleri için dijital ufku gözleyin.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-debug-log.png" alt="Hata Günlüğü"></td>
+      <td><b>Günlük:</b> Detaylı analiz raporlarını görüntülemek için Cadı'nın dahili kayıt defterini açın.</td>
+    </tr>
+   </table>
+
+  <h2 id="status-icons">Dosya Kazanı: <span class="subtitle">Durum Simgeleri</span></h2>
+  <p>Dosyalar eklendikçe, simge rengi Cadı'nın bulgularını gösterir:</p>
+
+  <table>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-orange.png" alt="Turuncu"></td>
+      <td><b>Analiz:</b> Dosya şu anda arka planda işleniyor.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-green.png" alt="Yeşil"></td>
+      <td><b>Unicode Kaynak:</b> UTF-8 kodlu bir dosya. Cadı en uygun kod sayfalarını eşleştirdi.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-blue.png" alt="Mavi"></td>
+      <td><b>Eski Kaynak:</b> Kod sayfasıyla kodlanmış bir dosya. Cadı istatistiksel analiz kullanıyor.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-gray.png" alt="Gri"></td>
+      <td><b>Sade ASCII:</b> Özel karakter içermeyen 7-bit metin. Her türlü dönüşüm için güvenli.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-yellow.png" alt="Sarı"></td>
+      <td><b>Kehanet:</b> Bir biçimlendirme hatası (eksik satır sonu gibi) tespit edildi.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-red.png" alt="Kırmızı"></td>
+      <td><b>Boşluk:</b> Okuma hatası oluştu veya bu bir ikili (binary) dosya.</td>
+    </tr>
+  </table>
+
+  <h2>Çift Aynalar: <span class="subtitle">Orijinal vs. Dönüştürülmüş</span></h2>
+  <ul>
+    <li><b>Unicode Görüntüleyici (Üst):</b> Dosyayı standart UTF-8 metni olarak gösterir.</li>
+    <li><b>Codepage Görüntüleyici (Alt):</b> Metni seçilen kod sayfasıyla işler.</li>
+  </ul>
+  </div>
+  <div class="chapters">
+	<h2>Büyüler ve Tılsımlar</h2>
+	<ul>
+	  <li><a href="index.html">Grimoire: <span class="subtitle">Bir Büyüleme Kılavuzu</span></a></li>
+	  <li><span class="this-page">Cadı'nın Yüzü: <span class="subtitle">Ana pencere</span></span></li>
+	  <li><a href="u2cp.html">Dönüşüm Sanatı: <span class="subtitle">Unicode'dan Codepage'e</span></a></li>
+	  <li><a href="cp2u.html">Önsezi: <span class="subtitle">Codepage'den Unicode'a</span></a></li>
+	  <li><a href="options.html">Kazanı Ayarlamak: <span class="subtitle">Seçenekler ve Ayarlar</span></a></li>
+      <li><a href="dictionary.html">Kelime Dağarcığını Genişletmek: <span class="subtitle">Ana ve Kullanıcı Sözlükleri</span></a></li>
+	  <li><a href="binaries.html">Dövme Ocağı: <span class="subtitle">İndirme ve Derleme</span></a></li>
+	  <li><a href="glossary.html">Sözlük: <span class="subtitle">Cep Referansı</span></a></li>
+	</ul>
+  </div>
+  <div class="languages">Dokümantasyon dilleri:
+	<a href="../face.html">İngilizce</a>,
+	<a href="../de_DE/face.html">Almanca</a>,
+	<a href="../es_ES/face.html">İspanyolca</a>,
+	<a href="../fr_FR/face.html">Fransızca</a>,
+	<a href="../pt_PT/face.html">Portekizce</a>,
+	<span class="this-lang">Türkçe</span> ve
+	<a href="../uk_UA/face.html">Ukraynaca</a>.
+  </div>
+</body>
+</html>

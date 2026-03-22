@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Le Visage de la Sorcière - la Codepage Witch</title>
+  <link href="../manual.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <img class="banner" src="../graphics/banner.png" alt="the Codepage Witch banner image">
+  <div class="headspace"></div>
+  <div class="pagetext">
+    <h1>Le Visage de la Sorcière : <span class="subtitle">La fenêtre principale</span></h1>
+  <p>L'interface principale est conçue pour offrir un "Miroir" en temps réel entre vos fichiers sources et leur destination prévue. La Sorcière utilise un système de code couleur pour communiquer l'état de vos fichiers en un coup d'œil.</p>
+
+  <img src="../graphics/main-form-fr.png" class="banner" alt="L'Interface Principale">
+
+  <h2>Les Incantations : <span class="subtitle">La Barre d'Outils</span></h2>
+  <p>La barre d'outils est votre principale source de magie. Elle abrite les sorts pour ouvrir les fichiers, exporter vos transmutations et accéder aux réglages profonds.</p>
+
+ <table>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-open.png" alt="Ouvrir"></td>
+      <td><b>Ouvrir :</b> Parcourez le système de fichiers pour sélectionner un ou plusieurs fichiers. Le <b>Glisser-Déposer</b> peut aussi être utilisé pour jeter des fichiers dans le chaudron.</td>
+    </tr>
+    <tr>
+	  <td><img class="btn-icon" src="../graphics/btn-edit.png" alt="Modifier"></td>
+      <td><b>Modifier :</b> Envoyez le fichier sélectionné vers votre éditeur de texte externe préféré pour des ajustements manuels.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-export.png" alt="Exporter"></td>
+      <td><b>Exporter :</b> Scellez vos transmutations. Cela enregistre le fichier en utilisant la page de codes et les fins de ligne choisies.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-close.png" alt="Fermer"></td>
+      <td><b>Fermer :</b> Bannissez le fichier sélectionné du chaudron.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-close-all.png" alt="Tout fermer"></td>
+      <td><b>Tout fermer :</b> Nettoyez complètement le chaudron, en retirant tous les fichiers de la session en cours.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-cp-filter.png" alt="Filtre de Codepage"></td>
+      <td><b>Filtrer :</b> Réduisez la liste des Enchantements pour ne montrer que les correspondances totales, potentielles ou toutes les pages de codes connues.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-dictionary.png" alt="Dictionnaire"></td>
+      <td><b>Dictionnaire :</b> Consultez les dictionnaires Maître et Utilisateur pour enrichir le vocabulaire multilingue de la Sorcière.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-options.png" alt="Options"></td>
+      <td><b>Options :</b> Observez la mécanique interne de la Sorcière. Ajustez son apparence, son comportement et ses règles automatiques.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-update-check.png" alt="Mise à jour"></td>
+      <td><b>Mise à jour :</b> Scrutez l'horizon numérique pour trouver de nouvelles versions de la Codepage Witch.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-debug-log.png" alt="Journal de débogage"></td>
+      <td><b>Journal :</b> Ouvrez le registre interne de la Sorcière pour consulter des rapports d'analyse détaillés.</td>
+    </tr>
+   </table>
+
+  <h2 id="status-icons">Le Chaudron de Fichiers : <span class="subtitle">Les Icônes d'État</span></h2>
+  <p>À mesure que les fichiers sont ajoutés, la couleur de l'icône indique les découvertes de la Sorcière :</p>
+
+  <table>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-orange.png" alt="Orange"></td>
+      <td><b>L'Analyse :</b> Le fichier est en cours de traitement en arrière-plan.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-green.png" alt="Vert"></td>
+      <td><b>Source Unicode :</b> Un fichier UTF-8. La Sorcière a mappé ses meilleures pages de codes.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-blue.png" alt="Bleu"></td>
+      <td><b>Source Héritée :</b> Un fichier encodé en page de codes. La Sorcière utilise l'analyse statistique.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-gray.png" alt="Gris"></td>
+      <td><b>ASCII Simple :</b> Texte 7 bits sans caractères spéciaux. Sûr pour toute conversion.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-yellow.png" alt="Jaune"></td>
+      <td><b>L'Augure :</b> Une erreur de formatage (comme l'absence d'un saut de ligne final) a été détectée.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-red.png" alt="Rouge"></td>
+      <td><b>Le Vide :</b> Une erreur de lecture est survenue ou il s'agit d'un fichier binaire.</td>
+    </tr>
+  </table>
+
+  <h2>Les Deux Miroirs : <span class="subtitle">Original vs. Transmuté</span></h2>
+  <ul>
+    <li><b>Lecteur Unicode (Haut) :</b> Affiche le fichier en texte UTF-8 standard.</li>
+    <li><b>Lecteur de Codepage (Bas) :</b> Rendu du texte avec la page de codes choisie.</li>
+  </ul>
+  </div>
+  <div class="chapters">
+	<h2>Sorts et Incantations</h2>
+	<ul>
+	  <li><a href="index.html">Le Grimoire : <span class="subtitle">Un Guide de Conjuration</span></a></li>
+	  <li><span class="this-page">Le Visage de la Sorcière : <span class="subtitle">La fenêtre principale</span></span></li>
+	  <li><a href="u2cp.html">L'Art de la Transmutation : <span class="subtitle">Unicode vers Codepage</span></a></li>
+	  <li><a href="cp2u.html">Précognition : <span class="subtitle">Codepage vers Unicode</span></a></li>
+	  <li><a href="options.html">Réglage du Chaudron : <span class="subtitle">Options et Paramètres</span></a></li>
+      <li><a href="dictionary.html">Enrichir le Vocabulaire : <span class="subtitle">Dictionnaires Maître et Utilisateur</span></a></li>
+	  <li><a href="binaries.html">La Forge : <span class="subtitle">Téléchargement et Compilation</span></a></li>
+	  <li><a href="glossary.html">Glossaire : <span class="subtitle">La Référence de Poche</span></a></li>
+	</ul>
+  </div>
+  <div class="languages">Langues de la documentation :
+	<a href="../face.html">Anglais</a>,
+	<a href="../de_DE/face.html">Allemand</a>,
+	<a href="../es_ES/face.html">Espagnol</a>,
+	<span class="this-lang">Français</span>,
+	<a href="../pt_PT/face.html">Portugais</a>,
+	<a href="../tr_TR/face.html">Turco</a> et
+	<a href="../uk_UA/face.html">Ukrainien</a>.
+  </div>
+</body>
+</html>

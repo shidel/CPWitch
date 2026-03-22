@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Master- und Benutzerwörterbücher - die Codepage Witch</title>
+  <link href="../manual.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <img class="banner" src="../graphics/banner.png" alt="the Codepage Witch banner image">
+  <div class="headspace"></div>
+
+  <div class="pagetext">
+    <h1>Wörterbücher: <span class="subtitle">Den Wortschatz der Hexe erweitern</span></h1>
+    <p>Die Hexe errät die Sprache einer Datei nicht nur; sie konsultiert ihre internen Lexika, um linguistische Muster zu erkennen. Wenn sie Wörter erkennt, die sie kennt, kann sie mit Zuversicht das richtige Gebietsschema (Locale) und die zugehörigen Codepages vorschlagen.</p>
+
+    <h2>1. Zwei Bände des Wissens</h2>
+    <p>Die Hexe führt zwei verschiedene Verzeichnisse von Wörtern:</p>
+    <ul>
+      <li><b>Das Master-Wörterbuch:</b> Ein vorab geschriebener, mehrsprachiger Wälzer, der mit dem Programm geliefert wird. Dies ist schreibgeschützt und kann vom Benutzer nicht geändert werden.</li>
+      <li><b>Das Benutzerwörterbuch:</b> Ihre persönliche Sammlung von Wörtern. Hier fügen Sie neue Begriffe hinzu, um der Hexe zu helfen, einzigartige Dialekte, Fachjargon oder projektspezifische Terminologie zu erkennen.</li>
+    </ul>
+
+    <h2>2. Die Hexe lehren (Wörter hinzufügen)</h2>
+    <p>Um das Wörterbuch zu erweitern, müssen Sie eine <b>Unicode</b> <img class="inline-icon" src="../graphics/icon-green.png"> oder <b>7-Bit-ASCII</b> <img class="inline-icon" src="../graphics/icon-gray.png"> Datei als Quelle verwenden.
+    <span class="aka">(Hinweis: Das Hinzufügen von Wörtern aus Codepage-Dateien ist derzeit deaktiviert, um sicherzustellen, dass nur sauberer, gültiger Text in die Lexika aufgenommen wird.)</span></p>
+
+    <p><b>Das Ritual:</b></p>
+    <ol>
+      <li>Wählen Sie eine Datei im Kessel aus und klicken Sie auf das <b>Wörterbuch</b> <img class="inline-icon" src="../graphics/btn-dictionary.png"> Symbol.</li>
+      <li>Die Hexe präsentiert eine Liste von Wörtern aus der Datei, die sie noch nicht erkennt.</li>
+      <li><b>Wählen Sie ein Gebietsschema:</b> Wählen Sie die beabsichtigte Sprache aus dem Dropdown-Menü.</li>
+      <li><b>Auto-Selektion:</b> Bei bekannten Gebietsschemata prüft die Hexe Kandidaten vor, die mindestens 6 Buchstaben lang sind, nicht nur aus Großbuchstaben bestehen und noch nicht in einer anderen Sprache existieren.</li>
+      <li><b>Heiligkeit des Lexikons:</b> Bevor Sie auf <b>Hinzufügen</b> klicken, scannen Sie die Liste manuell. Sie müssen sicherstellen, dass sich keine „verirrten“ Wörter aus anderen Sprachen oder nicht-linguistische Zeichenfolgen (wie Codevariablen oder Hex-Strings) in die Auswahl eingeschlichen haben.</li>
+      <li><b>Hinzufügen klicken:</b> Die markierten Wörter werden dem Gedächtnis des Benutzerwörterbuchs hinzugefügt.</li>
+    </ol>
+
+    <div style="background: #223; border-left: 5px solid #898; padding: 1em; margin: 2em 0;">
+      <h3 style="margin-top: 0; color: #efa;">Pro-Tipp: <span class="subtitle">Die Macht der Fünf</span></h3>
+      <p>Sie müssen nicht den gesamten Wortschatz einer Sprache hinzufügen! In der Regel reicht es aus, nur <b>5 bis 10 eindeutige, gebräuchliche Wörter</b> für ein bestimmtes Gebietsschema hinzuzufügen, um „das Zepter umzuschlagen“. Sobald die Hexe einige Signaturwörter erkennt, steigt ihre statistische Zuversicht sprunghaft an, sodass sie dieses Gebietsschema in zukünftigen Scryings sofort identifizieren kann.</p>
+    </div>
+
+    <h2>3. Erneutes Scrying und Verfeinerung</h2>
+    <p>Wenn Sie Wörter hinzufügen, analysiert die Hexe sofort alle Dateien neu, die sich derzeit im Kessel befinden. Sie werden sehen, wie sich die Symbolfarbe oder das erkannte Gebietsschema einer Datei ändert, während sie ihr neues Wissen in Echtzeit anwendet.</p>
+
+    <h2>4. Das Wissen finalisieren (Speichern vs. Neu laden)</h2>
+    <p>Änderungen im Wörterbuchfenster werden in einem „halbtemporären“ Zustand gehalten, bis die Sitzung abgeschlossen ist:</p>
+    <ul>
+      <li><b>Speichern:</b> Klicken Sie auf die Schaltfläche <b>Speichern</b>, um Ihre neuen Wörter dauerhaft auf die Festplatte zu schreiben.</li>
+      <li><b>Neu laden:</b> Wenn Sie einen Fehler gemacht haben, klicken Sie auf <b>Neu laden</b>, um die aktuellen Änderungen zu verwerfen und zum zuletzt gespeicherten Zustand zurückzukehren.</li>
+      <li><b>Auto-Save:</b> Wenn Sie das Programm schließen, ohne explizit auf „Neu laden“ zu klicken, geht die Hexe davon aus, dass Sie die Änderungen genehmigt haben, und speichert sie automatisch in Ihrem Benutzerwörterbuch.</li>
+    </ul>
+  </div>
+
+  <div class="chapters">
+    <h2>Zaubersprüche und Beschwörungen</h2>
+    <ul>
+	  <li><a href="index.html">Das Grimoire: <span class="subtitle">Ein Beschwörungsleitfaden</span></a></li>
+	  <li><a href="face.html">Das Antlitz der Hexe: <span class="subtitle">Das Hauptfenster</span></a></li>
+	  <li><a href="u2cp.html">Die Kunst der Transmutation: <span class="subtitle">Unicode zu Codepage</span></a></li>
+	  <li><a href="cp2u.html">Präkognition: <span class="subtitle">Codepage zu Unicode</span></a></li>
+	  <li><a href="options.html">Das Abstimmen des Kessels: <span class="subtitle">Optionen und Einstellungen</span></a></li>
+      <li><span class="this-page">Wortschatzerweiterung: <span class="subtitle">Master- und Benutzerwörterbücher</span></span></li>
+	  <li><a href="binaries.html">Die Schmiede: <span class="subtitle">Herunterladen und Kompilieren</span></a></li>
+	  <li><a href="glossary.html">Glossar: <span class="subtitle">Das Taschenreferenz</span></a></li>
+    </ul>
+  </div>
+
+  <div class="languages">Dokumentationssprachen:
+    <a href="../dictionary.html">Englisch</a>,
+    <span class="this-lang">Deutsch</span>,
+    <a href="../es_ES/dictionary.html">Spanisch</a>,
+    <a href="../fr_FR/dictionary.html">Französisch</a>,
+    <a href="../pt_PT/dictionary.html">Portugiesisch</a>,
+    <a href="../tr_TR/dictionary.html">Türkisch</a> und
+    <a href="../uk_UA/dictionary.html">Ukrainisch</a>.
+  </div>
+</body>
+</html>

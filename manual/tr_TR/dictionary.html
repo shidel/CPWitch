@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ana ve Kullanıcı Sözlükleri - Codepage Witch</title>
+  <link href="../manual.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <img class="banner" src="../graphics/banner.png" alt="the Codepage Witch banner image">
+  <div class="headspace"></div>
+
+  <div class="pagetext">
+    <h1>Sözlükler: <span class="subtitle">Cadı'nın Kelime Dağarcığını Genişletmek</span></h1>
+    <p>Cadı sadece bir dosyanın dilini tahmin etmekle kalmaz; dilsel kalıpları tanımak için dahili sözlüklerine danışır. Bildiği kelimeleri tanıdığında, doğru Yerel Ayarı (Locale) ve onunla ilişkili Kod Sayfalarını güvenle önerebilir.</p>
+
+    <h2>1. İki Bilgi Cildi</h2>
+    <p>Cadı iki farklı kelime defteri tutar:</p>
+    <ul>
+      <li><b>Ana Sözlük:</b> Programla birlikte sunulan önceden yazılmış, çok dilli bir cilt. Bu salt okunurdur ve kullanıcı tarafından değiştirilemez.</li>
+      <li><b>Kullanıcı Sözlüğü:</b> Kişisel kelime koleksiyonunuz. Cadı'nın benzersiz lehçeleri, teknik jargonları veya projeye özgü terminolojiyi tanımasına yardımcı olmak için buraya yeni terimler eklersiniz.</li>
+    </ul>
+
+    <h2>2. Cadı'ya Öğretmek (Kelime Ekleme)</h2>
+    <p>Sözlüğü genişletmek için kaynak olarak bir <b>Unicode</b> <img class="inline-icon" src="../graphics/icon-green.png"> veya <b>7-Bit ASCII</b> <img class="inline-icon" src="../graphics/icon-gray.png"> dosyası kullanmalısınız.
+    <span class="aka">(Not: Sözlüklere yalnızca temiz ve geçerli metin eklendiğinden emin olmak için Kod Sayfası dosyalarından kelime ekleme şu anda devre dışıdır.)</span></p>
+
+    <p><b>Ritüel:</b></p>
+    <ol>
+      <li>Kazandaki bir dosyayı seçin ve <b>Sözlük</b> <img class="inline-icon" src="../graphics/btn-dictionary.png"> simgesine tıklayın.</li>
+      <li>Cadı, dosyada bulunan ve henüz tanımadığı kelimelerin bir listesini sunacaktır.</li>
+      <li><b>Bir Yerel Ayar Seçin:</b> Açılır menüden hedef dili seçin.</li>
+      <li><b>Otomatik Seçim:</b> Bilinen yerel ayarlar için Cadı, en az 6 harf uzunluğunda olan, tamamı büyük harf olmayan ve başka bir dilde zaten bulunmayan adayları önceden işaretleyecektir.</li>
+      <li><b>Sözlüğün Kutsallığı:</b> <b>Ekle</b>'ye tıklamadan önce listeyi manuel olarak tarayın. Diğer dillerden gelen "hatalı" kelimelerin veya dil dışı dizelerin (kod değişkenleri veya onaltılık dizeler gibi) seçime sızmadığından emin olmalısınız.</li>
+      <li><b>Ekle'ye Tıklayın:</b> İşaretlenen kelimeler Kullanıcı Sözlüğünün belleğine eklenir.</li>
+    </ol>
+
+    <div style="background: #223; border-left: 5px solid #898; padding: 1em; margin: 2em 0;">
+      <h3 style="margin-top: 0; color: #efa;">Profesyonel İpucu: <span class="subtitle">Beşin Gücü</span></h3>
+      <p>Bir dilin tüm kelime dağarcığını eklemenize gerek yok! Genellikle, belirli bir yerel ayar için yalnızca <b>5 ila 10 benzersiz, yaygın kelime</b> eklemek "dengeyi değiştirmek" için yeterlidir. Cadı birkaç imza kelimeyi tanıdığında, istatistiksel güveni artacak ve gelecekteki kehanetlerde bu yerel ayarı anında tanımlamasını sağlayacaktır.</p>
+    </div>
+
+    <h2>3. Yeniden Kehanet ve İyileştirme</h2>
+    <p>Kelime eklediğinizde, Cadı kazandaki tüm dosyaları anında yeniden analiz eder. Yeni bilgisini gerçek zamanlı olarak uygularken bir dosyanın simge renginin veya algılanan yerel ayarının değiştiğini görebilirsiniz.</p>
+
+    <h2>4. Bilgiyi Kesinleştirmek (Kaydet ve Yeniden Yükle)</h2>
+    <p>Sözlük penceresinde yapılan değişiklikler, oturum sonlandırılana kadar "yarı geçici" bir durumda tutulur:</p>
+    <ul>
+      <li><b>Kaydet:</b> Yeni kelimelerinizi diske kalıcı olarak yazmak için <b>Kaydet</b> düğmesine tıklayın.</li>
+      <li><b>Yeniden Yükle:</b> Bir hata yaptıysanız, mevcut değişiklikleri atmak ve kaydedilen son duruma dönmek için <b>Yeniden Yükle</b>'ye tıklayın.</li>
+      <li><b>Otomatik Kaydet:</b> Programı açıkça Yeniden Yükle'ye tıklamadan kapatırsanız, Cadı değişiklikleri onayladığınızı varsayacak ve bunları otomatik olarak Kullanıcı Sözlüğünüze kaydedecektir.</li>
+    </ul>
+  </div>
+
+  <div class="chapters">
+    <h2>Büyüler ve Tılsımlar</h2>
+    <ul>
+	  <li><a href="index.html">Grimoire: <span class="subtitle">Bir Büyüleme Kılavuzu</span></a></li>
+	  <li><a href="face.html">Cadı'nın Yüzü: <span class="subtitle">Ana pencere</span></a></li>
+	  <li><a href="u2cp.html">Dönüşüm Sanatı: <span class="subtitle">Unicode'dan Codepage'e</span></a></li>
+	  <li><a href="cp2u.html">Önsezi: <span class="subtitle">Codepage'den Unicode'a</span></a></li>
+	  <li><a href="options.html">Kazanı Ayarlamak: <span class="subtitle">Seçenekler ve Ayarlar</span></a></li>
+      <li><span class="this-page">Kelime Dağarcığını Genişletmek: <span class="subtitle">Ana ve Kullanıcı Sözlükleri</span></span></li>
+	  <li><a href="binaries.html">Dövme Ocağı: <span class="subtitle">İndirme ve Derleme</span></a></li>
+	  <li><a href="glossary.html">Sözlük: <span class="subtitle">Cep Referansı</span></a></li>
+    </ul>
+  </div>
+
+  <div class="languages">Dokümantasyon dilleri:
+    <a href="../dictionary.html">İngilizce</a>,
+    <a href="../de_DE/dictionary.html">Almanca</a>,
+    <a href="../es_ES/dictionary.html">İspanyolca</a>,
+    <a href="../fr_FR/dictionary.html">Fransızca</a>,
+    <a href="../pt_PT/dictionary.html">Portekizce</a>,
+    <span class="this-lang">Türkçe</span> ve
+    <a href="../uk_UA/dictionary.html">Ukraynaca</a>.
+  </div>
+</body>
+</html>

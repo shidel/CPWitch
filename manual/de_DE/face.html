@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Das Antlitz der Hexe - die Codepage Witch</title>
+  <link href="../manual.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <img class="banner" src="../graphics/banner.png" alt="the Codepage Witch banner image">
+  <div class="headspace"></div>
+  <div class="pagetext">
+    <h1>Das Antlitz der Hexe: <span class="subtitle">Das Hauptfenster</span></h1>
+  <p>Die Hauptoberfläche ist als Echtzeit-"Spiegel" zwischen Ihren Quelldateien und ihrem beabsichtigten Ziel konzipiert. Während das Layout einfach ist, verwendet die Hexe ein farbcodiertes System, um den Status und die Integrität Ihrer Dateien auf einen Blick zu kommunizieren.</p>
+
+  <img src="../graphics/main-form-de.png" class="banner" alt="Die Hauptoberfläche">
+
+  <h2>Die Beschwörungen: <span class="subtitle">Die Symbolleiste</span></h2>
+  <p>Die Symbolleiste ist Ihre primäre Quelle für Magie. Sie beherbergt die Sprüche zum Öffnen von Dateien, zum Exportieren Ihrer Transmutationen und zum Zugriff auf die tieferen Einstellungen der Hexe.</p>
+
+ <table>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-open.png" alt="Öffnen"></td>
+      <td><b>Öffnen:</b> Durchsuchen Sie das Dateisystem, um eine oder mehrere Dateien auszuwählen. <b>Drag-and-Drop</b> kann ebenfalls verwendet werden, um Dateien oder ganze Verzeichnisse in den Dateikessel zu werfen.</td>
+    </tr>
+    <tr>
+	  <td><img class="btn-icon" src="../graphics/btn-edit.png" alt="Bearbeiten"></td>
+      <td><b>Bearbeiten:</b> Werfen Sie die ausgewählte Datei in Ihren bevorzugten externen Texteditor. Dies ermöglicht manuelle Verfeinerungen, ohne die Anwesenheit der Hexe zu verlassen.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-export.png" alt="Exportieren"></td>
+      <td><b>Exportieren:</b> Versiegeln Sie Ihre Transmutationen. Dies speichert die aktuell ausgewählte Datei mit der gewählten Codepage und den Zeilenenden-Einstellungen.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-close.png" alt="Schließen"></td>
+      <td><b>Schließen:</b> Verbannen Sie die aktuell ausgewählte Datei aus dem Kessel.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-close-all.png" alt="Alle schließen"></td>
+      <td><b>Alle schließen:</b> Waschen Sie den Kessel sauber und entfernen Sie alle Dateien aus der aktuellen Sitzung.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-cp-filter.png" alt="Codepage-Filter"></td>
+      <td><b>Filter:</b> Grenzen Sie die Liste der Verzauberungen ein. Wechseln Sie zwischen Ansichten, um nur 100%-Übereinstimmungen, potenzielle Übereinstimmungen oder jede der Hexe bekannte Codepage anzuzeigen.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-dictionary.png" alt="Wörterbuch"></td>
+      <td><b>Wörterbuch:</b> Konsultieren Sie die Master- und Benutzerwörterbücher. Hier können Sie der Hexe helfen, indem Sie ihren Wortschatz überprüfen und Wörter zu ihrem mehrsprachigen Wissen hinzufügen.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-options.png" alt="Optionen"></td>
+      <td><b>Optionen:</b> Blicken Sie in die tieferen Mechaniken der Hexe. Passen Sie ihr Aussehen, ihr Verhalten und die automatischen Dateiprüfregeln an.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-update-check.png" alt="Online-Update"></td>
+      <td><b>Updater:</b> Suchen Sie am digitalen Horizont nach neueren Versionen der Codepage Witch.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-debug-log.png" alt="Debug-Protokoll"></td>
+      <td><b>Protokoll:</b> Öffnen Sie das interne Hauptbuch der Hexe, um detaillierte Analyseberichte einzusehen oder Fehler zu untersuchen.</td>
+    </tr>
+   </table>
+
+  <h2 id="status-icons">Der Dateikessel: <span class="subtitle">Die Status-Icons</span></h2>
+  <p>Sobald Dateien hinzugefügt werden, beginnt die Hexe mit der Analyse ihres Inhalts. Die Farbe des Dateisymbols zeigt ihre Ergebnisse an:</p>
+
+  <table>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-orange.png" alt="Orange"></td>
+      <td><b>Die Analyse:</b> Die Datei wird derzeit im Hintergrund verarbeitet.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-green.png" alt="Grün"></td>
+      <td><b>Unicode-Quelle:</b> Eine UTF-8-kodierte Datei. Die Hexe hat ihre passendsten Codepages zugeordnet.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-blue.png" alt="Blau"></td>
+      <td><b>Legacy-Quelle:</b> Eine Codepage-kodierte Datei. Die Hexe nutzt statistische Analysen, um ihren Ursprung zu bestimmen.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-gray.png" alt="Grau"></td>
+      <td><b>Reines ASCII:</b> Einfacher 7-Bit-Text ohne Sonderzeichen. Sicher für jede Konvertierung.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-yellow.png" alt="Gelb"></td>
+      <td><b>Das Omen:</b> Ein Formatierungsfehler (wie ein fehlender Zeilenumbruch am Ende) wurde erkannt.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-red.png" alt="Rot"></td>
+      <td><b>Die Leere:</b> Eine Binärdatei oder ein Lesefehler ist aufgetreten.</td>
+    </tr>
+  </table>
+
+  <h2>Die Verzauberungen: <span class="subtitle">Codepage-Auswahl</span></h2>
+  <p>Neben der Dateiliste zeigt dieser Bereich, wie kompatibel Ihr Text mit verschiedenen Codepages ist.</p>
+  <ul>
+    <li><b>Kompatibilitätsgraph:</b> Bei <b>Unicode</b>-Dateien erscheinen Graphen, die zeigen, wie viel Text sicher konvertiert werden kann. Bei <b>Codepage</b>-Dateien zeigen sie die statistische Wahrscheinlichkeit einer Sprachübereinstimmung an.</li>
+     <li><b>Der Segen für jedes ASCII:</b> Bei <b>reinen ASCII</b>-Dateien erscheint ein einziger Eintrag, da diese universell sind.</li>
+  </ul>
+
+  <h2>Die zwei Spiegel: <span class="subtitle">Original vs. Transmutiert</span></h2>
+  <p>Die rechten Bereiche ermöglichen es Ihnen, den aktuellen Zustand der Datei mit ihrer vorgeschlagenen Konvertierung zu vergleichen.</p>
+  <ul>
+    <li><b>Unicode-Betrachter (Oben):</b> Zeigt die Datei als Standard-UTF-8-Text an.</li>
+    <li><b>Codepage-Betrachter (Unten):</b> Rendert den Text mit der gewählten Codepage. Nicht unterstützte Zeichen erscheinen als <span class="error-text">&iquest;</span>.</li>
+  </ul>
+  </div>
+  <div class="chapters">
+	<h2>Zaubersprüche und Beschwörungen</h2>
+	<ul>
+	  <li><a href="index.html">Das Grimoire: <span class="subtitle">Ein Beschwörungsleitfaden</span></a></li>
+	  <li><span class="this-page">Das Antlitz der Hexe: <span class="subtitle">Das Hauptfenster</span></span></li>
+	  <li><a href="u2cp.html">Die Kunst der Transmutation: <span class="subtitle">Unicode zu Codepage</span></a></li>
+	  <li><a href="cp2u.html">Präkognition: <span class="subtitle">Codepage zu Unicode</span></a></li>
+	  <li><a href="options.html">Das Abstimmen des Kessels: <span class="subtitle">Optionen und Einstellungen</span></a></li>
+      <li><a href="dictionary.html">Wortschatzerweiterung: <span class="subtitle">Master- und Benutzerwörterbücher</span></a></li>
+	  <li><a href="binaries.html">Die Schmiede: <span class="subtitle">Herunterladen und Kompilieren</span></a></li>
+	  <li><a href="glossary.html">Glossar: <span class="subtitle">Das Taschenreferenz</span></a></li>
+	</ul>
+  </div>
+  <div class="languages">Dokumentationssprachen:
+	<a href="../face.html">Englisch</a>,
+	<span class="this-lang">Deutsch</span>,
+	<a href="../es_ES/face.html">Spanisch</a>,
+	<a href="../fr_FR/face.html">Französisch</a>,
+	<a href="../pt_PT/face.html">Portugiesisch</a>,
+	<a href="../tr_TR/face.html">Türkisch</a> und
+	<a href="../uk_UA/face.html">Ukrainisch</a>.
+  </div>
+</body>
+</html>

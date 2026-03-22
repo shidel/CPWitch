@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Transmutation - la Codepage Witch</title>
+  <link href="../manual.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <img class="banner" src="../graphics/banner.png" alt="the Codepage Witch banner image">
+  <div class="headspace"></div>
+<div class="pagetext">
+  <h1>Unicode vers Codepage : <span class="subtitle">L'Art de la Transmutation</span></h1>
+  <p>C'est le rituel le plus courant pratiqué par la Sorcière : prendre un texte moderne encodé en Unicode (UTF-8) et le transmuer dans une page de codes DOS spécifique. Ce processus garantit que vos traductions et documents s'affichent correctement sur du matériel ancien et des émulateurs DOS.</p>
+
+  <h2>1. Le Scrutin Initial</h2>
+  <p>Lorsque vous jetez pour la première fois un fichier dans le chaudron, il apparaît avec une icône <b>Orange</b> <img class="inline-icon" src="../graphics/icon-orange.png">. Cela indique que la Sorcière analyse actuellement son contenu. Une fois qu'elle a confirmé que le fichier est en Unicode, l'icône se transformera en <b>Vert</b> <img class="inline-icon" src="../graphics/icon-green.png">.</p>
+
+  <p><i><b>Note :</b> Si le fichier ne devient pas vert, la Sorcière a détecté une complication :</i></p>
+  <ul>
+    <li><b>Jaune</b> <img class="inline-icon" src="../graphics/icon-yellow.png"> indique un <b>Augure</b> de formatage (comme l'absence d'un saut de ligne final) qui doit être corrigé avant de continuer.</li>
+    <li><b>Bleu</b> <img class="inline-icon" src="../graphics/icon-blue.png"> ou <b>Gris</b> <img class="inline-icon" src="../graphics/icon-gray.png"> indique que le fichier est déjà un fichier de Codepage ou ASCII. Voir <a href="cp2u.html">Codepage vers Unicode</a> pour ces rituels.</li>
+    <li><b>Rouge</b> <img class="inline-icon" src="../graphics/icon-red.png"> indique un <b>Vide</b> ou une erreur. Reportez-vous aux <a href="face.html#status-icons">Icônes d'État</a> pour plus de détails.</li>
+  </ul>
+
+  <h2>2. Choisir l'Incantation</h2>
+  <p>Le volet <b>Enchantements</b> se remplira d'une liste de pages de codes potentielles. La Sorcière les classe à l'aide de <b>Graphiques Circulaires de Compatibilité</b> <img class="inline-icon" src="../graphics/graph-green.png"> pour une référence visuelle rapide :</p>
+  <ul>
+    <li><b>La part verte :</b> Représente la portion de votre texte qui peut être convertie avec succès vers cette page de codes.</li>
+    <li><b>La part rouge :</b> Représente les caractères qui n'existent pas dans cette page de codes et qui seront perdus.</li>
+    <li><b>Le Sceau Parfait :</b> Lorsqu'une page de codes offre une compatibilité à 100 %, le graphique circulaire est remplacé par une <b>Coche</b> <img class="inline-icon" src="../graphics/check-green.png">.</li>
+  </ul>
+
+  <h2>3. Identifier l'Invisible</h2>
+  <p>Si vous sélectionnez une page de codes avec moins de 100 % de compatibilité, regardez attentivement le <b>Lecteur de Codepage</b> (le miroir inférieur). Tout caractère que la page de codes sélectionnée ne peut pas comprendre sera rendu par <span class="error-text">&iquest;</span>. Cela vous permet de traquer les caractères problématiques avant que le sceau ne soit finalisé.</p>
+
+  <h2>4. Finaliser le Sceau</h2>
+  <p>Une fois que vous êtes satisfait de l'aperçu, cliquez sur l'icône <b>Exporter</b> <img class="inline-icon" src="../graphics/btn-export-green.png">. La Sorcière préservera les fins de ligne trouvées dans le fichier original et vous demandera une destination. La transmutation est alors effectuée, laissant votre source Unicode originale intacte.</p>
+  </div>
+  <div class="chapters">
+	<h2>Sorts et Incantations</h2>
+	<ul>
+	  <li><a href="index.html">Le Grimoire : <span class="subtitle">Un Guide de Conjuration</span></a></li>
+	  <li><a href="face.html">Le Visage de la Sorcière : <span class="subtitle">La fenêtre principale</span></a></li>
+	  <li><span class="this-page">L'Art de la Transmutation : <span class="subtitle">Unicode vers Codepage</span></span></li>
+	  <li><a href="cp2u.html">Précognition : <span class="subtitle">Codepage vers Unicode</span></a></li>
+	  <li><a href="options.html">Réglage du Chaudron : <span class="subtitle">Options et Paramètres</span></a></li>
+      <li><a href="dictionary.html">Enrichir le Vocabulaire : <span class="subtitle">Dictionnaires Maître et Utilisateur</span></a></li>
+	  <li><a href="binaries.html">La Forge : <span class="subtitle">Téléchargement et Compilation</span></a></li>
+	  <li><a href="glossary.html">Glossaire : <span class="subtitle">La Référence de Poche</span></a></li>
+	</ul>
+  </div>
+  <div class="languages">Langues de la documentation :
+	<a href="../u2cp.html">Anglais</a>,
+	<a href="../de_DE/u2cp.html">Allemand</a>,
+	<a href="../es_ES/u2cp.html">Espagnol</a>,
+	<span class="this-lang">Français</span>,
+	<a href="../pt_PT/u2cp.html">Portugais</a>,
+	<a href="../tr_TR/u2cp.html">Turco</a> et
+	<a href="../uk_UA/u2cp.html">Ukrainien</a>.
+  </div>
+</body>
+</html>

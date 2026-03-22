@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>O Rosto da Bruxa - a Codepage Witch</title>
+  <link href="../manual.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <img class="banner" src="../graphics/banner.png" alt="the Codepage Witch banner image">
+  <div class="headspace"></div>
+  <div class="pagetext">
+    <h1>O Rosto da Bruxa: <span class="subtitle">A janela principal</span></h1>
+  <p>A interface principal foi desenhada para fornecer um "Espelho" em tempo real entre os seus ficheiros de origem e o seu destino pretendido. A Bruja utiliza um sistema de cores para comunicar o estado dos seus ficheiros num relance.</p>
+
+  <img src="../graphics/main-form-pt.png" class="banner" alt="A Interface Principal">
+
+  <h2>Os Encantamentos: <span class="subtitle">A Barra de Ferramentas</span></h2>
+  <p>A Barra de Ferramentas é a sua principal fonte de magia. Aloja os feitiços para abrir ficheiros, exportar as suas transmutações e aceder às definições profundas.</p>
+
+ <table>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-open.png" alt="Abrir"></td>
+      <td><b>Abrir:</b> Explore o sistema de ficheiros para selecionar um ou mais ficheiros. Também pode usar <b>Arrastar e Largar</b> para lançar ficheiros para o caldeirão.</td>
+    </tr>
+    <tr>
+	  <td><img class="btn-icon" src="../graphics/btn-edit.png" alt="Editar"></td>
+      <td><b>Editar:</b> Lance o ficheiro selecionado para o seu editor de texto externo preferido para ajustes manuais.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-export.png" alt="Exportar"></td>
+      <td><b>Exportar:</b> Sele as suas transmutações. Isto guarda o ficheiro usando a página de códigos e os finais de linha escolhidos.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-close.png" alt="Fechar"></td>
+      <td><b>Fechar:</b> Banir o ficheiro selecionado do caldeirão.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-close-all.png" alt="Fechar Tudo"></td>
+      <td><b>Fechar Tudo:</b> Limpe o caldeirão completamente, removendo todos os ficheiros da sessão.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-cp-filter.png" alt="Filtro de Codepage"></td>
+      <td><b>Filtrar:</b> Reduza a lista de Encantamentos para mostrar apenas correspondências totais, potenciais ou todas as páginas de códigos conhecidas.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-dictionary.png" alt="Dicionário"></td>
+      <td><b>Dicionário:</b> Consulte os dicionários Mestre e do Utilizador para ajudar a Bruxa a expandir o seu vocabulário multilingue.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-options.png" alt="Opções"></td>
+      <td><b>Opções:</b> Observe a mecânica interna da Bruxa. Ajuste a sua aparência, comportamento e regras automáticas.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-update-check.png" alt="Atualização Online"></td>
+      <td><b>Atualizador:</b> Procure no horizonte digital por novas versões da Codepage Witch.</td>
+    </tr>
+    <tr>
+      <td><img class="btn-icon" src="../graphics/btn-debug-log.png" alt="Log de Depuração"></td>
+      <td><b>Log:</b> Abra o registo interno da Bruxa para ver relatórios de análise detalhados.</td>
+    </tr>
+   </table>
+
+  <h2 id="status-icons">O Caldeirão de Ficheiros: <span class="subtitle">Os Ícones de Estado</span></h2>
+  <p>À medida que os ficheiros são adicionados, a cor do ícone indica as descobertas da Bruxa:</p>
+
+  <table>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-orange.png" alt="Laranja"></td>
+      <td><b>A Análise:</b> O ficheiro está a ser processado em segundo plano.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-green.png" alt="Verde"></td>
+      <td><b>Origem Unicode:</b> Um ficheiro UTF-8. A Bruxa mapeou as suas melhores páginas de códigos.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-blue.png" alt="Azul"></td>
+      <td><b>Origem Legada:</b> Um ficheiro codificado por página de códigos. A Bruxa usa análise estatística.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-gray.png" alt="Cinzento"></td>
+      <td><b>ASCII Simples:</b> Texto de 7 bits sem caracteres especiais. Seguro para qualquer conversão.</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-yellow.png" alt="Amarelo"></td>
+      <td><b>O Augúrio:</b> Foi detetado um erro de formatação (como a falta de uma nova linha final).</td>
+    </tr>
+    <tr>
+      <td><img class="file-icon" src="../graphics/icon-red.png" alt="Vermelho"></td>
+      <td><b>O Vazio:</b> Ocorreu um erro de leitura ou trata-se de um ficheiro binário.</td>
+    </tr>
+  </table>
+
+  <h2>Os Dois Espelhos: <span class="subtitle">Original vs. Transmutado</span></h2>
+  <ul>
+    <li><b>Visualizador Unicode (Superior):</b> Mostra o ficheiro como texto UTF-8 padrão.</li>
+    <li><b>Visualizador de Codepage (Inferior):</b> Renderiza o texto usando a página de códigos selecionada.</li>
+  </ul>
+  </div>
+  <div class="chapters">
+	<h2>Feitiços e Encantamentos</h2>
+	<ul>
+	  <li><a href="index.html">O Grimório: <span class="subtitle">Um Guia de Conjuração</span></a></li>
+	  <li><span class="this-page">O Rosto da Bruxa: <span class="subtitle">A janela principal</span></span></li>
+	  <li><a href="u2cp.html">Arte da Transmutaçāo: <span class="subtitle">Unicode para Codepage</span></a></li>
+	  <li><a href="cp2u.html">Precognição: <span class="subtitle">Codepage para Unicode</span></a></li>
+	  <li><a href="options.html">Afinando o Caldeirão: <span class="subtitle">Opções e Definições</span></a></li>
+      <li><a href="dictionary.html">Expandindo o Vocabulário: <span class="subtitle">Dicionários Mestre e do Utilizador</span></a></li>
+	  <li><a href="binaries.html">A Forja: <span class="subtitle">Download e Compilação</span></a></li>
+	  <li><a href="glossary.html">Glossário: <span class="subtitle">A Referência de Bolso</span></a></li>
+	</ul>
+  </div>
+  <div class="languages">Idiomas da documentação:
+	<a href="../face.html">Inglês</a>,
+	<a href="../de_DE/face.html">Alemão</a>,
+	<a href="../es_ES/face.html">Espanhol</a>,
+	<a href="../fr_FR/face.html">Francés</a>,
+	<span class="this-lang">Português</span>,
+	<a href="../tr_TR/face.html">Turco</a> e
+	<a href="../uk_UA/face.html">Ucraniano</a>.
+  </div>
+</body>
+</html>
