@@ -270,7 +270,9 @@ var
 begin
   if Not Assigned(fWitchItem) then Exit;
   if fCodepage < 0 then Exit;
+  fWitchItem.Unmappables:=True;
   TCP:=fWitchItem.AsCodePage(fCodepage);
+  fWitchItem.Unmappables:=False;
   if not Assigned(TCP) then Exit;
   dlgFileSave.InitialDir:=UserWorkPath;
   N := ExcludeTrailing(fWitchItem.DisplayName, '.UTF-8', false);
@@ -287,6 +289,7 @@ begin
   end else begin
     D:=TCP.Converted;
   end;
+  LogMessage(vbNormal, 'Downshift', PasExt.ToBytes(D));
   CM:=False;
   AO:=False;
   repeat
@@ -317,7 +320,9 @@ var
 begin
   if Not Assigned(fWitchItem) then Exit;
   if fCodepage < 0 then Exit;
+  fWitchItem.Unmappables:=True;
   TUC:=fWitchItem.AsUnicode(fCodepage);
+  fWitchItem.Unmappables:=False;
   if not Assigned(TUC) then Exit;
   dlgFileSave.InitialDir:=UserWorkPath;
   N := IncludeTrailing(fWitchItem.DisplayName, '.UTF-8', false);
@@ -1251,6 +1256,8 @@ begin
         weCodepage : begin
            C:=fWitchItem.AsUnicode(fCodepage, True);
            H:=EscapeHTML(RawByteString(C.Converted));
+           if HasUnmappables(fCodepage) then
+             H:=ExpandUnmappables(H);
            C.Free;
         end;
       end;
@@ -1262,6 +1269,7 @@ end;
 procedure TfMain.UpdateCodepageView;
 var
   C : TCodepageToUTF8;
+  S : RawByteString;
 begin
   if Not Assigned(fWitchItem) then begin
     fCodepage:=-2;
@@ -1320,7 +1328,10 @@ begin
           LogMessage(vbVerbose, 'Unicode Item: ' + fWitchItem.DisplayName + ' (Codepage ' +
             IntToStr(fCodepage) + ')');
           fCodepageText.Codepage:=fCodepage;
-          fCodepageText.AddText(PasExt.ToString(fWitchItem.FileData));
+          S:=PasExt.ToString(fWitchItem.FileData);
+          if HasUnmappables(fCodepage) then
+             S:=ContractUnmappables(S);
+          fCodepageText.AddText(S);
         end;
       end;
     end;

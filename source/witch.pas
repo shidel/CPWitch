@@ -51,9 +51,11 @@ type
     FPreferred: integer;
     FResults: TCodepageResults;
     FDateTime : TDateTime;
+    FUnmappables: boolean;
     function GetDisplayName: String;
     function GetIndex: integer;
     procedure SetFileName(AValue: String);
+    procedure SetUnmappables(AValue: boolean);
   protected
     procedure SetIndex(AIndex : Integer);
     procedure ClearData;
@@ -79,6 +81,7 @@ type
     property Detected: integer read FDetected; // Detected probable Codepage
     property EndsWithBlank : boolean read FEndsWithBlank;
     property ErrorCode : integer read FErrorCode;
+    property Unmappables : boolean read FUnmappables write SetUnmappables; // Convert Unmappables to ASCII or Unicode Sequence;
     function AsCodePage(Codepage : integer; Convert : boolean = true) : TUTF8ToCodepage;
     function AsUnicode(Codepage : integer; Convert : boolean = true) : TCodepageToUTF8;
   published
@@ -594,6 +597,12 @@ begin
 //  until E=0;
 end;
 
+procedure TWitchItem.SetUnmappables(AValue: boolean);
+begin
+  if FUnmappables=AValue then Exit;
+  FUnmappables:=AValue;
+end;
+
 function TWitchItem.GetIndex: integer;
 begin
   Result:=FIndex;
@@ -711,6 +720,7 @@ begin
   FIndex:=-1;
   FResults:=[];
   FData:=[];
+  Unmappables:=False;
   ClearData;
 end;
 
@@ -736,7 +746,10 @@ begin
   Result.ControlCodes:=False;
   Result.Expanded:=True;
   Result.Invalid:=$3f; { Question Mark }
-  Result.Source:=UnicodeString(NormalizeLineEndings(PasExt.ToString(FData)));
+  if FUnmappables and HasUnmappables(Codepage) then
+    Result.Source:=UnicodeString(NormalizeLineEndings(ContractUnmappables(PasExt.ToString(FData))))
+  else
+    Result.Source:=UnicodeString(NormalizeLineEndings(PasExt.ToString(FData)));
   if Convert then
     Result.Convert;
 end;
@@ -749,8 +762,12 @@ begin
   Result.Expanded:=True;
   Result.Invalid:=$3f; { Question Mark }
   Result.Source:=NormalizeLineEndings(PasExt.ToString(FData));
-  if Convert then
+  if Convert then begin
     Result.Convert;
+    (* Cannot be done before conversion!!!! *)
+    if FUnmappables and HasUnmappables(Codepage) then
+      Result.Converted:=ExpandUnmappables(Result.Converted);
+  end;
 end;
 
 { TWitch }
