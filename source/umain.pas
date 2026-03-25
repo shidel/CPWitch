@@ -752,6 +752,11 @@ begin
               end;
           end;
         end;
+        if lvCodepageList.Items.Count = 0 then begin
+          L:=lvCodepageList.Items.Add;
+          L.Caption:=IntToStr(437);
+          L.ImageIndex:=0;
+        end;
         SelectCodepageListItem;
         lvCodepageList.Enabled:=True;
       end else begin
