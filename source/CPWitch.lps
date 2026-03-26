@@ -20,7 +20,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="25" Y="25"/>
+        <CursorPos X="33" Y="24"/>
         <FoldState Value=" TL00409 p0zM21[95u663214 PErV2 T7bB{% T8jU4f3 PXiX4 T3lb03827 plOoT045 pjKja0E1]9I]964]96jM0?3]91ke0D62]BmgqE0Y4[c4kJ0L[T42jV0N[I4Ek40j T1lc02[{B67oT035[a5c0B01[B40mH0=]uiakc0A53]BkYqH0S[{X5kH0H[T4YjS0M4[w4k80e T]sZ70212C]TeqU=61912D[p4qTW77[^5NT618279[t4mBR3F]MdkSe5[94ZmY944 PSi5H T6pI01628 pL:b01D PQsg0 TMsH213D231 pE-7A401221t"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
@@ -93,9 +93,9 @@
         <UnitName Value="Witch"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="428"/>
-        <CursorPos X="59" Y="467"/>
-        <FoldState Value=" T3lO045 pj2jI0e1121417122B pneuJ[S5iaj90J7 Pi0iM02"/>
+        <TopLine Value="444"/>
+        <CursorPos Y="468"/>
+        <FoldState Value=" T3lO045 pj2jI0e1121417 plaqR0B22B]Q4kS[Z5iaj90J7 Pi0iM04"/>
         <UsageCount Value="104"/>
         <Loaded Value="True"/>
       </Unit>
@@ -103,9 +103,9 @@
         <Filename Value="mpla/codepages.pp"/>
         <UnitName Value="Codepages"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="95"/>
-        <CursorPos X="72" Y="146"/>
-        <FoldState Value=" TL004011211]5 PDkc0 T4L02 TCQH31 T7kPH9 T8jT23[f43 PCi2]WMl0L106 p0t4810[T4A]m3lJ0A726]fpn3oR0{74 pkRkC2FC piXlN056]IPl50{4]o6lK013811A Pa-O0 T1lM074E123]=jMuQ05B]91kA03411 PjAlU]e0lPe32F277]UCx0ZM]9idjBu49[v4iPu54 Pi2iDDA"/>
+        <TopLine Value="957"/>
+        <CursorPos Y="988"/>
+        <FoldState Value=" TL004011211]5 PDl10 T4L02 TCQH31 T8jT24]T[V4Bi8]PMl6L106 p0t48103]TA]f3lP0A72]OkalV0L3 pjAjd0{74]JRkC2FC111511 plKs208 T6lQ0138117 pN-e04 T1lS074E123[:4MuQ057]t111[{~51 PiIpD0 T0lVe32F277]eCx7ZM]9idjKu44[y5FiVBO3 PLi7D;"/>
         <UsageCount Value="100"/>
         <Loaded Value="True"/>
       </Unit>
@@ -166,18 +166,6 @@
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="mpla/codepages.pp"/>
-        <Caret Line="180" Column="6" TopLine="144"/>
-      </Position>
-      <Position>
-        <Filename Value="mpla/codepages.pp"/>
-        <Caret Line="156" Column="18" TopLine="27"/>
-      </Position>
-      <Position>
-        <Filename Value="CPWitch.lpr"/>
-        <Caret Line="34" Column="19"/>
-      </Position>
       <Position>
         <Filename Value="CPWitch.lpr"/>
         <Caret Line="33" Column="48"/>
@@ -285,6 +273,18 @@
       <Position>
         <Filename Value="witch.pas"/>
         <Caret Line="770" TopLine="726"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/codepages.pp"/>
+        <Caret Line="146" Column="66" TopLine="95"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/codepages.pp"/>
+        <Caret Line="127" Column="60" TopLine="113"/>
+      </Position>
+      <Position>
+        <Filename Value="mpla/codepages.pp"/>
+        <Caret Line="128" Column="17" TopLine="108"/>
       </Position>
     </JumpHistory>
     <RunParams>

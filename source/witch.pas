@@ -463,10 +463,8 @@ begin
         A.ControlCodes:=False; // Don't worry about ASCII control codes
         A.Expanded:=False;     // Don't bother expanding TABS
         A.Source:=S;
+        A.Expand:=True;
         A.Convert;
-        // Need to expand unmappables if it could have any
-        if HasUnmappables(A.Codepage) then
-         A.Converted:=ExpandUnmappables(A.Converted);
         // Just setting it, going to repurpose a couple fields.
         // Going to use Unicode for Word Count, Converted for Most Words found.
         // Then later, adjust compatibility for how compatible we think this one is.
@@ -749,10 +747,8 @@ begin
   Result.ControlCodes:=False;
   Result.Expanded:=True;
   Result.Invalid:=$3f; { Question Mark }
-  if FUnmappables and HasUnmappables(Codepage) then
-    Result.Source:=UnicodeString(NormalizeLineEndings(ContractUnmappables(PasExt.ToString(FData))))
-  else
-    Result.Source:=UnicodeString(NormalizeLineEndings(PasExt.ToString(FData)));
+  Result.Contract:=FUnmappables;
+  Result.Source:=UnicodeString(NormalizeLineEndings(PasExt.ToString(FData)));
   if Convert then
     Result.Convert;
 end;
@@ -764,13 +760,10 @@ begin
   Result.ControlCodes:=False;
   Result.Expanded:=True;
   Result.Invalid:=$3f; { Question Mark }
+  Result.Expand:=FUnmappables;
   Result.Source:=NormalizeLineEndings(PasExt.ToString(FData));
-  if Convert then begin
+  if Convert then
     Result.Convert;
-    (* Cannot be done before conversion!!!! *)
-    if FUnmappables and HasUnmappables(Codepage) then
-      Result.Converted:=ExpandUnmappables(Result.Converted);
-  end;
 end;
 
 { TWitch }
