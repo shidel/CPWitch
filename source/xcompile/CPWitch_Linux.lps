@@ -7,6 +7,7 @@
       <Unit>
         <Filename Value="CPWitch_Linux.lpr"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <CursorPos X="33" Y="18"/>
         <UsageCount Value="25"/>
         <Loaded Value="True"/>
@@ -80,23 +81,16 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uDictEdit"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="340"/>
         <CursorPos Y="359"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="1">
+    <JumpHistory>
       <Position>
         <Filename Value="CPWitch_Linux.lpr"/>
         <Caret Line="21" Column="70"/>
-      </Position>
-      <Position>
-        <Filename Value="udictedit.pas"/>
-        <Caret Line="358" Column="14" TopLine="337"/>
       </Position>
     </JumpHistory>
     <RunParams>

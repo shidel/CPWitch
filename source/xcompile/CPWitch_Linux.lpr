@@ -20,7 +20,7 @@ uses
 {$R *.res}
 
 begin
-  try
+   try
     {$IFDEF BUILD_PRERELEASE}
     Create_No_Language:=True;
     {$ENDIF}
