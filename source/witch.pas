@@ -464,6 +464,9 @@ begin
         A.Expanded:=False;     // Don't bother expanding TABS
         A.Source:=S;
         A.Convert;
+        // Need to expand unmappables if it could have any
+        if HasUnmappables(A.Codepage) then
+         A.Converted:=ExpandUnmappables(A.Converted);
         // Just setting it, going to repurpose a couple fields.
         // Going to use Unicode for Word Count, Converted for Most Words found.
         // Then later, adjust compatibility for how compatible we think this one is.
