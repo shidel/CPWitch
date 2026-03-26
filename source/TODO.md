@@ -1,5 +1,8 @@
 # Major feature To-Do list
 
+* Synchronized View Scrolling.
+* Use different control for Unicode Viewer for better Windows compatibility
+with multi-character Unicode sequences.
 * Ability to map most codepage control characters to unicode glyphs.
 * Warning dialog, when attempting to exit with unsaved stuff.
 * Warning dialog, when attempting to use 'improper' codepage for text.

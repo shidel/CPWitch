@@ -51,7 +51,7 @@ notes=$(while read -r line ; do
   echo "	<li>${line/\* }</li>"
 done<NOTES.md
 );
-echo "<h2>Preview ${version}</h2>"
+echo "<h2>Alpha ${version}</h2>"
 echo
 echo "<ul>"
 echo "${notes}"
