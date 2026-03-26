@@ -1578,7 +1578,15 @@ begin
   fLastTopCP:=-1;
   if Assigned(fWitchItem) then begin
     S:=fWitchItem.FileName;
-    fCodepage:=fWitchItem.Preferred;
+    if fAutoSelectCP then
+      fCodepage:=fWitchItem.Preferred
+    else begin
+      fCodepage:=fWitchItem.Detected;
+      if fCodepage < 0 then
+        fCodepage:=fWitchItem.Preferred;
+    end;
+    if fCodepage < 0 then
+      fCodepage:=437;
     LI:=fWitchItem.ListItem;
     if Assigned(LI) and (lvFileList.Selected <> LI) then begin
       lvFileList.Selected:=LI;
