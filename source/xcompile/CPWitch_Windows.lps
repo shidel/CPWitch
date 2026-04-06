@@ -9,7 +9,7 @@
         <Filename Value="CPWitch_Windows.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <CursorPos X="5" Y="18"/>
+        <CursorPos X="2" Y="5"/>
         <UsageCount Value="81"/>
         <Loaded Value="True"/>
       </Unit>
@@ -144,10 +144,14 @@
         <UsageCount Value="5"/>
       </Unit>
     </Units>
-    <JumpHistory>
+    <JumpHistory HistoryIndex="1">
       <Position>
         <Filename Value="CPWitch_Windows.lpr"/>
         <Caret Line="16" Column="74"/>
+      </Position>
+      <Position>
+        <Filename Value="CPWitch_Windows.lpr"/>
+        <Caret Line="18" Column="5"/>
       </Position>
     </JumpHistory>
     <RunParams>

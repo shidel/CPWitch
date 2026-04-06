@@ -12,3 +12,7 @@ with multi-character Unicode sequences.
 * Additional Codepages and Locales.
 * Some other fine tuning stuff and general improvements.
 
+## Known Issues
+
+* TIpHtmlPanel (Unicode Viewer) does not support Unicode Sequences on Windows.
+* Linux does not update selected file Codepage/Viewers on Drag and Drop.
