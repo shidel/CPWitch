@@ -123,7 +123,7 @@ if [[ "${APP}" == '' ]] ; then
 fi
 
 if [[ -e "${APP}" ]] ; then
-  rm "${APP}"
+  # rm "${APP}"
   if [[ $? -ne 0 ]] ; then
     echo "Failed to remove old compiled binary."
     exit 1
@@ -135,9 +135,17 @@ fi
 ./mpla/icons.sh || exit 1
 
 if [[ ${macOS} ]] ; then
-  targetdir='./'
+  targetdir='../bin/macOS/'
   target="${APP}"
+  if [[ ! -d "${targetdir}" ]] ; then
+    mkdir -p "${targetdir}"
+    if [[ $? -ne 0 ]] ; then
+      echo "Failed to create target directory for binary."
+      exit 1
+    fi
+  fi
   lazbuild "${APP}.lpi"
+  existcopy "${APP}"
 else
   if [[ -d xcompile ]] ; then
     cp -a *.pas *.pp *.lfm *.def *.lrs xcompile/
@@ -186,7 +194,24 @@ fi
 echo
 echo "Compiled new binary to: ${targetdir}"
 
-if [[ ! ${macOS} ]] && [[ "${targetdir}" != './' ]] ; then
+if [[ ${macOS} ]] ; then
+  existcopy "${APP}.app"
+  targetdir="../bin/macOS/${APP}.app/Contents/macOS/"
+  rm "${targetdir}${APP}" || exit 1
+  mv "../bin/macOS/${APP}" "${targetdir}" || exit 1
+  targetdir="../bin/macOS/${APP}.app/Contents/Resources/"
+  rm "${targetdir}/"* || exit 1
+  existcopy "${APP}.icns"
+  existcopy 0816norm.uff
+  existcopy codepages.ini
+  existcopy TODO.md
+  existcopy NOTES.md
+  existcopy translations/*.nls
+  existcopy master.cpw
+  targetdir="../bin/macOS/"
+  existcopy ../manual
+  existcopy ../LICENSE
+elif [[ "${targetdir}" != './' ]] ; then
   existcopy 0816norm.uff
   existcopy codepages.ini
   existcopy TODO.md
@@ -194,6 +219,7 @@ if [[ ! ${macOS} ]] && [[ "${targetdir}" != './' ]] ; then
   existcopy translations/*.nls
   existcopy master.cpw
   existcopy ../manual
+  existcopy ../LICENSE
 fi
 
 echo 'Done.'
