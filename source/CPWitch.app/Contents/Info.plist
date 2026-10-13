@@ -4,6 +4,18 @@
 <dict>
   <key>CFBundleDevelopmentRegion</key>
   <string>English</string>
+  <key>CFBundleLocalizations</key>
+  <array>
+    <string>en</string>
+    <string>de</string>
+    <string>es</string>
+    <string>fr</string>
+    <string>pl</string>
+    <string>pt</string>
+    <string>ro</string>
+    <string>tr</string>
+    <string>uk</string>
+  </array>
   <key>CFBundleExecutable</key>
   <string>CPWitch</string>
   <key>CFBundleName</key>
