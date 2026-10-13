@@ -432,7 +432,7 @@
       </Message>
       <SaveAsDialog>
         <Title Caption="Salvează actualizarea ca"/>
-        <File Filters="Fișiere arhivă (*.zip)|*.log|Toate fișierele (*.*)|*.*"/>
+        <File Filters="Fișiere arhivă (*.zip)|*.zip|Toate fișierele (*.*)|*.*"/>
       </SaveAsDialog>
     </fUpdateSaveDialog>
     <fLoggerViewForm Caption="Jurnal de depanare">

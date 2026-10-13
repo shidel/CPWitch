@@ -432,7 +432,7 @@
       </Message>
       <SaveAsDialog>
         <Title Caption="Зберегти оновлення як"/>
-        <File Filters="Архівні файли (*.zip)|*.log|Усі файли (*.*)|*.*"/>
+        <File Filters="Архівні файли (*.zip)|*.zip|Усі файли (*.*)|*.*"/>
       </SaveAsDialog>
     </fUpdateSaveDialog>
     <fLoggerViewForm Caption="Журнал налагодження">

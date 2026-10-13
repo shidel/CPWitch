@@ -427,7 +427,7 @@ object fMain: TfMain
     end
     object actDictionary: TAction
       Category = 'Dictionary'
-      Caption = 'actDictionary'
+      Caption = 'Dictionary'
       Hint = 'Open user dictionary editor.'
       OnExecute = actDictionaryExecute
     end

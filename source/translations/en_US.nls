@@ -133,7 +133,7 @@
         <actClose Hint="Close the current text file." Caption="Close File"/>
         <actCloseAll Hint="Close all open text files." Caption="Close All"/>
         <actEditNone Hint="Can not edit this type of file." Caption="No Editor"/>
-        <actDictionary Hint="Open user dictionary editor." Caption="actDictionary"/>
+        <actDictionary Hint="Open user dictionary editor." Caption="Dictionary"/>
       </alMain>
       <pBody>
         <pFileList>
@@ -432,7 +432,7 @@
       </Message>
       <SaveAsDialog>
         <Title Caption="Save update as"/>
-        <File Filters="Archive Files (*.zip)|*.log|All Files (*.*)|*.*"/>
+        <File Filters="Archive Files (*.zip)|*.zip|All Files (*.*)|*.*"/>
       </SaveAsDialog>
     </fUpdateSaveDialog>
     <fLoggerViewForm Caption="Debug log">

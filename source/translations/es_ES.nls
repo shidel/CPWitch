@@ -432,7 +432,7 @@
       </Message>
       <SaveAsDialog>
         <Title Caption="Guardar actualización como"/>
-        <File Filters="Archivos de archivo (*.zip)|*.log|Todos los archivos (*.*)|*.*"/>
+        <File Filters="Archivos de archivo (*.zip)|*.zip|Todos los archivos (*.*)|*.*"/>
       </SaveAsDialog>
     </fUpdateSaveDialog>
     <fLoggerViewForm Caption="Registro de depuración">

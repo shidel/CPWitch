@@ -432,7 +432,7 @@
       </Message>
       <SaveAsDialog>
         <Title Caption="Enregistrer la mise à jour sous"/>
-        <File Filters="Fichiers d'archive (*.zip)|*.log|Tous les fichiers (*.*)|*.*"/>
+        <File Filters="Fichiers d'archive (*.zip)|*.zip|Tous les fichiers (*.*)|*.*"/>
       </SaveAsDialog>
     </fUpdateSaveDialog>
     <fLoggerViewForm Caption="Journal de débogage">

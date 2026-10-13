@@ -432,7 +432,7 @@
       </Message>
       <SaveAsDialog>
         <Title Caption="Zapisz aktualizację jako"/>
-        <File Filters="Archiwa (*.zip)|*.log|Wszystkie pliki (*.*)|*.*"/>
+        <File Filters="Archiwa (*.zip)|*.zip|Wszystkie pliki (*.*)|*.*"/>
       </SaveAsDialog>
     </fUpdateSaveDialog>
     <fLoggerViewForm Caption="Dziennik debugowania">

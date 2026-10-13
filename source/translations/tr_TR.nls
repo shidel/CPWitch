@@ -432,7 +432,7 @@
       </Message>
       <SaveAsDialog>
         <Title Caption="Güncellemeyi farklı kaydet"/>
-        <File Filters="Arşiv Dosyaları (*.zip)|*.log|Tüm Dosyalar (*.*)|*.*"/>
+        <File Filters="Arşiv Dosyaları (*.zip)|*.zip|Tüm Dosyalar (*.*)|*.*"/>
       </SaveAsDialog>
     </fUpdateSaveDialog>
     <fLoggerViewForm Caption="Hata ayıklama günlüğü">

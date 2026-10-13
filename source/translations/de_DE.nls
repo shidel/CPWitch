@@ -425,7 +425,7 @@
       </Message>
       <SaveAsDialog>
         <Title Caption="Update speichern unter"/>
-        <File Filters="Archivdateien (*.zip)|*.log|Alle Dateien (*.*)|*.*"/>
+        <File Filters="Archivdateien (*.zip)|*.zip|Alle Dateien (*.*)|*.*"/>
       </SaveAsDialog>
     </fUpdateSaveDialog>
     <fMissingFiles Caption="Fehlende Dokumentdateien">
