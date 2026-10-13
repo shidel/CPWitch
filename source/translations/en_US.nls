@@ -350,7 +350,7 @@
           </gbUnicodeView>
           <gbDOSView Caption="DOS View">
             <tbDOSScale Caption="1"/>
-            <lbDOSScale Caption="Font scale %s%%"/>
+            <lbScaleOfDOS Caption="Font scale %s%%"/>
           </gbDOSView>
           <gbViewers Caption="Viewers">
             <cbSingleViewer Hint="Only show a single file view pane in the main window." Caption="Single file viewer mode"/>

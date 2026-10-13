@@ -350,7 +350,7 @@
           </gbUnicodeView>
           <gbDOSView Caption="Vizualizare DOS">
             <tbDOSScale Caption="1"/>
-            <lbDOSScale Caption="Scalare font %s%%"/>
+            <lbScaleOfDOS Caption="Scalare font %s%%"/>
           </gbDOSView>
           <gbViewers Caption="Vizualizare">
             <cbSingleViewer Hint="Afișează un singur fișier în fereastra principală" Caption="Doar un fișier în interfață"/>

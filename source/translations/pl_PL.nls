@@ -350,7 +350,7 @@
           </gbUnicodeView>
           <gbDOSView Caption="Podgląd DOS">
             <tbDOSScale Caption="1"/>
-            <lbDOSScale Caption="Skala czcionki %s%%"/>
+            <lbScaleOfDOS Caption="Skala czcionki %s%%"/>
           </gbDOSView>
           <gbViewers Caption="Podglądy">
             <cbSingleViewer Hint="Pokazuje w oknie głównym tylko jeden panel podglądu pliku." Caption="Tryb pojedynczego podglądu"/>
